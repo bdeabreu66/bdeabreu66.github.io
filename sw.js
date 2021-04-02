@@ -1,12 +1,11 @@
-
 const currentCache = 'cache-v1.0';
-
 const files =
 [
-    '/index.html',
-    '/style.css',
-    '/qrcode.js',
-    '/qrCodeReader.js'
+    'index.html',
+    'style.css',
+    'qr_packed.js',
+    'qrCodeReader.js',
+    'icon.png'
 ];
 
 self.addEventListener('install', event => {
@@ -23,7 +22,7 @@ self.addEventListener('activate', event => {
        caches.keys().then(cacheNames => Promise.all(
        cacheNames.filter(cacheName => {
            return cacheName !== currentCache
-         }).map(cacheName => caches.delete(cacheName))
+         }).map(cacheName => caches.delete(cacheName)
         ))
   );
 });
@@ -37,4 +36,5 @@ self.addEventListener(‘fetch’, function(e){
                             );
                     );
 });
+
 
