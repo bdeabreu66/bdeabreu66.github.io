@@ -22,7 +22,7 @@ self.addEventListener('activate', event => {
        caches.keys().then(cacheNames => Promise.all(
        cacheNames.filter(cacheName => {
            return cacheName !== currentCache
-         }).map(cacheName => caches.delete(cacheName)
+         }).map(cacheName => caches.delete(cacheName))
         ))
   );
 });
