@@ -28,7 +28,7 @@ self.addEventListener('activate', event => {
 });
 
 // carga de los cache si existen
-self.addEventListener(‘fetch’, function(e){
+self.addEventListener('fetch', function(e){
 	e.respondWith(
 		caches.match(e.request).then(function(response){
 			return response || fetch(e.request);
