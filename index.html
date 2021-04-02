@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>  Lector QR </TITLE>
+<link rel="stylesheet" href="styles.css" />
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+</HEAD>
+<BODY>
+<div id="container">
+    <h1>Seguimiento de Siembra micro green</h1>
+
+    <button id="btn-scan-qr"> Scanear QR
+       </button>
+
+    <canvas hidden="" id="qr-canvas"></canvas>
+
+    <div id="qr-result" hidden="">
+        <b>Data:</b> <span id="outputResult"></span>
+    </div>
+
+    <div name="divdata" hidden="true">
+        <b>Variedad:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Bandeja numero:</b> <span name="outputData"></span>
+    </div>
+
+    <div name="divdata" hidden="true">
+        <b>Proveedor:</b> <span name="outputData"></span>
+    </div>
+
+    <div name="divdata" hidden="true">
+        <b>Fecha de Siembra:</b> <span name="outputData"></span>
+    </div>
+
+    <div name="divdata" hidden="true">
+        <b>Dia:</b> <span name="outputData"></span>
+    </div>
+
+    <div name="divdata" hidden="true">
+        <b>Peso de las semillas:</b> <span name="outputData"></span>
+    </div>
+
+    <div name="divdata" hidden="true">
+        <b>Accion:</b> <span name="outputData"></span>
+    </div>
+
+    <div name="divdata" hidden="true">
+        <b>Tiempo de crecimiento:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Peso de la cosecha:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Dia de corte:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Tiempo de remojo:</b> <span name="outputData"></span>
+    </div>
+
+
+
+</div>
+<script src="qr_packed.js"> </script>
+<script src="qrCodeReader.js"></script>
+
+<script>
+// esto va en el script de la pagina
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+</script>
+</BODY>
+</html>
