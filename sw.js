@@ -2,7 +2,7 @@ const currentCache = 'cache-v1.0';
 const files =
 [
     'index.html',
-    'style.css',
+    'styles.css',
     'qr_packed.js',
     'qrCodeReader.js',
     'icon.png'
