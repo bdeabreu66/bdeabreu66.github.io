@@ -33,8 +33,7 @@ self.addEventListener(‘fetch’, function(e){
 		caches.match(e.request).then(function(response){
 			return response || fetch(e.request);
                             })
-                            );
-                    );
+                      );
 });
 
 
