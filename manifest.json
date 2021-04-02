@@ -4,9 +4,9 @@
   "short_name": "QR Micro Green",
   "icons": [{
     "src": "/icon.png",
-    "sizes": "512x512"
+    "sizes": "512x512",
   }],
-  "start_url": "index.html",
+  "start_url": "/index.html",
   "display": "fullscreen",
   "orientation": "portrait-primary",
   "theme_color": "aliceblue",
