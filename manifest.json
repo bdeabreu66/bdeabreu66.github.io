@@ -10,7 +10,7 @@
   "display": "fullscreen",
   "orientation": "portrait-primary",
   "theme_color": "aliceblue",
-  "background_color": "red",
+  "background_color": "green",
   "categories": ["books", "education", "medical"],
   "prefer_related_applications": false 
   }
