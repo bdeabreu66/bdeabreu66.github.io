@@ -4,7 +4,7 @@
   "short_name": "QR Micro Green",
   "icons": [{
     "src": "icon.png",
-    "sizes": "3125x3126"
+    "sizes": "512x512"
   }],
   "start_url": "index.html",
   "display": "fullscreen",
