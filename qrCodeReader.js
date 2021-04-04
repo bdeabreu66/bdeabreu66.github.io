@@ -82,7 +82,7 @@ qrcode.callback = (res) => {
     for (var i=0;i<divData.length;i++){
       divData[i].hidden=false;
      }
-     qrResult.hidden = true;
+     qrResult.hidden = false;
      btnScanQR.hidden = false;
      canvasElement.hidden = true;
      } else { qrResult.hidden = false;outputResult.innerText ="Codigo QR invalido";}  
