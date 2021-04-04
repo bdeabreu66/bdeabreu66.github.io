@@ -34,8 +34,8 @@ return resp
 
 qrcode.callback = (res) => {
   if (res) {
-    res=prueba;
     outputResult.innerText = res;
+    res=prueba;
     var datos=res.split("%");
     //var datos=prueba.split("%");
     if (datos.length==18) {
@@ -55,21 +55,21 @@ qrcode.callback = (res) => {
       console.log(contdias); 
 
       // Variedad
-      outputData[0].innerText=datos[7];
+      outputData[1].innerText=datos[7];
       // Bandeja
-      outputData[1].innerText=datos[6];
+      outputData[0].innerText=datos[6];
       // Proveedor
       outputData[2].innerText=datos[5];
       // Fecha de siembra
-      outputData[3].innerText=datos[2]+"/"+datos[1]+"/"+datos[0];
+      outputData[3].innerText=datos[2]+"/"+datos[1]+"/"+datos[0]+" "+datos[3]+":"+datos[4];
       // Dia
       outputData[4].innerText=contdias.toString()+" dias "+conthoras.toString()+" horas "+contmin.toString()+" minutos";
       // Peso Inicial
-      outputData[5].innerText=datos[8]+ " gramos";
+      outputData[7].innerText=datos[8]+ " gramos";
       // Accion
-      outputData[6].innerText=accion(datos[10],contdias);
+      outputData[5].innerText=accion(datos[10],contdias);
       // Dias de crecimiento
-      outputData[7].innerText=datos[12]+ " dias";
+      outputData[6].innerText=datos[12]+ " dias";
       // Peso cosecha
       outputData[8].innerText=datos[14]+ " gramos";
       // Dia de corte

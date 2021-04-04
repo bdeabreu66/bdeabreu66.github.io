@@ -27,14 +27,10 @@ h1 {
 }
 #btn-scan-qr {
   cursor: pointer;
+   font-size: 2em;
+
 }
 
-#btn-scan-qr img {
-  height: 10em;
-  padding: 15px;
-  margin: 15px;
-  background: white;
-}
 
 div [name=divdata] {
   font-size: 1.2em;
