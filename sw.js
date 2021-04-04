@@ -5,7 +5,7 @@ const files =
     'styles.css',
     'qr_packed.js',
     'qrCodeReader.js',
-    'icon.png'
+    'icondef.png'
 ];
 
 self.addEventListener('install', event => {
