@@ -28,9 +28,12 @@ h1 {
 #btn-scan-qr {
   cursor: pointer;
    font-size: 2em;
-
 }
 
+#btn-cancel-qr {
+  cursor: pointer;
+   font-size: 2em;
+}
 
 div [name=divdata] {
   font-size: 1.2em;

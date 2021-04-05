@@ -14,6 +14,7 @@ const outputData = document.getElementsByName("outputData");
 console.log(outputData.length);
 
 const btnScanQR = document.getElementById("btn-scan-qr");
+const btnCancelQR = document.getElementById("btn-cancel-qr");
 
 let scanning = false;
 var prueba="2021%03%24%18%30%P1%1%Dill%15%Coco Coir or Soil%ET-ET-ET-ET-ET-BO-W-W%0%17-20%13%177%20%The get decently tall on their own.%I";
@@ -84,6 +85,7 @@ qrcode.callback = (res) => {
      }
      qrResult.hidden = false;
      btnScanQR.hidden = false;
+     btnCancelQR.hidden = true;
      canvasElement.hidden = true;
      } else { qrResult.hidden = false;outputResult.innerText ="Codigo QR invalido";}  
   }
@@ -115,8 +117,10 @@ btnScanQR.onclick = () =>
          divData[i].hidden=true;
       }
 
-      btnScanQR.hidden = true;
-      canvasElement.hidden = false;
+        btnScanQR.hidden = true;
+        btnCancelQR.hidden = false;
+        canvasElement.hidden = false;
+
       video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
       video.srcObject = stream;
       video.play();

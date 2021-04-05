@@ -8,20 +8,22 @@
 <BODY>
 <div id="container">
     <h1>Seguimiento de cultivos microgreen</h1>
+<div>
+    <button id="btn-scan-qr"> Scanear QR</button>
+    <button id="btn-cancel-qr" hidden="true"> Cancelar scan</button>
+</div>
 
-    <button id="btn-scan-qr"> Scanear QR
-       </button>
     <canvas hidden="" id="qr-canvas"></canvas>
 
     <div id="qr-result" hidden="">
         <b>Data:</b> <span id="outputResult"></span>
     </div>
+    <div name="divdata" hidden="true">
+        <b>Bandeja numero:</b> <span name="outputData"></span>
+    </div>
 
     <div name="divdata" hidden="true">
         <b>Variedad:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Bandeja numero:</b> <span name="outputData"></span>
     </div>
 
     <div name="divdata" hidden="true">
@@ -29,15 +31,11 @@
     </div>
 
     <div name="divdata" hidden="true">
-        <b>Fecha de Siembra:</b> <span name="outputData"></span>
+        <b>Fecha y hora de Siembra:</b> <span name="outputData"></span>
     </div>
 
     <div name="divdata" hidden="true">
-        <b>Dia:</b> <span name="outputData"></span>
-    </div>
-
-    <div name="divdata" hidden="true">
-        <b>Peso de las semillas:</b> <span name="outputData"></span>
+        <b>Dias y horas transcurridas:</b> <span name="outputData"></span>
     </div>
 
     <div name="divdata" hidden="true">
@@ -45,14 +43,21 @@
     </div>
 
     <div name="divdata" hidden="true">
+        <b>Peso de las semillas:</b> <span name="outputData"></span>
+    </div>
+
+    <div name="divdata" hidden="true">
         <b>Tiempo de crecimiento:</b> <span name="outputData"></span>
     </div>
+
     <div name="divdata" hidden="true">
         <b>Peso de la cosecha:</b> <span name="outputData"></span>
     </div>
+
     <div name="divdata" hidden="true">
         <b>Dia de corte:</b> <span name="outputData"></span>
     </div>
+
     <div name="divdata" hidden="true">
         <b>Tiempo de remojo:</b> <span name="outputData"></span>
     </div>
