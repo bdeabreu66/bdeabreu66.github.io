@@ -17,7 +17,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
 const btnCancelQR = document.getElementById("btn-cancel-qr");
 
 let scanning = false;
-var prueba="2021%03%24%18%30%P1%1%Dill%15%Coco Coir or Soil%ET-ET-ET-ET-ET-BO-W-W%0%17-20%13%177%20%The get decently tall on their own.%I";
+var prueba="2021%03%24%18%30%P1%1%Dill%15%ET-ET-ET-ET-ET-BO-W-W%17-20%13%177%20";
 
 function accion(comando,ind){
  function Nombre(nom){
@@ -35,11 +35,11 @@ return resp
 
 qrcode.callback = (res) => {
   if (res) {
-    outputResult.innerText = res;
-    res=prueba;
+    //outputResult.innerText = res;
+    //res=prueba;
     var datos=res.split("%");
     //var datos=prueba.split("%");
-    if (datos.length==18) {
+    if (datos.length==14) {
       var fechainicio=new Date(datos[0],parseInt(datos[1])-1,datos[2],datos[3],datos[4])
       console.log(fechainicio);
       const Hoy=new Date();  
@@ -68,16 +68,14 @@ qrcode.callback = (res) => {
       // Peso Inicial
       outputData[7].innerText=datos[8]+ " gramos";
       // Accion
-      outputData[5].innerText=accion(datos[10],contdias);
+      outputData[5].innerText=accion(datos[9],contdias);
       // Dias de crecimiento
-      outputData[6].innerText=datos[12]+ " dias";
+      outputData[6].innerText=datos[10]+ " dias";
       // Peso cosecha
-      outputData[8].innerText=datos[14]+ " gramos";
-      // Dia de corte
-      outputData[9].innerText=datos[15];
-      // Soak time
-      outputData[10].innerText=datos[11];
-    scanning = false;
+      outputData[8].innerText=datos[12]+ " gramos";
+      // Hoja verdadera
+      outputData[9].innerText=datos[11];
+      scanning = false;
     video.srcObject.getTracks().forEach(track => {track.stop();});
     console.log(":"+divData.length); 
     for (var i=0;i<divData.length;i++){
