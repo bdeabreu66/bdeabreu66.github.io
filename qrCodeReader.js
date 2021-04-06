@@ -52,9 +52,7 @@ qrcode.callback = (res) => {
       var conthoras=Math.trunc(horastotales);
       var mintotales=(horastotales-conthoras)*60;
       var contmin=Math.trunc(mintotales);
-
       console.log(contdias); 
-
       // Variedad
       outputData[1].innerText=datos[7];
       // Bandeja
@@ -85,7 +83,9 @@ qrcode.callback = (res) => {
      btnScanQR.hidden = false;
      btnCancelQR.hidden = true;
      canvasElement.hidden = true;
-     } else { qrResult.hidden = false;outputResult.innerText ="Codigo QR invalido";}  
+     } else {  qrResult.hidden = false;
+               qrResult.hidden = false;outputResult.innerText ="Codigo QR invalido";
+             }  
   }
 };
 
