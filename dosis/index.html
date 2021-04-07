@@ -1,1 +1,4759 @@
+<HTML>
+<HEAD>
+<link rel="stylesheet" type="text/css" href="css/all.css">
+<link rel="icon" type="image/png" href="img/icon.png" />
+<link rel="manifest" href="manifest.json">
+<META http-equiv="Content-Type" content="text/html"; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no" />
+<meta name="mobile-web-app-capable" content="yes">
 
+</HEAD>
+<STYLE>
+body {text-align: center;
+background-color: white;
+}
+.divh {
+border: 2px solid #999999;
+padding: 10px;
+}
+*{
+font-size: 1.5rem; 
+padding: 0;
+margin: 0;
+}
+p {
+border: 1px solid #999999;
+margin: 3px;
+padding: 1px 35px; 
+text-align: left;
+font-size: 1rem; 
+}
+
+.historiaitem {
+    color: green;  
+    background-color: blue;
+}
+.historiaitemp {
+    border: 1px solid #999999;
+    color: green;  
+    background-color: blue;
+}
+
+
+.inputtext {
+    background-color: yellow;
+    color: blue;  
+   border-bottom: 2px solid black;
+/*    border: 6px solid red;  */
+    border-radius: 16px;
+
+}
+
+#frec {width: 120px;}
+
+#agregarimagen {display: none;} 
+button{
+color: magenta;
+border-radius: 12px;
+background-color: #C0D9D9;
+cursor:pointer;
+}
+
+.fa_char_D:before{
+ font-family:roboto;
+content: 'D';
+}
+.fa_char_I:before{
+ font-family:roboto;
+content: 'I';
+}
+.fa_char_C:before{
+ font-family:roboto;
+content: 'C';
+}
+.fa_char_E:before{
+ font-family:roboto;
+content: 'E';
+}
+.fa_char_FC:before{
+ font-family:roboto;
+content: 'Fc';
+}
+.fa_char_FD:before{
+ font-family:roboto;
+content: 'Fd';
+}
+.fa_char_IF:before{
+ font-family:roboto;
+content: 'If';
+}
+
+.buttonopt{
+border: none;
+color: white;
+background-color: blue;
+border-radius: 0px;
+}
+
+
+
+input[type=button]{
+color: magenta;
+border-radius: 12px;
+background-color: #C0D9D9;
+}
+
+input[type=number]{
+background-color: ligthgray;
+width: 110px;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.divinput {
+border-radius: 24px;
+background-color: blue;
+color:white;
+border: 3px solid #73AD21;
+}
+
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.15s;
+  padding-top: 60px;
+  text-align:left;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.2s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+input[type=checkbox]{
+transform: scale(1.9);
+}
+input[type=radio]{
+transform: scale(1.9);
+}
+
+</style>
+
+<script type="text/javascript" src="datos.js"></script>
+<script type="text/javascript" src="js/jspdfv153.js"></script>
+
+<script type="text/javascript" src="js/FileSaver.js"></script>
+
+<script type="text/javascript" src="js/addimagev153.js"></script>
+
+<script type="text/javascript" src="js/split_text_to_sizev153.js"></script>
+
+<script type="text/javascript" src="js/standard_fonts_metricsv153.js"></script>
+
+<script type="text/javascript" src="js/cell153.js"></script>
+
+<script type="text/javascript" src="js/png.js"></script>
+
+<script type="text/javascript" src="js/png_support.js"></script>
+
+<script type="text/javascript" src="js/zlib.js"></script>
+
+<script type="text/javascript" src="js/selectFile.js"></script>
+
+<script type="text/javascript" src="crearpdf.js"></script>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+function graficapercentil(c,vpercentil,xr,yr){
+var DATA=vpercentil.datos;
+var nx=vpercentil.descrx+" ("+vpercentil.unidx+")";
+var ny=vpercentil.descry+" ("+vpercentil.unidy+")";
+function Px(xf){
+var xreal=xmargin+escalax*(xf-xmin);
+return xreal;
+}
+function Py(yf){
+var yreal=(largo-ymargin)-escalay*(yf-ymin);
+return yreal;
+}
+
+
+
+
+var nfilas=DATA.length;
+var ncol=DATA[0].length;
+//alert(nfilas+" "+ncol);
+//var c=document.getElementById("ICANVAS");
+var ancho=c.width;
+var largo=c.height;
+var xmargin=0.15*ancho;
+var ymargin=0.15*largo;
+var xmin=vpercentil.x[0];
+var lastx=vpercentil.x.length-1
+var xmax=vpercentil.x[lastx];
+var ymin=vpercentil.y[0];
+var lasty=vpercentil.y.length-1
+var ymax=vpercentil.y[lasty];
+var ctx=c.getContext("2d");
+ctx.restore();
+ctx.fillStyle="#000088";
+
+ctx.fillStyle=vpercentil.color;
+
+ctx.strokeStyle="#990000"; 
+ctx.fillRect(0,0,ancho,largo);
+ctx.fillStyle="#009900";
+
+var escalax=(ancho-2*xmargin)/(xmax-xmin);
+var escalay=(largo-2*ymargin)/(ymax-ymin);
+//ctx.translate(xmargin, -ymargin);
+ctx.strokeStyle="#000000";
+ctx.beginPath();
+// ctx.lineCap="round"; 
+// ctx.lineCap="butt";
+// ctx.lineCap="square";  
+ ctx.lineWidth=1; 
+
+//ctx.moveTo(Px(xmin),Py(DATA[1][1]));
+ctx.moveTo(Px(xmin),Py(ymin));
+ctx.lineTo(Px(xmax),Py(ymin));
+ctx.moveTo(Px(xmin),Py(ymin));
+ctx.lineTo(Px(xmin),Py(ymax));
+ctx.stroke();
+ctx.font="bold 12px verdana, sans-serif";
+ctx.textAlign="center";
+ctx.fillText(nx, Px((xmin+xmax)/2)+5,Py(ymin)+0.6*ymargin) 
+//ctx.textAlign="right";
+
+ctx.fillText(ny, Px(xmin)-xmargin/4,Py(ymax)-ymargin/4) 
+ctx.textAlign="center";
+ctx.fillText(vpercentil.nombre, Px((xmin+xmax)/2),Py(ymax)-ymargin/2) 
+ctx.textAlign="left";
+ctx.stroke();
+ ctx.lineWidth=3; 
+for(var j=1;j<(nfilas);j++){
+   ctx.beginPath();
+   ctx.moveTo(Px(DATA[0][1]),Py(DATA[j][1]));
+   var tr=false;
+   for(var i=2;i<ncol;i++){
+
+    if ((DATA[j][i]<=ymax)&& !tr)  {ctx.lineTo(Px(DATA[0][i]),Py(DATA[j][i]))} 
+       else { var m=(DATA[j][i]-DATA[j][i-1])/(DATA[0][i]-DATA[0][i-1]);
+              var xnew=(ymax-DATA[j][i-1])/m+DATA[0][i-1]; 
+              //ctx.lineTo(Px(DATA[0][i]),Py(ymax))
+               ctx.lineTo(Px(xnew),Py(ymax))
+               tr=true;
+            }
+    }
+ctx.fillText(vpercentil.descrz+" "+DATA[j][0],Px(DATA[0][i-1])+xmargin/4,Py(DATA[j][i-1])) 
+ctx.stroke();
+}
+ctx.lineWidth=1; 
+ctx.textAlign="center";
+var grid=true;
+for(var i=0;i<=lastx;i++){
+var xx=vpercentil.x[i];
+//xmin+i*(xmax-xmin)/10;
+ctx.beginPath();
+if (grid) {
+   ctx.moveTo(Px(xx),Py(ymin)-4);
+   ctx.lineTo(Px(xx),Py(ymax));
+}  
+else {
+  ctx.moveTo(Px(xx),Py(ymin)-4);
+  ctx.lineTo(Px(xx),Py(ymin)+4);
+}
+ctx.stroke();
+ctx.fillText(xx.toString(),Px(xx),Py(ymin)+ymargin/4) ;
+}
+ctx.textAlign="rigth";
+for(var i=0;i<=lasty;i++){
+//var yy=ymin+i*(ymax-ymin)/10;
+var yy=vpercentil.y[i];
+ctx.beginPath();
+if (grid) {
+  ctx.moveTo(Px(xmin)-4,Py(yy));
+  ctx.lineTo(Px(xmax),Py(yy));
+} 
+else {
+  ctx.moveTo(Px(xmin)+4,Py(yy));
+  ctx.lineTo(Px(xmin)-4,Py(yy));
+}
+ctx.stroke();
+
+ctx.fillText(yy.toString(),Px(xmin)-0.5*xmargin,Py(yy)+3) ;
+}
+
+ctx.strokeStyle="#555555";
+ctx.beginPath();
+ctx.arc(Px(xr),Py(yr),4,0,2*Math.PI,false);
+ctx.fill();
+
+//ctx.fillText("Mesomorfia",Px(0),Py(13)) 
+//var perc=percentil(vpercentil,xr,yr);
+//perc=xround(perc,1);
+
+//ctx.textAlign="center";
+//ctx.fillText("p "+perc, Px((xmax-xmin)/2),Py(ymax)) 
+
+//ctx.stroke();
+}
+
+function obj_percentil(nombre,datos,x,y,descrx,descry,descrz,unidx,unidy,unidz,color){
+this.nombre=nombre;
+this.datos=datos;
+this.descrx=descrx;
+this.descry=descry;
+this.descrz=descrz;
+this.unidx=unidx;
+this.unidy=unidy;
+this.unidz=unidz;
+this.x=x;
+this.y=y;
+this.color=color;
+}
+
+function graficarpH(v1,v2){
+var phmin=7.2;
+var phmax=7.8;
+var incrph=0.05;
+var bicmin=0;
+var bicmax=60;
+var bicincr=2;
+var pco2min=10;
+var pco2max=120;
+var incrpco2=10;
+
+var datos=[];
+var fila=[];
+/*var n=1;
+var m=0;
+fila[0]=0;
+   for (j=bicmin;j<=bicmax;j+=bicincr){
+    fila[++m]=j;
+}
+datos[0]=fila;
+//console.log(datos[0]);
+for (var i=phmin;i<=phmax;i+=incrph){
+    var m=1; 
+   fila=[];
+   fila[0]=i;
+   for (j=bicmin;j<=bicmax;j+=bicincr){
+   var pco2=j/(Math.pow(10,i-6.1)*0.03);
+   fila[m++]=pco2;
+}
+datos[n++]=fila;
+}
+*/
+// pCO2 constante
+var n=1;
+var m=0;
+fila[0]=0;
+   for (j=phmin;j<=phmax;j+=incrph){
+    fila[++m]=j;
+}
+datos[0]=fila;
+//console.log(datos[0]);
+for (var i=pco2min;i<=pco2max;i+=incrpco2){
+    var m=1; 
+   fila=[];
+   fila[0]=i;
+   for (j=phmin;j<=phmax;j+=incrph){
+   var hco3=i*Math.pow(10,j-6.1)*0.03;
+   fila[m++]=hco3;
+}
+datos[n++]=fila;
+}
+
+var pH= new obj_percentil("pCO2 vs HCO3-",datos,[0,10,20,30,40,50,60],[0,20,40,60,80,100,120],"[HCO3-]","pCO2","pH","mmol/L","mmHg","","blue")
+
+var pCO2= new obj_percentil("HCO\u2083\u207B vs pH",datos,[7.2,7.25,7.3,7.35,7.4,7.45,7.5,7.55,7.6,7.65,7.7,7.75,7.8],[0,20,40,60,80,100,120],"pH","[HCO\u2083\u207B]","pCO\u2082","","mmol/L","mmHg","blue")
+
+var c=document.getElementById("canvaspH");
+graficapercentil(c,pCO2,v1,v2);
+
+}   
+
+
+
+
+
+//String.prototype.replaceAll = function (find, replace) {
+//    var str = this;
+//    return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+//};
+//const app=require('electron').remote.app;
+//directoriotrabajo=app.getPath('userData');
+//console.log(directoriotrabajo);
+function escapeRegExp(str) {
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+}
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
+function filePathToUrl(path) {
+    var replace="\\\\";
+//    var find="\";
+//    path=replaceAll(path,find,replace);
+//    path=replaceAll(path,' ','%20');
+ //console.log(path);
+
+    path=path.replace(/\\/g,'\\');
+ //console.log(path);
+    //var drive = /(.)\:\//
+   //return path.replace(drive, 'file:///$1:/');
+return path;
+}
+var venpdf=0;
+
+function openPDF(){
+//alert(venpdf);
+//if (venpdf==0) {
+//const { BrowserWindow } = require('electron').remote
+//const PDFWindow = require('electron-pdf-window')
+//alert("winpdf");
+//const winpdf = new BrowserWindow({ width: 800, height: 600 })
+//PDFWindow.addSupport(winpdf)
+venpdf=1;
+//}
+//console.log(filepdf);
+//var Url=filePathToUrl(filepdf);
+//winpdf.loadURL(Url);
+//document.body.style.cursor  = 'default';
+}
+
+//var dialog=require('electron').remote.dialog;
+//const { dialog } = require('electron').remote
+
+//var dialog=app2.dialog;
+//var remote = require('remote');
+//var dialog = remote.require('dialog');
+
+//var fs=require('fs');
+
+function callback(fileNames){
+ //console.log("Paso2");
+   if (fileNames===undefined){ console.log("No selecciono ningun archivo");}
+      else { console.log(fileNames[0]);readFile(fileNames[0]);}
+}
+
+function carga_adicional(){
+filepdf=directoriotrabajo+"\\adicional.txt";
+fs.readFileSync(filepdf, contenido, 'ascii');
+var items=contenido.split('&&')
+for (var i=0;i<items.length;i++){
+agregadosis(items[i]);
+}
+}
+
+function agregadosis(texto){
+var j=texto.indexOf(':');
+var gener=texto.substring(0,j);
+var dosisadc=texto.substring(j+1,texto.length);
+var encontrado=false;
+for(var i=0;i<remedio.length;i++){
+    var esta=verificatexto(gener,i,1); 
+      if (esta) {
+         var indice = i;
+ //        alert(texto);
+           encontrado=true;
+         break;
+        }
+}
+if (encontrado) {
+remedio[indice].dosis+='@'+dosisadc;
+} else {mensaje("no encontrado")}
+
+}
+
+function agrega_adicional(){
+filepdf=directoriotrabajo+"\\adicional.txt";
+fs.appendFileSync(filepdf, contenido, 'ascii');
+}
+
+
+function carga_archivo(){
+types = [ {name: 'recipes', extensions: ['rx']}]
+//   {name: 'Movies', extensions: ['mkv', 'avi', 'mp4']},
+//   {name: 'Custom File Type', extensions: ['as']},
+//   {name: 'All Files', extensions: ['*']}
+//   ]
+
+   options = {filters:types, properties:['openFile']};
+   fileNames=dialog.showOpenDialogSync(options);
+   if (fileNames===undefined) {} else { readFile(fileNames[0]);}
+}
+function readFile(filepath){
+  fs.readFile(filepath,'utf-8',function(err,data) {
+     if(err) { mensaje("Ha ourrido un error"+err.message); return;}
+   contenido=data; 
+   cargarecipe();
+   });
+ } 
+
+function carga_lab(){
+types = [ {name: 'recipes', extensions: ['lab']}]
+   options = {filters:types, properties:['openFile']};
+   fileNames=dialog.showOpenDialogSync(options);
+   if (fileNames===undefined) {} else { readFileLab(fileNames[0]);}
+}
+function readFileLab(filepath){
+  fs.readFile(filepath,'utf-8',function(err,data) {
+     if(err) { mensaje("Ha ourrido un error"+err.message); return;}
+   contenido=data; 
+   cargalaboratorio();
+   });
+ } 
+
+function carga_plantilla(){
+types = [ {name: 'plantillas', extensions: ['pl']}]
+options = {filters:types, properties:['openFile']};
+fileNames=dialog.showOpenDialogSync(options);
+//console.log(fileNames)
+if (fileNames===undefined) {} else { readFileplantilla(fileNames[0]);}
+}
+function readFileplantilla(filepath){
+//console.log(filepath)
+
+  fs.readFile(filepath,'utf-8',function(err,data) {
+     if(err) { mensaje("Ha ourrido un error"+err.message); return;}
+   contenido=data; 
+   cargaplantilla();
+   });
+ } 
+var filepdf;
+
+function guarda_pdf(){
+filepdf=directoriotrabajo+"\\recipe.pdf";
+  // types = [ {name: 'recipes', extensions: ['pdf']}]
+  // options = {filters:types, properties:['writeFile']};
+   //dialog.showOpenDialog(options,callback());
+   //guardarecipe();   
+//   filepdf=dialog.showSaveDialogSync(options);
+// fs.writeFileSync(filepdf, contenido, 'utf-8');
+fs.writeFileSync(filepdf, contenido, 'ascii');
+ //  writeFile(filepdf,contenido);
+//const {shell}=require('electron').remote;
+//shell.openItem(file)
+
+openPDF(filepdf)
+
+}
+
+
+
+function obtener_nombre()
+{
+
+
+
+}
+
+function guarda_archivo(){
+//   types = [ {name: 'recipes', extensions: ['rx']}]
+//   options = {filters:types, properties:['writeFile']};
+   //dialog.showOpenDialog(options,callback());
+var name = prompt("Introduzca el nombre del recipe", "");
+
+if (name == null ||name == "") { } else {
+    guardarecipe();   
+    var blob = new Blob([contenido], {type: "text/plain;charset=utf-8"});
+    saveAs(blob,name);
+}
+// if (contenido!=clavevalidaplantilla) {
+//   var file=dialog.showSaveDialogSync(options);
+//   writeFile(file,contenido);
+//}
+}
+
+
+
+function guarda_plantilla(){
+   types = [ {name: 'plantillas', extensions: ['pl']}]
+   options = {filters:types, properties:['writeFile']};
+   //dialog.showOpenDialog(options,callback());
+   guardaplantilla();   
+ if (contenido!=clavevalida) {
+   var file=dialog.showSaveDialogSync(options);
+   writeFile(file,contenido);
+}
+}
+
+function guarda_lab(){
+   types = [ {name: 'recipes', extensions: ['lab']}]
+   options = {filters:types, properties:['writeFile']};
+   //dialog.showOpenDialog(options,callback());
+   guardalaboratorio();   
+ if (contenido!=clavevalidalaboratorio) {
+   var file=dialog.showSaveDialogSync(options);
+   writeFile(file,contenido);
+   }
+
+}
+
+function writeFile(filepath,contenido){
+  fs.writeFile(filepath,contenido,function(err) {
+     if (err) { mensaje("Ha ourrido un error"+err.message); return;}
+   });
+ } 
+
+
+
+</SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+function cargarecipe(){
+var content=contenido.substring(0,clavevalida.length);
+if (content==clavevalida) {
+//  recipesA=[];recipesB=[];recipes=[];
+var base=recipes.length;
+var reci=contenido.slice(clavevalida.length).split("@!");
+for(var i=0;i<reci.length;i++){
+   var partes=reci[i].split("&#");
+   anexarecipe(partes[0],partes[1]);
+  // recipesA[base+i]=partes[0];recipesB[base+i]=partes[1];recipes[base+i]=partes[0].fontcolor("blue")+"<br>" +partes[1].fontcolor//("red");
+}
+   quitarrecipe();muestrarecipes();
+} else {mensaje("Formato de archivo de recipe no valido")}
+}
+
+function cargalaboratorio(){
+var content=contenido.substring(0,clavevalidalaboratorio.length);
+if (content==clavevalidalaboratorio) {
+   var items=contenido.slice(clavevalidalaboratorio.length).split("@!");
+   for(var i=0;i<items.length;i++){
+      var j1=items[i].indexOf(",");
+      var j2=items[i].indexOf(":");
+      var prop=items[i].substring(0,j1);
+      var indic=parseInt(items[i].substring(j1+1,j2));
+      var valors=items[i].substring(j2+1);
+//alert("p "+prop+" i "+indic+" v "+valors);
+     if (valors=='true')  {var valor=true } else {var valor=false}
+     labs[prop].tipo[indic].checked=valor;
+    }
+laboratorio();
+} else {mensaje("Formato de archivo de laboratorio no valido")}
+}
+
+
+function cargaplantilla(){
+var content=contenido.substring(0,clavevalidaplantilla.length);
+if (content==clavevalidaplantilla) {
+var partes=contenido.slice(clavevalidaplantilla.length).split("@!");
+  tamanoletra=parseInt(partes[0]);
+//  alert(partes[0]+"  "+tamanoletra);
+  fuenteletra=partes[1];
+  tipofuenteletra=partes[2];
+  primerapagina=partes[3];
+  dataurlimagen[0]=partes[4];
+  dataurlimagen[1]=partes[5];
+  dataurlimagen[2]=partes[6];
+
+cerrarConfigPlantilla();
+//alert("paso");
+
+configPlantilla();
+} else {mensaje("Formato de archivo de plantilla no valido")}
+
+}
+
+
+var clavevalida="recipevalido";
+var clavevalidaplantilla="plantilla";
+var clavevalidalaboratorio="laboratorio";
+
+var contenido;
+
+function guardarecipe(){
+contenido=clavevalida;
+for(var i=0;i<recipes.length;i++){
+   if (i!=0) {var aux="@!"} else {var aux=""}
+contenido+=aux+recipesA[i]+"&#"+recipesB[i];
+}
+}
+
+function guardaplantilla(){
+contenido=clavevalidaplantilla;
+var sep="@!";
+contenido+=tamanoletra.toString()+sep;
+contenido+=fuenteletra+sep;
+contenido+=tipofuenteletra+sep;
+contenido+=primerapagina+sep;
+contenido+=dataurlimagen[0]+sep;
+contenido+=dataurlimagen[1]+sep;
+contenido+=dataurlimagen[2];
+}
+
+function guardalaboratorio(){
+contenido=clavevalidalaboratorio;
+var sep="@!";
+var aux="";
+for (var prop in labs){
+  for (var j=0;j<labs[prop].tipo.length;j++){
+  contenido+=aux+prop+','+j+':'+labs[prop].tipo[j].checked;
+  aux=sep;  
+}
+}
+alert(contenido);
+}
+
+
+function openNav() {
+var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
+  texto+='<a href="javascript:void(0)" onclick="Infogeneral();">Informaci&oacute;n general</a>';
+  texto+='<a href="javascript:void(0)" onclick="Configurarplantilla();">'+"Configurar plantilla"+'</a>';
+  texto+='<a href="javascript:void(0)" onclick="Equilibrioacidobase();">'+"Equilibrio Acido-base"+'</a>';
+  texto+='<a href="javascript:void(0)" onclick="pregunta_signo(Signos[1]);">'+"Signos"+'</a>';
+
+  //texto+='<a  href="javascript:void(0)"onclick="mdatospaciente();">'+"Datos del paciente"+'</a>';
+  texto+='<a  href="javascript:void(0)"onclick="guardar();">'+"Guardar"+'</a>';
+  texto+='<a  href="javascript:void(0)"onclick="cargar();">'+"Cargar"+'</a>';
+ // texto+='<a  href="javascript:void(0)"onclick="Editarrecipe();">'+"Editar recipe"+'</a>' 
+  //texto+='<a  href="javascript:void(0)"onclick="makepdf();">'+"Generar recipe"+'</a>' 
+  document.getElementById("mySidenav").innerHTML=texto;
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+var nombpac="";
+var pesoglobal=70;
+var edadglobal=40;
+var alturaglobal=170;
+//var IMCglobal=pesoglobal/Math.pow(alturaglobal/100,2);
+var IMCglobal;
+
+function IMC(P,H){
+var p=parseFloat(P);
+var h=parseFloat(H);
+var imc=p/Math.pow(h/100,2);
+imc=xround(imc,1);
+return imc;
+}
+function pesoIMC(I,H){
+var i=parseFloat(I);
+var h=parseFloat(H);
+var peso=i*Math.pow(h/100,2);
+peso=xround(peso,1);
+return peso;
+}
+
+function refrescadatospac(){
+var inddatos=document.getElementById('datosg');
+var textoT='';
+textoT+='Nombre: '.fontcolor("blue")+ nombpac+' Edad: '.fontcolor("blue")+edadglobal+' años ';
+textoT+='Peso: '.fontcolor("blue")+pesoglobal+' '+unidemasa+' ';
+textoT+='Altura: '.fontcolor("blue")+alturaglobal+' '+unidelong+' ';
+textoT+='IMC: '.fontcolor("blue")+IMC(pesoglobal,alturaglobal)+' '+unideimc;
+
+inddatos.innerHTML=textoT;
+}
+
+function cierradivdatos()
+{
+
+var divdatos = document.getElementById("datos");
+divdatos.style="display: none;";
+muestradatosactivo="0";
+
+}
+
+
+function asignardatospaciente(){
+var divdatos = document.getElementById("datos");
+divdatos.style="display: none;";
+nombpac=document.getElementById("nombreu").value;
+pesoglobal=parseFloat(document.getElementById("peso2").value);
+edadglobal=parseFloat(document.getElementById("edad2").value);
+alturaglobal=parseFloat(document.getElementById("altura2").value);
+calctfg();
+var elementopeso=document.getElementById("peso");
+if ( (typeof(elementopeso)!="undefined") && (elementopeso!=null) ){
+  document.getElementById("peso").value=pesoglobal;
+}
+
+//refrescadatospac();
+}
+var unidelong="cm";
+var unidemasa="kg";
+var unideimc="kg/m<sup>2</sup>";
+
+
+function mdatospaciente(){
+closeNav();
+datospaciente();
+}
+
+function actimc(){
+var pe=parseFloat(document.getElementById("peso2").value);
+if (pe<0) { document.getElementById("peso2").value=Math.abs(pe).toString();        }
+document.getElementById("simc").value=IMC(Math.abs(pe),parseFloat(document.getElementById("altura2").value)).toString();
+}
+
+function actimcp(){
+document.getElementById("simc").value=IMC(parseFloat(document.getElementById("peso2").value),parseFloat(document.getElementById("altura2").value)).toString();
+}
+
+function actpeso(){
+document.getElementById("peso2").value=pesoIMC(parseFloat(document.getElementById("simc").value),parseFloat(document.getElementById("altura2").value)).toString();
+}
+
+function datospaciente(){
+var textoT="";
+var texto="";
+muestradatosactivo="1";
+var divdatos = document.getElementById("datos");
+divdatos.style="position: fixed;top :100px; left: 10px; width:98% ; text-align: left;";
+textoT+='<center> Datos del paciente </center>';
+textoT+='<br> Nombre: <INPUT id="nombreu" style="background-color: lightgray;color: black;" class="inputtext" TYPE="text" value="'+ nombpac+ '" >';
+textoT+='<br> Edad: <INPUT id="edad2" min="0" max="120"TYPE="number" onkeypress="return event.charCode !=45" value="'+ edadglobal.toString() +'" > años'
+textoT+='<br> Peso: <INPUT id="peso2" min="3" max="300" TYPE="number" onkeypress="return event.charCode !=45" value="'+ pesoglobal.toString()+'" oninput="actimcp();">'+ unidemasa;
+textoT+='<br> Altura: <INPUT id="altura2" min="50" max="250" TYPE="number"  onkeypress="return event.charCode !=45" value="'+ alturaglobal.toString()+'" oninput="actimc();">'+unidelong;
+textoT+='<br>';
+textoT+='IMC:<INPUT id="simc" TYPE="number" min="1" onkeypress="return event.charCode !=45" value="'+ IMC(pesoglobal,alturaglobal).toString()+'" oninput="actpeso();">'+unideimc;
+
+if (sexoglobal=="F") {var textf=iconoselecton;var textm=iconoselectoff;} else {var textf=iconoselectoff;var textm=iconoselecton;}
+textoT+=  ' <br> Sexo: '+iconomujer+' <button ID="ISEXF" TYPE="button" class="buttonopt" onclick="cambiasexo(this.id);">'+textf+'</button>';
+textoT+=' '+iconohombre+' '+'<button ID="ISEXM" TYPE="button" class="buttonopt" onclick="cambiasexo(this.id);">'+textm+'</button> '
+
+//if (sexoglobal=="F") {var textf='checked="checked"';var textm='';} else {var textf='';var textm='checked="checked"';}
+//textoT+=  ' <br> Sexo: F <INPUT NAME="NSEX" ID="ISEXF" TYPE="radio" value="F" '+textf+' onchange="cambiasexo();"> M <INPUT NAME="NSEX" ID="ISEXM" TYPE="radio" value="M" '+textm+'onchange="cambiasexo();"> '
+
+
+
+textoT+=texto+'<br> <INPUT TYPE="button" value="Ok" onclick="muestradatosactivo='+"0"+';asignardatospaciente();" style="font-size:100%">';
+divdatos.innerHTML=textoT;
+divdatos.focus();
+
+actimc();
+}
+
+var muestraactivo="0";
+function Infogeneral(){
+closeNav();
+var texto="<center>Version 1.0</center> <br>";
+valerta(texto);
+}
+
+function Configurarplantilla(){
+closeNav();
+configPlantilla();
+}
+
+function asignafuente(){
+var fuente=document.getElementById("fuente").selectedIndex; 
+switch (fuente) {
+ case 0: fuenteletra="Times"; break;
+ case 1: fuenteletra="Helvetica"; break;
+ case 2: fuenteletra="Courier"; break;
+
+}
+}
+var tipofuenteletra="normal";
+function asignatipofuente(){
+var tipofuente=document.getElementById("tipofuente").selectedIndex; 
+switch (tipofuente) {
+ case 0: tipofuenteletra="normal"; break;
+ case 1: tipofuenteletra="italic"; break;
+ case 2: tipofuenteletra="bold"; break;
+ case 3: tipofuenteletra="bolditalic"; break;
+}
+}
+
+var tamanoletra=14;
+var fuenteletra="Times";
+
+function asignatamano(){
+var tam=document.getElementById("tamano").selectedIndex; 
+switch (tam) {
+ case 0: tamanoletra=10; break;
+ case 1: tamanoletra=12; break;
+ case 2: tamanoletra=14; break;
+ case 3: tamanoletra=16; break;
+}
+}
+var fechaderecipe=new Date();
+
+function asignafecha(){
+fechaderecipe= new Date(document.getElementById("fecharecipe").value); 
+}
+
+function cerrarConfigPlantilla(){
+var plantilla = document.getElementById("plantilla");
+plantilla.style="display: none;";
+}
+
+function cerrarlab(){
+var lab = document.getElementById("laborat");
+lab.style.display="none";
+}
+
+dataurlimagen=[];
+dataurlimagen[0]="";
+dataurlimagen[1]="";
+dataurlimagen[2]="";
+
+var primerapagina="S"
+function iniciaconfig(){
+if (primerapagina=="S") {document.getElementById("ppag").checked=true} else {document.getElementById("ppag").checked=false}
+
+switch (tipofuenteletra) {
+case "normal": document.getElementById("tipofuente").selectedIndex=0;break;
+case "italic" : document.getElementById("tipofuente").selectedIndex=1;break;
+case "bold": document.getElementById("tipofuente").selectedIndex=2;break;
+case "bolditalic": document.getElementById("tipofuente").selectedIndex=3;break;
+}
+switch (fuenteletra) {
+case "Times": document.getElementById("fuente").selectedIndex=0;break;
+case "Helvetica" : document.getElementById("fuente").selectedIndex=1;break;
+case "Courier": document.getElementById("fuente").selectedIndex=2;break;
+}
+switch (tamanoletra) {
+case 10: document.getElementById("tamano").selectedIndex=0;break;
+case 12: document.getElementById("tamano").selectedIndex=1;break;
+case 14: document.getElementById("tamano").selectedIndex=2;break;
+case 16: document.getElementById("tamano").selectedIndex=3;break;
+}
+}
+function guardar(){
+closeNav();
+guardar_default();
+}
+
+
+function guardar_default(){
+var buffer="";
+var sep="&@!";
+buffer=""; 
+buffer+=edadglobal+sep;
+buffer+=pesoglobal+sep;
+buffer+=alturaglobal+sep;
+buffer+=sexoglobal+sep;
+buffer+=razaglobal+sep;
+buffer+=creatglobal+sep;
+buffer+=creatunidad+sep;
+buffer+=fuenteletra+sep;
+buffer+=tipofuenteletra+sep;
+buffer+=tamanoletra+sep;
+buffer+=primerapagina+sep;
+buffer+=dataurlimagen[0]+sep;
+buffer+=dataurlimagen[1]+sep;
+buffer+=dataurlimagen[2];
+//alert(buffer);
+localStorage.setItem("RECIPE",buffer);
+}
+
+function leer_default(){
+sep="&@!";
+var buffer=localStorage.getItem("RECIPE"); 
+//alert(buffer);
+if (buffer!=null){
+buf2=buffer.split(sep);
+//alert(buf2.length);
+edadglobal=buf2[0];
+pesoglobal=buf2[1];
+alturaglobal=buf2[2];
+sexoglobal=buf2[3];
+razaglobal=buf2[4];
+creatglobal=buf2[5];
+creatunidad=buf2[6];
+
+fuenteletra=buf2[7];
+tipofuenteletra=buf2[8];
+tamanoletra=buf2[9];
+primerapagina=buf2[10];
+dataurlimagen[0]=buf2[11];
+dataurlimagen[1]=buf2[12];
+dataurlimagen[2]=buf2[13];
+}
+}
+
+function asignappag(){
+if (document.getElementById("ppag").checked) {primerapagina="S"} else {primerapagina="N"}
+}
+function muestraejemplo(){
+var elemento2 = document.getElementById("imgcentro");
+var ctx=elemento2.getContext('2d');
+//ctx.clearRect(0,0,elemento2.width,elemento2.height);
+if (dataurlimagen[2]!=""){
+     var imagenextra2=new Image();  
+//      lienzo2.globalAlpha=0.9 ;
+     imagenextra2.addEventListener("load",function() {
+            var aspecto2=imagenextra2.width/imagenextra2.height;
+            elemento2.height=elemento2.width/aspecto2;
+            ctx.drawImage(imagenextra2,0,0, imagenextra2.width,imagenextra2.height,0, 0, elemento2.width, elemento2.height);
+             var fuente=tipofuenteletra+" "+tamanoletra+"px "+fuenteletra;
+             //ctx.font="bold 16px Courier, sans-serif";
+             ctx.font=fuente;
+             ctx.textAlign="left";
+             ctx.fillText('Texto de Prueba', 50,50) 
+             // mensaje(fuente);    
+          }, false);
+     imagenextra2.src=dataurlimagen[2];
+}
+//ctx.stroke();
+
+}
+function configPlantilla(){
+var textoT="";
+var plantilla = document.getElementById("plantilla");
+plantilla.style="position: fixed;top :100px; left: 10px; width:100% ; text-align: left; ";
+textoT+='<div style="position: fixed;background-color: gray;width:100%;">';
+textoT+=' <button title=" Cargar plantilla" id="cargaplantilla" onclick="carga_plantilla();">'+iconoload+'</button>';
+textoT+=' <button title=" Guardar plantilla" onclick="guarda_plantilla();">'+iconosave+'</button> ';
+textoT+=' <button title=" Salir" onclick="cerrarConfigPlantilla();">'+iconocerrar+' </button> </div><br>';
+textoT+='<div style=" float: left; width:50%;">';
+textoT+='Encabezado:<br><canvas id="imgtit" onclick=" numerodeimagen=0 ;Activalector_imagenes();" style="width:50%;position: relative; top: 0px; left: 0px; border:0 px SOLID #000000;  WIDTH: 80%; HEIGHT: 100px ; background-color: white;" ></canvas><br>';
+textoT+='Imagen central:<br><canvas id="imgcentro" onclick=" numerodeimagen=2 ;Activalector_imagenes();" style="width:50%;position: relative; top: 0px; left: 0px; border:0 px SOLID #000000;  WIDTH: 80%; HEIGHT: 200px ; background-color: white;" ></canvas><br>';
+textoT+='Pie:<br><canvas id="imgpie" onclick=" numerodeimagen=1 ;Activalector_imagenes();" style="width: 50%; position: relative; top: 0px; left: 0px; border:0 px SOLID #000000;  WIDTH: 80%; HEIGHT: 100px ; background-color: white;" ></canvas>';
+textoT+='</div>';
+textoT+='<br>Encabezado y pie solo en primera pagina <input type="checkbox" id="ppag" onchange="asignappag();"><br>';
+textoT+='<table border="4" style=" color: white;width=100%;"><tr><td> Fuente </td> <td> Tamaño </td><td> Tipo </td></tr><tr><td>';
+textoT+='<select id="fuente" onchange="asignafuente();muestraejemplo();">';
+textoT+='<option selected > Times</i> </option><option> Helvetica </option><option> Courier </option></select>';
+textoT+='</td>  <td> ';
+textoT+='<select id="tamano" onchange="asignatamano();muestraejemplo();">';
+textoT+='<option selected> 10 </option><option> 12 </option><option> 14 </option><option> 16 </option></select>';
+textoT+='</td>  <td> ';
+textoT+='<select id="tipofuente" onchange="asignatipofuente();muestraejemplo();">';
+textoT+='<option selected> Normal </option> <option> Italic </option><option> Bold </option><option> Bolditalic </option></select>';
+textoT+='</td> </tr><tr><td colspan=3> Fecha </td></tr><tr><td colspan=3>';
+textoT+='<INPUT TYPE="date.local" id="fecharecipe" value="'+fechaderecipe.toISOString().substr(0,10)+'" onchange="asignafecha();">';
+textoT+=' </td> </tr></table>';
+
+plantilla.innerHTML=textoT;
+iniciaconfig();
+//alert( dataurlimagen[1].length+" paso");
+var elemento0=document.getElementById('imgtit');
+if (dataurlimagen[0]!=""){
+     var lienzo0=elemento0.getContext('2d');
+     var imagenextra0=new Image();   
+     imagenextra0.addEventListener("load",function() {
+            var aspecto0=imagenextra0.width/imagenextra0.height;
+            elemento0.height=elemento0.width/aspecto0;
+            lienzo0.drawImage(imagenextra0,0,0, imagenextra0.width,imagenextra0.height,0, 0, elemento0.width, elemento0.height);
+          }, false);
+     imagenextra0.src=dataurlimagen[0];
+}
+
+var elemento1=document.getElementById('imgpie');
+if (dataurlimagen[1]!=""){
+     var lienzo1=elemento1.getContext('2d');
+     var imagenextra1=new Image();   
+     imagenextra1.addEventListener("load",function() {
+            var aspecto1=imagenextra1.width/imagenextra1.height;
+            elemento1.height=elemento1.width/aspecto1;
+            lienzo1.drawImage(imagenextra1,0,0, imagenextra1.width,imagenextra1.height,0, 0, elemento1.width, elemento1.height);
+          }, false);
+     imagenextra1.src=dataurlimagen[1];
+}
+var elemento2=document.getElementById('imgcentro');
+
+if (dataurlimagen[2]!=""){
+     var lienzo2=elemento2.getContext('2d');
+     var imagenextra2=new Image();  
+         lienzo2.globalAlpha=0.9 ;
+     imagenextra2.addEventListener("load",function() {
+            var aspecto2=imagenextra2.width/imagenextra2.height;
+            elemento2.height=elemento2.width/aspecto2;
+            lienzo2.drawImage(imagenextra2,0,0, imagenextra2.width,imagenextra2.height,0, 0, elemento2.width, elemento2.height);
+          }, false);
+     imagenextra2.src=dataurlimagen[2];
+}
+
+muestraejemplo();
+}
+
+
+function Editarrecipe(){
+closeNav();
+muestraactivo="1";
+muestrarecipes();
+}
+
+
+function makepdf(){
+closeNav();
+//getFile.simulate();
+hacerpdf();
+}
+
+function cargar(){
+closeNav();
+//if (!app) {cargarweb();} else {cargarapp();}
+//cargadatosweb("001");
+}
+function refrescapagina(){
+closeNav();
+//cambialenguaje();
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+
+var flagdosis=false;
+var indantdosis;
+var listatipo=new Array();
+var remedio=new Array();
+var indice;
+var indicetipo,indicefarmaco,indicedosis,indicepresent;
+var recipes=new Array();
+var recipesA=new Array();
+var recipesB=new Array();
+
+var creatglobal=1;
+var creatunidad=1;
+
+function supcorp(P){
+var pf=parseFloat(P);
+var sc;
+if (pf<10){
+sc=(4*pf+9)/100;
+}
+else {
+sc=(4*pf+7)/(pf+90);
+}
+return sc;
+}
+
+function supcorp2(P,H){
+var p=parseFloat(P);
+var h=parseFloat(H);
+var sc=Math.pow(p*h/3600,0.5);
+sc=xround(sc,2);
+return sc;
+}
+
+
+
+function compatibilidad(dosis,present){
+var resp=[];
+
+for (var i=0;i<present.via.length;i++){
+    for (var j=0;j<dosis.via.length;j++){
+       if (present.via[i]==dosis.via[j]) { resp.unshift(present.via[i]) }
+     }
+}
+return resp;
+}
+var hoy;
+function Antecedente(p1,p2,p3){
+this.nombre=p1;
+this.fecha=p2;
+this.trat=p3;
+}
+
+
+
+function signosintoma(nombre,sistema){
+this.nombre=nombre;
+this.sistema=sistema;
+}
+function properties(nombp,tipo,valpos,valor,ref){
+this.nombp=nombp;
+this.tipo=tipo;
+this.valpos=valpos;
+this.valor=valor;
+this.ref=ref;
+}
+
+
+function define_signos(){
+Signos=new Array(); 
+Signos[0]=new signosintoma("Fiebre","General")
+Signos[0].prop=new Array();
+Signos[0].prop[0]=new properties("Temperatura","R2.1-35-41","",37,"prop0");// NR : Numero real
+Signos[0].prop[1]=new properties("Predominio","E",["Matutino","Vespertino","Nocturno"],2,"prop1");
+Signos[0].prop[2]=new properties("Comienzo","E",["Brusco","Insidioso"],1,"prop2");
+Signos[0].prop[3]=new properties("Patrón","E",["No medido","irregular","Continua","Remitente","Intermitente","Séptica","Recurrente"],3,"prop3");
+
+Signos[1]=new signosintoma("Diarrea","General")
+Signos[1].prop=new Array();
+Signos[1].prop[0]=new properties("Comienzo","E",["Brusco","Insidioso"],0,"prop0");
+Signos[1].prop[1]=new properties("Tiempo de evolución","E",["Aguda","Crónica"],0,"prop1");
+Signos[1].prop[2]=new properties("Consistencia","E",["Blanda","Pastosa","Líquida"],0,"prop2");
+Signos[1].prop[3]=new properties("Sanguinolentas","E",["No","Si"],0,"prop3");
+Signos[1].prop[4]=new properties("Presencia de Moco","E",["No","Si"],0,"prop4");
+Signos[1].prop[5]=new properties("Presencia de Pus","E",["No","Si"],0,"prop5");
+
+Signos[2]=new signosintoma("Tos","Cardio-respiratorio")
+Signos[2].prop=new Array();
+Signos[2].prop[0]=new properties("Comienzo","E",["Brusco","Insidioso"],0,"prop0");
+Signos[2].prop[1]=new properties("Tiempo de evolución","E",["Aguda","Crónica"],0,"prop1");
+Signos[2].prop[2]=new properties("Tipo","E",["Quintosa","Coqueluchoide","Ronca","Emetizante","Bitonal"],0,"prop2");
+Signos[2].prop[3]=new properties("Sequedad","E",["Seca","Humeda no productiva","Humeda productiva"],0,"prop3");
+
+
+Signos[3]=new signosintoma("Expectoracion","Cardio-respiratorio")
+Signos[3].prop=new Array();
+Signos[3].prop[0]=new properties("Comienzo","E",["Brusco","Insidioso"],0,"prop0");
+Signos[3].prop[1]=new properties("Tiempo de evolución","E",["Aguda","Crónica"],0,"prop1");
+Signos[3].prop[2]=new properties("Cantidad","E",["Abundante","Media","Escasa"],0,"prop2");
+Signos[3].prop[3]=new properties("Color","E",["Blanquecino","Verdoso","Rojizo"],0,"prop3");
+Signos[3].prop[4]=new properties("Consistencia","E",["Blanquecino","Verdoso","Rojizo"],0,"prop3");
+Signos[3].prop[5]=new properties("Viscocidad","E",["Blanquecino","Verdoso","Rojizo"],0,"prop3");
+Signos[3].prop[6]=new properties("Olor","E",["Fetido","Normal"],1,"prop3");
+Signos[3].prop[7]=new properties("Contaminacion","E",["Fetido","Normal"],1,"prop3");
+
+
+
+
+
+}
+
+
+function pregunta_signo(signo){
+var divsigno = document.getElementById("div_signos");
+divsigno.style="position: fixed;top :100px; overflow-y: scroll; height: 70%;left: 10px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;";
+
+var textoT,texto;
+textoT="";
+textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
+textoT+=' <button title="Agrega recipe" id="carga_recipe" onclick="carga_archivo();">'+iconoplus +' </button>';
+textoT+=' <button title="Guarda recipe" onclick="guarda_archivo();">'+ iconosave+' </button> ';
+textoT+=' <button title="Eliminar recipe" onclick="borrar_recipes();">'+ iconobasura+' </button>';
+textoT+=' <button onclick="hacerpdf();"  title="Genera pdf"><i class="fas fa-file-pdf"></i> </button>';
+
+textoT+=' <button title="Salir" onclick="quitarrecipe()" >'+ iconocerrar+'</button></div>';
+
+textoT+=' <br> <br><center><span id="titrec">'+ signo.nombre +'</span></center><br>';
+
+for(var i=0;i<signo.prop.length;i++){
+var tip=signo.prop[i].tipo;
+var nt=signo.nombre+i;
+textoT+='<br>'+ signo.prop[i].nombp;
+
+if (tip=="E") {
+textoT+=makeSelectSimple(nt,signo.prop[i].valpos,signo.prop[i].valor);
+textoT+="<br>";
+}
+
+if (tip.substr(0,1)=="R") {
+textoT+=makeKeyInput(nt,"",signo.prop[i].tipo,signo.prop[i].valor);
+textoT+="<br>";
+}
+
+}
+divsigno.innerHTML=textoT;
+
+//for(var i=0;i<signo.prop.length;i++){
+//  if (signo.prop[i].tipo=="E") {
+//    var nt=signo.nombre+i;    
+//    setIndexInputSimple(nt,signo.prop[i].valor)
+//   }
+//}
+}
+
+
+function iniciaHistoriaPlantilla(){
+ historia=new Object();
+ historia.ficha=new Object();
+ historia.ficha.nombre="Braulio";
+ historia.ficha.ci=8736737;
+ historia.ficha.fechanac="1966-03-26";
+ historia.ficha.edocivil=1;
+ historia.ficha.sexo="1";
+ historia.ficha.dir="Urb. Carialinda";
+ historia.ficha.tel="0412-8552592";
+ historia.ficha.email="brauliodeabreu@gmail.com";
+ historia.antec=new Object();
+ historia.antec.medicos=new Object();
+ historia.antec.medicos.alergia="";
+ historia.antec.medicos.enfermedades=new Array();
+ historia.antec.medicos.enfermedades[0]=new Antecedente("Hipertensión arterial","07/2000","Sin Tratamiento");
+ historia.exfis=new Object();
+ historia.exfis.cabeza=new Object();
+ historia.exfis.cabeza.tamcab=1;
+ historia.exfis.cabeza.indcab=0;
+ historia.exfis.cabeza.altcab=1;
+ historia.exfis.cuello=new Object();
+ historia.exfis.cuello.tiroides=[];
+ historia.exfis.pulmonar=new Object();
+ historia.exfis.pulmonar.tipo=0;
+ historia.exfis.pulmonar.patron=0;
+ historia.exfis.pulmonar.rpm=25;
+ historia.exfis.cardio=new Object();
+ historia.exfis.cardio.psisto=120;
+ historia.exfis.cardio.pdiast=80;
+ historia.exfis.cardio.freccard=70;
+ historia.exfis.cardio.apex=[];
+// historia.exfis.cardio.apex.visible=true;
+// historia.exfis.cardio.apex.palpable=true;
+ historia.exfis.cardio.soplo=1;
+ historia.exfis.abdomen=new Object();
+ historia.exfis.abdomen.rshs=1;
+// var myJSON = JSON.stringify(historia);
+//alert(myJSON);
+}
+
+function inicialabplantilla(){
+labs=new Object();
+labs.hem=new Object();
+labs.hem.name="Hematologia";
+labs.hem.tipo=new Array();
+labs.hem.tipo[0]=new Exam("Hematologia Completa",false);
+labs.hem.tipo[1]=new Exam("Plaquetas",false);
+labs.hem.tipo[2]=new Exam("PTT",false);
+labs.hem.tipo[3]=new Exam("PT",false);
+labs.lip=new Object();
+labs.lip.name="Lipidos";
+labs.lip.tipo=new Array();
+labs.lip.tipo[0]=new Exam("Colesterol total",false);
+labs.lip.tipo[1]=new Exam("LDL",false);
+labs.lip.tipo[2]=new Exam("HDL",false);
+labs.lip.tipo[3]=new Exam("VLDL",false);
+labs.lip.tipo[4]=new Exam("Trigliceridos",false);
+labs.ren=new Object();
+labs.ren.name="Perfil Renal";
+labs.ren.tipo=new Array();
+labs.ren.tipo[0]=new Exam("Creatinina sérica",false);
+labs.ren.tipo[1]=new Exam("Urea",false);
+labs.ren.tipo[2]=new Exam("BUN",false);
+labs.ren.tipo[3]=new Exam("Acido úrico",false);
+labs.ren.tipo[4]=new Exam("Cistatina",false);
+labs.orina=new Object();
+labs.orina.name="Orina";
+labs.orina.tipo=new Array();
+labs.orina.tipo[0]=new Exam("Urocultivo",false);
+labs.orina.tipo[1]=new Exam("Creatinina 24 horas",false);
+labs.orina.tipo[2]=new Exam("BUN",false);
+labs.orina.tipo[3]=new Exam("Proteinuria cuantificada",false);
+labs.orina.tipo[4]=new Exam("Orina basico",false);
+}
+
+
+function Activalector_recipes(){
+getFile2 = new selectFile;
+getFile2.targets('choose2','selected');
+archivos2=document.getElementById('choose2');
+archivos2.value=null;
+archivos2.addEventListener('change', function(e){cargar_recipe(e)}, false);
+
+getFile2.simulate();
+
+}
+
+function Activalector_imagenes(){
+getFile = new selectFile;
+getFile.targets('choose1','selected');
+archivos1=document.getElementById('choose1');
+archivos1.value=null;
+archivos1.addEventListener('change', function(e){procesarimagen(e,numimagen)}, false);
+
+getFile.simulate();
+
+}
+
+function iniciar(){
+
+//graficarpH();
+define_signos();
+hoy=new Date();
+leer_default();
+leerdatos();
+remedio.sort(comparar);
+for(var i=0;i<remedio.length;i++){
+adicionar(remedio[i].tipo); 
+}
+function comparar(a,b){
+ if (a.tipo<b.tipo) return -1;
+ if (a.tipo>b.tipo) return  1;
+ if (a.tipo==b.tipo) {
+   if (a.ng<b.ng) return -1;
+   if (a.ng>b.ng) return  1;
+   if (a.ng==b.ng) return 0;
+   }
+}
+indicetipo=0;
+generapagina1();
+getFile = new selectFile;
+getFile.targets('choose1','selected');
+archivos1=document.getElementById('choose1');
+archivos1.addEventListener('change', function(e){procesarimagen(e,numimagen)}, false);
+numimagen=1;
+//refrescadatospac();
+inicialabplantilla();
+iniciaHistoriaPlantilla();
+
+
+
+
+
+
+//    var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+//    saveAs(blob, "hello world.txt");
+
+}
+
+
+var iconoregresar='<i class="fas fa-redo"></i>';
+var iconogrupos='<i class="fas fa-redo"></i>';
+var iconoindic='<i class="fas fa-redo"></i>';
+var iconocindic='<i class="fas fa-redo"></i>';
+var iconodescrip='<i class="fas fa-redo"></i>';
+var iconofarcin='<i class="fas fa-redo"></i>';
+var iconofardin='<i class="fas fa-redo"></i>';
+var iconoRAM='<i class="fas fa-redo"></i>';
+var iconorinterac='<i class="fas fa-redo"></i>';
+var iconoredo='<i class="fas fa-redo"></i>';
+var iconocerrar='<i class="fas fa-window-close"></i>';
+var iconobasura='<i class="fas fa-trash-alt"></i>';
+var iconoplus='<i class="fas fa-plus" ></i>';
+var iconominus='<i class="fas fa-minus" ></i>';
+var iconoload='<i class="fas fa-folder-open" ></i>';
+var iconoup='<i class="fa fa-arrow-up" ></i>';
+var iconoleft='<i class="fa fa-arrow-left" ></i>';
+var iconocheck='<i class="fa fa-check-square"></i>';
+var icononocheck='<i class="fa fa-square"></i>';
+
+
+var iconodown='<i class="fa fa-arrow-down" ></i>';
+var iconosave='<i class="fas fa-save" ></i>';
+var iconomujer='<i class="fas fa-female" ></i>';
+var iconohombre='<i class="fas fa-male" ></i>';
+var iconopdf='<i class="fas fa-file-pdf" ></i>';
+var iconoborrador='<i class="fas fa-eraser" ></i>';
+var iconoeditor='<i class="fas fa-edit" ></i>';
+var iconoselecton='<i class="fas fa-circle" style="font-size: 0.7em;"></i>';
+var iconoselectoff='<i class="far fa-circle" style="font-size: 0.7em;"></i>';
+
+function blancos(num){
+var texto="";
+for(var i=0;i<num;i++){
+texto+="&nbsp"
+}
+return texto;
+}
+function despliegarecipes(){
+var div4 = document.getElementById("pag4");
+var textoT,texto;
+textoT="";
+for(var i=0;i<recipes.length;i++){
+        if (i==0){textoT=" <br> <br> RECIPES <br>"; }
+         texto = recipes[i];
+//         textoT+="<INPUT  TYPE='button' value='B' onclick='clickp5("+i+" )' style='font-size:100%'>"+" <p onclick='editarecipe("+i+")'>"  +" <TT> "+texto+" </TT>"+"</p>";
+         textoT+= " <p >"+"<button onclick='clickp5("+i+" )' style='font-size:100%'><i class='fas fa-eraser'></i></button>"+"&nbsp"+"<button onclick='editarecipe("+i+" )' style='font-size:100%'><i class='fas fa-edit'></i></button>"+ " <TT> "+texto+" </TT>"+"</p>";
+
+//         alert(textoT);     
+}
+div4.innerHTML=textoT;
+presentadiv4(true);
+}
+
+function despliegarecipe(){
+var div4 = document.getElementById("pag4");
+var textoT,texto;
+var ind=recipes.length-1;
+var ind=0;
+div4.style="position: fixed;top :100px;  left: 10px; width:80% ;background-color: white;color:blue; text-align: left; border: 3px solid #73AD21;";
+
+textoT="";
+         texto = recipes[ind];
+         textoT+= " <p >"+"<button onclick='clickp5("+ind+" )' style='font-size:100%'><i class='fas fa-eraser'></i> </button> "+"&nbsp"+"<button onclick='editarecipe("+ind+" )' style='font-size:100%'><i class='fas fa-edit'></i> </button>"+ " <TT> "+texto+" </TT>"+"<INPUT  TYPE='button' value='Ok' onclick='presentadiv4(0)'>"+"</p>";
+
+
+div4.innerHTML=textoT;
+presentadiv4(true);
+}
+
+
+function muestrarecipes(){
+muestraactivo="1";
+presentadiv4(0);
+var divrecipe = document.getElementById("recipes");
+divrecipe.style="position: fixed;top :100px; overflow-y: scroll; height: 70%;left: 10px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;";
+
+var textoT,texto;
+textoT="";
+textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
+//textoT+=' <button title="Agrega recipe" id="carga_recipe" onclick="carga_archivo();">'+iconoplus +' </button>';
+textoT+=' <button title="Agrega recipe" id="carga_recipe" onclick="Activalector_recipes();">'+iconoplus +' </button>';
+textoT+=' <button title="Guarda recipe" onclick="guarda_archivo();">'+ iconosave+' </button> ';
+textoT+=' <button title="Eliminar recipe" onclick="borrar_recipes();">'+ iconobasura+' </button>';
+textoT+=' <button onclick="hacerpdf();"  title="Genera pdf"><i class="fas fa-file-pdf"></i> </button>';
+
+textoT+=' <button title="Salir" onclick="quitarrecipe()" >'+ iconocerrar+'</button></div>';
+
+textoT+=' <br> <br><center><span id="titrec"> RECIPES </span></center><br>';
+
+for(var i=0;i<recipes.length;i++){
+         var textaux = recipes[i];
+             texto=textaux.replace(/\r?\n/g,'<br />');
+         textoT+='<p style="font-size: 0.2em;">';
+   if (i!=(recipes.length-1))  {textoT+= '<button title="Bajar" onclick="bajaritem('+i+')"    >'+iconodown+'</button>';}
+   if (i!=0) {textoT+= '<button title="Subir" onclick="subiritem('+i+')" >'+iconoup+'</button>';}
+
+         textoT+= '<button title="Eliminar" onclick="clickp5('+i+')" >'+iconoborrador+'</button>&nbsp';
+         textoT+= '<button title="Editar" onclick="editarecipe('+i+')" >'+iconoeditor+'</button>';
+         textoT+= '<button title="Rehacer" onclick="quitarrecipe();rehacerrecipe('+i+')" >'+iconoredo+'</button><br>';
+         textoT+= '<TT >'+texto+' </TT></p>';
+}
+//alert(textoT);
+
+divrecipe.innerHTML=textoT;
+//presentadiv4(true);
+document.getElementById("titrec").scrollIntoView(false);
+//document.getElementById("titrec").focus();
+}
+
+function iniciahistoriamedica(){
+document.getElementById("nbpac").value=historia.ficha.nombre.toString();
+document.getElementById("cipac").value=historia.ficha.ci;
+document.getElementById("fnpac").value=historia.ficha.fechanac;
+//setIndexRadioInput("SEXOH",historia.ficha.sexo);
+document.getElementById("eciv").selectedIndex=historia.ficha.edocivil;
+document.getElementById("dirpac").value=historia.ficha.dir;
+document.getElementById("telpac").value=historia.ficha.tel;
+document.getElementById("mailpac").value=historia.ficha.email;
+
+//setIndexRadioInput("tiporesp",historia.exfis.pulmonar.tipo);
+//setIndexRadioInput("patronresp",historia.exfis.pulmonar.patron);
+document.getElementById("respormin").value=historia.exfis.pulmonar.rpm;
+
+document.getElementById("partsist").value=historia.exfis.cardio.psisto;
+document.getElementById("partdiast").value=historia.exfis.cardio.pdiast;
+document.getElementById("freccard").value=historia.exfis.cardio.freccard;
+//setIndexsCheckInput("apex",historia.exfis.cardio.apex);
+//setIndexRadioInput("soplo",historia.exfis.cardio.soplo);
+setIndexInputSimple("ruihidro",[historia.exfis.abdomen.rshs])
+//setIndexRadioInput("tamcab",historia.exfis.cabeza.tamcab);
+//setIndexsCheckInput("tiroid",historia.exfis.cuello.tiroides);
+}
+
+function quitarAntec(){
+var divantec = document.getElementById("antecedentes");
+divantec.style="display: none;";
+}
+function addAntec(){
+var divantec = document.getElementById("antecedentes");
+divantec.style="position: fixed;top :150px; overflow-y: scroll; height: 70%;left: 60px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;";
+var textoT,texto;
+textoT="";
+textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
+textoT+=' <button title="Guardar" onclick="agregarlistaantec();quitarAntec();">'+ iconosave+' </button> ';
+textoT+=' <button title="Salir" onclick="quitarAntec();">'+ iconocerrar+'</button></div>';
+textoT+=' <br> <br><center><span id="titrechistoria"> Antecedentes </span></center><br>';
+posantec=["Hipertension Arterial","Diabetes Mellitus"];
+textoT+=makeRadioInput("pantec",posantec);
+textoT+='<br>';
+textoT+= '  Fecha de Diagnóstico <input id="fechaantec" type="date">';
+textoT+='<br>';
+textoT+='Tratamiento: <input type="text" id="tratantec" value="Sin tratamiento">';
+textoT+='</div>';
+divantec.innerHTML=textoT;
+}
+function agregarlistaantec(){
+var indnomb=getIndexRadioInput("pantec");
+var nomb=posantec[indnomb];
+var fecha=document.getElementById("fechaantec").value;
+var trat=document.getElementById("tratantec").value;
+historia.antec.medicos.enfermedades.push(new Antecedente(nomb,fecha,trat));
+llenarlistaantec();
+}
+
+function Modantec(i){
+
+}
+function ELiantec(i){
+historia.antec.medicos.enfermedades.splice(i,1);
+llenarlistaantec();
+}
+function llenarlistaantec(){
+var textoT="<table>";
+for (var i=0;i<historia.antec.medicos.enfermedades.length;i++) {
+textoT+='<tr><td>'+historia.antec.medicos.enfermedades[i].nombre+'</td>';
+textoT+='<td>'+historia.antec.medicos.enfermedades[i].fecha+'</td>';
+textoT+='<td>'+historia.antec.medicos.enfermedades[i].trat+'</td>';
+textoT+='<td><button title="Eliminar antecedente" onclick="ELiantec('+i+');">E</button></td></tr>'
+//textoT+='<button onclick="Modantec(i);">M</button> <button onclick="ELiantec(i);">E</button></tr>'
+
+}
+textoT+='</table>';
+document.getElementById("listaantec").innerHTML=textoT;
+}
+
+function historiamedica(){
+var divhistoria = document.getElementById("historia");
+divhistoria.style="position: fixed;top :100px; overflow-y: scroll; height: 70%;left: 10px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;";
+
+var textoT,texto;
+textoT="";
+textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
+textoT+=' <button title="Carga historia" id="carga_historia" onclick="carga_historia();">'+iconoplus +' </button>';
+textoT+=' <button title="Guarda historia" onclick="guarda_historia();">'+ iconosave+' </button> ';
+textoT+=' <button title="Borra historia" onclick="borrar_historia();">'+ iconobasura+' </button>';
+textoT+=' <button onclick="hacerpdfhistoria();"  title="Genera pdf de la Historia"><i class="fas fa-file-pdf"></i> </button>';
+textoT+=' <button title="Salir" onclick="quitarhistoria()" >'+ iconocerrar+'</button></div>';
+
+textoT+=' <br> <br><center><span id="titrechistoria"> HISTORIA MEDICA </span></center><br>';
+
+var id1="fp";var id2="idfp";
+textoT+=' <span class="historiaitemp" >Ficha patronímica <button id="idfp" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button></span><br>';
+textoT+='<div class="divh" style="display:none;" id="fp">';
+//textoT+= '<label for id="nbpac"> Nombres y apellidos </label>';
+textoT+= 'Nombres y apellidos ';
+textoT+=makeKeyInput("nbpac","","T15","");
+// <input id="nbpac" type="text" >';
+//textoT+= '<label for id="cipac"> Cédula </label>';
+textoT+= ' Cédula <input id="cipac" type="number" style=" width: 6em;"><br>';
+//textoT+= '<label for id="fnpac"> Fecha de nacimiento </label>';
+textoT+= '  Fecha de nacimiento <input id="fnpac" type="date">&nbsp;';
+tsexos=[iconomujer,iconohombre];
+textoT+=  'Sexo: ';
+textoT+=makeRadioInput("SEXOH",tsexos,historia.ficha.sexo);
+//textoT+=  'Sexo: '+iconomujer+' <button name="SEXOH" onclick="changeStateButton(this)">'+iconoselecton+'</button>';
+//textoT+=' '+iconohombre+' '+'<button name="SEXOH" onclick="changeStateButton(this)">'+iconoselectoff+'</button> '
+
+textoT+= '<br>'+  'Estado civil: '+' <select id="eciv"><option> Soltero</option> <option> Casado</option>';
+textoT+=  '<option> Concubino</option><option> Divorciado</option><option> Viudo</option></select>';
+//textoT+= '<br><label for id="dirpac"> Dirección </label>';
+textoT+= '<br> Dirección <input id="dirpac" type="text">';
+//textoT+= '<br><label for id="telpac"> Teléfono </label>';
+textoT+= '<br> Teléfono<input id="telpac" type="tel">';
+//textoT+= '<br><label for id="mailpac"> Correo electrónico </label>';
+textoT+= '<br> Correo electrónico <input id="mailpac" type="email">';
+
+textoT+='</div>';
+
+var id1="mc";var id2="idmc";
+textoT+=' <span class="historiaitem" >Mótivo de consulta </span> <button id="idmc" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div style="display:none;" id="mc">';
+textoT+= '<textarea ID="tea" rows="4" cols="30" style="background-color: lightgray;color: black;"></textarea><br>';
+textoT+='</div>';
+
+
+
+var id1="ea";var id2="idea";
+textoT+=' <span class="historiaitem" >Enfermedad actual </span> <button id="idea" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div style="display:none;" class="divh" id="ea">';
+textoT+= '<textarea ID="tea" rows="4" cols="30" style="background-color: lightgray;color: black;"></textarea><br>';
+textoT+='</div>';
+
+var id1="antec";var id2="idantec";
+textoT+=' <span class="historiaitemp" >Antecedentes </span> <button id="idantec" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div id="antec" style="display:none;">';
+
+var id1="antmed";var id2="idantmed";
+textoT+=' <span class="historiaitem" >&nbsp;Médicos </span> <button id="idantmed" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div id="antmed" style="display:none;">';
+   textoT+= 'Alergias: <input type="text" id="alergia">';
+   textoT+='<span id="listaantec"></span>';
+   textoT+='<button onclick="addAntec();">Agregar</button>'; 
+// textoT+= ' No <button name="talergia" onclick="changeStateButton(this);activaalergia(0);">'+iconoselecton+' </button>';
+//   textoT+= ' Sí <button name="talergia" onclick="changeStateButton(this);activaalergia(1)">'+iconoselectoff+ '</button>';
+//   textoT+='&nbsp;<span id="valerg"> A: <input type="text" id="alergia"></span>';
+textoT+='</div>';
+
+var id1="antquir";var id2="idantquir";
+textoT+=' <span class="historiaitem" >&nbsp;Quirúrgicos </span> <button id="idantquir" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div id="antquir" style="display:none;">';
+
+textoT+='</div>';
+
+var id1="anthab";var id2="idanthab";
+textoT+=' <span class="historiaitem" >&nbsp;Hábitos psicobiológicos </span> <button id="idanthab" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div id="anthab" style="display:none;">';
+textoT+= 'Duración del sueño: ';
+textoT+= makeKeyInput("dursue","","I2-0-24","8");
+textoT+=' horas<br>';
+textoT+= 'Tabaquismo: ';
+tiposTabaco=["Cigarrillos","Tabaco","Pipa"];
+textoT+=makeSelectSimple("tipotabaco",tiposTabaco,0);
+textoT+= 'Unidades: ';
+textoT+= makeKeyInput("unddiatab","","I2-0-24","0");
+unidstiempo=["dia(s)","semana(s)","mes(es)"];
+textoT+=makeSelectSimple("unidstab",unidstiempo,0);
+textoT+= '<br>Alcohol: ';
+tiposAlcohol=["Cerveza","Vino","Ron"];
+textoT+=makeSelectSimple("tipoalcohol",tiposAlcohol,0);
+textoT+= 'Unidades: ';
+textoT+= makeKeyInput("unddiaalcohol","","I2-0-24","0");
+unidstiempo=["dia(s)","semana(s)","mes(es)"];
+textoT+=makeSelectSimple("unidsalcohol",unidstiempo,0);
+textoT+= '<br>Drogas: ';
+tiposDrogas=["Cocaina","Heroina","Crack"];
+textoT+=makeSelectSimple("tipodrogas",tiposDrogas,0);
+textoT+= 'Unidades: ';
+textoT+= makeKeyInput("unddiadrogas","","I2-0-24","0");
+unidstiempo=["dia(s)","semana(s)","mes(es)"];
+textoT+=makeSelectSimple("unidsdrogas",unidstiempo,0);
+
+textoT+='</div>';
+
+
+
+var id1="antfam";var id2="idantfam";
+textoT+=' <span class="historiaitem" >&nbsp;Familiares </span> <button id="idantfam" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div id="antfam" style="display:none;">';
+
+textoT+='</div>';
+
+var id1="antepi";var id2="idantepi";
+textoT+=' <span class="historiaitem" >&nbsp;Epidemiológicos </span> <button id="idantepi" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div id="antepi" style="display:none;">';
+
+textoT+='</div>';
+
+textoT+='</div>';
+var id1="int";var id2="idint";
+textoT+=' <span class="historiaitem" >Interrogatorio por aparatos y sistemas </span> <button id="idint" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div id="int" style="display:none;">';
+
+var id1="apsist1";var id2="idapsist1";
+   textoT+=' <span class="historiaitem" > &nbsp;General</span> <button id="idapsist1" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist1" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist2";var id2="idapsist2";
+   textoT+=' <span class="historiaitem" > &nbsp;Cabeza</span> <button id="idapsist2" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist2" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist3";var id2="idapsist3";
+   textoT+=' <span class="historiaitem" > &nbsp;Ojos</span> <button id="idapsist3" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist3" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist4";var id2="idapsist4";
+   textoT+=' <span class="historiaitem" > &nbsp;Oidos</span> <button id="idapsist4" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist4" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+
+var id1="apsist5";var id2="idapsist5";
+   textoT+=' <span class="historiaitem" > &nbsp;Nariz</span> <button id="idapsist5" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist5" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+
+
+var id1="apsist6";var id2="idapsist6";
+   textoT+=' <span class="historiaitem" > &nbsp;Boca</span> <button id="idapsist6" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist6" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist7";var id2="idapsist7";
+   textoT+=' <span class="historiaitem" > &nbsp;ORL</span> <button id="idapsist7" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist7" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist8";var id2="idapsist8";
+   textoT+=' <span class="historiaitem" > &nbsp;Respiratorio</span> <button id="idapsist8" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist8" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist9";var id2="idapsist9";
+   textoT+=' <span class="historiaitem" > &nbsp;Osteomuscular</span> <button id="idapsist9" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist9" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist10";var id2="idapsist10";
+   textoT+=' <span class="historiaitem" > &nbsp;Cardiovascular</span> <button id="idapsist10" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist10" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist11";var id2="idapsist11";
+   textoT+=' <span class="historiaitem" > &nbsp;Gastrointestinal</span> <button id="idapsist11" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist11" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist12";var id2="idapsist12";
+   textoT+=' <span class="historiaitem" > &nbsp;Genitourinario</span> <button id="idapsist12" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist12" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
+   textoT+='</div>';
+
+var id1="apsist13";var id2="idapsist13";
+   textoT+=' <span class="historiaitem" > &nbsp;Nervioso y mental</span> <button id="idapsist13" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="apsist13" style="display:none;">';
+   textoT+= ' Pérdida de peso:';
+   textoT+= '<input id="ppeso" type="number" >';
+//   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+//   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen,0)
+//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+//   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos,0)
+   textoT+='</div>';
+
+
+
+textoT+='</div>';
+
+
+var id1="exf";var id2="idexf";
+textoT+=' <span class="historiaitem" >Examen físico </span> <button id="idexf" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div id="exf" style="display:none;">';
+
+   var id1="exf1";var id2="idexf1";
+   textoT+=' <span class="historiaitem" > &nbsp;Cabeza</span> <button id="idexf1" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="exf1" style="display:none;">';
+   tamcabeza=["Normocefálico","Macrocefálico","Microcefálico"];
+   textoT+=' Tamaño: ';
+   textoT+=makeRadioInput("tamcab",tamcabeza,historia.exfis.cabeza.tamcab);
+   textoT+='<br>'
+   indcefal=["Normocefálico","Dolicocefálico","Braquicefálico"];
+   textoT+=' Indice cefálico: ';
+   textoT+=makeSelectSimple("indcab",indcefal,0);
+   textoT+='<br>'
+   altcefal=["Normocefálico","Turricefálico","Platicefálico"];
+   textoT+=' Altura cefálica: ';
+   textoT+=makeSelectSimple("altcab",altcefal,0);
+   textoT+='<br>'
+
+//
+//   textoT+= 'Tipo: Normocefala <button name="tipocab" onclick="changeStateButton(this)">'+iconoselecton+' </button>';
+//   textoT+= ' Dolicocefala <button name="tipocab" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+//   textoT+= ' Braquicefala <button name="tipocab" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+//   textoT+= ' Acrocefala <button name="tipocab" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+//   textoT+= ' Microcefala <button name="tipocab" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+//   textoT+= ' Macrocefala <button name="tipocab" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+   textoT+= ' Protuberacias: No <button name="protcab" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+   image='"img/abdomen.png"';
+  
+   textoT+= ' Si <button name="protcab" onclick="changeStateButton(this);muestrasvg(vsgobject,500,500);">'+iconoselectoff+ '</button>';
+   textoT+='Color de cabello: ';
+   colorcabello=["Negro","Castaño","Blanco"];
+   textoT+=makeSelectSimple("colcab",colorcabello,0)
+   textoT+='<br>Ojos: ';
+   Ojos=["Pupilas isocóricas","Reactivas a la luz"] 
+   textoT+=makeCheckInput("ojoscar",Ojos);
+   textoT+= '<br>';
+   textoT+='Fosas nasales:';
+   fosasNasales=["Permeables","Simétricas","Presencia de vibrisas"];
+   textoT+=makeSelectMultiple2("fosasnas",fosasNasales,[]);
+
+   textoT+='</div>';
+
+   var id1="exf2";var id2="idexf2";
+   textoT+=' <span class="historiaitem" > &nbsp;Cuello</span> <button id="idexf2" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="exf2" style="display:none;">';
+   textoT+= 'Tiroides: ';
+   tiroides=["Visible","Palpable"];
+   textoT+= makeCheckInput("tiroid",tiroides,historia.exfis.cuello.tiroides);
+   textoT+= '<br>';
+   textoT+='</div>';
+
+   var id1="exf3";var id2="idexf3";
+   textoT+=' <span class="historiaitem" > &nbsp;Pulmonar</span> <button id="idexf3" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="exf3" style="display:none;">';
+   textoT+= 'Torax estático:';
+   toraxEstat=["Enfisematoso","Cifoescoliótico","Pectus excavatum","Pectus carinatum"];
+   textoT+=makeSelectMultiple2("toraxsim",toraxEstat,[]);
+//   textoT+= ' Normal <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselecton+' </button>';
+//   textoT+= ' Enfisematoso <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+//   textoT+= ' Cifoescoliótico <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+//   textoT+= ' Pectus excavatum <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+//   textoT+= ' Pectus carinatum <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+   textoT+= '<br>';
+   textoT+= ' Tipo respiratorio: ';
+   TipoResp=["Costal superior","Costoabdominal","Abdominal"];
+   textoT+= makeRadioInput("tiporesp",TipoResp,historia.exfis.pulmonar.tipo);
+   textoT+= '<br>';
+
+   textoT+= ' Respiraciones por minuto:';
+   textoT+= makeKeyInput("respormin","","I2-0-50","20");
+
+  // <input id="respormin" type="number">'
+   textoT+= '<br>';
+   textoT+= ' Patrón respiratorio: ';
+   patronesresp=["Normal","Cheyne Stokes","Kussmaul","Biot"];
+   textoT+=makeRadioInput("patronresp",patronesresp,historia.exfis.pulmonar.patron)
+   textoT+= '<br>';
+   textoT+= ' Dificultad respiratoria: Ausente <button name="difresp" onclick="changeStateButton(this);activadifresp(0);">'+iconoselectoff+ '</button>';
+   textoT+= ' Presente <button name="difresp" onclick="changeStateButton(this);activadifresp(1);">'+iconoselectoff+ '</button>';
+   difResp=["Aleteo nasal","Tiraje intercostal","Musculatura accesoria","Depresión abdominal"];
+   textoT+=makeSelectMultiple2("tipodifresp",difResp,[]);
+   textoT+= '<br>';
+   image='"img/abdomen.png"';
+   textoT+= '<button onclick="muestrasvg(vsgobject,200,200);"> SVG </button>';
+   textoT+= '<br>';
+   textoT+='</div>';
+
+   var id1="exf4";var id2="idexf4";
+   textoT+=' <span class="historiaitem" > &nbsp;Cardiaco</span> <button id="idexf4" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="exf4" style="display:none;">';
+   textoT+= ' Frecuencia cardíaca: ';
+   textoT+= makeKeyInput("freccard","Latidos por minuto","I3-0-400","70");
+//<input id="freccard" type="number" style="width: 2.5em" min="0" onkeypress="return validInput(this,event,3,0)"> l.p.m.'
+   textoT+= '<br>';
+   textoT+= ' Presion arterial: ';
+   textoT+= makeKeyInput("partsist","Sistólica","I3-0-400","120");
+//  <input id="partsist" type="number" style="width: 2.5em" min="0" onkeypress="return validInput(this,event,3,0)">/';
+   textoT+= makeKeyInput("partdiast","Diastólica","I3-0-250","80");
+ textoT+=' mmHg'
+//   textoT+= '<input id="partdiast" type="number" style="width: 2em" min="0" onkeypress="return validInput(this,event,3,0)"> mmHg'
+
+   textoT+= '<br>Palpitaciones: ';
+   Palpitaciones=["Ausentes","Presentes"];
+   textoT+=makeRadioInput("palpit",Palpitaciones);
+   textoT+= '<br>Apex: ';
+   Apex=["Visible","Palpable"];
+   textoT+= makeCheckInput("apex",Apex,historia.exfis.cardio.apex);
+   
+//  Visible <button name="apex" status="0" onclick="setStateButton(this)">'+iconoselectoff+'</button>';
+//   textoT+= ' Palpable <button name="apex" status="0" onclick="setStateButton(this)">'+iconoselectoff+'</button>';
+
+   textoT+= '<br>';
+   soplos=["Ausente","Sistólico","Diastólico","Continuo"];
+   textoT+= ' Soplos: ';
+   textoT+=makeRadioInput("soplo",soplos,historia.exfis.cardio.soplo);
+   textoT+= '<br>';
+   textoT+='</div>';
+
+var id1="exf5";var id2="idexf5";
+   textoT+=' <span class="historiaitem" > &nbsp;Abdomen</span> <button id="idexf5" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="exf5" style="display:none;">';
+   textoT+= ' Tipo:';
+   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
+   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen,0)
+   textoT+= '<br> Ruidos Hidroaéreos:';
+   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
+   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos,0)
+   textoT+= '<br>Circulación colateral: ';
+   Circulcol=["Ausente","Presente"];
+   textoT+=makeRadioInput("circulcol",Circulcol);
+
+
+   textoT+='</div>';
+
+   var id1="exf6";var id2="idexf6";
+   textoT+=' <span class="historiaitem" >&nbsp;Neurológico</span> <button id="idexf6" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+='<div id="exf6" style="display:none;">';
+ 
+   textoT+= 'Pares craneales:<br>';
+   textoT+= '<table border="1" style="text-align: left; padding: 1px; "><tr>'
+   textoT+= '<td>Par</td>';
+   textoT+= '<td>Derecho</td>';
+   textoT+= '<td>Izquierdo</td></tr>';
+   textoT+= '<tr><td>I Olfatorio</td>';
+   textoT+= '<td>';
+   parcraneal1=["Normal","Hiposmia","Anosmia"]
+   textoT+= makeSelectSimple2("par1d",parcraneal1,0);
+   textoT+= '</td><td>'
+   textoT+= makeSelectSimple("par1i",parcraneal1,0);
+   textoT+= '</td></tr>';
+
+   textoT+= '<tr><td>II Optico</td>';
+   textoT+= '<td>';
+   parcraneal2=["Normal","Heminopsia","Cuadrannopsia"]
+   textoT+= makeSelectSimple("par2d",parcraneal2,0);
+   textoT+= '</td><td>'
+   textoT+= makeSelectSimple("par2i",parcraneal2,0);
+   textoT+= '</td></tr>';
+
+   textoT+= '<tr><td> \III Oculo Motor</td>';
+   textoT+= '<td>';
+   parcraneal3=["Normal","Paresia","Parálisis"]
+   textoT+= makeSelectSimple("par3d",parcraneal3,0);
+   textoT+= '</td><td>'
+   textoT+= makeSelectSimple("par3i",parcraneal3,0);
+   textoT+= '</td></tr>';
+
+   textoT+= '<tr><td> \IV Oblícuo</td>';
+   textoT+= '<td>';
+   parcraneal4=["Normal","Paresia","Parálisis"]
+   textoT+= makeSelectSimple("par4d",parcraneal4,0);
+   textoT+= '</td><td>'
+   textoT+= makeSelectSimple("par4i",parcraneal4,0);
+   textoT+= '</td></tr>';
+   
+   textoT+= '<tr><td>V Trigémino</td>';
+   textoT+= '<td><select>';
+   textoT+= '<option selected> Normal</option>';
+   textoT+= '<option>  Parálisis V<sub>1</sub></option>';
+   textoT+= '<option>  Parálisis V<sub>2</sub></option>';
+   textoT+= '<option>  Parálisis V<sub>3</sub></option>';
+   textoT+= '<option>  Hiposmia </option>';
+   textoT+= '</select></td>'
+   textoT+= '<td><select>';
+   textoT+= '<option selected> Normal</option>';
+   textoT+= '<option>  Parálisis V<sub>1</sub></option>';
+   textoT+= '<option>  Parálisis V<sub>2</sub></option>';
+   textoT+= '<option>  Parálisis V<sub>3</sub></option>';
+   textoT+= '<option>  Hiposmia </option>';
+   textoT+= '</select></td></tr>';
+
+   textoT+= '<tr><td> VI Lateral</td>';
+   textoT+= '<td>';
+   parcraneal6=["Normal","Paresia","Parálisis"]
+   textoT+= makeSelectSimple("par6d",parcraneal6,0);
+   textoT+= '</td><td>'
+   textoT+= makeSelectSimple("par6i",parcraneal6,0);
+   textoT+= '</td></tr>';
+
+   textoT+= '<tr><td> VII Facial</td>';
+   textoT+= '<td>';
+   parcraneal7=["Normal","Paresia","Parálisis"]
+   textoT+= makeSelectSimple("par7d",parcraneal7,0);
+   textoT+= '</td><td>'
+   textoT+= makeSelectSimple("par7i",parcraneal7,0);
+   textoT+= '</td></tr>';
+
+   textoT+= '<tr><td> VIII Auditivo-Vestibular</td>';
+   textoT+= '<td><select>';
+   textoT+= '<option selected> Normal</option>';
+   textoT+= '<option>  Parálisis </option>';
+   textoT+= '</select></td>'
+   textoT+= '<td><select>';
+   textoT+= '<option selected> Normal</option>';
+   textoT+= '<option>  Parálisis </option>';
+   textoT+= '</select></td></tr>';
+
+   textoT+= '<tr><td> IX Glosofaríngeo</td>';
+   textoT+= '<td>';
+   parcraneal9=["Normal","Paresia","Parálisis"]
+   textoT+= makeSelectSimple("par9d",parcraneal9,0);
+   textoT+= '</td><td>'
+   textoT+= makeSelectSimple("par9i",parcraneal9,0);
+   textoT+= '</td></tr>';
+
+   textoT+= '<tr><td> X Vago</td>';
+   textoT+= '<td><select>';
+   textoT+= '<option selected> Normal</option>';
+   textoT+= '<option>  Parálisis </option>';
+   textoT+= '</select></td>'
+   textoT+= '<td><select>';
+   textoT+= '<option selected> Normal</option>';
+   textoT+= '<option>  Parálisis </option>';
+   textoT+= '</select></td></tr>';
+
+   textoT+= '<tr><td> XI Espinal</td>';
+   textoT+= '<td>';
+   parcraneal11=["Normal","Paresia","Parálisis"]
+   textoT+= makeSelectSimple("par11d",parcraneal11,0);
+   textoT+= '</td><td>'
+   textoT+= makeSelectSimple("par11i",parcraneal11,0);
+   textoT+= '</td></tr>';
+
+   textoT+= '<tr><td> XII Hipogloso</td>';
+   textoT+= '<td><select>';
+   textoT+= '<option selected> Normal</option>';
+   textoT+= '<option>  Parálisis </option>';
+   textoT+= '</select></td>'
+   textoT+= '<td><select>';
+   textoT+= '<option selected> Normal</option>';
+   textoT+= '<option>  Parálisis </option>';
+   textoT+= '</select></td></tr>';
+
+  textoT+= '</table>';
+
+   textoT+= '<br>Conciencia: Persona Sí <button name="cenp" onclick="changeStateButton(this)">'+iconoselecton+ '</button>';
+   textoT+= ' No <button name="cenp" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+   textoT+= ' No evaluado <button name="cenp" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+    
+   textoT+= 'Tiempo Sí <button name="cent" onclick="changeStateButton(this)">'+iconoselecton+ '</button>';
+   textoT+= ' No <button name="cent" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+   textoT+= ' Espacio: Sí <button name="cene" onclick="changeStateButton(this)">' +iconoselecton+'</button>';
+   textoT+= ' No <button name="cene" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+   textoT+= '<br>Reflejos:';    
+   textoT+= '<br>Osteotendinosos:';    
+   textoT+= '<br>Rotuliano: Derecho ';
+   refOsteoM=["-","I","II","III","IV"]
+   textoT+= makeSelectSimple("refRotD",refOsteoM,0);
+   textoT+=  '/IV';    
+//   textoT+= '<select><option>0</option><option>I</option><option>II</option><option>3</option><option selected>4</option></select>';
+//   textoT+= '/IV';    
+   textoT+= ' Izquierdo';
+   textoT+= makeSelectSimple("refRotI",refOsteoM,0);
+//   textoT+=' <select><option>0</option><option>1</option><option>2</option><option>3</option><option selected>4</option></select>';
+   textoT+=  '/IV';    
+   textoT+= '<br>Fuerza Muscular:';    
+   textoT+= '<br>Extremidades superiores: Derecha ';
+   textoT+= '<select><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select>';
+   textoT+= '/V';    
+   textoT+= ' Izquierda';
+   textoT+= ' <select><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select>';
+   textoT+=  ' /V';    
+   textoT+= '<br>Extremidades inferiores: Derecha';
+   textoT+= ' <select><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select>';
+   textoT+= ' /V';    
+   textoT+= ' Izquierda ';
+   textoT+= '<select><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option><option selected>5</option></select>';
+   textoT+= ' /V';    
+
+   textoT+='</div>';
+textoT+='</div>';
+
+divhistoria.innerHTML=textoT;
+setTimeout(iniciahistoriamedica,10);
+llenarlistaantec();
+//presentadiv4(true);
+document.getElementById("titrechistoria").scrollIntoView(false);
+//document.getElementById("titrechistoria").focus();
+}
+
+function makeSelectSimple(id,D,indice){
+var texto='<select '+'id="'+id+'"'+'> ';
+//alert(texto);
+for (var i=0;i<D.length;i++){
+if (i==indice) {texto+='<option selected> '+D[i]+' </option>';} else {texto+='<option> '+D[i]+' </option>';}
+}
+texto+='</select>';
+return texto;
+}
+
+function makeRadioInput(name,D,indice){
+var texto='';
+texto+='<span style="color: '+colradio+';">';
+for (var i=0;i<D.length;i++){
+if (i==indice) { texto+=' '+D[i]+' <button name="'+name+'" onclick="changeStateButton(this)">'+iconoselecton+ '</button>';}
+   else { texto+=' '+D[i]+' <button name="'+name+'" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';}
+}
+//alert(texto);
+texto+='</span>';
+return texto;
+}
+
+function setIndexInputSimple(Id,D){
+var e=document.getElementById(Id);
+var sel=e.getElementsByTagName("div")[0].getElementsByTagName("p");
+for (var i=0;i<sel.length;i++){
+  sel[i].style.backgroundColor="white";
+}
+  sel[D].style.backgroundColor="blue";
+e.getElementsByTagName("span")[0].innerHTML= sel[D].innerHTML;
+}
+
+function setIndexInputMultiple(Id,D){
+var e=document.getElementById(Id);
+var sel=e.getElementsByTagName("div")[0].getElementsByTagName("p");
+for (var i=0;i<sel.length;i++){
+  sel[i].style.backgroundColor="white";
+}
+alert(D[0]);
+for (var i=0;i<D.length;i++){
+  sel[D[i]].style.backgroundColor="blue";
+}
+e.getElementsByTagName("span")[0].innerHTML= sel[D[0]].innerHTML;
+}
+
+
+
+function getIndexInputSimple(name){
+var D=[];
+var sel=name.getElementsByTagName("p");
+var cont=0;
+for (var i=0;i<sel.length;i++){
+  if (sel[i].style.backgroundColor=="blue") {D[cont++]=i};
+}
+return D;
+}
+
+function setIndexRadioInput(name,D){
+var sel=document.getElementsByName(name);
+for (var i=0;i<sel.length;i++){
+    if (i==D) {sel[i].innerHTML=iconoselecton} else {sel[i].innerHTML=iconoselectoff}
+}
+}
+
+function getIndexRadioInput(name){
+var sel=document.getElementsByName(name);
+for (var i=0;i<sel.length;i++){
+    if (sel[i].innerHTML==iconoselecton) return i
+}
+return 0;
+}
+
+function setIndexsCheckInput(name,D){
+var sel=document.getElementsByName(name);
+for (var i=0;i<sel.length;i++){
+    sel[i].innerHTML=icononocheck;
+}
+for (var i=0;i<D.length;i++){
+    sel[D[i]].innerHTML=iconocheck 
+}
+}
+
+function getIndexsCheckInput(name){
+var D=[];
+var sel=document.getElementsByName(name);
+for (var i=0;i<sel.length;i++){
+    if (sel[i].innerHTML==iconocheck) D.push(i)
+}
+return D;
+}
+
+
+colcheck="pink";
+colradio="lightblue";
+
+function makeCheckInput(name,D,indice){
+var texto='';
+texto+='<span style="color: '+colcheck+';">';
+for (var i=0;i<D.length;i++){
+if (i==indice) {texto+=' '+D[i]+' <button name="'+name+'" onclick="changeStateCheckButton(this)">'+iconocheck+ '</button>';}
+   else {texto+=' '+D[i]+' <button name="'+name+'" onclick="changeStateCheckButton(this)">'+icononocheck+ '</button>';}
+ 
+}
+//alert(texto);
+texto+='</span>';
+
+return texto;
+}
+
+function makeSelectSimple2(name,D,indice){
+var texto='<div id="'+name+'" colapso="0" style=" position: relative; border: 1px solid #73AD21; display: inline-block; left: 0px; width: 200px;">';
+//var texto='';
+texto+='<span style="font-size: 0.8em;padding: 3px 5px;"  >'+D[indice]+'</span><button style=" float: right;" onclick="changeCollapse('+name+')">'+iconodown+ '</button>'+'\n';
+//texto+='<p>'+D[0]+'<button onclick="changeCollapse(this.parentNode)">'+iconodown+ '</button></p>';
+texto+='<div style="display: none; overflow-y: scroll; max-height: 200px;border: 1px solid #73AD21; width: 200px; background-color: '+bckcol+';z-buffer: 1;">'; 
+for (var i=0;i<D.length;i++){
+ if (i==indice) {texto+='<p  style="border: none;padding: 3px 1px; background-color: '+frgcol+'"';} else {texto+='<p  style="border: none;padding: 3px 1px; background-color: '+bckcol+'"';}
+
+   texto+=' onMouseOver="changeColorOption('+name+','+i+');" ';
+   texto+=' onclick="changeSelectOption('+name+','+i+');"> '+D[i]+'</p>';
+}
+texto+='</div >';
+texto+='</div >';
+
+//alert(texto);
+return texto;
+}
+
+function makeSelectMultiple2(name,D,indices){
+var texto='<div id="'+name+'" colapso="0" style=" position: relative; border: 1px solid #73AD21; display: inline-block; left: 0px; width: 200px;">';
+texto+='<span style="font-size: 0.8em;"  >'+D[0]+'</span><button style=" float: right;" onclick="changeCollapse('+name+')">'+iconodown+ '</button>'+'\n';
+texto+='<div style="display: none; overflow-y: scroll; max-height: 200px;border: 1px solid #73AD21; max-width: 200px; background-color: '+bckcol+';z-buffer: 1;">'; 
+for (var i=0;i<D.length;i++){
+texto+='<p  style="border: none;padding: 3px 1px;" ';
+texto+=' onclick="changeSelectOptionMultiple('+name+','+i+');"> '+D[i]+'</p>';
+}
+texto+='</div >';
+texto+='</div >';
+return texto;
+}
+
+
+
+function changeCollapse(e){
+var sel=e.getElementsByTagName("div")[0];
+if (e.colapso==1) {
+e.colapso=0;
+sel.style.display="none";
+} else {
+e.colapso=1;
+//sel.style="background-color: white; z-index: 3;position: absolute;  overflow-y: scroll; height: 40px;left: 0px; display: block;border: 1px solid #73AD21;";
+sel.style.top=(e.offsetHeight-1)+'px';
+sel.style.width=(e.offsetWidth-1)+'px';
+sel.style.display="block";
+sel.style.position="absolute";
+}
+}
+
+bckcol="white";
+frgcol="blue";
+
+function changeColorOption(name,num){
+var sel=name.getElementsByTagName("p");
+for (var i=0;i<sel.length;i++){
+sel[i].style.backgroundColor=bckcol;
+}
+var sel2=sel[num];
+sel2.style.backgroundColor=frgcol;
+}
+
+function changeSelectOption(name,num){
+var sel=name.getElementsByTagName("p");
+var sel2=sel[num];
+sel2.style.backgroundColor=frgcol;
+name.getElementsByTagName("span")[0].innerHTML=sel2.innerHTML;
+changeCollapse(name);
+}
+
+function changeSelectOptionMultiple(name,num){
+var sel=name.getElementsByTagName("p");
+var sel2=sel[num];
+if (sel2.style.backgroundColor==frgcol) {sel2.style.backgroundColor=bckcol} else {sel2.style.backgroundColor=frgcol}
+}
+
+
+
+
+function makeKeyInput(name,titulo,tipo,valori){
+if (tipo[0]=='T') {
+   var tipod="text";
+   tam=parseInt(tipo.substring(1));
+   tamp=tam*20;
+   var texto='<input id="'+name+'" type="'+tipod+'" title="'+ titulo;
+   texto+='" style=" width: '+tamp+'px;" value="'+valori+'">';
+}
+
+if (tipo[0]=='I') {
+   var tipod="number";
+   var resto=tipo.substring(1);
+   var campos=resto.split("-"); 
+   tamp=campos[0]*15+20;
+   vmin=campos[1];
+   vmax=campos[2];
+   var texto='<input id="'+name+'" type="'+tipod+'" title="'+ titulo;
+   texto+='" style=" width: '+tamp+'px;" min="'+vmin+'" max="'+vmax+'" value="'+valori+'"';
+   //texto+=' onkeypress="return ((event.charCode !=46)&&(event.charCode !=45))">';
+   texto+=' onkeypress=" return validInputI(this,event,'+campos[0]+','+vmin+','+vmax+')">';
+}
+if (tipo[0]=='R') {
+   var tipod="text";
+   var resto=tipo.substring(1);
+   var campos=resto.split("-"); 
+   var partes=campos[0].split(".");
+   var pr=parseInt(partes[0]);
+   if (partes.length>1) {var dc=parseInt(partes[1])} else {var dc=0}
+   tamp=(pr+dc+1)*15;
+   vmin=campos[1];
+   vmax=campos[2];
+   var texto='<input id="'+name+'" type="'+tipod+'" title="'+ titulo;
+   texto+='" style=" width: '+tamp+'px;" min="'+vmin+'" max="'+vmax+'" value="'+valori+'"';
+   texto+=' onkeypress=" return validInputR(this,event,'+campos[0]+','+vmin+','+vmax+')">';
+}
+//alert("texto: "+texto);
+
+return texto;
+
+}
+
+
+
+
+
+function changeStateButton(e){
+var b=document.getElementsByName(e.name);
+for (var i=0;i<b.length;i++){
+   if (b[i]===e) {b[i].innerHTML=iconoselecton;} else  {b[i].innerHTML=iconoselectoff;}
+}
+
+}
+
+function changeStateCheckButton(e){
+     if (e.innerHTML==icononocheck) {e.innerHTML=iconocheck;} else  {e.innerHTML=icononocheck;}
+}
+
+
+function setStateButton(e){
+  if (e.innerHTML==iconoselectoff) 
+     {e.innerHTML=iconoselecton}
+        else  {e.innerHTML=iconoselectoff}
+}
+
+
+function cambiacolor(e){
+var b=document.getElementsByName("r1");
+for (var i=0;i<b.length;i++){
+if (e===b[i]) {var num=i;break}
+}
+activo[num]=1-activo[num];
+if (activo[num]==1) {e.style.fill="blue"} else {e.style.fill="black"}
+}
+
+function muestrasvg(o,ancho,alto){
+var divsvg = document.getElementById("svg");
+divsvg.style="position: fixed;top :100px; height: 70%;left: 10px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;";
+var textoT='';
+textoT+='<svg width="'+ancho+'" height="'+alto+'">';
+textoT+='<image width="'+ancho+'" height="'+alto+'" href='+image+'/>';
+
+var n=o.data.length;
+for (var i=0;i<n;i++) {
+var centx=o.data[i].centro[0]*(ancho/o.anchor);
+var centy=o.data[i].centro[1]*(alto/o.altor);
+var radio=o.data[i].radio*(ancho/o.anchor);
+
+//textoT+='<circle name="r1"  onclick="cambiacolor(this);" cx="30" cy="30" r="10" />';
+textoT+='<circle name="r1"  onmouseout="quitaleyenda();" onmouseover="muestraleyenda(this);" onclick="cambiacolor(this);" cx="'+centx +'"cy="'+centy +'" r="'+radio+'" fill-opacity="0.3"/>';
+}
+textoT+='</svg>';
+textoT+='<br><span id="mleyenda" ></span><br>';
+textoT+='<button onclick="quitarsvg();">Ok </button>';
+divsvg.innerHTML=textoT;
+for (var i=0;i<n;i++) {
+  document.getElementsByName("r1")[i].title=o.data[i].leyenda;
+   if (activo[i]==0) { document.getElementsByName("r1")[i].style.fill="black";} 
+      else { document.getElementsByName("r1")[i].style.fill="blue";}
+}
+}
+ function muestraleyenda(e){
+document.getElementById("mleyenda").innerHTML=e.title;
+}
+vsgobject= new Object();
+vsgobject.data= new Array(9);
+vsgobject.data[0]=new circulo("Epigastrio",153,130,10);
+vsgobject.data[1]=new circulo("Hipocondrio derecho",115,130,10);
+vsgobject.data[2]=new circulo("Hipocondrio izquierdo",190,130,10);
+vsgobject.data[3]=new circulo("Flanco derecho",115,180,10);
+vsgobject.data[4]=new circulo("Mesogastrio",153,180,10);
+vsgobject.data[5]=new circulo("Flanco izquierdo",190,180,10);
+vsgobject.data[6]=new circulo("Fosa ilíaca derecha",115,230,10);
+vsgobject.data[7]=new circulo("Hipogastrio",153,230,10);
+vsgobject.data[8]=new circulo("Fosa ilíaca izquierda",190,230,10);
+vsgobject.anchor=300;
+vsgobject.altor=300;
+activo=[];
+//alert(vsgobject.anchor)
+for (var j=0;j<vsgobject.data.length;j++){
+activo[j]=0;
+}
+function circulo(d1,d2,d3,d4){
+this.leyenda=d1;
+this.centro=[d2,d3];
+this.radio=d4;
+}
+ function quitaleyenda(){
+document.getElementById("mleyenda").innerHTML="";
+}
+
+function quitarsvg(){
+var divsvg = document.getElementById("svg");
+divsvg.style.display="none";
+}
+
+
+function activadifresp(n){
+var e=document.getElementById("tipodifresp");
+if (n==1) {e.style.visibility="visible"}
+ else {e.style.visibility="hidden"}
+}
+
+function activaalergia(n){
+var e=document.getElementById("valerg");
+if (n==1) {e.style.visibility="visible"}
+ else {e.style.visibility="hidden"}
+}
+function changedisplay1(){
+var e=document.getElementById("fp");
+var b=document.getElementById("idfp");
+if (e.style.display=="none") {e.style.display="block";b.innerHTML=iconoup;} else {e.style.display="none";b.innerHTML=iconodown;}
+}
+
+function changedisplay(A,B){
+if (A.style.display=="none") {A.style.display="block";B.innerHTML=iconominus;} 
+     else 
+{A.style.display="none";B.innerHTML=iconoplus;}
+}
+
+
+function informemedico(){
+var divinforme = document.getElementById("informe");
+divinforme.style="position: fixed;top :100px; overflow-y: scroll; height: 70%;left: 10px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;";
+
+var textoT,texto;
+textoT="";
+textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
+textoT+=' <button title="Carga informe" id="carga_informe" onclick="carga_informe();">'+iconoplus +' </button>';
+textoT+=' <button title="Guarda informe" onclick="guarda_informe();">'+ iconosave+' </button> ';
+textoT+=' <button title="Borra informe" onclick="borrar_informe();">'+ iconobasura+' </button>';
+textoT+=' <button onclick="hacerpdfinforme();"  title="Genera pdf de informe"><i class="fas fa-file-pdf"></i> </button>';
+textoT+=' <button title="Salir" onclick="quitarinforme()" >'+ iconocerrar+'</button></div>';
+
+textoT+=' <br> <br><center><span id="titrecinforme"> INFORME MEDICO </span></center><br>';
+divinforme.innerHTML=textoT;
+document.getElementById("titrecinforme").scrollIntoView(false);
+//document.getElementById("titrecinforme").focus();
+}
+
+
+
+
+
+
+function cancelarecipe(){
+
+}
+function borrar_recipes(){
+recipes=[];
+recipesA=[];
+recipesB=[];
+quitarrecipe();
+muestrarecipes();
+}
+
+
+function cambiarecipe(num){
+var tex1=document.getElementById("t1").value;
+var tex2=document.getElementById("t2").value;
+//alert(tex1.length-recipesA[num].length);
+//alert(tex2.length-recipesB[num].length);
+//if (tex1==recipesA[num]) {alert("iguales")} else {mensaje("desiguales")} 
+//alert(tex1[tex1.length-1]+" "+recipesA[num][recipesA[num].length-1]);
+
+//recipesA[num]=tex1.substring(0,tex1.length-2);
+//recipesB[num]=tex2.substring(0,tex2.length-2);
+recipesA[num]=tex1;
+recipesB[num]=tex2;
+recipes[num]=recipesA[num].fontcolor("blue")+"<br>" +recipesB[num].fontcolor("red");
+//alert(tex1.substring(tex1.length-3,tex1.length-1));
+quitarrecipe();
+muestrarecipes();
+//despliegarecipes();
+
+//if (muestraactivo=="1") {muestrarecipes();} else {despliegarecipe(); }
+}
+
+function rehacerrecipe(num){
+var ind1=recipesA[num].indexOf(",");
+var ind2=recipesA[num].indexOf(" ");
+var ind;
+var encontrado=false;
+if ((ind1>=0) || (ind2>=0)){
+if (ind1<0) {ind=ind2}
+if (ind2<0) {ind=ind1}
+if ((ind1>=0) && (ind2>=0)) {ind=Math.min(ind1,ind2);}
+var texto1=recipesA[num].substring(0,ind);
+mensaje(" texto1"+texto1);
+
+for(var i=0;i<remedio.length;i++){
+    var esta=verificatexto(texto1,i,1); 
+      if (esta) {
+         texto = remedio[i].ng;
+         //alert(texto+i);
+           encontrado=true;
+         break;
+        }
+}
+} 
+if (encontrado) {
+indicepresent=0;
+indicedosis=0;
+indantdosis=-1;
+clickp5(num);
+generapagina3(i);
+} else {mensaje("no encontrado")}
+}
+
+function editarecipe(num){
+var textoT="";
+var div6 = document.getElementById("divedit");
+divedit.style="position: fixed;top :150px; left: 80px; width:80% ; height: 70%; text-align: left; ";
+textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
+textoT+=' <button title="Modificar" onclick="quitardivedit();cambiarecipe('+num+');">'+iconoplus +' </button>';
+textoT+=' <button title="Cancelar" onclick="quitardivedit()" style="font-size:100%">'+ iconocerrar+'</button></div>';
+// alert(recipes[num]);
+//var i1=recipes[num].indexOf('"blue">');
+//var i2=recipes[num].indexOf('</font>');
+//var tex1=recipes[num].substring(i1+7,i2);
+//tex1=tex1.trim();
+tex1=recipesA[num];
+//var i1=recipes[num].indexOf('"red">');
+//var i2=recipes[num].lastIndexOf('</font>');
+//var tex2=recipes[num].substring(i1+6,i2);
+//tex2=tex2.trim();
+tex2=recipesB[num];
+
+//textoT+='<p> Presentación:</p>';
+
+//textoT+=' <INPUT id="t1" class="inputtext" TYPE="textarea" style="background-color: lightgray;color: black;width: 90%;" //value="'+ tex1 +'" ><br>';
+textoT+='<br><br><label for="t1">Presentación</label><br>'
+textoT+= '<textarea ID="t1" rows="4" cols="30" style="background-color: lightgray;color: black;"></textarea><br>';
+//textoT+='<p> Dosis:</p>';
+textoT+='<label for="t2">Dosis</label><br>'
+//textoT+=' <INPUT id="t2" class="inputtext" TYPE="textarea" style="background-color: lightgray;color: black;width: //90%;height: 5em;" value="'+ tex2 +'" ><br><br>';
+textoT+= '<textarea ID="t2" rows="4" cols="30" style="background-color: lightgray;color: black;"></textarea><br><br>';
+//textoT+="<INPUT TYPE='button' value='Cancelar' onclick='quitardivedit()' style='font-size:100%'>&nbsp";
+//textoT+='<INPUT TYPE="button" value="Ok" onclick="quitardivedit();cambiarecipe('+num+');" style="font-size:100%">';
+divedit.innerHTML=textoT;
+document.getElementById("t1").value=tex1;
+document.getElementById("t2").value=tex2;
+}
+
+function ajustarunidad(pdosis,ppres,valor){
+var aux=valor;
+if (pdosis.unidadmasa=="G" && ppres.unidad=="MG") {aux*=1000;}
+if (pdosis.unidadmasa=="MG" && ppres.unidad=="G") {aux/=1000;}
+if (pdosis.unidadmasa=="MG" && ppres.unidad=="MCG") {aux*=1000;}
+if (pdosis.unidadmasa=="MCG" && ppres.unidad=="MG") {aux/=1000;}
+if (pdosis.unidadmasa=="UI" && ppres.unidad=="MUI") {aux/=1000000;}
+if (pdosis.unidadmasa=="MUI" && ppres.unidad=="UI") {aux*=1000000;}
+return aux;
+}
+var inddiluir;
+var indliquido;
+
+function Exam(n,c){
+this.name=n;
+this.checked=c;
+}
+
+
+
+function laboratorio(){
+var textoT="";
+var lab = document.getElementById("laborat");
+//lab.style="position: fixed;top :100px; left: 10px; width:100% ; text-align: left; ";
+lab.style="position: fixed;top :100px; overflow-y: scroll; height: 70%;left: 10px; width:90% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;";
+textoT+='<div style="position: fixed;background-color: gray;width:90%;">';
+textoT+=' <button title=" Cargar laboratorio" id="cargalab" onclick="carga_lab();">'+iconoload+'</button>';
+textoT+=' <button title=" Guardar Laboratorio" onclick="guarda_lab();">'+iconosave+'</button> ';
+textoT+=' <button title=" Salir" onclick="cerrarlab();">'+iconocerrar+' </button> </div><br>';
+textoT+='<div>';
+textoT+='<center>Laboratorios</center>';
+var i=0;
+for (prop in labs){
+//alert(labs[prop].tipo[0].name);
+
+var id1="lab"+i;var id2="idlab"+i++;
+//alert(id1+"  "+id2);
+textoT+=' <span class="historiaitem" >'+labs[prop].name+'</span> <button id='+id2+' onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+='<div style="display:none;" id='+id1+'>';
+var ncol=4;
+var numfilas=Math.floor(labs[prop].tipo.length/ncol)+1;
+textoT+='<table>';
+
+//var caso='"'+prop+'"';
+var caso=prop;
+
+//alert(caso);
+//alert(prop);
+for (var i2=0;i2<numfilas;i2++) {
+textoT+='<tr>';
+for (var i3=0;i3<ncol;i3++) {
+var indic=parseInt(i2*ncol+i3);
+if (labs[prop].tipo[indic]!=undefined) {
+  textoT+='<td> <button name="blab" title=" Seleccionar" onclick="slab(this,';
+  textoT+="'"+caso+"'";
+  textoT+=','+indic+');">'+icononocheck+'</button>'+labs[prop].tipo[indic].name ;
+  textoT+='</td>';}
+  else {textoT+='<td></td>';}
+}
+textoT+='</tr>';
+}
+
+textoT+='</table>';
+textoT+='</div>';
+}
+lab.innerHTML=textoT;
+inicialab();
+}
+
+
+
+
+
+function inicialab(){
+var botlab=document.getElementsByName("blab");
+var cont=0;
+for (var prop in labs){
+  for (var j=0;j<labs[prop].tipo.length;j++){
+     if (!labs[prop].tipo[j].checked)   
+         {botlab[cont++].innerHTML=icononocheck} 
+           else 
+         {botlab[cont++].innerHTML=iconocheck}
+
+  }
+}
+}
+
+
+
+var labs2=[];
+
+function slab(elem,caso,indice){
+//alert(elem.name);
+//alert(caso);
+if (!labs[caso].tipo[indice].checked) 
+
+{labs[caso].tipo[indice].checked=true;elem.innerHTML=iconocheck} 
+
+else 
+
+{labs[caso].tipo[indice].checked=false;elem.innerHTML=icononocheck}
+}
+
+function sround(x){
+var error=0.99*x;
+//alert("error: "+error);
+var c=0;
+do {
+y=xround(x,c);
+//alert("c: "+c+" x: "+x+ " y: "+y);
+c++;
+} while (y<error)
+return y;
+}
+
+function procesar(){
+var cantidad;
+var unidades;
+var ind=recipes.length;
+var presrecipe=present[indicepresent];
+//  fdosisdelfarmaco remedio[indiceactivo].indadic=document.getElementById("textadic").value;
+
+// armar indicaciones
+//indicaciones[indicedosis]=document.getElementById("textadic").value;
+//var texaux="";
+//for (var j=0;j<indicaciones.length;j++){
+//   texaux+="@"+indicaciones[j];
+//}
+
+//remedio[indiceactivo].indadic=texaux.substring(1);
+//alert(remedio[indiceactivo].indadic);
+
+
+
+if (inddiluir>0) {
+var mladd=document.getElementById("voldiluir").value;
+if (parseFloat(mladd)>0) {
+    var soladicional=document.getElementById("soldiluir").value;
+    var i10=present[indicepresent].indexOf(" a diluir");
+    var pres1=present[indicepresent].substring(0,i10);
+    presrecipe=pres1+" diluido  en "+mladd+" cc de "+soladicional;
+    ppres.valor=parseFloat(ppres.valor1)/(parseFloat(ppres.valor2)+parseFloat(mladd));
+}
+}
+
+var noerror=true;
+var elementofrec=document.getElementById("frec2");
+if ( (typeof(elementofrec)!="undefined") && (elementofrec!=null) ) {
+      var nrotomas=numtomas(document.getElementById("frec2").value);
+      var vecesdia=document.getElementById("frec2").value;
+} else { nrotomas=1; vecesdia=1;}
+//alert(pdosis.peso);
+//alert(parseFloat(document.getElementById("peso").value));
+if (pdosis.peso && document.getElementById("peso").value=="") {
+noerror=false; mensaje("Debe introduicir un peso");}
+ else {
+if (pdosis.peso) {  pesoglobal=document.getElementById("peso").value;}
+
+}
+var compat=compatibilidad(pdosis,ppres);
+//alert(compat[0]);
+//alert(ppres.tipo);
+if (compat.length==0){noerror=false; mensaje("La dosis y la presentacion no se corresponden por incompatibilidad de vias");}
+//if (((ppres.tipo=="GOTAS") && (pdosis.unidadmasa!="GOTAS")) || ((ppres.tipo!="GOTAS") && (pdosis.unidadmasa=="GOTAS"))){noerror=false; mensaje("La presentacion la dosis no corresponden");}
+if ((ppres.tipo!="GOTAS") && (pdosis.unidadmasa=="GOTAS")){noerror=false; mensaje("La presentacion y la dosis no se corresponden");}
+if ((ppres.tipo=="GOTAS") && (pdosis.unidadmasa!="GOTAS") && (ppres.valor=="0") ){noerror=false; 
+mensaje("La presentacion y la dosis no se corresponden");}
+
+if (noerror) {
+var indi=pdosis.unidad.indexOf("DIA")
+if (indi<0) {nrotomas="1"}
+var texto;
+var pesoc;
+if (pdosis.peso) {pesoc=document.getElementById("peso").value;}
+if (pdosis.sc){pesoc=parseFloat(supcorp(document.getElementById("peso").value));}
+//alert(ppres.valor+" "+parseFloat(ppres.valor));
+var cantidad2=0;
+if (ppres.valor!="0") {
+   cantidad=parseFloat(document.getElementById("dosis").value);
+   if (pdosis.peso){cantidad*=pesoc;}
+   cantidad=cantidad/parseFloat(nrotomas);
+  // cantidad2=xround(cantidad,1);
+   cantidad2=cantidad;
+   cantidad=ajustarunidad(pdosis, ppres, cantidad);
+   cantidad=cantidad/parseFloat(ppres.valor);  
+ //  cantidad=xround(cantidad,1);
+/*if (inddiluir>0) {
+var mladd=document.getElementById("voldiluir").value;
+if (parseFloat(mladd)>0) {
+    var soladicional=document.getElementById("soldiluir").value;
+    presrecipe=present[indicepresent]+ " "+cantidad +" cc en "+mladd+" cc de "+soladicional;
+ //   ppres.valor=parseFloat(ppres.valor1)/(parseFloat(ppres.valor2)+parseFloat(mladd));
+   ppres.valor=parseFloat(parseFloat(cantidad)*ppres.valor1/ppres.valor2)/(parseFloat(mladd));
+   cantidad=parseFloat(document.getElementById("dosis").value)/parseFloat(ppres.valor);
+   if (pdosis.peso){cantidad*=pesoc;}
+   cantidad=ajustarunidad(pdosis, ppres, cantidad);
+   cantidad=cantidad/parseFloat(nrotomas);
+//   cantidad=xround(cantidad,1);
+   }
+}
+*/
+   if (ppres.tipo == "SUSP" || ppres.tipo == "SOL" || ppres.tipo == "JAR" ) { unidades=" cc  "; }
+   if ((ppres.tipo == "TAB")  && (cantidad!=1)){unidades=" tabletas "}
+   if ((ppres.tipo == "TAB")  && (cantidad==1)) {unidades=" tableta "}
+   if ((ppres.tipo == "TAB")  && (cantidad==0.5)) {cantidad="Media"; unidades=" tableta "}
+   if ((ppres.tipo == "GRAG") && (cantidad!=1)){unidades=" grageas "}
+   if ((ppres.tipo == "GRAG") && (cantidad==1)){unidades=" gragea "}
+   if ((ppres.tipo == "CAP")  && (cantidad!=1)){unidades=" cápsulas "}
+   if ((ppres.tipo == "CAP")  && (cantidad==1)){unidades=" cápsula "}
+   if ((ppres.tipo == "COMP") && (cantidad!=1)){unidades=" comprimidos "} 
+   if ((ppres.tipo == "COMP") && (cantidad==1)){unidades=" comprimido "} 
+   if ((ppres.tipo == "COMP")  && (cantidad==0.5)) {cantidad="Medio"; unidades=" comprimido "}
+   if ((ppres.tipo == "AERO") && (cantidad!=1)){unidades=" inhalaciones "}
+   if ((ppres.tipo == "AERO") && (cantidad==1)){unidades=" inhalación "}
+   if ((ppres.tipo =="GOTAS") && (cantidad!=1)){unidades=" gotas "}
+   if ((ppres.tipo =="GOTAS") && (cantidad==1)){unidades=" gota "}
+   if ((ppres.tipo == "OVU")  && (cantidad!=1)){unidades=" óvulos "}
+   if ((ppres.tipo == "OVU")  && (cantidad==1)){unidades=" óvulo "}
+   if ((ppres.tipo == "AMP")  && (cantidad!=1)){unidades=" ampollas "}
+   if ((ppres.tipo == "AMP")  && (cantidad==1)){unidades=" ampolla "}
+   if (ppres.unidad2!="") {unidades=" "+ppres.unidad2+" "} 
+
+  }
+
+//if (ppres.tipo == "AMP") {
+// var cantidad=parseFloat(document.getElementById("dosis").value);
+// unidades=" "+pdosis.unidadmasa +" "; 
+// if (pdosis.peso) {cantidad*=pesoc;}
+// cantidad=ajustarunidad(pdosis, ppres, cantidad);
+// cantidad=cantidad/parseFloat(nrotomas);
+// cantidad=xround(cantidad,1);
+//}
+
+if (ppres.tipo == "CREMA") {
+ var cantidad=parseFloat(document.getElementById("dosis").value);
+ unidades=" "+pdosis.unidadmasa +" "; 
+ if (pdosis.peso) {cantidad*=pesoc;}
+ cantidad=ajustarunidad(pdosis, ppres, cantidad);
+ cantidad=cantidad/parseFloat(nrotomas);
+ //cantidad=xround(cantidad,1);
+}
+
+if (ppres.tipo == "INF") {unidades=" AMPOLLA(S) ";}
+
+if ((ppres.tipo == "GOTAS") && (pdosis.unidadmasa == "GOTAS")) {
+  //var nrogotas=parseFloat(document.getElementById("dosis").value)/parseFloat(ppres.valor);
+  var cantidad=parseFloat(document.getElementById("dosis").value);
+  if (pdosis.peso) {cantidad*=pesoc;}
+//  alert(cantidad);
+  cantidad=cantidad/parseFloat(nrotomas);
+//  alert(cantidad);
+//  cantidad=xround(cantidad,1);
+  unidades=" GOTA(S) "; 
+ //texto="           " + nrogotas + " GOTA(S) " + vecesdia + " "+compat ;
+}
+
+var ib=pdosis.unidad.indexOf("/MIN")
+    if (ib>=0) {vecesdia= "cada hora"; cantidad*=60;cantidad2*=60;}
+
+var viaadm=""
+function nombrevia(nomb){
+switch (nomb){
+case "VO":return "via oral";
+case "EV":return "via endovenosa";
+case "VN":return "via nasal";
+case "VV":return "via vaginal";
+case "IM":return "via intramuscular";
+default: return nomb;
+}
+}
+
+for (var i=0;i<compat.length;i++){
+    viaadm+=nombrevia(compat[i])+ " o ";
+} 
+
+var elementot=document.getElementById("durac");
+if ( (typeof(elementot)!="undefined") && (elementot!=null) ){
+   var tiempo=parseInt(document.getElementById("durac").value); 
+} else {var tiempo=0}
+
+
+if ((tiempo!=0) && !(isNaN(tiempo))) {
+//alert(tiempo) ;
+var portiempo;
+ var unidades2=["días","semanas","meses","años"];
+ var unidades1=["día","semana","mes","año"];
+ var indi=document.getElementById("udurac").selectedIndex; 
+ portiempo=" por "+ tiempo +" ";
+ if (tiempo==1){portiempo+=unidades1[indi]} else {portiempo+=unidades2[indi]} 
+
+} else {portiempo=""}
+
+
+viaadm=viaadm.substring(0,viaadm.length-3);
+cantidad=sround(cantidad);
+cantidad2=sround(cantidad2);
+//alert(cantidad);
+if (ppres.valor2=="") {
+texto= cantidad + unidades + vecesdia + " "+viaadm + portiempo;
+} else { texto= cantidad2+" "+pdosis.unidadmasa+" ("+cantidad + unidades +") "+ vecesdia + " "+viaadm +portiempo;}
+//var indice=listafarmaco[indicefarmaco];
+/* if (remedio[indiceactivo].indadic!="") texto+=" "+remedio[indiceactivo].indadic;*/
+
+if (indliquido>0) {
+var mladd=document.getElementById("voldiluir").value;
+if (parseFloat(mladd)>0) {
+    var soladicional=document.getElementById("soldiluir").value;
+    //presrecipe=present[indicepresent]+" en "+mladd+" cc de "+soladicional;
+    ppres.valor=parseFloat(ppres.valor1)/(parseFloat(ppres.valor2)+parseFloat(mladd));
+var mensaje2="Diluir "+cantidad+ " cc en "+mladd +" de "+soladicional+" y pasar en "+remedio[indiceactivo].tinf;
+texto=mensaje2;
+texto+= " "+ vecesdia + " "+viaadm + portiempo;
+;
+
+}
+}
+
+texto+=" "+document.getElementById("textadic").value;
+var longitud=present[indicepresent].length;
+
+anexarecipe(presrecipe,texto);
+//despliegarecipes();
+//despliegarecipe();
+muestrarecipes();
+} 
+}
+
+function anexarecipe(t1,t2){
+   var repetido=false;
+   for (var i=0;i<recipes.length;i++){
+     if (recipesA[i]==t1) { repetido=true;var ind=i;break;}
+   }
+   if (!repetido) {
+      recipes.unshift(t1.fontcolor("blue")+"<br>" +t2.fontcolor("red"));
+      recipesA.unshift(t1);
+      recipesB.unshift(t2);
+   } else { 
+       if (recipesB[ind]!=t2) {
+          recipesB[ind]+='\n'+t2;
+          recipes[ind]=t1.fontcolor("blue")+"<br>" +recipesB[ind].fontcolor("red");
+       } 
+    }
+
+}
+
+
+
+
+function farmaco(nombregenerico,tipo,subtipo,dosisa,ajrenal,presentacion,descr,indica,cindica,efadv,farcin){
+this.ng=nombregenerico;
+this.tipo=tipo;
+this.subtipo=subtipo;
+this.dosisa=dosisa;
+this.ren=ajrenal;
+this.presentacion=presentacion;
+this.indadic="";
+this.desc=""; //descr;
+this.indic=""; //indica;
+this.cindic=""; //cindica;
+this.ram=""; //efadv;
+this.farcin=""; //farcin;
+this.fardin="";
+this.interac="";
+
+}
+function dameindice(texto1,texto2){
+  var encontrado=false;
+  var resultado=-1;
+  for (var i=0;i<remedio.length && !encontrado; i++){
+  if (remedio[i].ng==texto1 && remedio[i].tipo==texto2){
+    encontrado=true;
+    resultado=i;
+    }
+  }
+  return resultado;
+}
+
+function convierteafrase(numero){
+var resultado="";
+
+switch (numero){
+  case "1":
+  resultado="c/24 h";
+  break;
+ case "2":
+  resultado="c/12 h";
+  break;
+case "3":
+  resultado="c/8 h";
+  break;
+case "4":
+  resultado="c/6 h";
+  break;
+case "6":
+  resultado="c/4 h";
+  break;
+case "8":
+  resultado="c/3 h";
+  break;
+case "12":
+  resultado="c/2 h";
+  break;
+case "24":
+  resultado="c/1 h";
+  break;
+
+default:
+ resultado=""; 
+}
+
+return resultado;
+}
+
+function numtomas(s){
+switch (s) {
+  case "C/48H" :return 0.5;
+  case "STAT" :return 1;
+  case "C/24H" :return 1;
+  case "C/12H" :return 2;
+  case "C/8H" :return 3;
+  case "C/6H" :return 4;
+  case "C/4H" :return 6;
+  case "C/3H" :return 8;
+  case "C/2H" :return 12;
+  case "C/1H" :return 24;
+otherwise: return 1;
+}
+}
+function parsedosis(dosis){
+var dosisr=new Object;
+var dosism=dosis.toUpperCase()+" ";
+dosisr.valor="0";
+dosisr.unidad="";
+dosis.nvd=0;
+dosis.rango=false;
+dosisr.sc=false;
+
+function prosunidad(texto){
+   var i3=dosism.indexOf(texto);
+   if (i3>=0){
+     dosisr.unidad=texto.trim(); 
+     var i4=dosisr.unidad.indexOf("/");
+     if (i4>=0) {dosisr.unidadmasa=dosisr.unidad.substring(0,i4);} else {dosisr.unidadmasa=dosisr.unidad;}
+     //alert(dosisr.unidadmasa);
+     var dosis2=dosism.substring(0,i3);
+     dosis2=dosis2.trim();
+     var li=dosis2.lastIndexOf(" ");
+     dosisn=dosis2.substring(li+1);
+     dosisr.valor=dosisn;
+   }
+
+
+
+}
+
+
+// veces por dia
+//var i3=dosism.indexOf(" VECES/DIA ");
+//   if (i3>=0){
+//     var dosis2=dosism.substring(0,i3);
+//     dosis2=dosis2.trim();
+//     var li=dosis2.lastIndexOf(" ");
+//     dosisn=dosis2.substring(li+1);
+//     dosisr.valor=dosisn;
+//   } 
+
+
+
+// Averigua nro de dosis
+dosisr.frec=[];
+var imin=dosism.indexOf("/MIN");
+var i4=dosism.indexOf("C/");
+var istat=dosism.indexOf("STAT");
+
+if ((i4<0) && (imin<0) && (istat<0)) { dosisr.frec=["C/1H","C/2H","C/3H","C/4H","C/5H","C/6H","C/8H","C/12H","C/24H","STAT"];}
+
+var i4=dosism.indexOf("C/24H");
+if (i4>0) { dosisr.frec.unshift("C/24H");}
+var i4=dosism.indexOf("C/12H");
+if (i4>0) {dosisr.frec.unshift("C/12H");}
+var i4=dosism.indexOf("C/8H");
+if (i4>0) {dosisr.frec.unshift("C/8H");}
+var i4=dosism.indexOf("C/6H");
+if (i4>0) {dosisr.frec.unshift("C/6H");}
+var i4=dosism.indexOf("C/4H");
+if (i4>0) {dosisr.frec.unshift("C/4H");}
+var i4=dosism.indexOf("C/3H");
+if (i4>0) {dosisr.frec.unshift("C/3H");}
+var i4=dosism.indexOf("C/2H");
+if (i4>0) {dosisr.frec.unshift("C/2H");}
+var i4=dosism.indexOf("C/1H");
+if (i4>0) {dosisr.frec.unshift("C/1H");}
+var i4=dosism.indexOf("STAT");
+if (i4>0) {dosisr.frec.unshift("STAT");}
+var i4=dosism.indexOf("C/S");
+if (i4>0) { dosisr.frec.unshift("C/1S");}
+var i4=dosism.indexOf("C/2S");
+if (i4>0) { dosisr.frec.unshift("C/2S");}
+var i4=dosism.indexOf("C/3S");
+if (i4>0) { dosisr.frec.unshift("C/3S");}
+var i4=dosism.indexOf("C/4S");
+if (i4>0) { dosisr.frec.unshift("C/4S");}
+
+var i4=dosism.indexOf("C/M");
+if (i4>0) { dosisr.frec.unshift("C/1M");}
+var i4=dosism.indexOf("C/2M");
+if (i4>0) { dosisr.frec.unshift("C/2M");}
+var i4=dosism.indexOf("C/2M");
+if (i4>0) { dosisr.frec.unshift("C/3M");}
+var i4=dosism.indexOf("C/3M");
+if (i4>0) { dosisr.frec.unshift("C/4M");}
+var i4=dosism.indexOf("C/4M");
+if (i4>0) { dosisr.frec.unshift("C/5M");}
+var i4=dosism.indexOf("C/5M");
+
+var i=dosism.indexOf("/KG");
+if (i>=0) {
+   var dosisu=dosism.substring(i);
+   var i2=dosisu.indexOf(" ");
+   var dosisaux=dosism.substring(0,i);
+   var i7=dosisaux.lastIndexOf(" ");
+   dosisu=dosism.substring(i7+1,i+i2);
+   dosisr.unidad=dosisu; 
+   var indi2=dosisu.indexOf("/");
+   dosisr.unidadmasa=dosisu.substring(0,indi2); 
+   //alert(" "+ dosisr.unidadmasa);
+   dosisr.peso=true;
+   var dosis2=dosism.substring(0,i);
+   var li=dosis2.lastIndexOf(" ");
+   dosisn=dosis2.substring(0,li);
+    dosisn=dosisn.trim();
+   li=dosisn.lastIndexOf(" ");
+    dosisn=dosisn.substring(li+1);
+   dosisr.valor=dosisn;
+}
+else {
+   dosisr.peso=false;
+   prosunidad(" MG ");
+   prosunidad(" MG/DIA ");
+   prosunidad(" G/DOSIS ");
+   prosunidad(" MG/DOSIS ");
+   prosunidad(" MCG/DOSIS ");
+   prosunidad(" G ");
+   prosunidad(" G/DIA ");
+   prosunidad(" MCG ");
+   prosunidad(" MCG/DIA ");
+   prosunidad(" MCG/MIN ");
+   prosunidad(" GOTAS ");
+   prosunidad(" GOTAS/DIA ");
+   prosunidad(" GOTAS/MIN ");
+   prosunidad(" MUI ");
+   prosunidad(" MUI/DIA ");
+   prosunidad(" APLICACION ");
+   prosunidad(" APLICACION/DIA ");
+var i3=dosism.indexOf("/M2");
+   if (i3>=0){
+   var dosisu=dosism.substring(i3);
+   var i2=dosisu.indexOf(" ");
+   var dosisaux=dosism.substring(0,i3);
+   var i7=dosisaux.lastIndexOf(" ");
+   dosisu=dosism.substring(i7+1,i3+i2);
+   dosisr.unidad=dosisu; 
+   var indi2=dosisu.indexOf("/");
+   dosisr.unidadmasa=dosisu.substring(0,indi2); 
+  // alert(" "+ dosisr.unidadmasa);
+   dosisr.peso=true;
+   dosisr.sc=true;
+   var dosis2=dosism.substring(0,i3);
+   var li=dosis2.lastIndexOf(" ");
+   dosisn=dosis2.substring(0,li);
+    dosisn=dosisn.trim();
+    li=dosisn.lastIndexOf(" ");
+    dosisn=dosisn.substring(li+1);
+    dosisr.valor=dosisn;
+//    alert(dosisn);   
+} 
+}
+
+var it=dosism.indexOf(" POR ");
+dosisr.tiempo="";
+if (it>=0){
+var resto=dosism.substring(it+5)
+//alert(resto);
+var resto2=resto.split(" ");
+dosisr.tiempo=resto2[0];
+//alert(dosisr.tiempo);
+var i9=dosisr.tiempo.indexOf("-");
+    if (i9>0) {
+     dosisr.rango=true;
+     dosisr.tiempomin=dosisr.tiempo.substring(0,i9);
+     dosisr.tiempomax=dosisr.tiempo.substring(i9+1);
+     dosisr.tiempo=dosisr.tiempomin;
+
+     //alert(dosisr.min);
+     //alert(dosisr.max);
+     } 
+dosisr.unidadtiempo=resto2[1].toUpperCase();
+//alert(dosisr.tiempo+" "+dosisr.unidadtiempo);
+}
+   dosisr.via=[];
+   var i3=dosism.indexOf(" VO ");
+   if (i3>=0){
+     dosisr.via.unshift("VO");
+   } 
+   var i3=dosism.indexOf(" EV ");
+   if (i3>=0){
+     dosisr.via.unshift("EV");
+   } 
+   var i3=dosism.indexOf(" IM ");
+   if (i3>=0){
+     dosisr.via.unshift("IM");
+   } 
+   var i3=dosism.indexOf(" VR ");
+   if (i3>=0){
+     dosisr.via.unshift("VR");
+   } 
+
+// via nasal
+   var i3=dosism.indexOf(" VN ");
+   if (i3>=0){
+     dosisr.via.unshift("VN");
+   } 
+   var i3=dosism.indexOf(" VV ");
+   if (i3>=0){
+     dosisr.via.unshift("VV");
+   } 
+// via oftalmica
+   var i3=dosism.indexOf(" VOF ");
+   if (i3>=0){
+     dosisr.via.unshift("VOF");
+   } 
+
+// via auditiva
+   var i3=dosism.indexOf(" VOT ");
+   if (i3>=0){
+     dosisr.via.unshift("VOT");
+   } 
+
+// via dermica
+   var i3=dosism.indexOf(" VD ");
+   if (i3>=0){
+     dosisr.via.unshift("VD");
+   } 
+
+ dosisr.min=dosisr.valor;
+ dosisr.max=dosisr.valor;
+ var i3=dosisr.valor.indexOf("-");
+    if (i3>0) {
+     dosisr.rango=true;
+     dosisr.min=dosisr.valor.substring(0,i3);
+     dosisr.max=dosisr.valor.substring(i3+1);
+     //alert(dosisr.min);
+     //alert(dosisr.max);
+     }
+return dosisr;
+}
+
+function parsepresentacion(present){
+
+function splitconc(texto){
+var partesconc=texto.split("/"); 
+var aux=[];
+ aux[0]=parseFloat(partesconc[0]).toString();
+ aux[2]=parseFloat(partesconc[1]).toString();
+ var long0=aux[0].length;
+ 
+if (aux[2]=="NaN") {aux[2]="1";long1=0;} else {var long1=aux[2].length; }
+
+// alert(long0+"  "+texto.length);
+ aux[1]=partesconc[0].substring(long0);
+ aux[3]=partesconc[1].substring(long1);
+//alert(aux[0]+" " +aux[1]+" " +aux[2]+" " +aux[3]);
+//if (aux[2]="" ) {aux2="1";}
+return aux;
+}
+
+var presentr=new Object;
+presentr.via=[];
+presentr.valor="0";
+presentr.valor1=0;
+presentr.valor2=0;
+presentr.unidad="";
+presentr.unidad2="";
+
+presentr.tipo="";
+var presentm=present.toUpperCase()+" ";
+
+var i=presentm.indexOf("%");
+if (i>0){
+     presentr.unidad="G";
+     presentr.unidadmasa="G";
+ var present2=presentm.substring(0,i);
+     present2=present2.trim();
+ var li=present2.lastIndexOf(" ");
+     present2=present2.substring(li);
+     presentr.valor=(parseFloat(present2)/100).toString(); 
+     //alert(presentr.valor);
+     presentr.unidad2="ML";
+
+}
+
+
+var i=presentm.indexOf(" MG ");
+if (i>0){
+     presentr.unidad="MG";
+     presentr.unidadmasa="MG";
+ var present2=presentm.substring(0,i);
+     present2=present2.trim();
+ var li=present2.lastIndexOf(" ");
+     present2=present2.substring(li);
+     presentr.valor=present2;
+}
+
+i=presentm.indexOf(" G ");
+if (i>0){
+     presentr.unidad="G";
+     presentr.unidadmasa="G";
+ var present2=presentm.substring(0,i);
+     present2=present2.trim();
+ var li=present2.lastIndexOf(" ");
+     present2=present2.substring(li);
+     presentr.valor=present2;
+}
+
+i=presentm.indexOf(" MCG ");
+if (i>0){
+     presentr.unidad="MCG";
+     presentr.unidadmasa="MCG";
+ var present2=presentm.substring(0,i);
+     present2=present2.trim();
+ var li=present2.lastIndexOf(" ");
+     present2=present2.substring(li);
+     presentr.valor=present2;
+}
+
+i=presentm.indexOf(" MUI ");
+if (i>0){
+     presentr.unidad="MUI";
+     presentr.unidadmasa="MUI";
+ var present2=presentm.substring(0,i);
+     present2=present2.trim();
+ var li=present2.lastIndexOf(" ");
+     present2=present2.substring(li);
+     presentr.valor=present2;
+}
+
+//     presentr.tipo="SUSP"; 
+     var i1=presentm.indexOf("MG/");
+     if (i1>0){
+        i2=presentm.indexOf(" ",i1);
+        i3=presentm.lastIndexOf(" ",i1);
+        var texto=presentm.substring(i3+1,i2);   
+        var aux=splitconc(texto);
+        presentr.valor1=parseFloat(aux[0]);
+        presentr.valor2=parseFloat(aux[2]);
+        presentr.valor=parseFloat(aux[0])/parseFloat(aux[2]);
+        //alert(presentr.valor);
+        presentr.unidad=aux[1];
+        presentr.unidad2=aux[3];
+       presentr.via[0]="VO";
+     }
+    else {
+         var i1=presentm.indexOf("G/");
+         if (i1>0){
+           i2=presentm.indexOf(" ",i1);
+           i3=presentm.lastIndexOf(" ",i1);
+           var texto=presentm.substring(i3+1,i2);   
+           var aux=splitconc(texto);    
+           presentr.valor1=parseFloat(aux[0]);
+           presentr.valor2=parseFloat(aux[2]);
+           presentr.valor=parseFloat(aux[0])/parseFloat(aux[2]);
+           presentr.unidad=aux[1];
+           presentr.unidad2=aux[3];
+           presentr.via[0]="VO";
+        }
+       } 
+
+i=presentm.indexOf(" CREMA ");
+if (i>=0){
+     presentr.tipo="CREMA"; 
+     presentr.via[0]="VD";
+     presentr.via[1]="VV";
+
+}
+i=presentm.indexOf(" TABLET");
+if (i>=0){
+     presentr.tipo="TAB"; 
+     presentr.via[0]="VO";
+}
+
+i=presentm.indexOf(" GRAGEAS");
+if (i>=0){
+     presentr.tipo="GRAG"; 
+     presentr.via[0]="VO";
+}
+
+i=presentm.indexOf(" CAPSULA");
+if (i>=0){
+     presentr.tipo="CAP"; 
+     presentr.via[0]="VO";
+
+}
+
+i=presentm.indexOf(" CÁPSULA");
+if (i>=0){
+     presentr.tipo="CAP"; 
+     presentr.via[0]="VO";
+
+}
+
+
+
+
+
+
+i=presentm.indexOf(" COMPRIMIDO");
+if (i>=0){
+     presentr.tipo="COMP"; 
+     presentr.via[0]="VO";
+}
+
+i=presentm.indexOf(" AEROSOL");
+if (i>=0){
+     presentr.tipo="AERO"; 
+     presentr.via[0]="VN";
+     
+}
+
+i=presentm.indexOf(" AMPOLL");
+if (i>=0){
+     presentr.tipo="AMP"; 
+     presentr.via[0]="EV";
+     presentr.via[1]="IM";
+
+}
+i=presentm.indexOf(" GOTAS");
+if (i>0){
+     presentr.tipo="GOTAS"; 
+     presentr.via[0]="VO";
+
+}
+i=presentm.indexOf(" SUPOSITORIO");
+if (i>0){
+     presentr.tipo="SUP"; 
+     presentr.via[0]="VR";
+}
+
+i=presentm.indexOf(" INFUSI");
+if (i>0){
+     presentr.tipo="INF"; 
+     presentr.via[0]="EV";
+}
+
+i=presentm.indexOf(" OVULO");
+if (i>0){
+      presentr.tipo="OVU"; 
+     presentr.via[0]="VV";
+}
+
+i=presentm.indexOf(" SUSPEN");
+if (i>0){
+     presentr.tipo="SUSP"; 
+     presentr.via[0]="VO";
+}
+
+i=presentm.indexOf(" SOLUCION");
+if (i>0){
+     presentr.tipo="SOL"; 
+     presentr.via[0]="VO";
+}
+
+
+
+
+
+i=presentm.indexOf(" JARABE");
+if (i>0){
+     presentr.tipo="JAR"; 
+     presentr.via[0]="VO";
+}
+
+i=presentm.indexOf(" INYECTABLE");
+if (i>=0){
+    presentr.tipo="AMP"; 
+     presentr.via[0]="EV";
+     presentr.via[1]="IM";
+  
+}
+
+i=presentm.indexOf(" OFTALM");
+if (i>0){
+     presentr.via[0]="VOF";
+}
+
+i=presentm.indexOf(" INHALAR");
+if (i>=0){
+//     presentr.tipo="INH"; 
+     presentr.via[0]="VN";
+}
+
+return presentr;
+}
+
+function adicionar(tipo){
+var tipos=tipo.split("@");
+for(var j=0 ;j<tipos.length;j++){
+  var encontrado=false;
+  for(var i=0 ;i<listatipo.length && !encontrado;i++){
+         if (listatipo[i]==tipos[j]) {
+           encontrado=true;
+         }
+  }
+  if (!encontrado) {
+     listatipo[i]=tipos[j];
+  }
+}
+}
+
+
+
+function generapagina1(){
+var div1 = document.getElementById("pag1");
+div1.style="width:100%;";
+document.getElementById("farmaco").innerHTML="";
+var textoT="";
+// textoT="<SPAN STYLE='font-size:75%'>GRUPOS FARMACOLOGICOS</SPAN>";
+document.getElementById("farmaco").innerHTML="GRUPOS FARMACOLOGICOS";
+var texto;
+//alert(indicetipo);
+for (var i=0;i<listatipo.length;i++){
+   texto=listatipo[i];
+   if (i==indicetipo){
+     textoT+='<p style="color:black;background:lightblue" onclick="clickp('+i+')"> '+texto+'</p>';
+    }
+  else {
+       textoT+="<p onclick='clickp("+i+" )'> "+texto+"</p>"; 
+ }
+}
+div1.innerHTML=textoT;
+pagina(1);
+//presentadiv4(false);
+}
+
+function generapagina2(){
+indantdosis=-1;
+var div2 = document.getElementById("pag2");
+div2.style="width:100%;";
+var textoT="";
+var texto;
+document.getElementById("farmaco").innerHTML=tipoactivo;
+document.getElementById("brereturn").style.display='initial';
+listafarmaco=new Array;
+//textoT='<INPUT TYPE="button" value="GRUPOS" onclick="return regresar(1);" style="font-size:70%"><br>';
+//textoT+="<SPAN STYLE='font-size:75%'>"+tipoactivo+"<\SPAN> <br>";
+div2.innerHTML=textoT;
+//alert(indicefarmaco);
+var indf=0;
+//alert(indicetipo);
+for(var i=0;i<remedio.length;i++){
+var tipos=remedio[i].tipo.split("@");
+for(var j=0;j<remedio.length;j++){
+
+//  if (tipos[j]==listatipo[indicetipo]) {
+  if (tipos[j]==tipoactivo) {
+
+      listafarmaco[indf]=i;       
+      texto = remedio[i].ng;
+      if (indf==indicefarmaco){
+           textoT+='<p style="color:black;background:lightblue" onclick="clickp2('+indf+')"> '+texto+'</p>';
+      }
+        else {
+            textoT+="<p onclick='clickp2("+indf+" )'> "+texto+"</p>"; 
+         }
+       indf++;    
+    }
+}
+}
+div2.innerHTML=textoT;
+pagina(2);
+//presentadiv4(false);
+}
+
+function selecciona(){
+indantdosis=-1;
+var divselect = document.getElementById("selfar");
+var textoT="";
+textoT+='<div style="position: fixed;background-color: gray;width:50%;">';
+textoT+=' <button title="Cancelar" onclick="quitardivselec();" >'+ iconocerrar+'</button></div><br>';
+var texto;
+var indf=0;
+for(var i=0;i<listafarmacosel.length;i++){
+      texto=remedio[listafarmacosel[i]].ng;
+      textoT+="<p onclick='clickp6("+i+" )'> "+texto+"</p>"; 
+      indf++;
+}
+
+divselect.innerHTML=textoT;
+divselect.style="position: fixed;top :300px; overflow-y: scroll; height: 40%;left: 10px;width:50%;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;";
+}
+
+
+
+
+
+function valerta(texto){
+var textoT;
+var div5 = document.getElementById("pag5");
+div5.style="position: fixed;top :100px; left: 10px; overflow-y: auto; width: 90% ; height: 50%; background-color: gray;color:white; border: 3px solid #73AD21;";
+textoT='<p style="text-indent: 10px; text-align: justify; border: none;">'+texto+'</p><br> <INPUT TYPE="button" value="OK" onclick="return quitar();" style="font-size:100%">';
+div5.innerHTML=textoT;
+}
+
+var tfg=0;
+var tfga=0;
+var unidcreatglobal=0;
+var creatunid="mg/dl";
+var sexoglobal="M";
+var razaglobal="O";
+var pco2global="40";
+var bicarbglobal="22";
+var phglobal="7.4";
+
+function CG(){
+if (unidcreatglobal==0) {var factor2=1; creatunid="mg/dL"} else {var factor2=1/88.4;creatunid="mcmol/L"}
+var creatininacorr=creatglobal*factor2;
+if (sexoglobal!="M") {var factor=0.85} else  {var factor=1;}
+tfg=xround((140-edadglobal)*pesoglobal*factor/(72*creatininacorr),1);
+var campotfg=document.getElementById("btfg");
+//campotfg.innerHTML=": "+tfg+" ml/min "+modelotfg;
+campotfg.title="Tasa de filtración glomerular: "+tfg+" ml/min "+modelotfg;
+
+}
+
+function MDRDIDMS(){
+// ckd-epi 2009 >18
+
+if (unidcreatglobal==0) {var factor2=1; creatunid="mg/dL"} else {var factor2=1/88.4;creatunid="mcmol/L"}
+var creatininacorr=creatglobal*factor2;
+if (sexoglobal=="F") { var fsexo=0.742} else {var kappa=0.9; var alfa=-0.411; var fsexo=1;}
+if (razaglobal=="N") {var fraza=1.21;} else {var fraza=1;}
+tfg=175*fsexo*fraza*Math.pow(creatininacorr,-1.154)*Math.pow(edadglobal,-0.203);
+tfg=xround(tfg,1);
+var campotfg=document.getElementById("btfg");
+//campotfg.innerHTML=": "+tfg+" ml/min " +modelotfg;
+campotfg.title="Tasa de filtración glomerular: "+tfg+" ml/min " +modelotfg;
+
+}
+
+
+function CKDEPI(){
+// ckd-epi 2009
+
+if (unidcreatglobal==0) {var factor2=1; creatunid="mg/dL"} else {var factor2=1/88.4;creatunid="mcmol/L"}
+var creatininacorr=creatglobal*factor2;
+if (sexoglobal=="F") {var kappa=0.7; var alfa=-0.329; var fsexo=1.018} else {var kappa=0.9; var alfa=-0.411; var fsexo=1;}
+if (razaglobal=="N") {var fraza=1.159;} else {var fraza=1;}
+var fmin=Math.min(creatininacorr/kappa ,1 );
+var fmax=Math.max(creatininacorr/kappa ,1 );
+tfg=141*fsexo*fraza*Math.pow(fmin,alfa)*Math.pow(fmax,-1.209)*Math.pow(0.993,edadglobal);
+tfg=xround(tfg,1);
+var campotfg=document.getElementById("btfg");
+//campotfg.innerHTML=": "+tfg+" ml/min " +modelotfg;
+campotfg.title="Tasa de filtración glomerular: "+tfg+" ml/min " +modelotfg;
+
+}
+
+function establecemetodo(Id){
+var model1=document.getElementById("Imod0");
+var model2=document.getElementById("Imod1");
+var model3=document.getElementById("Imod2");
+
+if (Id=="Imod0") {modelotfg="CG";model1.innerHTML=iconoselecton; model2.innerHTML=iconoselectoff; model3.innerHTML=iconoselectoff;} 
+if (Id=="Imod1") {modelotfg="CKDEPI";model1.innerHTML=iconoselectoff;model2.innerHTML=iconoselecton;model3.innerHTML=iconoselectoff;}
+if (Id=="Imod2") {modelotfg="MDRD-IDMS";model1.innerHTML=iconoselectoff;model2.innerHTML=iconoselectoff;model3.innerHTML=iconoselecton;}
+
+}
+
+
+function establecemetodo2(){
+var model=document.getElementById("model").selectedIndex;
+switch (model) {
+case 0: modelotfg="CG";
+       break;
+case 1: modelotfg="CKDEPI";
+       break;
+case 2: modelotfg="MDRD-IDMS";
+       break;
+}
+}
+
+function iniciamodelo(){
+switch (modelotfg) {
+case "CG": document.getElementById("model").selectedIndex=0;
+       break;
+case "CKDEPI" : document.getElementById("model").selectedIndex=1;
+       break;
+case "MDRD-IDMS": document.getElementById("model").selectedIndex=2;
+       break;
+}
+}
+
+var creatglobal=1;
+
+function cambiapeso(){
+pesoglobal=document.getElementById("tfgpeso").value;
+var elementopeso=document.getElementById("peso");
+if ( (typeof(elementopeso)!="undefined") && (elementopeso!=null) ){
+  document.getElementById("peso").value=pesoglobal;
+}
+}
+function cambiaaltura(){
+alturaglobal=document.getElementById("altura3").value;
+}
+
+
+
+//refrescadatospac();
+function cambiaedad(){edadglobal=document.getElementById("edad").value;
+//refrescadatospac();
+}
+function cambiacreat(){creatglobal=parseFloat(document.getElementById("creat").value);}
+function cambiaunidcreat(){
+var factor;
+unidcreatglobal=document.getElementById("creatuni").selectedIndex;
+if (unidcreatglobal=="0") {factor=1/88.4} else {factor=88.4}
+document.getElementById("creat").value=xround(parseFloat(document.getElementById("creat").value)*factor,1).toString();
+cambiacreat();
+}
+
+function cambiasexo(Id){
+var sexf=document.getElementById("ISEXF");
+var sexm=document.getElementById("ISEXM");
+if (Id=="ISEXF") {sexoglobal="F";sexf.innerHTML=iconoselecton; sexm.innerHTML=iconoselectoff;} 
+else {sexoglobal="M";sexf.innerHTML=iconoselectoff; sexm.innerHTML=iconoselecton;}
+}
+
+function cambiasexoh(Id){
+var sexf=document.getElementById("ISEXFH");
+var sexm=document.getElementById("ISEXMH");
+if (Id=="ISEXFH") {sexoglobal="F";sexf.innerHTML=iconoselecton; sexm.innerHTML=iconoselectoff;} 
+else {sexoglobal="M";sexf.innerHTML=iconoselectoff; sexm.innerHTML=iconoselecton;}
+}
+
+
+function cambiasexocr(Id){
+var sexf=document.getElementById("ISEXFCR");
+var sexm=document.getElementById("ISEXMCR");
+if (Id=="ISEXFCR") {sexoglobal="F";sexf.innerHTML=iconoselecton; sexm.innerHTML=iconoselectoff;} 
+else {sexoglobal="M";sexf.innerHTML=iconoselectoff; sexm.innerHTML=iconoselecton;}
+}
+
+function cambiaraza(Id){
+var razan=document.getElementById("IRAZN");
+var razao=document.getElementById("IRAZO");
+
+if (Id=="IRAZN") {razaglobal="N";razan.innerHTML=iconoselecton; razao.innerHTML=iconoselectoff;} 
+else {razaglobal="O";razan.innerHTML=iconoselectoff; razao.innerHTML=iconoselecton;}
+}
+
+
+
+function calctfg(){
+var sp=supcorp2(pesoglobal,alturaglobal);
+if (modelotfg=="CG") {CG();tfga=tfg; tfg=xround(tfg*1.73/sp,2)} 
+if (modelotfg=="CKDEPI") {CKDEPI();tfga=xround(tfg*sp/1.73,2) }
+if (modelotfg=="MDRD-IDMS") {MDRDIDMS();tfga=xround(tfg*sp/1.73,2)}
+var elem=document.getElementById("muestrafTFG");
+if ( (typeof(elem)!="undefined") && (elem!=null) ){
+document.getElementById("muestrafTFG").innerHTML= "TFG: "+tfg.toString()+" ml/min/1.73 m<sup>2</sup> " +modelotfg;
+document.getElementById("muestrafTFGA").innerHTML= "TFGA: "+tfga+" ml/min " +modelotfg;
+}
+}
+
+function corr_renal(){
+var textoT="";
+var texto="";
+var divrenal = document.getElementById("renal");
+divrenal.style="position: fixed;top :100px; left: 10px; width:98% ; text-align: left;";
+textoT+='<center> Calculadora de tasa de filtraci&oacute;n glomerular</center>';
+textoT+='<br> Creatinina: <INPUT min="0.1" id="creat" TYPE="number" step="0.1" value="'+creatglobal.toString()+'" onchange="cambiacreat();calctfg();"style="font-size:100%">';
+textoT+='<select id="creatuni" onchange="cambiaunidcreat();calctfg();">'; 
+if (unidcreatglobal=="0") {textoT+='<option selected> mg/dL </option>  <option>&#181;mol/L </option> </select>';} else
+       {textoT+='<option> mg/dL </option>  <option selected>&#181;mol/L </option> </select>';}
+
+textoT+='<br> Edad: <INPUT id="edad"  pattern=”[0-9]{3}" min="0" max="120" TYPE="number" value="'+edadglobal.toString()+'" onkeypress="return validInputI(this,event,3,0,150)" onchange="cambiaedad();calctfg();" style="font-size:100%"> años'
+textoT+='<br> Peso: ';
+textoT+='<INPUT id="tfgpeso" min="3" max="400" TYPE="text" onkeypress="return validInputR(this,event,6,3,400)" value="'+pesoglobal.toString()+'" onchange="cambiapeso();cambiasup();calctfg();" style="width: 80px;"> kg'
+textoT+='<br> Altura: <INPUT id="altura3" min="50" max="250" TYPE="number" onkeypress="return event.charCode !=45" value="'+ alturaglobal.toString()+'" oninput="cambiaaltura();calctfg();cambiasup();">'+unidelong;
+if (sexoglobal=="F") {var textf=iconoselecton;var textm=iconoselectoff;} else {var textf=iconoselectoff;var textm=iconoselecton;}
+textoT+=  ' <br> Sexo: '+iconomujer+' <button ID="ISEXFCR" TYPE="button" class="buttonopt" onclick="cambiasexocr(this.id);calctfg();">'+textf+'</button>';
+textoT+=' '+iconohombre+' <button ID="ISEXMCR" TYPE="button" class="buttonopt" onclick="cambiasexocr(this.id);calctfg();">'+textm+'</button> '
+if (razaglobal=="N") {var textn='checked="checked"';var textO='';} else {var textn='';var textO='checked="checked"';}
+if (razaglobal=="N") {var textn=iconoselecton;var textO=iconoselectoff;} else {var textn=iconoselectoff;var textO=iconoselecton;}
+textoT+=  ' <br> Raza: Negra <button ID="IRAZN" TYPE="button" class="buttonopt" onclick="cambiaraza(this.id);calctfg();">'+textn+'</button>';
+textoT+=' Otra <button ID="IRAZO" TYPE="button" class="buttonopt" onclick="cambiaraza(this.id);calctfg();">'+textO+'</button> '
+textoT+=' <br> Modelo:<select id="model" onchange="establecemetodo2();calctfg();">'; 
+textoT+='<option selected> Cockcroft-Gault </option> <option> CKD-EPI </option> <option> MDRD-IDMS </option></select>';
+textoT+=texto+'<br> <span id="supcorporal"></span>';
+
+textoT+=texto+'<br> <span id="muestrafTFG"></span>';
+
+textoT+=texto+'<br> <span id="muestrafTFGA"></span>';
+
+textoT+=texto+'<br> <INPUT TYPE="button" value="Ok" onclick="return ajuste();" style="font-size:100%">';
+
+divrenal.innerHTML=textoT;
+iniciamodelo();
+cambiasup();
+calctfg();
+}
+
+
+function ajusteph(){
+var diveq = document.getElementById("eqacidobase");
+diveq.style="display: none;";
+//pesoglobal=parseFloat(document.getElementById("tfgpeso").value);
+//edadglobal=parseFloat(document.getElementById("edad").value);
+//document.getElementById("tfgind").innerHTML= ": "+ tfg.toString()+" ml/min "+modelotfg;
+//refrescadatospac();
+}
+
+function cambiacheck(e){
+switch (e.id) {
+case "pco2check": if (pco2check.checked) {
+                   document.getElementById("biccheck").checked=false;
+                   document.getElementById("Bic").disabled=false;
+                   document.getElementById("phcheck").checked=false;
+                   document.getElementById("valph").disabled=false;
+                   document.getElementById("pCO2").disabled=true;
+                    } else {
+                         document.getElementById("pco2check").checked=true;
+                         document.getElementById("pCO2").disabled=true;
+                            }
+break;
+
+case "biccheck": if (biccheck.checked) {
+                   document.getElementById("pco2check").checked=false;
+                   document.getElementById("pCO2").disabled=false;
+                   document.getElementById("phcheck").checked=false;
+                   document.getElementById("valph").disabled=false;
+                   document.getElementById("Bic").disabled=true;
+
+                  } else {document.getElementById("biccheck").checked=true;
+                          document.getElementById("Bic").disabled=true;
+                         }
+break;
+case "phcheck": if (phcheck.checked) {
+                   document.getElementById("biccheck").checked=false;
+                   document.getElementById("Bic").disabled=false;
+                   document.getElementById("pco2check").checked=false;
+                   document.getElementById("pCO2").disabled=false;
+                   document.getElementById("valph").disabled=true;
+
+                   }  else {
+                        document.getElementById("phcheck").checked=true;
+                        document.getElementById("valph").disabled=true;
+}
+break;            
+}
+}
+
+function cambiaph(){
+phglobal=document.getElementById("valph").value;
+if (document.getElementById("pCO2").disabled) {
+bicarbglobal=Math.pow(10,phglobal-6.1)*pco2global*0.03;
+bicarbglobal=xround(bicarbglobal,0)
+document.getElementById("Bic").value=bicarbglobal;
+} 
+else {
+pco2global=bicarbglobal/(Math.pow(10,phglobal-6.1)*0.03);
+pco2global=xround(pco2global,0)
+document.getElementById("pCO2").value=pco2global;
+}
+}
+
+function cambiapco2(){
+pco2global=document.getElementById("pCO2").value;
+if (document.getElementById("Bic").disabled) {
+phglobal=6.1+Math.log10(bicarbglobal/(pco2global*0.03));
+phglobal=xround(phglobal,2)
+document.getElementById("valph").value=phglobal;
+} 
+else {
+bicarbglobal=Math.pow(10,phglobal-6.1)*pco2global*0.03;
+bicarbglobal=xround(bicarbglobal,0)
+document.getElementById("Bic").value=bicarbglobal;
+}
+}
+
+function cambiabic(){
+bicarbglobal=document.getElementById("Bic").value;
+if (document.getElementById("pCO2").disabled) {
+phglobal=6.1+Math.log10(bicarbglobal/(pco2global*0.03));
+phglobal=xround(phglobal,2)
+document.getElementById("valph").value=phglobal;
+} 
+else {
+pco2global=bicarbglobal/(Math.pow(10,phglobal-6.1)*0.03);
+pco2global=xround(pco2global,0)
+document.getElementById("pCO2").value=pco2global;
+}
+
+}
+
+
+function Equilibrioacidobase(){
+var textoT="";
+var texto="";
+var divequi = document.getElementById("eqacidobase");
+divequi.style="position: fixed;top :100px; left: 10px; width:98% ; text-align: left;";
+textoT+='<center> Equilibrio acido-base</center>';
+textoT+='<br> pCO<sub>2</sub>: <INPUT  id="pCO2" min="10" max="120" step="1" TYPE="number" disabled="true" value="'+pco2global.toString()+'" onchange="cambiapco2();graficarpH(phglobal,bicarbglobal);"> mmHg ';
+textoT+='<INPUT  id="pco2check" TYPE="checkbox"  checked onchange="cambiacheck(this);">';
+
+textoT+='<br> HCO<sub>3</sub><sup>-</sup>: <INPUT id="Bic"  min="0" max="120" step="1" TYPE="number" value="'+bicarbglobal.toString()+'" onkeypress="return validInputI(this,event,3,0,150)" onchange="cambiabic();graficarpH(phglobal,bicarbglobal);" > mmol/L'
+textoT+='<INPUT  id="biccheck" TYPE="checkbox" onchange="cambiacheck(this);" ';
+
+textoT+='<br> pH: ';
+textoT+='<INPUT id="valph" min="6" max="8" step="0.01" TYPE="number" onkeypress="return validInputR(this,event,6,3,8)" value="'+phglobal.toString()+'" onchange="cambiaph();graficarpH(phglobal,bicarbglobal);" style="width: 80px;">'
+textoT+='<INPUT  id="phcheck" TYPE="checkbox" onchange="cambiacheck(this);"';
+
+textoT+=texto+'<br> <span id="muestrafTFG"></span>';
+
+textoT+=texto+'<br> <span id="muestrafTFGA"></span>';
+
+textoT+=texto+'<br> <INPUT TYPE="button" value="Ok" onclick="ajusteph();" style="font-size:100%">';
+textoT+='<canvas id="canvaspH" style="BORDER:1PX SOLID #000000;background-color: white" width="500px" height="300px"></canvas>';  
+
+divequi.innerHTML=textoT;
+//iniciamodelo();
+//cambiasup();
+graficarpH(phglobal,bicarbglobal);
+
+}
+
+function cambiasup(){document.getElementById("supcorporal").innerHTML='Sup. corporal: '+supcorp2(pesoglobal,alturaglobal)+' m<sup>2</sup>'}
+
+
+
+var indiceactivo;
+function dextra(num){
+var textoT,texto;
+textoT="";
+var encabezado=["Descripci&oacute;n:","Indicaciones:","Contraindicaciones:","Interacciones:","Reacciones adversas:","Farmacocinetica:","Farmacodinámica:"];
+var color="blue"
+textoT=encabezado[num].fontcolor(color) + '<br><br>';
+//var indice=listafarmaco[indicefarmaco];
+var indice=indiceactivo;
+
+if (num==0) {textoT+=remedio[indice].desc;}
+if (num==1) {textoT+=remedio[indice].indic;}
+if (num==2) {textoT+=remedio[indice].cindic;}
+if (num==3) {textoT+=remedio[indice].interac;}
+if (num==4) {textoT+=remedio[indice].ram;}
+if (num==5) {textoT+=remedio[indice].farcin;}
+if (num==6) {textoT+=remedio[indice].fardin;}
+
+valerta(textoT);
+
+}
+function ajuste(){
+var divrenal = document.getElementById("renal");
+divrenal.style="display: none;";
+pesoglobal=parseFloat(document.getElementById("tfgpeso").value);
+edadglobal=parseFloat(document.getElementById("edad").value);
+//document.getElementById("tfgind").innerHTML= ": "+ tfg.toString()+" ml/min "+modelotfg;
+//refrescadatospac();
+}
+
+var modelotfg="CG";
+function quitar(){
+var div5 = document.getElementById("pag5");
+div5.style="display: none;";
+if (muestraactivo=="1") {muestraactivo="0";}
+}
+
+function quitarrecipe(){
+var divrecipe = document.getElementById("recipes");
+divrecipe.style="display: none;";
+if (muestraactivo=="1") {muestraactivo="0";}
+}
+
+function quitarinforme(){
+var divinforme = document.getElementById("informe");
+divinforme.style.display="none";
+}
+
+function quitarhistoria(){
+var divhistoria = document.getElementById("historia");
+divhistoria.style.display="none";
+}
+
+
+
+function quitardivedit(){
+var divedit = document.getElementById("divedit");
+divedit.style="display: none;";
+}
+
+
+function act(){
+document.getElementById("dosis").value=document.getElementById("dosis2").value;
+}
+
+function actinv(){
+document.getElementById("dosis2").value=document.getElementById("dosis").value;
+}
+
+function generapagina3(indice){
+var div3 = document.getElementById("pag3");
+div3.style="width:100%;";
+var textoT="";
+var texto;
+indiceactivo=indice;
+var tipos=remedio[indice].tipo.split("@");
+tipoactivo=tipos[0];
+document.getElementById("breturn").title='Regresar a '+tipoactivo;
+//var indice=listafarmaco[indicefarmaco];
+//textoT='<INPUT TYPE="button" value="'+listatipo[indicetipo] +'" onclick="return regresar(2);" style="font-size:70%"> &nbsp';
+//textoT='<INPUT TYPE="button" value="'+tipoactivo +'" onclick="return regresar(2);" style="font-size:70%"> &nbsp';
+//textoT+='<INPUT TYPE="button" value="GRUPOS" onclick="return regresar(1);" style="font-size:70%"><br>';
+//textoT+="<SPAN STYLE='font-size:75%'>"+listatipo[indicetipo]+" "+remedio[indice].ng+"</SPAN><br>";
+//textoT+="<SPAN STYLE='font-size:75%'>"+remedio[indice].ng+"</SPAN><br>";
+
+document.getElementById("farmaco").innerHTML=remedio[indice].ng;
+//alert(indice+ " "+ remedio[indice].desc);
+
+document.getElementById("breturn").style.display='initial';
+document.getElementById("brereturn").style.display='initial';
+if (remedio[indice].desc!="") {
+    document.getElementById("bdesc").style.display='initial';
+    //textoT+='<INPUT TYPE="button" value="Descripcion" onclick="dextra(0);"> &nbsp';
+}
+if (remedio[indice].indic!="") {
+    document.getElementById("bindic").style.display='initial';
+    //textoT+='<INPUT TYPE="button" value="Indicaciones" onclick="dextra(1);"> &nbsp';
+}
+if (remedio[indice].cindic!="") {
+    document.getElementById("bcindic").style.display='initial';
+    //textoT+='<INPUT TYPE="button" value="Contraindicaciones" onclick="dextra(2);"> &nbsp';
+}
+if (remedio[indice].interac!="") {
+    document.getElementById("binterac").style.display='initial';
+    //textoT+='<INPUT TYPE="button" value="Contraindicaciones" onclick="dextra(2);"> &nbsp';
+}
+if (remedio[indice].ram!="") {
+    document.getElementById("bram").style.display='initial';
+    //textoT+='<INPUT TYPE="button" value="Efectos adversos" onclick="dextra(3);"> &nbsp';
+}
+if (remedio[indice].farcin!="") {
+    document.getElementById("bfarcin").style.display='initial';
+    //textoT+='<INPUT TYPE="button" value="Farmacocinetica" onclick="dextra(4);"> &nbsp';
+}
+if (remedio[indice].fardin!="") {
+    document.getElementById("bfardin").style.display='initial';
+    //textoT+='<INPUT TYPE="button" value="Farmacocinetica" onclick="dextra(4);"> &nbsp';
+}
+
+
+//if (remedio[indice].ren!="") {textoT+='<INPUT id="btfg" TYPE="button" value="TFG: '+ tfg.toString() +' " onclick="corr_renal();"> &nbsp';}
+
+present=remedio[indice].presentacion.split("@");
+dosisdelfarmaco=remedio[indice].dosisa.split("@");
+//alert(dosisdelfarmaco);
+textoT+=' <br>PRESENTACIONES<br>';
+textoT+=' <div style="overflow-y: auto; font-size:0.5rem;">';
+var tadicpres=[];
+for(var i=0;i<present.length;i++){
+        var iadic=present[i].indexOf("adic:");
+        if (iadic>=0) {texto = present[i].substring(0,iadic);tadicpres[i]=present[i].substring(iadic+6);} 
+             else {texto = present[i];tadicpres[i]=""}
+//     alert(tadicpres[i]);    
+    if (i==indicepresent){
+           textoT+='<p style="color:black;background:lightblue" onclick="clickp4('+i+')"> '+texto+'</p>';
+           inddiluir=present[i].indexOf(" a diluir");
+           indliquido=present[i].indexOf(" diluido ");
+         }
+        else {
+            textoT+="<p onclick='clickp4("+i+" )'> "+texto+"</p>"; 
+         }
+//       div3.innerHTML=textoT;
+}
+
+textoT+=' </div >';
+textoT+='<br>DOSIS';
+textoT+='<div style="overflow-y: auto;">'
+for(var i=0;i<dosisdelfarmaco.length;i++){
+        texto = dosisdelfarmaco[i];
+        if (i==indicedosis){
+           textoT+='<p style="color:black;background:lightblue" onclick="clickp3('+i+')"> '+texto+'</p>';
+         }
+        else {
+            textoT+="<p onclick='clickp3("+i+" )'> "+texto+"</p>"; 
+         }
+}
+textoT+='</div>';
+pdosis=parsedosis(dosisdelfarmaco[indicedosis]);
+ppres=parsepresentacion(present[indicepresent]);
+//alert(ppres.valor+" "+ppres.unidad+" "+ppres.tipo)
+//alert(pdosis.peso);
+//textoT+='<table ><tr>'
+//textoT+='<td>'
+if (pdosis.peso){
+textoT+='<div >';
+textoT+=' PESO(Kg):';
+textoT+=makeKeyInput("peso","","R3.2-2-300",pesoglobal);
+//<INPUT  ID="peso" onkeypress="return event.charCode !=45" min="2" TYPE="number" SIZE="1" MAXLENGTH="2" value="'+pesoglobal+'" style="font-size:100%"> ';
+textoT+='</div>';
+}
+//textoT+='</td>'
+if (indantdosis!=indicedosis) {var dosisactual=pdosis.min;}
+else {
+var dosisactual=document.getElementById("dosis").value;
+}
+//textoT+='<td>'
+textoT+='<div>';
+
+if (pdosis.rango) 
+{ 
+var vpaso=((parseFloat(pdosis.max)-parseFloat(pdosis.min))/10).toString();
+//alert(pdosis.min);
+textoT+='<table style="display: inline;"><tr><td align="right"> DOSIS:<INPUT onkeypress="return event.charCode !=45" min="0" ID="dosis" TYPE="number" SIZE="6" MAXLENGTH="6" onchange="actinv();" value="'+dosisactual+'" min="'+pdosis.min+'" max="'+pdosis.max+'" step="'+vpaso+'" style="font-size:100%"> ';
+textoT+='</td></tr><tr><td align="right"> <INPUT ID="dosis2" TYPE="range" onchange="act();" value="'+dosisactual+'" min="'+pdosis.min+'" max="'+pdosis.max+'" step="'+vpaso+'" style="font-size:100%"> </div>';
+textoT+='</td></tr></table>';
+}
+  else {
+     textoT+=' DOSIS:';
+     var max=3*pdosis.max;
+     var lng=parseInt(max).toString().length
+     var pr="R"+lng+".2-0-"+max;
+  // alert(pr);
+     textoT+=makeKeyInput("dosis","",pr,dosisactual);
+//   <INPUT ID="dosis" onkeypress="return event.charCode !=45" min="0" TYPE="number" SIZE="5" MAXLENGTH="4" value="'+dosisactual+'" style="font-size:100%"> ';
+  }
+textoT+='</div>';
+
+//textoT+=' <INPUT  ID="unidad" TYPE="TEXT" SIZE="5" MAXLENGTH="0" value="'+pdosis.unidad+'" style="font-size:100%"<br>';
+textoT+=pdosis.unidad;
+//textoT+='</td>'
+
+//textoT+=' <INPUT  ID="frec" value="'+pdosis.frec+'" list="informacion" style="font-size:100%"> ';
+//textoT+=' <INPUT  ID="frec" type="TEXT" value="'+pdosis.frec+'"  style="font-size:100%"> ';
+//textoT+='<td>'
+if (pdosis.frec.length>0){
+   textoT+=' <SELECT ID="frec2" >';
+   //alert(pdosis.frec.length);
+   for (var i=0;i<pdosis.frec.length;i++){
+   if (i==0){
+     textoT+=' <option selected>'+ pdosis.frec[i]+'</option>';
+     } 
+      else {
+       textoT+=' <option>'+ pdosis.frec[i]+'</option>';
+       }
+}
+textoT+='</SELECT>  ';
+}
+//textoT+='</td>'
+//textoT+='<td>'
+textoT+='<button id="agregar" TYPE="button" title="Agregar récipe" onclick="return procesar();" style="font-size:100%">'+iconoplus+'</button><br>';
+//textoT+='</td>'
+//textoT+='</tr>'
+//textoT+='<tr><td colspan="2">'
+if (pdosis.tiempo!="") {
+ textoT+='<label for="durac" >Por </label>'
+ textoT+=makeKeyInput("durac","Tiempo de infusión","I3-1-999","1");
+// textoT+='<input id="durac" onkeypress="return event.charCode !=45" min="1" type="number" style="background-color: lightgray;color: black;" title="Tiempo de infusión">';
+ textoT+=' <SELECT ID="udurac" >';
+ textoT+=' <option selected>'+'día(s)'+'</option>';
+ textoT+=' <option >'+'semana(s)'+'</option>';
+ textoT+=' <option >'+'mes(es)'+'</option>';
+ textoT+=' <option >'+'año(s)'+'</option>';
+textoT+='</SELECT>  ';
+} 
+//textoT+='</td>';
+//textoT+='<td style="text-align:left;" colspan="2">';
+textoT+='<input id="textadic"  class="inputtext" type="text" style="background-color: lightgray;color: black;" title="Agregar indicación" >&nbsp';
+//textoT+='</td></tr>';
+//textoT+='<tr>';
+//textoT+='<td colspan="4">';
+if (ppres.tipo=="INF") {
+ textoT+='<label for="tinfu" >Tiempo de infusión</label>'
+ textoT+=makeKeyInput("tinfu","Tiempo de infusión","I3-0-999","0");
+// textoT+='<input id="tinfu"  type="number" onkeypress="return event.charCode !=45" min="0" style="background-color: lightgray;color: black;" title="Tiempo de infusión">';
+
+ textoT+=' <SELECT ID="uinfu" >';
+ textoT+=' <option selected>'+'Horas'+'</option>';
+ textoT+=' <option >'+'Minutos'+'</option>';
+ textoT+='</SELECT>  ';
+}
+//textoT+='</td></tr>';
+//textoT+='<tr><td colspan="4">';
+if ((inddiluir>=0)||(indliquido>=0)) {
+   textoT+=' diluir ';
+   textoT+=makeKeyInput("voldiluir","","I3-0-999","250");
+ //  <INPUT  onkeypress="return event.charCode !=45" min="0" ID="voldiluir" TYPE="number" SIZE="5"  value="250">
+   textoT+= ' cc de ';
+   var solc=remedio[indice].diluible.split("@");
+   textoT+=' <SELECT ID="soldiluir" >';
+   for (var i=0;i<solc.length;i++){
+   if (i==0){
+     textoT+=' <option selected>'+ solc[i]+'</option>';
+    } 
+      else {
+       textoT+=' <option>'+ solc[i]+'</option>';
+       }
+}
+   textoT+='</SELECT>  ';
+}
+//textoT+='</td>';
+//textoT+='</tr></table>';
+
+//textoT+=' <datalist id="informacion">   <option>   <option value=C/12H> </datalist>'; 
+div3.innerHTML=textoT;
+pagina(3);
+//document.getElementById("agregar").focus();
+document.getElementById("agregar").scrollIntoView();
+//indicaciones=[];
+//indicaciones=remedio[indice].indadic.split('@');
+//alert(indicedosis+" "+indicaciones.length+" "+ indice+" "+remedio[indice].indadic);
+//if (indicaciones[indicedosis]!=undefined) {document.getElementById("textadic").value=indicaciones[indicedosis];} else 
+//{document.getElementById("textadic").value="";}
+
+document.getElementById("textadic").value=tadicpres[indicepresent];
+flagdosis=true;
+indantdosis=indicedosis;
+if (pdosis.tiempo!="") {
+document.getElementById("durac").value=pdosis.tiempo;
+var unid=pdosis.unidadtiempo.substring(0,1);
+switch (unid) {
+case "D": document.getElementById("udurac").selectedIndex=0;break;
+case "S": document.getElementById("udurac").selectedIndex=1;break;
+case "M": document.getElementById("udurac").selectedIndex=2;break;
+case "A": document.getElementById("udurac").selectedIndex=3;break;
+}
+}
+//var indcomp=indicepresent;
+//var compat=compatibilidad(pdosis,ppres);
+// if (compat.length==0){
+//   for(var i=0;i<present.length;i++){
+//      ppres=parsepresentacion(present[i]);
+//      var compat2=compatibilidad(pdosis,ppres);
+//      if (compat.length!=0){ indcomp=i;}
+//   }
+// clickp4(indcomp);
+// }
+
+
+
+}
+
+
+function calcular(){
+if (ppres.tipo=="SUSP"){
+    volumencc=parseFloat(document.getElementById("dosis").value)/parseFloat(ppres.valor);
+     if (pdosis.peso){volumencc*=document.getElementById("peso").value;}
+     //alert("nveces"+pdosis.nvd +" "+volumencc );
+     var ind=pdosis.unidad.indexOf("DIA"); 
+    if (ind>=0) {volumencc=volumencc/pdosis.nvd;}
+      
+//      document.getElementById("volm").value=volumencc;
+}
+
+}
+
+function xround(num,ndec){
+var fact=1;
+for(i=1;i<=ndec;i++){
+fact*=10;
+}
+return Math.trunc(num*fact)/fact;
+//return Math.round(num*fact)/fact;
+}
+
+function ocultabotones(){
+document.getElementById("breturn").style.display='none';
+document.getElementById("bdesc").style.display='none';
+document.getElementById("bindic").style.display='none';
+document.getElementById("bcindic").style.display='none';
+document.getElementById("bram").style.display='none';
+document.getElementById("bfarcin").style.display='none';
+document.getElementById("bfardin").style.display='none';
+document.getElementById("binterac").style.display='none';
+
+}
+function pagina(i){
+if (i==1){
+document.getElementById("pag1").style.display="block";
+document.getElementById("pag2").style.display="none";
+document.getElementById("pag3").style.display="none";
+ocultabotones();
+document.getElementById("brereturn").style.display='none';
+
+}
+if (i==2){
+document.getElementById("pag1").style.display="none";
+document.getElementById("pag2").style.display="block";
+document.getElementById("pag3").style.display="none";
+ocultabotones();
+document.getElementById("brereturn").style.display='initial';
+}
+if (i==3){
+document.getElementById("pag1").style.display="none";
+document.getElementById("pag3").style.display="block";
+document.getElementById("pag2").style.display="none";
+}
+}
+var tipoactivo;
+
+function clickp(num){
+indicetipo=num;
+tipoactivo=listatipo[indicetipo];
+pagina(2);
+indicefarmaco=0;
+generapagina2();
+}
+
+function clickp2(num){
+indicefarmaco=num;
+indicedosis=0;
+indicepresent=0;
+generapagina3(listafarmaco[indicefarmaco]);
+}
+
+function clickp3(num){
+indicedosis=num;
+generapagina3(indiceactivo);
+}
+
+function clickp4(num){
+indicepresent=num;
+generapagina3(indiceactivo);
+}
+
+function clickp5(num){
+recipes.splice(num,1);
+recipesA.splice(num,1);
+recipesB.splice(num,1);
+
+if (muestraactivo=="1") {muestrarecipes();} else {presentadiv4(0)} 
+}
+
+function quitardivselec(){
+document.getElementById("selfar").style.display="none";
+}
+
+
+function clickp6(num){
+document.getElementById("selfar").style.display="none";
+indicepresent=0;
+indicedosis=0;
+indantdosis=-1;
+generapagina3(listafarmacosel[num]);
+}
+
+
+function subiritem(num){
+var temp; 
+temp=recipes[num];recipes[num]=recipes[num-1];recipes[num-1]=temp;
+temp=recipesA[num];recipesA[num]=recipesA[num-1];recipesA[num-1]=temp;
+temp=recipesB[num];recipesB[num]=recipesB[num-1];recipesB[num-1]=temp;
+if (muestraactivo=="1") {muestrarecipes();} else {presentadiv4(0)} 
+}
+
+function bajaritem(num){
+var temp; 
+temp=recipes[num];recipes[num]=recipes[num+1];recipes[num+1]=temp;
+temp=recipesA[num];recipesA[num]=recipesA[num+1];recipesA[num+1]=temp;
+temp=recipesB[num];recipesB[num]=recipesB[num+1];recipesB[num+1]=temp;
+
+if (muestraactivo=="1") {muestrarecipes();} else {presentadiv4(0)} 
+}
+
+
+function regresar(num){
+if (num==1) {
+generapagina1();
+}
+if (num==2) {
+generapagina2();
+}
+}
+
+function presentadiv4(sw){
+if (sw){
+document.getElementById("pag4").style.display="block";
+}
+ else
+{
+document.getElementById("pag4").style.display="none";
+}
+}
+function verificatexto(texto,num,tipo){
+//alert(texto);
+texto=texto.toUpperCase();
+//alert(tipo);
+if (tipo==0){
+var ind=remedio[num].tipo.toUpperCase().indexOf(texto); 
+if (ind>=0) {return true} else {return false}
+}
+
+if (tipo==1){
+var ind=remedio[num].presentacion.toUpperCase().indexOf(texto); 
+if (ind>=0) {return true} else {return false}
+}
+
+if (tipo==2){
+var ind=remedio[num].desc.toUpperCase().indexOf(texto); 
+if (ind>=0) {return true} 
+var ind=remedio[num].indic.toUpperCase().indexOf(texto); 
+if (ind>=0) {return true} 
+var ind=remedio[num].dosisa.toUpperCase().indexOf(texto); 
+if (ind>=0) {return true} 
+}
+//this.dosisa=dosisa;
+//this.dosisp=dosisp;
+//this.presentacion=presentacion;
+//this.desc=descr;
+//this.indic=indica;
+//this.cindic=cindica;
+//this.ram=efadv;
+//this.aux=aux;
+
+}
+
+function busqueda(){
+indicefarmaco=0;
+indantdosis=-1;
+//var div2 = document.getElementById("pag2");
+var textoT,texto;
+listafarmacosel=new Array;
+//textoT='<INPUT TYPE="button" value="GRUPOS" onclick="return regresar(1);" style="font-size:70%"><br>';
+//textoT+="<SPAN STYLE='font-size:75%'>BUSQUEDA<\SPAN> <br>";
+//div2.innerHTML=textoT;
+var indf=0;
+var texto1=document.getElementById("Textoabuscar").value;
+var tipo=document.getElementById("tipobusqueda").selectedIndex;
+if (texto1!='') {
+for(var i=0;i<remedio.length;i++){
+    var esta=verificatexto(texto1,i,tipo); 
+      if (esta) {
+         listafarmacosel[indf]=i;       
+         //alert(i);
+         texto = remedio[i].ng;
+         if (indf==indicefarmaco){
+              textoT+='<p style="color:black;background:lightblue" onclick="clickp2('+indf+')"> '+texto+'</p>';
+         }
+        else {
+            textoT+="<p onclick='clickp2("+indf+" )'> "+texto+"</p>"; 
+        }
+       indf++;    
+     }
+ }
+selecciona();
+} else {quitardivselec()}
+
+}
+
+
+function togglerecipe() {
+if (muestraactivo=="0") {muestrarecipes();} else {quitarrecipe(); muestraactivo="0"}
+}
+var muestradatosactivo="0";
+
+function toggledatos() {
+if (muestradatosactivo=="0") {datospaciente();} else {asignardatospaciente(); muestradatosactivo="0"}
+}
+
+var Archivos=[];
+
+function cargar_recipe(e){
+    var archivos=e.target.files;
+    for(var f=0;f<archivos.length;f++){
+       var archivo=archivos[f];
+//       if (archivo.type.match(/image.*/i)) {
+          var lector=new FileReader();
+          lector.addEventListener("load",function(e){guarda_recipe(e);},false);
+          lector.readAsText(archivo); 
+//        }
+     } 
+}
+
+
+function guarda_recipe(e){   
+contenido=e.target.result; 
+cargarecipe();
+//console.log(contenido);
+} 
+
+
+
+function procesarimagen(e,num){
+  if (num>=0){
+    var archivos=e.target.files;
+    for(var f=0;f<archivos.length;f++){
+       var archivo=archivos[f];
+       if (archivo.type.match(/image.*/i)) {
+          //alert("m1 ");
+          var lector=new FileReader();
+          lector.addEventListener("load",function(e){mostrarimagen(e,num);},false);
+          lector.readAsDataURL(archivo); 
+        }
+     } 
+   }
+} 
+
+
+var elemento;
+var numerodeimagen;
+var lienzo;
+
+function mostrarimagen(e,num){   
+var resultado=e.target.result; 
+//alert("mostrar"+num);
+if (numerodeimagen==0) {
+elemento=document.getElementById("imgtit");
+}
+if (numerodeimagen==1) {
+elemento=document.getElementById("imgpie");
+}
+if (numerodeimagen==2) {
+elemento=document.getElementById("imgcentro");
+}
+
+lienzo=elemento.getContext('2d');
+if (numerodeimagen==2) {
+lienzo.globalAlpha=0.1;
+}
+
+imagen=new Image();
+imagen.src=resultado;
+imagen.addEventListener("load", function(){
+     var himagen=imagen.height;
+     var wimagen=imagen.width;
+     var aspecto=wimagen/himagen;
+     var anchoimagen=wimagen;
+     var altoimagen=himagen;
+        elemento.height=elemento.width/aspecto;
+        lienzo.drawImage(imagen,0,0, imagen.width,imagen.height,0,0, elemento.width, elemento.height);
+         if (numerodeimagen==0) {
+             dataurlimagen[0]=elemento.toDataURL("image/jpeg");
+           }
+
+         if (numerodeimagen==1) {
+             dataurlimagen[1]=elemento.toDataURL("image/jpeg");
+          }
+          if (numerodeimagen==2) {
+             dataurlimagen[2]=elemento.toDataURL("image/jpeg");
+          }
+
+ } , false);
+
+// hay que usar otro elemento del tamanno de la imagen para no perder resolucion.
+
+
+} 
+// fas fa-syringe
+
+function mensaje(texto){
+var textoT;
+var divmen = document.getElementById("mensaje");
+divmen.style="position: fixed;top :100px; left: 10%; overflow-y: auto; width: 40% ; height: 30%; background-color: gray;color:white; border: 3px solid #73AD21;";
+textoT='<p style="text-indent: 10px; text-align: justify; border: none;">'+texto+'</p><br> <INPUT TYPE="button" value="OK" onclick="return quitarmensaje();" style="font-size:100%">';
+divmen.innerHTML=textoT;
+}
+function quitarmensaje(){
+var divmen = document.getElementById("mensaje");
+divmen.style.display="none";
+}
+
+function validInputR(o,e,l,vmin,vmax){
+var k=e.charCode;
+var x1=o.value;
+   var partes=l.toString().split(".");
+   var pr=parseInt(partes[0]);
+   if (partes.length>1) {var dc=parseInt(partes[1])} else {var dc=0}
+   var lg=pr+dc+1;
+//alert(pr+" "+dc+" "+lg);
+var partes2=x1.split(".");
+var nri=parseInt(partes2[0].length); 
+if (partes2.length >1) {var nrd=parseInt(partes2[1].length)} else {var nrd=0}
+
+//alert(nrd);
+if (nrd>=dc) {return false} // longitud
+
+//mensaje(o.valueAsNumber);
+var x2=o.value+String.fromCharCode(e.charCode);
+//mensaje(x1+" "+x2);
+if (x2.length>lg) {return false} // longitud
+//if ((x2<vmin) || (x2>vmax)) {return false}
+if (x2>vmax) {return false}
+
+//if (((x1.indexOf(".")>=0) && (e.charCode==46)) || (e.charCode==45)) {return false}
+if ((x1.indexOf(".")>=0) && (e.charCode==46)) {return false}
+
+if ((k>57) || ((k<48) && (k!=46))) {return false}
+return true;
+}
+
+function validInputI(o,e,l,vmin,vmax){
+//alert(e.charCode);
+var x=o.value+String.fromCharCode(e.charCode);
+//alert(x);
+if (x.length>l) {return false} // longitud
+if ((x<vmin) || (x>vmax)) {return false}
+if ((e.charCode==45) || (e.charCode==46)) {return false}
+
+//if ((x.indexOf(".")>0) && (t==1) && (e.charCode==46)) { alert("F");return false}
+//if (((t==0) || (t==1)) && (e.charCode==45)) { return false}
+//if ((t==0) && (e.charCode==46)) { return false}
+return true;
+}
+
+
+</SCRIPT>
+
+<BODY onload="iniciar();">
+
+<div id="encabezado"  style=" position: fixed; top:0; left:0; text-align: left; border: 0px solid #999999;   background-color: gray; width:100%" > 
+<div>
+<button title="Configuración" onclick="openNav();"> &#9776; </button>
+<button onclick="togglerecipe();" title="Recipe"> <i class="fas fa-file-prescription"></i> </button>
+<button onclick="toggledatos();" title="Datos del paciente" ><i class="fas fa-user"></i> </button>
+<button onclick="laboratorio();" title="Laboratorios" ><i class="fas fa-flask"></i> </button>
+<button onclick="historiamedica();" title="Historia médica" ><i class="fas fa-file-medical"></i> </button>
+<button onclick="informemedico();" title="Informe médico" ><i class="fas fa-notes-medical"></i> </button>
+<!-- <button onclick="hacerpdf();"  title="Genera pdf"><i class="fas fa-file-pdf"></i> </button>-->
+<span onclick="refrescadatospac();return false" id="datosg"> </span>
+<button id="btfg" onclick="corr_renal();" title="Tasa de filtración glomerular">TFG</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+</div>
+<div>
+<button  style="display:none;"id="brereturn" onclick="regresar(1);" title="Regresar a Grupos"><i class="fa fa-angle-double-left"></i></button>
+<button  style="display:none;"id="breturn" onclick="regresar(2);" title="Regresar"><i class="fa fa-angle-left"></i></button>
+<span id="farmaco" style="color:blue;"> </span>
+<div>
+<button  style="display:none;"id="bdesc" onclick="dextra(0);" title="Descripción"><i class="fa_char_D"></i></button>
+<button  style="display:none;"id="bindic" onclick="dextra(1);" title="Indicaciones"><i class="fa_char_I"></i></button>
+<button  style="display:none;"id="bcindic" onclick="dextra(2);" title="Contraindicaciones"><i class="fa_char_C"></i></button>
+<button  style="display:none;"id="binterac" onclick="dextra(3);" title="Interacciones Farmacológicas"><i class="fa_char_IF"></i></button>
+<button  style="display:none;"id="bram" onclick="dextra(4);" title="Efectos adversos"><i class="fa_char_E"></i></button>
+<button  style="display:none;"id="bfarcin" onclick="dextra(5);" title="Farmacocinética"><i class="fa_char_FC"></i></button>
+<button  style="display:none;"id="bfardin" onclick="dextra(6);" title="Farmacodinámica"><i class="fa_char_FD"></i></button>
+</div>
+</div>
+</div>
+<CENTER>
+<div style="display: block; margin-top : 90px;">
+<div>   
+<H1> Dosis de Farmacos </H1> 
+ <input class="inputtext" id="Textoabuscar" type="text"  style="background-color: lightgray;color: black;" oninput="busqueda();"> <button type="button" onclick="busqueda();"><i class="fa fa-search"></i></button>
+
+  </div> 
+<div>
+<select id="tipobusqueda" >
+<option > Grupo </option>
+<option selected> Presentación </option>
+<option> Otras </option>
+</select>
+</div>
+</div>
+</CENTER>
+
+<div id="pag1" style="display:none;overflow-y: scroll; height: 80%;"> </div>
+<div id="pag2" style="display:none;overflow-y: scroll;"> </div>
+<div id="pag3" style="display:none; "> </div>
+<div id="pag4" style="display:none;"> </div>
+<div id="pag5" style="display:none;"onmouseleave="quitar();"></div>
+<div id="recipes" style="display:none; " > </div>
+<div id="divedit" style="display:none;" class="divinput"> </div>
+<div id="plantilla" style="display:none;" class="divinput" > </div>
+<div id="renal" style="display:none;" class="divinput"> </div>
+<div id="eqacidobase" style="display:none;" class="divinput"> </div>
+<div id="div_signos" style="display:none;" class="divinput"> </div>
+
+<div id="datos" style="display:none;" class="divinput" ></div>
+<div id="selfar"style="display:none;" class="divinput" ></div>
+<div id="mensaje" style="display:none;"></div>
+<div id="laborat" style="display:none;"></div>
+<div id="informe" style="display:none;"></div>
+<div id="historia" style="display:none;"></div>
+<div id="antecedentes" style="display:none;"></div>
+
+
+<div id="svg" style="display:none;"></div>
+<div id="mySidenav" onmouseleave="closeNav();" class="sidenav" ></div>
+<div id="agregarimagen" style="display:none;" > 
+<input hidden type=file id="choose1" accept="image/*" >
+<label hidden id=selected>Nothing selected</label><br>
+<input hidden type=file id="choose2" accept="application/pdf">
+</div>
+</BODY>
+</html>
