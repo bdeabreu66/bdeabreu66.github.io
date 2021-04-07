@@ -1,4 +1,4 @@
-
+//
 //const qrcode = window.qrcode;
 
 const video = document.createElement("video");
