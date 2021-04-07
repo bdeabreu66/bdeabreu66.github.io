@@ -80,19 +80,18 @@ qrcode.callback = (res) => {
       outputData[9].innerText=datos[13];
       // Hoja verdadera
       outputData[10].innerText=datos[11];
-      scanning = false;
       for (var i=0;i<divData.length;i++){
-      divData[i].hidden=false;          
+         divData[i].hidden=false;}         
       qrResult.hidden = true;
-  }
-      video.srcObject.getTracks().forEach(track => {track.stop();});
+    }  else { qrResult.hidden = false;
+               outputResult.innerText ="Codigo QR invalido";
+            }  
+       scanning = false;
+       video.srcObject.getTracks().forEach(track => {track.stop();});
        btnScanQR.hidden = false;
        btnCancelQR.hidden = true;
        canvasElement.hidden = true;
-     }  else { qrResult.hidden = false;
-               outputResult.innerText ="Codigo QR invalido";
-             }  
-  }
+    }
 };
 
 function tick() {
