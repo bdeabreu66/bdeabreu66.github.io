@@ -17,20 +17,24 @@ const btnScanQR = document.getElementById("btn-scan-qr");
 const btnCancelQR = document.getElementById("btn-cancel-qr");
 
 let scanning = false;
-//var prueba="2021%03%24%18%30%P1%1%Dill%15%ET-ET-ET-ET-ET-BO-W-W%17-20%13%177%20";
+//var prueba="2021%03%30%18%30%P1%1%Dill%15%ET-ET-ET-ET-ET-BO-W-W%17-20%13%177%17";
 
-function accion(comando,ind){
+function accion(comando,ind,ind2){
  function Nombre(nom){
    if (nom=="ET") return "Empty Try"
    if (nom=="BO") return "Black Out"
-   if (nom=="W") return "Weigth"
+   if (nom=="W") return "Weight"
    return nom
 }
+var corte=parseInt(ind2);
+console.log(corte);
+var resp_parcial;
 var acciones=comando.split("-");
 console.log(acciones.length)
 console.log(ind);
-if ((ind>=0) && (ind<acciones.length)) {resp=Nombre(acciones[ind])} else {resp="Luz"}
-return resp
+if ((ind>=0) && (ind<acciones.length)) {resp_parcial=Nombre(acciones[ind]);} else {resp_parcial="Luz";}
+
+if (ind>=corte) {var resp=resp_parcial+" + "+"<strong>Posible Corte</strong>"; return resp;} else {return resp_parcial;}
 }
 
 qrcode.callback = (res) => {
@@ -67,15 +71,16 @@ qrcode.callback = (res) => {
       // Peso Inicial
       outputData[7].innerText=datos[8]+ " gramos";
       // Accion
-      outputData[5].innerText=accion(datos[9],contdias);
+     outputData[5].innerHTML=accion(datos[9],contdias,datos[13]);
       // Dias de crecimiento
       outputData[6].innerText=datos[10]+ " dias";
       // Peso cosecha
       outputData[8].innerText=datos[12]+ " gramos";
+      // Posible corte
+      outputData[9].innerText=datos[13];
       // Hoja verdadera
-      outputData[9].innerText=datos[11];
+      outputData[10].innerText=datos[11];
       scanning = false;
-     console.log(":"+divData.length); 
       for (var i=0;i<divData.length;i++){
       divData[i].hidden=false;          
       qrResult.hidden = true;
