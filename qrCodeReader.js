@@ -17,7 +17,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
 const btnCancelQR = document.getElementById("btn-cancel-qr");
 
 let scanning = false;
-var prueba="2021%03%24%18%30%P1%1%Dill%15%ET-ET-ET-ET-ET-BO-W-W%17-20%13%177%20";
+//var prueba="2021%03%24%18%30%P1%1%Dill%15%ET-ET-ET-ET-ET-BO-W-W%17-20%13%177%20";
 
 function accion(comando,ind){
  function Nombre(nom){
@@ -39,6 +39,7 @@ qrcode.callback = (res) => {
     //res=prueba;
     var datos=res.split("%");
     //var datos=prueba.split("%");
+    console.log(datos.length);
     if (datos.length==14) {
       var fechainicio=new Date(datos[0],parseInt(datos[1])-1,datos[2],datos[3],datos[4])
       console.log(fechainicio);
@@ -79,12 +80,13 @@ qrcode.callback = (res) => {
     for (var i=0;i<divData.length;i++){
       divData[i].hidden=false;
      }
-     qrResult.hidden = false;
+     qrResult.hidden = true;
      btnScanQR.hidden = false;
      btnCancelQR.hidden = true;
      canvasElement.hidden = true;
-     } else {  qrResult.hidden = false;
-               qrResult.hidden = false;outputResult.innerText ="Codigo QR invalido";
+     } else {  scanning=false;
+               qrResult.hidden = false;
+               outputResult.innerText ="Codigo QR invalido";
              }  
   }
 };
@@ -110,13 +112,14 @@ btnScanQR.onclick = () =>
     .getUserMedia({ video: { facingMode: "environment" } })
     .then(function(stream) {
       scanning = true;
+      
       qrResult.hidden = true;
       for (var i=0;i<divData.length;i++){
          divData[i].hidden=true;
       }
 
         btnScanQR.hidden = true;
-        btnCancelQR.hidden = false;
+//        btnCancelQR.hidden = false;
         canvasElement.hidden = false;
 
       video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
