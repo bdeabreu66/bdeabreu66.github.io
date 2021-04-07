@@ -75,17 +75,16 @@ qrcode.callback = (res) => {
       // Hoja verdadera
       outputData[9].innerText=datos[11];
       scanning = false;
-    video.srcObject.getTracks().forEach(track => {track.stop();});
-    console.log(":"+divData.length); 
-    for (var i=0;i<divData.length;i++){
-      divData[i].hidden=false;
-     }
-     qrResult.hidden = true;
-     btnScanQR.hidden = false;
-     btnCancelQR.hidden = true;
-     canvasElement.hidden = true;
-     } else {  scanning=false;
-               qrResult.hidden = false;
+     console.log(":"+divData.length); 
+      for (var i=0;i<divData.length;i++){
+      divData[i].hidden=false;          
+      qrResult.hidden = true;
+  }
+      video.srcObject.getTracks().forEach(track => {track.stop();});
+       btnScanQR.hidden = false;
+       btnCancelQR.hidden = true;
+       canvasElement.hidden = true;
+     }  else { qrResult.hidden = false;
                outputResult.innerText ="Codigo QR invalido";
              }  
   }
