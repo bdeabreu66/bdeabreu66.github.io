@@ -35,6 +35,14 @@ h1 {
   font-size: 2em;
 }
 
+#confirm {
+  cursor: pointer;
+  font-size: 2em;
+}
+#sourceSelect {
+   font-size: 2em;
+}
+
 div [name=divdata] {
   font-size: 1.2em;
   text-align: left;

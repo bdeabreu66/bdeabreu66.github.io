@@ -5,9 +5,7 @@ const files =
 [
     '/index.html',
     '/style.css',
-    '/qrcode.js',
-    '/qrCodeReader.js'
-];
+ ];
 
 self.addEventListener('install', event => {
   event.waitUntil(

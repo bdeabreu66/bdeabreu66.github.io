@@ -8,15 +8,16 @@
 <BODY>
 <div id="container">
     <h1>Seguimiento de cultivos microgreen</h1>
-<div id="sourceSelectPanel" style="display:none">
-<label for="sourceSelect">Cambiar camara:</label>
-<select id="sourceSelect" style="max-width:400px">
-</select>
+<div id="sourceSelectPanel" 
+style="position: fixed;top :200px; left: 50px; width:80% ; text-align: left;display:none;background-color:gray">
+<label style="font-size: 2em;" >Cambiar camara: <br></label>
+<select id="sourceSelect" >
+</select> <button id="confirm" onclick="sourceSelectPanel.style.display='none';">Ok</button>
 </div>
 
 <div>
     <button id="btn-scan-qr"> Scanear QR</button>
-    <button id="sel-camara"> Cam </button>
+    <button id="sel-camara"> Camara </button>
 </div>
      <div>
         <center><video id="video" width="300" height="300" style="border: 1px solid gray;display:none"></video></center>
@@ -141,8 +142,8 @@ const btnScanQR = document.getElementById("btn-scan-qr");
                 divData[i].hidden=true;
                }
            btnScanQR.hidden = true;
-
-           // const decodingStyle = document.getElementById('decoding-style').value;
+           document.getElementById('sel-camara').hidden=true;
+            // const decodingStyle = document.getElementById('decoding-style').value;
           //  if (decodingStyle == "once") {
               document.getElementById("video").style.display="block";
               decodeOnce(codeReader, selectedDeviceId);
@@ -157,6 +158,11 @@ const btnScanQR = document.getElementById("btn-scan-qr");
        //     document.getElementById('result').textContent = '';
        //     console.log('Reset.')
        //   })
+           document.getElementById('sel-camara').addEventListener('click', () => {
+              sourceSelectPanel.style.display = 'block'
+
+           })
+
 
         })
         .catch((err) => {
@@ -231,6 +237,7 @@ function display_data(res){
      scanning = false     
      document.getElementById("video").style.display="none";
      btnScanQR.hidden = false;
+     document.getElementById('sel-camara').hidden=false;
      codeReader.reset();
      //btnCancelQR.hidden = true;
      //canvasElement.hidden = true;
