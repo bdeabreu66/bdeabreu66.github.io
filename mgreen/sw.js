@@ -3,7 +3,7 @@ const files =
 [
     'index.html',
     'styles.css',
-    'icondef.png'
+    'icondef.png',
     'https://unpkg.com/@zxing/library@latest'
 ];
 
