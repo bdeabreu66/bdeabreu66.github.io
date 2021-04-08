@@ -1,1 +1,255 @@
-txt
+<HTML>
+<HEAD>
+<TITLE>  Lector QR </TITLE>
+<link rel="stylesheet" href="styles.css" >
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+</HEAD>
+<BODY>
+<div id="container">
+    <h1>Seguimiento de cultivos microgreen</h1>
+<div id="sourceSelectPanel" style="display:none">
+<label for="sourceSelect">Cambiar camara:</label>
+<select id="sourceSelect" style="max-width:400px">
+</select>
+</div>
+
+<div>
+    <button id="btn-scan-qr"> Scanear QR</button>
+    <button id="sel-camara"> Cam </button>
+</div>
+     <div>
+        <center><video id="video" width="300" height="300" style="border: 1px solid gray;display:none"></video></center>
+      </div>
+    <div id="qr-result" hidden="true">
+        <b>Data:</b> <span id="outputResult"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Bandeja numero:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Variedad:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Proveedor:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Fecha de siembra:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Periodo transcurrido:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Accion:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Tiempo de crecimiento:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Peso de las semillas:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Peso de la cosecha:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Posible dia de corte:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Hoja verdadera en dia:</b> <span name="outputData"></span>
+    </div>
+</div>
+  <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+  <script type="text/javascript">
+const qrResult = document.getElementById("qr-result");
+const ouputResult = document.getElementById("outputResult");
+divData = document.getElementsByName("divdata");
+const outputData = document.getElementsByName("outputData");
+const btnScanQR = document.getElementById("btn-scan-qr");
+    function decodeOnce(codeReader, selectedDeviceId) {
+      codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
+        console.log(result)
+        //document.getElementById('result').textContent = result.text
+        display_data(result);
+      }).catch((err) => {
+        console.error(err)
+        document.getElementById('result').textContent = err
+      })
+    }
+
+    function decodeContinuously(codeReader, selectedDeviceId) {
+      codeReader.decodeFromInputVideoDeviceContinuously(selectedDeviceId, 'video', (result, err) => {
+        if (result) {
+          // properly decoded qr code
+          //console.log('Found QR code!', result)
+          //document.getElementById('result').textContent = result.text
+        }
+
+        if (err) {
+          // As long as this error belongs into one of the following categories
+          // the code reader is going to continue as excepted. Any other error
+          // will stop the decoding loop.
+          //
+          // Excepted Exceptions:
+          //
+          //  - NotFoundException
+          //  - ChecksumException
+          //  - FormatException
+
+          if (err instanceof ZXing.NotFoundException) {
+            console.log('No QR code found.')
+          }
+
+          if (err instanceof ZXing.ChecksumException) {
+            console.log('A code was found, but it\'s read value was not valid.')
+          }
+
+          if (err instanceof ZXing.FormatException) {
+            console.log('A code was found, but it was in a invalid format.')
+          }
+        }
+      })
+    }
+
+    window.addEventListener('load', function () {
+      let selectedDeviceId;
+      codeReader = new ZXing.BrowserQRCodeReader()
+      console.log('ZXing code reader initialized')
+
+      codeReader.getVideoInputDevices()
+        .then((videoInputDevices) => {
+          const sourceSelect = document.getElementById('sourceSelect')
+          selectedDeviceId = videoInputDevices[0].deviceId
+          if (videoInputDevices.length >= 1) {
+            videoInputDevices.forEach((element) => {
+              const sourceOption = document.createElement('option')
+              sourceOption.text = element.label
+              sourceOption.value = element.deviceId
+              sourceSelect.appendChild(sourceOption)
+            })
+
+            sourceSelect.onchange = () => {
+              selectedDeviceId = sourceSelect.value;
+            };
+
+            const sourceSelectPanel = document.getElementById('sourceSelectPanel')
+            //sourceSelectPanel.style.display = 'block'
+          }
+
+          document.getElementById('btn-scan-qr').addEventListener('click', () => {
+              qrResult.hidden = true;
+              for (var i=0;i<divData.length;i++){
+                divData[i].hidden=true;
+               }
+           btnScanQR.hidden = true;
+
+           // const decodingStyle = document.getElementById('decoding-style').value;
+          //  if (decodingStyle == "once") {
+              document.getElementById("video").style.display="block";
+              decodeOnce(codeReader, selectedDeviceId);
+
+          //  } else {
+          //   decodeContinuously(codeReader, selectedDeviceId);}
+            console.log(`Started decode from camera with id ${selectedDeviceId}`)
+          })
+
+       //   document.getElementById('btn-cancel-qr').addEventListener('click', () => {
+       //     codeReader.reset()
+       //     document.getElementById('result').textContent = '';
+       //     console.log('Reset.')
+       //   })
+
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    })
+
+function accion(comando,ind,ind2){
+ function Nombre(nom){
+   if (nom=="ET") return "Empty Try"
+   if (nom=="BO") return "Black Out"
+   if (nom=="W") return "Weight"
+   return nom
+}
+var corte=parseInt(ind2);
+console.log(corte);
+var resp_parcial;
+var acciones=comando.split("-");
+console.log(acciones.length)
+console.log(ind);
+if ((ind>=0) && (ind<acciones.length)) {resp_parcial=Nombre(acciones[ind]);} else {resp_parcial="Luz";}
+
+if (ind>=corte) {var resp=resp_parcial+" + "+"<strong>Posible Corte</strong>"; return resp;} else {return resp_parcial;}
+}
+
+function display_data(res){
+    var datos=res.text.split("%");
+    //var datos=prueba.split("%");
+    console.log(datos.length);
+    if (datos.length==14) {
+      var fechainicio=new Date(datos[0],parseInt(datos[1])-1,datos[2],datos[3],datos[4])
+      console.log(fechainicio);
+      const Hoy=new Date();  
+      console.log(Hoy);
+      var diasdif=Hoy.getTime()-fechainicio.getTime();
+      // Dias transcurridos
+      var diastotales=diasdif/(1000*60*60*24);
+      var contdias=Math.trunc(diastotales);
+      var horastotales=(diastotales-contdias)*24; 
+      var conthoras=Math.trunc(horastotales);
+      var mintotales=(horastotales-conthoras)*60;
+      var contmin=Math.trunc(mintotales);
+      console.log(contdias); 
+      // Variedad
+      outputData[1].innerText=datos[7];
+      // Bandeja
+      outputData[0].innerText=datos[6];
+      // Proveedor
+      outputData[2].innerText=datos[5];
+      // Fecha de siembra
+      outputData[3].innerText=datos[2]+"/"+datos[1]+"/"+datos[0]+" "+datos[3]+":"+datos[4];
+      // Dia
+      outputData[4].innerText=contdias.toString()+" dias "+conthoras.toString()+" horas "+contmin.toString()+" minutos";
+      // Peso Inicial
+      outputData[7].innerText=datos[8]+ " gramos";
+      // Accion
+      outputData[5].innerHTML=accion(datos[9],contdias,datos[13]);
+      // Dias de crecimiento
+      outputData[6].innerText=datos[10]+ " dias";
+      // Peso cosecha
+      outputData[8].innerText=datos[12]+ " gramos";
+      // Posible corte
+      outputData[9].innerText=datos[13];
+      // Hoja verdadera
+      outputData[10].innerText=datos[11];
+      for (var i=0;i<divData.length;i++){
+         divData[i].hidden=false;}         
+      qrResult.hidden = true;
+      }  else { qrResult.hidden = false;
+               outputResult.innerText ="Codigo QR invalido";
+            }  
+     scanning = false     
+     document.getElementById("video").style.display="none";
+     btnScanQR.hidden = false;
+     codeReader.reset();
+     //btnCancelQR.hidden = true;
+     //canvasElement.hidden = true;
+}
+</script>
+
+<script>
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+</script>
+</BODY>
+</html>
