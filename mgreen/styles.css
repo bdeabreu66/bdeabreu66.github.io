@@ -27,17 +27,20 @@ h1 {
 }
 #btn-scan-qr {
   cursor: pointer;
-   font-size: 2em;
+  font-size: 2em;
+  border-radius: 16px;
 }
 
 #sel-camara {
   cursor: pointer;
   font-size: 2em;
+  border-radius: 16px;
 }
 
 #confirm {
   cursor: pointer;
   font-size: 2em;
+  border-radius: 8px;
 }
 #sourceSelect {
    font-size: 1.2em;
