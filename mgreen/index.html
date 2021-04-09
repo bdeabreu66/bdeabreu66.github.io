@@ -236,7 +236,7 @@ function display_data(res){
          divData[i].hidden=false;}         
       qrResult.hidden = true;
       }  else { qrResult.hidden = false;
-               outputResult.innerText ="Codigo QR invalido";
+               outputResult.innerText ="Codigo QR inalido: "+res.text;
             }  
      scanning = false     
      document.getElementById("video").style.display="none";
