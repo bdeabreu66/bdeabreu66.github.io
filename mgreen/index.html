@@ -7,7 +7,7 @@
 </HEAD>
 <BODY>
 <div id="container">
-    <h1>Seguimiento de cultivos microgreen</h1>
+    <h1> <button id="sel-camara"> C </button> Seguimiento de cultivos microgreen</h1>
 <div id="sourceSelectPanel" 
 style="position: fixed;top :200px; left: 50px; width:80% ; text-align: left;display:none;background-color:gray">
 <label style="font-size: 2em;" >Cambiar camara: <br></label>
@@ -17,7 +17,7 @@ style="position: fixed;top :200px; left: 50px; width:80% ; text-align: left;disp
 
 <div>
     <button id="btn-scan-qr"> Scanear QR</button>
-    <button id="sel-camara"> Camara </button>
+    
 </div>
      <div>
         <center><video id="video" width="300" height="300" style="border: 1px solid gray;display:none"></video></center>
@@ -67,16 +67,15 @@ divData = document.getElementsByName("divdata");
 const outputData = document.getElementsByName("outputData");
 const btnScanQR = document.getElementById("btn-scan-qr");
     function decodeOnce(codeReader, selectedDeviceId) {
-      console.log(":"+selectedDeviceId);
-       codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
-        //console.log(result)
-        //document.getElementById('result').textContent = result.text
-        display_data(result);
+      codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
+        console.log(result)
+        display_data(result)
       }).catch((err) => {
-        console.error(err)
-        document.getElementById('result').textContent = err
-      })
+        console.log(err)
+        })
     }
+
+
 
     function decodeContinuously(codeReader, selectedDeviceId) {
       codeReader.decodeFromInputVideoDeviceContinuously(selectedDeviceId, 'video', (result, err) => {
@@ -117,14 +116,10 @@ const btnScanQR = document.getElementById("btn-scan-qr");
       codeReader = new ZXing.BrowserQRCodeReader()
       console.log('ZXing code reader initialized')
 
-      codeReader.getVideoInputDevices()
-        .then((videoInputDevices) => {
+         codeReader.getVideoInputDevices().then((videoInputDevices) => {
           const sourceSelect = document.getElementById('sourceSelect')
-          selectedDeviceId = videoInputDevices[0].deviceId;
-          console.log(":"+selectedDeviceId);
-          try {selectedDeviceId = window.localStorage.getItem('idcam');}
-          catch (error) {
-             console.log("error")
+        try {selectedDevice=window.localStorage.getItem('idcam')}
+         catch(e){ console.log("paso");  selectedDeviceId = videoInputDevices[0].deviceId
           }
           if (videoInputDevices.length >= 1) {
             videoInputDevices.forEach((element) => {
@@ -133,6 +128,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
               sourceOption.value = element.deviceId
               sourceSelect.appendChild(sourceOption)
             })
+
 
             sourceSelect.onchange = () => {
               selectedDeviceId = sourceSelect.value;
@@ -153,7 +149,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
             // const decodingStyle = document.getElementById('decoding-style').value;
           //  if (decodingStyle == "once") {
               document.getElementById("video").style.display="block";
-selectedDeviceId=0;
+              //selectedDeviceId=0;
               decodeOnce(codeReader, selectedDeviceId);
 
           //  } else {
