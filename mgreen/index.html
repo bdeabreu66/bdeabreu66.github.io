@@ -7,9 +7,8 @@
 </HEAD>
 <BODY>
 <div id="container">
-    <h1> <button id="sel-camara"> C </button>Seguimiento de cultivos microgreen</h1>
-<div id="sourceSelectPanel" 
-style="position: fixed;top :200px; left: 50px; width:80% ; text-align: left;display:none;background-color:gray">
+    <h1> <button id="sel-camara"> C </button> Seguimiento de cultivos microgreen</h1>
+<div id="sourceSelectPanel" style="position: fixed;top :200px; left: 50px; width:80% ; text-align: left;display:none;background-color:gray">
 <label style="font-size: 2em;" >Cambiar camara: <br></label>
 <select id="sourceSelect" >
 </select> <button id="confirm" onclick="sourceSelectPanel.style.display='none';">Ok</button>
@@ -17,7 +16,6 @@ style="position: fixed;top :200px; left: 50px; width:80% ; text-align: left;disp
 
 <div>
     <button id="btn-scan-qr"> Scanear QR</button>
-    <button id="sel-camara"> C </button>
 </div>
      <div>
         <center><video id="video" width="300" height="300" style="border: 1px solid gray;display:none"></video></center>
@@ -67,6 +65,7 @@ divData = document.getElementsByName("divdata");
 const outputData = document.getElementsByName("outputData");
 const btnScanQR = document.getElementById("btn-scan-qr");
     function decodeOnce(codeReader, selectedDeviceId) {
+      codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
       console.log(selectedDeviceId);
        codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
         console.log(result)
