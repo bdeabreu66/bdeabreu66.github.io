@@ -122,7 +122,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
           selectedDeviceId = videoInputDevices[0].deviceId
           try {selectedDeviceId = Window.localStorage.getItem('idcam');}
           catch (error) {
- 
+ console.log("error")
 }
           if (videoInputDevices.length >= 1) {
             videoInputDevices.forEach((element) => {
