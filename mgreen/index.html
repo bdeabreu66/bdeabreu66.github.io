@@ -120,7 +120,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
         .then((videoInputDevices) => {
           const sourceSelect = document.getElementById('sourceSelect')
           selectedDeviceId = videoInputDevices[0].deviceId
-          try {selectedDeviceId = Window.localStorage.getItem('idcam');}
+          try {selectedDeviceId = window.localStorage.getItem('idcam');}
           catch (error) {
  console.log("error")
 }
@@ -134,7 +134,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
 
             sourceSelect.onchange = () => {
               selectedDeviceId = sourceSelect.value;
-              Window.localStorage.setItem('idcam',selectedDeviceId);
+              window.localStorage.setItem('idcam',selectedDeviceId);
             };
 
             const sourceSelectPanel = document.getElementById('sourceSelectPanel')
@@ -164,7 +164,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
        //   })
            document.getElementById('sel-camara').addEventListener('click', () => {
               sourceSelectPanel.style.display = 'block';
-            Window.localStorage.setItem('idcam',document.getElementById('sourceSelect').value);
+            window.localStorage.setItem('idcam',0);
                           
            })
 
