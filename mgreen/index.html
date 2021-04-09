@@ -150,8 +150,7 @@ const btnScanQR = document.getElementById("btn-scan-qr");
            document.getElementById('sel-camara').hidden=true;
             // const decodingStyle = document.getElementById('decoding-style').value;
           //  if (decodingStyle == "once") {
-              document.getElementById("video").style.display="block";
-              decodeOnce(codeReader, selectedDeviceId);
+              document.getElementById("video").style.display="block";decodeOnce(codeReader, selectedDeviceId);
 
           //  } else {
           //   decodeContinuously(codeReader, selectedDeviceId);}
@@ -164,10 +163,10 @@ const btnScanQR = document.getElementById("btn-scan-qr");
        //     console.log('Reset.')
        //   })
            document.getElementById('sel-camara').addEventListener('click', () => {
-              sourceSelectPanel.style.display = 'block'
-
+              sourceSelectPanel.style.display = 'block';
+            Window.localStorage.setItem('idcam',sourceSelect.value);
+                          
            })
-
 
         })
         .catch((err) => {
