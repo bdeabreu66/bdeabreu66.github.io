@@ -16,7 +16,7 @@ connectButton.onclick = async () => {
    console.log(device.manufacturerName);
   await device.open();
   await device.selectConfiguration(1);
-  await device.claimInterface(0);
+  await device.claimInterface(device.configuration.interfaces[0].interfaceNumber);
 
   connected.style.display = "block";
   connectButton.style.display = "none";
