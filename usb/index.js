@@ -15,7 +15,7 @@ connectButton.onclick = async () => {
 
   await device.open();
   await device.selectConfiguration(1);
-  await device.claimInterface(0);
+  //await device.claimInterface(0);
 
   connected.style.display = "block";
   connectButton.style.display = "none";
