@@ -1,0 +1,21 @@
+{
+  "name": "Recipes medicos",
+  "description": "Generador de recipes medicos",
+  "short_name": "Recipes",
+  "icons": [{
+    "src": "img/icon.png",
+    "sizes": "512x512"
+  }],
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "orientation": "portrait-primary",
+  "theme_color": "aliceblue",
+  "background_color": "red",
+  "categories": ["books", "education", "medical"]
+  "prefer_related_applications": false, 
+  "serviceworker": {
+    "src": "sw.js",
+    "scope": "/racer/",
+    "update_via_cache": "none"
+  },
+}
