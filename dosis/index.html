@@ -1,8 +1,8 @@
 <HTML>
 <HEAD>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/all.css">
 <link rel="icon" type="image/png" href="img/icon.png" />
-<link rel="manifest" href="manifest.json">
+
 <META http-equiv="Content-Type" content="text/html"; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no" />
 <meta name="mobile-web-app-capable" content="yes">
@@ -2610,7 +2610,7 @@ if (ind1<0) {ind=ind2}
 if (ind2<0) {ind=ind1}
 if ((ind1>=0) && (ind2>=0)) {ind=Math.min(ind1,ind2);}
 var texto1=recipesA[num].substring(0,ind);
-mensaje(" texto1"+texto1);
+//mensaje(" texto1"+texto1);
 
 for(var i=0;i<remedio.length;i++){
     var esta=verificatexto(texto1,i,1); 
@@ -2782,6 +2782,17 @@ return y;
 }
 
 function procesar(){
+function nombrevia(nomb){
+switch (nomb){
+case "VO":return "via oral";
+case "EV":return "via endovenosa";
+case "VN":return "via nasal";
+case "VV":return "via vaginal";
+case "IM":return "via intramuscular";
+case "VR":return "via rectal";
+default: return nomb;
+}
+}
 var cantidad;
 var unidades;
 var ind=recipes.length;
@@ -2820,7 +2831,7 @@ if ( (typeof(elementofrec)!="undefined") && (elementofrec!=null) ) {
 //alert(pdosis.peso);
 //alert(parseFloat(document.getElementById("peso").value));
 if (pdosis.peso && document.getElementById("peso").value=="") {
-noerror=false; mensaje("Debe introduicir un peso");}
+noerror=false; mensaje("Debe introducir un peso");}
  else {
 if (pdosis.peso) {  pesoglobal=document.getElementById("peso").value;}
 
@@ -2845,6 +2856,7 @@ if (pdosis.sc){pesoc=parseFloat(supcorp(document.getElementById("peso").value));
 var cantidad2=0;
 if (ppres.valor!="0") {
    cantidad=parseFloat(document.getElementById("dosis").value);
+ //alert(cantidad)
    if (pdosis.peso){cantidad*=pesoc;}
    cantidad=cantidad/parseFloat(nrotomas);
   // cantidad2=xround(cantidad,1);
@@ -2852,7 +2864,8 @@ if (ppres.valor!="0") {
    cantidad=ajustarunidad(pdosis, ppres, cantidad);
    cantidad=cantidad/parseFloat(ppres.valor);  
  //  cantidad=xround(cantidad,1);
-/*if (inddiluir>0) {
+/*
+if (inddiluir>0) {
 var mladd=document.getElementById("voldiluir").value;
 if (parseFloat(mladd)>0) {
     var soladicional=document.getElementById("soldiluir").value;
@@ -2867,6 +2880,11 @@ if (parseFloat(mladd)>0) {
    }
 }
 */
+// redondea las cantidades
+ cantidad=sround(cantidad);
+ cantidad2=sround(cantidad2);
+
+
    if (ppres.tipo == "SUSP" || ppres.tipo == "SOL" || ppres.tipo == "JAR" ) { unidades=" cc  "; }
    if ((ppres.tipo == "TAB")  && (cantidad!=1)){unidades=" tabletas "}
    if ((ppres.tipo == "TAB")  && (cantidad==1)) {unidades=" tableta "}
@@ -2908,8 +2926,8 @@ if (ppres.tipo == "CREMA") {
  //cantidad=xround(cantidad,1);
 }
 
-if (ppres.tipo == "INF") {unidades=" AMPOLLA(S) ";}
-
+//if (ppres.tipo == "INF") {unidades=" AMPOLLA(S) ";}
+if (ppres.tipo == "INF") {unidades=" ml ";}
 if ((ppres.tipo == "GOTAS") && (pdosis.unidadmasa == "GOTAS")) {
   //var nrogotas=parseFloat(document.getElementById("dosis").value)/parseFloat(ppres.valor);
   var cantidad=parseFloat(document.getElementById("dosis").value);
@@ -2926,16 +2944,6 @@ var ib=pdosis.unidad.indexOf("/MIN")
     if (ib>=0) {vecesdia= "cada hora"; cantidad*=60;cantidad2*=60;}
 
 var viaadm=""
-function nombrevia(nomb){
-switch (nomb){
-case "VO":return "via oral";
-case "EV":return "via endovenosa";
-case "VN":return "via nasal";
-case "VV":return "via vaginal";
-case "IM":return "via intramuscular";
-default: return nomb;
-}
-}
 
 for (var i=0;i<compat.length;i++){
     viaadm+=nombrevia(compat[i])+ " o ";
@@ -2948,7 +2956,7 @@ if ( (typeof(elementot)!="undefined") && (elementot!=null) ){
 
 
 if ((tiempo!=0) && !(isNaN(tiempo))) {
-//alert(tiempo) ;
+// alert("t "+tiempo) ;
 var portiempo;
  var unidades2=["días","semanas","meses","años"];
  var unidades1=["día","semana","mes","año"];
@@ -2958,28 +2966,32 @@ var portiempo;
 
 } else {portiempo=""}
 
-
 viaadm=viaadm.substring(0,viaadm.length-3);
-cantidad=sround(cantidad);
-cantidad2=sround(cantidad2);
-//alert(cantidad);
 if (ppres.valor2=="") {
 texto= cantidad + unidades + vecesdia + " "+viaadm + portiempo;
 } else { texto= cantidad2+" "+pdosis.unidadmasa+" ("+cantidad + unidades +") "+ vecesdia + " "+viaadm +portiempo;}
 //var indice=listafarmaco[indicefarmaco];
-/* if (remedio[indiceactivo].indadic!="") texto+=" "+remedio[indiceactivo].indadic;*/
-
+/* 
+if (remedio[indiceactivo].indadic!="") texto+=" "+remedio[indiceactivo].indadic;
+*/
+var tinfusion=0;
+var elemento2=document.getElementById("tinfu");
+if ( (typeof(elemento2)!="undefined") && (elemento2!=null) ){
+var unidtinf=document.getElementById("uinfu").value;
+tinfusion=elemento2.value;
+texto+=". Infundir en "+tinfusion+" "+unidtinf;
+//alert(tinfusion);
+}
+//+remedio[indiceactivo].tinf;
 if (indliquido>0) {
 var mladd=document.getElementById("voldiluir").value;
 if (parseFloat(mladd)>0) {
     var soladicional=document.getElementById("soldiluir").value;
     //presrecipe=present[indicepresent]+" en "+mladd+" cc de "+soladicional;
     ppres.valor=parseFloat(ppres.valor1)/(parseFloat(ppres.valor2)+parseFloat(mladd));
-var mensaje2="Diluir "+cantidad+ " cc en "+mladd +" de "+soladicional+" y pasar en "+remedio[indiceactivo].tinf;
-texto=mensaje2;
-texto+= " "+ vecesdia + " "+viaadm + portiempo;
-;
-
+    var mensaje2="Diluir "+cantidad+ " cc en "+mladd +" de "+soladicional+". Infundir en "+tinfusion+" "+unidtinf;
+    texto=mensaje2;
+    texto+= " "+ vecesdia + " "+viaadm + portiempo;
 }
 }
 
@@ -3513,6 +3525,12 @@ if (i>0){
      presentr.via[0]="VR";
 }
 
+i=presentm.indexOf(" SOLUCION");
+if (i>0){
+     presentr.tipo="SOL"; 
+     presentr.via[0]="VO";
+}
+
 i=presentm.indexOf(" INFUSI");
 if (i>0){
      presentr.tipo="INF"; 
@@ -3531,11 +3549,6 @@ if (i>0){
      presentr.via[0]="VO";
 }
 
-i=presentm.indexOf(" SOLUCION");
-if (i>0){
-     presentr.tipo="SOL"; 
-     presentr.via[0]="VO";
-}
 
 
 
@@ -4247,9 +4260,9 @@ textoT+='<input id="textadic"  class="inputtext" type="text" style="background-c
 //textoT+='<td colspan="4">';
 if (ppres.tipo=="INF") {
  textoT+='<label for="tinfu" >Tiempo de infusión</label>'
- textoT+=makeKeyInput("tinfu","Tiempo de infusión","I3-0-999","0");
+ var ttinfu=remedio[indice].tinf.split(" ")[0].toString();
+ textoT+=makeKeyInput("tinfu","Tiempo de infusión","I3-0-999",ttinfu);
 // textoT+='<input id="tinfu"  type="number" onkeypress="return event.charCode !=45" min="0" style="background-color: lightgray;color: black;" title="Tiempo de infusión">';
-
  textoT+=' <SELECT ID="uinfu" >';
  textoT+=' <option selected>'+'Horas'+'</option>';
  textoT+=' <option >'+'Minutos'+'</option>';

@@ -20,7 +20,7 @@ remedio[4]=new farmaco("ACIDO VALPROICO","ANTICONVULSIONANTES/ ANTIEPILEPTICOS",
 remedio[5]=new farmaco("AMLODIPINA","ANTIHIPERTENSIVOS","CACIO ANTAGONISTA","DA: 2.5-10 mg/dia c/24h VO","","Amlodipina, Amlip comprimidos 5 mg@Amlodipina, Amlip comprimidos 10 mg@Amlodipina, Amlibon tabletas 5 mg@Amlodipina, Amlibon tabletas 10 mg","","","","","");
 remedio[6]=new farmaco("PROPANOLOL","ANTIHIPERTENSIVOS@ANTIARRITMICOS@ANTIMIGRAÑA","BETABLOQUEADOR","D.A 40-600 mg/dia c/12h VO","30 mg/Kg","Propanolol tabletas 40 mg","","","","","");
 remedio[7]=new farmaco("ANFOTERICINA B","ANTIMICOTICOS@ANTIBIOTICOS","","D.A 0.1-1 mg/Kg/dia c/24h EV","","Anfotericina B, Fungisone ampollas 50 mg","","","","","");
-remedio[8]=new farmaco("LORATADINA","ANTIALERGICOS","ANTAGONISTA H1","D.P. 0.2 mg/kg/dia c/24h VO@D.A. 10 mg/dia c/12h o c/24h VO","","Loratadina, Clarityne, Loraval suspension 5mg/5cc@Loratadina, Biorolat, Loriden tabletas 10 mg","","","","","");
+remedio[8]=new farmaco("LORATADINA","ANTIALERGICOS","ANTAGONISTA H1","D.P. 0.2 mg/kg/dia c/24h VO@D.A. 10 mg/dia c/12h o c/24h VO","","Loratadina, Clarityne, Loraval suspension 5mg/5cc@Loratadina, Biorolat, Loriden, Roletra en tabletas 10 mg","","","","","");
        remedio[8].indic="Tratamiento b&aacute;sico de la rinitis al&eacute;rgica estacional, rinitis al&eacute;rgicas perennes, conjuntivitis al&eacute;rgica, prurito y urticaria de origen al&eacute;rgico, dermatosis al&eacute;rgicas, picaduras de insectos.";
        remedio[8].desc="Antial&eacute;rgico y antihistam&iacute;nico.";
        remedio[8].cindic="Insuficiencia renal, ni&ntilde;os menores de 6 a&ntilde;os, embarazo y lactancia.";
@@ -356,7 +356,17 @@ remedio[137]=new farmaco("OXITOCINA","HORMONALES","","DA 0.3-1 ml/dosis IM@ 0.06
        remedio[137].indic="Inducción del parto, inercia uterina, hemorragias postparto";
 remedio[138]=new farmaco("SIMVASTATINA","METABOLISMO LIPIDICO","","D.A. 10-80 mg/dia c/24h VO","","Simvastatina, Tinasin, Tavor, Vasotenal en comprimidos de 10 mg@Simvastatina, Tinasin, Tavor, Vasotenal en comprimidos de 20 mg  @Simvastatina, Tinasin, Tavor, Vasotenal en comprimidos de 40 mg@Simvastatina, Tinasin, Tavor, Vasotenal en comprimidos de 80 mg","","","","","");
        remedio[138].indic="Disminución de los niveles elevados del colesterol total y las LDC-C";
-
-
+remedio[139]=new farmaco("ACEBROFILINA","EXPECTORANTES","","D.A. 100 mg c/12h VO@D.P 3.3 mg/kg/dia c/12h VO","","Acebrofilina, Brixilon, Bronilis en capsulas de 100 mg@Acebrofilina, Brixilon, Bronilis en jarabe de 50mg/5ml","","","","","");
+       remedio[139].indic="Mucolitico, expectorante e incrementador de surfactante con actividad broncodilatadora";
+remedio[140]=new farmaco("EBASTINA","ANTIALERGICOS","","D.A. 10 mg/dia c/24h VO@D.P 5 mg/dia c/24h VO","","Ebastina, Ebastel en tabletas de 10 mg@Ebastina, Ebastel en solucion oral de 1mg/1ml","","","","","");
+       remedio[140].indic="Tratamiento sintomático de la rinitis alérgica (estacional o perenne) asociada o no a la conjuntivitis alérgica. Urticaria crónica idiopatica";
+remedio[141]=new farmaco("DESLORATADINA","ANTIALERGICOS","","D.A. 5 mg/dia c/24h VO@D.P 6 meses - 1 año 1 mg/dia c/24h VO@D.P 6 2 - 5 años 1.25 mg/dia c/24h VO@D.P 6 - 11 años 2.5 mg/dia c/24h VO","","Desloratadina, Aerius, Desalex, Esparflin, en tabletas de 5 mg@Desloratadina, Mailen en comprimidos recubiertos de 5 mg@Desloratadina, Desalex en jarabe de 2mg/5ml@Desloratadina, Aerius, Esarflin, Mailen en jarabe de 2.5mg/5ml","","","","","");
+       remedio[141].indic="Tratamiento sintomático de la rinitis alérgica (estacional o perenne) asociada o no a la conjuntivitis alérgica. Urticaria crónica idiopatica";
+remedio[142]=new farmaco("FEXOFENADINA","ANTIALERGICOS","","D.A. 60-180 mg/dia c/24h VO","","Fexofenadina, Alervax, Allegra, Rinolast en tabletas de 120 mg@Fexofenadina, Alervax, Allegra, Rinolast en tabletas de 180 mg","","","","","");
+       remedio[142].indic="Antihistaminico. Tratamiento sintomático de la rinitis alérgica (estacional o perenne) asociada o no a la conjuntivitis alérgica. Urticaria crónica idiopatica";
+remedio[143]=new farmaco("LINEZOLID","ANTIBIOTICOS","","D.A. 400-600 mg/dosis c/12h por 10-14 días VO@D.P. 10 mg/kg/dosis c/12h EV VO","","Linezolid, Zyvox en tabletas de 600 mg@Linezolid, Zyvox en solucion para infusion 2mg/ml","","","","","");
+       remedio[143].indic="Infecciones producidas por gérmenes sensibles al Linezolid";
+       remedio[143].interac="Pseudoefedrina, fenilpropanolamina, tiramina, warfarina, fenitoina"; 
+       remedio[143].tinf="1 hora"; 
 
 }
