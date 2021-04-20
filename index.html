@@ -1,73 +1,25 @@
 <HTML>
 <HEAD>
-<TITLE>  Lector QR </TITLE>
-<link rel="stylesheet" href="styles.css" >
-<link rel="manifest" href="manifest.json">
+<TITLE>  De todo un poco </TITLE>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 </HEAD>
 <BODY>
 <div id="container">
-    <h1>Seguimiento de cultivos microgreen</h1>
+    <h1><center> Braulio De Abreu </center></h1>
+    <h2><center> De todito </center></h1>
+
 <div>
-    <button id="btn-scan-qr"> Scanear QR</button>
-    <button id="btn-cancel-qr" hidden="true"> Cancelar scan</button>
+    <p>Aceite marca Shell </p>
+  <table>
+  <tr><td>Mineral H5 20W50 (1 litro)</td><td>5</td></tr>
+  <tr><td>Mineral H5 20W50 (4 litros)</td><td>20</td></tr>
+  <tr><td>Mineral H5 15W40 (1 litro)</td><td>5</td></tr>
+  <tr><td>Mineral H5 15W40 (1 litro)</td><td>5</td></tr>
+  <tr><td>Semi-sintetico H7 10W30 (1 litro)</td><td>6</td></tr>
+  <tr><td>Semi-sintetico H7 10W40 (1 litro)</td><td>6</td></tr>
+  <tr><td>Sintetico H8 0W20 (1 litro)</td><td>6.5</td></tr>
+  </table>
 </div>
-
-    <canvas hidden="" id="qr-canvas"></canvas>
-
-    <div id="qr-result" hidden="true">
-        <b>Data:</b> <span id="outputResult"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Bandeja numero:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Variedad:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Proveedor:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Fecha de siembra:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Periodo transcurrido:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Accion:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Tiempo de crecimiento:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Peso de las semillas:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Peso de la cosecha:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Posible dia de corte:</b> <span name="outputData"></span>
-    </div>
-    <div name="divdata" hidden="true">
-        <b>Hoja verdadera en dia:</b> <span name="outputData"></span>
-    </div>
 </div>
-<script src="qr_packed.js"> </script>
-<script src="qrCodeReader.js"></script>
-
-<script>
-// esto va en el script de la pagina
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').then(function(registration) {
-      // Si es exitoso
-      console.log('SW registrado correctamente');
-    }, function(err) {
-      // Si falla
-      console.log('SW fallo', err);
-    });
-  });
-}
-</script>
 </BODY>
 </html>
