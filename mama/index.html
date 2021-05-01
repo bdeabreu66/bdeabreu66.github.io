@@ -1,1 +1,194 @@
+<HTML>
+<HEAD>
+<TITLE>  Estadificacion mama </TITLE>
+<link rel="stylesheet" href="styles.css" />
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+</HEAD>
+<style> 
+body {
+font-size:1.5em;
+}
+table{
+ margin: 0.2em;
+ font-size:0.7em;
+}
+h2{
+font-family: Arial, Helvetica, sans-serif;
+text-align:center;
+color:blue;
+}
+p {
+ margin: 0.2em;
+ line-height: 0.5em;
+ background-color: yellow;
+}
+#T,N,M{
+font-size:1.6em;
+}
+#N{
+font-size:1.6em;
+}
+#M{
+font-size:1.6em;
+}
+#res-estad{
+text-align: center;
+font-size:1.6em;
+margin:1em;
+}
+</style>
+<BODY>
+<div id="container">
+    <h2>Estadificaci&oacute;n del c&aacutencer de mama</h2>
+<div id="res-estad">
+</div>
 
+<div id="T">
+  <button id="despT" onclick="cambia('muestraT');"> &#x25BC; </button> Tumor:  
+  <span id="spT"></span>
+<div id="muestraT" hidden="true">
+<table>
+<tr><td>T0</td><td><input onclick="changeT(0);" type="radio" name="selT" ></td></tr>
+<tr><td>Tx</td><td><input onclick="changeT(1);" type="radio" name="selT" ></td></tr>
+<tr><td>Tis</td><td><input onclick="changeT(2);" type="radio" name="selT" ></td></tr>
+<tr><td>T1a</td><td><input onclick="changeT(3);" type="radio" name="selT" ></td></tr>
+<tr><td>T1b</td><td><input onclick="changeT(4);" type="radio" name="selT" ></td></tr>
+<tr><td>T1c</td><td><input onclick="changeT(5);" type="radio" name="selT" ></td></tr>
+<tr><td>T2</td><td><input onclick="changeT(6);" type="radio" name="selT" ></td></tr>
+<tr><td>T3</td><td><input onclick="changeT(7);" type="radio" name="selT" ></td></tr>
+<tr><td>T4</td><td><input onclick="changeT(8);" type="radio" name="selT" ></td></tr>
+</table>
+</div>
+</div>
+
+<div id="N">
+  <button id="despN" onclick="cambia('muestraN');"> &#x25BC; </button> Ganglios:  
+  <span id="spN"></span>
+<div id="muestraN" hidden="true">
+<table>
+<tr><td>N0</td><td><input onclick="changeN(0);" type="radio" name="selN" ></td></tr>
+<tr><td>N1mi</td><td><input onclick="changeN(1);" type="radio" name="selN" ></td></tr>
+<tr><td>N1</td><td><input onclick="changeN(2);" type="radio" name="selN" ></td></tr>
+<tr><td>N2</td><td><input onclick="changeN(3);" type="radio" name="selN" ></td></tr>
+<tr><td>N3</td><td><input onclick="changeN(4);" type="radio" name="selN" ></td></tr>
+</table>
+</div>
+</div>
+
+<div id="M">
+  <button onclick="cambia('muestraM');"> &#x25BC; </button> Met&aacute;stasis:  
+  <span id="spM"></span>
+<div id="muestraM" hidden="true">
+<table>
+<tr><td>M0</td><td><input onclick="changeM(0);" type="radio" name="selM" ></td></tr>
+<tr><td>M1</td><td><input onclick="changeM(1);" type="radio" name="selM" ></td></tr>
+</table>
+</div>
+</div>
+
+
+</div>
+
+<script>
+var T,N,M;
+T="T0";
+N="N0";
+M="M0";
+
+var valT=["T0","Tx","Tis","T1a","T1b","T1c","T2","T3","T4"];
+var valN=["N0","N1mi","N1","N2","N3"];
+var valM=["M0","M1"];
+
+document.getElementById("spT").innerHTML="<strong>"+valT[0]+"</strong>";
+document.getElementById("spN").innerHTML="<strong>"+valN[0]+"</strong>";
+document.getElementById("spM").innerHTML="<strong>"+valM[0]+"</strong>";
+
+document.getElementsByName("selT")[0].checked=true;
+document.getElementsByName("selN")[0].checked=true;
+document.getElementsByName("selM")[0].checked=true;
+
+function cambia(nomb){
+var handler=document.getElementById(nomb);
+if (handler.hidden==true) {handler.hidden=false;handler.parentElement.children[0].innerHTML="&#x25B2;"} else {handler.hidden=true;handler.parentElement.children[0].innerHTML="&#x25BC;"} 
+}
+
+//document.getElementsByName("selT").addEventListener=("click",changeT,false)
+//document.getElementsByName("selT").addEventListener=("click",changeT,false)
+
+function changeT(pos){
+document.getElementById("spT").innerHTML="<strong>"+valT[pos]+"</strong>";
+T=valT[pos];
+cambia("muestraT");
+estadiar();
+}
+function changeN(pos){
+document.getElementById("spN").innerHTML="<strong>"+valN[pos]+"</strong>";
+//alert(valT[pos]);
+N=valN[pos];
+cambia("muestraN");
+estadiar();
+}
+
+function changeM(pos){
+document.getElementById("spM").innerHTML="<strong>"+valM[pos]+"</strong>";
+M=valM[pos];
+cambia("muestraM");
+estadiar();
+}
+
+estadiar();
+function estadiar(){
+var resultado="Estadio no definido";
+if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
+// 0
+//alert(T+" "+N+" "+M);
+// no
+if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado = "Sin c&aacute;ncer"}
+// 0
+if ((M=="M0") && (N=="N0") && (T=="Tis")) {resultado = "Estadio 0"}
+// Ia
+if ( (M=="M0") && (N=="N0") && (T=="T1")) {resultado = "Estadio Ia"}
+// Ib
+if ((M=="M0") && (N=="N1mi") && ((T=="T1") || (T=="T0"))) {resultado = "Estadio Ib"}
+
+// IIa
+if ((M=="M0") && (N=="N1") && (T=="T0")) {resultado = "Estadio IIa"}
+if ((M=="M0") && (N=="N0") && (T=="T2")) {resultado = "Estadio IIa"}
+if ((M=="M0") && (N=="N1") && (T=="T1")) {resultado = "Estadio IIa"}
+
+// IIb
+if ((M=="M0") && (N=="N1") && (T=="T2")) {resultado = "Estadio IIb"}
+if ((M=="M0") && (N=="N0") && (T=="T3")) {resultado = "Estadio IIb"}
+
+// IIIa
+if ((M=="M0") && (N=="N1") && (T=="T3")) {resultado = "Estadio IIIa"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2") || (T=="T3"))) {resultado = "Estadio IIIa"}
+
+// IIIb
+if ((M=="M0") && ((N=="N0") || (N=="N1") || (N=="N2")) && (T=="T4")) {resultado = "Estadio IIIb"}
+
+// IIIc
+if ((M=="M0") && (N=="N3")) {resultado = "Estadio IIIc"}
+
+// IV
+if (M=="M1") {resultado = "Estadio IV"} 
+
+document.getElementById("res-estad").innerHTML=resultado;
+}
+
+// esto va en el script de la pagina
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+</script>
+</BODY>
+</html>
