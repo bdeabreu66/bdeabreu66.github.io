@@ -6,8 +6,11 @@
 <style> 
 body {
 font-size:1.5em;
+color:white;
+background-color: black;
 }
 table{
+  width: 80%;
  margin: 0.2em;
  font-size:0.7em;
 }
@@ -35,6 +38,12 @@ text-align: center;
 font-size:1.6em;
 margin:1em;
 }
+.desp{
+color:blue;
+}
+input[type=radio]{
+transform: scale(1.5);
+}
 </style>
 <BODY>
 <div id="container">
@@ -43,44 +52,56 @@ margin:1em;
 </div>
 
 <div id="T">
-  <button id="despT" onclick="cambia('muestraT');"> &#x25BC; </button> Tumor:  
+  <button class="desp" onclick="cambia('muestraT');"> &#x25BC; </button> Tumor:  
   <span id="spT"></span>
 <div id="muestraT" hidden="true">
 <table>
-<tr><td>T0</td><td><input onclick="changeT(0);" type="radio" name="selT" ></td></tr>
-<tr><td>Tx</td><td><input onclick="changeT(1);" type="radio" name="selT" ></td></tr>
-<tr><td>Tis</td><td><input onclick="changeT(2);" type="radio" name="selT" ></td></tr>
-<tr><td>T1a</td><td><input onclick="changeT(3);" type="radio" name="selT" ></td></tr>
-<tr><td>T1b</td><td><input onclick="changeT(4);" type="radio" name="selT" ></td></tr>
-<tr><td>T1c</td><td><input onclick="changeT(5);" type="radio" name="selT" ></td></tr>
-<tr><td>T2</td><td><input onclick="changeT(6);" type="radio" name="selT" ></td></tr>
-<tr><td>T3</td><td><input onclick="changeT(7);" type="radio" name="selT" ></td></tr>
-<tr><td>T4</td><td><input onclick="changeT(8);" type="radio" name="selT" ></td></tr>
+<tr><td>T0</td><td><input onclick="changeT(0);" type="radio" name="selT" ></td>
+<td>Tx</td><td><input onclick="changeT(1);" type="radio" name="selT" ></td>
+<td>Tis</td><td><input onclick="changeT(2);" type="radio" name="selT" ></td>
+</tr>
+
+<tr>
+<td>T1a</td><td><input onclick="changeT(3);" type="radio" name="selT" ></td>
+<td>T1b</td><td><input onclick="changeT(4);" type="radio" name="selT" ></td>
+<td>T1c</td><td><input onclick="changeT(5);" type="radio" name="selT" ></td>
+</tr>
+<tr>
+<td>T2</td><td><input onclick="changeT(6);" type="radio" name="selT" ></td>
+<td>T3</td><td><input onclick="changeT(7);" type="radio" name="selT" ></td>
+<td>T4</td><td><input onclick="changeT(8);" type="radio" name="selT" ></td>
+</tr>
 </table>
 </div>
 </div>
 
 <div id="N">
-  <button id="despN" onclick="cambia('muestraN');"> &#x25BC; </button> Ganglios:  
+  <button class="desp" onclick="cambia('muestraN');"> &#x25BC; </button> Ganglios:  
   <span id="spN"></span>
 <div id="muestraN" hidden="true">
 <table>
-<tr><td>N0</td><td><input onclick="changeN(0);" type="radio" name="selN" ></td></tr>
-<tr><td>N1mi</td><td><input onclick="changeN(1);" type="radio" name="selN" ></td></tr>
-<tr><td>N1</td><td><input onclick="changeN(2);" type="radio" name="selN" ></td></tr>
-<tr><td>N2</td><td><input onclick="changeN(3);" type="radio" name="selN" ></td></tr>
-<tr><td>N3</td><td><input onclick="changeN(4);" type="radio" name="selN" ></td></tr>
+<tr>
+<td>N0</td><td><input onclick="changeN(0);" type="radio" name="selN" ></td>
+<td>N1mi</td><td><input onclick="changeN(1);" type="radio" name="selN" ></td>
+<td>N1</td><td><input onclick="changeN(2);" type="radio" name="selN" ></td>
+</tr>
+<tr>
+<td>N2</td><td><input onclick="changeN(3);" type="radio" name="selN" ></td>
+<td>N3</td><td><input onclick="changeN(4);" type="radio" name="selN" ></td>
+</tr>
 </table>
 </div>
 </div>
 
 <div id="M">
-  <button onclick="cambia('muestraM');"> &#x25BC; </button> Met&aacute;stasis:  
+  <button class="desp" onclick="cambia('muestraM');"> &#x25BC; </button> Met&aacute;stasis:  
   <span id="spM"></span>
 <div id="muestraM" hidden="true">
 <table>
-<tr><td>M0</td><td><input onclick="changeM(0);" type="radio" name="selM" ></td></tr>
-<tr><td>M1</td><td><input onclick="changeM(1);" type="radio" name="selM" ></td></tr>
+<tr>
+<td>M0</td><td><input onclick="changeM(0);" type="radio" name="selM" ></td>
+<td>M1</td><td><input onclick="changeM(1);" type="radio" name="selM" ></td>
+</tr>
 </table>
 </div>
 </div>
