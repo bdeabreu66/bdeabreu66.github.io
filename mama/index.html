@@ -15,6 +15,11 @@ font-size:1.2em;
 color:white;
 background-color: black;
 }
+.doc{
+border:1px solid black;
+font-size:1.2em;
+width:90%;'
+}
 table{
   width: 80%;
  margin: 0.2em;
@@ -26,37 +31,13 @@ text-align:center;
 color:blue;
 }
 p {
- line-height: 0.8em;
+ line-height: 0.9em;
  }
-#T,N,M{
-font-size:1.6em;
-}
-#N{
-font-size:1.6em;
-}
-#M{
-font-size:1.6em;
-}
-#G{
+#T,#N,#M,#G,#H,#E,#P{
 font-size:1.6em;
 }
 
-#H{
-font-size:1.6em;
-}
-#E{
-font-size:1.6em;
-}
-#P{
-font-size:1.6em;
-}
-
-#res-estad{
-text-align: center;
-font-size:1.2em;
-margin:1em;
-}
-#res-estad2{
+#res-estad,#res-estad2{
 text-align: center;
 font-size:1.2em;
 margin:1em;
@@ -143,7 +124,7 @@ transform: scale(1.5);
 </div>
 
 <div id="H">
-  <button class="desp" onclick="cambia('muestraH');"> &#x25BC; </button><a  href="javascript:void(0)" onclick="Ayuda(4);"> R. Her2:</a>  
+  <button class="desp" onclick="cambia('muestraH');"> &#x25BC; </button><a  href="javascript:void(0)" onclick="Ayuda(4);"> Status Her2:</a>  
   <span id="spH"></span>
 <div id="muestraH" hidden="true">
 <table>
@@ -504,7 +485,7 @@ if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="N") ) {resultado=resultado + "
 // IV
 if ( (M=="M1") && ((G=="G1") || (G=="G2") || (G=="G3"))  ){resultado=resultado + "IV"} 
 //alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
-
+if (resultado==""){resultado="ND"}
 document.getElementById("res-estad2").innerHTML="Estadio pron&oacute;stico: " +resultado;
 }
 
@@ -540,7 +521,9 @@ var div5 = document.getElementById("ayuda");
 div5.hidden=true;
 }
 var descr=[];
-descr[0]=" <center>Clasificacion de Tumores</center> <table border='1' style='font-size:1em;'><tr><td>To</td> <td><p>No hay evidencia del tumor primario</p></td></tr>";
+descr[0]=" <center>Clasificacion de Tumores</center>";
+descr[0]+="<table class='doc'>";
+descr[0]+="<tr><td>To</td> <td><p>No hay evidencia del tumor primario</p></td></tr>";
 descr[0]+="<tr><td>Tx</td> <td><p>El tumor primario no puede ser evaluado</p></td></tr>"
 descr[0]+="<tr><td>Tis</td> <td><p>Carcinoma ductal in situ</p></td></tr>"
 descr[0]+="<tr><td>T1</td> <td><p>Tumor <= 20mm de diametro</p></td></tr>"
@@ -550,23 +533,39 @@ descr[0]+="<tr><td>T1b</td> <td><p>Tumor >5mm y <= 10mm de diametro</p></td></tr
 descr[0]+="<tr><td>T1c</td> <td><p>Tumor >10mm y <= 20mm de diametro</p></td></tr>"
 descr[0]+="<tr><td>T2</td> <td><p>Tumor >20mm y <=50mm de diametro</p></td></tr>"
 descr[0]+="<tr><td>T3</td> <td><p>Tumor >=50mm de diametro</p></td></tr>"
-descr[0]+="<tr><td>T4</td> <td><p>Tumor de cualquier tamano con extensi&oacute;n a pared tor&aacute;cica y/o piel(ulceraci&oacute;n o n&oacute;dulos macrosc&oacute;picos); la invasi&oacute;n de la dermis por si sola no califica como T4 </p></td></tr>"
+descr[0]+="<tr><td>T4</td> <td><p>Tumor de cualquier tamano con extensi&oacute;n a pared tor&aacute;cica y/o piel (ulceraci&oacute;n o n&oacute;dulos macrosc&oacute;picos); la invasi&oacute;n de la dermis por si sola no califica como T4 </p></td></tr>"
 
 
 descr[0]+="</table>"
 descr[1]=" <center>Clasificaci&oacute;n de Ganglios</center>";
-descr[1]+="<table border='1' style='font-size:1.2em;'>"
-descr[1]+="<tr><td>.cN0</td> <td><p>No hay evidebcia de met&aacute;stasis en los ganglios linf&aacute;ticos regionales (por imagen o exploraci&oacute;n cl&iacute;nica).</p></td></tr>"
+descr[1]+="<table class='doc' >";
+descr[1]+="<tr><td>.cN0</td> <td><p>No hay evidencia de met&aacute;stasis en los ganglios linf&aacute;ticos regionales (por imagen o exploraci&oacute;n cl&iacute;nica).</p></td></tr>"
 descr[1]+="<tr><td>.cN1</td> <td><p>Met&aacute;stasis m&oacute;viles en niveles I-II en ganglios linf&aacute;ticos axilares ipsilaterales.</p></td></tr>"
 descr[1]+="<tr><td>cN1mi</td> <td><p>Micromet&aacute;stasis (aproximadamente 200 c&eacute;lulas, mayor de 0,2 mm, pero no mayorde 2 mm).</p></td></tr>"
 descr[1]+="<tr><td>.cN2</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos ipsilaterales en niveles I-II fijos entre s&iacute; o conglomerado;<br>- o en ganglios mamarios internos ipsilaterales en ausencia de met&aacute;stasis en ganglios linf&aacute;ticos axilares. </p></td></tr>"
 descr[1]+="<tr><td>.cN3</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos infraclaviculares (nivel II axilar) con o sin afectaci&oacute;n de los ganglios linf&aacute;ticos axilares de niveles I-II;<br>- o en ganglios linf&aacute;ticos mamarios internos con met&aacute;stasis en ganglios linf&aacute;ticos axilares de niveles I-II;<br>- o met&aacute;stasis en ganglios linf&aacute;ticos supraclaviculares ipsilaterales con o sin afectaci&oacute;n de los ganglios axilares o mamarios internos. </p></td></tr>"
+descr[1]+="<tr><td>cN3a</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos infraclaviculares.</p></td></tr>"
+descr[1]+="<tr><td>cN3b</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos mamarios internos ipsilaterales y axilares. </p></td></tr>"
+descr[1]+="<tr><td>cN3c</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos supraclaviculares ipsilaterales.</p></td></tr>"
 
 descr[1]+="</table>"
 
 
-descr[2]=" Clasificacion de Metastasis";
-descr[3]=" Clasificacion de Grado histologico";
+descr[2]=" <center>Clasificaci&oacute;n de Met&aacute;stasis</center>";
+descr[2]+="<table class='doc' >";
+descr[2]+="<tr><td>.M0</td> <td><p>No hay evidencia cl&iacute;nica o radiol&oacute:gica de met&aacute;stasis a distancia.</p></td></tr>"
+descr[2]+="<tr><td>.M1</td> <td><p>Met&aacute;stasis a distancia detectadas por cl&iacute;nica o por medios radiol&oacute;gicos (cM) y/o met&aacute;stasis con estudio histol&oacute;gico mayores de 0,2mm (pM).</p></td></tr>"
+descr[2]+="</table>"
+
+descr[3]=" <center>Clasificaci&oacute;n de de Grado histol&oacute;gico</center>";
+descr[3]+="<table class='doc' >"
+descr[3]+="<tr><td>.Gx</td> <td><p>El grado histol&oacute;gico no puede ser evaluado.</p></td></tr>"
+descr[3]+="<tr><td>.G1</td> <td><p>Bajo grado histol&oacute;gico.<br> Score SBR de 3-5 puntos.</p></td></tr>"
+descr[3]+="<tr><td>.G2</td> <td><p>Grado histol&oacute;gico intermedio (moderadamente favorable).<br> Score SBR de 6-7 puntos.</p></td></tr>"
+descr[3]+="<tr><td>.G3</td> <td><p>Alto grado histol&oacute;gico (desfavorable).<br> Score SBR de 6-7 puntos.</p></td></tr>"
+descr[3]+="</table>"
+
+
 descr[4]=" Descripcion de Her2";
 descr[5]=" Descripcion de Receptor de Estrogeno";
 descr[6]=" Descripcion de Receptor de Prostageno";
