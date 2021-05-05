@@ -3,7 +3,20 @@
 <TITLE>  Estadificacion mama </TITLE>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 </HEAD>
-<style> 
+<style>
+#spT,#spN,#spM,#spG,#spH,#spE,#spP{
+color: black;
+} 
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+  font-size:0.7em;
+}
 a:hover {
   color: hotpink;
 }
@@ -33,7 +46,7 @@ table{
 h2{
 font-family: "Lato", sans-serif;
 text-align:center;
-color:blue;
+color:darkred;
 }
 p {
  line-height: 0.9em;
@@ -168,14 +181,15 @@ transform: scale(1.5);
 </div>
 </div>
 <div id="ayuda" hidden="true"></div>
+<div> <br></div>
 </div>
-
+<div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlf: +58414 4728631</div>
 <script>
 var T,N,M,G,H,E,P;
 T="T0";
 N="N0";
 M="M0";
-G="Gx"
+G="G1"
 H="N";
 E="N";
 P="N"
@@ -190,7 +204,7 @@ var valP=["N","P"];
 document.getElementById("spT").innerHTML="<strong>"+valT[0]+"</strong>";
 document.getElementById("spN").innerHTML="<strong>"+valN[0]+"</strong>";
 document.getElementById("spM").innerHTML="<strong>"+valM[0]+"</strong>";
-document.getElementById("spG").innerHTML="<strong>"+valG[0]+"</strong>";
+document.getElementById("spG").innerHTML="<strong>"+valG[1]+"</strong>";
 document.getElementById("spH").innerHTML="<strong>"+valH[0]+"</strong>";
 document.getElementById("spE").innerHTML="<strong>"+valE[0]+"</strong>";
 document.getElementById("spP").innerHTML="<strong>"+valP[0]+"</strong>";
@@ -199,7 +213,7 @@ document.getElementById("spP").innerHTML="<strong>"+valP[0]+"</strong>";
 document.getElementsByName("selT")[0].checked=true;
 document.getElementsByName("selN")[0].checked=true;
 document.getElementsByName("selM")[0].checked=true;
-document.getElementsByName("selG")[0].checked=true;
+document.getElementsByName("selG")[1].checked=true;
 document.getElementsByName("selH")[0].checked=true;
 document.getElementsByName("selE")[0].checked=true;
 document.getElementsByName("selP")[0].checked=true;
