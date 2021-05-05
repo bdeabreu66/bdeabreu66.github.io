@@ -1,0 +1,16 @@
+{
+  "name": "Breast cancer follower",
+  "description": "Estadificacion cancer de mama",
+  "short_name": "ECM",
+  "icons": [{
+    "src": "icon.png",
+    "sizes": "100x100"
+  }],
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "aliceblue",
+  "background_color": "hotpink",
+  "categories": ["books", "education", "medical"],
+  "prefer_related_applications": false 
+  }

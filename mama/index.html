@@ -1,6 +1,7 @@
 <html>
 <HEAD>
 <TITLE>  Estadificacion mama </TITLE>
+<link rel="manifest" href="manifest.json">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 </HEAD>
 <style>
@@ -117,7 +118,7 @@ transform: scale(1.5);
 <div id="M">
   <button class="desp" onclick="cambia('muestraM');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda('2');">Met&aacute;stasis:</a>  
   <span id="spM"></span>
-<div id="muestraM" hidden="true">
+<div id="muestraM" style="width:50%;" hidden="true">
 <table>
 <tr>
 <td>M0</td><td><input onclick="changeM(0);" type="radio" name="selM" ></td>
@@ -146,7 +147,7 @@ transform: scale(1.5);
   <button class="desp" onclick="cambia('muestraH');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(4);"> Status Her2:</a>  
   <span id="spH"></span>
 <div id="muestraH" hidden="true">
-<table>
+<table style="width:50%;" >
 <tr>
 <td>Neg</td><td><input onclick="changeH(0);" type="radio" name="selH" ></td>
 <td>Pos</td><td><input onclick="changeH(1);" type="radio" name="selH" ></td>
@@ -159,7 +160,7 @@ transform: scale(1.5);
   <button class="desp" onclick="cambia('muestraE');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(5);">R. Estr&oacute;geno:</a>  
   <span id="spE"></span>
 <div id="muestraE" hidden="true">
-<table>
+<table style="width:50%;">
 <tr>
 <td>Neg</td><td><input onclick="changeE(0);" type="radio" name="selE" ></td>
 <td>Pos</td><td><input onclick="changeE(1);" type="radio" name="selE" ></td>
@@ -172,7 +173,7 @@ transform: scale(1.5);
   <button class="desp" onclick="cambia('muestraP');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(6);">R. Progest&aacute;geno:</a>  
   <span id="spP"></span>
 <div id="muestraP" hidden="true">
-<table>
+<table style="width:50%;">
 <tr>
 <td>Neg</td><td><input onclick="changeP(0);" type="radio" name="selP" ></td>
 <td>Pos</td><td><input onclick="changeP(1);" type="radio" name="selP" ></td>
@@ -509,19 +510,6 @@ if (resultado==""){resultado="ND"}
 document.getElementById("res-estad2").innerHTML="&nbsp &nbsp Estadio pron&oacute;stico: " +resultado;
 }
 
-// esto va en el script de la pagina
-/*if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
-      // Si es exitoso
-      console.log('SW registrado correctamente');
-    }, function(err) {
-      // Si falla
-      console.log('SW fallo', err);
-    });
-  });
-}
-*/
 
 
 function Ayuda(num){
@@ -588,6 +576,20 @@ descr[3]+="</table>"
 descr[4]=" Descripcion de Her2";
 descr[5]=" Descripcion de Receptor de Estrogeno";
 descr[6]=" Descripcion de Receptor de Prostageno";
+
+// esto va en el script de la pagina
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+
 
 
 </script>
