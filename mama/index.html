@@ -23,7 +23,7 @@ width:90%;'
 }
 .doc td{
 border:1px solid white;
-padding:0.6em;
+padding:0.4em;
 }
 table{
   width: 80%;
@@ -175,7 +175,7 @@ var T,N,M,G,H,E,P;
 T="T0";
 N="N0";
 M="M0";
-G="GX"
+G="Gx"
 H="N";
 E="N";
 P="N"
@@ -215,7 +215,7 @@ if (handler.hidden==true) {handler.hidden=false;handler.parentElement.children[0
 function changeT(pos){
 document.getElementById("spT").innerHTML="<strong>"+valT[pos]+"</strong>";
 T=valT[pos];
-cambia("muestraT");
+//cambia("muestraT");
 estadiar();
 estadiar2();
 }
@@ -223,7 +223,7 @@ function changeN(pos){
 document.getElementById("spN").innerHTML="<strong>"+valN[pos]+"</strong>";
 //alert(valT[pos]);
 N=valN[pos];
-cambia("muestraN");
+//cambia("muestraN");
 estadiar();
 estadiar2();
 }
@@ -231,7 +231,7 @@ estadiar2();
 function changeM(pos){
 document.getElementById("spM").innerHTML="<strong>"+valM[pos]+"</strong>";
 M=valM[pos];
-cambia("muestraM");
+//cambia("muestraM");
 estadiar();
 estadiar2();
 }
@@ -239,27 +239,27 @@ estadiar2();
 function changeG(pos){
 document.getElementById("spG").innerHTML="<strong>"+valG[pos]+"</strong>";
 G=valG[pos];
-cambia("muestraG");
+//cambia("muestraG");
 estadiar2();
 }
 
 function changeH(pos){
 document.getElementById("spH").innerHTML="<strong>"+valH[pos]+"</strong>";
 H=valH[pos];
-cambia("muestraH");
+//cambia("muestraH");
 estadiar2();
 }
 
 function changeE(pos){
 document.getElementById("spE").innerHTML="<strong>"+valE[pos]+"</strong>";
 E=valE[pos];
-cambia("muestraE");
+//cambia("muestraE");
 estadiar2();
 }
 function changeP(pos){
 document.getElementById("spP").innerHTML="<strong>"+valP[pos]+"</strong>";
 P=valP[pos];
-cambia("muestraP");
+//cambia("muestraP");
 estadiar2();
 }
 
@@ -273,7 +273,7 @@ if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
 // 0
 //alert(T+" "+N+" "+M);
 // no
-if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado = "Sin c&aacute;ncer"}
+if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado = " "}
 // 0
 if ((M=="M0") && (N=="N0") && (T=="Tis")) {resultado = "0"}
 // Ia
@@ -313,7 +313,7 @@ if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
 // 0
 //alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
 // no
-if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado=resultado + "Sin c&aacute;ncer"}
+if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado=resultado + " "}
 // 0
 if ((M=="M0") && (N=="N0") && (T=="Tis")) {resultado=resultado + "0"}
 
@@ -489,7 +489,7 @@ if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="N") ) {resultado=resultado + "
 
 
 // IV
-if ( (M=="M1") && ((G=="G1") || (G=="G2") || (G=="G3"))  ){resultado=resultado + "IV"} 
+if ( (M=="M1") && ((G=="Gx")||(G=="G1") || (G=="G2") || (G=="G3"))  ){resultado=resultado + "IV"} 
 //alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
 if (resultado==""){resultado="ND"}
 document.getElementById("res-estad2").innerHTML="&nbsp &nbsp Estadio pron&oacute;stico: " +resultado;
