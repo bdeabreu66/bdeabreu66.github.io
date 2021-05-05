@@ -15,10 +15,14 @@ font-size:1.2em;
 color:white;
 background-color: black;
 }
+
 .doc{
-border:1px solid black;
+border-collapse:separate;
 font-size:1.2em;
 width:90%;'
+}
+.doc td{
+border:1px solid white;
 }
 table{
   width: 80%;
@@ -32,18 +36,18 @@ color:blue;
 }
 p {
  line-height: 0.9em;
+ font-size:1em;
  }
 #T,#N,#M,#G,#H,#E,#P{
 font-size:1.6em;
 }
 
 #res-estad,#res-estad2{
-text-align: center;
 font-size:1.2em;
 margin:1em;
 }
 .desp{
-color:blue;
+color:red;
 }
 input[type=radio]{
 transform: scale(1.5);
@@ -55,7 +59,7 @@ transform: scale(1.5);
 <div id="res-estad"> </div>
 <div id="res-estad2"> </div>
 <div id="T">
-  <button class="desp" onclick="cambia('muestraT');"> &#x25BC; </button> <a  href="javascript:void(0)" onclick="Ayuda(0);">Tumor</a>:  
+  <button class="desp" onclick="cambia('muestraT');"> &#x25BC;  </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(0);">Tumor</a>:  
   <span id="spT"></span>
 <div id="muestraT" hidden="true">
 <table>
@@ -79,7 +83,7 @@ transform: scale(1.5);
 </div>
 
 <div id="N">
-  <button class="desp" onclick="cambia('muestraN');"> &#x25BC; </button> <a  href="javascript:void(0)" onclick="Ayuda(1);">Ganglios:</a>  
+  <button class="desp" onclick="cambia('muestraN');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(1);">Ganglios:</a>  
   <span id="spN"></span>
 <div id="muestraN" hidden="true">
 <table>
@@ -97,7 +101,7 @@ transform: scale(1.5);
 </div>
 
 <div id="M">
-  <button class="desp" onclick="cambia('muestraM');"> &#x25BC; </button> <a  href="javascript:void(0)" onclick="Ayuda('2');">Met&aacute;stasis:</a>  
+  <button class="desp" onclick="cambia('muestraM');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda('2');">Met&aacute;stasis:</a>  
   <span id="spM"></span>
 <div id="muestraM" hidden="true">
 <table>
@@ -110,21 +114,22 @@ transform: scale(1.5);
 </div>
 
 <div id="G">
-  <button class="desp" onclick="cambia('muestraG');"> &#x25BC; </button> <a  href="javascript:void(0)" onclick="Ayuda(3);">G. Histol&oacute;gico:</a>  
+  <button class="desp" onclick="cambia('muestraG');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(3);">G. Histol&oacute;gico:</a>  
   <span id="spG"></span>
 <div id="muestraG" hidden="true">
 <table>
 <tr>
-<td>G1</td><td><input onclick="changeG(0);" type="radio" name="selG" ></td>
-<td>G2</td><td><input onclick="changeG(1);" type="radio" name="selG" ></td>
-<td>G3</td><td><input onclick="changeG(2);" type="radio" name="selG" ></td>
+<td>Gx</td><td><input onclick="changeG(0);" type="radio" name="selG" ></td>
+<td>G1</td><td><input onclick="changeG(1);" type="radio" name="selG" ></td>
+<td>G2</td><td><input onclick="changeG(2);" type="radio" name="selG" ></td>
+<td>G3</td><td><input onclick="changeG(3);" type="radio" name="selG" ></td>
 </tr>
 </table>
 </div>
 </div>
 
 <div id="H">
-  <button class="desp" onclick="cambia('muestraH');"> &#x25BC; </button><a  href="javascript:void(0)" onclick="Ayuda(4);"> Status Her2:</a>  
+  <button class="desp" onclick="cambia('muestraH');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(4);"> Status Her2:</a>  
   <span id="spH"></span>
 <div id="muestraH" hidden="true">
 <table>
@@ -137,7 +142,7 @@ transform: scale(1.5);
 </div>
 
 <div id="E">
-  <button class="desp" onclick="cambia('muestraE');"> &#x25BC; </button> <a  href="javascript:void(0)" onclick="Ayuda(5);">R. Estr&oacute;geno:</a>  
+  <button class="desp" onclick="cambia('muestraE');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(5);">R. Estr&oacute;geno:</a>  
   <span id="spE"></span>
 <div id="muestraE" hidden="true">
 <table>
@@ -150,7 +155,7 @@ transform: scale(1.5);
 </div>
 
 <div id="P">
-  <button class="desp" onclick="cambia('muestraP');"> &#x25BC; </button> <a  href="javascript:void(0)" onclick="Ayuda(6);">R. Progest&aacute;geno:</a>  
+  <button class="desp" onclick="cambia('muestraP');"> &#x25BC; </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(6);">R. Progest&aacute;geno:</a>  
   <span id="spP"></span>
 <div id="muestraP" hidden="true">
 <table>
@@ -169,14 +174,14 @@ var T,N,M,G,H,E,P;
 T="T0";
 N="N0";
 M="M0";
-G="G1"
+G="GX"
 H="N";
 E="N";
 P="N"
 var valT=["T0","Tx","Tis","T1a","T1b","T1c","T2","T3","T4"];
 var valN=["N0","N1mi","N1","N2","N3"];
 var valM=["M0","M1"];
-var valG=["G1","G2","G3"];
+var valG=["Gx","G1","G2","G3"];
 var valH=["N","P"];
 var valE=["N","P"];
 var valP=["N","P"];
@@ -262,7 +267,7 @@ estadiar2();
 estadiar();
 estadiar2();
 function estadiar(){
-var resultado="Estadio no definido";
+var resultado="ND";
 if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
 // 0
 //alert(T+" "+N+" "+M);
@@ -297,7 +302,7 @@ if ((M=="M0") && (N=="N3")) {resultado = "IIIc"}
 // IV
 if (M=="M1") {resultado = "IV"} 
 
-document.getElementById("res-estad").innerHTML="Estadio anat&oacute;mico: " +resultado;
+document.getElementById("res-estad").innerHTML="&nbsp &nbsp Estadio anat&oacute;mico: " +resultado;
 }
 
 
@@ -486,7 +491,7 @@ if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="N") ) {resultado=resultado + "
 if ( (M=="M1") && ((G=="G1") || (G=="G2") || (G=="G3"))  ){resultado=resultado + "IV"} 
 //alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
 if (resultado==""){resultado="ND"}
-document.getElementById("res-estad2").innerHTML="Estadio pron&oacute;stico: " +resultado;
+document.getElementById("res-estad2").innerHTML="&nbsp &nbsp Estadio pron&oacute;stico: " +resultado;
 }
 
 // esto va en el script de la pagina
@@ -508,10 +513,10 @@ function Ayuda(num){
 //alert(descr[num]);
 var textoT="";
 var div5 = document.getElementById("ayuda");
-div5.style="position: fixed;top :5px; left: 5px; overflow-y: auto; width: 95% ; height: 60%; background-color: gray;color:white; border: 3px solid #73AD21;";
-textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:80%;">';
+div5.style="position: fixed;top :5px; left: 5px; overflow-y: auto; width: 95% ; height: 60%; background-color: green;color:white; border: 3px solid #73AD21;";
+textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
 textoT+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
-textoT+='<div style="color:blue; font-size:1em;">'+descr[num]+'</div>';
+textoT+='<div style="color:black; font-size:1em;">'+descr[num]+'</div>';
 div5.innerHTML=textoT;
 div5.hidden=false;
 return false;
@@ -521,7 +526,7 @@ var div5 = document.getElementById("ayuda");
 div5.hidden=true;
 }
 var descr=[];
-descr[0]=" <center>Clasificacion de Tumores</center>";
+descr[0]=" <center style='font-size:1.5em;'>Clasificacion de Tumores</center>";
 descr[0]+="<table class='doc'>";
 descr[0]+="<tr><td>To</td> <td><p>No hay evidencia del tumor primario</p></td></tr>";
 descr[0]+="<tr><td>Tx</td> <td><p>El tumor primario no puede ser evaluado</p></td></tr>"
@@ -534,10 +539,9 @@ descr[0]+="<tr><td>T1c</td> <td><p>Tumor >10mm y <= 20mm de diametro</p></td></t
 descr[0]+="<tr><td>T2</td> <td><p>Tumor >20mm y <=50mm de diametro</p></td></tr>"
 descr[0]+="<tr><td>T3</td> <td><p>Tumor >=50mm de diametro</p></td></tr>"
 descr[0]+="<tr><td>T4</td> <td><p>Tumor de cualquier tamano con extensi&oacute;n a pared tor&aacute;cica y/o piel (ulceraci&oacute;n o n&oacute;dulos macrosc&oacute;picos); la invasi&oacute;n de la dermis por si sola no califica como T4 </p></td></tr>"
-
-
 descr[0]+="</table>"
-descr[1]=" <center>Clasificaci&oacute;n de Ganglios</center>";
+
+descr[1]=" <center style='font-size:1.5em;'>Clasificaci&oacute;n de Ganglios</center>";
 descr[1]+="<table class='doc' >";
 descr[1]+="<tr><td>.cN0</td> <td><p>No hay evidencia de met&aacute;stasis en los ganglios linf&aacute;ticos regionales (por imagen o exploraci&oacute;n cl&iacute;nica).</p></td></tr>"
 descr[1]+="<tr><td>.cN1</td> <td><p>Met&aacute;stasis m&oacute;viles en niveles I-II en ganglios linf&aacute;ticos axilares ipsilaterales.</p></td></tr>"
@@ -551,13 +555,13 @@ descr[1]+="<tr><td>cN3c</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ti
 descr[1]+="</table>"
 
 
-descr[2]=" <center>Clasificaci&oacute;n de Met&aacute;stasis</center>";
+descr[2]=" <center style='font-size:1.5em;'>Clasificaci&oacute;n de Met&aacute;stasis</center>";
 descr[2]+="<table class='doc' >";
 descr[2]+="<tr><td>.M0</td> <td><p>No hay evidencia cl&iacute;nica o radiol&oacute:gica de met&aacute;stasis a distancia.</p></td></tr>"
 descr[2]+="<tr><td>.M1</td> <td><p>Met&aacute;stasis a distancia detectadas por cl&iacute;nica o por medios radiol&oacute;gicos (cM) y/o met&aacute;stasis con estudio histol&oacute;gico mayores de 0,2mm (pM).</p></td></tr>"
 descr[2]+="</table>"
 
-descr[3]=" <center>Clasificaci&oacute;n de de Grado histol&oacute;gico</center>";
+descr[3]=" <center style='font-size:1.5em;'>Clasificaci&oacute;n de Grado histol&oacute;gico</center>";
 descr[3]+="<table class='doc' >"
 descr[3]+="<tr><td>.Gx</td> <td><p>El grado histol&oacute;gico no puede ser evaluado.</p></td></tr>"
 descr[3]+="<tr><td>.G1</td> <td><p>Bajo grado histol&oacute;gico.<br> Score SBR de 3-5 puntos.</p></td></tr>"
