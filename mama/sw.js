@@ -3,7 +3,6 @@ const currentCache = 'cache-v1.0';
 const files =
 [
     'index.html',
-    'styles.css',
     'icono.png'
   ];
 
