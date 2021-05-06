@@ -4,7 +4,7 @@ const files =
 [
     'index.html',
     'styles.css',
-    'icon.png'
+    'icono.png'
   ];
 
 self.addEventListener('install', event => {
