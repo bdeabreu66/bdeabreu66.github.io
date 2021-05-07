@@ -5,6 +5,9 @@ const files =
     'index.html',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
     'img/icon.png',
+    'datos.js',
+    'crearpdf.js'
+ 
 ];
 
 self.addEventListener('install', event => {
