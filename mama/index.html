@@ -21,13 +21,25 @@ a:hover {
   color: hotpink;
 }
 a:link {
-  color: white;
+  color: aqua;
 }
 body {
 font-size:1.2em;
 color:white;
 background-color: hotpink;
 }
+#titulo{
+background-color: black; 
+margin: 0px;
+padding: 0px;
+width: 100%;
+}
+h2{
+font-family: "Lato", sans-serif;
+text-align:center;
+color:red;
+}
+
 
 .doc{
 border-collapse:separate;
@@ -43,11 +55,6 @@ table{
  margin: 0.2em;
  font-size:0.7em;
 }
-h2{
-font-family: "Lato", sans-serif;
-text-align:center;
-color:darkred;
-}
 p {
  line-height: 0.9em;
  font-size:1em;
@@ -58,7 +65,7 @@ font-size:1.6em;
 
 #res-estad,#res-estad2{
 font-size:1.2em;
-margin:1em;
+margin:0.3em;
 }
 .desp{
 color:red;
@@ -67,13 +74,13 @@ input[type=radio]{
 transform: scale(1.5);
 }
 </style>
-<BODY>
+<BODY >
 <div id="container">
-    <h2>Estadificaci&oacute;n del c&aacutencer de mama (AJCC 2017)</h2>
+<div id="titulo">    <h2>Estadificaci&oacute;n del c&aacutencer de mama (AJCC 2017)</h2> </div>
 <div id="res-estad"> </div>
 <div id="res-estad2"> </div>
 <div id="T">
-  <button class="desp" onclick="cambia('muestraT');"> &#x25BC;  </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(0);">Tumor</a>:  
+  <button class="desp" onclick="cambia('muestraT');"> &#x25BC;  </button> &nbsp&nbsp <a  href="javascript:void(0)" onclick="Ayuda(0);">Tumor:</a>  
   <span id="spT"></span>
 <div id="muestraT" hidden="true">
 <table>
@@ -231,7 +238,7 @@ document.getElementById("spT").innerHTML="<strong>"+valT[pos]+"</strong>";
 T=valT[pos];
 //cambia("muestraT");
 estadiar();
-estadiar2();
+estadiar3();
 }
 function changeN(pos){
 document.getElementById("spN").innerHTML="<strong>"+valN[pos]+"</strong>";
@@ -239,7 +246,7 @@ document.getElementById("spN").innerHTML="<strong>"+valN[pos]+"</strong>";
 N=valN[pos];
 //cambia("muestraN");
 estadiar();
-estadiar2();
+estadiar3();
 }
 
 function changeM(pos){
@@ -247,40 +254,39 @@ document.getElementById("spM").innerHTML="<strong>"+valM[pos]+"</strong>";
 M=valM[pos];
 //cambia("muestraM");
 estadiar();
-estadiar2();
+estadiar3();
 }
 
 function changeG(pos){
 document.getElementById("spG").innerHTML="<strong>"+valG[pos]+"</strong>";
 G=valG[pos];
 //cambia("muestraG");
-estadiar2();
+estadiar3();
 }
 
 function changeH(pos){
 document.getElementById("spH").innerHTML="<strong>"+valH[pos]+"</strong>";
 H=valH[pos];
 //cambia("muestraH");
-estadiar2();
+estadiar3();
 }
 
 function changeE(pos){
 document.getElementById("spE").innerHTML="<strong>"+valE[pos]+"</strong>";
 E=valE[pos];
 //cambia("muestraE");
-estadiar2();
+estadiar3();
 }
 function changeP(pos){
 document.getElementById("spP").innerHTML="<strong>"+valP[pos]+"</strong>";
 P=valP[pos];
 //cambia("muestraP");
-estadiar2();
+estadiar3();
 }
 
-
-
 estadiar();
-estadiar2();
+estadiar3();
+
 function estadiar(){
 var resultado="ND";
 if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
@@ -317,7 +323,7 @@ if ((M=="M0") && (N=="N3")) {resultado = "IIIc"}
 // IV
 if (M=="M1") {resultado = "IV"} 
 
-document.getElementById("res-estad").innerHTML="&nbsp &nbsp Estadio anat&oacute;mico: " +resultado;
+document.getElementById("res-estad").innerHTML="&nbsp &nbsp <font color='darkblue'>Estadio anat&oacute;mico: " +resultado+"</font>";
 }
 
 
@@ -327,186 +333,425 @@ if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
 // 0
 //alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
 // no
-if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado=resultado + " "}
+if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado= " "}
 // 0
-if ((M=="M0") && (N=="N0") && (T=="Tis")) {resultado=resultado + "0"}
+if ((M=="M0") && (N=="N0") && (T=="Tis")) {resultado= "0"}
 
 // Ia
-if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G1") && (H=="P")) {resultado=resultado + "Ia"}
-if ( (M=="M0") && (N=="N0") && (T=="T1") && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "Ia"}
-if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "Ia"}
-if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G3") && (H=="P") && (E=="P") ) {resultado=resultado + "Ia"}
+if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G1") && (H=="P")) {resultado= "Ia  "}
+// agregados para G1
+//if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G1") && (H=="N") && (E=="P")   ) {resultado= "Ia  "}
+//if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G1") && (H=="N") && (E=="N") && (P=="P")  ) {resultado= "Ia  "}
+// fin agregados para G1
+if ( (M=="M0") && (N=="N0") && (T=="T1") && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G3") && (H=="P") && (E=="P") ) {resultado= "Ia  "}
+if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G1") && (H=="P")) {resultado= "Ia  "}
+// agregados para G1
+//if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G1") && (H=="N") && (E=="P")   ) {resultado= "Ia  "}
+//if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G1") && (H=="N") && (E=="N") && (P=="P")  ) {resultado= "Ia  "}
+// fin agregados para G1
 
-if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G1") && (H=="P")) {resultado=resultado + "Ia"}
-if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "Ia"}
-if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "Ia"}
-if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G3") && (H=="P") && (E=="P") ) {resultado=resultado + "Ia"}
 
-//if ( (M=="M0") && (N=="N0") && ((T=="T1")||(T=="T2")) && ((G=="G1")||(G=="G2")||(G=="G3")) && (H=="N") && (E=="P") ) {resultado=resultado + "Ia"}
+if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G3") && (H=="P") && (E=="P") ) {resultado= "Ia  "}
+
+//if ( (M=="M0") && (N=="N0") && ((T=="T1")||(T=="T2")) && ((G=="G1")||(G=="G2")||(G=="G3")) && (H=="N") && (E=="P") ) {resultado= "Ia  "}
 
 // Ib
-if ((M=="M0") && ( ( (N=="N0") && (T=="T1") ) || ( (N=="N1mi") && ( (T=="T0")||(T=="T1") ) ) ) && (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "Ib"}
-if ((M=="M0") && (((N=="N0") && (T=="T1"))||((N=="N1mi") && ((T=="T0")||(T=="T1")))) && (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "Ib"}
-if ((M=="M0") && (((N=="N0") && (T=="T1"))||((N=="N1mi") && ((T=="T0")||(T=="T1")))) && (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "Ib"}
-if ((M=="M0") && (((N=="N0") && (T=="T1"))||((N=="N1mi") && ((T=="T0")||(T=="T1")))) && (G=="G2") && (H=="P") && (E=="N") ) {resultado=resultado + "Ib"}
-if ((M=="M0") && (((N=="N0") && (T=="T1"))||((N=="N1mi") && ((T=="T0")||(T=="T1")))) && (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "Ib"}
-if ((M=="M0") && (((N=="N0") && (T=="T1"))||((N=="N1mi") && ((T=="T0")||(T=="T1")))) && (G=="G3") && (H=="P") && (E=="N") ) {resultado=resultado + "Ib"}
-if ((M=="M0") && (((N=="N0") && (T=="T1"))||((N=="N1mi") && ((T=="T0")||(T=="T1")))) && (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "Ib"}
+if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G2") && (H=="P") && (E=="N") ) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G3") && (H=="P") && (E=="N") ) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
 
-if ((M=="M0") && (((N=="N0") && (T=="T2"))||((N=="N1") && (T=="T1"))) && ((G=="G1")||(G=="G2")||(G=="G3")) && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "Ib"}
-if ((M=="M0") && (((N=="N0") && (T=="T2"))||((N=="N1") && (T=="T1"))) && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "Ib"}
+if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G2") && (H=="P") && (E=="N") ) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G3") && (H=="P") && (E=="N") ) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
 
-if ( (M=="M0") && (N=="N1") && (T=="T2") && (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "Ib"}
-if ( (M=="M0") && (N=="N1") && (T=="T2") && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "Ib"}
-if ( (M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2")) && ((G=="G1")||(G=="G2")) && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "Ib"}
-if ( (M=="M0") && ((N=="N1")||(N=="N2")) && (T=="T3") && (G=="G1") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "Ib"}
-if ( (M=="M0") && ((N=="N1")||(N=="N2")) && (T=="T3") && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "Ib"}
+
+if ((M=="M0") && ((N=="N0") && (T=="T2")) && ((G=="G1")||(G=="G2")||(G=="G3")) && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N0") && (T=="T2")) && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+
+if ((M=="M0") && ((N=="N1") && (T=="T1")) && ((G=="G1")||(G=="G2")||(G=="G3")) && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+if ((M=="M0") && ((N=="N1") && (T=="T1")) && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+
+
+if ( (M=="M0") && (N=="N1") && (T=="T2") && (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+if ( (M=="M0") && (N=="N1") && (T=="T2") && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+
+if ( (M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2")) && ((G=="G1")||(G=="G2")) && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+
+if ( (M=="M0") && ((N=="N1")||(N=="N2")) && (T=="T3") && (G=="G1") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+if ( (M=="M0") && ((N=="N1")||(N=="N2")) && (T=="T3") && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
 
 // IIa
-if ((M=="M0") && ( (N=="N0")&&(T=="T1") || (N=="N1mi")&&((T=="T0")||(T=="T1")) ) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIa"}
-if ((M=="M0") && ( (N=="N0")&&(T=="T1") || (N=="N1mi")&&((T=="T0")||(T=="T1")) ) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIa"}
-if ((M=="M0") && ( (N=="N0")&&(T=="T1") || (N=="N1mi")&&((T=="T0")||(T=="T1")) ) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIa"}
-if ((M=="M0") && ( (N=="N0")&&(T=="T1") || (N=="N1mi")&&((T=="T0")||(T=="T1")) ) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "IIa"}
-if ((M=="M0") && ( (N=="N0")&&(T=="T1") || (N=="N1mi")&&((T=="T0")||(T=="T1")) ) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIa"}
+if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
+if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
 
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIa"}
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  ((G=="G1")||(G=="G2")) && (H=="P") && (E=="N") ) {resultado=resultado + "IIa"}
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIa"}
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "IIa"}
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIa"}
+if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
 
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIa"}
 
-if ((M=="M0") && ((N=="N1")||(N=="N2")) && (T=="T3") && (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIa"}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  ((G=="G1")||(G=="G2")) && (H=="P") && (E=="N") ) {resultado= "IIa "}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
+
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  ((G=="G1")||(G=="G2")) && (H=="P") && (E=="N") ) {resultado= "IIa "}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
+
+if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
+
+if ((M=="M0") && ((N=="N1")||(N=="N2")) && (T=="T3") && (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
 
 // IIb
 
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIb"}
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIb"}
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIb"}
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "IIb"}
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIb"}
-if ((M=="M0") && ( ((N=="N1")&&((T=="T0")||(T=="T1")) ) || ((N=="N0")&&(T=="T2")) ) &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado=resultado + "IIb"}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIb "}
 
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G1") && (H=="P") ) {resultado=resultado + "IIb"}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "IIb"}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIb "}
 
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIb"}
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "IIb"}
 
-if ((M=="M0") && (T=="T3") && ((N=="N1")||(N=="N2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIb"}
-if ((M=="M0") && (T=="T3") && ((N=="N1")||(N=="N2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "IIb"}
+if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G1") && (H=="P") ) {resultado= "IIb "}
+if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
+
+if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIb "}
+if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIb "}
+
+if ((M=="M0") && (T=="T3") && ((N=="N1")||(N=="N2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIb "}
+if ((M=="M0") && (T=="T3") && ((N=="N1")||(N=="N2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIb "}
 
 // IIIa
 
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado=resultado + "IIIa"}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIa"}
 
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="N") && (E=="N")) {resultado=resultado + "IIIa"}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="N") && (E=="N")) {resultado= "IIIa"}
 
 
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G2") && (H=="P") && (E=="N") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="N") && (P=="N")) {resultado=resultado + "IIIa"}
+if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G2") && (H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
 
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G2") && (H=="P") && (E=="N") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G3") && (H=="P") && (E=="N") && (P=="N")) {resultado=resultado + "IIIa"}
+if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G2") && (H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G3") && (H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
 
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIa"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="P") && (E=="N") ) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado= "IIIa"}
 
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIa"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="P") && (E=="N") ) {resultado= "IIIa"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado= "IIIa"}
 
-if ((M=="M0") &&  (N=="N3") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIIa"}
+if ((M=="M0") &&  (N=="N3") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIa"}
 
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIIa"}
+if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIa"}
 
 // IIIb
 
-if ((M=="M0") && (T=="T2") && (N=="N1") &&  ((G=="G1")||(G=="G2")) && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (T=="T2") && (N=="N1") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIb"}
+if ((M=="M0") && (T=="T2") && (N=="N1") &&  ((G=="G1")||(G=="G2")) && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
+if ((M=="M0") && (T=="T2") && (N=="N1") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
 
-if ((M=="M0") && (T=="T3") && (N=="N0") &&  ((G=="G1")||(G=="G2")) && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (T=="T3") && (N=="N0") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIb"}
+if ((M=="M0") && (T=="T3") && (N=="N0") &&  ((G=="G1")||(G=="G2")) && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
+if ((M=="M0") && (T=="T3") && (N=="N0") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
 
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIIb"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIIb"}
+if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
 
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIIb"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIIb"}
+if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
 
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G1") && (H=="P") ) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "IIIb"}
+if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G1") && (H=="P") ) {resultado= "IIIb"}
+if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
+if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
+if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
 
-if ((M=="M0") && (N=="N3") &&  (G=="G1") && (H=="P") ) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (N=="N3") &&  (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (N=="N3") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado=resultado + "IIIb"}
-if ((M=="M0") && (N=="N3") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado=resultado + "IIIb"}
+if ((M=="M0") && (N=="N3") &&  (G=="G1") && (H=="P") ) {resultado= "IIIb"}
+if ((M=="M0") && (N=="N3") &&  (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
+if ((M=="M0") && (N=="N3") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
+if ((M=="M0") && (N=="N3") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
 
 // IIIc
 
-if ((M=="M0") && (T=="T2") && (N=="N1")  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T3") && (N=="N0")  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado=resultado + "IIIc"}
+if ((M=="M0") && (T=="T2") && (N=="N1")  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T3") && (N=="N0")  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
 
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado=resultado + "IIIc"}
+if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
 
-if ((M=="M0") && (T=="T3") && ( (N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T3") && ( (N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T3") && ( (N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado=resultado + "IIIc"}
+if ((M=="M0") && (T=="T3") && ( (N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T3") && ( (N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T3") && ( (N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
 
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G1") && (H=="N") && (E=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="N") && (E=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="N")  ) {resultado=resultado + "IIIc"}
+if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G1") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="N")  ) {resultado= "IIIc"}
 
-if ((M=="M0") && (N=="N3")  &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G1") && (H=="N") && (E=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="N") && (E=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado=resultado + "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="N") ) {resultado=resultado + "IIIc"}
+if ((M=="M0") && (N=="N3")  &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N3")  &&  (G=="G1") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIIc"}
+if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="N") ) {resultado= "IIIc"}
 
 
 // IV
-if ( (M=="M1") && ((G=="Gx")||(G=="G1") || (G=="G2") || (G=="G3"))  ){resultado=resultado + "IV"} 
+if ( (M=="M1") && ((G=="Gx")||(G=="G1") || (G=="G2") || (G=="G3"))  ){resultado= "IV"} 
 //alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
 if (resultado==""){resultado="ND"}
 document.getElementById("res-estad2").innerHTML="&nbsp &nbsp Estadio pron&oacute;stico: " +resultado;
+return resultado;
+}
+
+function estadiar3(){
+var resultado="";
+if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
+// 0
+//alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
+// no
+if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado= " "}
+// 0
+if ((M=="M0") && (N=="N0") && (T=="Tis")) {resultado= "0"}
+
+if ((M=="M0") && ( ((N=="N0") && (T=="T1")) || ( (N=="N1mi")&&( (T=="T0")||(T=="T1") ) ) ) ){ 
+
+if (G=="G1") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "Ia  "}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "Ib  "}
+}
+
+if (G=="G2") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "Ia  "}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "Ib  "}
+}
+if (G=="G3") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "Ia  "}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "Ib  "}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "Ib  "}
+}
+}
+
+if ((M=="M0") && ( ((N=="N1") && (T=="T0")) || ((N=="N1") && (T=="T1")) || ((N=="N0") && (T=="T2")) ) ){ 
+
+if (G=="G1") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIa "}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
+}
+
+if (G=="G2") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIa "}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
+}
+if (G=="G3") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIa "}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
+}
+}
+
+if ((M=="M0") && ( ((N=="N1") && (T=="T2")) || ((N=="N0") && (T=="T3"))) ){ 
+
+if (G=="G1") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIb "}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
+}
+
+if (G=="G2") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIb "}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
+}
+if (G=="G3") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIb "}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIb "}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIb "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
+}
+}
+
+if ((M=="M0") && ( ((N=="N2") && (T=="T0")) || ((N=="N2") && (T=="T1")) || ((N=="N2") && (T=="T2")) || ((N=="N1") && (T=="T3")) || ((N=="N2") && (T=="T3")) ) ){ 
+
+if (G=="G1") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIa "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIa"}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
+}
+
+if (G=="G2") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIa "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIa"}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
+}
+if (G=="G3") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIb "}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIa"}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIIa"}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
+}
+}
+
+if ( (M=="M0") && ( ((N=="N0") && (T=="T4")) || ((N=="N1") && (T=="T4")) || ((N=="N2") && (T=="T4")) || (N=="N3") ) ){ 
+
+if (G=="G1") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIIa"}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
+}
+
+if (G=="G2") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIIa"}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
+}
+if (G=="G3") {
+   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
+   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
+   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
+   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIc"}
+   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
+}
+}
+
+// IV
+if ( (M=="M1") && ((G=="Gx")||(G=="G1") || (G=="G2") || (G=="G3"))  ){resultado= "IV"} 
+//alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
+if (resultado==""){resultado="ND"}
+document.getElementById("res-estad2").innerHTML="&nbsp &nbsp <font color='black'>Estadio pron&oacute;stico: " +resultado+"</font>";
+return resultado;
 }
 
 
@@ -540,7 +785,7 @@ descr[0]+="<tr><td>T1b</td> <td><p>Tumor >5mm y <= 10mm de diametro</p></td></tr
 descr[0]+="<tr><td>T1c</td> <td><p>Tumor >10mm y <= 20mm de diametro</p></td></tr>"
 descr[0]+="<tr><td>T2</td> <td><p>Tumor >20mm y <=50mm de diametro</p></td></tr>"
 descr[0]+="<tr><td>T3</td> <td><p>Tumor >=50mm de diametro</p></td></tr>"
-descr[0]+="<tr><td>T4</td> <td><p>Tumor de cualquier tamano con extensi&oacute;n a pared tor&aacute;cica y/o piel (ulceraci&oacute;n o n&oacute;dulos macrosc&oacute;picos); la invasi&oacute;n de la dermis por si sola no califica como T4 </p></td></tr>"
+descr[0]+="<tr><td>T4</td> <td><p>Tumor de cualquier tama&ntilde;o con extensi&oacute;n a pared tor&aacute;cica y/o piel (ulceraci&oacute;n o n&oacute;dulos macrosc&oacute;picos); la invasi&oacute;n de la dermis por si sola no califica como T4 </p></td></tr>"
 descr[0]+="</table>"
 
 descr[1]=" <center style='font-size:1.5em;'>Clasificaci&oacute;n de Ganglios</center>";
@@ -568,7 +813,7 @@ descr[3]+="<table class='doc' >"
 descr[3]+="<tr><td>.Gx</td> <td><p>El grado histol&oacute;gico no puede ser evaluado.</p></td></tr>"
 descr[3]+="<tr><td>.G1</td> <td><p>Bajo grado histol&oacute;gico.<br> Score SBR de 3-5 puntos.</p></td></tr>"
 descr[3]+="<tr><td>.G2</td> <td><p>Grado histol&oacute;gico intermedio (moderadamente favorable).<br> Score SBR de 6-7 puntos.</p></td></tr>"
-descr[3]+="<tr><td>.G3</td> <td><p>Alto grado histol&oacute;gico (desfavorable).<br> Score SBR de 6-7 puntos.</p></td></tr>"
+descr[3]+="<tr><td>.G3</td> <td><p>Alto grado histol&oacute;gico (desfavorable).<br> Score SBR de 8-9 puntos.</p></td></tr>"
 descr[3]+="</table>"
 
 
@@ -589,6 +834,37 @@ descr[6]=" Descripcion de Receptor de Prostageno";
   });
 }
 */
+//verif();
+function verif(){
+var count=0;
+var vT=["T0","T1","T2","T3","T4"];
+var vN=["N0","N1","N2","N3"];
+var vG=["G1","G2","G3"];
+var vH=["N","P"];
+var vE=["N","P"];
+var vP=["N","P"];
+
+for (var i=0;i<vT.length;i++){
+   for (var j=0;j<vN.length;j++){
+     for (var k=0;k<vG.length;k++){
+       for (var m=0;m<vH.length;m++){
+           for (var n=0;n<vE.length;n++){
+             for (var l=0;l<vP.length;l++){
+               M="M0"; T=vT[i]; N=vN[j]; G=vG[k]; H=vH[m]; E=vE[n]; P=vP[l];
+               texto=estadiar3();
+               if (texto=="IIa " ) {count=count+1;
+                console.log("T="+T+" "+"N="+N+" "+"G="+G+" "+"H="+H+" "+"E="+E+" "+"P="+P);
+
+                 }
+             }
+           }
+       }
+     }
+   }
+}
+
+alert(count);
+}
 
 
 </script>
