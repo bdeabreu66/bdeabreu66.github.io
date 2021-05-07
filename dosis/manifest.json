@@ -11,11 +11,9 @@
   "orientation": "portrait-primary",
   "theme_color": "aliceblue",
   "background_color": "red",
-  "categories": ["books", "education", "medical"]
+  "categories": ["books", "education", "medical"],
   "prefer_related_applications": false, 
   "serviceworker": {
     "src": "sw.js",
-    "scope": "/racer/",
-    "update_via_cache": "none"
-  },
+   },
 }
