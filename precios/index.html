@@ -59,16 +59,26 @@ padding:0px;
   font-size:0.5em;
 }
 
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
 </style>
 
 </HEAD>
 
 
 <BODY onload="carga();">
+<br>
 <table>
-<tr><td>Paralelo </td><td><input id="t1" type="text" value="0"></td><td><center><button onclick="factura();">F</button></center></td></tr>
-<tr><td>BCV </td><td><input id="t2" type="text" value="0"></td>
-<td colspan="2"><center><button onclick="refresca();">P</button></center></td></tr>
+<tr><td>Paralelo </td><td><input id="t1" type="text" value="0"></td></tr>
+<tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr>
 </table>
 <center>Lista de precios</center>
 
@@ -76,6 +86,8 @@ padding:0px;
 </div>
 <div id="factura" hidden="true"></div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
+ <div id="header"> <button onclick="refresca();">P</button> <button onclick="factura();">F</button> <button onclick="anula();">Z</button></div>
+
 
 <!--   -->
 
@@ -230,13 +242,13 @@ data[j++]=["Yogurt. F y D. 750 x 12",12,59.86,1,0,0,"t2"];
 refresca();
 }
 function actT(ind){
-var valor=prompt("Introduzca cantidad", "0");
+var valor=prompt("Introduzca cantidad", "");
 if (valor!=null) {data[ind][5]=parseInt(valor);}
 refresca();
 console.log(ind);
 }
 function actU(ind){
-var valor=prompt("Introduzca cantidad", "0");
+var valor=prompt("Introduzca cantidad", "");
 if (valor!=null) {data[ind][4]=parseInt(valor);}
 refresca();
 
@@ -257,21 +269,35 @@ var Tdolar=data[i][4]*(data[i][2]/data[i][1]) + data[i][5]*(data[i][2]);
 if (Tdolar!=0) { 
 totald+=Tdolar;
 totalb+=factor*Tdolar;
-texto+='<p  >'+ data[i][0]+'</p>';
+if (data[i][4]!=0) { texto+='<p style=" font-size:0.8em;" >'+ data[i][4] +'U '+ data[i][0]+'</p>';}
+if (data[i][5]!=0) { texto+='<p style=" font-size:0.8em;" >'+ data[i][5] +'T  ' + data[i][0]+'</p>';}
+
+
 texto+='<table width="100%"><tr><td>'+impri(Tdolar.toFixed(2))+' $'+'</td><td>'+impri((factor*Tdolar).toFixed(2))+' Bs'+'</td></tr></table>';}
 }
 
 
-texto+='<HR>'+"Total: "+totald.toFixed(2);
+texto+='<HR>';
+texto+='<span style="color:yellow; font-size:1em;">Total: </span>'+impri(totald.toFixed(2))+' $ <br>  ';
+texto+=impri(totalb.toFixed(2))+' Bs';
 
 var textoT="";
 divfactura=document.getElementById("factura")
-divfactura.style="position: fixed;top :2px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
+divfactura.style="position: fixed;top :15px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
 textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
 textoT+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
-textoT+='<div style="color:black; font-size:1em;">'+texto+'</div>';
+textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
 divfactura.innerHTML=textoT;
 divfactura.hidden=false;
+}
+
+function anula(){
+
+for (var i=0;i<data.length;i++){
+data[i][4]=0;
+data[i][5]=0;
+}
+refresca();
 }
 
 function quitar(){
