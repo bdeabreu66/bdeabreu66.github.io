@@ -90,6 +90,8 @@ padding:0px;
 
 <BODY onload="carga();">
 <br>
+<span id="fecha"> </span>
+
 <table>
 <tr><td>Paralelo </td><td><input id="t1" type="text" value="0"></td></tr>
 <tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr>
@@ -116,6 +118,8 @@ document.getElementById("t2").value = localStorage.getItem('p2');
   console.error(error);
 
 }
+var fecha=document.getElementById("fecha");
+fecha.innerHTML="Fecha: 02/07/2021 ";
 divt=document.getElementById("divt");
 fiva=7.25;
 data=[];
@@ -173,7 +177,8 @@ data[j++]=["Detergente BB 400g x 30",30,35.15,1,0,0,"t2"];
 data[j++]=["Detergente BB 900g x 20",30,50.58,1,0,0,"t2"];
 data[j++]=["Detergente Floral 900g x 20",20,50.58,1,0,0,"t2"];
 
-data[j++]=["Gelatina Golden.96 gr x 10",10,11.6,1,0,0,"t2"];
+data[j++]=["Gelatina Golden Fresa 96 gr x 10",10,11.6,1,0,0,"t2"];
+data[j++]=["Gelatina Golden Kolita 96 gr x 10",10,10.0,1,0,0,"t2"];
 
 data[j++]=["Harina Pan.1 k x 20",20,19.8,0,0,0,"t2"];
 data[j++]=["Harina Pan/Arroz.1 k x 20",20,16.2,0,0,0,"t2"];
@@ -200,7 +205,7 @@ data[j++]=["KONGA SABOR NARANJA 30gx50",50,15.66,1,0,0,"t2"];
 data[j++]=["KONGA SABOR PARCHITA 30gx8x14",14,3.78,1,0,0,"t2"];
 
 data[j++]=["Mantequilla Mavesa 5 K x 1.S/S",1,14.92,0,0,0,"t2"];
-data[j++]=["Mantequilla Mavesa 5 K x 1.C/S",1,17.31,0,0,0,"t2"];
+data[j++]=["Mantequilla Mavesa 5 K x 1.C/S",1,14.92,0,0,0,"t2"];
 data[j++]=["Mantequilla Mavesa 1 K x 6",6,18.9,0,0,0,"t2"];
 data[j++]=["Mantequilla Mavesa 250 x 24",24,20.4,0,0,0,"t2"];
 data[j++]=["Mantequilla Mavesa 500 x 12",12,19.44,0,0,0,"t2"];
@@ -211,17 +216,18 @@ data[j++]=["Mantequilla Nelly.454 x 12",12,15.12,0,0,0,"t2"];
 data[j++]=["Mayonesa(Aderezo).3,6 K x 4",4,66.12,0,0,0,"t2"];
 data[j++]=["Mayonesa 500g x 12",12,24.84,0,0,0,"t2"];
 data[j++]=["Mayonesa 175g x 24",24,23.76,0,0,0,"t2"];
-data[j++]=["Mayonesa limon  445 g x 12",12,84.76,0,0,0,"t2"];
+data[j++]=["Mayonesa limon  445 g x 12",12,24.84,0,0,0,"t2"];
 data[j++]=["Mayonesa 445g x 12",12,24.84,0,0,0,"t2"];
 data[j++]=["Mayonesa 910g x 6U",6,23.46,0,0,0,"t2"];
 
 data[j++]=["Mezcla/Cachapas.500 x 12",12,12.60,1,0,0,"t2"];
+data[j++]=["Mermelada Vienesa 240g x 18",18,30.69,1,0,0,"t2"];
 
 data[j++]=["Pasta 500g x 12",12,13.56,1,0,0,"t2"];
 data[j++]=["Pasta 1 K x 12",12,26.28,1,0,0,"t2"];
 data[j++]=["Pasta Linguini. 1 K x 12",12,26.28,1,0,0,"t2"];
 
-data[j++]=["Pepitonas.140g x 35",35,36.05,1,0,0,"t2"];
+data[j++]=["Pepitonas.140g x 35",35,42.22,1,0,0,"t2"];
 
 data[j++]=["Rikesa Blanco.200 x 18",18,32.36,1,0,0,"t2"];
 data[j++]=["Rikesa Trad.300 x 12",12,29.65,1,0,0,"t2"];
@@ -229,7 +235,7 @@ data[j++]=["Rikesa Tocineta.300 x 12",12,29.65,1,0,0,"t2"];
 data[j++]=["Rikesa Trad.200 x 18",18,27.90,1,0,0,"t2"];
 
 data[j++]=["Sardina/Aceite.170 x 20",20,19.0,1,0,0,"t2"];
-data[j++]=["Sardina/Tom/Pic.170x 20",20,10.0,1,0,0,"t2"];
+data[j++]=["Sardina/Tom/Pic.170x 20",20,19.0,1,0,0,"t2"];
 
 data[j++]=["Salsa/Tomate.198 x 24",24,15.03,1,0,0,"t2"];
 data[j++]=["Salsa/Tomate.397 x 24",24,25.06,1,0,0,"t2"];
@@ -264,6 +270,7 @@ data[j++]=["Vinagre. 4 lt x 4",4,16.56,1,0,0,"t2"];
 data[j++]=["Yogurt. F y D. 125 x 24",24,27.00,1,0,0,"t2"];
 data[j++]=["Yogurt. F y D. 250 x 24",24,47.61,1,0,0,"t2"];
 data[j++]=["Yogurt. F y D. 750 x 12",12,59.86,1,0,0,"t2"];
+data[j++]=["Yogurt. Migurt 240 x 24",24,39.25,1,0,0,"t2"];
 
 refresca();
 }
