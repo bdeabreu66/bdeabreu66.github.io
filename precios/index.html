@@ -111,6 +111,8 @@ padding:0px;
 <script type="text/javascript">
 
 function carga(){
+data=[];
+
 try {
 document.getElementById("t1").value = localStorage.getItem('p1');
 document.getElementById("t2").value = localStorage.getItem('p2');
@@ -119,13 +121,26 @@ document.getElementById("t2").value = localStorage.getItem('p2');
   console.error(error);
 
 }
+
+try {
+data=eval(localStorage.getItem('data'));
+
+} catch (error) 
+{
+  console.error(error);
+
+}
+
+
+
+
 var fecha=document.getElementById("fecha");
 fecha.innerHTML="Fecha: 02/07/2021 ";
 divt=document.getElementById("divt");
 fiva=7.25;
-data=[];
+
 var j=0;
-data=[["Pilsen,Light,Ice, 1/4",36,13.60,0,0,0,"t1"],
+/*data=[["Pilsen,Light,Ice, 1/4",36,13.60,0,0,0,"t1"],
       ["Pilsen,Light,Ice, 1/3",24,13.60,0,0,0,"t1"],
       ["Solera 1/4",36,15.20,0,0,0,"t1"],
       ["Solera lata.250 x 24",24,17.6,0,0,0,"t1"],
@@ -243,6 +258,7 @@ data=[["Pilsen,Light,Ice, 1/4",36,13.60,0,0,0,"t1"],
       ["Yogurt. F y D. 750 x 12",12,59.86,1,0,0,"t2"],
       ["Yogurt. Migurt 240 x 24",24,39.25,1,0,0,"t2"],
       ];
+*/
 refresca();
 }
 function actT(ind){
@@ -439,8 +455,11 @@ function ajaxPositive(response) {
       }
     }
  function showResult(txt) {
-      console.log('muestro respuesta: ', txt);
-    }
+       console.log('muestro respuesta: ', txt);
+        localStorage.setItem('data',txt);
+        data=eval(txt);
+        refresca();
+  }
 
 function showError(err) { 
       console.log('muestor error', err);
