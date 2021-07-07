@@ -103,7 +103,7 @@ padding:0px;
 <div id="content" hidden="false"></div>
 <div id="factura" hidden="true"></div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
- <div id="header"> <button class="btop" onclick="refresca();">P</button>&nbsp&nbsp<button class="btop" onclick="factura();">F</button>&nbsp&nbsp <button class="btop" onclick="anula();">Z</button></div>
+ <div id="header"> <button class="btop" onclick="Actualiza_dolar();">A</button>&nbsp&nbsp<button class="btop" onclick="refresca();">P</button>&nbsp&nbsp<button class="btop" onclick="factura();">F</button>&nbsp&nbsp <button class="btop" onclick="anula();">Z</button></div>
 
 
 <!--   -->
@@ -455,7 +455,7 @@ function ajaxPositive(response) {
       }
     }
  function showResult(txt) {
-       console.log('muestro respuesta: ', txt);
+        //console.log('muestro respuesta: ', txt);
         localStorage.setItem('data',txt);
         data=eval(txt);
         refresca();
