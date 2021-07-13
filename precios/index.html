@@ -310,7 +310,7 @@ texto+='$ BCV: '+  impri(document.getElementById("t2").value) +'<br>';
 texto+="<center>F&aacute;ctura</center>";
 var totald=0;
 var totalb=0;
-var Ftexto='Fecha: '+fecha_actual()+'\n';
+Ftexto='Fecha: '+fecha_actual()+'\n';
 Ftexto+=dist+'\n';
 Ftexto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'\n';
 Ftexto+='$ BCV: '+  impri(document.getElementById("t2").value) +'\n';
@@ -371,12 +371,8 @@ const shareData = {
   title: 'Factura',
   text: Ftexto
 }
-console.log('paso');
+console.log(shareData);
 comparte(shareData);
-/*
-   navigator.share(shareData).then(() => console.log('Share was successful.'))
-  .catch((error) => console.log('Sharing failed', error));
-*/
 }
 
 async function comparte(shareData){
@@ -387,20 +383,6 @@ async function comparte(shareData){
     console.log( 'Error: ' + err);
   }
 }
-
-/*btn.addEventListener('click', async () => {
-    const shareData = {
-      title: 'Factura',
-      text: Ftexto
-     }
-     console.log('paso');
-  try {
-    await navigator.share(shareData)
-    console.log('MDN shared successfully');
-  } catch(err) {
-    console.log( 'Error: ' + err);
-  }
-});*/
 
 
 function anula(){
