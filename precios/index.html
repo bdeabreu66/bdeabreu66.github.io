@@ -372,17 +372,21 @@ const shareData = {
   text: Ftexto
 }
 console.log('paso');
-async () => {
-     try {
+comparte(shareData);
+/*
+   navigator.share(shareData).then(() => console.log('Share was successful.'))
+  .catch((error) => console.log('Sharing failed', error));
+*/
+}
+
+async function comparte(shareData){
+  try {
     await navigator.share(shareData)
     console.log('MDN shared successfully');
   } catch(err) {
     console.log( 'Error: ' + err);
   }
 }
-
-}
-
 
 /*btn.addEventListener('click', async () => {
     const shareData = {
