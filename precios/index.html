@@ -101,7 +101,12 @@ padding:0px;
 <div id="divt" >
 </div>
 <div id="content" hidden="false"></div>
-<div id="factura" hidden="true"></div>
+<div id="factura" hidden="true">
+<div style="position: fixed; text-align:right;background-color: gray;width:95%;">
+  <button  title="Compartir" id="btnc" onclick="compartir();"> C </button> <button  title="Salir" onclick="quitar();" > x </button>
+</div> 
+
+</div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
  <div id="header"> <button class="btop" onclick="Actualiza_dolar();">A</button>&nbsp&nbsp<button class="btop" onclick="refresca();">P</button>&nbsp&nbsp<button class="btop" onclick="factura();">F</button>&nbsp&nbsp <button class="btop" onclick="anula();">Z</button></div>
 
@@ -109,7 +114,8 @@ padding:0px;
 <!--   -->
 
 <script type="text/javascript">
-
+var dist="Distribuidora Pita-Orozco"
+var hoy=new Date();
 function carga(){
 data=[];
 
@@ -140,6 +146,15 @@ divt=document.getElementById("divt");
 fiva=7.25;
 
 var j=0;
+//var btn=document.getElementById("btnc");
+//console.log(btn);
+//btn.addEventListener('click', function(){
+//     console.log('paso');},false);
+
+//btn.onclick=function(){ console.log('paso');};
+
+
+
 /*data=[["Pilsen,Light,Ice, 1/4",36,13.60,0,0,0,"t1"],
       ["Pilsen,Light,Ice, 1/3",24,13.60,0,0,0,"t1"],
       ["Solera 1/4",36,15.20,0,0,0,"t1"],
@@ -280,11 +295,26 @@ if (factflag) {factflag=false; factura2(); } else { factflag=true; quitar()};
 
 }
 var Ftexto;
+
+function fecha_actual(){
+var mes=(hoy.getMonth()+1).toString();
+if (mes.length==1) {mes='0'+mes}
+return (hoy.getDate()).toString() + '/' +mes + '/' +hoy.getFullYear().toString()
+
+}
 function factura2(){
-var texto="<center>F&aacute;ctura</center>";
+var texto='Fecha: '+fecha_actual()+'<br>';
+texto+=dist+'<br>';
+texto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'<br>';
+texto+='$ BCV: '+  impri(document.getElementById("t2").value) +'<br>';
+texto+="<center>F&aacute;ctura</center>";
 var totald=0;
 var totalb=0;
-Ftexto="FACTURA\n"
+var Ftexto='Fecha: '+fecha_actual()+'\n';
+Ftexto+=dist+'\n';
+Ftexto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'\n';
+Ftexto+='$ BCV: '+  impri(document.getElementById("t2").value) +'\n';
+Ftexto+="FACTURA\n"
 for (var i=0;i<data.length;i++){
 if (data[i][6]=="t1") {factor=t1;}
 if (data[i][6]=="t2") {factor=t2;}
@@ -317,18 +347,18 @@ if (data[i][3]==1) {
 
 texto+='<HR>';
 Ftexto+='============================================\n';
-texto+='<span style="color:yellow; font-size:1em;">Total: </span>'+impri(totald.toFixed(2))+' $ \n  ';
+texto+='<span style="color:yellow; font-size:1em;">Total: </span>'+impri(totald.toFixed(2))+' $ <br>';
 texto+=impri(totalb.toFixed(2))+' Bs';
-Ftexto+='Total:'+impri(totald.toFixed(2))+' $\n'
+Ftexto+='Total:'+impri(totald.toFixed(2))+'$ \n'
 Ftexto+=impri(totalb.toFixed(2))+' Bs';
 console.log(Ftexto);
 var textoT="";
 divfactura=document.getElementById("factura")
 divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
-textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
-textoT+=' <button  title="Compartir" id="btn" onclick="compartir();" > C </button> <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
+//textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
+//textoT+=' <button  title="Compartir" id="btn" onclick="compartir();" > C </button> <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
 textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
-divfactura.innerHTML=textoT;
+divfactura.innerHTML+=textoT;
 divfactura.hidden=false;
 }
 
@@ -341,18 +371,33 @@ const shareData = {
   title: 'Factura',
   text: Ftexto
 }
+console.log('paso');
+async () => {
+     try {
+    await navigator.share(shareData)
+    console.log('MDN shared successfully');
+  } catch(err) {
+    console.log( 'Error: ' + err);
+  }
+}
+
+}
 
 
-btn=document.getElementById("btn");
-btn.addEventListener('click', async () => {
+/*btn.addEventListener('click', async () => {
+    const shareData = {
+      title: 'Factura',
+      text: Ftexto
+     }
+     console.log('paso');
   try {
     await navigator.share(shareData)
-    resultPara.textContent = 'MDN shared successfully'
+    console.log('MDN shared successfully');
   } catch(err) {
-    resultPara.textContent = 'Error: ' + err
+    console.log( 'Error: ' + err);
   }
-});
-}
+});*/
+
 
 function anula(){
 
