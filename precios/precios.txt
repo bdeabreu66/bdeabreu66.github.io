@@ -40,7 +40,7 @@
       ["Detergente BB 900g x 20",30,51.50,1,0,0,"t2"],
       ["Detergente Floral 900g x 20",20,51.50,1,0,0,"t2"], 
       ["Gelatina Golden Frambuesa 96 gr x 10U",10,11.6,1,0,0,"t2"],
-      ["Gelatina Golden Fresa 96 gr x 10",10U,11.6,1,0,0,"t2"],
+      ["Gelatina Golden Fresa 96 gr x 10U",10,11.6,1,0,0,"t2"],
       ["Gelatina Golden Kolita 96 gr x 10U",10,10.0,1,0,0,"t2"],
       ["Harina Pan.1 k x 20",20,19.8,0,0,0,"t2"],
       ["Harina Pan Amarilla k x 20",20,19.8,0,0,0,"t2"],
