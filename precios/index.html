@@ -102,9 +102,6 @@ padding:0px;
 </div>
 <div id="content" hidden="false"></div>
 <div id="factura" hidden="true">
-<div style="position: fixed; text-align:right;background-color: gray;width:95%;">
-  <button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button> <button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button>
-</div> 
 
 </div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
@@ -367,7 +364,8 @@ texto+=impri(totalb.toFixed(2))+' Bs';
 Ftexto+='Total:'+impri(totald.toFixed(2))+'$ \n'
 Ftexto+=impri(totalb.toFixed(2))+' Bs';
 console.log(Ftexto);
-var textoT="";
+var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
+textoT+='<button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button> <button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></div><br>';
 divfactura=document.getElementById("factura")
 divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
 //textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
