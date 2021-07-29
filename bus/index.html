@@ -1,1 +1,236 @@
+<HTML>
+<HEAD>
+<TITLE>  Reporte de ubicacion</TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<!-- <link rel="manifest" href="manifest.json"> -->
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
+
+body{
+font-size:30px;
+}
+input[type=number]{
+width: 3em;
+}
+
+
+.btop{
+
+font-size:2em;
+
+}
+
+.btn2{
+
+font-size:1em;
+
+}
+
+
+input[type=text]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+p{
+font-size:1.5rem;
+background-color:black;
+color:white;
+padding:0px;
+margin:0px;
+
+}
+td{
+font-size:1.5rem;
+padding:5px;
+}
+table{
+margin:0px;
+padding:0px;
+
+}
+
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+</style>
+
+</HEAD>
+
+
+<BODY onload="carga();">
+<br>
+ <div id="header"> <button class="btop" onclick="activar_Reporte();">A</button>&nbsp&nbsp<button class="btop" onclick="stop_Reporte();">P</button></div>
+ <div id="pos"></div>
+<!--   -->
+
+<form id="loginForm" name="loginForm" action="javascript:postData()">
+                <input name="long" type="hidden">
+                <input name="lat" type="hidden">
+                <input type="submit" id="loginSubmit" value="Log in" />
+</form>
+
+
+<script type="text/javascript">
+
+var watchID;
+function activar_Reporte(){
+watchID = navigator.geolocation.watchPosition(function(position) {
+  reportar(position.coords.latitude, position.coords.longitude);
+document.getElementsByName('lat').value=position.coords.latitude;
+console.log(document.getElementsByName('lat').value);
+document.getElementsByName('long').value=position.coords.longitude;
+postData();
+//document.getElementById('loginSubmit').submit();
+});
+
+
+}
+
+function carga(){
+
+}
+function postData() {
+var myHeaders = new Headers({
+  'Content-Type': 'text/plain',
+  'X-Custom-Header': 'hello world',
+  'Access-Control-Allow-Origin': '*'
+});
+    const form = document.getElementsByName('loginForm');
+    const data = new FormData();
+    data.append('lat', document.getElementsByName('lat').value);
+    data.append('long',document.getElementsByName('long').value);
+    console.log(data.get('long'));
+    fetch('http://www.bdeabreu.orgfree.com/guarda.php', { headers: myHeaders , method: 'POST', mode: 'cors', body: data}).then(response => {
+       console.log(response.url); 
+       console.log(response.status); 
+ 
+      if (!response.ok){
+            throw new Error('Network response was not ok.');
+            //console.log(response);
+        }
+    }).catch(err => console.log(err));
+}
+
+function stop_Reporte(){
+navigator.geolocation.clearWatch(watchID);
+}
+
+function reportar(x,y){
+var divpos=document.getElementById("pos");
+divpos.innerHTML="Latitud: "+x+ " Longitud: "+y;
+
+}
+
+</script>
+<script>
+
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+var myHeaders = new Headers();
+
+var myInit = { mode: 'cors' };
+
+//var nombrepag="https://monitordolarvenezuela.com/monitor-dolar-hoy";
+var nombrepag="https://bdeabreu66.github.io/precios/precios.txt";
+
+
+//fetch(nombrepag,myInit)
+//        .then(ajaxPositive)
+//        .catch(showError);
+
+function ajaxPositive(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.text().then(showResult);
+      } else {
+        showError('status code: ' + response.status);
+      }
+    }
+ function showResult(txt) {
+        //console.log('muestro respuesta: ', txt);
+        localStorage.setItem('data',txt);
+        data=eval(txt);
+        refresca();
+  }
+
+function showError(err) { 
+      console.log('muestor error', err);
+    }
+
+
+//Actualiza_dolar();
+
+function Actualiza_dolar(){
+var nomb="https://s3.amazonaws.com/dolartoday/data.json"
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+ function showResultD(txt) {
+       console.log('muestro respuesta: ', txt.USD.sicad2);
+       document.getElementById("t1").value = txt.USD.promedio;
+       document.getElementById("t2").value = txt.USD.sicad2;
+       refresca();
+  }
+
+function showErrorD(err) { 
+      console.log('muestor error', err);
+    }
+
+}
+
+</script>
+</BODY>
+</html>
