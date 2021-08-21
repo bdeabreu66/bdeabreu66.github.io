@@ -44,6 +44,16 @@ input[type=text]:focus {
   background-color: lightblue;
 }
 
+.barra {
+  font-size: 1.7em;
+  text-align: left;
+  margin: 5px auto;
+  padding: 5px;
+  max-width: 700px;
+  background-color: white;
+  text-align: center;
+}
+
 p{
 font-size:1.5rem;
 background-color:black;
@@ -73,8 +83,18 @@ padding:0px;
   font-size:0.5em;
 }
 
+#tabla_h {
+  font-size:1.5rem;
+  border: red 2px solid;
+  width:100%;
+}
+
+td {
+  font-size:1.0rem;
+}
+
 #header {
-  position: fixed;
+  position: relative;
   left: 0;
   top: 0;
   width: 100%;
@@ -90,56 +110,607 @@ padding:0px;
 
 <BODY onload="carga();">
 <br>
- <div id="header"> <button class="btop" onclick="activar_Reporte();">A</button>&nbsp&nbsp<button class="btop" onclick="stop_Reporte();">P</button></div>
+<div> Sistema de Transporte </div>
+ <div id="header"> <button class="btop" onclick="Despliega_Rutas();">Rutas</button>&nbsp&nbsp<button class="btop" onclick="Despliega_paradas();">Paradas</button></div>
  <div id="pos"></div>
 <!--   -->
-
-<form id="loginForm" name="loginForm" action="javascript:postData()">
-                <input name="long" type="hidden">
-                <input name="lat" type="hidden">
-                <input type="submit" id="loginSubmit" value="Log in" />
-</form>
+<div id="ruta"></div>
+<div id="display"></div>
+<div id="svg" style="display:none;"></div>
+<div id="parada"></div>
 
 
 <script type="text/javascript">
-
-var watchID;
-function activar_Reporte(){
-watchID = navigator.geolocation.watchPosition(function(position) {
-  reportar(position.coords.latitude, position.coords.longitude);
-document.getElementsByName('lat').value=position.coords.latitude;
-console.log(document.getElementsByName('lat').value);
-document.getElementsByName('long').value=position.coords.longitude;
-postData();
-//document.getElementById('loginSubmit').submit();
-});
-
-
-}
-
 function carga(){
+Pedir_Rutas();
+}
+
+var rutaactiva=0;
+/*datos_graf=[{"datos":[{"id":"P_1","cx":"85","cy":"70","r":"5"},
+                      {"id":"P_2","cx":"115","cy":"130","r":"5"},
+                      {"id":"P_3","cx":"190","cy":"130","r":"5"},
+                      {"id":"P_4","cx":"115","cy":"180","r":"5"},
+                      {"id":"P_5","cx":"153","cy":"180","r":"5"},
+                      {"id":"P_10","cx":"280","cy":"180","r":"5"}
+                     ],
+             "anchor":"500",
+             "altor":"500";
+             "cordenadas":[{"cx":"85","cy":"85"},
+                           {"cx":"95","cy":"85"},
+                           {"cx":"85","cy":"95"},
+                           {"cx":"95","cy":"105"},
+                           {"cx":"85","cy":"115"}
+                          ]
+            },
+            {"datos":[{"id":"P_1","cx":"95","cy":"70","r":"5"},
+                      {"id":"P_2","cx":"115","cy":"130","r":"5"},
+                      {"id":"P_3","cx":"190","cy":"130","r":"5"},
+                      {"id":"P_4","cx":"115","cy":"180","r":"5"},
+                      {"id":"P_5","cx":"153","cy":"180","r":"5"},
+                      {"id":"P_10","cx":"280","cy":"180","r":"5"}
+                     ],
+             "anchor":"500",
+             "altor":"500",
+             "cordenadas":[{"cx":"85","cy":"85"},
+                           {"cx":"85","cy":"85"},
+                           {"cx":"85","cy":"85"},
+                           {"cx":"85","cy":"85"},
+                           {"cx":"85","cy":"85"}
+                          ]            
+            },
+            {"datos":[{"id":"P_1","cx":"100","cy":"70","r":"5"},
+                      {"id":"P_3","cx":"125","cy":"130","r":"5"},
+                      {"id":"P_5","cx":"195","cy":"130","r":"5"},
+                      {"id":"P_7","cx":"120","cy":"180","r":"5"},
+                      {"id":"P_10","cx":"250","cy":"180","r":"5"}
+                     ],
+             "anchor":"500",
+             "altor":"500",
+             "cordenadas":[{"cx":"85","cy":"85"},
+                           {"cx":"85","cy":"85"},
+                           {"cx":"85","cy":"85"},
+                           {"cx":"85","cy":"85"},
+                           {"cx":"85","cy":"85"}
+                          ]
+            }
+          ];
+
+svgobject= datos_graf[0];
+*/
+/* svgobject.data= new Array(5);
+svgobject.data[0]=new circulo("P_1",95,70,5);
+svgobject.data[1]=new circulo("P_2",115,130,5);
+svgobject.data[2]=new circulo("P_3",190,130,5);
+svgobject.data[3]=new circulo("P_4",115,180,5);
+svgobject.data[4]=new circulo("P_5",153,180,5);
+svgobject.anchor=500;
+svgobject.altor=500;
+activo=[];
+//alert(svgobject.anchor)
+for (var j=0;j<svgobject.data.length;j++){
+activo[j]=1;
+}
+*/
+
+function circulo(d1,d2,d3,d4){
+this.leyenda=d1;
+this.centro=[d2,d3];
+this.radio=d4;
+}
+
+function cambiacolor(e){
+var b=document.getElementsByName("r1");
+for (var i=0;i<b.length;i++){
+if (e===b[i]) {var num=i;break}
+}
+
+//var divsvg = document.getElementById("svg");
+//divsvg.hidden=true;
+
+muestra_parada2(datos_graf[rutaactiva]["datos"][num]["id"])
+console.log(e);
+}
+
+function muestrasvg(o,ancho,alto,imagen){
+var divsvg = document.getElementById("svg");
+//divsvg.style="position: fixed; top :100px; height: 70%;left: 10px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical; overflow-x: scroll;";
+divsvg.style="height: 70%; width:100% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical; overflow-x: scroll;";
+
+var textoT='';
+divsvg.hidden=false;
+//divsvg.style.backgroundImage = 'url("'+imagen+'")';
+
+textoT+='<svg position: relative; width="'+ancho+'" height="'+alto+'">';
+textoT+='<image id="imag" width="'+ancho+'" height="'+alto+'" href='+imagen+' />';
+
+var n=o.datos.length;
+console.log(n);
+for (var i=0;i<n;i++) {
+var centx=o.datos[i].cx*(ancho/o.anchor);
+var centy=o.datos[i].cy*(alto/o.altor);
+var radio=o.datos[i].r*(ancho/o.anchor);
+console.log(centx+" "+centy+" "+radio);
+//textoT+='<circle name="r1"  onclick="cambiacolor(this);" cx="30" cy="30" r="10" />';
+textoT+='<circle name="r1" onclick="cambiacolor(this);" cx="'+centx +'" cy="'+centy +'" r="'+radio+'" stroke="black" stroke-width="3" opacity= "1"/>';
 
 }
-function postData() {
+
+var n=o.cordenadas.length;
+for (var i=0;i<n;i++) {
+var px=o.cordenadas[i].cx*(ancho/o.anchor);
+var py=o.cordenadas[i].cy*(ancho/o.anchor);
+if (i>0) {
+   textoT+='<line x1="'+pxant+'" y1="'+pyant+'" x2="'+px+'" y2="'+ py+'" stroke="blue" stroke-width="3"  />'
+}
+var pxant=px;
+var pyant=py;
+
+}
+
+
+textoT+='</svg>';
+textoT+='<br><span id="mleyenda" ></span><br>';
+textoT+='<button onclick="quitarsvg();">Ok </button>';
+divsvg.innerHTML=textoT;
+for (var i=0;i<n;i++) {
+  document.getElementsByName("r1")[i].style.fill="black"; 
+}
+
+var img = document.getElementById('imag');
+    var altoDefinido = img.height; // 300
+    var altoOriginal = img.naturalHeight; // 600
+    var anchoDefinido = img.width; // 300
+    var anchoOriginal = img.naturalWidth; // 600
+    console.log(altoDefinido);
+
+}
+ function muestraleyenda(e){
+document.getElementById("mleyenda").innerHTML=e.title;
+}
+
+function quitarsvg(){
+var divsvg = document.getElementById("svg");
+divsvg.style.display="none";
+}
+
+function despliega_imagen_ruta(ruta){
+rutaactiva=ruta;
+console.log('ruta:'+ruta);
+var divdisplay=document.getElementById("display");
+divdisplay.innerHTML='';
+var fuente=rutas[ruta]["id"]+'.jpg';
+
+muestrasvg(datos_graf[ruta],700,700,fuente)
+
+//var texto='<img src="'+rutas[ruta]["id"]+'.jpg" width="100%" height="100%">';
+//divdisplay.innerHTML=texto;
+
+}
+function quitar(){
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
+}
+
+function muestra_parada2(codpar){
+console.log(codpar);
+var texto='';
+var divparada=document.getElementById("parada");
+divparada.style="position: fixed; top :200px; font-size:15px; height: 30%;left: 30px; width:40% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;fill: red; overflow-x: scroll;";
+
+//var divruta=document.getElementById("ruta");
+//divruta.innerHTML="";
+texto+='<div style="position: fixed; text-align:right;background-color: gray;width:40%;">';
+texto+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
+
+//var divdisplay=document.getElementById("display");
+var rutas=paradas.length;
+var enc=false;
+var k=0;
+var np=paradas.length;
+while (!enc && k<np){
+  if (codpar==paradas[k]["id"]) {enc=true} else {k++}
+}
+if (enc) {
+texto+='<center>'+paradas[k]["nombre"]+'</center>';
+var nr=paradas[k]["rutas"].length;
+var param=paradas[k]["latitud"]+','+paradas[k]["longitud"];
+console.log(param);
+texto+='Ubicacion:'+paradas[k]["latitud"]+' '+paradas[k]["longitud"]+'<button onclick="muestra_enlace('+'\''+param+'\''+')"> </button><br>';
+//texto+='Longitud: '+grad_min_seg(paradas[k]["longitud"])+'<br>';
+for (j=1;j<=nr;j++){
+var idruta=getIdRuta(paradas[k]["rutas"][j-1]);
+texto+='<button onclick="displayruta('+ idruta +');">'+Nombre_ruta(paradas[k]["rutas"][j-1])+'</button><br>';
+}
+
+}
+divparada.innerHTML=texto;
+divparada.hidden=false;
+}
+
+var latitud;
+var longitud;
+var id='01';
+var fecha;
+var tiempo;
+var hoy;
+var watchID;
+var rutas;
+var paradas;
+
+function Despliega_Rutas(){
+var divdisplay=document.getElementById("display");
+var divruta=document.getElementById("ruta");
+var divsvg=document.getElementById("svg");
+divsvg.hidden=true;
+
+divruta.innerHTML="";
+divdisplay.hidden=false;
+var texto="<center>";
+var nrutas=rutas.length
+for (var j=0;j<nrutas;j++){
+ texto+='<button onclick="displayruta('+j+')">'+rutas[j]["nombre"]+'</button><br>'
+ console.log(rutas[j]["nombre"]);
+}
+texto+="</center>";
+divdisplay.innerHTML=texto;
+}
+
+function Despliega_paradas(){
+var divdisplay=document.getElementById("display");
+var divruta=document.getElementById("ruta");
+divruta.hidden=true;
+var divsvg = document.getElementById("svg");
+divsvg.style.display="none";
+
+var texto="<center>";
+var nparadas=paradas.length
+for (var j=0;j<nparadas;j++){
+ var codpar=paradas[j]["id"];
+ texto+='<p onclick="muestra_parada(\''+codpar+'\')">'+paradas[j]["nombre"]+'</p>'
+ console.log(paradas[j]["nombre"]);
+}
+texto+="</center>";
+divdisplay.innerHTML=texto;
+
+
+}
+
+function getIdRuta(id){
+var nr=rutas.length;
+var enc=false;
+var k=0;
+while (!enc && k<nr){
+  if (id==rutas[k]["id"]) {enc=true} else {k++}
+}
+if (enc) { return k; } else {return -1}
+}
+
+
+function Nombre_ruta(id){
+console.log('id: '+id);
+var nr=rutas.length;
+var enc=false;
+var k=0;
+while (!enc && k<nr){
+  if (id==rutas[k]["id"]) {enc=true} else {k++}
+}
+if (enc) { return rutas[k]["nombre"] } else {return "imnominada"}
+
+}
+
+function muestra_parada(codpar){
+console.log(codpar);
+var divruta=document.getElementById("ruta");
+divruta.innerHTML="";
+var divsvg = document.getElementById("svg");
+divsvg.style.display="none";
+var divdisplay=document.getElementById("display");
+var rutas=paradas.length;
+var enc=false;
+var k=0;
+var np=paradas.length;
+while (!enc && k<np){
+  if (codpar==paradas[k]["id"]) {enc=true} else {k++}
+}
+if (enc) {
+var texto='<center>'+paradas[k]["nombre"]+'</center>';
+var nr=paradas[k]["rutas"].length;
+var param=paradas[k]["latitud"]+','+paradas[k]["longitud"];
+console.log(param);
+texto+='Ubicacion:'+paradas[k]["latitud"]+' '+paradas[k]["longitud"]+'<button onclick="muestra_enlace('+'\''+param+'\''+')"> </button><br>';
+//texto+='Longitud: '+grad_min_seg(paradas[k]["longitud"])+'<br>';
+for (j=1;j<=nr;j++){
+var idruta=getIdRuta(paradas[k]["rutas"][j-1]);
+texto+='<button onclick="displayruta('+ idruta +');">'+Nombre_ruta(paradas[k]["rutas"][j-1])+'</button><br>';
+}
+
+}
+divdisplay.innerHTML=texto;
+
+}
+function muestra_enlace(local){
+console.log(local);
+//var divdisplay=document.getElementById("display");
+//texto='<iframe src="https://maps.google.com/?q='+local+'" style="width: 90%; height: 80%" ></iframe>';
+window.open('https://maps.google.com/?q='+local);
+//divdisplay.innerHTML=texto;
+
+}
+function despliega_paradas_ruta(ruta){
+var divdisplay=document.getElementById("display");
+var divsvg = document.getElementById("svg");
+divsvg.style.display="none";
+
+var np=rutas[ruta]["paradas"].length;
+var texto="";
+for (j=0;j<np;j++){
+var codpar=rutas[ruta]["paradas"][j].toString();
+console.log(codpar);
+texto+='<div class="barra"><button onclick="muestra_parada(\''+codpar+'\');">'+rutas[ruta]["paradas"][j]+'</button></div>';
+}
+divdisplay.innerHTML=texto;
+}
+
+function grad_min_seg(num){
+var numabs=Math.abs(num);
+var grados=Math.trunc(numabs);
+var resto=numabs-grados;
+var min=Math.trunc(resto*60);
+resto=resto*60-min;
+var seg=resto*60;
+seg =Math.trunc(seg*100)/100;
+return grados+'G'+min+'\''+seg+'\'\'';
+}
+
+function despliega_horsem(ruta){
+var divsvg = document.getElementById("svg");
+divsvg.style.display="none";
+var divdisplay=document.getElementById("display");
+var npu=rutas[ruta]["horariosutiles"].length;
+var nps=rutas[ruta]["horariossabados"].length;
+var npd=rutas[ruta]["horariosdomingos"].length;
+var npu2=rutas[ruta]["horariosutiles2"].length;
+var nps2=rutas[ruta]["horariossabados2"].length;
+var npd2=rutas[ruta]["horariosdomingos2"].length;
+
+var npm=Math.max(npu,nps,npd,npu2,nps2,npd2);
+var texto='<table id="tabla_h" style="font-size: 60px;"><tr><td colspan="2">Semana</td><td colspan="2">Sabados</td><td colspan="2">Domingos</td></tr>';
+texto+='<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0];
+for (j=0;j<npm;j++){
+texto+='<tr>';
+if (j<npu) {texto+='<td>'+rutas[ruta]["horariosutiles"][j]+'</td>'} else {texto+='<td></td>'}
+if (j<nps) {texto+='<td>'+rutas[ruta]["horariossabados"][j]+'</td>'} else {texto+='<td></td>'}
+if (j<npd) {texto+='<td>'+rutas[ruta]["horariosdomingos"][j]+'</td>'} else {texto+='<td></td>'}
+if (j<npu2) {texto+='<td>'+rutas[ruta]["horariosutiles2"][j]+'</td>'} else {texto+='<td></td>'}
+if (j<nps2) {texto+='<td>'+rutas[ruta]["horariossabados2"][j]+'</td>'} else {texto+='<td></td>'}
+if (j<npd2) {texto+='<td>'+rutas[ruta]["horariosdomingos2"][j]+'</td>'} else {texto+='<td></td>'}
+
+texto+='</tr>';
+}
+texto+='</table>';
+divdisplay.style.backgroundColor="gray";
+divdisplay.innerHTML=texto;
+
+}
+function despliega_horsab(ruta){
+var divdisplay=document.getElementById("display");
+var np=rutas[ruta]["Horariossabados"].length;
+var texto="";
+for (j=0;j<np;j++){
+texto+=rutas[ruta]["Horariossabados"][j]+'<br>';
+}
+divdisplay.innerHTML=texto;
+
+}
+function despliega_hordom(ruta){
+var divdisplay=document.getElementById("display");
+var np=rutas[ruta]["Horariosdomingos"].length;
+var texto="";
+for (j=0;j<np;j++){
+texto+=rutas[ruta]["Horariosdomingos"][j]+'<br>';
+}
+divdisplay.innerHTML=texto;
+
+}
+
+
+function displayruta(ruta){
+var divdisplay=document.getElementById("display");
+divdisplay.innerHTML="";
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
+
+var divsvg=document.getElementById("svg");
+divsvg.hidden=true;
+
+var ind=ruta;
+console.log(ind);
+var divruta=document.getElementById("ruta");
+divruta.hidden=false;
+var nparadas=rutas[ind]["paradas"].length;
+
+var texto='<center>'+rutas[ind]["nombre"]+'</center>';
+texto+='<button onclick="despliega_imagen_ruta('+ind+');"> Mapa </button>';
+texto+='<button onclick="despliega_paradas_ruta('+ind+');"> Paradas: </button>';
+texto+='<button onclick="despliega_horsem('+ind+');">Horarios</button>';
+
+//texto+='<button onclick="despliega_horsem('+ind+');">Horarios semanales </button>';
+//texto+='<button onclick="despliega_horsab('+ind+');">Horarios sabados </button>';
+//texto+='<button onclick="despliega_hordom('+ind+');">Horarios Domingos </button>';
+/*
+for (var j=0;j<nparadas;j++){
+texto+=rutas[ind]["paradas"][j]+'<br>'
+console.log(rutas[ind]["paradas"][j]);
+}
+*/
+divruta.innerHTML=texto;
+var fuente=rutas[ruta]["id"]+'.jpg';
+muestrasvg(datos_graf[ruta],700,700,fuente);
+}
+
+function procesa_rutas(){
+
+console.log(rutas);
+var sel=document.getElementById("select");
+for (var j=0;j<rutas.length;j++){
+ console.log(rutas[j].nombre);  
+var opt = document.createElement("option");
+opt.value = j.toString();
+opt.text = rutas[j].nombre;
+sel.add(opt, null);
+}
+}
+
+function Pedir_Rutas(){
+console.log('paso');
+getDataRutas();
+getDataParadas();
+getDataGraf();
+};
+
+function getDataGraf() {
 var myHeaders = new Headers({
-  'Content-Type': 'text/plain',
-  'X-Custom-Header': 'hello world',
+  //'Content-Type': 'text/plain',
+  'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': '*'
 });
-    const form = document.getElementsByName('loginForm');
-    const data = new FormData();
-    data.append('lat', document.getElementsByName('lat').value);
-    data.append('long',document.getElementsByName('long').value);
-    console.log(data.get('long'));
-    fetch('http://www.bdeabreu.orgfree.com/guarda.php', { headers: myHeaders , method: 'POST', mode: 'cors', body: data}).then(response => {
-       console.log(response.url); 
+
+//    const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
+    const corsAnywhere ='';
+
+     const yourUrl ='https://bdeabreu66.github.io/bus/datagraf.json';
+
+    fetch(corsAnywhere + yourUrl, { header: myHeaders, method: 'GET', mode: 'cors'}).then(response => {
+       //console.log(response.text()); 
        console.log(response.status); 
- 
+       //console.log(response.Body.body); 
       if (!response.ok){
             throw new Error('Network response was not ok.');
             //console.log(response);
         }
-    }).catch(err => console.log(err));
+        response.json().then(function(data) {
+        datos_graf=data;
+        localStorage.setItem("resp_graf", JSON.stringify(datos_graf));
+        console.log(paradas);
+//        procesa_rutas();
+        });
+    }).catch(err => {console.log(err);
+      datos_graf=JSON.parse(localStorage.resp_graf);  
+      console.log('prueba');   
+     //procesa_rutas();
+
+
+});
+}
+
+
+function getDataParadas() {
+var myHeaders = new Headers({
+  //'Content-Type': 'text/plain',
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*'
+});
+
+//    const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
+    const corsAnywhere ='';
+
+     const yourUrl ='https://bdeabreu66.github.io/bus/paradas.json';
+
+    fetch(corsAnywhere + yourUrl, { header: myHeaders, method: 'GET', mode: 'cors'}).then(response => {
+       //console.log(response.text()); 
+       console.log(response.status); 
+       //console.log(response.Body.body); 
+      if (!response.ok){
+            throw new Error('Network response was not ok.');
+            //console.log(response);
+        }
+        response.json().then(function(data) {
+        paradas=data;
+        localStorage.setItem("resp_paradas", JSON.stringify(paradas));
+        console.log(paradas);
+//        procesa_rutas();
+        });
+    }).catch(err => {console.log(err);
+      paradas=JSON.parse(localStorage.resp_paradas);  
+      console.log('prueba');   
+     //procesa_rutas();
+
+
+});
+}
+
+
+function getDataRutas() {
+var myHeaders = new Headers({
+  //'Content-Type': 'text/plain',
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*'
+});
+
+//    const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
+    const corsAnywhere = '';
+
+     const yourUrl ='https://bdeabreu66.github.io/bus/rutas.json';
+
+    fetch(corsAnywhere + yourUrl, { header: myHeaders, method: 'GET', mode: 'cors'}).then(response => {
+       //console.log(response.text()); 
+       console.log(response.status); 
+       //console.log(response.Body.body); 
+      if (!response.ok){
+            throw new Error('Network response was not ok.');
+            //console.log(response);
+        }
+        response.json().then(function(data) {
+        rutas=data;
+        localStorage.setItem("resp_rutas", JSON.stringify(rutas));
+
+        console.log(rutas);
+ //       procesa_rutas();
+        });
+    }).catch(err => {console.log(err);
+      rutas=JSON.parse(localStorage.resp_rutas);    
+
+//procesa_rutas();
+
+
+});
+}
+
+
+
+function postData() {
+var myHeaders = new Headers({
+  //'Content-Type': 'text/plain',
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*'
+});
+
+    const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
+
+     const yourUrl ='bdeabreu.42web.io/guarda.php';
+
+    const form = document.getElementsByName('loginForm');
+    const data = new FormData();
+    data.append('lat', latitud);
+    data.append('long',longitud);
+    data.append('id',id);
+    data.append('fecha',fecha);
+    data.append('tiempo',tiempo);
+    console.log(data.get('fecha'));
+    fetch(corsAnywhere + yourUrl, { header: myHeaders, method: 'POST', mode: 'cors', body: data}).then(response => {
+       //console.log(response.text()); 
+       console.log(response.status); 
+       //console.log(response.Body.body); 
+      if (!response.ok){
+            throw new Error('Network response was not ok.');
+            //console.log(response);
+        }
+        response.text().then(function(data) {
+        console.log(data);
+        });
+    }).catch(err => {console.log(err); 
+    
+});
 }
 
 function stop_Reporte(){
@@ -147,6 +718,7 @@ navigator.geolocation.clearWatch(watchID);
 }
 
 function reportar(x,y){
+console.log('paso2');
 var divpos=document.getElementById("pos");
 divpos.innerHTML="Latitud: "+x+ " Longitud: "+y;
 
@@ -201,35 +773,6 @@ function showError(err) {
 
 //Actualiza_dolar();
 
-function Actualiza_dolar(){
-var nomb="https://s3.amazonaws.com/dolartoday/data.json"
-//var myHeaders = new Headers();
-var myInit = { mode: 'cors' };
-
-fetch(nomb,myInit)
-        .then(ajaxPositiveD)
-        .catch(showErrorD);
-
-function ajaxPositiveD(response) {
-      console.log('response.ok: ', response.ok);
-      if(response.ok) {
-        response.json().then(showResultD);
-      } else {
-        showErrorD('status code: ' + response.status);
-      }
-    }
- function showResultD(txt) {
-       console.log('muestro respuesta: ', txt.USD.sicad2);
-       document.getElementById("t1").value = txt.USD.promedio;
-       document.getElementById("t2").value = txt.USD.sicad2;
-       refresca();
-  }
-
-function showErrorD(err) { 
-      console.log('muestor error', err);
-    }
-
-}
 
 </script>
 </BODY>
