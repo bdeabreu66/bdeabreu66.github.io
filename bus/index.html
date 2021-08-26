@@ -14,7 +14,11 @@ input[type=number]{
 width: 3em;
 }
 
-
+#parada {
+  border: 2px solid red;
+  border-radius: 10%;
+  font-size:0.5em;
+}
 .btop{
 
 font-size:2em;
@@ -53,10 +57,18 @@ input[type=text]:focus {
   background-color: white;
   text-align: center;
 }
+.parlist {
+font-family: Arial, Helvetica, sans-serif;
+font-size:1.5rem;
+
+color:darkblue;
+padding:2px;
+margin:2px;
+}
 
 p{
 font-size:1.5rem;
-background-color:black;
+background-color:white;
 color:white;
 padding:0px;
 margin:0px;
@@ -65,7 +77,11 @@ margin:0px;
 td{
 font-size:1.5rem;
 padding:5px;
+
+text-align: center;
 }
+
+
 table{
 margin:0px;
 padding:0px;
@@ -108,9 +124,11 @@ td {
 </HEAD>
 
 
+
+
 <BODY onload="carga();">
 <br>
-<div> Sistema de Transporte </div>
+<div> <center>Sistema de Transporte </center></div>
  <div id="header"> <button class="btop" onclick="Despliega_Rutas();">Rutas</button>&nbsp&nbsp<button class="btop" onclick="Despliega_paradas();">Paradas</button></div>
  <div id="pos"></div>
 <!--   -->
@@ -126,58 +144,151 @@ Pedir_Rutas();
 }
 
 var rutaactiva=0;
-/*datos_graf=[{"datos":[{"id":"P_1","cx":"85","cy":"70","r":"5"},
-                      {"id":"P_2","cx":"115","cy":"130","r":"5"},
-                      {"id":"P_3","cx":"190","cy":"130","r":"5"},
-                      {"id":"P_4","cx":"115","cy":"180","r":"5"},
-                      {"id":"P_5","cx":"153","cy":"180","r":"5"},
-                      {"id":"P_10","cx":"280","cy":"180","r":"5"}
+datos_ubic=[{"ruta":"R_1",
+             "ubic":[
+                {"unidad":"U_1","lat":"","longi":""},
+                {"unidad":"U_1","lat":"","longi":""}
+                    ]
+             },
+            {"ruta":"R_1",
+                "ubic":[
+                   {"unidad":"U_1","lat":"","longi":""},
+                   {"unidad":"U_1","lat":"","longi":""}
+                       ]
+             } 
+           ];
+
+datos_graf=[{"datos":[{"id":"P_27","cx":"795","cy":"773","r":"5"},
+                      {"id":"P_28","cx":"731","cy":"710","r":"5"},
+                      {"id":"P_29","cx":"678","cy":"674","r":"5"},
+                      {"id":"P_30","cx":"625","cy":"637","r":"5"},
+                      {"id":"P_31","cx":"576","cy":"605","r":"5"},
+                      {"id":"P_32","cx":"463","cy":"516","r":"5"},
+                      {"id":"P_33","cx":"365","cy":"499","r":"5"},
+                      {"id":"P_34","cx":"342","cy":"471","r":"5"},
+                      {"id":"P_35","cx":"279","cy":"449","r":"5"},
+                      {"id":"P_36","cx":"284","cy":"413","r":"5"},
+                      {"id":"P_37","cx":"272","cy":"371","r":"5"},
+                      {"id":"P_38","cx":"246","cy":"297","r":"5"},
+                      {"id":"P_39","cx":"184","cy":"206","r":"5"},
+                      {"id":"P_40","cx":"183","cy":"140","r":"5"},
+                      {"id":"P_41","cx":"222","cy":"253","r":"5"},
+                      {"id":"P_42","cx":"219","cy":"301","r":"5"},
+                      {"id":"P_43","cx":"246","cy":"372","r":"5"},
+                      {"id":"P_44","cx":"258","cy":"416","r":"5"},
+                      {"id":"P_45","cx":"247","cy":"477","r":"5"},
+                      {"id":"P_46","cx":"308","cy":"497","r":"5"},
+                      {"id":"P_47","cx":"336","cy":"526","r":"5"},
+                      {"id":"P_48","cx":"451","cy":"541","r":"5"},
+                      {"id":"P_49","cx":"551","cy":"624","r":"5"},
+                      {"id":"P_50","cx":"612","cy":"661","r":"5"},
+                      {"id":"P_51","cx":"666","cy":"697","r":"5"},
+                      {"id":"P_52","cx":"714","cy":"728","r":"5"}
                      ],
-             "anchor":"500",
-             "altor":"500";
-             "cordenadas":[{"cx":"85","cy":"85"},
+             "anchor":"999",
+             "altor":"999",
+             "coordenadas1":[
+                           {"cx":"85","cy":"85"},
                            {"cx":"95","cy":"85"},
                            {"cx":"85","cy":"95"},
+                           ],
+              "coordenadas2":[
                            {"cx":"95","cy":"105"},
                            {"cx":"85","cy":"115"}
                           ]
             },
-            {"datos":[{"id":"P_1","cx":"95","cy":"70","r":"5"},
-                      {"id":"P_2","cx":"115","cy":"130","r":"5"},
-                      {"id":"P_3","cx":"190","cy":"130","r":"5"},
-                      {"id":"P_4","cx":"115","cy":"180","r":"5"},
-                      {"id":"P_5","cx":"153","cy":"180","r":"5"},
-                      {"id":"P_10","cx":"280","cy":"180","r":"5"}
-                     ],
-             "anchor":"500",
-             "altor":"500",
-             "cordenadas":[{"cx":"85","cy":"85"},
+            {"datos":[{"id":"P_1","cx":"819","cy":"451","r":"5"},
+                      {"id":"P_2","cx":"753","cy":"383","r":"5"},
+                      {"id":"P_3","cx":"644","cy":"402","r":"5"},
+                      {"id":"P_4","cx":"592","cy":"430","r":"5"},
+                      {"id":"P_5","cx":"541","cy":"437","r":"5"},
+                      {"id":"P_6","cx":"525","cy":"471","r":"5"},
+                      {"id":"P_7","cx":"462","cy":"493","r":"5"},
+                      {"id":"P_8","cx":"459","cy":"528","r":"5"},
+                      {"id":"P_9","cx":"454","cy":"562","r":"5"},
+                      {"id":"P_10","cx":"450","cy":"625","r":"5"},
+                      {"id":"P_11","cx":"355","cy":"610","r":"5"},
+                      {"id":"P_12","cx":"318","cy":"665","r":"5"},
+                      {"id":"P_13","cx":"200","cy":"666","r":"5"},
+                      {"id":"P_14","cx":"123","cy":"623","r":"5"},
+                      {"id":"P_15","cx":"183","cy":"716","r":"5"},
+                      {"id":"P_16","cx":"329","cy":"705","r":"5"},
+                      {"id":"P_17","cx":"366","cy":"646","r":"5"},
+                      {"id":"P_18","cx":"496","cy":"673","r":"5"},
+                      {"id":"P_19","cx":"492","cy":"587","r":"5"},
+                      {"id":"P_20","cx":"488","cy":"546","r":"5"},
+                      {"id":"P_21","cx":"509","cy":"512","r":"5"},
+                      {"id":"P_22","cx":"552","cy":"508","r":"5"},
+                      {"id":"P_23","cx":"560","cy":"465","r":"5"},
+                      {"id":"P_24","cx":"597","cy":"458","r":"5"},
+                      {"id":"P_25","cx":"649","cy":"439","r":"5"},
+                      {"id":"P_26","cx":"730","cy":"422","r":"5"}
+                    ],
+             "anchor":"1000",
+             "altor":"1000",
+             "coordenadas1":[{"cx":"85","cy":"85"},
                            {"cx":"85","cy":"85"},
                            {"cx":"85","cy":"85"},
                            {"cx":"85","cy":"85"},
                            {"cx":"85","cy":"85"}
-                          ]            
-            },
-            {"datos":[{"id":"P_1","cx":"100","cy":"70","r":"5"},
-                      {"id":"P_3","cx":"125","cy":"130","r":"5"},
-                      {"id":"P_5","cx":"195","cy":"130","r":"5"},
-                      {"id":"P_7","cx":"120","cy":"180","r":"5"},
-                      {"id":"P_10","cx":"250","cy":"180","r":"5"}
-                     ],
-             "anchor":"500",
-             "altor":"500",
-             "cordenadas":[{"cx":"85","cy":"85"},
+                          ],            
+             "coordenadas2":[{"cx":"85","cy":"85"},
                            {"cx":"85","cy":"85"},
                            {"cx":"85","cy":"85"},
                            {"cx":"85","cy":"85"},
                            {"cx":"85","cy":"85"}
                           ]
+            },
+            {"datos":[{"id":"P_53","cx":"181","cy":"634","r":"5"},
+                      {"id":"P_54","cx":"188","cy":"667","r":"5"},
+                      {"id":"P_41","cx":"235","cy":"640","r":"5"},
+                      {"id":"P_55","cx":"207","cy":"610","r":"5"},
+                      {"id":"P_56","cx":"201","cy":"588","r":"5"},
+                      {"id":"P_57","cx":"198","cy":"561","r":"5"},
+                      {"id":"P_58","cx":"190","cy":"537","r":"5"},
+                      {"id":"P_59","cx":"185","cy":"498","r":"5"},
+                      {"id":"P_60","cx":"220","cy":"500","r":"5"},
+                      {"id":"P_61","cx":"860","cy":"496","r":"5"},
+                      {"id":"P_62","cx":"189","cy":"459","r":"5"},
+                      {"id":"P_63","cx":"145","cy":"461","r":"5"},
+                      {"id":"P_64","cx":"159","cy":"520","r":"5"},
+                      {"id":"P_65","cx":"164","cy":"550","r":"5"},
+                      {"id":"P_66","cx":"176","cy":"580","r":"5"},
+                      {"id":"P_67","cx":"178","cy":"609","r":"5"}
+                     ],
+             "anchor":"1000",
+             "altor":"1000",
+             "coordenadas1":[{"cx":"183","cy":"612"},
+                            {"cx":"193","cy":"659"},
+                            {"cx":"221","cy":"660"},
+                            {"cx":"238","cy":"647"},
+                            {"cx":"232","cy":"604"},
+                            {"cx":"211","cy":"603"},
+                            {"cx":"185","cy":"474"},
+                            {"cx":"239","cy":"477"},
+                            {"cx":"239","cy":"462"},
+                            {"cx":"220","cy":"358"},
+                            {"cx":"247","cy":"303"},
+                            {"cx":"482","cy":"246"},
+                            {"cx":"607","cy":"233"},
+                            {"cx":"663","cy":"280"},
+                            {"cx":"667","cy":"474"},
+                            {"cx":"736","cy":"462"},
+                            {"cx":"766","cy":"512"}
+                          ],
+             "coordenadas2":[{"cx":"85","cy":"85"},
+                            {"cx":"85","cy":"85"},
+                            {"cx":"85","cy":"85"},
+                            {"cx":"85","cy":"85"},
+                            {"cx":"85","cy":"85"}
+                          ]
+     
             }
           ];
 
+/*
 svgobject= datos_graf[0];
-*/
-/* svgobject.data= new Array(5);
+ svgobject.data= new Array(5);
 svgobject.data[0]=new circulo("P_1",95,70,5);
 svgobject.data[1]=new circulo("P_2",115,130,5);
 svgobject.data[2]=new circulo("P_3",190,130,5);
@@ -213,8 +324,8 @@ console.log(e);
 
 function muestrasvg(o,ancho,alto,imagen){
 var divsvg = document.getElementById("svg");
-//divsvg.style="position: fixed; top :100px; height: 70%;left: 10px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical; overflow-x: scroll;";
-divsvg.style="height: 70%; width:100% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical; overflow-x: scroll;";
+//divsvg.style="position: fixed; top :100px; height: 70%;left: 0px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical; overflow-x: scroll;";
+divsvg.style="height: 70%; width:100% ;background-color: white;color:green; text-align: left; border: 1px solid #73AD21;resize:vertical; overflow-x: scroll;";
 
 var textoT='';
 divsvg.hidden=false;
@@ -235,16 +346,28 @@ textoT+='<circle name="r1" onclick="cambiacolor(this);" cx="'+centx +'" cy="'+ce
 
 }
 
-var n=o.cordenadas.length;
+var n=o.coordenadas1.length;
+var color="blue";
 for (var i=0;i<n;i++) {
-var px=o.cordenadas[i].cx*(ancho/o.anchor);
-var py=o.cordenadas[i].cy*(ancho/o.anchor);
+var px=o.coordenadas1[i].cx*(ancho/o.anchor);
+var py=o.coordenadas1[i].cy*(ancho/o.anchor);
 if (i>0) {
-   textoT+='<line x1="'+pxant+'" y1="'+pyant+'" x2="'+px+'" y2="'+ py+'" stroke="blue" stroke-width="3"  />'
+   textoT+='<line x1="'+pxant+'" y1="'+pyant+'" x2="'+px+'" y2="'+ py+'" stroke="'+color+'" stroke-width="3"  />'
 }
 var pxant=px;
 var pyant=py;
+}
 
+var n=o.coordenadas2.length;
+var color="black";
+for (var i=0;i<n;i++) {
+var px=o.coordenadas2[i].cx*(ancho/o.anchor);
+var py=o.coordenadas2[i].cy*(ancho/o.anchor);
+if (i>0) {
+   textoT+='<line x1="'+pxant+'" y1="'+pyant+'" x2="'+px+'" y2="'+ py+'" stroke="'+color+'" stroke-width="3"  />'
+}
+var pxant=px;
+var pyant=py;
 }
 
 
@@ -276,11 +399,13 @@ divsvg.style.display="none";
 function despliega_imagen_ruta(ruta){
 rutaactiva=ruta;
 console.log('ruta:'+ruta);
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
 var divdisplay=document.getElementById("display");
 divdisplay.innerHTML='';
 var fuente=rutas[ruta]["id"]+'.jpg';
 
-muestrasvg(datos_graf[ruta],700,700,fuente)
+muestrasvg(datos_graf[ruta],500,500,fuente)
 
 //var texto='<img src="'+rutas[ruta]["id"]+'.jpg" width="100%" height="100%">';
 //divdisplay.innerHTML=texto;
@@ -295,12 +420,12 @@ function muestra_parada2(codpar){
 console.log(codpar);
 var texto='';
 var divparada=document.getElementById("parada");
-divparada.style="position: fixed; top :200px; font-size:15px; height: 30%;left: 30px; width:40% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;fill: red; overflow-x: scroll;";
+divparada.style="position: fixed; top :200px;  height: 20%;left: 10px; width:30% ;background-color: white;color:green; text-align: left; ";
 
 //var divruta=document.getElementById("ruta");
 //divruta.innerHTML="";
-texto+='<div style="position: fixed; text-align:right;background-color: gray;width:40%;">';
-texto+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
+//texto+='<div style="position: fixed; text-align:right;background-color: gray;width:40%;">';
+//texto+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
 
 //var divdisplay=document.getElementById("display");
 var rutas=paradas.length;
@@ -315,11 +440,13 @@ texto+='<center>'+paradas[k]["nombre"]+'</center>';
 var nr=paradas[k]["rutas"].length;
 var param=paradas[k]["latitud"]+','+paradas[k]["longitud"];
 console.log(param);
-texto+='Ubicacion:'+paradas[k]["latitud"]+' '+paradas[k]["longitud"]+'<button onclick="muestra_enlace('+'\''+param+'\''+')"> </button><br>';
+//texto+='Ubicacion: <br>'+'Latitud:'+paradas[k]["latitud"]+'<br>';
+//texto+='Longitud: '+paradas[k]["longitud"]+'<button onclick="muestra_enlace('+'\''+param+'\''+')"> </button><br>';
 //texto+='Longitud: '+grad_min_seg(paradas[k]["longitud"])+'<br>';
 for (j=1;j<=nr;j++){
 var idruta=getIdRuta(paradas[k]["rutas"][j-1]);
-texto+='<button onclick="displayruta('+ idruta +');">'+Nombre_ruta(paradas[k]["rutas"][j-1])+'</button><br>';
+var idt="te_"+(j-1).toString()+"_"+k.toString();
+texto+='<p class="parlist" onclick="displayruta('+ idruta +');">'+Nombre_ruta(paradas[k]["rutas"][j-1])+' </p> <span id="'+idt+'"></span>';
 }
 
 }
@@ -342,13 +469,14 @@ var divdisplay=document.getElementById("display");
 var divruta=document.getElementById("ruta");
 var divsvg=document.getElementById("svg");
 divsvg.hidden=true;
-
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
 divruta.innerHTML="";
 divdisplay.hidden=false;
 var texto="<center>";
 var nrutas=rutas.length
 for (var j=0;j<nrutas;j++){
- texto+='<button onclick="displayruta('+j+')">'+rutas[j]["nombre"]+'</button><br>'
+ texto+='<p class="parlist" onclick="displayruta('+j+')">'+rutas[j]["nombre"]+'</p><br>'
  console.log(rutas[j]["nombre"]);
 }
 texto+="</center>";
@@ -358,6 +486,8 @@ divdisplay.innerHTML=texto;
 function Despliega_paradas(){
 var divdisplay=document.getElementById("display");
 var divruta=document.getElementById("ruta");
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
 divruta.hidden=true;
 var divsvg = document.getElementById("svg");
 divsvg.style.display="none";
@@ -366,7 +496,7 @@ var texto="<center>";
 var nparadas=paradas.length
 for (var j=0;j<nparadas;j++){
  var codpar=paradas[j]["id"];
- texto+='<p onclick="muestra_parada(\''+codpar+'\')">'+paradas[j]["nombre"]+'</p>'
+ texto+='<p class="parlist" onclick="muestra_parada(\''+codpar+'\')">'+paradas[j]["nombre"]+'</p>'
  console.log(paradas[j]["nombre"]);
 }
 texto+="</center>";
@@ -395,6 +525,17 @@ while (!enc && k<nr){
   if (id==rutas[k]["id"]) {enc=true} else {k++}
 }
 if (enc) { return rutas[k]["nombre"] } else {return "imnominada"}
+}
+
+function Nombre_parada(codpar){
+var enc=false;
+var k=0;
+var np=paradas.length;
+while (!enc && k<np){
+  if (codpar==paradas[k]["id"]) {enc=true} else {k++}
+}
+if (enc) { return paradas[k]["nombre"] } else {return "No encontrada" }
+
 
 }
 
@@ -403,9 +544,8 @@ console.log(codpar);
 var divruta=document.getElementById("ruta");
 divruta.innerHTML="";
 var divsvg = document.getElementById("svg");
-divsvg.style.display="none";
+divsvg.hidden=true;
 var divdisplay=document.getElementById("display");
-var rutas=paradas.length;
 var enc=false;
 var k=0;
 var np=paradas.length;
@@ -417,13 +557,15 @@ var texto='<center>'+paradas[k]["nombre"]+'</center>';
 var nr=paradas[k]["rutas"].length;
 var param=paradas[k]["latitud"]+','+paradas[k]["longitud"];
 console.log(param);
-texto+='Ubicacion:'+paradas[k]["latitud"]+' '+paradas[k]["longitud"]+'<button onclick="muestra_enlace('+'\''+param+'\''+')"> </button><br>';
+texto+='Ubicacion: <br>'+'Latitud:'+paradas[k]["latitud"]+'<br>';
+texto+='Longitud: '+paradas[k]["longitud"]+'<button onclick="muestra_enlace('+'\''+param+'\''+')"> </button><br>';
+
 //texto+='Longitud: '+grad_min_seg(paradas[k]["longitud"])+'<br>';
+texto+='Rutas asociadas:<br>';
 for (j=1;j<=nr;j++){
 var idruta=getIdRuta(paradas[k]["rutas"][j-1]);
-texto+='<button onclick="displayruta('+ idruta +');">'+Nombre_ruta(paradas[k]["rutas"][j-1])+'</button><br>';
+texto+='<p  class="parlist" onclick="displayruta('+ idruta +');">'+Nombre_ruta(paradas[k]["rutas"][j-1])+'  </p> ';
 }
-
 }
 divdisplay.innerHTML=texto;
 
@@ -440,13 +582,14 @@ function despliega_paradas_ruta(ruta){
 var divdisplay=document.getElementById("display");
 var divsvg = document.getElementById("svg");
 divsvg.style.display="none";
-
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
 var np=rutas[ruta]["paradas"].length;
 var texto="";
 for (j=0;j<np;j++){
 var codpar=rutas[ruta]["paradas"][j].toString();
 console.log(codpar);
-texto+='<div class="barra"><button onclick="muestra_parada(\''+codpar+'\');">'+rutas[ruta]["paradas"][j]+'</button></div>';
+texto+='<div class="barra"><p class="parlist" onclick="muestra_parada(\''+codpar+'\');">'+Nombre_parada(rutas[ruta]["paradas"][j])+'</p></div>';
 }
 divdisplay.innerHTML=texto;
 }
@@ -465,6 +608,8 @@ return grados+'G'+min+'\''+seg+'\'\'';
 function despliega_horsem(ruta){
 var divsvg = document.getElementById("svg");
 divsvg.style.display="none";
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
 var divdisplay=document.getElementById("display");
 var npu=rutas[ruta]["horariosutiles"].length;
 var nps=rutas[ruta]["horariossabados"].length;
@@ -475,7 +620,7 @@ var npd2=rutas[ruta]["horariosdomingos2"].length;
 
 var npm=Math.max(npu,nps,npd,npu2,nps2,npd2);
 var texto='<table id="tabla_h" style="font-size: 60px;"><tr><td colspan="2">Semana</td><td colspan="2">Sabados</td><td colspan="2">Domingos</td></tr>';
-texto+='<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0]+'<td >'+rutas[ruta]["paradas"][0];
+texto+='<td >'+rutas[ruta]["PI"]+'<td >'+rutas[ruta]["PF"]+'<td >'+rutas[ruta]["PI"]+'<td >'+rutas[ruta]["PF"]+'<td >'+rutas[ruta]["PI"]+'<td >'+rutas[ruta]["PF"];
 for (j=0;j<npm;j++){
 texto+='<tr>';
 if (j<npu) {texto+='<td>'+rutas[ruta]["horariosutiles"][j]+'</td>'} else {texto+='<td></td>'}
@@ -487,7 +632,7 @@ if (j<npd2) {texto+='<td>'+rutas[ruta]["horariosdomingos2"][j]+'</td>'} else {te
 
 texto+='</tr>';
 }
-texto+='</table>';
+texto+='</table>';
 divdisplay.style.backgroundColor="gray";
 divdisplay.innerHTML=texto;
 
@@ -544,8 +689,9 @@ console.log(rutas[ind]["paradas"][j]);
 }
 */
 divruta.innerHTML=texto;
-var fuente=rutas[ruta]["id"]+'.jpg';
-muestrasvg(datos_graf[ruta],700,700,fuente);
+despliega_imagen_ruta(ruta);
+//var fuente=rutas[ruta]["id"]+'.jpg';
+//muestrasvg(datos_graf[ruta],500,500,fuente);
 }
 
 function procesa_rutas(){
@@ -565,7 +711,7 @@ function Pedir_Rutas(){
 console.log('paso');
 getDataRutas();
 getDataParadas();
-getDataGraf();
+//getDataGraf();
 };
 
 function getDataGraf() {
@@ -591,7 +737,7 @@ var myHeaders = new Headers({
         response.json().then(function(data) {
         datos_graf=data;
         localStorage.setItem("resp_graf", JSON.stringify(datos_graf));
-        console.log(paradas);
+        console.log(datos_graf);
 //        procesa_rutas();
         });
     }).catch(err => {console.log(err);
