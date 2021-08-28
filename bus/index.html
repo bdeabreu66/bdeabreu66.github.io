@@ -18,11 +18,27 @@ width: 3em;
   border: 2px solid red;
   border-radius: 10%;
   font-size:0.5em;
+  background-color: white;
+}
+
+#display {
+  font-size:1.5 rem;
+  background-color: white;
+}
+
+button {
+font-size:1.5 rem;
+border: 2px solid red;
+border-radius: 15%;
+background-color: lightgray;
+
+
 }
 .btop{
 
-font-size:2em;
-
+font-size:1.5 rem;
+border: 2px solid red;
+border-radius: 15%;
 }
 
 .btn2{
@@ -60,10 +76,12 @@ input[type=text]:focus {
 .parlist {
 font-family: Arial, Helvetica, sans-serif;
 font-size:1.5rem;
+  border: 1px groove red;
+  border-radius: 5%;
 
 color:darkblue;
 padding:2px;
-margin:2px;
+margin:1px;
 }
 
 p{
@@ -128,7 +146,10 @@ td {
 
 <BODY onload="carga();">
 <br>
-<div> <center>Sistema de Transporte </center></div>
+<div>
+<div width="100%" height="20%">
+   <img src="logo.png" width="100%" height="20%">
+</div>
  <div id="header"> <button class="btop" onclick="Despliega_Rutas();">Rutas</button>&nbsp&nbsp<button class="btop" onclick="Despliega_paradas();">Paradas</button></div>
  <div id="pos"></div>
 <!--   -->
@@ -312,6 +333,25 @@ muestra_parada2(datos_graf[rutaactiva]["datos"][num]["id"])
 console.log(e);
 }
 
+function despliega_slider(){
+var divslider=document.getElementById("slide");
+divslider.hidden=false;
+}
+
+function oculta_slider(){
+var divslider=document.getElementById("slide");
+divslider.hidden=true;
+}
+
+vzmax=1.5;
+vzmin=0.8;
+function redibuja(){
+var fuente=rutas[rutaactiva]["id"]+'.jpg';
+var vsl=document.getElementById("myRange");
+var zoom=((vzmax-vzmin)/(vsl.max-vsl.min))*(vsl.value-vsl.min)+vzmin;
+muestrasvg(datos_graf[rutaactiva],parseInt(600*zoom),parseInt(600*zoom),fuente)
+}
+
 function muestrasvg(o,ancho,alto,imagen){
 var divsvg = document.getElementById("svg");
 //divsvg.style="position: fixed; top :100px; height: 70%;left: 0px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical; overflow-x: scroll;";
@@ -320,7 +360,6 @@ divsvg.style="height: 70%; width:100% ;background-color: white;color:green; text
 var textoT='';
 divsvg.hidden=false;
 //divsvg.style.backgroundImage = 'url("'+imagen+'")';
-
 textoT+='<svg position: relative; width="'+ancho+'" height="'+alto+'">';
 textoT+='<image id="imag" width="'+ancho+'" height="'+alto+'" href='+imagen+' />';
 
@@ -387,12 +426,16 @@ divsvg.style.display="none";
 }
 
 function despliega_imagen_ruta(ruta){
+despliega_slider();
 rutaactiva=ruta;
 console.log('ruta:'+ruta);
 var divparada=document.getElementById("parada");
 divparada.hidden=true;
 var divdisplay=document.getElementById("display");
 divdisplay.innerHTML='';
+var divhor=document.getElementById("hor");
+divhor.hidden=true;
+
 var fuente=rutas[ruta]["id"]+'.jpg';
 
 muestrasvg(datos_graf[ruta],500,500,fuente)
@@ -438,12 +481,17 @@ var idruta=getIdRuta(paradas[k]["rutas"][j-1]);
 var idt="te_"+(j-1).toString()+"_"+k.toString();
 texto+='<p class="parlist" onclick="displayruta('+ idruta +');">'+Nombre_ruta(paradas[k]["rutas"][j-1])+' </p> <span id="'+idt+'"></span>';
 }
-
+texto+='<div style="text-align:center;"> <button   title="Salir" onclick="quitar_par2();" > x </button></div>';
 }
 divparada.innerHTML=texto;
 divparada.hidden=false;
 }
+function quitar_par2(){
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
 
+
+}
 var latitud;
 var longitud;
 var id='01';
@@ -466,7 +514,7 @@ divdisplay.hidden=false;
 var texto="<center>";
 var nrutas=rutas.length
 for (var j=0;j<nrutas;j++){
- texto+='<p class="parlist" onclick="displayruta('+j+')">'+rutas[j]["nombre"]+'</p><br>'
+ texto+='<p class="parlist" onclick="displayruta('+j+')">'+rutas[j]["nombre"]+'</p>'
  console.log(rutas[j]["nombre"]);
 }
 texto+="</center>";
@@ -574,6 +622,9 @@ var divsvg = document.getElementById("svg");
 divsvg.style.display="none";
 var divparada=document.getElementById("parada");
 divparada.hidden=true;
+var divhor=document.getElementById("hor");
+divhor.hidden=true;
+oculta_slider();
 var np=rutas[ruta]["paradas"].length;
 var texto="";
 for (j=0;j<np;j++){
@@ -608,44 +659,61 @@ var npu2=rutas[ruta]["horariosutiles2"].length;
 var nps2=rutas[ruta]["horariossabados2"].length;
 var npd2=rutas[ruta]["horariosdomingos2"].length;
 
-var npm=Math.max(npu,nps,npd,npu2,nps2,npd2);
-var texto='<table id="tabla_h" style="font-size: 60px;"><tr><td colspan="2">Semana</td><td colspan="2">Sabados</td><td colspan="2">Domingos</td></tr>';
-texto+='<td >'+rutas[ruta]["PI"]+'<td >'+rutas[ruta]["PF"]+'<td >'+rutas[ruta]["PI"]+'<td >'+rutas[ruta]["PF"]+'<td >'+rutas[ruta]["PI"]+'<td >'+rutas[ruta]["PF"];
+var npm=Math.max(npu,npu2);
+var texto='<table id="tabla_h" style="font-size: 60px;"><tr><td colspan="2">Semana</td></tr>';
+texto+='<tr><td >'+Nombre_parada(rutas[ruta]["PI"])+'</td><td>'+Nombre_parada(rutas[ruta]["PF"])+'</td ></tr>';
 for (j=0;j<npm;j++){
 texto+='<tr>';
 if (j<npu) {texto+='<td>'+rutas[ruta]["horariosutiles"][j]+'</td>'} else {texto+='<td></td>'}
-if (j<nps) {texto+='<td>'+rutas[ruta]["horariossabados"][j]+'</td>'} else {texto+='<td></td>'}
-if (j<npd) {texto+='<td>'+rutas[ruta]["horariosdomingos"][j]+'</td>'} else {texto+='<td></td>'}
 if (j<npu2) {texto+='<td>'+rutas[ruta]["horariosutiles2"][j]+'</td>'} else {texto+='<td></td>'}
-if (j<nps2) {texto+='<td>'+rutas[ruta]["horariossabados2"][j]+'</td>'} else {texto+='<td></td>'}
-if (j<npd2) {texto+='<td>'+rutas[ruta]["horariosdomingos2"][j]+'</td>'} else {texto+='<td></td>'}
-
 texto+='</tr>';
 }
-texto+='</table>';
-divdisplay.style.backgroundColor="gray";
+texto+='</table>';
 divdisplay.innerHTML=texto;
 
 }
 function despliega_horsab(ruta){
+var divsvg = document.getElementById("svg");
+divsvg.style.display="none";
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
 var divdisplay=document.getElementById("display");
-var np=rutas[ruta]["Horariossabados"].length;
-var texto="";
-for (j=0;j<np;j++){
-texto+=rutas[ruta]["Horariossabados"][j]+'<br>';
-}
-divdisplay.innerHTML=texto;
+var nps=rutas[ruta]["horariossabados"].length;
+var nps2=rutas[ruta]["horariossabados2"].length;
 
+var npm=Math.max(nps,nps2);
+var texto='<table id="tabla_h" style="font-size: 60px;"><tr><td colspan="2">Sabado</td></tr>';
+texto+='<td >'+Nombre_parada(rutas[ruta]["PI"])+'</td><td>'+Nombre_parada(rutas[ruta]["PF"])+'</td></tr>';
+for (j=0;j<npm;j++){
+texto+='<tr>';
+if (j<nps) {texto+='<td>'+rutas[ruta]["horariossabados"][j]+'</td>'} else {texto+='<td></td>'}
+if (j<nps2) {texto+='<td>'+rutas[ruta]["horariossabados2"][j]+'</td>'} else {texto+='<td></td>'}
+
+texto+='</tr>';
 }
+texto+='</table>';
+divdisplay.innerHTML=texto;
+}
+
 function despliega_hordom(ruta){
+var divsvg = document.getElementById("svg");
+divsvg.style.display="none";
+var divparada=document.getElementById("parada");
+divparada.hidden=true;
 var divdisplay=document.getElementById("display");
-var np=rutas[ruta]["Horariosdomingos"].length;
-var texto="";
-for (j=0;j<np;j++){
-texto+=rutas[ruta]["Horariosdomingos"][j]+'<br>';
+var npd=rutas[ruta]["horariosdomingos"].length;
+var npd2=rutas[ruta]["horariosdomingos2"].length;
+var npm=Math.max(npd,npd2);
+var texto='<table id="tabla_h" style="font-size: 60px;"><tr><td colspan="2">Domingo</td></tr>';
+texto+='<td>'+Nombre_parada(rutas[ruta]["PI"])+'</td><td>'+Nombre_parada(rutas[ruta]["PF"])+'</td></tr>';
+for (j=0;j<npm;j++){
+texto+='<tr>';
+if (j<npd) {texto+='<td>'+rutas[ruta]["horariosdomingos"][j]+'</td>'} else {texto+='<td></td>'}
+if (j<npd2) {texto+='<td>'+rutas[ruta]["horariosdomingos2"][j]+'</td>'} else {texto+='<td></td>'}
+texto+='</tr>';
 }
+texto+='</table>';
 divdisplay.innerHTML=texto;
-
 }
 
 
@@ -665,13 +733,13 @@ divruta.hidden=false;
 var nparadas=rutas[ind]["paradas"].length;
 
 var texto='<center>'+rutas[ind]["nombre"]+'</center>';
-texto+='<button onclick="despliega_imagen_ruta('+ind+');"> Mapa </button>';
-texto+='<button onclick="despliega_paradas_ruta('+ind+');"> Paradas: </button>';
-texto+='<button onclick="despliega_horsem('+ind+');">Horarios</button>';
-
-//texto+='<button onclick="despliega_horsem('+ind+');">Horarios semanales </button>';
-//texto+='<button onclick="despliega_horsab('+ind+');">Horarios sabados </button>';
-//texto+='<button onclick="despliega_hordom('+ind+');">Horarios Domingos </button>';
+texto+='<button class="btop" onclick="despliega_imagen_ruta('+ind+');"> Mapa </button>';
+texto+='<button class="btop" onclick="despliega_paradas_ruta('+ind+');"> Paradas: </button>';
+texto+='<button class="btop" onclick="despliega_horario_sel('+ind+');">Horarios</button>';
+texto+='<div id="slide" hidden="true"> <input onchange="redibuja();" type="range" min="1" max="100" value="50" class="slider" id="myRange"></div>';
+texto+='<div id="hor" style="text-align:center;" hidden="true"><button onclick="despliega_horsem('+ind+');">Semanales </button>';
+texto+='<button onclick="despliega_horsab('+ind+');">Sabados </button>';
+texto+='<button onclick="despliega_hordom('+ind+');">Domingos </button></div>';
 /*
 for (var j=0;j<nparadas;j++){
 texto+=rutas[ind]["paradas"][j]+'<br>'
@@ -682,6 +750,11 @@ divruta.innerHTML=texto;
 despliega_imagen_ruta(ruta);
 //var fuente=rutas[ruta]["id"]+'.jpg';
 //muestrasvg(datos_graf[ruta],500,500,fuente);
+}
+function despliega_horario_sel(ind){
+var divhor=document.getElementById("hor");
+divhor.hidden=false;
+oculta_slider();
 }
 
 function procesa_rutas(){
