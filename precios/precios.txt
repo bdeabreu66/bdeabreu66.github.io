@@ -135,4 +135,4 @@
       ["Yogurt Fruta durazno 250 x 24",24,48.16,1,0,0,"t2"],
       ["Yogurt Fruta Fresa 125gx24",24,27.28,1,0,0,"t2"],
       ["Yogurt Fruta Fresa 250 x 24",24,48.16,1,0,0,"t2"]
-      ];
+      ]
