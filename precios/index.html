@@ -28,10 +28,12 @@ font-size:1em;
 }
 
 
-#search {
-position:sticky;
-top:20 px;
+#dsearch {
+position:absolute;
+}
 
+#enc {
+position:absolute;
 }
 
 #divt {
@@ -102,7 +104,9 @@ padding:0px;
 
 
 <BODY onload="carga();">
+
 <br>
+<div id="enc">
 <span id="fecha"> </span>
 
 <table>
@@ -110,7 +114,10 @@ padding:0px;
 <tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr>
 </table>
 <center>Lista de precios</center>
+</div>
+<div id="dsearch">
 <input id="search" type="text" oninput="refresca();"> Buscar
+</div>
 <div id="divt" >
 </div>
 <div id="content" hidden="false"></div>
