@@ -13,19 +13,19 @@ width: 3em;
 
 input[type=text]{
 font-size:1em;
-width: 4em;
+width: 8em;
 border: 2px solid red;
 border-radius: 4px;
 padding: 4px 4px;
   margin: 4px 0;
   box-sizing: border-box;
-  background-color: #3CBC8D;
+  background-color: blue;
   color: white;
 }
 
 input[type=number]{
 font-size:1em;
-width: 5em;
+width: 3em;
 border: 2px solid red;
 border-radius: 4px;
 padding: 4px 4px;
@@ -47,37 +47,173 @@ input[type=text]:focus {
 
 <BODY onload="inicio();">
 <div id="datos">
-TASA: <input id="tas" oninput="guarda_tasa();" type="number" value="0">
-
+TASA: <input id="tas" oninput="guarda_tasa();" type="number" value="0"><br>
+Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
+</div>
+<divstyle="scroll:auto; height:70%; >
 <table>
-<tr><td>Producto</td><td>Precio</td><td>M</td></td><td>Cantidad</td><td>Total (Bs)</td></tr>
-<tr><td> Molida </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(0);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Bistec </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(1);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Guisar </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(2);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Mechada </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(3);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Rabo </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(4);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Costilla </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(5);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Pata de Res </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(6);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Frito de puerco </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(7);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Chorizo pollo </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(8);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Chorizo cochino </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(9);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Morcilla </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(10);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Lomito </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(11);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Punta trasera </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(12);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Solomo cuerito </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(13);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Muslos </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(14);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Pechuga </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(15);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Pollo Picado </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(16);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Pollo entero </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(17);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Adic 1 </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(18);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Adic 2 </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(19);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Adic 3 </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(20);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
-<tr><td> Adic 4 </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><button name="m" onclick="change(21);">Bs</button></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr>
+<td>Producto</td>
+<td>Precio</td>
+<td>M</td></td>
+<td>Cantidad</td>
+<td>Total (Bs)</td>
+</tr>
+<tr>
+<td><input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(0);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(1);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(2);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr><td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(3);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(4);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(5);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(6);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(7);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(8);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0">
+</td><td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(9);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(10);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""></td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(11);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(12);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(13);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(14);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(15);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(16);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(17);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(18);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(19);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""> </td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(20);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""></td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(21);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+</tr>
 
 
-
-<tr><td></td><td></td><td></td><td><span id="tot"></span></td></tr>
-<tr><td></td><td></td><td></td><td><span id="tot2"></span></td></tr>
 </table>
 </div>
 
@@ -112,17 +248,25 @@ procesar();
 
 function inicio(){
 try {
+document.getElementById("tas").value=localStorage.getItem("TASACARNE"); 
 var buffer=localStorage.getItem("DATOS"); 
 var buffer2=localStorage.getItem("MONEDAS");
+var buffer3=localStorage.getItem("NOMBRES");
+
 var mo=buffer2.split(","); 
-document.getElementById("tas").value=localStorage.getItem("TASACARNE"); 
+var nom=buffer3.split(","); 
 var pr=buffer.split(",");
+
 var n=pr.length;
 var precios=document.getElementsByName("p");
 var monedas=document.getElementsByName("m");
+var nombres=document.getElementsByName("np");
+
 for (j=0;j<n;j++){ 
 precios[j].value=pr[j];
 monedas[j].innerText=mo[j];
+nombres[j].value=nom[j];
+
 }
 
 }
@@ -133,6 +277,7 @@ catch(e) {}
 
 function procesar(){
 var precios=document.getElementsByName("p");
+var nombres=document.getElementsByName("np");
 var cantidad=document.getElementsByName("c");
 var subtotal=document.getElementsByName("r");
 var n=precios.length;
@@ -141,10 +286,12 @@ var tasa=parseFloat(document.getElementById("tas").value);
 var total=0;
 var buffer="";
 var buffer2="";
+var buffer3="";
 for (j=0;j<n;j++){
 buffer+=precios[j].value;
 buffer2+=moneda[j].innerText;
-if (j!=(n-1)) {buffer+=","; buffer2+=",";}
+buffer3+=nombres[j].value;
+if (j!=(n-1)) {buffer+=","; buffer2+=","; buffer3+=","}
 var tp=(parseFloat(cantidad[j].value)*parseFloat(precios[j].value));
 if (moneda[j].innerText=='$') {tp*=tasa}
 subtotal[j].innerText=tp.toFixed(2);
@@ -152,6 +299,7 @@ total+=tp;
 }
 localStorage.setItem("DATOS",buffer);
 localStorage.setItem("MONEDAS",buffer2);
+localStorage.setItem("NOMBRES",buffer3);
 
 document.getElementById("tot").innerText=total.toFixed(2)+ ' Bs';
 document.getElementById("tot2").innerText=(total/tasa).toFixed(2)+ ' $';
