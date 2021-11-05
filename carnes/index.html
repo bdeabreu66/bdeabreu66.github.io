@@ -1,0 +1,129 @@
+<HTML>
+<HEAD>
+<TITLE>  Precios Carne </TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<!-- <link rel="manifest" href="manifest.json">   -->
+<link rel="manifest" href="manifest.json"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
+
+input[type=number]{
+width: 3em;
+}
+
+input[type=text]{
+font-size:1em;
+width: 4em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+input[type=number]{
+font-size:1em;
+width: 5em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+
+</style>
+
+</HEAD>
+
+
+<BODY onload="inicio();">
+<div id="datos">
+<table>
+<tr><td>Producto</td><td>Precio</td><td>Cantidad</td><td>Total</td></tr>
+<tr><td> Molida </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Bistec </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Guisar </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Mechada </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Rabo </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Costilla </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Pata de Res </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Frito de puerco </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Chorizo pollo </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Chorizo cochino </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Morcilla </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Lomito </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Punta trasera </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Solomo cuerito </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Muslos </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Pechuga </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Pollo Picado </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td> Pollo entero </td><td><input name="p" oninput="procesar();" type="number" value="0"></td><td><input name="c" oninput="procesar();" type="number" value="0"></td><td><span name="r"></span></td></tr>
+<tr><td></td><td></td><td></td><td><span id="tot"></span></td></tr>
+
+</table>
+</div>
+
+<button onclick="procesar();">P</button>
+ 
+<!--   -->
+
+<script type="text/javascript">
+function inicio(){
+try {
+var buffer=localStorage.getItem("DATOS"); 
+var pr=buffer.split(",");
+var n=pr.length;
+var precios=document.getElementsByName("p");
+for (j=0;j<n;j++){ precios[j].value=pr[j];}
+}
+catch(e) {}
+}
+
+
+
+function procesar(){
+var precios=document.getElementsByName("p");
+var cantidad=document.getElementsByName("c");
+var subtotal=document.getElementsByName("r");
+var n=precios.length;
+var total=0;
+var buffer="";
+for (j=0;j<n;j++){
+buffer+=precios[j].value;
+if (j!=(n-1)) {buffer+=","}
+var tp=(parseFloat(cantidad[j].value)*parseFloat(precios[j].value));
+subtotal[j].innerText=tp.toFixed(2);
+total+=tp;
+}
+localStorage.setItem("DATOS",buffer);
+document.getElementById("tot").innerText=total.toFixed(2);
+
+}
+
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+
+
+</script>
+
+</BODY>
+</html>
