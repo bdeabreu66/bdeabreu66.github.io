@@ -1,0 +1,744 @@
+<HTML>
+<HEAD>
+<TITLE>  Precios Aldiam</TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<link rel="manifest" href="manifest.json"> 
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
+
+body{
+font-size:30px;
+}
+input[type=number]{
+width: 3em;
+}
+
+
+.btop{
+
+font-size:2em;
+
+}
+
+.btn2{
+
+font-size:1em;
+
+}
+
+
+#dsearch {
+position:relative;
+}
+
+#enc {
+position:relative;
+}
+
+#divt {
+position:fixed;
+height: 60%;
+width:95%;
+overflow-y:scroll;
+
+}
+
+input[type=text]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+p{
+font-size:1.5rem;
+background-color:black;
+color:white;
+padding:0px;
+margin:0px;
+
+}
+td{
+font-size:1.5rem;
+padding:5px;
+}
+table{
+margin:0px;
+padding:0px;
+
+}
+
+#simag {
+position:fixed;
+top=40%;
+left=0px;
+}
+
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+</style>
+
+</HEAD>
+
+
+<BODY onload="carga();">
+
+<br>
+<div id="enc">
+<span id="fecha"> </span>
+<div >
+<!-- <table > -->
+<!-- <tr><td>Paralelo </td><td><input id="t1" type="text" value="0"></td></tr> -->
+<!-- <tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr> -->
+<!-- <table > -->
+Dolar: <span id="sdol"></span>
+</div>
+<center>Lista de precios</center>
+</div>
+<div id="dsearch">
+<input id="search" type="text" > <button onclick="refresca();">Buscar</button>
+</div>
+<div id="divt" ondblclick="HideImage();" >
+</div>
+<div id="content" hidden="false"></div>
+<div id="factura" hidden="true">
+
+</div>
+<div id="simag" display="none"></div>
+ <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
+ <div id="header"> <button class="btop" onclick="Actualiza_dolar();">A</button>&nbsp&nbsp<button class="btop" onclick="factura();">F</button>&nbsp&nbsp <button class="btop" onclick="anula();">Z</button></div>
+
+
+<!--   -->
+
+<script type="text/javascript">
+var dist="Distribuidora Aldiam"
+var hoy=new Date();
+var userid='1';
+
+function carga(){
+data=[];
+
+try {
+document.getElementById("sdol").innerHTML = localStorage.getItem('p1');
+//document.getElementById("t1").value = localStorage.getItem('p1');
+//document.getElementById("t2").value = localStorage.getItem('p2');
+} catch (error) 
+{
+  console.error(error);
+
+}
+
+try {
+data=eval(localStorage.getItem('data'));
+
+} catch (error) 
+{
+  console.log(error);
+
+}
+
+
+
+var fecha=document.getElementById("fecha");
+fecha.innerHTML="V 0.1 13/10/2021";
+divt=document.getElementById("divt");
+fiva=7.25;
+
+var j=0;
+//var btn=document.getElementById("btnc");
+//console.log(btn);
+//btn.addEventListener('click', function(){
+//     console.log('paso');},false);
+
+//btn.onclick=function(){ console.log('paso');};
+
+
+
+data=[["Polar pilsen 1/4",36,17,"L_C_0001",0,0,"t1"],
+      ["Polar light 1/4",36,17,"L_C_0002",0,0,"t1"],
+      ["Polar ice,1/4",36,17,"L_C_0003",0,0,"t1"],
+      ["Polar pilsen 1/3",24,17,"L_C_0004",0,0,"t1"],
+      ["Polar light,1/3",24,17,"L_C_0005",0,0,"t1"],
+      ["Polar ice,1/3",24,17,"L_C_0006",0,0,"t1"],
+      ["Solera 1/4",36,18,"L_C_0007",0,0,"t1"],
+      ["Solera Lata 250 cc",24,17.6,"L_C_0008",0,0,"t1"],
+      ["Solera Lata 295 cc",24,19.2,"L_C_0009",0,0,"t1"],
+      ["Solera Nr ",12,8.8,"L_C_0010",0,0,"t1"],
+      ["Polar pilsen Nr 355 cc",12,8.4,"L_C_0011",0,0,"t1"],
+      ["Polar light  Nr 355 cc",12,8.4,"L_C_0012",0,0,"t1"],
+      ["Polar ice    Nr 355 cc",12,8.4,"L_C_0013",0,0,"t1"],
+      ["Polar pilsen Lata 295 cc",24,16.8,"L_C_0014",0,0,"t1"],
+      ["Polar light, Lata 295 cc",24,16.8,"L_C_0015",0,0,"t1"],
+      ["Polar ice Lata 295 cc",24,16.8,"L_C_0016",0,0,"t1"],
+      ["Pilsen Lata 355 cc",24,20.0,"L_C_0017",0,0,"t1"],
+      ["Light  Lata 355 cc",24,20.0,"L_C_0018",0,0,"t1"],
+      ["Ice Lata 355 cc",24,20.0,"L_C_0019",0,0,"t1"],
+      ["Pilsen Lata 250 cc",24,16.0,"L_C_0020",0,0,"t1"],
+      ["Light  Lata 250 cc",24,16.0,"L_C_0021",0,0,"t1"],
+      ["Ice    Lata 250 cc",24,16.0,"L_C_0022",0,0,"t1"],
+      ["Carorena negra",6,31.2,"L_C_0023",0,0,"t1"],
+      ["Carorena rosada",6,31.2,"L_C_0024",0,0,"t1"],
+      ["Carorena amarilla",6,31.2,"L_C_0025",0,0,"t1"],
+      ["Malta 1/4",36,8.0,"C_B_0001",0,0,"t1"],
+      ["Malta Nr/Light. ",12,4.29,"C_B_0002",0,0,"t1"],
+      ["Malta Litron",6,9.02,"C_B_0003",0,0,"t1"],
+      ["Atun",35,55.62,"C_E_0001",0,0,"t2"],
+      ["Bonito",35,50.34,"C_E_0002",0,0,"t2"],
+      ["Aceite Chef Oleina de Palma.18 Lt ",1,45.45,"C0031",0,0,"t2"],
+      ["Aceite Super Oleina de Palma.1 Lt ",12, 32.52,"C0032",0,0,"t2"],
+      ["Aceite 0.420lt ",24,32.16,"C0031",0,0,"t2"],
+      ["Aceite Mazeite 1 lt ",12,33.96,"C0032",0,0,"t2"],
+      ["Arroz Clasico. 1 Kg ",24,33.84,"C0033",0,0,"t2"],
+      ["Arroz Corina. 1 Kg  ",24,20.16,"C0034",0,0,"t2"],
+      ["Avena 100 grs",48,19.2,"C0035",0,0,"t2"],
+      ["Avena 200.grs",30,23.1,"C0036",0,0,"t2"],
+      ["Avena 400.grs",24,36.72,"C0037",0,0,"t2"],
+      ["Avena 800.grs",12,31.80,"C0038",0,0,"t2"],
+      ["Avena(Harina).400.grs",26,64.28,"C0039",0,0,"t2"],
+      ["Crema/Arroz bolsa 450 g",24,20.88,"C0040",0,0,"t2"],
+      ["Crema/Arroz bolsa 900 g",12,16.44,"C0041",0,0,"t2"],
+      ["Crema/Arroz pote  450 g",24,27.60,"C0042",0,0,"t2"],
+      ["Crema/Arroz pote  900 g",12,21.60,"C0043",0,0,"t2"],
+      ["Crema/Arroz bolsa 225 g",34,16.66,"C0044",0,0,"t2"],
+      ["Detergente liq.BB.1L",12,46.77,"C0045",0,0,"t2"],
+      ["Detergente liq.ROPA DELI.510cc ",12,26.17,"C0046",0,0,"t2"],
+      ["Detergente BB 400g ",30,37.93,"C0047",0,0,"t2"],
+      ["Detergente BB 900g ",20,54.98,"C0048",0,0,"t2"],
+      ["Detergente Floral 900g ",20,54.98,"C0049",0,0,"t2"],
+      ["Gelatina Golden Frambuesa 96 gr",10,11.72,"C0050",0,0,"t2"],
+      ["Gelatina Golden Fresa 96 gr",10,11.72,"C0051",0,0,"t2"],
+      ["Gelatina Golden Kolita 96 gr",10,10.0,"C0052",0,0,"t2"],
+      ["Harina Pan.1 kg",20,19.8,"C0053",0,0,"t2"],
+      ["Harina Pan Amarilla 1 kg ",20,19.8,"C0054",0,0,"t2"],
+      ["Harina Pan/Arroz.1 kg",20,17.40,"C0055",0,0,"t2"],
+      ["Harina Pan/Mezcla cachapas 500g ",12,13.08,"C0056",0,0,"t2"],
+      ["Jabon Panela.BEBE.160 x 48",48,26.17,"C0057",0,0,"t2"],
+      ["Jabon Panela.Floral.200 x 44",44,23.99,"C0058",0,0,"t2"],
+      ["Jabon Panela.Ext.Limp.250 x 36",36,24.64,"C0059",0,0,"t2"],
+      ["Jabon Polvo.BEBE.400 cc ",30,35.84,"C0060",0,0,"t2"],
+      ["Jabon Polvo.BEBE.900 cc",20,48.92,"C0061",0,0,"t2"],
+      ["Suavizante BEBE 950 cc ",12,36.47,"C0062",0,0,"t2"],
+      ["Suavizante BEBE 530 cc ",12,21.85,"C0063",0,0,"t2"],
+      ["Jabon Crema Multiuso.250 g ",36,54.29,"C0064",0,0,"t2"],
+      ["Jabon Crema Multiuso.500 g ",18,48.86,"C0065",0,0,"t2"],
+      ["Jabon pastilla Multiuso 130g x 42U",42,21.42,"C0066",0,0,"t2"],
+      ["KONGA SABOR NARANJA 30gx8x14",14,4.38,"C0067",0,0,"t2"],
+      ["KONGA SABOR NARANJA 30gx50",50,15.66,"C0068",0,0,"t2"],
+      ["KONGA SABOR LIMON 30gx8x14",14,5.03,"C0069",0,0,"t2"],
+      ["KONGA SABOR MORA 30gx8x14",14,5.03,"C0070",0,0,"t2"],
+      ["KONGA SABOR PARCHITA 30gx8x14",14,4.34,"C0071",0,0,"t2"],
+      ["LLaves Limp. Marea Cristalina 1L ",12,25.22,"C0072",0,0,"t2"],
+      ["LLaves Limp. Brisa Tropical 1L ",12,25.20,"C0073",0,0,"t2"],
+      ["LLaves Limp. Marea Cristalina 500cc  x 24",24,28.68,"C0074",0,0,"t2"],
+      ["LLaves Limp. Brisa Tropical 500cc x 24U",24,28.68,"C0075",0,0,"t2"],
+      ["LLaves Lav. Antib liq. 500cc x 18",18,44.89,"C0076",0,0,"t2"],
+      ["Mantequilla Mavesa 5 K x 1.C/S",1,14.92,"C0077",0,0,"t2"],
+      ["Mantequilla Mavesa 5 K x 1.S/S",1,14.92,"C0078",0,0,"t2"],
+      ["Mantequilla Mavesa 1 Kg",6,18.9,"C0079",0,0,"t2"],
+      ["Mantequilla Mavesa 250 x 24",24,20.40,"C0080",0,0,"t2"],
+      ["Mantequilla Mavesa 500 x 12",12,19.44,"C0081",0,0,"t2"],
+      ["Mantequilla Nelly 227 x 24",24,15.60,"C0082",0,0,"t2"],
+      ["Mantequilla Nelly.454 x 12",12,15.72,"C0083",0,0,"t2"],
+      ["Mayonesa(Aderezo).3,6 Kg",4,71.04,"C0084",0,0,"t2"],
+      ["Mayonesa limon  445 g",12,26.64,"C0085",0,0,"t2"],
+      ["Mayonesa 445g ",12,26.64,"C0086",0,0,"t2"],
+      ["Mayonesa 445g ND",12,26.64,"C0087",0,0,"t2"],
+      ["Mayonesa 910g ",6,25.20,"C0088",0,0,"t2"],
+      ["Mayonesa 175g ",24,25.44,"C0089",0,0,"t2"],
+      ["Mermelada Vienesa Fresa 240g ",18,30.90,"C0090",0,0,"t2"],
+      ["Mermelada Vienesa Guayaba 240g ",18,30.90,"C0091",0,0,"t2"],
+      ["Mermelada Vienesa Fresamora 240g ",18,30.90,"C0092",0,0,"t2"],
+      ["Pasta corta dedales 1 Kg",12,28.80,"C0093",0,0,"t2"],
+      ["Pasta corta tornillo 1 Kg",12,28.80,"C0094",0,0,"t2"],
+      ["Pasta larga spaguetti 1 Kg",12,28.80,"C0095",0,0,"t2"],
+      ["Pasta larga Linguini. 1 Kg",13,28.80,"C0096",0,0,"t2"],
+      ["Pasta corta dedales 500 g ",12,14.76,"C0097",0,0,"t2"],
+      ["Pasta corta plumitas 1 Kg ",12,24.80,"C0098",0,0,"t2"],
+      ["Pasta larga vermicelli 1 Kg ",12,28.80,"C0099",0,0,"t2"],
+      ["Pasta larga vermicelli 500 g ",12,14.76,"C0100",0,0,"t2"],
+      ["Pasta larga spaguetti 500 g ",12,14.76,"C0101",0,0,"t2"],
+      ["Pepitonas.140 g",35,42.63,"C0102",0,0,"t2"],
+      ["Rikesa Blanco.200g ",18,32.57,"C0103",0,0,"t2"],
+      ["Rikesa Parmesano 200g ",18,32.57,"C0104",0,0,"t2"],
+      ["Rikesa Trad.300 g",12,29.93,"C0105",0,0,"t2"],
+      ["Rikesa Tocineta.300 g",12,29.93,"C0106",0,0,"t2"],
+      ["Rikesa Trad.200 g ",18,28.08,"C0107",0,0,"t2"],
+      ["Sardina Aceite.170 g",20,17,"C0108",0,0,"t2"],
+      ["Sardina Tomate.170 g",20,17,"C0109",0,0,"t2"],
+      ["Sardina Picante.170 g",20,17,"C0110",0,0,"t2"],
+      ["Salsa/Tomate. 4,2 Kg",4 ,40.37,"C0111",0,0,"t2"],
+      ["Salsa/Tomate.198 g",24,15.03,"C0112",0,0,"t2"],
+      ["Salsa/Tomate.397 g",24,25.06,"C0113",0,0,"t2"],
+      ["Dogourmet Cachorros 18 Kg x 1",1,38.88,"C0114",0,0,"t2"],
+      ["Dogourmet Cachorros 2 Kg x 6U",6,34.31,"C0115",0,0,"t2"],
+      ["Dogourmet Parrilla. 18 Kg x 1U",1,34.52,"C0116",0,0,"t2"],
+      ["Dogourmet Parrilla. 1 Kg x 10U",10,27.14,"C0117",0,0,"t2"],
+      ["Dogourmet Parrilla. 2 Kg x 6U",6,30.83,"C0118",0,0,"t2"],
+      ["Dogourmet Parrilla. 4 Kg x 5U",5,44.72,"C0119",0,0,"t2"],
+      ["Dogourmet Pollo brasa. 4 Kg x 5U",5,44.72,"C0120",0,0,"t2"],
+      ["Super Can. carne hueso 2 Kg x 6U",6,18.72,"C0121",0,0,"t2"],
+      ["Dogourmet Cachorros 10 Kg x 1U ",1,21.65,"C0122",0,0,"t2"],
+      ["Dogourmet Parrilla. 10 Kg x 1U",1,19.74,"C0123",0,0,"t2"],
+      ["Super Can. pollo 18 Kg x 1",1,23.76,"C0124",0,0,"t2"],
+      ["Super Can.carne hueso 10 Kg x 1",1,13.87,"C0125",0,0,"t2"],
+      ["Super Can.carne hueso 18 Kg x 1",1,23.76,"C0126",0,0,"t2"],
+      ["Super Can.carne hueso 4 Kg x 5U",5,30.68,"C0127",0,0,"t2"],
+      ["Toddy. 2 Kg x 8U. Bolsa",8,111.36,"C0128",0,0,"t2"],
+      ["Toddy. 1 Kg x 12U Bolsa",12,89.09,"C0129",0,0,"t2"],
+      ["Toddy. 400g x 24U Bolsa",24,80.46,"C0130",0,0,"t2"],
+      ["Toddy. 400g x 12U Pote",12,40.23,"C0131",0,0,"t2"],
+      ["Toddy. 100g x 36U Bolsa",36,34.24,"C0132",0,0,"t2"],
+      ["Toddy. 200g x 12U Pote",12,21.16,"C0133",0,0,"t2"],
+      ["Toddy. Galleta. 6 x 6 x 24",24,7.80,"C0134",0,0,"t2"],
+      ["Vinagre. 1 lt x 12",12,12.67,"C0135",0,0,"t2"],
+      ["Vinagre. 4 lt x 4",4,16.80,"C0136",0,0,"t2"],
+      ["Vinagre. 1/2 lt x 24",24,14.48,"C0137",0,0,"t2"],
+      ["Migurt.Fresh fresa. 250g x 24",24,39.53,"C0138",0,0,"t2"],
+      ["Yogurt Fruta Durazno. 125 x 24",24,27.28,"C0139",0,0,"t2"],
+      ["Yogurt Fruta Durazno 750 x 12",12,60.41,"C0140",0,0,"t2"],
+      ["Yogurt Fruta Fresa 750 x 12",12,60.41,"C0141",0,0,"t2"],
+      ["Yogurt sabor dulce 750 x 12",12,60.41,"C0142",0,0,"t2"],
+      ["Yogurt Fruta durazno 250 x 24",24,48.16,"C0143",0,0,"t2"],
+      ["Yogurt Fruta Fresa 125gx24",24,27.28,"C0144",0,0,"t2"],
+      ["Yogurt Fruta Fresa 250 x 24",24,48.16,"C0145",0,0,"t2"],
+      ["Bateria Fulgor FP36 700 Amp",1,60,"C0146",0,0,"t2"],
+      ["Bateria Fulgor 22FA 800 Amp",1,70,"C0147",0,0,"t2"],
+      ["Bateria Fulgor 34 1000 Amp",1,85,"C0148",0,0,"t2"],
+      ["Aceite Shell Mineral 15W40 1 L",1,5.5,"C0149",0,0,"t2"],
+      ["Olla Renaware 12 litros",1,60,"C0150",0,0,"t2"],
+      ["Hielo por Bolsa",1,1.2,"C0151",0,0,"t2"],
+      ["Aceite Shell Mineral 20W50 4 L",1,5.5,"C0152",0,0,"t2"],
+
+    ];
+
+descarga_tienda();
+descarga_carrito();
+
+//refresca();
+}
+
+function HideImage(){
+var divimg=document.getElementById("simag");
+divimg.style.display='none';
+
+}
+function show(num){
+var divimg=document.getElementById("simag");
+var texto='';
+//console.log(num);
+texto+='<div style="background-color:blue; text-align:right;"><button  onclick="HideImage();">X</button></div>';
+texto+='<img src="http://bdeabreu.42web.io/tienda/images/imag'+num+'.jpg" onerror="this.src=\'imag1.jpg\';this.onerror=\'\';" alt="N" width="300" height="300">';
+console.log(texto);
+divimg.innerHTML=texto;
+divimg.style.display='block';
+}
+
+var win;
+var win2;
+var win3;
+
+function despliega2(o,ind,valor){
+//console.log(valor);
+//console.log(win2.document.URL);
+var resp=JSON.parse(win2.document.getElementsByTagName("span")[0].innerHTML);
+console.log('respuesta '+resp["exito"]);
+
+if (resp["exito"]=="true") {
+data[ind]["en_carrito"]=parseInt(valor);
+
+o.innerText=data[ind]["en_carrito"]; } 
+else {alert('Ocurrio un error');}
+win2.close();
+
+
+
+}
+
+function actU(ind,o){
+//var vi=parseInt(o.innerText);
+var valor=prompt("Introduzca cantidad", "");
+if (valor!=null) {
+var vf=parseInt(valor);
+var cant=vf;
+var cod=data[ind]["id"];
+win2=window.open('http://bdeabreu.42web.io/agrega_a_carrito.php?userid='+userid+'&codigo='+cod+'&cantidad='+cant);
+setTimeout(despliega2,2000,o,ind,valor);
+
+}
+
+
+//alert("pso");
+//refresca();
+
+console.log(ind);
+}
+var factflag=true;
+function factura(){
+if (factflag) {factflag=false; factura(); } else { factflag=true; quitar()};
+
+}
+var Ftexto;
+function despliega(){
+console.log(win.document.documentElement.innerHTML);
+data=JSON.parse(win.document.getElementsByTagName("span")[0].innerHTML);
+win.close();
+}
+var data_carrito;
+
+function busca_ind(cod){
+for (var i=0;i<data.length;i++){
+ if (data[i]["id"]==cod) {return i}
+}
+return -1;
+}
+function despliega3(){
+console.log(win3.document.documentElement.innerHTML);
+data_carrito=JSON.parse(win3.document.getElementsByTagName("span")[0].innerHTML);
+for (var i=0;i<data_carrito.length;i++){
+var cod=busca_ind(data_carrito[i]["cod"]);
+console.log('indice'+cod);
+
+if (cod>=0) {data[cod]["en_carrito"]=data_carrito[i]["numero"];}
+}
+
+win3.close();
+}
+
+function descarga_carrito(user){
+win3=window.open("http://bdeabreu.42web.io/descarga_carrito.php?userid="+userid);
+setTimeout(despliega3,2000);
+}
+function despliega4(){
+console.log(win4.document.documentElement.innerHTML);
+data=JSON.parse(win.document.getElementsByTagName("span")[0].innerHTML);
+//win4.close()
+}
+
+function despliega5(){
+console.log(win5.document.documentElement.innerHTML);
+var resp=JSON.parse(win5.document.getElementsByTagName("span")[0].innerHTML);
+win5.close();
+}
+function vacia_carrito(){
+win4=window.open("http://bdeabreu.42web.io/vacia_carrito1.php?userid="+userid);
+setTimeout(despliega4,2000);
+}
+
+
+function limpia_carrito(){
+win5=window.open("http://bdeabreu.42web.io/vacia_carrito2.php?userid="+userid);
+setTimeout(despliega5,2000);
+}
+
+
+function descarga_tienda(){
+
+win=window.open("http://bdeabreu.42web.io/descarga_tienda.php");
+setTimeout(despliega,2000);
+
+}
+
+
+function fecha_actual(){
+var mes=(hoy.getMonth()+1).toString();
+if (mes.length==1) {mes='0'+mes}
+return (hoy.getDate()).toString() + '/' +mes + '/' +hoy.getFullYear().toString()
+
+}
+function factura(){
+var texto='Fecha: '+fecha_actual()+'<br>';
+texto+=dist+'<br>';
+//texto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'<br>';
+//texto+='$ BCV: '+  impri(document.getElementById("t2").value) +'<br>';
+texto+='$: '+  impri(document.getElementById("sdol").innerText) +'<br>';
+
+texto+="<center>F&aacute;ctura</center>";
+var totald=0;
+var totalb=0;
+Ftexto='Fecha: '+fecha_actual()+'\n';
+Ftexto+=dist+'\n';
+//Ftexto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'\n';
+//
+Ftexto+='$ : '+  impri(document.getElementById("sdol").innerText) +'\n';
+Ftexto+="FACTURA\n"
+for (var i=0;i<data.length;i++){
+
+factor=t1;
+var Tdolar=data[i]["en_carrito"]*(data[i]["precio"]);
+if (Tdolar!=0) { 
+  totald+=Tdolar;
+  totalb+=factor*Tdolar;
+  Ftexto+='------------\n';
+  if (data[i]["en_carrito"]!=0) { 
+         texto+='<p style=" font-size:0.8em;" >'+ data[i]["en_carrito"] +'U '+ data[i]["descripcion"]+'</p>';
+         Ftexto+=data[i]["en_carrito"] +'U '+ data[i]["descripcion"]+'\n';
+  }
+//  if (data[i][5]!=0) 
+//  { texto+='<p style=" font-size:0.8em;" >'+ data[i][5] +'T  ' + data[i][0]+'</p>';
+//      Ftexto+=data[i][5] +'T '+ data[i][0]+'\n';;
+ //  }
+  texto+='<table width="100%"><tr><td>'+impri(Tdolar.toFixed(2))+' $'+'</td><td>'+impri((factor*Tdolar).toFixed(2))+' Bs'+'</td></tr></table>';
+   Ftexto+=impri(Tdolar.toFixed(2))+' $'+"    "+impri((factor*Tdolar).toFixed(2))+' Bs'+'\n'
+
+
+//if (data[i][3]==1) { 
+ // var fr=data[i][5]+ data[i][4]/data[i][1]; 
+ // texto+='Retencion: '+  impri((fr*data[i][2]/fiva).toFixed(2))+' $ '+impri((fr*data[i][2]*factor/fiva).toFixed(2))+ ' Bs';
+ // Ftexto+='Retencion: '+  impri((fr*data[i][2]/fiva).toFixed(2))+' $ '+impri((fr*data[i][2]*factor/fiva).toFixed(2))+ ' Bs\n';
+//}
+
+}
+}
+
+
+texto+='<HR>';
+Ftexto+='============================================\n';
+texto+='<span style="color:yellow; font-size:1em;">Total: </span>'+impri(totald.toFixed(2))+' $ <br>';
+texto+=impri(totalb.toFixed(2))+' Bs';
+Ftexto+='Total:'+impri(totald.toFixed(2))+'$ \n'
+Ftexto+=impri(totalb.toFixed(2))+' Bs';
+console.log(Ftexto);
+var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
+textoT+='<button style="font-size: 0.9em;" title="Vaciar" id="btnv" onclick="vacia_carrito();"> V </button> ';
+
+textoT+='<button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button> <button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></div><br>';
+divfactura=document.getElementById("factura")
+divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
+//textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
+//textoT+=' <button  title="Compartir" id="btn" onclick="compartir();" > C </button> <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
+textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
+divfactura.innerHTML=textoT;
+divfactura.hidden=false;
+}
+
+
+
+
+
+function compartir(){
+const shareData = {
+  title: 'Factura',
+  text: Ftexto
+}
+//console.log(shareData);
+comparte(shareData);
+}
+
+async function comparte(shareData){
+  try {
+    await navigator.share(shareData)
+    console.log('MDN shared successfully');
+  } catch(err) {
+    console.log( 'Error: ' + err);
+  }
+}
+
+
+function anula(){
+
+//for (var i=0;i<data.length;i++){
+//data[i]["en_carrito"]=0;
+//}
+refresca();
+}
+
+function quitar(){
+var div5 = document.getElementById("factura");
+div5.hidden=true;
+factflag=true;
+}
+
+function refresca(){
+var patron=document.getElementById("search").value.toUpperCase();
+//t1=document.getElementById("t1").value;
+t1=document.getElementById("sdol").innerText;
+
+//t2=document.getElementById("t2").value;
+localStorage.setItem('p1',t1);
+//localStorage.setItem('p2',t2);
+texto="";
+var factor;
+for (var i=0;i<data.length;i++){
+if (data[i]["descripcion"].toUpperCase().indexOf(patron) !=-1)   {
+factor=t1;
+//console.log(i+" "+data[i]["descripcion"]);
+texto+='<p  >'+ data[i]["descripcion"]+'</p>';
+if (data[i]["en_carrito"]==0) {var vcor='black';} else {var vcor='blue';}
+var numimg=data[i]["id"].toString();
+texto+='<table><tr>';
+var taux='onclick="show(\''+numimg+'\');"';
+console.log(taux);
+var taux2='<td><img '+taux + ' src="http://bdeabreu.42web.io/tienda/images/imag'+numimg+'45x45.jpg" onerror="this.src=\'imag1.jpg\';this.onerror=\'\';"  alt="N" width="45" height="45"></td>';
+//console.log(taux2);
+texto+=taux2;
+
+texto+='<td> U '+impri((data[i]["precio"]).toFixed(2))+' $' +'</td><td>'+ impri(((data[i]["precio"])*factor).toFixed(2))+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+',this);">'+data[i]["en_carrito"]+'</button></td>';
+
+texto+='</tr></table>';
+//texto+='<tr><td> T '+impri(data[i][2].toFixed(2))+' $'+'</td><td>'+ impri((data[i][2]*factor).toFixed(2))+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+
+//  if (data[i][3]==1) {
+//  texto+="<span style='font-size:0.6em;'>Retenci&oacute;n T: "+impri((data[i][2]/fiva).toFixed(2))+" $ "+impri((data[i][2]*factor/fiva).toFixed(2))+" Bs          </span>";
+// }
+
+  }
+
+}
+
+texto+='<br><br><br>'
+divt.innerHTML=texto;
+}
+function impri(A){
+var At=A.toString();
+var p=At.indexOf('.');
+var num=At.substring(0,p);
+var dec=At.substring(p+1,At.length);
+//console.log(p+" "+num+" "+dec);
+var B="";
+var j=0;
+var indfin=num.length
+var porc=[];
+while (indfin>0) {
+porc[j]=num.substring(indfin-3,indfin);
+indfin=indfin-3;
+j=j+1;
+}
+
+for(var j=porc.length-1;j>0;j--)
+{
+B=B+porc[j]+".";
+}
+B=B+porc[0]+","+dec
+//console.log(B);
+return B;
+}
+impri(12356.3478);
+
+</script>
+<script>
+
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+var myHeaders = new Headers();
+
+var myInit = { mode: 'cors' };
+
+//var nombrepag="https://monitordolarvenezuela.com/monitor-dolar-hoy";
+var nombrepag="https://bdeabreu66.github.io/precios/precios.txt";
+
+
+fetch(nombrepag,myInit)
+        .then(ajaxPositive)
+        .catch(showError);
+
+function ajaxPositive(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.text().then(showResult);
+      } else {
+        showError('status code: ' + response.status);
+      }
+    }
+ function showResult(txt) {
+        //console.log('muestro respuesta: ', txt);
+        localStorage.setItem('data',txt);
+        //data=eval(txt);
+        //refresca();
+  }
+
+function showError(err) { 
+      console.log('muestor error', err);
+    }
+
+//async function fetchHtmlAsText(url) {
+//    return await (await fetch(url,myInit)).text();
+//}
+
+// this is your `load_home() function`
+
+Actualiza_dolar();
+
+function Actualiza_dolar(){
+var nomb="https://s3.amazonaws.com/dolartoday/data.json"
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+var precio_dolar;
+ function showResultD(txt) {
+       console.log('muestro respuesta: ', txt.USD.sicad2);
+ //      document.getElementById("t1").value = txt.USD.promedio;
+ //    document.getElementById("t2").value = txt.USD.sicad2;
+ precio_dolar= ((txt.USD.promedio+txt.USD.sicad2)*0.5*1.01).toFixed(2);
+      document.getElementById("sdol").innerHTML=precio_dolar; 
+       //refresca();
+  }
+
+function showErrorD(err) { 
+      console.log('muestor error', err);
+    }
+
+}
+
+//async function loadHome() {
+//var nombrepag="https://bdeabreu66.github.io/mgreen/index.html";
+//    const contentDiv = document.getElementById("content");
+//    const texto = await fetchHtmlAsText(nombrepag);
+//    contentDiv.innerHTML =texto; 
+//    console.log('paso'+texto);
+//}
+//loadHome();
+</script>
+</BODY>
+</html>
