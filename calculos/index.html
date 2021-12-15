@@ -1,0 +1,140 @@
+<HTML>
+<HEAD>
+<TITLE>  Calculos </TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<!-- <link rel="manifest" href="manifest.json">   -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
+
+input[type=number]{
+width: 3em;
+}
+
+input[type=text]{
+font-size:1.5em;
+width: 18em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+
+</style>
+
+</HEAD>
+
+
+<BODY>
+<div id respuestas>
+<button onclick="procesar();">P</button>
+
+</div>
+
+
+<div id="datos">
+<table>
+<tr><td>Variables :</td><td><input id="_var" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+
+
+
+</table>
+</div>
+
+<div id="salida" style="font-size:20px;">
+</div>
+ 
+<!--   -->
+<script src="math.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pi=Math.PI;
+var mu0=4*pi*1e-7;
+function procesar(){
+var _variables=document.getElementById("_var").value.split(",");
+var expr=document.getElementsByName("_for");
+var nform=expr.length;
+var sc='{"nA":"6.02e23","K":"9e9","e0":"8.8542e-12","pi":"'+eval(pi)+'","mu0":"'+eval(mu0)+'",';
+sc+='"qe":"-1.6021017e-19","qp":"1.6021017e-19","me":"9.1095e-31","mp":"1.67492e-27","g":"9.8",';
+var jmax=_variables.length;
+var nm=[];
+for (j=0;j<jmax;j++){
+eval(_variables[j]);
+var ind=_variables[j].indexOf('=');
+nm[j]=_variables[j].substring(0,ind);
+//console.log(eval(nm[j]));
+console.log(_variables[j]+" "+nm[j]);
+sc+='"'+nm[j]+'":'+'"'+eval(nm[j])+'"';
+//sc+=nm[j]+':'+eval(nm[j]);
+if (j!=(jmax-1)) {sc+=',';}
+}
+sc+='}';
+//console.log(sc);
+
+for (var i=0;i<nform;i++){
+     var formi=expr[i].value;
+     var pos=formi.split("=");
+if (pos.length!=0) {
+     if (pos.length==2 )
+      {var nvari=pos[0]; var nexpr=pos[1];
+        var _Res=math.compile(nexpr);
+        var scope= JSON.parse(sc);
+        //console.log(scope);
+        var salida=_Res.evaluate(scope);
+        console.log(nvari+"="+salida);
+        sc=sc.substr(0,sc.length-1);
+        //console.log(sc);
+        sc+=',"'+nvari+'":'+'"'+salida+'"}';
+        //console.log(sc);
+       }
+   else {
+    var _Res=math.compile(formi);
+    var scope= JSON.parse(sc);
+    //console.log(scope);
+    var salida=_Res.evaluate(scope);
+
+    }
+
+var nd=4;
+r1=math.re(salida);
+r2=math.im(salida);
+console.log(salida);
+//console.log('ans=' + r1.toExponential(nd) + 'i*'+r2.toExponential(nd));
+console.log('ans=' + math.format(r1,{notation: 'engineering'}) + 'i*'+math.format(r2,{notation: 'engineering'}));
+
+}
+}
+
+
+//var K=9e9;
+//var e0=8.8542e-12;
+//var qe=-1.6021017e-19;
+//var qp=1.6021017e-19;
+//var me=9.1095e-31;
+//var mp=1.67492e-27;
+
+}
+
+</script>
+
+</BODY>
+</html>
