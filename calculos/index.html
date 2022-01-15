@@ -1,7 +1,7 @@
 
 <HTML>
 <HEAD>
-<TITLE>  Calculos </TITLE>
+<TITLE>  Calculos complejos</TITLE>
 <!-- <link rel="stylesheet" href="styles.css" > -->
 <!-- <link rel="manifest" href="manifest.json">   -->
 
@@ -15,6 +15,18 @@ width: 3em;
 input[type=text]{
 font-size:1.5em;
 width: 18em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+textarea{
+font-size:1.5em;
+width: 22em;
 border: 2px solid red;
 border-radius: 4px;
 padding: 4px 4px;
@@ -43,7 +55,7 @@ input[type=text]:focus {
 
 <div id="datos">
 <table>
-<tr><td>Variables :</td><td><input id="_var" type="text" value=""></td></tr>
+<tr><td>Variables :</td><td><textarea id="_var" rows="4" value=""></textarea></td></tr>
 <tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
 <tr><td></td><td><span name="_res" ></span></td></tr>
 <tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
@@ -82,62 +94,286 @@ input[type=text]:focus {
 <script type="text/javascript">
 var pi=Math.PI;
 var mu0=4*pi*1e-7;
+
 function procesar(){
-var _variables=document.getElementById("_var").value.split(",");
+var nd=4;
+const parser=math.parser();
+var _variables=document.getElementById("_var").value;
+_variables=_variables.replace(/(\r\n|\n|\r)/gm, "");
+var _variables=_variables.split(";");
 var expr=document.getElementsByName("_for");
 var vsal=document.getElementsByName("_res");
 var nform=expr.length;
-var sc='{"nA":"6.02e23","K":"9e9","e0":"8.8542e-12","pi":"'+eval(pi)+'","mu0":"'+eval(mu0)+'",';
-sc+='"qe":"-1.6021017e-19","qp":"1.6021017e-19","me":"9.1095e-31","mp":"1.67492e-27","g":"9.8",';
-var jmax=_variables.length;
-var nm=[];
-for (j=0;j<jmax;j++){
-eval(_variables[j]);
-var ind=_variables[j].indexOf('=');
-nm[j]=_variables[j].substring(0,ind);
-//console.log(eval(nm[j]));
-console.log(_variables[j]+" "+nm[j]);
-sc+='"'+nm[j]+'":'+'"'+eval(nm[j])+'"';
-//sc+=nm[j]+':'+eval(nm[j]);
-if (j!=(jmax-1)) {sc+=',';}
-}
-sc+='}';
-//console.log(sc);
+var sc2='navo=6.02e23,K=9e9,e0=8.8542e-12,mu0='+eval(mu0)+',';
+sc2+='qe=-1.6021017e-19,qp=1.6021017e-19,me=9.1095e-31,mp=1.67492e-27,g=9.8';
+console.log(sc2);
+console.log('lsc'+lsc);
+var variableinicial=sc2.split(",");
+var lsc=variableinicial.length;
+// Preprocesamiento
 
+for (j=0;j<lsc;j++){
+var ind=variableinicial[j].indexOf('=');
+nvm=variableinicial[j].substring(0,ind);
+valor=variableinicial[j].substring(ind+1);
+parser.set(nvm,math.complex(parser.evaluate(valor)));
+console.log(parser.get(nvm)) ; 
+}
+
+parser.set('nulo', function (A) {
+var A2=math.clone(A);
+var t=math.size(A2);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m= '+m+' n= '+n);
+console.log('tama;o'+math.size(A))
+var filap=0;
+var colpiv=[];
+for (cin=0;cin<n;cin++){
+   var im=cin;
+   var ik=filap+1;
+   console.log('im= '+im+' cin= '+cin+'ik= '+ik+'filap= '+filap);
+   if (filap<(m)) {
+   while  ((math.subset(A2, math.index(filap,cin))==0) && (ik<m)) {if ((math.subset(A2, math.index(ik,cin))!=0)) {A2=permuta(A2,filap,ik);};ik++;}
+     if (math.subset(A2,math.index(filap,cin))!=0) {
+         colpiv.push(cin);
+         piv=parseFloat(math.subset(A2,math.index(filap,cin)));
+         for (var ic2=cin;ic2<n;ic2++){
+            console.log('piv= '+piv+'ic2= '+ic2);
+            A2.subset(math.index(filap,ic2),math.subset(A2,math.index(filap,ic2))/piv);
+            console.log('nvp'+math.subset(A2, math.index(filap,ic2)));
+         }
+      for (im=0;im<m;im++){
+       if (im!=filap){
+       var fp=parseFloat(-math.subset(A2, math.index(im,cin))/math.subset(A2, math.index(filap,cin)));
+       console.log('fp= '+fp);
+        for (var ic=cin;ic<n;ic++){
+        va=parseFloat(math.subset(A2, math.index(im,ic)));
+        ta=parseFloat(math.subset(A2, math.index(filap,ic)));
+        console.log('va= '+va);
+        console.log('ta= '+ta);
+        A2.subset(math.index(im,ic),va+fp*ta);
+        console.log('nv'+math.subset(A2, math.index(im,ic)));
+       }
+       }
+      }
+    filap++;
+   } 
+  }
+}
+function busca(v,B){
+var n=B.length;
+for (var k=0;k<n;k++) {if (v==B[k]) {return true;}}
+return false;
+}
+
+console.log('colpiv= '+colpiv);
+var colnpiv=[];
+for (var k=0;k<n;k++) {if (!busca(k,colpiv)) {colnpiv.push(k)}}
+console.log('colnpiv= '+colnpiv);
+var nvl=colnpiv.length;
+var nvnl=colpiv.length;
+var R=math.zeros(n, nvl);
+var fila1=0;
+var pos1=0;
+for (var k=0;k<n;k++){
+   if (busca(k,colpiv)) {
+   for (var j=0;j<nvl;j++) {
+     console.log('fila1='+fila1+'col='+colnpiv[j]);
+     R.subset(math.index(k,j),-math.subset(A2,math.index(fila1,colnpiv[j])));}
+     fila1++;
+   } else 
+     { R.subset(math.index(k,pos1),1);pos1++}
+}
+console.log('R='+R);
+console.log('A2='+A2);
+return R;
+//return A2;
+
+})
+
+
+parser.set('span', function (A) {
+var A2=math.transpose(A);
+var t=math.size(A2);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m= '+m+' n= '+n);
+console.log('tama;o'+math.size(A))
+var filap=0;
+var colpiv=[];
+for (cin=0;cin<n;cin++){
+   var im=cin;
+   var ik=filap+1;
+   console.log('im= '+im+' cin= '+cin+'ik= '+ik+'filap= '+filap);
+   if (filap<(m)) {
+   while  ((math.subset(A2, math.index(filap,cin))==0) && (ik<m)) {if ((math.subset(A2, math.index(ik,cin))!=0)) {A2=permuta(A2,filap,ik);};ik++;}
+     if (math.subset(A2,math.index(filap,cin))!=0) {
+         colpiv.push(cin);
+         piv=parseFloat(math.subset(A2,math.index(filap,cin)));
+         for (var ic2=cin;ic2<n;ic2++){
+            console.log('piv= '+piv+'ic2= '+ic2);
+            A2.subset(math.index(filap,ic2),math.subset(A2,math.index(filap,ic2))/piv);
+            console.log('nvp'+math.subset(A2, math.index(filap,ic2)));
+         }
+      for (im=0;im<m;im++){
+       if (im!=filap){
+       var fp=parseFloat(-math.subset(A2, math.index(im,cin))/math.subset(A2, math.index(filap,cin)));
+       console.log('fp= '+fp);
+        for (var ic=cin;ic<n;ic++){
+        va=parseFloat(math.subset(A2, math.index(im,ic)));
+        ta=parseFloat(math.subset(A2, math.index(filap,ic)));
+        console.log('va= '+va);
+        console.log('ta= '+ta);
+        A2.subset(math.index(im,ic),va+fp*ta);
+        console.log('nv'+math.subset(A2, math.index(im,ic)));
+       }
+       }
+      }
+    filap++;
+   } 
+  }
+}
+return A2;
+})
+
+
+parser.set('gram_G', function (A) {
+var V=math.clone(A);
+var t=math.size(V);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m= '+m+' n= '+n);
+var w1=[];
+var w2=[];
+
+for (k=1;k<m;k++) {
+    for (j=0;j<n;j++) { w2[j]=math.subset(V,math.index(k,j));}
+    console.log('k= '+k+' w2= '+w2);
+    for (l=0;l<k;l++) {
+      var S=0;Mo=0;
+      for (j=0;j<n;j++) {
+          w1[j]=math.subset(V,math.index(l,j)); S+=w1[j]*w2[j];Mo+=w1[j]*w1[j];
+          console.log('Mo= '+Mo+' S= '+S);
+          }
+      for (j=0;j<n;j++) { 
+        va=V.subset(math.index(k,j));vn=va-(parseFloat(S)/parseFloat(Mo))*w1[j];V.subset(math.index(k,j),vn); 
+        console.log('l= '+l+' w1= '+w1);
+       }                 	
+     }
+}
+return V;
+})
+
+parser.set('gram', function (A) {
+var V=math.clone(A);
+var t=math.size(V);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m= '+m+' n= '+n);
+var w1=[];
+var w2=[];
+
+for (k=1;k<m;k++) {
+    for (j=0;j<n;j++) { w2[j]=math.subset(V,math.index(k,j));}
+    console.log('k= '+k+' w2= '+w2);
+    for (l=0;l<k;l++) {
+      var S=0;Mo=0;
+      for (j=0;j<n;j++) {
+          w1[j]=math.subset(V,math.index(l,j)); S+=w1[j]*w2[j];Mo+=w1[j]*w1[j];
+          console.log('Mo= '+Mo+' S= '+S);
+          }
+      for (j=0;j<n;j++) { 
+        va=V.subset(math.index(k,j));vn=va-(parseFloat(S)/parseFloat(Mo))*w1[j];V.subset(math.index(k,j),vn); 
+        console.log('l= '+l+' w1= '+w1);
+       }                 	
+     }
+}
+
+for (k=0;k<m;k++) {
+    Mo=0;
+    for (j=0;j<n;j++) { va=math.subset(V,math.index(k,j));Mo+=va*va;}
+    Mo=Math.sqrt(Mo);
+     console.log('Mo= '+Mo);
+     if (Mo!=0) {
+        for (j=0;j<n;j++) { V.subset(math.index(k,j),(1/Mo)*math.subset(V,math.index(k,j)));}
+     }
+}
+return V;
+})
+
+
+function permuta(C,i,j){
+var t=math.size(C);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('permuta'+' m= '+m+' n= '+n);
+
+for (k=0;k<n;k++){
+  var tmp=math.subset(C, math.index(i,k));
+   C.subset(math.index(i,k),math.subset(C, math.index(j,k)));
+   C.subset(math.index(j, k),tmp);
+}
+return C;
+}
+
+
+
+parser.evaluate('j=i');
+parser.evaluate('tor(x) = x*(pi/180)');
+parser.evaluate('tod(x) = x*(180/pi)');
+parser.evaluate('arg_d(x) = arg(x)*(180/pi)');
+parser.evaluate('polar(r,w) = r*(cos(w)+i*sin(w))');
+parser.evaluate('fasor(r,w) = r*(cos(w*(pi/180))+i*sin(w*(pi/180)))');
+parser.evaluate('ifasor(x) =[abs(x),arg_d(x)]')  
+var jmax=_variables.length;
+//Agregamos las variables nuevas
+for (j=0;j<jmax;j++){
+var ind=_variables[j].indexOf('=');
+var nva=_variables[j].substring(0,ind);
+console.log(nva);
+valor=_variables[j].substring(ind+1);
+console.log(valor);
+//parser.set(nva,math.complex(valor));
+parser.set(nva,math.complex(parser.evaluate(valor)));
+console.log(parser.get(nva)) ; 
+}
+
+//Formulas
+
+console.log(nform);
 for (var i=0;i<nform;i++){
      var formi=expr[i].value;
      var pos=formi.split("=");
-if (pos.length!=0) {
+if (formi!='') {
      if (pos.length==2 )
       {var nvari=pos[0]; var nexpr=pos[1];
-        var _Res=math.compile(nexpr);
-        var scope= JSON.parse(sc);
-        //console.log(scope);
-        var salida=_Res.evaluate(scope);
-        vsal[i].innerText=salida;
-        console.log(nvari+"="+salida);
-        sc=sc.substr(0,sc.length-1);
-        //console.log(sc);
-        sc+=',"'+nvari+'":'+'"'+salida+'"}';
-        //console.log(sc);
+        var _Res=parser.evaluate(nexpr);
+        console.log(_Res);
+       parser.set(nvari,math.complex(_Res));
+      // var salida=_Res;
+          var salida=parser.get(nvari);
+       //try{
+        //var r1=salida.re;
+        //var r2=salida.im;
+        console.log(parser.get(nvari));
+         vsal[i].innerText=print_m(math.format(salida,{notation: 'auto', precision: 5}));
+//+r2.toExponential(nd)+'(i)';}
+//        if (r2>0) { vsal[i].innerText+= ' + '+r2.toExponential(nd)+'(i)';}
+//            else
+//               { if (r2<0)  {vsal[i].innerText+= ' - '+Math.abs(r2).toExponential(nd)+'(i)';}}
+
+       console.table(salida);
+       // }
+       // catch {} 
        }
    else {
-    var _Res=math.compile(formi);
-    var scope= JSON.parse(sc);
-    //console.log(scope);
-    var salida=_Res.evaluate(scope);
-
+    var _Res=parser.evaluate(formi);
     }
-
-var nd=4;
-r1=math.re(salida);
-r2=math.im(salida);
-console.log(salida);
-//console.log('ans=' + r1.toExponential(nd) + 'i*'+r2.toExponential(nd));
-console.log('ans=' + math.format(r1,{notation: 'engineering'}) + 'i*'+math.format(r2,{notation: 'engineering'}));
+  }
 
 }
-}
+//console.log('ans=' + math.format(r1,{notation: 'engineering'}) + 'i*'+math.format(r2,{notation: 'engineering'}));
 
 
 //var K=9e9;
@@ -147,6 +383,32 @@ console.log('ans=' + math.format(r1,{notation: 'engineering'}) + 'i*'+math.forma
 //var me=9.1095e-31;
 //var mp=1.67492e-27;
 
+}
+
+function print_m(A){
+var t=math.size(A);
+
+console.log(math.typeOf(t));
+var texto='';
+
+try {
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m='+m+' n='+n);
+for (i=0;i<m;i++) {
+    texto+='['
+ for (j=0;j<n;j++){
+   texto+=A.subset(math.index(i, j));
+   if (j<(n-1)) {texto+=',';}
+}
+   texto+=']'
+   if (i<(m-1)) {texto+=',';}
+
+}
+
+}
+catch{texto=A, console.log('paso')}
+return texto;
 }
 
 </script>
