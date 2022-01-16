@@ -55,6 +55,7 @@ input[type=text]:focus {
 
 <div id="datos">
 <table>
+<tr><td>Problema:</td><td><input id="dpro" type="text" value=""></td></tr>
 <tr><td>Variables :</td><td><textarea id="_var" rows="4" value=""></textarea></td></tr>
 <tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
 <tr><td></td><td><span name="_res" ></span></td></tr>
@@ -94,8 +95,8 @@ input[type=text]:focus {
 <script type="text/javascript">
 var pi=Math.PI;
 var mu0=4*pi*1e-7;
-
 function procesar(){
+window.document.title = document.getElementById("dpro").value;
 var nd=4;
 const parser=math.parser();
 var _variables=document.getElementById("_var").value;
@@ -317,6 +318,14 @@ for (k=0;k<n;k++){
 return C;
 }
 
+parser.set('PARA', function () {
+var C=math.complex('0');
+ for (var k=0; k < arguments.length; k++) {
+  C=math.add(C,math.divide(1,arguments[k]));
+console.log('C='+C);
+}
+return math.divide(1,C);
+})
 
 
 parser.evaluate('j=i');
