@@ -303,6 +303,32 @@ for (k=0;k<m;k++) {
 return V;
 })
 
+parser.set('proy', function (V,A) {
+var V1=math.clone(V);
+var A1=math.clone(A);
+var t=math.size(A1);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+var P=math.multiply(A1,V1);
+console.log('P= '+P);
+console.log('m= '+m+' n= '+n);
+S=math.zeros(n);
+console.log('S= '+S);
+for (k=0;k<m;k++) {
+     var T=math.row(A1,k);
+     console.log('T= '+T);
+      T=math.squeeze(T);
+     console.log('T= '+T); 
+      var a=P.get([k]);
+      console.log('a= '+a);
+      var S1=math.multiply(a,T);
+      console.log('S1= '+S1); 
+     S=math.add(S,S1);
+}
+
+return S;
+})
+
 
 function permuta(C,i,j){
 var t=math.size(C);
