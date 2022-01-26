@@ -1,1 +1,381 @@
+<HTML>
+<HEAD>
+<TITLE>  Angelo </TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<!-- <link rel="manifest" href="manifest.json">   -->
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
+
+input[type=number]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+
+}
+
+input[type=text]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+input[type=date]{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+select{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 8px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+
+</style>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align:left;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+
+  transition: 0.8s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</HEAD>
+<script type="text/javascript" src="js/jspdfv153.js"></script>
+
+<script type="text/javascript" src="js/FileSaver.js"></script>
+
+<script type="text/javascript" src="js/addimagev153.js"></script>
+
+<script type="text/javascript" src="js/split_text_to_sizev153.js"></script>
+
+<script type="text/javascript" src="js/standard_fonts_metricsv153.js"></script>
+
+<script type="text/javascript" src="js/cell153.js"></script>
+
+<script type="text/javascript" src="js/png.js"></script>
+
+<script type="text/javascript" src="js/png_support.js"></script>
+
+<script type="text/javascript" src="js/zlib.js"></script>
+
+<script type="text/javascript" src="js/selectFile.js"></script>
+
+<script type="text/javascript" src="pdfs.js"></script>
+
+
+<script type="text/javascript">
+
+function openNav() {
+var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
+  texto+='<a href="javascript:void(0)">About</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();maneja_planes();">Administracion de Planes</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();maneja_clientes();">Manejo de Clientes</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();manejo_instalaciones();">Instalaciones</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();manejo_inventario();">Inventario</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();registra_pago();">Pago de servicio</a>';
+  
+
+
+ document.getElementById("mySidenav").innerHTML=texto;
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+function inicio(){
+ //  maneja_clientes();
+ //   maneja_planes();
+//hacerfactura_pago();
+}
+
+/*
+var openRequest = indexedDB.open('angelo', 1);
+openRequest.onupgradeneeded = function() {
+  
+  let db = openRequest.result;
+  if (!db.objectStoreNames.contains('clientes')) { 
+    db.createObjectStore('clientes', {keyPath: 'cid'}); 
+  if (!db.objectStoreNames.contains('inventario')) { 
+    db.createObjectStore('inventario',{autoIncrement: 'true'}); // create it
+  }
+  if (!db.objectStoreNames.contains('instalaciones')) { 
+    db.createObjectStore('instalaciones', {autoIncrement: 'true'}); 
+  }
+  if (!db.objectStoreNames.contains('registros')) { 
+    db.createObjectStore('registros', {autoIncrement: 'true'}); 
+  }
+   if (!db.objectStoreNames.contains('planes')) { 
+    db.createObjectStore('planes', {autoIncrement: 'true'}); 
+  }
+};
+
+openRequest.onerror = function() {
+  console.error("Error", openRequest.error);
+};
+
+openRequest.onsuccess = function() {
+  let db = openRequest.result;
+  // continue working with database using db object
+};
+
+*/
+var planes=[];
+
+planes[0]={'nombre':'Basico','monto':'20'};
+planes[1]={'nombre':'2 Megas','monto':'25'};
+planes[2]={'nombre':'3 Megas','monto':'30'};
+
+var equipos=[];
+
+equipos[0]={'nombre':'Antena ','cantidad':'5','costo':'20','pventa':'30'};
+equipos[0]={'nombre':'Router 1','cantidad':'5','costo':'2','pventa':'5'};
+
+
+function agregar_cliente(){
+var nombre=document.getElementById('NOMBRE').value;
+var cid=document.getElementById('CID').value;
+var correo=document.getElementById('CORREO').value;
+var tlf=document.getElementById('TLF').value;
+var dir=document.getElementById('DIR').value;
+var fechaco=document.getElementById('FECHAC').value;
+var linea={'nombre': nombre,'cid':cid,'correo': correo,'tlf':tlf,'dir':dir,'fechaco':fechaco,'plan':plan};
+let transaction = db.transaction("clientes","readwrite");
+ 
+let request = transaction.objectStore("clientes").add(linea);
+request.onsuccess = function() {
+  if (request.result !== undefined) {
+      console.log("Clientes", request.result); 
+  } else {
+    console.log("No such Client");
+  }
+};
+
+}
+
+function buscar_cliente(){
+var cbus=document.getElementById('CID').value;
+let transaction = db.transaction("clientes"); // readonly
+let request = transaction.objectStore("clientes").get(cbus);
+request.onsuccess = function() {
+  if (request.result !== undefined) {
+      console.log("Clientes", request.result); 
+  } else {
+    console.log("No such Client");
+  }
+};
+}
+
+function eliminar_cliente(){
+var cbus=document.getElementById('CID').value;
+let transaction = db.transaction("clientes"); // readonly
+let request = transaction.objectStore("clientes").delete(cbus);
+request.onsuccess = function() {
+  if (request.result !== undefined) {
+      console.log("Clientes", request.result); 
+  } else {
+    console.log("No such Client");
+  }
+};
+
+}
+
+function quitar(nombdiv){
+var div=document.getElementById(nombdiv);
+div.hidden=true;
+}
+
+
+function maneja_clientes(){
+var divg=document.getElementById('divcliente');
+divg.style="position: fixed;top :2px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
+var texto='';
+texto+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
+texto+=' <button  title="Salir" onclick="quitar(\'divcliente\');" > x </button></div> <br> <br>';
+texto+='<h2>Manejo de clientes</h2><table><tr>'
+texto+='<table><tr>'
+texto+='<td>Nombre</td><td><input id="NOMBRE" type="text" value=""></td></tr>';
+texto+='<td>C.I </td><td><input id="CID" type="number" value=""></td></tr>';
+texto+='<td>Correo</td><td><input id="CORREO" type="email" placeholder="me@example.com" required style="width:12em;" value=""></td></tr>';
+texto+='<td>Tlf</td><td><input id="TLF" type="text" style="width:8em;" value=""></td></tr>';
+texto+='<td>Direccion</td><td><input id="DIR" type="text" style="width:12em;" value=""></td></tr>';
+texto+='<td>Fecha contrato</td><td><input id="FECHAC" type="date"  value=""></td></tr>';
+texto+='<td>Plan </td><td><select id="PLAN">';
+for (var i=0;i<planes.length;i++) texto+='<option>'+planes[i].nombre+'</option>';
+texto+='</select></td></tr>';
+texto+='</table>';
+texto+='<button id="AG" onclick="agregar_cliente();">AG</button>';
+texto+='<button id="BUS" onclick="buscar_cliente();">Buscar</button>';
+texto+='<button id="ELIM" onclick="eliminar_cliente();">Eliminar</button>';
+texto+='<button id="UP" onclick="UP_cliente();">Up</button>';
+texto+='<button id="DOWN" onclick="DOWN_cliente();">Down</button>';
+divg.innerHTML=texto;
+divg.hidden=false;
+}
+
+function maneja_planes(){
+var divg=document.getElementById('divplan');
+divg.style="position: fixed;top :2px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
+var texto='';
+texto+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
+texto+=' <button  title="Salir" onclick="quitar(\'divplan\');" > x </button></div> <br> <br>';
+
+texto+='<h2><center>Administracion de planes<center></h2><table><tr>'
+texto+='<td>Plan</td><td><input id="NOMBRE_PLAN" type="text" value=""></td></tr>';
+texto+='<td>Monto</td><td><input id="MONTO_PLAN" type="number" value=""></td></tr>';
+texto+='</table>';
+
+texto+='<button id="AG_PLAN" onclick="agregar_plan();">AG</button>';
+texto+='<button id="BUS_PLAN" onclick="buscar_plan();">Buscar</button>';
+texto+='<button id="ELIM_PLAN" onclick="eliminar_plan();">Eliminar</button>';
+texto+='<button id="UP_PLAN" onclick="UP_plan();">Up</button>';
+texto+='<button id="DOWN_PLAN" onclick="DOWN_plan();">Down</button>';
+
+divg.innerHTML=texto;
+divg.hidden=false;
+}
+
+
+function manejo_inventario(){
+var divg=document.getElementById('divequipo');
+divg.style="position: fixed;top :2px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
+var texto='';
+texto+='<div style="position: fixed;text-align:center; background-color: gray; color: white; width:95%;">';
+texto+=' <table style="color:white;width:100%;"><tr><td style="text-align:center;"><h2>Inventario</h2></td><td style="text-align:right;"> <button  title="Salir" onclick="quitar(\'divequipo\');" > x </button></td></tr></table></div> <br><br><br>';
+texto+='<table><tr>'
+texto+='<td>Equipo</td><td><input id="NOMBRE_EQUIPO" type="text" value=""></td></tr>';
+texto+='<td>Cantidad</td><td><input id="CANTIDA_EQUIPO" type="number" value=""></td></tr>';
+texto+='<td>Costo</td><td><input id="COSTO_EQUIPO" type="text" value=""></td></tr>';
+texto+='<td>Precio</td><td><input id="PRECIO_EQUIPO" type="text" value=""></td></tr>';
+texto+='</table>';
+texto+='<button id="AG_PLAN" onclick="agregar_equipo();">AG</button>';
+texto+='<button id="BUS_PLAN" onclick="buscar_equipo();">Buscar</button>';
+texto+='<button id="ELIM_PLAN" onclick="eliminar_equipo();">Eliminar</button>';
+texto+='<button id="UP_PLAN" onclick="UP_equipo();">Up</button>';
+texto+='<button id="DOWN_PLAN" onclick="DOWN_equipo();">Down</button>';
+divg.innerHTML=texto;
+divg.hidden=false;
+}
+
+function registra_pago_cliente(){
+var id_cliente=document.getElementById('CID_PAGO').value;
+var monto=document.getElementById('MONTO_PAGO').value;
+var phone='584125311999';
+//hacerfactura_pago();
+var text="Estimado "+id_cliente+" su pago de "+monto +" $ "+"fue registrado satisfactoriamente";
+enviar_whatsapp(phone,text)
+
+
+}
+function registra_pago(){
+var divg=document.getElementById('divpago');
+divg.style="position: fixed;top :2px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
+var texto='';
+texto+='<div style="position: fixed;text-align:center; background-color: gray; color: white; width:95%;">';
+texto+=' <table style="color:white;width:100%;"><tr><td style="text-align:center;"><h2>Registro de pago</h2></td><td style="text-align:right;"> <button  title="Salir" onclick="quitar(\'divpago\');" > x </button></td></tr></table></div> <br><br><br>';
+texto+='<table><tr>'
+texto+='<td>Cliente</td><td><input id="CID_PAGO" type="text" value=""></td></tr>';
+texto+='<td>Monto</td><td><input id="MONTO_PAGO" type="number" value=""></td></tr>';
+texto+='<td>Periodo</td><td><input id="PERIODO_PAGO" type="text" value=""></td></tr>';
+texto+='</table>';
+texto+='<button id="REGISTRAR_PAGO" onclick="registra_pago_cliente();">Registrar</button>';
+divg.innerHTML=texto;
+divg.hidden=false;
+
+}
+
+
+function enviar_whatsapp(phone,text){
+
+url ='https://api.whatsapp.com/send?phone='+phone+'&text='+text;
+window.open(url);
+}
+
+</script>
+
+<BODY onload="inicio();">
+<div id="encabezado" style="text-align: left; border: 1px solid #999999; position: fixed;" > 
+<span style="font-size:30px;cursor:pointer; margin-left: 0px;text-align: left;" onclick="openNav()">&#9776; Menu </span>
+</div>
+<div id="mySidenav" class="sidenav" ></div>
+
+<div id="divcliente"></div>
+<div id="divplan"></div>
+<div id="divequipo"></div>
+<div id="divpago"></div>
+
+<button onclick="enviar_whatsapp('584262252003','Prueba');">P</button>
+
+<!--   -->
+</BODY>
+</html>
