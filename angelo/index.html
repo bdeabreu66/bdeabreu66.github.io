@@ -331,7 +331,7 @@ function registra_pago_cliente(){
 var id_cliente=document.getElementById('CID_PAGO').value;
 var monto=document.getElementById('MONTO_PAGO').value;
 var phone='584125311999';
-//hacerfactura_pago();
+hacerfactura_pago();
 var text="Estimado "+id_cliente+" su pago de "+monto +" $ "+"fue registrado satisfactoriamente";
 enviar_whatsapp(phone,text)
 
