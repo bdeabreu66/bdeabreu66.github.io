@@ -454,10 +454,10 @@ texto+='<p  >'+ data[i][0]+'</p>';
 if (data[i][4]==0) {var vcor='black';} else {var vcor='blue';}
 if (data[i][5]==0) {var vcor1='black';} else {var vcor1='blue';}
 if (data[i][3]==1) {var fm=fiva} else {fm=1}
-texto+='<table><tr><td> U '+impri((fm*data[i][2]/data[i][1]).toFixed(2))+' $' +'</td><td>'+ impri(((fm*data[i][2]/data[i][1])*factor).toFixed(2))+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> T '+impri(fm*data[i][2].toFixed(2))+' $'+'</td><td>'+ impri((fm*data[i][2]*factor).toFixed(2))+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+texto+='<table><tr><td> U '+(fm*data[i][2]/data[i][1]).toFixed(2)+' $' +'</td><td>'+ ((fm*data[i][2]/data[i][1])*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
+texto+='<tr><td> T '+(fm*data[i][2]).toFixed(2)+' $'+'</td><td>'+ impri((fm*data[i][2]*factor).toFixed(2))+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
    if (data[i][3]==1) {
-    texto+="<span style='font-size:0.6em;'>Retenci&oacute;n T: "+impri((data[i][2]/fiva).toFixed(2))+" $ "+impri((data[i][2]*factor/fiva).toFixed(2))+" Bs          </span>";
+    texto+="<span style='font-size:0.6em;'>Retenci&oacute;n T: "+(data[i][2]/fiva).toFixed(2))" $ "+(data[i][2]*factor/fiva).toFixed(2)+" Bs          </span>";
    }
 }
 }
