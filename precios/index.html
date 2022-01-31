@@ -445,6 +445,7 @@ localStorage.setItem('p1',t1);
 localStorage.setItem('p2',t2);
 texto="";
 var factor;
+var fm;
 for (var i=0;i<data.length;i++){
 if (data[i][0].toUpperCase().indexOf(patron) !=-1)   {
 if (data[i][6]=="t1") {factor=t1;}
@@ -453,7 +454,7 @@ if (data[i][6]=="t2") {factor=t2;}
 texto+='<p  >'+ data[i][0]+'</p>';
 if (data[i][4]==0) {var vcor='black';} else {var vcor='blue';}
 if (data[i][5]==0) {var vcor1='black';} else {var vcor1='blue';}
-if (data[i][3]==1) {var fm=fiva} else {fm=1}
+if (data[i][3]==1) {fm=1.16} else {fm=1}
 texto+='<table><tr><td> U '+(fm*data[i][2]/data[i][1]).toFixed(2)+' $' +'</td><td>'+ ((fm*data[i][2]/data[i][1])*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
 texto+='<tr><td> T '+(fm*data[i][2]).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
    if (data[i][3]==1) {
