@@ -23,7 +23,7 @@
       ["Aceite Chef Oleina de Palma.18 Lt x 1U",1,45.45,0,0,0,"t2"],
       ["Aceite Super Oleina de Palma.1 Lt x 12U",12,32.52,0,0,0,"t2"],
       ["Aceite 0.420lt x 24",24,32.16,0,0,0,"t2"],
-      ["Aceite Mazeite 1 lt x 12",39,48.40,0,0,0,"t2"],
+      ["Aceite Mazeite 1 lt x 12",12,48.40,0,0,0,"t2"],
       ["Arroz Clasico. 1 Kg x 24 ",24,26.88,0,0,0,"t2"],
       ["Arroz Corina. 1 Kg x 24 ",24,19.44,0,0,0,"t2"],
       ["Avena 48 x 100.Bolsa",48,19.2,0,0,0,"t2"],
