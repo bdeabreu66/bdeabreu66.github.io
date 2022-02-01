@@ -354,7 +354,9 @@ Ftexto+="FACTURA\n"
 for (var i=0;i<data.length;i++){
 if (data[i][6]=="t1") {factor=t1;}
 if (data[i][6]=="t2") {factor=t2;}
-var Tdolar=data[i][4]*(data[i][2]/data[i][1]) + data[i][5]*(data[i][2]);
+if (data[i][3]==1) {fm=1.16;} else {fm=1;}
+
+var Tdolar=data[i][4]*(fm*data[i][2]/data[i][1]) + data[i][5]*fm*(data[i][2]);
 if (Tdolar!=0) { 
   totald+=Tdolar;
   totalb+=factor*Tdolar;
@@ -367,14 +369,14 @@ if (Tdolar!=0) {
     { texto+='<p style=" font-size:0.8em;" >'+ data[i][5] +'T  ' + data[i][0]+'</p>';
         Ftexto+=data[i][5] +'T '+ data[i][0]+'\n';;
     }
-  texto+='<table width="100%"><tr><td>'+impri(Tdolar.toFixed(2))+' $'+'</td><td>'+impri((factor*Tdolar).toFixed(2))+' Bs'+'</td></tr></table>';
-   Ftexto+=impri(Tdolar.toFixed(2))+' $'+"    "+impri((factor*Tdolar).toFixed(2))+' Bs'+'\n'
+  texto+='<table width="100%"><tr><td>'+Tdolar.toFixed(2)+' $'+'</td><td>'+(factor*Tdolar).toFixed(2)+' Bs'+'</td></tr></table>';
+   Ftexto+=Tdolar.toFixed(2)+' $'+"    "+(factor*Tdolar).toFixed(2)+' Bs'+'\n'
 
 
 if (data[i][3]==1) { 
   var fr=data[i][5]+ data[i][4]/data[i][1]; 
-  texto+='Retencion: '+  impri((fr*data[i][2]/fiva).toFixed(2))+' $ '+impri((fr*data[i][2]*factor/fiva).toFixed(2))+ ' Bs';
-  Ftexto+='Retencion: '+  impri((fr*data[i][2]/fiva).toFixed(2))+' $ '+impri((fr*data[i][2]*factor/fiva).toFixed(2))+ ' Bs\n';
+  texto+='Retencion: '+  (fm*fr*data[i][2]/fiva).toFixed(2)+' $ '+(fm*fr*data[i][2]*factor/fiva).toFixed(2)+ ' Bs';
+  Ftexto+='Retencion: '+  (fm*fr*data[i][2]/fiva).toFixed(2)+' $ '+(fm*fr*data[i][2]*factor/fiva).toFixed(2)+ ' Bs\n';
 }
 
 }
