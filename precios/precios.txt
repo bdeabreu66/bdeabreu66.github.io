@@ -44,7 +44,7 @@
       ["L082 Las llaves Detergente Floral 900g x 20",20,52.0,1,0,0,"t2"],
       ["Q107 Gelatina Golden Frambuesa 96 gr x 10U",10,10.40,1,0,0,"t2"],
       ["Q101 Gelatina Golden Fresa 96 gr x 10U",10,10.40,1,0,0,"t2"],
-      ["Q102 Gelatina Golden Kolita 96 gr x 10U",10,10.20,1,0,0,"t2"],
+      ["Q102 Gelatina Golden Kolita 96 gr x 10U",10,10.40,1,0,0,"t2"],
       ["H135 Harina Pan.1 k x 20",20,20.2,0,0,0,"t2"],
       ["H136 Harina Pan Amarilla k x 20",20,20.2,0,0,0,"t2"],
       ["H173 Harina Pan/Arroz.1 k x 20",20,17.00,0,0,0,"t2"],
