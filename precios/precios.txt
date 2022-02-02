@@ -18,7 +18,7 @@
       ["Carorena verano",36,40.01,0,0,0,"t1"],
       ["Malta 1/4",36,9.59,1,0,0,"t1"],
       ["Malta Nr/Light.12",12,4.72,1,0,0,"t1"],
-      ["Malta Litron",6,9.84.0,1,0,0,"t1"],
+      ["Malta Litron",6,9.84,1,0,0,"t1"],
       ["D362 Atun x35",35,48.65,1,0,0,"t2"],
       ["D388 Bonito en aceite x35",35,43.40,1,0,0,"t2"],
       ["D389 Bonito con vegetales x 24",24,35.04,1,0,0,"t2"],
