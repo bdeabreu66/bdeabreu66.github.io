@@ -61,7 +61,7 @@
       ["L357 Jabon Crema Multiuso.250g x 36U",36,51.12,1,0,0,"t2"],
       ["L358 Jabon Crema Multiuso.500g x 18U",18,46.08,1,0,0,"t2"],
       ["L373 Jabon pastilla Multiuso 130g x 42U",42,25.2,1,0,0,"t2"],
-      ["Q114 KONGA SABOR NARANJA 30gx8x14",14,4.76.08,1,0,0,"t2"],
+      ["Q114 KONGA SABOR NARANJA 30gx8x14",14,4.76,1,0,0,"t2"],
       ["Q119 KONGA SABOR LIMON 30gx50",50,17.0,1,0,0,"t2"],
       ["Q115 KONGA SABOR MORA 30gx8x14 ",14,4.76,1,0,0,"t2"],
       ["Q123 KONGA SABOR PARCHITA 30gx8x14",14,4.76,1,0,0,"t2"],
