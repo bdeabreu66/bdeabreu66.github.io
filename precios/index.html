@@ -38,10 +38,9 @@ position:relative;
 
 #divt {
 position:fixed;
-height: 80%;
+height: 60%;
 width:95%;
 overflow-y:scroll;
-
 }
 
 input[type=text]{
@@ -70,7 +69,7 @@ margin:0px;
 }
 td{
 font-size:1.5rem;
-padding:5px;
+padding:1px;
 }
 table{
 margin:0px;
@@ -107,14 +106,13 @@ padding:0px;
 <BODY onload="carga();">
 
 <br>
-<div id="enc">
-<span id="fecha"> </span>
 
-<table>
+
+<table >
 <tr><td>Paralelo </td><td><input id="t1" type="text" value="0"></td></tr>
 <tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr>
 </table>
-<center>Lista de precios <br>(04-02-2022)</center>
+<center><span style="font-size:1em;">Lista de precios <br>(04-02-2022)</span></center>
 </div>
 <div id="dsearch">
 <input id="search" type="text" oninput="refresca();"> Buscar
@@ -157,8 +155,8 @@ data=eval(localStorage.getItem('data'));
 
 
 
-var fecha=document.getElementById("fecha");
-fecha.innerHTML="V 0.1 13/10/2021";
+//var fecha=document.getElementById("fecha");
+//fecha.innerHTML="V 0.1 13/10/2021";
 divt=document.getElementById("divt");
 fiva=7.25;
 
@@ -473,6 +471,7 @@ texto+='<tr><td> T '+(fm*data[i][2]).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]
 texto+='<br><br>'
 divt.innerHTML=texto;
 }
+
 function impri(A){
 var At=A.toString();
 var p=At.indexOf('.');
