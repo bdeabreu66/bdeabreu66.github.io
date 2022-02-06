@@ -1,5 +1,5 @@
-      [["Vacio de cerveza Ret 222 ml x 36 UN",36,3.5,0,0,0,"t1"],
-      ["Vacio de cerveza Ret 330 ml x 24 UN",36,3.5,0,0,0,"t1"],
+      [["Vacio de cerveza Ret 222 ml x 36 UN",36,3.35,0,0,0,"t1"],
+      ["Vacio de cerveza Ret 330 ml x 24 UN",36,3.35,0,0,0,"t1"],
       ["Pilsen Ret 222 ml x 36 UN",36,14.4,0,0,0,"t1"],
       ["Pilsen Ret 330 ml x 24 UN",24,14.4,0,0,0,"t1"],
       ["Pilsen lata 250 ml x 24 UN",24,16.0,0,0,0,"t1"],
