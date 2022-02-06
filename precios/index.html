@@ -78,6 +78,7 @@ padding:0px;
 }
 
 #footer {
+  display: none;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -111,6 +112,7 @@ padding:0px;
 <table >
 <tr><td>Paralelo </td><td><input id="t1" type="text" value="0"></td></tr>
 <tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr>
+<!-- <tr><td><input id="t3" onchange="camb();" type="checkbox" value="Automatico"><label for="t3"> Automatico </label></td></tr> -->
 </table>
 <center><span style="font-size:1em;">Lista de precios <br>(04-02-2022)</span></center>
 </div>
@@ -132,12 +134,18 @@ padding:0px;
 <script type="text/javascript">
 var dist="Distribuidora Pita-Orozco"
 var hoy=new Date();
+function camb(){
+var va=document.getElementById("t3").checked; 
+console.log('va '+va);
+localStorage.setItem('p3',va);
+}
 function carga(){
 data=[];
 
 try {
 document.getElementById("t1").value = localStorage.getItem('p1');
 document.getElementById("t2").value = localStorage.getItem('p2');
+document.getElementById("t3").checked = localStorage.getItem('p3');
 } catch (error) 
 {
   console.error(error);
@@ -549,8 +557,9 @@ function showError(err) {
 //}
 
 // this is your `load_home() function`
-
-Actualiza_dolar();
+//var va=document.getElementById("t3").checked;
+//console.log('checked '+va);
+//if (va) {Actualiza_dolar();}
 
 function Actualiza_dolar(){
 var nomb="https://s3.amazonaws.com/dolartoday/data.json"
