@@ -3,7 +3,7 @@
       ["Gavera de cerveza Ret 222 ml x 36 UN",1,0.87,0,0,0,"t1"],
       ["Gavera de cerveza Ret 333 ml x 24 UN",1,0.87,0,0,0,"t1"],
       ["Botella de cerveza Ret 222 ml ",1,0.07,0,0,0,"t1"],
-      ["Botella de cerveza Ret 333 ml ",1,0.1,0,0,0,"t1"],
+      ["Botella de cerveza Ret 333 ml ",1,0.11,0,0,0,"t1"],
       ["Pilsen Ret 222 ml x 36 UN",36,14.4,0,0,0,"t1"],
       ["Pilsen Ret 330 ml x 24 UN",24,14.4,0,0,0,"t1"],
       ["Pilsen lata 250 ml x 24 UN",24,16.0,0,0,0,"t1"],
