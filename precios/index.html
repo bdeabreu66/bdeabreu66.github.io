@@ -178,7 +178,13 @@ var j=0;
 
 
 
-data=[["Pilsen Ret 222 ml x 36 UN",36,14.4,0,0,0,"t1"],
+data=[["Vacio de cerveza Ret 222 ml x 36 UN",1,3.36,0,0,0,"t1"],
+      ["Vacio de cerveza Ret 330 ml x 24 UN",1,3.36,0,0,0,"t1"],
+      ["Gavera de cerveza Ret 222 ml x 36 UN",1,0.87,0,0,0,"t1"],
+      ["Gavera de cerveza Ret 333 ml x 24 UN",1,0.87,0,0,0,"t1"],
+      ["Botella de cerveza Ret 222 ml ",1,0.07,0,0,0,"t1"],
+      ["Botella de cerveza Ret 333 ml ",1,0.11,0,0,0,"t1"],
+      ["Pilsen Ret 222 ml x 36 UN",36,14.4,0,0,0,"t1"],
       ["Pilsen Ret 330 ml x 24 UN",24,14.4,0,0,0,"t1"],
       ["Pilsen lata 250 ml x 24 UN",24,16.0,0,0,0,"t1"],
       ["Solera Light Ret 222 ml x 36 UN",36,16.00,0,0,0,"t1"],
@@ -194,11 +200,11 @@ data=[["Pilsen Ret 222 ml x 36 UN",36,14.4,0,0,0,"t1"],
       ["Solera Kriek Ret 222 ml x 36 UN",36,16.0,0,0,0,"t1"],
       ["Solera IPA NR 222 ml x 12 UN",36,7.20,0,0,0,"t1"],
       ["Solera Kriek NR 222 ml x 12 UN",36,7.20,0,0,0,"t1"],
-      ["Carorena",6,45.01,0,0,0,"t1"],
-      ["Carorena verano",36,40.01,0,0,0,"t1"],
-      ["Malta 1/4",36,9.59,1,0,0,"t1"],
-      ["Malta Nr/Light.12",12,4.72,1,0,0,"t1"],
-      ["Malta Litron",6,9.84,1,0,0,"t1"],
+      ["Carorena",6,36.01,0,0,0,"t1"],
+      ["Carorena verano",36,32.01,0,0,0,"t1"],
+      ["Malta 1/4",36,8.26724,1,0,0,"t1"],
+      ["Malta Nr/Light.12",12,4.0689,1,0,0,"t1"],
+      ["Malta Litron",6,8.4827,1,0,0,"t1"],
       ["H201 Aceite Mazeite 1 lt x 12",12,39.48,0,0,0,"t2"],
       ["M033 Super Can.carne hueso 18 Kg x 1",1,22.82,1,0,0,"t2"],
       ["M034 Super Can. pollo 18 Kg x 1",1,22.82,1,0,0,"t2"],
@@ -225,10 +231,11 @@ data=[["Pilsen Ret 222 ml x 36 UN",36,14.4,0,0,0,"t1"],
       ["Q464 Avena fortificada 100g x 48",48,19.2,0,0,0,"t2"],     
       ["Q465 Avena fortificada 200g x 30",30,23.1,0,0,0,"t2"],
       ["Q005 Avena( Don Pancho) 400g x 24",24,23.76,1,0,0,"t2"],
-      ["Q114 KONGA SABOR NARANJA 30gx8x14",14,4.76,1,0,0,"t2"],
+      ["Q114 KONGA SABOR NARANJA 30gx8x14",14,38.08,1,0,0,"t2"],
+      ["Q113 KONGA SABOR LIMON 30gx8x14",14,38.08,1,0,0,"t2"],
       ["Q119 KONGA SABOR LIMON 30gx50",50,17.0,1,0,0,"t2"],
-      ["Q115 KONGA SABOR MORA 30gx8x14 ",14,4.76,1,0,0,"t2"],
-      ["Q123 KONGA SABOR PARCHITA 30gx8x14",14,4.76,1,0,0,"t2"],
+      ["Q115 KONGA SABOR MORA 30gx8x14 ",14,38.08,1,0,0,"t2"],
+      ["Q123 KONGA SABOR PARCHITA 30gx8x14",14,38.08,1,0,0,"t2"],
       ["H172 Pan/Mezcla cachapas 500g x 12",12,13.56,0,0,0,"t2"],
       ["H330 Primor Crema/Arroz E 450g x 24 Pote",24,28.32,0,0,0,"t2"],
       ["H331 Primor Crema/Arroz.12 x 900g Pote",12,22.20,0,0,0,"t2"],
@@ -248,14 +255,14 @@ data=[["Pilsen Ret 222 ml x 36 UN",36,14.4,0,0,0,"t1"],
       ["T076 Chef Margarina 5 K x 1.C/S",1,15.11,0,0,0,"t2"],
       ["T080 Chef Margarina 5 K x 1.S/S",1,15.11,1,0,0,"t2"],
       ["T084 Mantequilla Mavesa 1 K x 6",6,19.14,1,0,0,"t2"],
-      ["T086 Mantequilla Mavesa 500g x 12",12,19.68,1,0,0,"t2"],
-      ["T572 Mantequilla Mavesa 250g x 24",24,20.64,1,0,0,"t2"],
-      ["T576 Mantequilla Nelly CR 400g x 12",12,17.04,1,0,0,"t2"],
-      ["T587 Mantequilla Nelly CR 250g x 24",24,16.80,1,0,0,"t2"],
-      ["T588 Mantequilla Nelly CR 500g x 12",12,17.04,1,0,0,"t2"],
-      ["T018 Mayonesa 910g x 6",6,26.88,1,0,0,"t2"],
-      ["T020 Mayonesa 445g x 12",12,28.68,1,0,0,"t2"],
-      ["T393 Mayonesa 445g x 12 ND",12,28.68,1,0,0,"t2"],
+      ["T086 Mantequilla Mavesa 500g x 12",12,19.68,0,0,0,"t2"],
+      ["T572 Mantequilla Mavesa 250g x 24",24,20.64,0,0,0,"t2"],
+      ["T576 Mantequilla Nelly CR 400g x 12",12,17.04,0,0,0,"t2"],
+      ["T587 Mantequilla Nelly CR 250g x 24",24,16.80,0,0,0,"t2"],
+      ["T588 Mantequilla Nelly CR 500g x 12",12,17.04,0,0,0,"t2"],
+      ["T018 Mayonesa 910g x 6",6,26.88,0,0,0,"t2"],
+      ["T020 Mayonesa 445g x 12",12,28.68,0,0,0,"t2"],
+      ["T393 Mayonesa 445g x 12 ND",12,28.68,0,0,0,"t2"],
       ["T486 Mayonesa(Aderezo) 3,6 kg x 4",4,65.4,1,0,0,"t2"],
       ["T573 Mayonesa 175g x 24",24,27.12,0,0,0,"t2"],
       ["T574 Mayonesa limon  445 g x 12",12,28.68,1,0,0,"t2"],
@@ -268,14 +275,14 @@ data=[["Pilsen Ret 222 ml x 36 UN",36,14.4,0,0,0,"t1"],
       ["T427 Aceite Chef Oleina de Palma.18 Lt x 1U",1,58.38,0,0,0,"t2"],
       ["T584 Aceite Super Oleina de Palma.1 Lt x 12U",12,42.36,0,0,0,"t2"],
       ["H500 Pasta corta dedales 1 K x 12U",12,15.48,0,0,0,"t2"],
-      ["H501 Pasta corta tornillo 1 K x 12U",12,15.48,1,0,0,"t2"],
+      ["H501 Pasta corta tornillo 1 K x 12U",12,15.48,0,0,0,"t2"],
       ["H506 Pasta corta plumitas 1 K x 12U",12,15.48,0,0,0,"t2"],
       ["H509 Pasta corta dedales 500g x 12U",12,7.92,0,0,0,"t2"],
       ["H516 Pasta larga vermicelli 500g x 12U",12,7.92,0,0,0,"t2"],
       ["H517 Pasta larga spaguetti 500g x 12U",12,7.92,0,0,0,"t2"],
       ["H689 Pasta larga vermicelli 1 K x 12U",12,15.48,0,0,0,"t2"],
-      ["H690 Pasta larga spaguetti 1 K x 12U",12,15.48,1,0,0,"t2"],
-      ["H1804 Pasta larga Linguini. 1 K x 12U",13,15.48,1,0,0,"t2"],
+      ["H690 Pasta larga spaguetti 1 K x 12U",12,15.48,0,0,0,"t2"],
+      ["H1804 Pasta larga Linguini. 1 K x 12U",13,15.48,0,0,0,"t2"],
       ["D366 Pepitonas picantes 140g x 35 ",35,38.5,1,0,0,"t2"],
       ["D388 Bonito en aceite 140g x 35",35,43.40,1,0,0,"t2"],
       ["D389 Bonito con vegetales  165g x 24",24,35.04,1,0,0,"t2"],
@@ -284,9 +291,9 @@ data=[["Pilsen Ret 222 ml x 36 UN",36,14.4,0,0,0,"t1"],
       ["T501 Rikesa Tocineta.300 x 12",12,27.84,1,0,0,"t2"],
       ["T564 Rikesa Blanco.200g x 18U",18,30.24,1,0,0,"t2"],
       ["T565 Rikesa Parmesano 200g x 18U",18,30.24,1,0,0,"t2"],
-      ["D384 Sardina Aceite.170 x 20",20,15.8,1,0,0,"t2"],
-      ["D385 Sardina Picante.170x 20",20,15.8,1,0,0,"t2"],
-      ["D386 Sardina Tomate.170x 20",20,15.8,1,0,0,"t2"],
+      ["D384 Sardina Aceite.170 x 20",20,15.8,0,0,0,"t2"],
+      ["D385 Sardina Picante.170x 20",20,15.8,0,0,0,"t2"],
+      ["D386 Sardina Tomate.170x 20",20,15.8,0,0,0,"t2"],
       ["T297 Mermelada Vienesa Fresa 240g x 18U",18,27.18,1,0,0,"t2"],
       ["T298 Mermelada Vienesa Guayaba 240g x 18U",18,27.18,1,0,0,"t2"],
       ["T583 Mermelada Vienesa Fresamora 240g x 18U",18,27.18,1,0,0,"t2"],
@@ -367,8 +374,11 @@ for (var i=0;i<data.length;i++){
 if (data[i][6]=="t1") {factor=t1;}
 if (data[i][6]=="t2") {factor=t2;}
 if (data[i][3]==1) {fm=1.16;} else {fm=1;}
-
-var Tdolar=data[i][4]*(fm*data[i][2]/data[i][1]) + data[i][5]*fm*(data[i][2]);
+var pu=Math.ceil(100*fm*data[i][2]/data[i][1])/100;
+var pb;
+if (data[i][3]==1) { pb=pu*data[i][1];} else { pb=data[i][2];}
+//var Tdolar=data[i][4]*(fm*data[i][2]/data[i][1]) + data[i][5]*fm*(data[i][2]);
+var Tdolar=data[i][4]*(pu) + data[i][5]*pb;
 if (Tdolar!=0) { 
   totald+=Tdolar;
   totalb+=factor*Tdolar;
@@ -376,10 +386,12 @@ if (Tdolar!=0) {
   if (data[i][4]!=0) { 
          texto+='<p style=" font-size:0.8em;" >'+ data[i][4] +'U '+ data[i][0]+'</p>';
          Ftexto+=data[i][4] +'U '+ data[i][0]+'\n';
+//  console.log('pu:'+pu);
+
   }
   if (data[i][5]!=0) 
-    { texto+='<p style=" font-size:0.8em;" >'+ data[i][5] +'T  ' + data[i][0]+'</p>';
-        Ftexto+=data[i][5] +'T '+ data[i][0]+'\n';;
+    { texto+='<p style=" font-size:0.8em;" >'+ data[i][5] +'B  ' + data[i][0]+'</p>';
+        Ftexto+=data[i][5] +'B '+ data[i][0]+'\n';;
     }
   texto+='<table width="100%"><tr><td>'+Tdolar.toFixed(2)+' $'+'</td><td>'+(factor*Tdolar).toFixed(2)+' Bs'+'</td></tr></table>';
    Ftexto+=Tdolar.toFixed(2)+' $'+"    "+(factor*Tdolar).toFixed(2)+' Bs'+'\n'
@@ -387,8 +399,8 @@ if (Tdolar!=0) {
 
 if (data[i][3]==1) { 
   var fr=data[i][5]+ data[i][4]/data[i][1]; 
-  texto+='Retencion: '+  (fm*fr*data[i][2]/fiva).toFixed(2)+' $ '+(fm*fr*data[i][2]*factor/fiva).toFixed(2)+ ' Bs';
-  Ftexto+='Retencion: '+  (fm*fr*data[i][2]/fiva).toFixed(2)+' $ '+(fm*fr*data[i][2]*factor/fiva).toFixed(2)+ ' Bs\n';
+  texto+='Retencion: '+  (fr*pb/fiva).toFixed(2)+' $ '+(fr*pb*factor/fiva).toFixed(2)+ ' Bs';
+  Ftexto+='Retencion: '+  (fr*pb/fiva).toFixed(2)+' $ '+(fr*pb*factor/fiva).toFixed(2)+ ' Bs\n';
 }
 
 }
@@ -453,6 +465,8 @@ factflag=true;
 
 function refresca(){
 var patron=document.getElementById("search").value.toUpperCase();
+var pb;
+var pu;
 t1=document.getElementById("t1").value;
 t2=document.getElementById("t2").value;
 localStorage.setItem('p1',t1);
@@ -469,8 +483,11 @@ texto+='<p  >'+ data[i][0]+'</p>';
 if (data[i][4]==0) {var vcor='black';} else {var vcor='blue';}
 if (data[i][5]==0) {var vcor1='black';} else {var vcor1='blue';}
 if (data[i][3]==1) {fm=1.16} else {fm=1}
-texto+='<table><tr><td> U '+(fm*data[i][2]/data[i][1]).toFixed(2)+' $' +'</td><td>'+ ((fm*data[i][2]/data[i][1])*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> T '+(fm*data[i][2]).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+pu=Math.ceil(100*fm*data[i][2]/data[i][1])/100;
+if (data[i][3]==1) {pb=pu*data[i][1];} else {pb=data[i][2];}
+texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
+texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+
    if (data[i][3]==1) {
     texto+="<span style='font-size:0.6em;'>Retenci&oacute;n T: "+(fm*data[i][2]/fiva).toFixed(2)+ " $ "+(fm*data[i][2]*factor/fiva).toFixed(2)+" Bs          </span>";
    }
