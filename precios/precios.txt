@@ -52,7 +52,7 @@
       ["Q465 Avena fortificada 200g x 30",30,23.1,0,0,0,"t2"],
       ["Q005 Avena( Don Pancho) 400g x 24",24,23.76,1,0,0,"t2"],
       ["Q114 KONGA SABOR NARANJA 30gx8x14",14,38.08,1,0,0,"t2"],
-      ["Q113 KONGA SABOR LIMON 30gx8x14",14,38.08.0,1,0,0,"t2"],
+      ["Q113 KONGA SABOR LIMON 30gx8x14",14,38.08,1,0,0,"t2"],
       ["Q119 KONGA SABOR LIMON 30gx50",50,17.0,1,0,0,"t2"],
       ["Q115 KONGA SABOR MORA 30gx8x14 ",14,38.08,1,0,0,"t2"],
       ["Q123 KONGA SABOR PARCHITA 30gx8x14",14,38.08,1,0,0,"t2"],
