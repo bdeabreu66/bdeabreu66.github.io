@@ -114,7 +114,7 @@ padding:0px;
 <tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr>
 <!-- <tr><td><input id="t3" onchange="camb();" type="checkbox" value="Automatico"><label for="t3"> Automatico </label></td></tr> -->
 </table>
-<center><span style="font-size:1em;">Lista de precios <br>(04-02-2022)</span></center>
+<center>Lista de precios <br><span id="fecha_p" style="font-size:1em;"></span></center>
 </div>
 <div id="dsearch">
 <input id="search" type="text" oninput="refresca();"> Buscar
@@ -145,6 +145,7 @@ data=[];
 try {
 document.getElementById("t1").value = localStorage.getItem('p1');
 document.getElementById("t2").value = localStorage.getItem('p2');
+document.getElementById("fecha_p").innerText = localStorage.getItem('FECHA_P');
 //document.getElementById("t3").checked = localStorage.getItem('p3');
 } catch (error) 
 {
@@ -211,7 +212,7 @@ data=      [["Vacio de cerveza Ret 222 ml x 36 UN",1,3.36,0,0,0,"t1"],
       ["M324 Dogourmet Parrilla. 18 Kg x 1U",1,30.67,1,0,0,"t2"],
       ["M326 Dogourmet Parrilla. 2 Kg x 6U",6,27.41,1,0,0,"t2"],
       ["M329 Dogourmet Cachorros 18 Kg x 1",1,34.54,1,0,0,"t2"],
-      ["M330 Dogourmet Cachorros 2 Kg x 6U",6,30.46,1,0,0,"t2"],
+      ["M330 Dogourmet Cachorros 2 Kg x 6U",6,30.47,1,0,0,"t2"],
       ["M338 Dogourmet Parrilla. 4 Kg x 5U",5,40.15,1,0,0,"t2"],
       ["M339 Dogourmet Pollo brasa. 4 Kg x 5U",5,40.15,1,0,0,"t2"],
       ["M340 Super Can.carne hueso 4 Kg x 5U",5,29.79,1,0,0,"t2"],
@@ -223,8 +224,8 @@ data=      [["Vacio de cerveza Ret 222 ml x 36 UN",1,3.36,0,0,0,"t1"],
       ["H300 Arroz Clasico. 1 Kg x 24 ",24,26.88,0,0,0,"t2"],
       ["H364 Arroz Corina. 1 Kg x 24 ",24,19.68,0,0,0,"t2"],
       ["D362 Atun en aceite 140g x 35",35,48.65,1,0,0,"t2"],
-      ["Q001 Avena Quaker Original (Bolsa) 400g x 24",24,26,88,0,0,0,"t2"],
-      ["Q002 Avena Quaker Original (Bolsa) 800g x 12",12,26,88,0,0,0,"t2"],
+      ["Q001 Avena Quaker Original (Bolsa) 400g x 24",24,36.72,0,0,0,"t2"],
+      ["Q002 Avena Quaker Original (Bolsa) 800g x 12",12,31.80,0,0,0,"t2"],
       ["Q023 Harina Avena Quaker (Bolsa) 400g x 24",24,22.8,0,0,0,"t2"],
       ["Q464 Avena fortificada 100g x 48",48,19.2,0,0,0,"t2"],     
       ["Q465 Avena fortificada 200g x 30",30,23.1,0,0,0,"t2"],
@@ -233,7 +234,7 @@ data=      [["Vacio de cerveza Ret 222 ml x 36 UN",1,3.36,0,0,0,"t1"],
       ["Q134 Avena Vainilla casera 400g x 24",24,36.72,0,0,0,"t2"],
       ["Q135 Avena Sirop de Maple 400g x 24",24,36.72,0,0,0,"t2"],
       ["Q136 Avena Orignal (Bolsa) 100g x 48",48,19,20,0,0,0,"t2"],
-      ["Q005 Avena( Don Pancho) 400g x 24",24,23.76,1,0,0,"t2"],
+      ["Q005 Avena( Don Pancho) 400g x 24",24,20.48,1,0,0,"t2"],
       ["Q113 KONGA SABOR LIMON 30gx8x14",14,5.05,1,0,0,"t2"],
       ["Q114 KONGA SABOR NARANJA 30gx8x14",14,5.05,1,0,0,"t2"],
       ["Q115 KONGA SABOR MORA 30gx8x14 ",14,5.05,1,0,0,"t2"],
@@ -251,7 +252,7 @@ data=      [["Vacio de cerveza Ret 222 ml x 36 UN",1,3.36,0,0,0,"t1"],
       ["H135 Harina Pan tradicional 1 k x 20",20,21.20,0,0,0,"t2"],
       ["H136 Harina Pan Amarilla k x 20",20,21.20,0,0,0,"t2"],
       ["H173 Harina Pan/Arroz.1 k x 20",20,18.40,0,0,0,"t2"],
-      ["T060 Salsa/Tomate.198 x 24",24,13.66,1,0,0,"t2"],
+      ["T060 Salsa/Tomate.198 x 24",24,13.65,1,0,0,"t2"],
       ["T061 Salsa/Tomate.397 x 24",24,21.93,1,0,0,"t2"],
       ["T449 Salsa/Tomate. 4,2 x 4",4 ,35.24,1,0,0,"t2"],
       ["T076 Chef Margarina 5 K x 1.C/S",1,15.11,0,0,0,"t2"],
@@ -376,9 +377,10 @@ for (var i=0;i<data.length;i++){
 if (data[i][6]=="t1") {factor=t1;}
 if (data[i][6]=="t2") {factor=t2;}
 if (data[i][3]==1) {fm=1.16;} else {fm=1;}
-var pu=Math.ceil(100*fm*data[i][2]/data[i][1])/100;
-var pb;
-if (data[i][3]==1) { pb=pu*data[i][1];} else { pb=data[i][2];}
+//var pu=Math.ceil(100*fm*data[i][2]/data[i][1])/100;
+var pu=+(fm*data[i][2]/data[i][1]).toFixed(2);
+var pb=+(fm*data[i][2]).toFixed(2);
+//if (data[i][3]==1) { pb=pu*data[i][1];} else { pb=data[i][2];}
 //var Tdolar=data[i][4]*(fm*data[i][2]/data[i][1]) + data[i][5]*fm*(data[i][2]);
 var Tdolar=data[i][4]*(pu) + data[i][5]*pb;
 if (Tdolar!=0) { 
@@ -485,8 +487,10 @@ texto+='<p  >'+ data[i][0]+'</p>';
 if (data[i][4]==0) {var vcor='black';} else {var vcor='blue';}
 if (data[i][5]==0) {var vcor1='black';} else {var vcor1='blue';}
 if (data[i][3]==1) {fm=1.16} else {fm=1}
-pu=Math.ceil(100*fm*data[i][2]/data[i][1])/100;
-if (data[i][3]==1) {pb=pu*data[i][1];} else {pb=data[i][2];}
+//pu=Math.ceil(100*fm*data[i][2]/data[i][1])/100;
+var pu=+(fm*data[i][2]/data[i][1]).toFixed(2);
+var pb=+(fm*data[i][2]).toFixed(2);
+//if (data[i][3]==1) {pb=pu*data[i][1];} else {pb=data[i][2];}
 texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
 texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
 
@@ -634,7 +638,10 @@ function ajaxPositiveD(response) {
        console.log('fecha: '+ txt.dia+txt.mes+txt.ano);
       // document.getElementById("t1").value = txt.USD.promedio;
      //    document.getElementById("t2").value = txt.USD.sicad2;
-     //  refresca();
+      var fecha='('+txt.dia+'/'+txt.mes+'/'+txt.ano+')';
+      document.getElementById("fecha_p").innerText=fecha;
+      localStorage.setItem('FECHA_P',fecha);
+  //  refresca();
   }
 
 function showErrorD(err) { 

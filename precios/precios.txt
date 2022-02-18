@@ -31,7 +31,7 @@
       ["M324 Dogourmet Parrilla. 18 Kg x 1U",1,30.67,1,0,0,"t2"],
       ["M326 Dogourmet Parrilla. 2 Kg x 6U",6,27.41,1,0,0,"t2"],
       ["M329 Dogourmet Cachorros 18 Kg x 1",1,34.54,1,0,0,"t2"],
-      ["M330 Dogourmet Cachorros 2 Kg x 6U",6,30.46,1,0,0,"t2"],
+      ["M330 Dogourmet Cachorros 2 Kg x 6U",6,30.47,1,0,0,"t2"],
       ["M338 Dogourmet Parrilla. 4 Kg x 5U",5,40.15,1,0,0,"t2"],
       ["M339 Dogourmet Pollo brasa. 4 Kg x 5U",5,40.15,1,0,0,"t2"],
       ["M340 Super Can.carne hueso 4 Kg x 5U",5,29.79,1,0,0,"t2"],
