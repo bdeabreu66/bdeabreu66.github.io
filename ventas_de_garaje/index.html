@@ -38,9 +38,9 @@ position:relative;
 
 #divt {
 position:fixed;
-height: 60%;
+height: 70%;
 width:95%;
-overflow-y:scroll;
+overflow-y:auto;
 }
 
 input[type=text]{
@@ -93,7 +93,7 @@ padding:0px;
   position: fixed;
   left: 0;
   top: 0;
-  width: 100%;
+  width: 95%;
   background-color: blue;
   color: white;
   text-align: center;
@@ -106,10 +106,8 @@ padding:0px;
 
 <BODY onload="carga();">
 
-<div>
-<center>Lista de Productos<br>
-</div>
 <div id="dsearch">
+<br><br>
 <input id="search" type="text" oninput="refresca();"> Buscar
 </div>
 <div id="divt" >
@@ -118,8 +116,8 @@ padding:0px;
 <div id="factura" hidden="true">
 
 </div>
- <div id="footer"> Contacto: Rosa Aguilar. email: brauliodeabreu@gmail.com <br> Tlfs: +58426 2252003 +58412 8552592</div>
- <div id="header"> <button class="btop" onclick="Actualiza_dolar();">A</button>&nbsp&nbsp<button class="btop" onclick="refresca();">P</button>&nbsp&nbsp<button class="btop" onclick="factura();">F</button>&nbsp&nbsp <button class="btop" onclick="anula();">Z</button></div>
+ <div id="footer"> Contactos: Rosa Aguilar. Tlf: +58426 2252003 <br> Braulio De Abreu Tlf +58412 8552592</div>
+ <div id="header"> <h3> Venta de Garaje </h3>  </div>
 
 <!--   -->
 
@@ -188,8 +186,8 @@ texto="";
 for (var i=0;i<data.length;i++){
 if (data[i]["nombre"].toUpperCase().indexOf(patron) !=-1)   {
   texto+='<p  >'+ data[i]["nombre"]+'</p>';
-  texto+='<table><tr><td span=2>'+ data[i]["descripcion"]+'</td></tr>';
-  texto+='<tr><td>'+ data[i]["imagp"]+ '</td><td>Ref. '+ data[i]["ref"]   +  '</td></tr></table>';
+  texto+='<table><tr><td colspan="2" style="font-size:1.2em;">'+ data[i]["descripcion"]+'</td></tr>';
+  texto+='<tr><td> <img src="images/'+ data[i]["imagp"] +'" alt="" width="150" height="150">'+ '</td><td>Ref. '+ data[i]["ref"]   +  '</td></tr></table>';
 }
 texto+='<br><br>'
 divt.innerHTML=texto;
