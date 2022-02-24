@@ -89,11 +89,24 @@ padding:0px;
   font-size:0.5em;
 }
 
+#div_image {
+  
+  position: fixed;
+  left: 0;
+  top: 100px;
+  width: 100%;
+  heigth: 50%
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+
 #header {
   position: fixed;
   left: 0;
   top: 0;
-  width: 95%;
+  width: 100%;
   background-color: blue;
   color: white;
   text-align: center;
@@ -112,6 +125,9 @@ padding:0px;
 </div>
 <div id="divt" >
 </div>
+<div id="div_image" hidden="true" >
+</div>
+
 <div id="content" hidden="false"></div>
 <div id="factura" hidden="true">
 
@@ -187,11 +203,19 @@ for (var i=0;i<data.length;i++){
 if (data[i]["nombre"].toUpperCase().indexOf(patron) !=-1)   {
   texto+='<p  >'+ data[i]["nombre"]+'</p>';
   texto+='<table><tr><td colspan="2" style="font-size:1.2em;">'+ data[i]["descripcion"]+'</td></tr>';
-  texto+='<tr><td> <img src="images/'+ data[i]["imagp"] +'" alt="" width="150" height="150">'+ '</td><td>Ref. '+ data[i]["ref"]   +  '</td></tr></table>';
+  texto+='<tr><td> <img src="images/'+ data[i]["imagp"] +'" onclick="muestraImagen('+i+')" alt="" width="150" height="150" style="border:5px solid black">'+ '</td><td>Ref. '+ data[i]["ref"]   +  '</td></tr></table>';
 }
 texto+='<br><br>'
 divt.innerHTML=texto;
 }
+}
+
+function muestraImagen(num){
+var divimage=document.getElementById("div_image");
+var texto='';
+texto+='<img src="/images/'+ data[num]["imagg"] + '" alt="" width="100%" height="100%" style="border:5px solid black">';
+divimage.innerHTML=texto;
+divimage.hidden=false;
 }
 </script>
 <script>
