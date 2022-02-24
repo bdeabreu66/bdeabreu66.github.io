@@ -1,4 +1,5 @@
 [{"nombre":"Olla Renaware 12 litros","descripcion":"Excelente estado, calidad insuperable.Para sus sopas","ref":"50","imagp":"pdefault.jpg","imagg":""},
 {"nombre":"Sarten Renaware 12","descripcion":"Excelente estado, calidad insuperable. No se pega","ref":"50","imagp":"pdefault.jpg","imagg":""},
-{"nombre":"Biblia Ilustrada","descripcion":"Excelente estado, Caratula dura. Mas de 50 ilustraciones","ref":"25","imagp":"pdefault.jpg","imagg":""}
+{"nombre":"Biblia Ilustrada","descripcion":"Excelente estado, Caratula dura. Mas de 50 ilustraciones","ref":"25","imagp":"pdefault.jpg","imagg":""},
+{"nombre":"Poltrona mecedora","descripcion":"Hecha en Hermigon. Calidad insuperable","ref":"100","imagp":"poltrona.jpg","imagg":""}
 ]
