@@ -201,7 +201,7 @@ function refresca(){
 var patron=document.getElementById("search").value.toUpperCase();
 texto="";
 for (var i=0;i<data.length;i++){
-if (data[i]["nombre"].toUpperCase().indexOf(patron) !=-1)   {
+if ((data[i]["nombre"]+data[i]["id"]).toUpperCase().indexOf(patron) !=-1)   {
   texto+='<p  >'+ data[i]["nombre"]+ ' ('+data[i]["id"]+')</p>';
   texto+='<table><tr><td colspan="2" style="font-size:1.2em;">'+ data[i]["descripcion"]+'</td></tr>';
   texto+='<tr><td> <img src="images/'+ data[i]["imagp"] +'" onclick="muestraImagen('+i+')" alt="" width="150" height="150" style="border:5px solid black">'+ '</td><td>Ref. '+ data[i]["ref"]   +  '</td></tr></table>';
