@@ -103,7 +103,7 @@
       ["H517 Pasta larga spaguetti 500g x 12U",12,8.28,0,0,0,"t2"],
       ["H689 Pasta larga vermicelli 1 K x 12U",12,16.20,0,0,0,"t2"],
       ["H690 Pasta larga spaguetti 1 K x 12U",12,16.20,0,0,0,"t2"],
-      ["H1804 Pasta larga Linguini. 1 K x 12U",13,16.20,0,0,0,"t2"],
+      ["H1804 Pasta larga Linguini. 1 K x 12U",12,16.20,0,0,0,"t2"],
       ["D366 Pepitonas picantes 140g x 35 ",35,39.2,1,0,0,"t2"],
       ["D388 Bonito en aceite 140g x 35",35,44.1,1,0,0,"t2"],
       ["T499 Rikesa Trad.200 x 18",18,32.58,1,0,0,"t2"],
