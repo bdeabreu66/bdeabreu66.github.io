@@ -3,5 +3,6 @@
 {"id":"P0003","cat":"&Libros&Religion&","nombre":"Biblia Ilustrada","descripcion":"Excelente estado, Caratula dura. Mas de 50 ilustraciones","ref":"25","imagp":"pdefault.jpg","imagg":"pdefault.jpg"},
 {"id":"P0004","cat":"&Hogar&Muebles&","nombre":"Poltrona mecedora","descripcion":"Hecha en Hermigon. Calidad insuperable","ref":"100","imagp":"poltrona_p.jpg","imagg":"poltrona.jpg"},
 {"id":"P0005","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Sopera Renaware","descripcion":"Excelente estado, calidad insuperable. Duradera. Ideal para servir en la mesa","ref":"50","imagp":"sopera_rena_p.jpg","imagg":"sopera_rena.jpg"},
-{"id":"P0006","cat":"&Hogar&Cocina&","nombre":"Juego de ollas","descripcion":"Excelente calidad. Resistentes","ref":"40","imagp":"juego_peltre_p.jpg","imagg":"juego_peltre.jpg"}
+{"id":"P0006","cat":"&Hogar&Cocina&","nombre":"Juego de ollas","descripcion":"Excelente calidad. Resistentes","ref":"40","imagp":"juego_peltre_p.jpg","imagg":"juego_peltre.jpg"},
+{"id":"P0007","cat":"&Libros&Computacion&","nombre":"Programacion en C++","descripcion":"Excelente estado, Libro de bolsillo. Anaya.","ref":"2","imagp":"lib_comp_1.jpg","imagg":"lib_comp_1.jpg"}
 ]
