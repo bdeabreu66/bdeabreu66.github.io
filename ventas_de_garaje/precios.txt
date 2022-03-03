@@ -4,5 +4,7 @@
 {"id":"P0004","cat":"&Hogar&Muebles&","nombre":"Poltrona mecedora","descripcion":"Hecha en Hermigon. Calidad insuperable","ref":"100","imagp":"poltrona_p.jpg","imagg":"poltrona.jpg"},
 {"id":"P0005","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Sopera Renaware","descripcion":"Excelente estado, calidad insuperable. Duradera. Ideal para servir en la mesa","ref":"50","imagp":"sopera_rena_p.jpg","imagg":"sopera_rena.jpg"},
 {"id":"P0006","cat":"&Hogar&Cocina&","nombre":"Juego de ollas","descripcion":"Excelente calidad. Resistentes","ref":"40","imagp":"juego_peltre_p.jpg","imagg":"juego_peltre.jpg"},
-{"id":"P0007","cat":"&Libros&Computacion&","nombre":"Programacion en C++","descripcion":"Excelente estado, Libro de bolsillo. Anaya.","ref":"2","imagp":"lib_comp_1.jpg","imagg":"lib_comp_1.jpg"}
+{"id":"P0007","cat":"&Libros&Computacion&","nombre":"Programacion en C++","descripcion":"Excelente estado, Libro de bolsillo. Anaya.","ref":"2","imagp":"lib_comp_1.jpg","imagg":"lib_comp_1_g.jpg"},
+{"id":"P0008","cat":"&Libros&Computacion&","nombre":"Aprendiendo HTML 3.2 en 24 Horas","descripcion":"Excelente estado, Libro de bolsillo. Prentce Hall.","ref":"2","imagp":"lib_comp_2.jpg","imagg":"lib_comp_2_g.jpg"},
+{"id":"P0009","cat":"&Libros&Computacion&","nombre":"Fundamentos de Computacion","descripcion":"Excelente estado, Autor: Luis Joyanes Aguilar.Mc Graw-Hill.","ref":"2","imagp":"lib_comp_3.jpg","imagg":"lib_comp_3_g.jpg"}
 ]
