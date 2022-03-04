@@ -30,6 +30,7 @@ font-size:1em;
 
 #dsearch {
 position:relative;
+/*display:none;*/
 }
 
 #enc {
@@ -38,9 +39,20 @@ position:relative;
 
 #divt {
 position:fixed;
+top:150px;
 height: 70%;
 width:95%;
 overflow-y:auto;
+}
+
+#cat {
+position:fixed;
+left: 0;
+top: 50;
+height: 20%;
+width:95%;
+overflow-y:auto;
+display:none;
 }
 
 input[type=text]{
@@ -74,7 +86,6 @@ padding:1px;
 table{
 margin:0px;
 padding:0px;
-
 }
 
 #footer {
@@ -120,19 +131,18 @@ padding:0px;
 
 
 <BODY onload="carga();">
-
+<div id="cat" hidden=true></div>
 <div id="dsearch">
 <br><br>
 <input id="search" type="text" placeholder="Buscar" oninput="refresca();"> 
+</div>
 <div id="divt" >
 </div>
 <div id="div_image" hidden="true" >
 </div>
 
 <div id="content" hidden="false"></div>
-<div id="factura" hidden="true">
-
-</div>
+<div id="factura" hidden="true"></div>
  <div id="footer"> Contactos: Rosa Aguilar. Tlf: +58426 2252003 <br> Braulio De Abreu Tlf +58412 8552592</div>
  <div id="header"> <h3> Venta de Garaje </h3>  </div>
 
@@ -160,6 +170,73 @@ data=JSON.parse(localStorage.getItem('data_garaje'));
 divt=document.getElementById("divt");
 var j=0;
 var factflag=true;
+var ncat='&';
+
+function subecat(){
+var a=ncat.split('&');
+console.log('a'+a);
+if (a.length>=1) {
+  a.pop();
+  a.pop();
+
+  ncat=a.join('&');
+  ncat+='&';
+  console.log('ncat '+ncat);
+  categorias();
+}
+}
+var lcat=[];
+
+function set_cat(){
+var ldatos=data.length;
+for (i=0;i<ldatos;i++){
+  var ind=lcat.indexOf(data[i]["cat"])
+    if (ind ==-1)   {
+      lcat.push(data[i]["cat"]);
+      console.log(data[i]["cat"]);
+      }
+}
+}
+
+function categorias(){
+var divcat=document.getElementById("cat");
+var texto='';
+texto+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+texto+= 'Categoria'+ncat+' <button  title="Atras" onclick="subecat();" > Up </button></div> <br><br>';
+var acat=[];
+var lgcat=ncat.length;
+console.log('ncat '+ncat+' lgcat '+lgcat);
+var ldatos=lcat.length;
+for (i=0;i<ldatos;i++){
+   var pos=lcat[i].indexOf(ncat);
+   if (pos !=-1)   {
+      pos2=lcat[i].indexOf('&',pos+lgcat+1);
+      if (pos2!=-1) {
+      catn=lcat[i].substring(pos+lgcat,pos2);
+      console.log('pos '+pos+'pos2 '+pos2+'catn '+catn);
+      ind=acat.indexOf(catn);
+      if (ind==-1) {
+      acat.push(catn);
+      var npath=ncat+catn;
+      var click='onclick="cambiacat(\''+npath+'\');">';
+      console.log('click '+click)
+      console.log(npath);
+      texto+='<p style="color:blue;"' +click +catn+'</p>';
+       }
+      }
+
+ }
+  }
+
+divcat.innerHTML=texto;
+divcat.hidden=false;
+refresca2();
+}
+function cambiacat(camino){
+ncat=camino+'&';
+console.log('camino '+ncat);
+categorias();
+}
 
 function factura(){
 if (factflag) {factflag=false; factura2(); } else { factflag=true; quitar()};
@@ -201,7 +278,21 @@ function refresca(){
 var patron=document.getElementById("search").value.toUpperCase();
 texto="";
 for (var i=0;i<data.length;i++){
-if ((data[i]["nombre"]+data[i]["id"]).toUpperCase().indexOf(patron) !=-1)   {
+if (((data[i]["nombre"]+data[i]["id"]).toUpperCase().indexOf(patron) !=-1) && (data[i]["S"]==1))  {
+  texto+='<p  >'+ data[i]["nombre"]+ ' ('+data[i]["id"]+')</p>';
+  texto+='<table><tr><td colspan="2" style="font-size:1.2em;">'+ data[i]["descripcion"]+'</td></tr>';
+  texto+='<tr><td> <img src="images/'+ data[i]["imagp"] +'" onclick="muestraImagen('+i+')" alt="" width="150" height="150" style="border:3px solid black">'+ '</td><td>Ref. '+ data[i]["ref"]   +  '</td></tr></table>';
+}
+//texto+='<br>'
+divt.innerHTML=texto;
+}
+}
+
+function refresca2(){
+var patron=document.getElementById("search").value.toUpperCase();
+texto="";
+for (var i=0;i<data.length;i++){
+if ((data[i]["cat"]).indexOf(ncat) !=-1)   {
   texto+='<p  >'+ data[i]["nombre"]+ ' ('+data[i]["id"]+')</p>';
   texto+='<table><tr><td colspan="2" style="font-size:1.2em;">'+ data[i]["descripcion"]+'</td></tr>';
   texto+='<tr><td> <img src="images/'+ data[i]["imagp"] +'" onclick="muestraImagen('+i+')" alt="" width="150" height="150" style="border:5px solid black">'+ '</td><td>Ref. '+ data[i]["ref"]   +  '</td></tr></table>';
@@ -265,7 +356,10 @@ function ajaxPositive(response) {
         //console.log('muestro respuesta: ', _txt);
         localStorage.setItem('data',_txt);
         data=JSON.parse(_txt);
-        refresca();
+        //set_cat();
+        //categorias();
+       // refresca2();
+          refresca();
   }
 
 function showError(err) { 
