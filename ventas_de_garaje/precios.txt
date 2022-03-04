@@ -42,5 +42,7 @@
 {"id":"P0042","S":"1","cat":"&Libros&Ingenieria&","nombre":"Manual de proyecto y c&aacute;lculo de sistemas de recolecci&oacute;n de aguas servidas en urbanismos","descripcion":"Excelente estado, Encuadernado. Autor: Maria Teresa de Frenza.UC 2005. 79 pags. + Anexos.","ref":"4","imagp":"lib_ing_17.jpg","imagg":"lib_ing_17_g.jpg"},
 {"id":"P0043","S":"1","cat":"&Libros&Ingenieria&","nombre":"Mec&aacute;nica de Fluidos","descripcion":"Excelente estado, Libro. Autores: Victor L. Streeter.Mc Graw Hill. 740 pags.","ref":"20","imagp":"lib_ing_18.jpg","imagg":"lib_ing_18_g.jpg"},
 {"id":"P0044","S":"1","cat":"&Libros&Ingenieria&","nombre":"Planeaci&oacute;n y control de la producci&oacute;n","descripcion":"Excelente estado, Libro. Autores: Thomas E. Vollmann. Quinta edici&oacute;n. Mc Graw Hill. 755 pags.","ref":"15","imagp":"lib_ing_19.jpg","imagg":"lib_ing_19_g.jpg"},
-{"id":"P0045","S":"1","cat":"&Hogar&Computacion&","nombre":"Mesa para computadora","descripcion":"Excelente estado, Color beige. Alto: 750 mm. Ancho: 450 mm. Largo: 700 mm","ref":"25","imagp":"hog_comp_2.jpg","imagg":"hog_comp_2_g.jpg"}
+{"id":"P0045","S":"1","cat":"&Hogar&Computacion&","nombre":"Mesa para computadora","descripcion":"Excelente estado, Color beige. Alto: 750 mm. Ancho: 450 mm. Largo: 700 mm","ref":"25","imagp":"hog_comp_2.jpg","imagg":"hog_comp_2_g.jpg"},
+{"id":"P0046","S":"1","cat":"&Deporte&Tenis&","nombre":"Juego de raquetas de tenis Head","descripcion":"Buen estado. Usadas","ref":"10","imagp":"dep_tenis_1.jpg","imagg":"dep_tenis_1_g.jpg"}
+
 ]
