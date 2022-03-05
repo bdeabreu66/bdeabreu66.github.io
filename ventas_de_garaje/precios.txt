@@ -1,6 +1,6 @@
-[{"id":"P0001","S":"1","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Renaware 16 litros","descripcion":"Excelente estado, calidad insuperable.Para elaborar sus sopas","ref":"50","imagp":"hog_cocina_1.jpg","imagg":"hog_cocina_1_G.jpg"},
+[{"id":"P0001","S":"1","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Renaware 16 litros","descripcion":"Excelente estado, calidad insuperable.Para elaborar sus sopas","ref":"50","imagp":"hog_cocina_1.jpg","imagg":"hog_cocina_1_g.jpg"},
 {"id":"P0002","S":"0","cat":"&Hogar&Cocina&Renaware&","nombre":"Sarten Renaware 12","descripcion":"Excelente estado, calidad insuperable. No se pega","ref":"50","imagp":"pdefault.jpg","imagg":"pdefault.jpg"},
-{"id":"P0003","S":"1","cat":"&Libros&Religion&","nombre":"Sagrada Biblia con ilustraciones","descripcion":"Excelente estado, Caratula dura. ","ref":"25","imagp":"lib_rel_1.jpg","imagg":"lib_rel_1_G.jpg"},
+{"id":"P0003","S":"1","cat":"&Libros&Religion&","nombre":"Sagrada Biblia con ilustraciones","descripcion":"Excelente estado, Caratula dura. ","ref":"25","imagp":"lib_rel_1.jpg","imagg":"lib_rel_1_g.jpg"},
 {"id":"P0004","S":"1","cat":"&Hogar&Muebles&","nombre":"Mecedora de Hermig&oacute;n","descripcion":"Hecha de Hermig&oacute;n. Calidad insuperable","ref":"100","imagp":"poltrona_p.jpg","imagg":"poltrona.jpg"},
 {"id":"P0005","S":"1","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Sopera Renaware","descripcion":"Excelente estado, calidad insuperable. Duradera. Ideal para servir en la mesa","ref":"50","imagp":"sopera_rena_p.jpg","imagg":"sopera_rena.jpg"},
 {"id":"P0006","S":"1","cat":"&Hogar&Cocina&","nombre":"Juego de ollas","descripcion":"Excelente calidad. Resistentes","ref":"40","imagp":"juego_peltre_p.jpg","imagg":"juego_peltre.jpg"},
@@ -47,7 +47,7 @@
 {"id":"P0047","S":"1","cat":"&Deporte&Beisbol&","nombre":"Juego de Pelota y guante","descripcion":"Guante marca Tamanaco con peque&nacute;no detalle","ref":"2","imagp":"dep_beisbol_1.jpg","imagg":"dep_beisbol_1_g.jpg"},
 {"id":"P0048","S":"1","cat":"&Hogar&Cocina&","nombre":"Cuchillo el&eacute;ctrico Oster","descripcion":"Poco uso. En perfecto estado con su estuche","ref":"20","imagp":"hog_cocina_2.jpg","imagg":"hog_cocina_2_g.jpg"},
 {"id":"P0049","S":"1","cat":"&Hogar&Cocina&","nombre":"Juego de Fondue","descripcion":"En perfecto estado. 23 piezas en acero al carbono","ref":"10","imagp":"hog_cocina_3.jpg","imagg":"hog_cocina_3_g.jpg"},
-{"id":"P0050","S":"1","cat":"&Hogar&Muebles&","nombre":"Silla playera","descripcion":"Excelente estado, En aluminio","ref":"5","imagp":"hog_muebles_2.jpg","imagg":"hog_muebles_2_G.jpg"},
-{"id":"P0051","S":"1","cat":"&Hogar&Muebles&","nombre":"Mesa de estudio","descripcion":"Excelente estado, Madera pura. Escritorio plegable","ref":"50","imagp":"hog_muebles_1.jpg","imagg":"hog_muebles_1_G.jpg"},
-{"id":"P0052","S":"1","cat":"&Hogar&Muebles&","nombre":"Espejo de pared","descripcion":"Excelente estado, Enmarcado en madera. Para cuerpo completo","ref":"20","imagp":"hog_muebles_3.jpg","imagg":"hog_muebles_3_G.jpg"}
+{"id":"P0050","S":"1","cat":"&Hogar&Muebles&","nombre":"Silla playera","descripcion":"Excelente estado, En aluminio","ref":"5","imagp":"hog_muebles_2.jpg","imagg":"hog_muebles_2_g.jpg"},
+{"id":"P0051","S":"1","cat":"&Hogar&Muebles&","nombre":"Mesa de estudio","descripcion":"Excelente estado, Madera pura. Escritorio plegable","ref":"50","imagp":"hog_muebles_1.jpg","imagg":"hog_muebles_1_g.jpg"},
+{"id":"P0052","S":"1","cat":"&Hogar&Muebles&","nombre":"Espejo de pared","descripcion":"Excelente estado, Enmarcado en madera. Para cuerpo completo","ref":"20","imagp":"hog_muebles_3.jpg","imagg":"hog_muebles_3_g.jpg"}
 ]
