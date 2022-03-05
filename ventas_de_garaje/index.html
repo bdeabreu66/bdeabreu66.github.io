@@ -197,7 +197,7 @@ for (i=0;i<ldatos;i++){
       }
 }
 }
-
+//var data=[];
 function categorias(){
 var divcat=document.getElementById("cat");
 var texto='';
@@ -236,6 +236,11 @@ function cambiacat(camino){
 ncat=camino+'&';
 console.log('camino '+ncat);
 categorias();
+}
+function ordena(){
+data.sort(function(a, b){
+  if (a.cat<b.cat) {return -1} else {return 0;}
+   });
 }
 
 function factura(){
@@ -277,8 +282,13 @@ factflag=true;
 function refresca(){
 var patron=document.getElementById("search").value.toUpperCase();
 texto="";
+var catant='';
 for (var i=0;i<data.length;i++){
 if (((data[i]["nombre"]+data[i]["id"]).toUpperCase().indexOf(patron) !=-1) && (data[i]["S"]==1))  {
+  if (catant!=data[i]["cat"]) {
+  catant=data[i]["cat"];
+  texto+='<p style="background-color:red;" >'+catant.replaceAll('&', '\\')+ '</p><br>';
+   }
   texto+='<p  >'+ data[i]["nombre"]+ ' ('+data[i]["id"]+')</p>';
   texto+='<table><tr><td colspan="2" style="font-size:1.2em;">'+ data[i]["descripcion"]+'</td></tr>';
   texto+='<tr><td> <img src="images/'+ data[i]["imagp"] +'" onclick="muestraImagen('+i+')" alt="" width="150" height="150" style="border:3px solid black">'+ '</td><td>Ref. '+ data[i]["ref"]   +  '</td></tr></table>';
@@ -287,6 +297,14 @@ if (((data[i]["nombre"]+data[i]["id"]).toUpperCase().indexOf(patron) !=-1) && (d
 divt.innerHTML=texto;
 }
 }
+/*
+var ordena2 = new Promise(function(resolve, reject) {
+data.sort(function(a, b){
+  if (a.cat<b.cat) {return -1} else {return 0;}
+   });  
+resolve("Ok");
+});
+*/
 
 function refresca2(){
 var patron=document.getElementById("search").value.toUpperCase();
@@ -359,7 +377,8 @@ function ajaxPositive(response) {
         //set_cat();
         //categorias();
        // refresca2();
-          refresca();
+         ordena();
+         refresca();
   }
 
 function showError(err) { 
@@ -434,8 +453,6 @@ function showErrorD(err) {
     }
 
 }
-
-
 </script>
 </BODY>
 </html>
