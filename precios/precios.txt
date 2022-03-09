@@ -86,7 +86,7 @@
       ["T393 Mayonesa 445g x 12 ND",12,30.36,0,0,0,"t2"],
       ["T486 Mayonesa(Aderezo) 3,6 kg x 4",4,69.32,1,0,0,"t2"],
       ["T409 Mayonesa  Stock 175g x 24 U",24,28.56,0,0,0,"t2"],
-      ["T574 Mayonesa limon  445 g x 12",12,30.36,1,0,0,"t2"],
+      ["T574 Mayonesa limon  445 g x 12",12,30.36,0,0,0,"t2"],
       ["T001 Toddy. 1 Kg x 12U Bolsa",12,81.84,1,0,0,"t2"],
       ["T002 Toddy. 2 Kg x 8U. Bolsa",8,102.24,1,0,0,"t2"],
       ["T003 Toddy. 400g x 24U Bolsa",24,73.92,1,0,0,"t2"],
