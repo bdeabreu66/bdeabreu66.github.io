@@ -134,7 +134,7 @@
       ["L255 Las llaves Detergente Bebe 900g x 20",20,52.80,1,0,0,"t2"],
       ["L350 Las llaves Detergente liq.Bebe 1L x 12",12,48.48,1,0,0,"t2"],
       ["L367 Las llaves Detergente liq.ROPA DELI.510cc x 12",12,27.00,1,0,0,"t2"],
-      ["L382 Multiclean Detergente Frag citrica 900g x 20",20,27.00,0,0,0,"t2"],
+      ["L382 Multiclean Detergente Frag citrica 900g x 20",20,27.00,1,0,0,"t2"],
       ["L207 Llaves Panela Trad Floral 250 x 36",36,24.84,1,0,0,"t2"],
       ["L275 Jabon Panela.BEBE.160 x 48",48,27.36,1,0,0,"t2"],
       ["L376 Jabon Panela.Floral.200 x 44",44,25.08,1,0,0,"t2"],
