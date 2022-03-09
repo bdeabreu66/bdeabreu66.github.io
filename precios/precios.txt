@@ -75,7 +75,7 @@
       ["T449 Salsa/Tomate. 4,2 x 4",4 ,36.36,1,0,0,"t2"],
       ["T076 Chef Margarina 5 K x 1.C/S",1,16.47,0,0,0,"t2"],
       ["T080 Chef Margarina 5 K x 1.S/S",1,16.47,1,0,0,"t2"],
-      ["T084 Mantequilla Mavesa 1 K x 6",6,21.48,0,0,0,"t2"],
+      ["T084 Mantequilla Mavesa 1 K x 6",6,20.88,0,0,0,"t2"],
       ["T086 Mantequilla Mavesa 500g x 12",12,21.48,0,0,0,"t2"],
       ["T572 Mantequilla Mavesa 250g x 24",24,22.80,0,0,0,"t2"],
       ["T578 Mantequilla Nelly CR 400g x 12",12,18.24,0,0,0,"t2"],
