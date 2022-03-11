@@ -294,13 +294,15 @@ datos_ret=JSON.parse(localStorage.getItem('dat_ret'));
 } catch {console.log('error')};
 
 try {
-NRO_RET=localStorage.getItem('nro_ret');
+var NRO_RET_T=localStorage.getItem('nro_ret');
+if (NRO_RET_T!=null) {NRO_RET=NRO_RET_T};
+
 } catch {console.log('error')};
 
 try {
 var FECHA_PAGO_T=localStorage.getItem('fechapago');
 } catch {console.log('error')};
-if (FECHA_PAGO_T!=null) {FECHA_PAGO=FECHA_PAGO_T);
+if (FECHA_PAGO_T!=null) {FECHA_PAGO=FECHA_PAGO_T};
 /*try {
 DIR_FISCAL= localStorage.getItem('dir_fiscal');
 RIF_FISCAL= localStorage.getItem('rif_fiscal');
