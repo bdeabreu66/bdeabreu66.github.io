@@ -218,8 +218,7 @@ window.open(url);
 var TASA_IVA=16;
 var FACTOR_RET=0.75;
 var divs_datos;
-var FECHA_PAGO=new Date();
-    FECHA_PAGO=fecha_estandar(FECHA_PAGO);
+var FECHA_PAGO;
 //var NRO_COMPROBANTE;
 var PERIODO_FISCAL;
 var DIR_FISCAL='Calle ppal. Manzana #9 casa #3, Urb Valle Verde. San Diego. Edo Carabobo. Tlf 0414-4405044';
@@ -272,6 +271,8 @@ return mes;
 
 function inicio(){
 Max_F=7;
+FECHA_PAGO=new Date();
+FECHA_PAGO=fecha_estandar(FECHA_PAGO);
 fecha_hoy= new Date();
 fecha_hoy=fecha_estandar(fecha_hoy);
 console.log(fecha_hoy);
