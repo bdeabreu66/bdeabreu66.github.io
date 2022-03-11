@@ -1,0 +1,407 @@
+<HTML>
+<HEAD>
+<TITLE>  Retenciones Maltin Polar </TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<!-- <link rel="manifest" href="manifest.json">   -->
+<!-- <meta charset="iso-8859-1">  -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
+
+input[type=number]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+
+}
+
+input[type=text]{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+}
+
+input[type=email]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+}
+
+input[type=date]{
+font-size:1em;
+width: 12em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+}
+
+select{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 8px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+
+</style>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align:left;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+
+  transition: 0.8s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+/*
+div[name=divdata] {
+position:fixed;
+top:150px;
+height: 60%;
+width:95%;
+overflow-y:scroll;
+}
+*/
+
+#seleccion {
+position:fixed;
+top:150px;
+height: 60%;
+width:95%;
+overflow-y:scroll;
+hidden:true;
+}
+
+#configuracion {
+top:150px;
+position:fixed;
+height: 60%;
+width:95%;
+overflow-y:scroll;
+hidden:true;
+}
+#footer {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+</style>
+</HEAD>
+
+<script type="text/javascript" src="js/jspdfv153.js"></script>
+<script type="text/javascript" src="js/FileSaver.js"></script>
+<script type="text/javascript" src="js/addimagev153.js"></script>
+<script type="text/javascript" src="js/split_text_to_sizev153.js"></script>
+<script type="text/javascript" src="js/standard_fonts_metricsv153.js"></script>
+<script type="text/javascript" src="js/cell153.js"></script>
+<script type="text/javascript" src="js/png.js"></script>
+<script type="text/javascript" src="js/png_support.js"></script>
+<script type="text/javascript" src="js/zlib.js"></script>
+<script type="text/javascript" src="js/selectFile.js"></script>
+
+<script type="text/javascript" src="setlanguage.js"></script>
+<script type="text/javascript" src="pdfs.js"></script>
+<script type="text/javascript">
+
+function openNav() {
+var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
+  texto+='<a href="javascript:void(0)">About</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();Configurar();">Configuracion</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();Crea_datos();">Datos de retencion</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();hacerRetencion();">Hacer PDF</a>';
+ document.getElementById("mySidenav").innerHTML=texto;
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+//localStorage.setItem('p3',va);
+
+
+/*
+*/
+
+function quitar(nombdiv){
+var div=document.getElementById(nombdiv);
+div.hidden=true;
+}
+
+
+function enviar_whatsapp(phone,text){
+
+url ='https://api.whatsapp.com/send?phone='+phone+'&text='+text;
+window.open(url);
+}
+var TASA_IVA=16;
+var FACTOR_RET=0.75;
+var divs_datos;
+var FECHA_PAGO=new Date();
+    FECHA_PAGO=fecha_estandar(FECHA_PAGO);
+//var NRO_COMPROBANTE;
+var PERIODO_FISCAL;
+var DIR_FISCAL='Calle ppal. Manzana #9 casa #3, Urb Valle Verde. San Diego. Edo Carabobo. Tlf 0414-4405044';
+var RIF_FISCAL='J-00041312-6';
+var NOMB_DIST='Distribuidora Pita Orozco, C.A.';
+var data=[];
+var datos_ret=[];
+var datos_ret_base;
+var NRO_RET="982";
+var NRO_COMPROB;
+
+function fecha_date(f){
+var comp=f.split('/');
+var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
+console.log('sal '+sal)
+return sal;
+}
+
+function inv_fecha_date(f){
+var comp=f.split('-');
+var sal=comp[2]+'/'+comp[1]+'/'+comp[0];
+console.log('sal2 '+sal);
+return sal;
+}
+
+function fecha_estandar(f){
+  var year=f.getFullYear();
+  var mes=f.getMonth();mes++;if (mes<10) {mes='0'+mes}
+  var day=f.getDay();if (day<10) {day='0'+day}
+return day+'/'+mes+'/'+year;
+}
+
+function crea_fecha(fe){
+  var comp=fe.split('/');
+  var dia=comp[0];
+  var mes=comp[1]-1;
+  var year=comp[2];
+return new Date(year,mes,dia);
+}
+
+function year_estandar(f){
+  var year=f.split('/')[2];
+return year;
+}
+function mes_estandar(f){
+  var mes=f.split('/')[1]; 
+//if (mes<10) {mes='0'+mes}
+return mes;
+}
+
+function inicio(){
+Max_F=7;
+fecha_hoy= new Date();
+fecha_hoy=fecha_estandar(fecha_hoy);
+fecha_min=year_estandar(fecha_hoy)+'-01-01';
+divs_datos=document.getElementById("divdata");
+datos_ret[0]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[1]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[2]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[3]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[4]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[5]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[6]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[7]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+//datos_ret[8]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+//datos_ret[9]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+
+try {
+datos_ret=JSON.parse(localStorage.getItem('dat_ret'));
+} catch {console.log('error')};
+
+try {
+NRO_RET=localStorage.getItem('nro_ret');
+} catch {console.log('error')};
+
+try {
+FECHA_PAGO=localStorage.getItem('fechapago');
+} catch {console.log('error')};
+
+/*try {
+DIR_FISCAL= localStorage.getItem('dir_fiscal');
+RIF_FISCAL= localStorage.getItem('rif_fiscal');
+NOMBRE_DIST= localStorage.getItem('nombre_dist');
+}
+catch {console.log('error')}
+*/
+document.getElementById("seleccion").hidden=true;
+document.getElementById("configuracion").hidden=true;
+Seleccion();
+//hacerRetencion();
+}
+function Agregar_datos(m){
+var divpart=divs_datos;
+var texto='';
+texto+='<h3 align="center"> Factura nro '+(m+1).toString()+'</h3>';
+texto+='Fecha de la Factura:<br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'"><br>';
+texto+='Nro de factura:<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
+texto+='Nro de Control:<br> <input type="text" value="'+datos_ret[m]["nro_control"]+'"><br> ';
+texto+='Monto sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
+texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
+texto+='<button onclick="guarda_datos('+m+')";>Guardar</button>';
+divpart.innerHTML=texto;
+divpart.hidden=false;
+divpart.style='position:fixed;top:150px;height: 60%;width:95%;';
+document.getElementById("seleccion").hidden=true;
+
+}
+
+function Configurar(){
+var divconf=document.getElementById("configuracion");
+var texto='';
+texto+='Tasa del IVA(%):<br> <input type="text" value="16"><br>';
+texto+='Porcentaje de retencion(%): <br><input type="text" value="75"><br>';
+texto+='Rif : <br> <input type="text" ><br>';
+texto+='Direccion:<br> <textarea placeholder="Dir. Fiscal" value=""></textarea><br>';
+texto+='<button onclick="guardaconfig();">Guardar</button>';
+divconf.innerHTML=texto;
+divconf.hidden=false;
+document.getElementById("seleccion").hidden=true;
+}
+
+function set_n_ret(){
+NRO_RET=document.getElementById("nret").value;
+localStorage.setItem('nro_ret',NRO_RET);
+}
+function set_fecha_pago(){
+FECHA_PAGO=inv_fecha_date(document.getElementById("fechapago").value);
+localStorage.setItem('fechapago',FECHA_PAGO);
+}
+
+
+function Seleccion(){
+var divsel=document.getElementById("seleccion");
+var texto='';
+texto+='Nro de Retenci&oacute;n <input id="nret" type="text" onchange="set_n_ret();" value="'+NRO_RET+'"> <br>';
+texto+='Fecha de Pago <input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> <br><br>';
+for (var i=0;i<Max_F;i++) {
+texto+='<button onclick="Agregar_datos('+i+');">F'+(i+1).toString()+' '+ datos_ret[i]["fecha"]+' '+datos_ret[i]["nro_factura"]+' '+datos_ret[i]["nro_control"]+' '+datos_ret[i]["C_IVA"]+'</button><br>';
+}
+divsel.innerHTML=texto;
+divsel.hidden=false;
+}
+function guardaconfig(){
+document.getElementById("configuracion").hidden=true;
+document.getElementById("seleccion").hidden=false;
+
+}
+
+function guarda_datos(m){
+ var fi=divs_datos.getElementsByTagName("input")[0].value;
+ console.log(fi);
+ datos_ret[m]["fecha"]=inv_fecha_date(fi);
+ datos_ret[m]["nro_factura"]=divs_datos.getElementsByTagName("input")[1].value;
+ datos_ret[m]["nro_control"]=divs_datos.getElementsByTagName("input")[2].value;
+ datos_ret[m]["C_IVA"]=(divs_datos.getElementsByTagName("input")[3].value).replace(',','.');
+ datos_ret[m]["C_SIVA"]=(divs_datos.getElementsByTagName("input")[4].value).replace(',','.');
+divs_datos.hidden=true;
+console.log(m);
+console.table(datos_ret);
+Seleccion();
+//console.table(
+localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
+}
+
+</script>
+
+<BODY onload="inicio();">
+<!-- <div id="encabezado" style="text-align: left; border: 1px solid #999999; position: fixed;" >  -->
+<!--<span style="font-size:30px;cursor:pointer; margin-left: 0px;text-align: left;" onclick="openNav()">&#9776; Menu </span>  -->
+<!--</div>  -->
+<div id="mySidenav" class="sidenav" ></div>
+
+<div id="divdata"></div>
+<div id="seleccion">
+
+</div>
+<div id="configuracion">
+ 
+</div>
+<div id="header"> <button class="btop" onclick="Configurar();">Config</button>&nbsp&nbsp<button class="btop" onclick="hacerRetencion();"> Retencion</button></div>
+
+
+<!--   -->
+</BODY>
+</html>
