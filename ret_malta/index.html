@@ -275,7 +275,7 @@ FECHA_PAGO=new Date();
 FECHA_PAGO=fecha_estandar(FECHA_PAGO);
 fecha_hoy= new Date();
 fecha_hoy=fecha_estandar(fecha_hoy);
-console.log('FP '+FECHA_PAGO);
+
 fecha_min=year_estandar(fecha_hoy)+'-01-01';
 divs_datos=document.getElementById("divdata");
 datos_ret[0]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
@@ -310,6 +310,7 @@ catch {console.log('error')}
 */
 document.getElementById("seleccion").hidden=true;
 document.getElementById("configuracion").hidden=true;
+console.table(FECHA_PAGO);
 Seleccion();
 //hacerRetencion();
 }
