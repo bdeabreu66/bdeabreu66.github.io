@@ -120,9 +120,9 @@ body {
   .sidenav a {font-size: 18px;}
 }
 /*
-div[name=divdata] {
+#divdata {
 position:fixed;
-top:50px;
+top:150px;
 height: 60%;
 width:95%;
 overflow-y:scroll;
@@ -131,7 +131,7 @@ overflow-y:scroll;
 
 #seleccion {
 position:fixed;
-top:150px;
+top:100px;
 height: 60%;
 width:95%;
 overflow-y:scroll;
@@ -139,7 +139,7 @@ hidden:true;
 }
 
 #configuracion {
-top:150px;
+top:100px;
 position:fixed;
 height: 60%;
 width:95%;
@@ -329,7 +329,7 @@ texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_S
 texto+='<button onclick="guarda_datos('+m+')";>Guardar</button>';
 divpart.innerHTML=texto;
 divpart.hidden=false;
-divpart.style='position:fixed;top:150px;height: 60%;width:95%;';
+divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
 document.getElementById("seleccion").hidden=true;
 
 }
@@ -345,6 +345,7 @@ texto+='<button onclick="guardaconfig();">Guardar</button>';
 divconf.innerHTML=texto;
 divconf.hidden=false;
 document.getElementById("seleccion").hidden=true;
+document.getElementById("divdata").hidden=true;
 }
 
 function set_n_ret(){
