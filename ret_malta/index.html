@@ -2,7 +2,7 @@
 <HEAD>
 <TITLE>  Retenciones Maltin Polar </TITLE>
 <!-- <link rel="stylesheet" href="styles.css" > -->
-<!-- <link rel="manifest" href="manifest.json">   -->
+<link rel="manifest" href="manifest.json">
 <!-- <meta charset="iso-8859-1">  -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 <style>
@@ -421,7 +421,7 @@ Seleccion();
 //console.table(
 localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
 }
-function guarda_config(){
+function guardaconfig(){
 localStorage.setItem('dir_fiscal',DIR_FISCAL);
 localStorage.setItem('rif_fiscal',RIF_FISCAL);
 localStorage.setItem('nombre_dist',NOMB_DIST);
@@ -460,6 +460,18 @@ function showErrorD(err) { console.log('muestor error', err); }
 
 }
 
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
 
 </script>
 
