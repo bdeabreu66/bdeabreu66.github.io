@@ -358,6 +358,6 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
     escribirtop();
      escribircuerpo();
     doc.save(nombrepdf);
-    doc.output('datauristring');
+    //doc.output('datauristring');
 
 }
