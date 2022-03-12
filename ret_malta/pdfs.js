@@ -56,7 +56,7 @@ doc.rect(esqx,esqy,ancho,altura,'S');
 //
 esqx=pageLeft+90;ancho=86;altura=12;esqy=ylinea+lineHeight();
 doc.setFontStyle('bold');
-doc.text(esqx+ancho/2,esqy+1*lineHeight(),"3.Registro de informaci\u00F3n Fiscal del Agente de Retencion",{ align: "center" });
+doc.text(esqx+ancho/2,esqy+1*lineHeight(),"3.Registro de informaci\u00F3n Fiscal del Agente de Retenci\u00F3n",{ align: "center" });
 doc.setFontStyle('normal');
 doc.text(esqx+ancho/2,esqy+2*lineHeight(),RIF_FISCAL,{ align: "center" });
 doc.rect(esqx,esqy,ancho,altura,'S');
@@ -322,7 +322,7 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
     var sFont3=8;
     var sFont4=6;
     var ptodecimal=false;
-    var titulo="COMPROBANTE DE RETENCION AL VALOR AGREGADO";
+    var titulo="COMPROBANTE DE RETENCI\u00D3N AL VALOR AGREGADO";
     //var nro_comp="20220200000982";
     //var nombre_comp='Distribuidora Pita Orozco, C.A.';
     //var rif_comp='J-07590071-5';
