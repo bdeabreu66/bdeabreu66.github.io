@@ -225,7 +225,7 @@ sumat+=BASE_IMP
 COMPRA_SIN_IVA=parseFloat(datos_ret[k]["C_SIVA"]);
 sumats+=COMPRA_SIN_IVA;
 // Columna 10
- baseimp=(parseFloat(datos_ret[k]["C_IVA"])/FIVA);
+ baseimp=(parseFloat(datos_ret[k]["C_IVA"]-COMPRA_SIN_IVA)/FIVA);
  console.log('baseimp'+baseimp);
  suma_baseimp+=baseimp;
  doc.text(xbase+Anchos[9]-2,posy+Alto_fila/2, pd(baseimp.toFixed(2)),{ align: "right" });
