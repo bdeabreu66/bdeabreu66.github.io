@@ -401,9 +401,11 @@ divsel.innerHTML=texto;
 divsel.hidden=false;
 }
 function guardaconfig(){
+localStorage.setItem('dir_fiscal',DIR_FISCAL);
+localStorage.setItem('rif_fiscal',RIF_FISCAL);
+localStorage.setItem('nombre_dist',NOMB_DIST);
 document.getElementById("configuracion").hidden=true;
 document.getElementById("seleccion").hidden=false;
-
 }
 
 function guarda_datos(m){
@@ -421,14 +423,7 @@ Seleccion();
 //console.table(
 localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
 }
-function guardaconfig(){
-localStorage.setItem('dir_fiscal',DIR_FISCAL);
-localStorage.setItem('rif_fiscal',RIF_FISCAL);
-localStorage.setItem('nombre_dist',NOMB_DIST);
 
-
-
-}
 
 function descarga_configuracion(name){
 var nomb="https://bdeabreu66.github.io/ret_malta/"+name+".txt";
