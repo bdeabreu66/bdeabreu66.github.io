@@ -119,15 +119,25 @@ body {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-/*
+
+.btop{
+font-size:2em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: black;
+}
+
 #divdata {
 position:fixed;
-top:150px;
+top:40px;
 height: 60%;
 width:95%;
 overflow-y:scroll;
 }
-*/
 
 #seleccion {
 position:fixed;
@@ -222,7 +232,7 @@ var FECHA_PAGO;
 //var NRO_COMPROBANTE;
 var PERIODO_FISCAL;
 var DIR_FISCAL='Calle ppal. Manzana #9 casa #3, Urb Valle Verde. San Diego. Edo Carabobo. Tlf 0414-4405044';
-var RIF_FISCAL='J-00041312-6';
+var RIF_FISCAL='J-07590071-5';
 var NOMB_DIST='Distribuidora Pita Orozco, C.A.';
 var data=[];
 var datos_ret=[];
@@ -304,13 +314,21 @@ try {
 var FECHA_PAGO_T=localStorage.getItem('fechapago');
 } catch {console.log('error')};
 if (FECHA_PAGO_T!=null) {FECHA_PAGO=FECHA_PAGO_T};
-/*try {
+try {
 DIR_FISCAL= localStorage.getItem('dir_fiscal');
 RIF_FISCAL= localStorage.getItem('rif_fiscal');
-NOMBRE_DIST= localStorage.getItem('nombre_dist');
-}
-catch {console.log('error')}
-*/
+NOMB_DIST= localStorage.getItem('nombre_dist');
+} catch {console.log('error')}
+
+try {
+TASA_IVA= localStorage.getItem('dir_fiscal');
+RIF_FISCAL= localStorage.getItem('rif_fiscal');
+NOMB_DIST= localStorage.getItem('nombre_dist');
+} catch {console.log('error')}
+
+var TASA_IVA=16;
+var FACTOR_RET=0.75;
+
 document.getElementById("seleccion").hidden=true;
 document.getElementById("configuracion").hidden=true;
 console.table(FECHA_PAGO);
@@ -329,9 +347,16 @@ texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_S
 texto+='<button onclick="guarda_datos('+m+')";>Guardar</button>';
 divpart.innerHTML=texto;
 divpart.hidden=false;
-divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
+//divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
 document.getElementById("seleccion").hidden=true;
 
+}
+
+function carga_data(){
+var narch=document.getElementById("nombarch").value;
+if (narch.length>0) {
+ descarga_configuracion(narch) ;
+}
 }
 
 function Configurar(){
@@ -339,13 +364,19 @@ var divconf=document.getElementById("configuracion");
 var texto='';
 texto+='Tasa del IVA(%):<br> <input type="text" value="16"><br>';
 texto+='Porcentaje de retencion(%): <br><input type="text" value="75"><br>';
-texto+='Rif : <br> <input type="text" ><br>';
-texto+='Direccion:<br> <textarea placeholder="Dir. Fiscal" value=""></textarea><br>';
+texto+='Archivo de datos <br> <input id="nombarch" type="text" > <button onclick="carga_data()"> A </button><br>';
+texto+='Rif:<br> <span id="sal1"></span><br>';
+texto+='Nombre:<br> <span id="sal2"></span><br>';
+texto+='Direccion:<br> <span id="sal3"></span><br>';
 texto+='<button onclick="guardaconfig();">Guardar</button>';
 divconf.innerHTML=texto;
 divconf.hidden=false;
 document.getElementById("seleccion").hidden=true;
 document.getElementById("divdata").hidden=true;
+document.getElementById("sal1").innerText=RIF_FISCAL;
+document.getElementById("sal2").innerText=NOMB_DIST;
+document.getElementById("sal3").innerText=DIR_FISCAL;
+
 }
 
 function set_n_ret(){
@@ -390,6 +421,45 @@ Seleccion();
 //console.table(
 localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
 }
+function guarda_config(){
+localStorage.setItem('dir_fiscal',DIR_FISCAL);
+localStorage.setItem('rif_fiscal',RIF_FISCAL);
+localStorage.setItem('nombre_dist',NOMB_DIST);
+
+
+
+}
+
+function descarga_configuracion(name){
+var nomb="https://bdeabreu66.github.io/ret_malta/"+name+".txt";
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+ function showResultD(txt) {
+       console.log('muestro respuesta: ', txt);
+        DIR_FISCAL=txt.dir;
+        RIF_FISCAL=txt.rif;
+        NOMB_DIST=txt.nombre_C;
+        document.getElementById("sal1").innerText=RIF_FISCAL;
+        document.getElementById("sal2").innerText=NOMB_DIST;
+        document.getElementById("sal3").innerText=DIR_FISCAL;
+        
+ }
+function showErrorD(err) { console.log('muestor error', err); }
+
+}
+
 
 </script>
 
