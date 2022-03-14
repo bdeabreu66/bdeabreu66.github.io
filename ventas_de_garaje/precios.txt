@@ -1,7 +1,7 @@
 [{"id":"P0001","S":"1","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Renaware 16 litros","descripcion":"Excelente estado, calidad insuperable.Para elaborar sus sopas","ref":"50","imagp":"hog_cocina_1.jpg","imagg":"hog_cocina_1_g.jpg"},
 {"id":"P0002","S":"0","cat":"&Hogar&Cocina&Renaware&","nombre":"Sarten Renaware 12","descripcion":"Excelente estado, calidad insuperable. No se pega","ref":"50","imagp":"pdefault.jpg","imagg":"pdefault.jpg"},
 {"id":"P0003","S":"1","cat":"&Libros&Religion&","nombre":"Sagrada Biblia con ilustraciones","descripcion":"Excelente estado, Caratula dura. ","ref":"25","imagp":"lib_rel_1.jpg","imagg":"lib_rel_1_g.jpg"},
-{"id":"P0004","S":"1","cat":"&Hogar&Muebles&","nombre":"Mecedora de Hervig&oacute;n","descripcion":"Hecha de Hervig&oacute;n. Calidad insuperable","ref":"100","imagp":"poltrona_p.jpg","imagg":"poltrona.jpg"},
+{"id":"P0004","S":"1","cat":"&Hogar&Muebles&","nombre":"Mecedora de Hervig&oacute;n","descripcion":"Hecha en Hervig&oacute;n. Calidad insuperable","ref":"100","imagp":"poltrona_p.jpg","imagg":"poltrona.jpg"},
 {"id":"P0005","S":"1","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Sopera Renaware","descripcion":"Excelente estado, calidad insuperable. Duradera. Ideal para servir en la mesa","ref":"50","imagp":"sopera_rena_p.jpg","imagg":"sopera_rena.jpg"},
 {"id":"P0006","S":"1","cat":"&Hogar&Cocina&","nombre":"Juego de ollas","descripcion":"Excelente calidad. Resistentes","ref":"40","imagp":"juego_peltre_p.jpg","imagg":"juego_peltre.jpg"},
 {"id":"P0007","S":"1","cat":"&Libros&Computacion&","nombre":"Programaci&oacute;n en C++","descripcion":"Excelente estado, Libro de bolsillo. Anaya.","ref":"1","imagp":"lib_comp_1.jpg","imagg":"lib_comp_1_g.jpg"},
@@ -54,4 +54,11 @@
 {"id":"P0054","S":"1","cat":"&Hogar&Decoracion","nombre":"Cuadro de Afiche","descripcion":"Sacre Coeur. Par&iacute;s.Excelente estado, Enmarcado en madera. ","ref":"20","imagp":"hog_decor_2.jpg","imagg":"hog_decor_2_g.jpg"},
 {"id":"P0055","S":"1","cat":"&Hogar&Decoracion","nombre":"Cuadro de Puzzles","descripcion":"Excelente estado, Enmarcado en madera. ","ref":"20","imagp":"hog_decor_3.jpg","imagg":"hog_decor_3_g.jpg"},
 {"id":"P0056","S":"1","cat":"&Hogar&Decoracion","nombre":"Cuadro de Pintura al &oacute;leo","descripcion":"Excelente estado, Enmarcado en madera. ","ref":"40","imagp":"hog_decor_4.jpg","imagg":"hog_decor_4_g.jpg"}
+{"id":"P0057","S":"1","cat":"&Libros&Ingenieria&","nombre":"Proyectos de Ingenier&iacute;a Hidra&acute;ulica Tomo I","descripcion":"Excelente estado, Libro. Autor: Juan Jos&eacute; Bolinaga","ref":"15","imagp":"lib_ing_20.jpg","imagg":"lib_ing_20_g.jpg"},
+{"id":"P0058","S":"1","cat":"&Libros&Ingenieria&","nombre":"Proyectos de Ingenier&iacute;a Hidra&acute;ulica Tomo II","descripcion":"Excelente estado, Libro. Autor: Juan Jos&eacute; Bolinaga","ref":"15","imagp":"lib_ing_21.jpg","imagg":"lib_ing_21_g.jpg"},
+{"id":"P0059","S":"1","cat":"&Libros&Ingenieria&","nombre":"Administraci&oacute;n de Obras","descripcion":"Excelente estado, Libro. Autor: Ing. Antonio Mascia. Universidad de Carabobo","ref":"4","imagp":"lib_ing_22.jpg","imagg":"lib_ing_22_g.jpg"},
+{"id":"P0060","S":"1","cat":"&Libros&Ingenieria&","nombre":"Fundaciones y muros. Temas complementarios","descripcion":"Excelente estado, Copia." ,"ref":"4","imagp":"lib_ing_23.jpg","imagg":"lib_ing_23_g.jpg"},
+{"id":"P0061","S":"1","cat":"&Libros&Ingenieria&","nombre":"Micropilotes y Contracimentaciones","descripcion":"Excelente estado, Copia. Autores: Ojeda L. Olivera W., V&aacute;squez A. ","ref":"4","imagp":"lib_ing_24.jpg","imagg":"lib_ing_24_g.jpg"},
+{"id":"P0062","S":"1","cat":"&Libros&Ingenieria&","nombre":"Welded Steels Tanks for water storage","descripcion":"Excelente estado, Copia. Autor:","ref":"15","imagp":"lib_ing_25.jpg","imagg":"lib_ing_25_g.jpg"},
+{"id":"P0063","S":"1","cat":"&Libros&Ingenieria&","nombre":"Mec&aacute;nica elemental de los fluidos","descripcion":"Excelente estado, Libro. Autor: Autor: Juan Jos&eacute; Bolinaga","ref":"15","imagp":"lib_ing_26.jpg","imagg":"lib_ing_26_g.jpg"}
 ]
