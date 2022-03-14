@@ -49,5 +49,9 @@
 {"id":"P0049","S":"1","cat":"&Hogar&Cocina&","nombre":"Juego de Fondue","descripcion":"En perfecto estado. 23 piezas en acero al carbono","ref":"10","imagp":"hog_cocina_3.jpg","imagg":"hog_cocina_3_g.jpg"},
 {"id":"P0050","S":"1","cat":"&Hogar&Muebles&","nombre":"Silla playera","descripcion":"Excelente estado, En aluminio","ref":"5","imagp":"hog_muebles_2.jpg","imagg":"hog_muebles_2_g.jpg"},
 {"id":"P0051","S":"1","cat":"&Hogar&Muebles&","nombre":"Mesa de estudio","descripcion":"Excelente estado, Madera pura. Escritorio plegable","ref":"50","imagp":"hog_muebles_1.jpg","imagg":"hog_muebles_1_g.jpg"},
-{"id":"P0052","S":"1","cat":"&Hogar&Muebles&","nombre":"Espejo de pared","descripcion":"Excelente estado, Enmarcado en madera. Para cuerpo completo","ref":"20","imagp":"hog_muebles_3.jpg","imagg":"hog_muebles_3_g.jpg"}
+{"id":"P0052","S":"1","cat":"&Hogar&Muebles&","nombre":"Espejo de pared","descripcion":"Excelente estado, Enmarcado en madera. Para cuerpo completo","ref":"20","imagp":"hog_muebles_3.jpg","imagg":"hog_muebles_3_g.jpg"},
+{"id":"P0053","S":"1","cat":"&Hogar&Decoracion","nombre":"Cuadro de Pintura","descripcion":"Excelente estado, Enmarcado en madera. ","ref":"20","imagp":"hog_decor_1.jpg","imagg":"hog_decor_1_g.jpg"},
+{"id":"P0054","S":"1","cat":"&Hogar&Decoracion","nombre":"Cuadro de Afiche","descripcion":"Sacre Coeur. Par&iacute;s.Excelente estado, Enmarcado en madera. ","ref":"20","imagp":"hog_decor_2.jpg","imagg":"hog_decor_2_g.jpg"},
+{"id":"P0055","S":"1","cat":"&Hogar&Decoracion","nombre":"Cuadro de Puzzles","descripcion":"Excelente estado, Enmarcado en madera. ","ref":"20","imagp":"hog_decor_3.jpg","imagg":"hog_decor_3_g.jpg"},
+{"id":"P0056","S":"1","cat":"&Hogar&Decoracion","nombre":"Cuadro de Pintura al &oacute;leo","descripcion":"Excelente estado, Enmarcado en madera. ","ref":"20","imagp":"hog_decor_4.jpg","imagg":"hog_decor_4_g.jpg"}
 ]
