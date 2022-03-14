@@ -131,29 +131,36 @@ padding: 4px 4px;
   color: black;
 }
 
+.botonf{
+font-size:0.8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 8px 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: white;
+  color: black;
+}
 #divdata {
 position:fixed;
 top:40px;
-height: 60%;
+height: 90%;
 width:95%;
-overflow-y:scroll;
 }
 
 #seleccion {
 position:fixed;
 top:100px;
-height: 60%;
-width:95%;
-overflow-y:scroll;
+height: 90%;
+width:100%;
 hidden:true;
 }
 
 #configuracion {
 top:100px;
 position:fixed;
-height: 60%;
-width:95%;
-overflow-y:scroll;
+height: 90%;
+width:100%;
 hidden:true;
 }
 #footer {
@@ -257,7 +264,7 @@ return sal;
 function fecha_estandar(f){
   var year=f.getFullYear();
   var mes=f.getMonth();mes++;if (mes<10) {mes='0'+mes}
-  var day=f.getDay();if (day<10) {day='0'+day}
+  var day=f.getDate();if (day<10) {day='0'+day}
 return day+'/'+mes+'/'+year;
 }
 
@@ -284,8 +291,10 @@ Max_F=7;
 FECHA_PAGO=new Date();
 FECHA_PAGO=fecha_estandar(FECHA_PAGO);
 fecha_hoy= new Date();
-fecha_hoy=fecha_estandar(fecha_hoy);
+console.log('fecha_hoy '+fecha_hoy);
 
+fecha_hoy=fecha_estandar(fecha_hoy);
+console.log('fecha_hoy '+fecha_hoy);
 fecha_min=year_estandar(fecha_hoy)+'-01-01';
 divs_datos=document.getElementById("divdata");
 datos_ret[0]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
@@ -321,13 +330,10 @@ NOMB_DIST= localStorage.getItem('nombre_dist');
 } catch {console.log('error')}
 
 try {
-TASA_IVA= localStorage.getItem('dir_fiscal');
-RIF_FISCAL= localStorage.getItem('rif_fiscal');
-NOMB_DIST= localStorage.getItem('nombre_dist');
+TASA_IVA= localStorage.getItem('tasa_iva');
+FACTOR_RET= localStorage.getItem('factor_ret');
 } catch {console.log('error')}
-
-var TASA_IVA=16;
-var FACTOR_RET=0.75;
+console.log(TASA_IVA);
 
 document.getElementById("seleccion").hidden=true;
 document.getElementById("configuracion").hidden=true;
@@ -339,12 +345,13 @@ function Agregar_datos(m){
 var divpart=divs_datos;
 var texto='';
 texto+='<h3 align="center"> Factura nro '+(m+1).toString()+'</h3>';
+texto+='Limpiar <button onclick="anular('+m+');">x</button><br>'
 texto+='Fecha de la Factura:<br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'"><br>';
 texto+='Nro de factura:<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
 texto+='Nro de Control:<br> <input type="text" value="'+datos_ret[m]["nro_control"]+'"><br> ';
 texto+='Monto sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
 texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
-texto+='<button onclick="guarda_datos('+m+')";>Guardar</button>';
+texto+='<button onclick="guarda_datos('+m+')";>Guardar</button><button onclick="canceladatos();">Cancelar</button> '';
 divpart.innerHTML=texto;
 divpart.hidden=false;
 //divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
@@ -362,13 +369,13 @@ if (narch.length>0) {
 function Configurar(){
 var divconf=document.getElementById("configuracion");
 var texto='';
-texto+='Tasa del IVA(%):<br> <input type="text" value="16"><br>';
-texto+='Porcentaje de retencion(%): <br><input type="text" value="75"><br>';
+texto+='Tasa del IVA(%):<br> <input type="text" value="'+TASA_IVA+'"><br>';
+texto+='Porcentaje de retencion(%): <br><input type="text" value="'+FACTOR_RET+'"><br>';
 texto+='Archivo de datos <br> <input id="nombarch" type="text" > <button onclick="carga_data()"> A </button><br>';
 texto+='Rif:<br> <span id="sal1"></span><br>';
 texto+='Nombre:<br> <span id="sal2"></span><br>';
 texto+='Direccion:<br> <span id="sal3"></span><br>';
-texto+='<button onclick="guardaconfig();">Guardar</button>';
+texto+='<button onclick="guardaconfig();">Guardar</button> <button onclick="cancelaconfig();">Cancelar</button> ';
 divconf.innerHTML=texto;
 divconf.hidden=false;
 document.getElementById("seleccion").hidden=true;
@@ -388,6 +395,16 @@ FECHA_PAGO=inv_fecha_date(document.getElementById("fechapago").value);
 localStorage.setItem('fechapago',FECHA_PAGO);
 }
 
+function anular(m){
+datos_ret[m]["fecha"]=fecha_hoy;
+datos_ret[m]["nro_factura"]="0000000000";
+datos_ret[m]["nro_control"]="00-00000000";
+datos_ret[m]["C_IVA"]="0";
+datos_ret[m]["C_SIVA"]="0";
+Agregar_datos(m);
+//localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
+//Seleccion();
+}
 
 function Seleccion(){
 var divsel=document.getElementById("seleccion");
@@ -395,12 +412,20 @@ var texto='';
 texto+='Nro de Retenci&oacute;n <input id="nret" type="text" onchange="set_n_ret();" value="'+NRO_RET+'"> <br>';
 texto+='Fecha de Pago <input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> <br><br>';
 for (var i=0;i<Max_F;i++) {
-texto+='<button onclick="Agregar_datos('+i+');">F'+(i+1).toString()+' '+ datos_ret[i]["fecha"]+' '+datos_ret[i]["nro_factura"]+' '+datos_ret[i]["nro_control"]+' '+datos_ret[i]["C_IVA"]+'</button><br>';
+//texto+='<button class="botonf" onclick="Agregar_datos('+i+');">F'+(i+1).toString()+' '+ datos_ret[i]["fecha"]+' '+datos_ret[i]["nro_factura"]+' '+datos_ret[i]["nro_control"]+' '+datos_ret[i]["C_IVA"]+'</button> <button onclick="anular('+i+');">x</button><br>';
+texto+='<button class="botonf" onclick="Agregar_datos('+i+');">F'+(i+1).toString()+' '+ datos_ret[i]["fecha"]+' '+datos_ret[i]["nro_factura"]+' '+datos_ret[i]["nro_control"]+' '+datos_ret[i]["C_IVA"]+'</button><br>';
 }
 divsel.innerHTML=texto;
 divsel.hidden=false;
 }
+
 function guardaconfig(){
+var div_config=document.getElementById("configuracion");
+TASA_IVA=div_config.getElementsByTagName("input")[0].value;
+FACTOR_RET=div_config.getElementsByTagName("input")[1].value;
+localStorage.setItem('tasa_iva',TASA_IVA);
+localStorage.setItem('factor_ret',FACTOR_RET);
+
 localStorage.setItem('dir_fiscal',DIR_FISCAL);
 localStorage.setItem('rif_fiscal',RIF_FISCAL);
 localStorage.setItem('nombre_dist',NOMB_DIST);
@@ -408,6 +433,10 @@ document.getElementById("configuracion").hidden=true;
 document.getElementById("seleccion").hidden=false;
 }
 
+function cancelaconfig(){
+document.getElementById("configuracion").hidden=true;
+document.getElementById("seleccion").hidden=false;
+}
 function guarda_datos(m){
  var fi=divs_datos.getElementsByTagName("input")[0].value;
  console.log(fi);
@@ -424,6 +453,14 @@ Seleccion();
 localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
 }
 
+function canceladatos(m){
+ divs_datos.hidden=true;
+console.log(m);
+console.table(datos_ret);
+Seleccion();
+//console.table(
+localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
+}
 
 function descarga_configuracion(name){
 var nomb="https://bdeabreu66.github.io/ret_malta/"+name+".txt";
