@@ -138,7 +138,7 @@ border-radius: 4px;
 padding: 8px 8px;
   margin: 8px 0;
   box-sizing: border-box;
-  background-color: white;
+  background-color: oldlace;
   color: black;
 }
 #divdata {
@@ -331,7 +331,10 @@ NOMB_DIST= localStorage.getItem('nombre_dist');
 
 try {
 TASA_IVA= localStorage.getItem('tasa_iva');
+ if (TASA_IVA==null) {TASA_IVA=16;} 
 FACTOR_RET= localStorage.getItem('factor_ret');
+ if (FACTOR_RET==null) {FACTOR_RET=0.75;} 
+
 } catch {console.log('error')}
 console.log(TASA_IVA);
 
@@ -345,13 +348,13 @@ function Agregar_datos(m){
 var divpart=divs_datos;
 var texto='';
 texto+='<h3 align="center"> Factura nro '+(m+1).toString()+'</h3>';
-texto+='Limpiar <button onclick="anular('+m+');">x</button><br>'
+texto+='Limpiar <button class="botonf" onclick="anular('+m+');">x</button><br>'
 texto+='Fecha de la Factura:<br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'"><br>';
 texto+='Nro de factura:<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
 texto+='Nro de Control:<br> <input type="text" value="'+datos_ret[m]["nro_control"]+'"><br> ';
 texto+='Monto sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
 texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
-texto+='<button onclick="guarda_datos('+m+')";>Guardar</button><button onclick="canceladatos();">Cancelar</button>';
+texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button><button class="botonf" onclick="canceladatos();">Cancelar</button>';
 divpart.innerHTML=texto;
 divpart.hidden=false;
 //divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
@@ -371,11 +374,11 @@ var divconf=document.getElementById("configuracion");
 var texto='';
 texto+='Tasa del IVA(%):<br> <input type="text" value="'+TASA_IVA+'"><br>';
 texto+='Porcentaje de retencion(%): <br><input type="text" value="'+FACTOR_RET+'"><br>';
-texto+='Archivo de datos <br> <input id="nombarch" type="text" > <button onclick="carga_data()"> A </button><br>';
+texto+='Archivo de datos <br> <input id="nombarch" type="text" > <button class="botonf" onclick="carga_data()"> A </button><br>';
 texto+='Rif:<br> <span id="sal1"></span><br>';
 texto+='Nombre:<br> <span id="sal2"></span><br>';
 texto+='Direccion:<br> <span id="sal3"></span><br>';
-texto+='<button onclick="guardaconfig();">Guardar</button> <button onclick="cancelaconfig();">Cancelar</button> ';
+texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <button class="botonf" onclick="cancelaconfig();">Cancelar</button> ';
 divconf.innerHTML=texto;
 divconf.hidden=false;
 document.getElementById("seleccion").hidden=true;
