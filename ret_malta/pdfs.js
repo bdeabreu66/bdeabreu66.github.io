@@ -32,7 +32,7 @@ doc.setFontStyle('normal');
 //
 esqx=130;ancho=46;altura=12;esqy=tMargin+lineHeight();
 doc.setFontStyle('bold');
-doc.text(esqx+ancho/2,esqy,"0.NRO COMPROBANTE",{ align: "center" });
+doc.text(esqx+ancho/2,esqy,"0. NRO COMPROBANTE",{ align: "center" });
 doc.setFontStyle('normal');
 doc.text(esqx+ancho/2,esqy+5,NRO_COMPROB,{ align: "center" });
 doc.rect(esqx,20,ancho,altura,'S');
@@ -49,29 +49,29 @@ doc.setFontSize(sFont3);
 //
 esqx=pageLeft;ancho=78;altura=12;esqy=ylinea+lineHeight();
 doc.setFontStyle('bold');
-doc.text(esqx+ancho/2,esqy+1*lineHeight(),"2.Nombre o Raz\u00F3n Social del agente de Retenci\u00F3n",{ align: "center" });
+doc.text(esqx+ancho/2,esqy+1*lineHeight(),"2. Nombre o Raz\u00F3n Social del agente de Retenci\u00F3n",{ align: "center" });
 doc.setFontStyle('normal');
 doc.text(esqx+ancho/2,esqy+2*lineHeight(),NOMB_DIST,{ align: "center" });
 doc.rect(esqx,esqy,ancho,altura,'S');
 //
 esqx=pageLeft+90;ancho=86;altura=12;esqy=ylinea+lineHeight();
 doc.setFontStyle('bold');
-doc.text(esqx+ancho/2,esqy+1*lineHeight(),"3.Registro de informaci\u00F3n Fiscal del Agente de Retenci\u00F3n",{ align: "center" });
+doc.text(esqx+ancho/2,esqy+1*lineHeight(),"3. Registro de informaci\u00F3n Fiscal del Agente de Retenci\u00F3n",{ align: "center" });
 doc.setFontStyle('normal');
 doc.text(esqx+ancho/2,esqy+2*lineHeight(),RIF_FISCAL,{ align: "center" });
 doc.rect(esqx,esqy,ancho,altura,'S');
 //
 esqx=208;ancho=50;altura=12;esqy=ylinea+lineHeight();
 doc.setFontStyle('bold');
-doc.text(esqx+ancho/2,esqy+1*lineHeight(),"4.Periodo Fiscal",{ align: "center" });
+doc.text(esqx+ancho/2,esqy+1*lineHeight(),"4. Periodo Fiscal",{ align: "center" });
 doc.setFontStyle('normal');
-doc.text(esqx+ancho/2,esqy+2*lineHeight(),"A\u00F1o:"+ P_FISCAL_A+" Mes: "+P_FISCAL_M,{ align: "center" });
+doc.text(esqx+ancho/2,esqy+2*lineHeight(),"A\u00F1o: "+ P_FISCAL_A+" Mes: "+P_FISCAL_M,{ align: "center" });
 doc.rect(esqx,esqy,ancho,altura,'S');
 //
 ylinea=ylinea+5*lineHeight();
 esqx=pageLeft;ancho=140;altura=12;esqy=ylinea+lineHeight();
 doc.setFontStyle('bold');
-doc.text(esqx+ancho/2,esqy+1*lineHeight(),"5.Direcci\u00F3n Fiscal del Agente de Retenci\u00F3n",{ align: "center" });
+doc.text(esqx+ancho/2,esqy+1*lineHeight(),"5. Direcci\u00F3n Fiscal del Agente de Retenci\u00F3n",{ align: "center" });
 doc.setFontStyle('normal');
 doc.text(esqx+ancho/2,esqy+2*lineHeight(),DIR_FISCAL,{ align: "center" });
 doc.rect(esqx,esqy,ancho,altura,'S');
@@ -79,14 +79,14 @@ doc.rect(esqx,esqy,ancho,altura,'S');
 ylinea=ylinea+5*lineHeight();
 esqx=pageLeft;ancho=80;altura=12;esqy=ylinea+lineHeight();
 doc.setFontStyle('bold');
-doc.text(esqx+ancho/2,esqy+1*lineHeight(),"6.Nombre o raz\u00F3n Social del Sujeto Retenido",{ align: "center" });
+doc.text(esqx+ancho/2,esqy+1*lineHeight(),"6. Nombre o raz\u00F3n Social del Sujeto Retenido",{ align: "center" });
 doc.setFontStyle('normal');
 doc.text(esqx+ancho/2,esqy+2*lineHeight(),nomb_emp,{ align: "center" });
 doc.rect(esqx,esqy,ancho,altura,'S');
 //
 esqx=pageLeft+90;ancho=80;altura=12;esqy=ylinea+lineHeight();
 doc.setFontStyle('bold');
-doc.text(esqx+ancho/2,esqy+1*lineHeight(),"7.Registro de informaci\u00F3n Fiscal del Sujeto Retenido",{ align: "center" });
+doc.text(esqx+ancho/2,esqy+1*lineHeight(),"7. Registro de informaci\u00F3n Fiscal del Sujeto Retenido",{ align: "center" });
 doc.setFontStyle('normal');
 doc.text(esqx+ancho/2,esqy+2*lineHeight(),rif_emp,{ align: "center" });
 doc.rect(esqx,esqy,ancho,altura,'S');
@@ -106,30 +106,30 @@ doc.text(xbase+Anchos[0]/2,esqy+2*lineHeight(),"Oper. Nro",{ align: "center" });
 //
 xbase+=Anchos[0];
 doc.text(xbase+Anchos[1]/2,esqy+2*lineHeight(),"Fecha de la",{ align: "center" });
-doc.text(xbase+Anchos[1]/2,esqy+3*lineHeight(),"Factura",{ align: "center" });
+doc.text(xbase+Anchos[1]/2,esqy+3*lineHeight(),"factura",{ align: "center" });
 //
 xbase+=Anchos[1];
 doc.text(xbase+Anchos[2]/2,esqy+2*lineHeight(),"N\u00FAmero de",{ align: "center" });
-doc.text(xbase+Anchos[2]/2,esqy+3*lineHeight(),"Factura",{ align: "center" });
+doc.text(xbase+Anchos[2]/2,esqy+3*lineHeight(),"factura",{ align: "center" });
 
 //
 xbase+=Anchos[2];
 doc.text(xbase+Anchos[3]/2,esqy+2*lineHeight(),"N\u00FAmero de",{ align: "center" });
-doc.text(xbase+Anchos[3]/2,esqy+3*lineHeight(),"Control de",{ align: "center" });
-doc.text(xbase+Anchos[3]/2,esqy+4*lineHeight(),"Factura",{ align: "center" });
+doc.text(xbase+Anchos[3]/2,esqy+3*lineHeight(),"control de",{ align: "center" });
+doc.text(xbase+Anchos[3]/2,esqy+4*lineHeight(),"factura",{ align: "center" });
 //
 xbase+=Anchos[3];
 doc.text(xbase+Anchos[4]/2,esqy+2*lineHeight(),"N\u00FAmero de",{ align: "center" });
-doc.text(xbase+Anchos[4]/2,esqy+3*lineHeight(),"(Nota D\u00E9edito)",{ align: "center" });
+doc.text(xbase+Anchos[4]/2,esqy+3*lineHeight(),"(Nota D\u00E9bito)",{ align: "center" });
 //
 xbase+=Anchos[4];
 doc.text(xbase+Anchos[5]/2,esqy+2*lineHeight(),"Tipo de",{ align: "center" });
-doc.text(xbase+Anchos[5]/2,esqy+3*lineHeight(),"Transacci\u00F3n",{ align: "center" });
+doc.text(xbase+Anchos[5]/2,esqy+3*lineHeight(),"transacci\u00F3n",{ align: "center" });
 //
 xbase+=Anchos[5];
 doc.text(xbase+Anchos[6]/2,esqy+2*lineHeight(),"N\u00FAmero ",{ align: "center" });
-doc.text(xbase+Anchos[6]/2,esqy+3*lineHeight(),"de Facturas",{ align: "center" });
-doc.text(xbase+Anchos[6]/2,esqy+4*lineHeight(),"Afectadas",{ align: "center" });
+doc.text(xbase+Anchos[6]/2,esqy+3*lineHeight(),"de facturas",{ align: "center" });
+doc.text(xbase+Anchos[6]/2,esqy+4*lineHeight(),"afectadas",{ align: "center" });
 
 //
 xbase+=Anchos[6];
