@@ -123,6 +123,8 @@
       ["T048 Vinagre. 1 lt x 12",12,11.88,0,0,0,"t2"],
       ["T049 Vinagre. 1/2 lt x 24",24,13.92,0,0,0,"t2"],
       ["T533 Vinagre. 4 lt x 4",4,15.76,0,0,0,"t2"],
+      ["D390 Primor Caraotas negras sazonadas 220gx24U",20,15.80,1,0,0,"t2"],
+      ["D391 Primor Frijoles sazonados 220gx24U",20,15.80,1,0,0,"t2"],
       ["Y001 Yogurt Fruta Fresa Migurt 125gx24",24,25.20,1,0,0,"t2"],
       ["Y002 Yogurt Fruta Durazno Migurt 125 x 24",24,25.20,1,0,0,"t2"],
       ["Y004 Yogurt Fruta Fresa Migurt 250 x 24",24,44.88,1,0,0,"t2"],
