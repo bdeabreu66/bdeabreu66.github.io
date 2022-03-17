@@ -284,7 +284,7 @@ var patron=document.getElementById("search").value.toUpperCase();
 texto="";
 var catant='';
 for (var i=0;i<data.length;i++){
-if (((data[i]["nombre"]+data[i]["id"]).toUpperCase().indexOf(patron) !=-1) && (data[i]["S"]==1))  {
+if (((data[i]["nombre"]+data[i]["id"]).toUpperCase().indexOf(patron) !=-1) && (data[i]["S"]!=0))  {
   if (catant!=data[i]["cat"]) {
   catant=data[i]["cat"];
   texto+='<p style="background-color:red;" >'+catant.replaceAll('&', '\\')+ '</p><br>';

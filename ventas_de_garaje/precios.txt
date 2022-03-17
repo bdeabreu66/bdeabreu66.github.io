@@ -69,6 +69,6 @@
 {"id":"P0069","S":"1","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Renaware 3 lt","descripcion":"Excelente estado, calidad insuperable. Capacidad: 3 litros","ref":"25","imagp":"hog_cocina_9.jpg","imagg":"hog_cocina_9_g.jpg"},
 {"id":"P0070","S":"1","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Renaware 2 lt","descripcion":"Excelente estado, calidad insuperable. Capacidad: 2 litros","ref":"20","imagp":"hog_cocina_10.jpg","imagg":"hog_cocina_10_g.jpg"},
 {"id":"P0071","S":"2","cat":"&Hogar&Cocina&Renaware&","nombre":"Olla Renaware 1.6 lt","descripcion":"Excelente estado, calidad insuperable. Capacidad: 1.6 litros","ref":"20","imagp":"hog_cocina_11.jpg","imagg":"hog_cocina_11_g.jpg"},
-{"id":"P0072","S":"2","cat":"&Hogar&Entretenimiento&","nombre":"Proyector LED","descripcion":"Excelente estado, ","ref":"20","imagp":"hog_entr_1.jpg","imagg":"hog_entr_1_g.jpg"},
-{"id":"P0077","S":"2","cat":"&Ferreteria&","nombre":"Pistola para pintar","descripcion":"Excelente estado, Nueva. ","ref":"40","imagp":"ferre_1.jpg","imagg":"ferre_1_g.jpg"}
+{"id":"P0072","S":"1","cat":"&Hogar&Entretenimiento&","nombre":"Proyector LED","descripcion":"Excelente estado, ","ref":"20","imagp":"hog_entr_1.jpg","imagg":"hog_entr_1_g.jpg"},
+{"id":"P0077","S":"1","cat":"&Ferreteria&","nombre":"Pistola para pintar","descripcion":"Excelente estado, Nueva. ","ref":"40","imagp":"ferre_1.jpg","imagg":"ferre_1_g.jpg"}
 ]
