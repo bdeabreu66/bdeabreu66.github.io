@@ -84,6 +84,6 @@
 {"id":"P0088","S":"1","cat":"&Hogar&Decoracion","nombre":"Adorno de pared","descripcion":"Excelente estado, 15 cm x 31 cm","ref":"2","imagp":"hog_decor_15.jpg","imagg":"hog_decor_15_g.jpg"},
 {"id":"P0089","S":"1","cat":"&Hogar&Decoracion","nombre":"Adorno de pared","descripcion":"Excelente estado, 14 cm x 20 cm","ref":"2","imagp":"hog_decor_16.jpg","imagg":"hog_decor_16_g.jpg"},
 {"id":"P0090","S":"1","cat":"&Hogar&Decoracion","nombre":"Adorno de pared","descripcion":"Excelente estado, 10 cm x 15 cm","ref":"2","imagp":"hog_decor_17.jpg","imagg":"hog_decor_17_g.jpg"},
-{"id":"P0091","S":"1","cat":"&Hogar&Muebles&","nombre":"Silla para playa","descripcion":"Buen estado. De aluminio color azul","ref":"5","imagp":"hog_mueble_4","imagg":"hog_mueble_4_g.jpg"},
-{"id":"P0092","S":"1","cat":"&Hogar&Muebles&","nombre":"Porta beb&eacute;","descripcion":"Buen estado. Sin uso","ref":"15","imagp":"hog_mueble_5","imagg":"hog_mueble_5_g.jpg"}
+{"id":"P0091","S":"1","cat":"&Hogar&Muebles&","nombre":"Silla para playa","descripcion":"Buen estado. De aluminio color azul","ref":"5","imagp":"hog_mueble_4.jpg","imagg":"hog_mueble_4_g.jpg"},
+{"id":"P0092","S":"1","cat":"&Hogar&Muebles&","nombre":"Porta beb&eacute;","descripcion":"Buen estado. Sin uso","ref":"15","imagp":"hog_mueble_5.jpg","imagg":"hog_mueble_5_g.jpg"}
 ]
