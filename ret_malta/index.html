@@ -297,14 +297,14 @@ fecha_hoy=fecha_estandar(fecha_hoy);
 console.log('fecha_hoy '+fecha_hoy);
 fecha_min=year_estandar(fecha_hoy)+'-01-01';
 divs_datos=document.getElementById("divdata");
-datos_ret[0]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
-datos_ret[1]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
-datos_ret[2]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
-datos_ret[3]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
-datos_ret[4]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
-datos_ret[5]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
-datos_ret[6]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
-datos_ret[7]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[0]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","nro_debito":"00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[1]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","nro_debito":"00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[2]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","nro_debito":"00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[3]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","nro_debito":"00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[4]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","nro_debito":"00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[5]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","nro_debito":"00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[6]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","nro_debito":"00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
+datos_ret[7]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","nro_debito":"00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
 //datos_ret[8]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
 //datos_ret[9]={"fecha":fecha_hoy,"nro_factura":"0000000000","nro_control":"00-00000000","tt":"Compra","nfa":"1","C_IVA":"0","C_SIVA":"0"};
 
@@ -344,22 +344,40 @@ console.table(FECHA_PAGO);
 Seleccion();
 //hacerRetencion();
 }
+function copia(j,k){
+switch (k) {
+  case 1: divs_datos.getElementsByTagName("input")[1].value=datos_ret[j-1]["nro_factura"];break;
+  case 2: divs_datos.getElementsByTagName("input")[2].value=datos_ret[j-1]["nro_control"];break;
+  case 3: divs_datos.getElementsByTagName("input")[3].value=datos_ret[j-1]["nro_debito"];break;
+
+}
+}
+
 function Agregar_datos(m){
 var divpart=divs_datos;
 var texto='';
+var ta='';
 texto+='<h3 align="center"> Factura nro '+(m+1).toString()+'</h3>';
 texto+='Limpiar <button class="botonf" onclick="anular('+m+');">x</button><br>'
-texto+='Fecha de la Factura:<br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'"><br>';
-texto+='Nro de factura:<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
-texto+='Nro de Control:<br> <input type="text" value="'+datos_ret[m]["nro_control"]+'"><br> ';
-texto+='Monto sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
-texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
+if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',1)">C</button>'} else {ta=""}
+
+texto+='Fecha de la Factura:<br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">'+' <br>';
+//texto+='Nro de factura (afectada <input type="checkbox">):<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
+
+texto+='Nro de factura:<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'">'+ta+'<br> ';
+if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',2)">C</button>'} else {ta=""}
+
+texto+='Nro de Control:<br> <input type="text" value="'+datos_ret[m]["nro_control"]+'">'+ta+'<br> ';
+if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',3)">C</button>'} else {ta=""}
+
+texto+='Nota de debito:<br> <input type="text" value="'+datos_ret[m]["nro_debito"]+'">'+ta+'<br> ';
+texto+='Monto Base imponible a IVA:<br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
+//texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
 texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button><button class="botonf" onclick="canceladatos();">Cancelar</button>';
 divpart.innerHTML=texto;
 divpart.hidden=false;
 //divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
 document.getElementById("seleccion").hidden=true;
-
 }
 
 function carga_data(){
@@ -400,10 +418,11 @@ localStorage.setItem('fechapago',FECHA_PAGO);
 
 function anular(m){
 datos_ret[m]["fecha"]=fecha_hoy;
-datos_ret[m]["nro_factura"]="0000000000";
-datos_ret[m]["nro_control"]="00-00000000";
+datos_ret[m]["nro_factura"]="";
+datos_ret[m]["nro_control"]="";
+datos_ret[m]["nro_debito"]="";
 datos_ret[m]["C_IVA"]="0";
-datos_ret[m]["C_SIVA"]="0";
+//datos_ret[m]["C_SIVA"]="0";
 Agregar_datos(m);
 //localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
 //Seleccion();
@@ -446,8 +465,11 @@ function guarda_datos(m){
  datos_ret[m]["fecha"]=inv_fecha_date(fi);
  datos_ret[m]["nro_factura"]=divs_datos.getElementsByTagName("input")[1].value;
  datos_ret[m]["nro_control"]=divs_datos.getElementsByTagName("input")[2].value;
- datos_ret[m]["C_IVA"]=(divs_datos.getElementsByTagName("input")[3].value).replace(',','.');
- datos_ret[m]["C_SIVA"]=(divs_datos.getElementsByTagName("input")[4].value).replace(',','.');
+ datos_ret[m]["nro_debito"]=divs_datos.getElementsByTagName("input")[3].value;
+ datos_ret[m]["C_IVA"]=(divs_datos.getElementsByTagName("input")[4].value).replace(',','.');
+if (isNaN(parseFloat(datos_ret[m]["C_IVA"]))) {datos_ret[m]["C_IVA"]="0"}
+//datos_ret[m]["C_SIVA"]=(divs_datos.getElementsByTagName("input")[4].value).replace(',','.');
+//console.log(parseFloat(datos_ret[m]["C_IVA"]));
 divs_datos.hidden=true;
 console.log(m);
 console.table(datos_ret);
@@ -523,7 +545,7 @@ if ('serviceWorker' in navigator) {
 <div id="configuracion">
  
 </div>
-<div id="header"> <button class="btop" onclick="Configurar();">Config</button>&nbsp&nbsp<button class="btop" onclick="hacerRetencion();"> Retencion</button></div>
+<div id="header"> <button class="btop" onclick="Configurar();">Configurar</button>&nbsp&nbsp<button class="btop" onclick="hacerRetencion();"> Efectuar Retenci&oacute;n</button></div>
 
 
 <!--   -->
