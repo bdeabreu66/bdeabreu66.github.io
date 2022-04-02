@@ -143,7 +143,7 @@ padding: 8px 8px;
 }
 #divdata {
 position:fixed;
-top:40px;
+top:20px;
 height: 90%;
 width:95%;
 }
@@ -357,8 +357,7 @@ function Agregar_datos(m){
 var divpart=divs_datos;
 var texto='';
 var ta='';
-texto+='<h3 align="center"> Factura nro '+(m+1).toString()+'</h3>';
-texto+='Limpiar <button class="botonf" onclick="anular('+m+');">x</button><br>'
+texto+='<h4 align="center"> Factura nro '+(m+1).toString()+'</h4>';
 if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',1)">C</button>'} else {ta=""}
 
 texto+='Fecha de la Factura:<br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">'+' <br>';
@@ -373,7 +372,9 @@ if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m
 texto+='Nota de debito:<br> <input type="text" value="'+datos_ret[m]["nro_debito"]+'">'+ta+'<br> ';
 texto+='Monto Base imponible a IVA:<br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
 //texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
-texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button><button class="botonf" onclick="canceladatos();">Cancelar</button>';
+texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button>';
+texto+=' <button class="botonf" onclick="canceladatos();">Cancelar</button>';
+texto+=' <button class="botonf" onclick="anular('+m+');">Anular</button><br>'
 divpart.innerHTML=texto;
 divpart.hidden=false;
 //divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
@@ -417,13 +418,18 @@ localStorage.setItem('fechapago',FECHA_PAGO);
 }
 
 function anular(m){
-datos_ret[m]["fecha"]=fecha_hoy;
-datos_ret[m]["nro_factura"]="";
-datos_ret[m]["nro_control"]="";
-datos_ret[m]["nro_debito"]="";
-datos_ret[m]["C_IVA"]="0";
+divs_datos.getElementsByTagName("input")[0].value=fecha_date(fecha_hoy);
+divs_datos.getElementsByTagName("input")[1].value='';
+divs_datos.getElementsByTagName("input")[2].value='';
+divs_datos.getElementsByTagName("input")[3].value='';
+divs_datos.getElementsByTagName("input")[4].value='0';
+//datos_ret[m]["fecha"]=fecha_hoy;
+//datos_ret[m]["nro_factura"]="";
+//datos_ret[m]["nro_control"]="";
+//datos_ret[m]["nro_debito"]="";
+//datos_ret[m]["C_IVA"]="0";
 //datos_ret[m]["C_SIVA"]="0";
-Agregar_datos(m);
+//Agregar_datos(m);
 //localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
 //Seleccion();
 }
