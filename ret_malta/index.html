@@ -123,7 +123,7 @@ body {
 .btop{
 font-size:2em;
 border: 2px solid red;
-border-radius: 4px;
+border-radius: 8px;
 padding: 4px 4px;
   margin: 4px 0;
   box-sizing: border-box;
@@ -247,8 +247,9 @@ var datos_ret=[];
 var datos_ret_base;
 var NRO_RET="982";
 var TIPO_RET="0";
+var LISTA_A="";
+var LISTA_C="";
 var NRO_COMPROB;
-
 function fecha_date(f){
 var comp=f.split('/');
 var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
@@ -324,7 +325,16 @@ if (NRO_RET_T!=null) {NRO_RET=NRO_RET_T};
 try {
 var TIPO_RET_T=localStorage.getItem('tipo_ret');
 if (TIPO_RET_T!=null) {TIPO_RET=TIPO_RET_T};
+} catch {console.log('error')};
 
+try {
+var LISTA_A_T=localStorage.getItem('lista_a');
+if (LISTA_A_T!=null) {LISTA_A=LISTA_A_T};
+} catch {console.log('error')};
+
+try {
+var LISTA_C_T=localStorage.getItem('lista_c');
+if (LISTA_C_T!=null) {LISTA_C=LISTA_C_T};
 } catch {console.log('error')};
 
 
@@ -358,7 +368,6 @@ switch (k) {
   case 1: divs_datos.getElementsByTagName("input")[1].value=datos_ret[j-1]["nro_factura"];break;
   case 2: divs_datos.getElementsByTagName("input")[2].value=datos_ret[j-1]["nro_control"];break;
   case 3: divs_datos.getElementsByTagName("input")[3].value=datos_ret[j-1]["nro_debito"];break;
-
 }
 }
 
@@ -406,6 +415,8 @@ texto+='Archivo de datos <br> <input id="nombarch" type="text" > <button class="
 texto+='Rif:<br> <span id="sal1"></span><br>';
 texto+='Nombre:<br> <span id="sal2"></span><br>';
 texto+='Direccion:<br> <span id="sal3"></span><br>';
+texto+='Alimentos <br> <input id="lista_a" type="text" value="'+LISTA_A+'"> ';
+texto+='Cerveceria <input id="lista_c" type="text" value="'+LISTA_C+'"> ';
 texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <button class="botonf" onclick="cancelaconfig();">Cancelar</button> ';
 divconf.innerHTML=texto;
 divconf.hidden=false;
@@ -474,7 +485,6 @@ TASA_IVA=div_config.getElementsByTagName("input")[0].value;
 FACTOR_RET=div_config.getElementsByTagName("input")[1].value;
 localStorage.setItem('tasa_iva',TASA_IVA);
 localStorage.setItem('factor_ret',FACTOR_RET);
-
 localStorage.setItem('dir_fiscal',DIR_FISCAL);
 localStorage.setItem('rif_fiscal',RIF_FISCAL);
 localStorage.setItem('nombre_dist',NOMB_DIST);
@@ -535,10 +545,13 @@ function ajaxPositiveD(response) {
         DIR_FISCAL=txt.dir;
         RIF_FISCAL=txt.rif;
         NOMB_DIST=txt.nombre_C;
+        LISTA_A=txt.lista_a;
+        LISTA_C=txt.lista_c;
         document.getElementById("sal1").innerText=RIF_FISCAL;
         document.getElementById("sal2").innerText=NOMB_DIST;
         document.getElementById("sal3").innerText=DIR_FISCAL;
-        
+        document.getElementById("lista_a").innerText=LISTA_A;
+ document.getElementById("lista_c").innerText=LISTA_C;
  }
 function showErrorD(err) { console.log('muestor error', err); }
 
