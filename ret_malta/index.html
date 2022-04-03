@@ -229,7 +229,7 @@ div.hidden=true;
 
 function enviarRetencion(){
 if (TIPO_RET=="0") {txt=LISTA_C;} else {txt=LISTA_A;}
-var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+";
+var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST;
 url ='mailto:'+txt+asunto;
 window.open(url);
 }
@@ -415,8 +415,8 @@ texto+='Archivo de datos <br> <input id="nombarch" type="text" > <button class="
 texto+='Rif:<br> <span id="sal1"></span><br>';
 texto+='Nombre:<br> <span id="sal2"></span><br>';
 texto+='Direccion:<br> <span id="sal3"></span><br>';
-texto+='Alimentos <br> <input id="lista_a" type="text" value="'+LISTA_A+'"> ';
-texto+='Cerveceria <input id="lista_c" type="text" value="'+LISTA_C+'"> ';
+texto+='Cerveceria <br> <span id="lista_c"></span><br> ';
+texto+='Alimentos <br> <span id="lista_a"></span><br> ';
 texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <button class="botonf" onclick="cancelaconfig();">Cancelar</button> ';
 divconf.innerHTML=texto;
 divconf.hidden=false;
@@ -425,7 +425,8 @@ document.getElementById("divdata").hidden=true;
 document.getElementById("sal1").innerText=RIF_FISCAL;
 document.getElementById("sal2").innerText=NOMB_DIST;
 document.getElementById("sal3").innerText=DIR_FISCAL;
-
+document.getElementById("lista_a").innerText=LISTA_A;
+document.getElementById("lista_c").innerText=LISTA_C;
 }
 
 function set_n_ret(){
@@ -488,6 +489,8 @@ localStorage.setItem('factor_ret',FACTOR_RET);
 localStorage.setItem('dir_fiscal',DIR_FISCAL);
 localStorage.setItem('rif_fiscal',RIF_FISCAL);
 localStorage.setItem('nombre_dist',NOMB_DIST);
+localStorage.setItem('lista_a',LISTA_A);
+localStorage.setItem('lista_c',LISTA_C);
 document.getElementById("configuracion").hidden=true;
 document.getElementById("seleccion").hidden=false;
 }
@@ -551,7 +554,7 @@ function ajaxPositiveD(response) {
         document.getElementById("sal2").innerText=NOMB_DIST;
         document.getElementById("sal3").innerText=DIR_FISCAL;
         document.getElementById("lista_a").innerText=LISTA_A;
- document.getElementById("lista_c").innerText=LISTA_C;
+     document.getElementById("lista_c").innerText=LISTA_C;
  }
 function showErrorD(err) { console.log('muestor error', err); }
 
