@@ -228,9 +228,9 @@ div.hidden=true;
 
 
 function enviarRetencion(){
-var destinatarios1='distribuidorapitaorozcoca@gmail.com'
-var txt=destinatarios1;
-url ='mailto:'+txt;
+if (TIPO_RET=="0") {txt=LISTA_C;} else {txt=LISTA_A;}
+var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+";
+url ='mailto:'+txt+asunto;
 window.open(url);
 }
 var TASA_IVA=16;
