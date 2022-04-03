@@ -330,12 +330,12 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
     var sFont4=6;
     var ptodecimal=false;
     var titulo="COMPROBANTE DE RETENCI\u00D3N AL VALOR AGREGADO";
-    //var nro_comp="20220200000982";
-    //var nombre_comp='Distribuidora Pita Orozco, C.A.';
-    //var rif_comp='J-07590071-5';
-    //var dir_comp='Calle ppal. Manzana #9 casa #3, Urb Valle Verde. San Diego. Edo Carabobo. Tlf 0414-4405044';
-    var nomb_emp='ALIMENTOS POLAR COMERCIAL, C.A.';
-    var rif_emp='J-00041312-6';
+    var nomb_emp1='ALIMENTOS POLAR COMERCIAL, C.A.';
+    var rif_emp1='J-00041312-6';
+    var nomb_emp2='CERVECERIA POLAR C.A.';
+    var rif_emp2='J-00006372-9';
+    var nomb_emp;
+    var rif_emp;
     //var FECHA_PAGO="25/02/2022";
     var P_FISCAL_A=year_estandar(FECHA_PAGO);
     var P_FISCAL_M=mes_estandar(FECHA_PAGO);
@@ -357,7 +357,7 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
 
 
    console.log(RIF_FISCAL);
-
+ if (TIPO_RET=="0") {nomb_emp=nomb_emp2;rif_emp=rif_emp2} else {nomb_emp=nomb_emp1;rif_emp=rif_emp1}
 
 
 

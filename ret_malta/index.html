@@ -227,9 +227,10 @@ div.hidden=true;
 }
 
 
-function enviar_whatsapp(phone,text){
-
-url ='https://api.whatsapp.com/send?phone='+phone+'&text='+text;
+function enviarRetencion(){
+var destinatarios1='distribuidorapitaorozcoca@gmail.com'
+var txt=destinatarios1;
+url ='mailto:'+txt;
 window.open(url);
 }
 var TASA_IVA=16;
@@ -245,6 +246,7 @@ var data=[];
 var datos_ret=[];
 var datos_ret_base;
 var NRO_RET="982";
+var TIPO_RET="0";
 var NRO_COMPROB;
 
 function fecha_date(f){
@@ -318,6 +320,13 @@ var NRO_RET_T=localStorage.getItem('nro_ret');
 if (NRO_RET_T!=null) {NRO_RET=NRO_RET_T};
 
 } catch {console.log('error')};
+
+try {
+var TIPO_RET_T=localStorage.getItem('tipo_ret');
+if (TIPO_RET_T!=null) {TIPO_RET=TIPO_RET_T};
+
+} catch {console.log('error')};
+
 
 try {
 var FECHA_PAGO_T=localStorage.getItem('fechapago');
@@ -412,6 +421,10 @@ function set_n_ret(){
 NRO_RET=document.getElementById("nret").value;
 localStorage.setItem('nro_ret',NRO_RET);
 }
+function set_t_ret(){
+if (document.getElementById("t1").checked==true) {TIPO_RET="0";} else {TIPO_RET="1";}
+localStorage.setItem('tipo_ret',TIPO_RET);
+}
 function set_fecha_pago(){
 FECHA_PAGO=inv_fecha_date(document.getElementById("fechapago").value);
 localStorage.setItem('fechapago',FECHA_PAGO);
@@ -437,6 +450,14 @@ divs_datos.getElementsByTagName("input")[4].value='0';
 function Seleccion(){
 var divsel=document.getElementById("seleccion");
 var texto='';
+texto+='<center>';
+if (TIPO_RET=="0") {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();" checked>';
+ texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();"> <br>';
+}
+else {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();">';
+ texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" checked> <br>';
+}
+texto+='</center><br>';
 texto+='Nro de Retenci&oacute;n <input id="nret" type="text" onchange="set_n_ret();" value="'+NRO_RET+'"> <br>';
 texto+='Fecha de Pago <input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> <br><br>';
 for (var i=0;i<Max_F;i++) {
@@ -551,7 +572,7 @@ if ('serviceWorker' in navigator) {
 <div id="configuracion">
  
 </div>
-<div id="header"> <button class="btop" onclick="Configurar();">Configurar</button>&nbsp&nbsp<button class="btop" onclick="hacerRetencion();"> Efectuar Retenci&oacute;n</button></div>
+<div id="header"> <button class="btop" onclick="Configurar();">Configurar</button>&nbsp&nbsp<button class="btop" onclick="hacerRetencion();"> Efectuar Retenci&oacute;n</button>&nbsp&nbsp<button class="btop" onclick="enviarRetencion();"> Enviar Retenci&oacute;n</button></div>
 
 
 <!--   -->
