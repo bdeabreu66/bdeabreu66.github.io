@@ -130,7 +130,9 @@ padding: 4px 4px;
   background-color: #3CBC8D;
   color: black;
 }
-
+.titulo{
+color:blue;
+}
 .botonf{
 font-size:0.8em;
 border: 2px solid red;
@@ -157,10 +159,11 @@ hidden:true;
 }
 
 #configuracion {
-top:100px;
+top:50px;
 position:fixed;
 height: 90%;
 width:100%;
+overflow-y: auto;
 hidden:true;
 }
 #footer {
@@ -378,17 +381,17 @@ var ta='';
 texto+='<h4 align="center"> Factura nro '+(m+1).toString()+'</h4>';
 if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',1)">C</button>'} else {ta=""}
 
-texto+='Fecha de la Factura:<br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">'+' <br>';
+texto+='<span class="titulo">Fecha de la Factura:</span><br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">'+' <br>';
 //texto+='Nro de factura (afectada <input type="checkbox">):<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
 
-texto+='Nro de factura:<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'">'+ta+'<br> ';
+texto+='<span class="titulo">Nro de factura:</span><br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'">'+ta+'<br> ';
 if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',2)">C</button>'} else {ta=""}
 
-texto+='Nro de Control:<br> <input type="text" value="'+datos_ret[m]["nro_control"]+'">'+ta+'<br> ';
+texto+='<span class="titulo">Nro de Control:</span><br> <input type="text" value="'+datos_ret[m]["nro_control"]+'">'+ta+'<br> ';
 if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',3)">C</button>'} else {ta=""}
 
-texto+='Nota de debito:<br> <input type="text" value="'+datos_ret[m]["nro_debito"]+'">'+ta+'<br> ';
-texto+='Monto Base imponible a IVA:<br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
+texto+='<span class="titulo">Nota de debito:</span><br> <input type="text" value="'+datos_ret[m]["nro_debito"]+'">'+ta+'<br> ';
+texto+='<span class="titulo">Monto Base imponible a IVA:</span><br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
 //texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
 texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button>';
 texto+=' <button class="botonf" onclick="canceladatos();">Cancelar</button>';
@@ -409,14 +412,14 @@ if (narch.length>0) {
 function Configurar(){
 var divconf=document.getElementById("configuracion");
 var texto='';
-texto+='Tasa del IVA(%):<br> <input type="text" value="'+TASA_IVA+'"><br>';
-texto+='Porcentaje de retencion(%): <br><input type="text" value="'+FACTOR_RET+'"><br>';
-texto+='Archivo de datos <br> <input id="nombarch" type="text" > <button class="botonf" onclick="carga_data()"> A </button><br>';
-texto+='Rif:<br> <span id="sal1"></span><br>';
-texto+='Nombre:<br> <span id="sal2"></span><br>';
-texto+='Direccion:<br> <span id="sal3"></span><br>';
-texto+='Cerveceria <br> <span id="lista_c"></span><br> ';
-texto+='Alimentos <br> <span id="lista_a"></span><br> ';
+texto+='<span class="titulo">Tasa del IVA(%):</span><br> <input type="text" value="'+TASA_IVA+'"><br>';
+texto+='<span class="titulo">Porcentaje de retencion(%):</span> <br><input type="text" value="'+FACTOR_RET+'"><br>';
+texto+='<span class="titulo">Archivo de datos: </span><br> <input id="nombarch" type="text" > <button class="botonf" onclick="carga_data()"> A </button><br>';
+texto+='<span class="titulo">Rif:</span><br> <span id="sal1"></span><br>';
+texto+='<span style="color:blue;">Nombre:</span><br> <span id="sal2"></span><br>';
+texto+='<span style="color:blue;">Direccion:</span><br> <span id="sal3"></span><br>';
+texto+='<span style="color:blue;">Correos para Cervecer&iacute;a: </span><br> <span id="lista_c"></span><br> ';
+texto+='<span style="color:blue;">Correos para Alimentos: </span><br> <span id="lista_a"></span><br> ';
 texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <button class="botonf" onclick="cancelaconfig();">Cancelar</button> ';
 divconf.innerHTML=texto;
 divconf.hidden=false;
@@ -425,8 +428,8 @@ document.getElementById("divdata").hidden=true;
 document.getElementById("sal1").innerText=RIF_FISCAL;
 document.getElementById("sal2").innerText=NOMB_DIST;
 document.getElementById("sal3").innerText=DIR_FISCAL;
-document.getElementById("lista_a").innerText=LISTA_A;
-document.getElementById("lista_c").innerText=LISTA_C;
+document.getElementById("lista_a").innerText=lineas(LISTA_A);
+document.getElementById("lista_c").innerText=lineas(LISTA_C);
 }
 
 function set_n_ret(){
@@ -527,6 +530,10 @@ Seleccion();
 localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
 }
 
+function lineas(t){
+var l=t.split(";");
+return l.join("\n");
+}
 function descarga_configuracion(name){
 var nomb="https://bdeabreu66.github.io/ret_malta/"+name+".txt";
 //var myHeaders = new Headers();
@@ -553,8 +560,8 @@ function ajaxPositiveD(response) {
         document.getElementById("sal1").innerText=RIF_FISCAL;
         document.getElementById("sal2").innerText=NOMB_DIST;
         document.getElementById("sal3").innerText=DIR_FISCAL;
-        document.getElementById("lista_a").innerText=LISTA_A;
-     document.getElementById("lista_c").innerText=LISTA_C;
+        document.getElementById("lista_a").innerText=lineas(LISTA_A);
+       document.getElementById("lista_c").innerText=lineas(LISTA_C);
  }
 function showErrorD(err) { console.log('muestor error', err); }
 
