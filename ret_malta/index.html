@@ -390,7 +390,7 @@ var texto='';
 var ta='';
 texto+='<h4 align="center"> Factura nro '+(m+1).toString()+'</h4>';
 texto+='<span class="titulo">Fecha de la Factura:</span><br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">';
-if (m>0) {texto+='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+');"> Copiar anterior </button><br>';} else {texto+='<br>';}
+if (m>0) {texto+='&nbsp;&nbsp;&nbsp;<button title="copiar de factura anterior" onclick="copia('+m+');"> Copiar anterior </button><br>';} else {texto+='<br>';}
 
 
 //texto+='Nro de factura (afectada <input type="checkbox">):<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
@@ -477,10 +477,10 @@ var divsel=document.getElementById("seleccion");
 var texto='';
 texto+='<center>';
 texto+='<h4>Retenciones para Franquiciados de Empresas Polar</h4>';
-if (TIPO_RET=="0") {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();" checked><br>';
+if (TIPO_RET=="0") {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();" checked>&nbsp;&nbsp;&nbsp;';
  texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();"> <br>';
 }
-else {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();"><br>';
+else {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();">&nbsp;&nbsp;&nbsp;';
  texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" checked> <br>';
 }
 texto+='</center><br>';
