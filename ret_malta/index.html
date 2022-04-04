@@ -152,7 +152,7 @@ width:95%;
 
 #seleccion {
 position:fixed;
-top:100px;
+top:50px;
 height: 90%;
 width:100%;
 hidden:true;
@@ -231,8 +231,11 @@ div.hidden=true;
 
 
 function enviarRetencion(){
-if (TIPO_RET=="0") {txt=LISTA_C;} else {txt=LISTA_A;}
-var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST;
+var txt;
+var aux;
+if (TIPO_RET=="0") {txt=LISTA_C;aux="";} else {txt=LISTA_A;aux=" Alimentos";}
+var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+aux;
+console.log(asunto);
 url ='mailto:'+txt+asunto;
 window.open(url);
 }
@@ -291,9 +294,11 @@ function mes_estandar(f){
 //if (mes<10) {mes='0'+mes}
 return mes;
 }
-
+var Max_L;
+var Max_F;
 function inicio(){
 Max_F=7;
+Max_L=7;
 FECHA_PAGO=new Date();
 FECHA_PAGO=fecha_estandar(FECHA_PAGO);
 fecha_hoy= new Date();
@@ -340,6 +345,12 @@ var LISTA_C_T=localStorage.getItem('lista_c');
 if (LISTA_C_T!=null) {LISTA_C=LISTA_C_T};
 } catch {console.log('error')};
 
+try {
+var Max_F_T=localStorage.getItem('max_f');
+if (Max_F_T!=null) {Max_F=parseInt(Max_F_T)};
+} catch {console.log('error')};
+
+
 
 try {
 var FECHA_PAGO_T=localStorage.getItem('fechapago');
@@ -366,12 +377,11 @@ console.table(FECHA_PAGO);
 Seleccion();
 //hacerRetencion();
 }
-function copia(j,k){
-switch (k) {
-  case 1: divs_datos.getElementsByTagName("input")[1].value=datos_ret[j-1]["nro_factura"];break;
-  case 2: divs_datos.getElementsByTagName("input")[2].value=datos_ret[j-1]["nro_control"];break;
-  case 3: divs_datos.getElementsByTagName("input")[3].value=datos_ret[j-1]["nro_debito"];break;
-}
+function copia(j){
+divs_datos.getElementsByTagName("input")[0].value=fecha_date(datos_ret[j-1]["fecha"]);
+divs_datos.getElementsByTagName("input")[1].value=datos_ret[j-1]["nro_factura"];
+divs_datos.getElementsByTagName("input")[2].value=datos_ret[j-1]["nro_control"];
+divs_datos.getElementsByTagName("input")[3].value=datos_ret[j-1]["nro_debito"];
 }
 
 function Agregar_datos(m){
@@ -379,18 +389,17 @@ var divpart=divs_datos;
 var texto='';
 var ta='';
 texto+='<h4 align="center"> Factura nro '+(m+1).toString()+'</h4>';
-if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',1)">C</button>'} else {ta=""}
+texto+='<span class="titulo">Fecha de la Factura:</span><br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">';
+if (m>0) {texto+='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+');"> Copiar anterior </button><br>';} else {texto+='<br>';}
 
-texto+='<span class="titulo">Fecha de la Factura:</span><br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">'+' <br>';
+
 //texto+='Nro de factura (afectada <input type="checkbox">):<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
 
-texto+='<span class="titulo">Nro de factura:</span><br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'">'+ta+'<br> ';
-if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',2)">C</button>'} else {ta=""}
+texto+='<span class="titulo">Nro de factura:</span><br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
 
-texto+='<span class="titulo">Nro de Control:</span><br> <input type="text" value="'+datos_ret[m]["nro_control"]+'">'+ta+'<br> ';
-if (m>0){ ta='&nbsp<button title="copiar de factura anterior" onclick="copia('+m+',3)">C</button>'} else {ta=""}
+texto+='<span class="titulo">Nro de Control:</span><br> <input type="text" value="'+datos_ret[m]["nro_control"]+'"><br> ';
 
-texto+='<span class="titulo">Nota de debito:</span><br> <input type="text" value="'+datos_ret[m]["nro_debito"]+'">'+ta+'<br> ';
+texto+='<span class="titulo">Nota de debito:</span><br> <input type="text" value="'+datos_ret[m]["nro_debito"]+'"><br> ';
 texto+='<span class="titulo">Monto Base imponible a IVA:</span><br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
 //texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
 texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button>';
@@ -414,6 +423,7 @@ var divconf=document.getElementById("configuracion");
 var texto='';
 texto+='<span class="titulo">Tasa del IVA(%):</span><br> <input type="text" value="'+TASA_IVA+'"><br>';
 texto+='<span class="titulo">Porcentaje de retencion(%):</span> <br><input type="text" value="'+FACTOR_RET+'"><br>';
+texto+='<span class="titulo">M&aacute;ximo de facturas (1-7):</span> <br><input type="text" value="'+Max_F+'"><br>';
 texto+='<span class="titulo">Archivo de datos: </span><br> <input id="nombarch" type="text" > <button class="botonf" onclick="carga_data()"> A </button><br>';
 texto+='<span class="titulo">Rif:</span><br> <span id="sal1"></span><br>';
 texto+='<span style="color:blue;">Nombre:</span><br> <span id="sal2"></span><br>';
@@ -466,15 +476,17 @@ function Seleccion(){
 var divsel=document.getElementById("seleccion");
 var texto='';
 texto+='<center>';
-if (TIPO_RET=="0") {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();" checked>';
+texto+='<h4>Retenciones para Franquiciados de Empresas Polar</h4>';
+if (TIPO_RET=="0") {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();" checked><br>';
  texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();"> <br>';
 }
-else {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();">';
+else {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t_ret();"><br>';
  texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" checked> <br>';
 }
 texto+='</center><br>';
 texto+='Nro de Retenci&oacute;n <input id="nret" type="text" onchange="set_n_ret();" value="'+NRO_RET+'"> <br>';
 texto+='Fecha de Pago <input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> <br><br>';
+texto+='<span class="titulo"> Datos de facturas:</span><br>';
 for (var i=0;i<Max_F;i++) {
 //texto+='<button class="botonf" onclick="Agregar_datos('+i+');">F'+(i+1).toString()+' '+ datos_ret[i]["fecha"]+' '+datos_ret[i]["nro_factura"]+' '+datos_ret[i]["nro_control"]+' '+datos_ret[i]["C_IVA"]+'</button> <button onclick="anular('+i+');">x</button><br>';
 texto+='<button class="botonf" onclick="Agregar_datos('+i+');">F'+(i+1).toString()+' '+ datos_ret[i]["fecha"]+' '+datos_ret[i]["nro_factura"]+' '+datos_ret[i]["nro_control"]+' '+datos_ret[i]["C_IVA"]+'</button><br>';
@@ -487,6 +499,11 @@ function guardaconfig(){
 var div_config=document.getElementById("configuracion");
 TASA_IVA=div_config.getElementsByTagName("input")[0].value;
 FACTOR_RET=div_config.getElementsByTagName("input")[1].value;
+Max_F=parseInt(div_config.getElementsByTagName("input")[2].value);
+console.log(Max_F);
+if (Max_F>Max_L) {Max_F=Max_L;}
+if (Max_F<1) {Max_F=1;}
+
 localStorage.setItem('tasa_iva',TASA_IVA);
 localStorage.setItem('factor_ret',FACTOR_RET);
 localStorage.setItem('dir_fiscal',DIR_FISCAL);
@@ -494,8 +511,9 @@ localStorage.setItem('rif_fiscal',RIF_FISCAL);
 localStorage.setItem('nombre_dist',NOMB_DIST);
 localStorage.setItem('lista_a',LISTA_A);
 localStorage.setItem('lista_c',LISTA_C);
+localStorage.setItem('max_f',Max_F.toString());
 document.getElementById("configuracion").hidden=true;
-document.getElementById("seleccion").hidden=false;
+Seleccion();
 }
 
 function cancelaconfig(){

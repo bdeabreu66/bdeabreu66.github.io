@@ -167,100 +167,101 @@ var la=Anchos.length;
 var esqy
 esqy=ylinea+Alto_rotulo;
 Ybase_tabla=esqy; 
-for (var j=0;j<Max_F;j++){
-var esqx=pageLeft;
-ylinea+=lineHeight();
-for (var i=0;i<la;i++){
-doc.rect(esqx,esqy,Anchos[i],Alto_fila,'S');
-esqx+=Anchos[i];
-} 
-esqy+=Alto_fila;
-}
-var posy=Ybase_tabla; 
-var sumat=0;
-var sumats=0;
-var suma_baseimp=0;
-var suma_IMPIVA=0;
-var COMPRA_IMP;
-var COMPRA_SIN_IVA;
-var baseimp;
-var RET;
-var sumaRET=0;
-var nid=0;
-for (var k=0;k<datos_ret.length;k++){
-if (parseFloat(datos_ret[k]["C_IVA"])!=0) {
- nid++;
- var xbase=pageLeft;
- console.log('k= '+k);
-// Columna 1 (id)
- doc.text(xbase+Anchos[0]/2,posy+Alto_fila/2,(nid).toString(),{ align: "center" });
- xbase+=Anchos[0];
-// Columna 2 
- doc.text(xbase+Anchos[1]/2,posy+Alto_fila/2,datos_ret[k]["fecha"].toString(),{ align: "center" });
- xbase+=Anchos[1];
-// Columna 3 
-if (datos_ret[k]["nro_debito"]=="") {
- doc.text(xbase+Anchos[2]/2,posy+Alto_fila/2,datos_ret[k]["nro_factura"].toString(),{ align: "center" });
-} else  {doc.text(xbase+Anchos[2]/2,posy+Alto_fila/2,"",{ align: "center" });}
+  for (var j=0;j<Max_L;j++){
+   var esqx=pageLeft;
+   ylinea+=lineHeight();
+   for (var i=0;i<la;i++){
+    doc.rect(esqx,esqy,Anchos[i],Alto_fila,'S');
+    esqx+=Anchos[i];
+   } 
+   esqy+=Alto_fila;
+  }
+  var posy=Ybase_tabla; 
+  var sumat=0;
+  var sumats=0;
+  var suma_baseimp=0;
+  var suma_IMPIVA=0;
+  var COMPRA_IMP;
+  var COMPRA_SIN_IVA;
+  var baseimp;
+  var RET;
+  var sumaRET=0;
+  var nid=0;
+ // for (var k=0;k<datos_ret.length;k++){
+  for (var k=0;k<Max_F;k++){
+  if (parseFloat(datos_ret[k]["C_IVA"])!=0) {
+      nid++;
+      var xbase=pageLeft;
+      console.log('k= '+k);
+      // Columna 1 (id)
+      doc.text(xbase+Anchos[0]/2,posy+Alto_fila/2,(nid).toString(),{ align: "center" });
+      xbase+=Anchos[0];
+      // Columna 2 
+      doc.text(xbase+Anchos[1]/2,posy+Alto_fila/2,datos_ret[k]["fecha"].toString(),{ align: "center" });
+      xbase+=Anchos[1];
+      // Columna 3 
+      if (datos_ret[k]["nro_debito"]=="") {
+        doc.text(xbase+Anchos[2]/2,posy+Alto_fila/2,datos_ret[k]["nro_factura"].toString(),{ align: "center" });
+      } else  {doc.text(xbase+Anchos[2]/2,posy+Alto_fila/2,"",{ align: "center" });}
 
-xbase+=Anchos[2];
-// Columna 4 
- doc.text(xbase+Anchos[3]/2,posy+Alto_fila/2,datos_ret[k]["nro_control"].toString(),{ align: "center" });
- xbase+=Anchos[3];
-// Columna 5 
-doc.text(xbase+Anchos[4]/2,posy+Alto_fila/2,datos_ret[k]["nro_debito"].toString(),{ align: "center" });
-//doc.text(xbase+Anchos[4]/2,posy+Alto_fila/2,"",{ align: "center" });
- xbase+=Anchos[4];
-// Columna 6 
- doc.text(xbase+Anchos[5]/2,posy+Alto_fila/2,datos_ret[k]["tt"].toString(),{ align: "center" });
- xbase+=Anchos[5];
-// Columna 7 
-if (datos_ret[k]["nro_debito"]!="") {
- doc.text(xbase+Anchos[6]/2,posy+Alto_fila/2,datos_ret[k]["nro_factura"].toString(),{ align: "center" });
-} else  {doc.text(xbase+Anchos[6]/2,posy+Alto_fila/2,"",{ align: "center" });}
- xbase+=Anchos[6];
-// Columna 8 
- COMPRA_IMP=1.16*parseFloat(datos_ret[k]["C_IVA"]);
-// doc.text(xbase+Anchos[7]-2,posy+Alto_fila/2,pd(datos_ret[k]["C_IVA"].toString()),{ align: "right" });
-  doc.text(xbase+Anchos[7]-2,posy+Alto_fila/2,pd(COMPRA_IMP.toFixed(2)),{ align: "right" });
- xbase+=Anchos[7];
-sumat+=COMPRA_IMP 
-// Columna 9 
- doc.text(xbase+Anchos[8]-2,posy+Alto_fila/2,pd(datos_ret[k]["C_SIVA"].toString()),{ align: "right" });
- xbase+=Anchos[8];
-COMPRA_SIN_IVA=parseFloat(datos_ret[k]["C_SIVA"]);
-sumats+=COMPRA_SIN_IVA;
-// Columna 10
- //baseimp=(parseFloat(datos_ret[k]["C_IVA"]-COMPRA_SIN_IVA)/FIVA);
- baseimp=parseFloat(datos_ret[k]["C_IVA"]);
- console.log('baseimp'+baseimp);
- suma_baseimp+=baseimp;
- doc.text(xbase+Anchos[9]-2,posy+Alto_fila/2, pd(baseimp.toFixed(2)),{ align: "right" });
- xbase+=Anchos[9];
+      xbase+=Anchos[2];
+      // Columna 4 
+      doc.text(xbase+Anchos[3]/2,posy+Alto_fila/2,datos_ret[k]["nro_control"].toString(),{ align: "center" });
+      xbase+=Anchos[3];
+      // Columna 5 
+      doc.text(xbase+Anchos[4]/2,posy+Alto_fila/2,datos_ret[k]["nro_debito"].toString(),{ align: "center" });
+      //doc.text(xbase+Anchos[4]/2,posy+Alto_fila/2,"",{ align: "center" });
+      xbase+=Anchos[4];
+      // Columna 6 
+      doc.text(xbase+Anchos[5]/2,posy+Alto_fila/2,datos_ret[k]["tt"].toString(),{ align: "center" });
+      xbase+=Anchos[5];
+      // Columna 7 
+      if (datos_ret[k]["nro_debito"]!="") {
+         doc.text(xbase+Anchos[6]/2,posy+Alto_fila/2,datos_ret[k]["nro_factura"].toString(),{ align: "center" });
+      } else  {doc.text(xbase+Anchos[6]/2,posy+Alto_fila/2,"",{ align: "center" });}
+      xbase+=Anchos[6];
+      // Columna 8 
+      COMPRA_IMP=1.16*parseFloat(datos_ret[k]["C_IVA"]);
+      // doc.text(xbase+Anchos[7]-2,posy+Alto_fila/2,pd(datos_ret[k]["C_IVA"].toString()),{ align: "right" });
+      doc.text(xbase+Anchos[7]-2,posy+Alto_fila/2,pd(COMPRA_IMP.toFixed(2)),{ align: "right" });
+      xbase+=Anchos[7];
+      sumat+=COMPRA_IMP 
+      // Columna 9 
+      doc.text(xbase+Anchos[8]-2,posy+Alto_fila/2,pd(datos_ret[k]["C_SIVA"].toString()),{ align: "right" });
+      xbase+=Anchos[8];
+      COMPRA_SIN_IVA=parseFloat(datos_ret[k]["C_SIVA"]);
+      sumats+=COMPRA_SIN_IVA;
+      // Columna 10
+      //baseimp=(parseFloat(datos_ret[k]["C_IVA"]-COMPRA_SIN_IVA)/FIVA);
+      baseimp=parseFloat(datos_ret[k]["C_IVA"]);
+      console.log('baseimp'+baseimp);
+      suma_baseimp+=baseimp;
+      doc.text(xbase+Anchos[9]-2,posy+Alto_fila/2, pd(baseimp.toFixed(2)),{ align: "right" });
+      xbase+=Anchos[9];
 
-// Columna 11
+      // Columna 11
  
- doc.text(xbase+Anchos[10]/2,posy+Alto_fila/2, TASA_IVA.toString()+" %",{ align: "center" });
- xbase+=Anchos[10];
+      doc.text(xbase+Anchos[10]/2,posy+Alto_fila/2, TASA_IVA.toString()+" %",{ align: "center" });
+      xbase+=Anchos[10];
   
-// Columna 12
- IMP_IVA=baseimp*(FIVA-1);
- suma_IMPIVA+=IMP_IVA;
- doc.text(xbase+Anchos[11]-2,posy+Alto_fila/2, pd(IMP_IVA.toFixed(2)),{ align: "right" });
- xbase+=Anchos[11];
+      // Columna 12
+      IMP_IVA=baseimp*(FIVA-1);
+      suma_IMPIVA+=IMP_IVA;
+      doc.text(xbase+Anchos[11]-2,posy+Alto_fila/2, pd(IMP_IVA.toFixed(2)),{ align: "right" });
+      xbase+=Anchos[11];
 
-// Columna 13
- RET=IMP_IVA*FACTOR_RET;
- sumaRET+=RET;
- doc.text(xbase+Anchos[12]-2,posy+Alto_fila/2, pd(RET.toFixed(2)),{ align: "right" });
-// xbase+=Anchos[12];
-posy+=Alto_fila;
-}
-} 
+      // Columna 13
+      RET=IMP_IVA*FACTOR_RET;
+      sumaRET+=RET;
+      doc.text(xbase+Anchos[12]-2,posy+Alto_fila/2, pd(RET.toFixed(2)),{ align: "right" });
+      // xbase+=Anchos[12];
+      posy+=Alto_fila;
+     }
+  } 
 doc.setFontStyle('bold');
 // Agrega totales
 xbase=pageLeft+Anchos[0]+Anchos[1]+Anchos[2]+Anchos[3]+Anchos[4]+Anchos[5];
-posy=Ybase_tabla+Alto_fila*Max_F;
+posy=Ybase_tabla+Alto_fila*Max_L;
 
 // c7
 doc.rect(xbase,posy,Anchos[6],Alto_fila,'S');
@@ -336,6 +337,7 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
     var rif_emp2='J-00006372-9';
     var nomb_emp;
     var rif_emp;
+    
     //var FECHA_PAGO="25/02/2022";
     var P_FISCAL_A=year_estandar(FECHA_PAGO);
     var P_FISCAL_M=mes_estandar(FECHA_PAGO);
