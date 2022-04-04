@@ -340,8 +340,10 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
     var P_FISCAL_A=year_estandar(FECHA_PAGO);
     var P_FISCAL_M=mes_estandar(FECHA_PAGO);
     NRO_COMPROB=P_FISCAL_A+P_FISCAL_M+ceros(8-NRO_RET.length)+NRO_RET;
-    var nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+".pdf";
-         doc.setFontSize(sFont1);
+    
+     var nombrepdf;
+      
+  doc.setFontSize(sFont1);
          doc.setTextColor('#000000');
          doc.setFont("times");
     var Anchos=[15,20,20,20,20,16,18,20,24,24,16,20,20];
@@ -354,8 +356,9 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
     //var FACTOR_RET=0.75;
     var paragraph='(Ley IVA-Art 11: "Ser\u00E1n responsables del pago del impuesto en calidad de agentes de retenci\u00F3n. los compradores o adquirientes de determinados bienes muebles y los receptores de ciertos servicios, a quienes la administraci\u00F3n tributaria designe como tal"';
     var ylinea=40;
-
-
+if (TIPO_RET=="0") {nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+".pdf";}
+     else {nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+"_Alimentos.pdf";}
+    console.log(nombrepdf); 
    console.log(RIF_FISCAL);
  if (TIPO_RET=="0") {nomb_emp=nomb_emp2;rif_emp=rif_emp2} else {nomb_emp=nomb_emp1;rif_emp=rif_emp1}
 
