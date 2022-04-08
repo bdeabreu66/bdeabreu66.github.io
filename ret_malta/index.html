@@ -234,7 +234,7 @@ function enviarRetencion(){
 var txt;
 var aux;
 if (TIPO_RET=="0") {txt=LISTA_C;aux="";} else {txt=LISTA_A;aux=" Alimentos";}
-var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+aux;
+var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+aux+"_"+CODIGO;
 console.log(asunto);
 url ='mailto:'+txt+asunto;
 window.open(url);
@@ -296,9 +296,11 @@ return mes;
 }
 var Max_L;
 var Max_F;
+var CODIGO;
 function inicio(){
 Max_F=7;
 Max_L=7;
+CODIGO="";
 FECHA_PAGO=new Date();
 FECHA_PAGO=fecha_estandar(FECHA_PAGO);
 fecha_hoy= new Date();
@@ -350,6 +352,10 @@ var Max_F_T=localStorage.getItem('max_f');
 if (Max_F_T!=null) {Max_F=parseInt(Max_F_T)};
 } catch {console.log('error')};
 
+try {
+var CODIGO_T=localStorage.getItem('codigo');
+if (CODIGO_T!=null) {CODIGO=CODIGO_T};
+} catch {console.log('error')};
 
 
 try {
@@ -424,10 +430,11 @@ var texto='';
 texto+='<span class="titulo">Tasa del IVA(%):</span><br> <input type="text" value="'+TASA_IVA+'"><br>';
 texto+='<span class="titulo">Porcentaje de retencion(%):</span> <br><input type="text" value="'+FACTOR_RET+'"><br>';
 texto+='<span class="titulo">M&aacute;ximo de facturas (1-7):</span> <br><input type="text" value="'+Max_F+'"><br>';
-texto+='<span class="titulo">Archivo de datos: </span><br> <input id="nombarch" type="text" > <button class="botonf" onclick="carga_data()"> A </button><br>';
+texto+='<span class="titulo">Archivo de datos: </span><br> <input id="nombarch" type="text" > <button class="botonf" onclick="carga_data()"> Descargar </button><br>';
 texto+='<span class="titulo">Rif:</span><br> <span id="sal1"></span><br>';
 texto+='<span style="color:blue;">Nombre:</span><br> <span id="sal2"></span><br>';
 texto+='<span style="color:blue;">Direccion:</span><br> <span id="sal3"></span><br>';
+texto+='<span style="color:blue;">C&oacute;digo:</span><br> <span id="codigo"></span><br>';
 texto+='<span style="color:blue;">Correos para Cervecer&iacute;a: </span><br> <span id="lista_c"></span><br> ';
 texto+='<span style="color:blue;">Correos para Alimentos: </span><br> <span id="lista_a"></span><br> ';
 texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <button class="botonf" onclick="cancelaconfig();">Cancelar</button> ';
@@ -440,6 +447,7 @@ document.getElementById("sal2").innerText=NOMB_DIST;
 document.getElementById("sal3").innerText=DIR_FISCAL;
 document.getElementById("lista_a").innerText=lineas(LISTA_A);
 document.getElementById("lista_c").innerText=lineas(LISTA_C);
+document.getElementById("codigo").innerText=CODIGO;
 }
 
 function set_n_ret(){
@@ -484,8 +492,8 @@ else {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t
  texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" checked> <br>';
 }
 texto+='</center><br>';
-texto+='Nro de Retenci&oacute;n <input id="nret" type="text" onchange="set_n_ret();" value="'+NRO_RET+'"> <br>';
-texto+='Fecha de Pago <input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> <br><br>';
+texto+='<span class="titulo"> Nro de Retenci&oacute;n </span><br><input id="nret" type="text" onchange="set_n_ret();" value="'+NRO_RET+'"> <br>';
+texto+='<span class="titulo">Fecha de Pago </span><br><input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> <br><br>';
 texto+='<span class="titulo"> Datos de facturas:</span><br>';
 for (var i=0;i<Max_F;i++) {
 //texto+='<button class="botonf" onclick="Agregar_datos('+i+');">F'+(i+1).toString()+' '+ datos_ret[i]["fecha"]+' '+datos_ret[i]["nro_factura"]+' '+datos_ret[i]["nro_control"]+' '+datos_ret[i]["C_IVA"]+'</button> <button onclick="anular('+i+');">x</button><br>';
@@ -512,6 +520,8 @@ localStorage.setItem('nombre_dist',NOMB_DIST);
 localStorage.setItem('lista_a',LISTA_A);
 localStorage.setItem('lista_c',LISTA_C);
 localStorage.setItem('max_f',Max_F.toString());
+localStorage.setItem('codigo',CODIGO);
+
 document.getElementById("configuracion").hidden=true;
 Seleccion();
 }
@@ -575,11 +585,14 @@ function ajaxPositiveD(response) {
         NOMB_DIST=txt.nombre_C;
         LISTA_A=txt.lista_a;
         LISTA_C=txt.lista_c;
+        CODIGO=txt.codigo;
         document.getElementById("sal1").innerText=RIF_FISCAL;
         document.getElementById("sal2").innerText=NOMB_DIST;
         document.getElementById("sal3").innerText=DIR_FISCAL;
         document.getElementById("lista_a").innerText=lineas(LISTA_A);
-       document.getElementById("lista_c").innerText=lineas(LISTA_C);
+        document.getElementById("lista_c").innerText=lineas(LISTA_C);
+        document.getElementById("codigo").innerText=CODIGO; 
+
  }
 function showErrorD(err) { console.log('muestor error', err); }
 
