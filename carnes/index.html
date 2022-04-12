@@ -47,7 +47,7 @@ input[type=text]:focus {
 
 <BODY onload="inicio();">
 <div id="datos">
-TASA: <input id="tas" oninput="guarda_tasa();" type="number" value="0"><br>
+TASA: <input id="tas" oninput="guarda_tasa();" type="number" value="0"> <button onclick="procesar()":>P</button><br>
 Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 </div>
 
@@ -266,7 +266,7 @@ var cantidades=document.getElementsByName("c");
 
 for (j=0;j<n;j++){ 
 precios[j].value=pr[j];
-monedas[j].value=mo[j];
+monedas[j].innerText=mo[j];
 nombres[j].value=nom[j];
 cantidades[j].value=cant[j];
 }
