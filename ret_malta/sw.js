@@ -1,10 +1,11 @@
-////
-const currentCache = 'cache-v1.2';
+//07-05-2022
+const currentCache = 'cache-v1.3';
 const files =
 [
     'index.html',
     'icondef.png',
     'pdfs.js',
+    'microphone.svg',
     'js/jspdfv153.js',
     'js/FileSaver.js',
     'js/addimagev153.js',

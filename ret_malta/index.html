@@ -120,6 +120,18 @@ body {
   .sidenav a {font-size: 18px;}
 }
 
+.micro {
+   background-image:url(microphone.svg);
+   width:30px;
+	height:30px;
+	font-size:16px;
+	padding:0px 0px 0px 0px;
+	background-size:30px 30px;
+	background-position:-2px 0px;
+    fill: green;
+
+border-radius: 8px;
+}
 .btop{
 font-size:2em;
 border: 2px solid red;
@@ -130,6 +142,7 @@ padding: 4px 4px;
   background-color: #3CBC8D;
   color: black;
 }
+.btop:active {background-color: lightgreen;}
 .titulo{
 color:blue;
 }
@@ -143,6 +156,7 @@ padding: 8px 8px;
   background-color: oldlace;
   color: black;
 }
+.botonf:active {background-color: lightgreen;}
 #divdata {
 position:fixed;
 top:20px;
@@ -204,7 +218,40 @@ hidden:true;
 <script type="text/javascript" src="setlanguage.js"></script>
 <script type="text/javascript" src="pdfs.js"></script>
 <script type="text/javascript">
+var textoreconocido;
+function obtenerTexto(indice) {
+if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
+// Obtenemos el objeto de reconocimento de texto de forma compatible a diferentes navegadores
+reconocimientoTexto = new ( window.SpeechRecognition || window.webkitSpeechRecognition ) ()
+reconocimientoTexto.lang='es-Ve'; 
+reconocimientoTexto.onerror = function(event) {
+ alert("error"+event.error);
+ textoreconocido="";
+procesar2(indice);
+}
+reconocimientoTexto.onresult = function(event) {
+// Mostramos el texto obtenido
+textoreconocido=event.results[0][0].transcript;
+console.log(textoreconocido);
+procesar2(indice);
+}
+// Empezamos a reconocer texto
+reconocimientoTexto.start();
+} else {
+alert ('navegador no soporta reconocimiento de voz' );
+}
+}
 
+function procesar2(ind){
+var num=textoreconocido.split(" ");
+var lt=num.length;
+var cant='';
+for (var i=0;i<lt;i++) {
+ cant+=num[i];
+}
+
+console.log(cant);
+}
 function openNav() {
 var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
   texto+='<a href="javascript:void(0)">About</a>';
@@ -229,6 +276,11 @@ var div=document.getElementById(nombdiv);
 div.hidden=true;
 }
 
+function enviar_whatsapp(phone,text){
+var url ='https://api.whatsapp.com/send?phone='+phone+'&text='+text;
+console.log(url);
+window.open(url);
+}
 
 function enviarRetencion(){
 var txt;
@@ -386,9 +438,11 @@ Seleccion();
 function copia(j){
 divs_datos.getElementsByTagName("input")[0].value=fecha_date(datos_ret[j-1]["fecha"]);
 divs_datos.getElementsByTagName("input")[1].value=datos_ret[j-1]["nro_factura"];
-divs_datos.getElementsByTagName("input")[2].value=datos_ret[j-1]["nro_control"];
-divs_datos.getElementsByTagName("input")[3].value=datos_ret[j-1]["nro_debito"];
+divs_datos.getElementsByTagName("input")[2].value=datos_ret[j-1]["nro_control"].substring(0,2);
+divs_datos.getElementsByTagName("input")[3].value=datos_ret[j-1]["nro_control"].substring(3);
+divs_datos.getElementsByTagName("input")[4].value=datos_ret[j-1]["nro_debito"];
 }
+
 
 function Agregar_datos(m){
 var divpart=divs_datos;
@@ -397,20 +451,23 @@ var ta='';
 texto+='<h4 align="center"> Factura nro '+(m+1).toString()+'</h4>';
 texto+='<span class="titulo">Fecha de la Factura:</span><br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">';
 if (m>0) {texto+='&nbsp;&nbsp;&nbsp;<button title="copiar de factura anterior" onclick="copia('+m+');"> Copiar anterior </button><br>';} else {texto+='<br>';}
+//texto+='Nro de factura (afectada <input type="checkbox">):<br> <input type="number" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
+texto+='<span class="titulo">Nro de factura:</span><br> <input type="number" value="'+datos_ret[m]["nro_factura"]+'">';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(1);">&nbsp;</button><br> ';
+var tmp=datos_ret[m]["nro_control"];
+var pa=tmp.substring(0,2);
+var pb=tmp.substring(3,tmp.length);
 
+//texto+='<span class="titulo">Nro de Control:</span><br> <input type="number" style="width:2em;" value="'+datos_ret[m]["nro_control"]+'"><br> ';
+texto+='<span class="titulo">Nro de Control:</span><br> <input type="number" style="width:3em;" value="'+pa+'">-<input type="number" value="'+pb+'"><br> ';
 
-//texto+='Nro de factura (afectada <input type="checkbox">):<br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
-
-texto+='<span class="titulo">Nro de factura:</span><br> <input type="text" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
-
-texto+='<span class="titulo">Nro de Control:</span><br> <input type="text" value="'+datos_ret[m]["nro_control"]+'"><br> ';
-
-texto+='<span class="titulo">Nota de debito:</span><br> <input type="text" value="'+datos_ret[m]["nro_debito"]+'"><br> ';
-texto+='<span class="titulo">Monto Base imponible a IVA:</span><br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
+texto+='<span class="titulo">Nota de debito:</span><br> <input type="number" value="'+datos_ret[m]["nro_debito"]+'"><br> ';
+texto+='<span class="titulo">Monto Base imponible a IVA:</span><br> <input type="number" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
 //texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
 texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button>';
 texto+=' <button class="botonf" onclick="canceladatos();">Cancelar</button>';
 texto+=' <button class="botonf" onclick="anular('+m+');">Anular</button><br>'
+console.log(texto);
 divpart.innerHTML=texto;
 divpart.hidden=false;
 //divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
@@ -427,9 +484,9 @@ if (narch.length>0) {
 function Configurar(){
 var divconf=document.getElementById("configuracion");
 var texto='';
-texto+='<span class="titulo">Tasa del IVA(%):</span><br> <input type="text" value="'+TASA_IVA+'"><br>';
-texto+='<span class="titulo">Porcentaje de retencion(%):</span> <br><input type="text" value="'+FACTOR_RET+'"><br>';
-texto+='<span class="titulo">M&aacute;ximo de facturas (1-7):</span> <br><input type="text" value="'+Max_F+'"><br>';
+texto+='<span class="titulo">Tasa del IVA(%):</span><br> <input type="number" value="'+TASA_IVA+'"><br>';
+texto+='<span class="titulo">Porcentaje de retencion(%):</span> <br><input type="number" value="'+FACTOR_RET+'"><br>';
+texto+='<span class="titulo">M&aacute;ximo de facturas (1-7):</span> <br><input type="number" value="'+Max_F+'"><br>';
 texto+='<span class="titulo">Archivo de datos: </span><br> <input id="nombarch" type="text" > <button class="botonf" onclick="carga_data()"> Descargar </button><br>';
 texto+='<span class="titulo">Rif:</span><br> <span id="sal1"></span><br>';
 texto+='<span style="color:blue;">Nombre:</span><br> <span id="sal2"></span><br>';
@@ -438,6 +495,12 @@ texto+='<span style="color:blue;">C&oacute;digo:</span><br> <span id="codigo"></
 texto+='<span style="color:blue;">Correos para Cervecer&iacute;a: </span><br> <span id="lista_c"></span><br> ';
 texto+='<span style="color:blue;">Correos para Alimentos: </span><br> <span id="lista_a"></span><br> ';
 texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <button class="botonf" onclick="cancelaconfig();">Cancelar</button> ';
+texto+='<div> <center><h5> Para informaci&oacute;n adicicional escribe al whatsapp <br>';
+var numero='584144728631';
+var tex='\'\'';
+texto+='Dr Braulio De Abreu <button onclick="enviar_whatsapp('+numero+','+tex+');">0414-4728631</button></h5></center></div>';
+copia='<button onclik="enviar_whatsapp('+numero+','+tex+');">0414-4728631</button></h5></center></div>';
+console.log(copia);
 divconf.innerHTML=texto;
 divconf.hidden=false;
 document.getElementById("seleccion").hidden=true;
@@ -468,7 +531,8 @@ divs_datos.getElementsByTagName("input")[0].value=fecha_date(fecha_hoy);
 divs_datos.getElementsByTagName("input")[1].value='';
 divs_datos.getElementsByTagName("input")[2].value='';
 divs_datos.getElementsByTagName("input")[3].value='';
-divs_datos.getElementsByTagName("input")[4].value='0';
+divs_datos.getElementsByTagName("input")[4].value='';
+divs_datos.getElementsByTagName("input")[5].value='0';
 //datos_ret[m]["fecha"]=fecha_hoy;
 //datos_ret[m]["nro_factura"]="";
 //datos_ret[m]["nro_control"]="";
@@ -492,8 +556,8 @@ else {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t
  texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" checked> <br>';
 }
 texto+='</center><br>';
-texto+='<span class="titulo"> Nro de Retenci&oacute;n </span><br><input id="nret" type="text" onchange="set_n_ret();" value="'+NRO_RET+'"> <br>';
-texto+='<span class="titulo">Fecha de Pago </span><br><input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> <br><br>';
+texto+='<span class="titulo"> Nro de la retenci&oacute;n </span><br><input id="nret" type="number" onchange="set_n_ret();" value="'+NRO_RET+'"> <br>';
+texto+='<span class="titulo">Fecha de la retenci&oacute;n </span><br><input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> <br><br>';
 texto+='<span class="titulo"> Datos de facturas:</span><br>';
 for (var i=0;i<Max_F;i++) {
 //texto+='<button class="botonf" onclick="Agregar_datos('+i+');">F'+(i+1).toString()+' '+ datos_ret[i]["fecha"]+' '+datos_ret[i]["nro_factura"]+' '+datos_ret[i]["nro_control"]+' '+datos_ret[i]["C_IVA"]+'</button> <button onclick="anular('+i+');">x</button><br>';
@@ -535,9 +599,9 @@ function guarda_datos(m){
  console.log(fi);
  datos_ret[m]["fecha"]=inv_fecha_date(fi);
  datos_ret[m]["nro_factura"]=divs_datos.getElementsByTagName("input")[1].value;
- datos_ret[m]["nro_control"]=divs_datos.getElementsByTagName("input")[2].value;
- datos_ret[m]["nro_debito"]=divs_datos.getElementsByTagName("input")[3].value;
- datos_ret[m]["C_IVA"]=(divs_datos.getElementsByTagName("input")[4].value).replace(',','.');
+ datos_ret[m]["nro_control"]=divs_datos.getElementsByTagName("input")[2].value+"-"+divs_datos.getElementsByTagName("input")[3].value;
+ datos_ret[m]["nro_debito"]=divs_datos.getElementsByTagName("input")[4].value;
+ datos_ret[m]["C_IVA"]=(divs_datos.getElementsByTagName("input")[5].value).replace(',','.');
 if (isNaN(parseFloat(datos_ret[m]["C_IVA"]))) {datos_ret[m]["C_IVA"]="0"}
 //datos_ret[m]["C_SIVA"]=(divs_datos.getElementsByTagName("input")[4].value).replace(',','.');
 //console.log(parseFloat(datos_ret[m]["C_IVA"]));
@@ -626,9 +690,7 @@ if ('serviceWorker' in navigator) {
 <div id="configuracion">
  
 </div>
-<div id="header"> <button class="btop" onclick="Configurar();">Configurar</button>&nbsp&nbsp<button class="btop" onclick="hacerRetencion();"> Efectuar Retenci&oacute;n</button>&nbsp&nbsp<button class="btop" onclick="enviarRetencion();"> Enviar Retenci&oacute;n</button></div>
-
-
-<!--   -->
-</BODY>
+<div id="header"> <button class="btop" onclick="Configurar();">Configurar</button>&nbsp&nbsp<button class="btop" onclick="hacerRetencion();"> Efectuar Retenci&oacute;n</button>&nbsp&nbsp<button class="btop" onclick="enviarRetencion();">Enviar Retenci&oacute;n</button>
+</div>
+</body>
 </html>
