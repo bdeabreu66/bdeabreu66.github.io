@@ -249,8 +249,19 @@ var cant='';
 for (var i=0;i<lt;i++) {
  cant+=num[i];
 }
-
 console.log(cant);
+if (ind==1) {divs_datos.getElementsByTagName("input")[1].value=cant;return;}
+if (ind==2) {
+ divs_datos.getElementsByTagName("input")[2].value=cant.substring(0,2);
+ divs_datos.getElementsByTagName("input")[3].value=cant.substring(2);
+return;}
+ if (ind==3) {divs_datos.getElementsByTagName("input")[4].value=cant;return;}
+if (ind==4) {divs_datos.getElementsByTagName("input")[5].value=cant;return;}
+if (ind==5) {
+ document.getElementById("nret").value=cant;
+ set_n_ret();
+return;}
+
 }
 function openNav() {
 var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
@@ -459,10 +470,15 @@ var pa=tmp.substring(0,2);
 var pb=tmp.substring(3,tmp.length);
 
 //texto+='<span class="titulo">Nro de Control:</span><br> <input type="number" style="width:2em;" value="'+datos_ret[m]["nro_control"]+'"><br> ';
-texto+='<span class="titulo">Nro de Control:</span><br> <input type="number" style="width:3em;" value="'+pa+'">-<input type="number" value="'+pb+'"><br> ';
+texto+='<span class="titulo">Nro de Control:</span><br> <input type="number" style="width:3em;" value="'+pa+'">-<input type="number" value="'+pb+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(2);">&nbsp;</button><br> ';
 
-texto+='<span class="titulo">Nota de debito:</span><br> <input type="number" value="'+datos_ret[m]["nro_debito"]+'"><br> ';
-texto+='<span class="titulo">Monto Base imponible a IVA:</span><br> <input type="number" value="'+datos_ret[m]["C_IVA"]+'"><br> ';
+texto+='<span class="titulo">Nota de debito:</span><br> <input type="number" value="'+datos_ret[m]["nro_debito"]+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(3);">&nbsp;</button><br> ';
+
+texto+='<span class="titulo">Monto Base imponible a IVA:</span><br> <input type="number" value="'+datos_ret[m]["C_IVA"]+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(4);">&nbsp;</button><br> ';
+
 //texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
 texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button>';
 texto+=' <button class="botonf" onclick="canceladatos();">Cancelar</button>';
@@ -556,7 +572,8 @@ else {texto+='Cerveceria <input type="radio" id="t1" name="tipo" onchange="set_t
  texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" checked> <br>';
 }
 texto+='</center><br>';
-texto+='<span class="titulo"> Nro de la retenci&oacute;n </span><br><input id="nret" type="number" onchange="set_n_ret();" value="'+NRO_RET+'"> <br>';
+texto+='<span class="titulo"> Nro de la retenci&oacute;n </span><br><input id="nret" type="number" onchange="set_n_ret();" value="'+NRO_RET+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(5);">&nbsp;</button><br> ';
 texto+='<span class="titulo">Fecha de la retenci&oacute;n </span><br><input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> <br><br>';
 texto+='<span class="titulo"> Datos de facturas:</span><br>';
 for (var i=0;i<Max_F;i++) {
