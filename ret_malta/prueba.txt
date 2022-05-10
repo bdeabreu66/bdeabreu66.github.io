@@ -1,4 +1,4 @@
 {"rif":"J-08736737-7","dir":"Calle ppal. Manzana #9 casa #3, Urb Valle Verde. San Diego. Edo Carabobo. Tlf 0414-4728631","nombre_C":"Distribuidora Exitos, C.A.",
-"lista_a":"agente_alimentos@empresas-polar.com;brauliodeabreu@gmail;contador_personal@gmail.com",
-"lista_c":"agente_cerveceria@empresas-polar.com;brauliodeabreu@gmail;contador_personal@gmail.com",
+"lista_a":"agente_alimentos@empresas-polar.com;brauliodeabreu@gmail.com;contador_personal@gmail.com",
+"lista_c":"agente_cerveceria@empresas-polar.com;brauliodeabreu@gmail.com;contador_personal@gmail.com",
 "codigo":"12345678"}
