@@ -1,0 +1,4 @@
+{"rif":"","dir":"","nombre_C":"",
+"lista_a":"",
+"lista_c":"",
+"codigo":""}
