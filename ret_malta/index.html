@@ -324,6 +324,12 @@ console.log(url);
 window.open(url);
 }
 
+
+function enviar_mail(){
+var url ='mailto:brauliodeabreu@gmail.com?subject=Retenciones';
+window.open(url);
+}
+
 function enviarRetencion(){
 var txt;
 var aux;
@@ -331,7 +337,7 @@ if (TIPO_RET=="0") {txt=LISTA_C;aux="";} else {txt=LISTA_A;aux=" Alimentos";}
 var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+aux+"_"+CODIGO;
 var adjunto='&attachment=';
 console.log(asunto);
-url ='mailto:'+txt+asunto+adjunto;
+var url ='mailto:'+txt+asunto+adjunto;
 window.open(url);
 }
 var TASA_IVA=16;
@@ -392,7 +398,7 @@ return mes;
 function fecha_mayor(f1,f2){
 var a2=f2.split('/');
 var a1=f1.split('/');
- if (a2[2]>=a1[2] && a2[1]>=a1[1] && a2[0]>=a1[0]) {return false; } else {return true;}
+ if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>=a1[0]) {return false; } else {return true;}
 }
 
 var Max_L;
@@ -579,7 +585,7 @@ texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <butto
 texto+='<div> <center><h5> Para informaci&oacute;n adicicional y configuraci&oacute;n, escribe al whatsapp <br>';
 var numero='584144728631';
 var tex='\'\'';
-texto+='Dr Braulio De Abreu <button onclick="enviar_whatsapp('+numero+','+tex+');">0414-4728631</button></h5></center></div>';
+texto+='Dr Braulio De Abreu <button onclick="enviar_whatsapp('+numero+','+tex+');">0414-4728631</button></h5>email: <button onclick="enviar_mail();"> brauliodeabreu@gmail.com </button> </center></div>';
 divconf.innerHTML=texto;
 divconf.hidden=false;
 document.getElementById("seleccion").hidden=true;
@@ -597,7 +603,8 @@ NRO_RET=document.getElementById("nret").value;
 localStorage.setItem('nro_ret',NRO_RET);
 }
 function set_t_ret(){
-if (document.getElementById("t1").checked==true) {TIPO_RET="0";} else {TIPO_RET="1";}
+if (document.getElementById("t1").checked==true) {TIPO_RET="0";} 
+if (document.getElementById("t2").checked==true) {TIPO_RET="1";}
 localStorage.setItem('tipo_ret',TIPO_RET);
 }
 function set_fecha_pago(){
@@ -654,7 +661,7 @@ texto+='</tr>';
 texto+='</table>';
 texto+='</button>';
 
-texto+='&nbsp;<button  style="font-size:1.5em;">'+' F'+(i+1).toString()+'</button>'
+texto+='&nbsp;<button  style="font-size:1.5em; border-radius: 6px;" onclick="Agregar_datos('+i+');">'+' F'+(i+1).toString()+'</button>'
 }
 texto+='<br><button class="botonf" onclick="reinicio()";>Reiniciar</button>';
 
