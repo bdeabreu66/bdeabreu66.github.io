@@ -201,6 +201,7 @@ top:50px;
 height: 90%;
 width:100%;
 hidden:true;
+overflow-y: scroll;
 }
 
 #configuracion {
@@ -400,7 +401,8 @@ var a2=f2.split('/');
 var a1=f1.split('/');
  if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>=a1[0]) {return false; } else {return true;}
 }
-
+console.log((parseFloat(2718)*FACTOR_RET/100));
+ console.log(((2718)*75).toFixed(2));
 var Max_L;
 var Max_F;
 var CODIGO;
@@ -482,7 +484,7 @@ if (NOMB_DIST_T!=null) {NOMB_DIST=NOMB_DIST_T};
 try {
 TASA_IVA= localStorage.getItem('tasa_iva');
  if (TASA_IVA==null) {TASA_IVA=16;} 
-FACTOR_RET= localStorage.getItem('factor_ret');
+FACTOR_RET= parseFloat(localStorage.getItem('factor_ret'));
  if (FACTOR_RET==null) {FACTOR_RET=0.75;} 
 
 } catch {console.log('error')}
@@ -499,7 +501,7 @@ var ok2=true;
 
 var mensaje='';
 for (var i=0;i<Max_F;i++){
- if (parseInt(datos_ret[i]["C_IVA"])!=0) {
+ if ((datos_ret[i]["C_IVA"]!='') && (parseFloat(datos_ret[i]["C_IVA"]) !=0) ) {
   ok1=true;
   if (datos_ret[i]["nro_factura"]=='')  {ok2=false; mensaje+=" Falta el nro de factura en la factura "+(i+1)+'\n';}
   if (datos_ret[i]["nro_control"]=='-')  {ok2=false; mensaje+=" Falta el nro de control en la factura "+(i+1)+'\n';}
@@ -618,16 +620,7 @@ divs_datos.getElementsByTagName("input")[1].value='';
 divs_datos.getElementsByTagName("input")[2].value='';
 divs_datos.getElementsByTagName("input")[3].value='';
 divs_datos.getElementsByTagName("input")[4].value='';
-divs_datos.getElementsByTagName("input")[5].value='0';
-//datos_ret[m]["fecha"]=fecha_hoy;
-//datos_ret[m]["nro_factura"]="";
-//datos_ret[m]["nro_control"]="-";
-//datos_ret[m]["nro_debito"]="";
-//datos_ret[m]["C_IVA"]="0";
-//datos_ret[m]["C_SIVA"]="0";
-//Agregar_datos(m);
-//localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
-//Seleccion();
+divs_datos.getElementsByTagName("input")[5].value='';
 }
 
 function Seleccion(){
@@ -675,7 +668,7 @@ datos_ret[i]["fecha"]=fecha_hoy;
 datos_ret[i]["nro_factura"]='';
 datos_ret[i]["nro_control"]='-';
 datos_ret[i]["nro_debito"]='';
-datos_ret[i]["C_IVA"]=0;
+datos_ret[i]["C_IVA"]='';
 }
 NRO_RET=(parseInt(NRO_RET)+1).toString();
 FECHA_PAGO=fecha_hoy;
@@ -719,7 +712,7 @@ function guarda_datos(m){
  datos_ret[m]["nro_control"]=divs_datos.getElementsByTagName("input")[2].value+"-"+divs_datos.getElementsByTagName("input")[3].value;
  datos_ret[m]["nro_debito"]=divs_datos.getElementsByTagName("input")[4].value;
  datos_ret[m]["C_IVA"]=(divs_datos.getElementsByTagName("input")[5].value).replace(',','.');
-if (isNaN(parseFloat(datos_ret[m]["C_IVA"]))) {datos_ret[m]["C_IVA"]="0"}
+//if (isNaN(parseFloat(datos_ret[m]["C_IVA"]))) {datos_ret[m]["C_IVA"]="0"}
 //datos_ret[m]["C_SIVA"]=(divs_datos.getElementsByTagName("input")[4].value).replace(',','.');
 //console.log(parseFloat(datos_ret[m]["C_IVA"]));
 divs_datos.hidden=true;

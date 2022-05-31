@@ -1,5 +1,5 @@
-//23-05-2022
-const currentCache = 'cache-v1.2';
+//31-05-2022 . Modificado la entrada base imponible para que acepte ''
+const currentCache = 'cache-v1.3';
 const files =
 [
     'index.html',

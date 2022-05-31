@@ -189,7 +189,7 @@ Ybase_tabla=esqy;
   var nid=0;
  // for (var k=0;k<datos_ret.length;k++){
   for (var k=0;k<Max_F;k++){
-  if (parseFloat(datos_ret[k]["C_IVA"])!=0) {
+  if ((datos_ret[k]["C_IVA"]!='') && (parseFloat(datos_ret[k]["C_IVA"])!=0)) {
       nid++;
       var xbase=pageLeft;
       console.log('k= '+k);
@@ -221,11 +221,11 @@ Ybase_tabla=esqy;
       } else  {doc.text(xbase+Anchos[6]/2,posy+Alto_fila/2,"",{ align: "center" });}
       xbase+=Anchos[6];
       // Columna 8 
-      COMPRA_IMP=1.16*parseFloat(datos_ret[k]["C_IVA"]);
+      COMPRA_IMP=FIVA*parseFloat(datos_ret[k]["C_IVA"]);
       // doc.text(xbase+Anchos[7]-2,posy+Alto_fila/2,pd(datos_ret[k]["C_IVA"].toString()),{ align: "right" });
       doc.text(xbase+Anchos[7]-2,posy+Alto_fila/2,pd(COMPRA_IMP.toFixed(2)),{ align: "right" });
       xbase+=Anchos[7];
-      sumat+=COMPRA_IMP 
+      sumat+=parseFloat(COMPRA_IMP.toFixed(2)) 
       // Columna 9 
       doc.text(xbase+Anchos[8]-2,posy+Alto_fila/2,pd(datos_ret[k]["C_SIVA"].toString()),{ align: "right" });
       xbase+=Anchos[8];
@@ -246,13 +246,18 @@ Ybase_tabla=esqy;
   
       // Columna 12
       IMP_IVA=baseimp*(FIVA-1);
-      suma_IMPIVA+=IMP_IVA;
+      //IMP_IVA=parseFloat(IMP_IVA.toFixed(2));
+      suma_IMPIVA+=parseFloat(IMP_IVA.toFixed(2));
       doc.text(xbase+Anchos[11]-2,posy+Alto_fila/2, pd(IMP_IVA.toFixed(2)),{ align: "right" });
       xbase+=Anchos[11];
 
       // Columna 13
-      RET=IMP_IVA*FACTOR_RET;
-      sumaRET+=RET;
+     
+      console.log(IMP_IVA);
+      RET=(IMP_IVA*FACTOR_RET);
+      //RET=parseFloat(RET);
+      console.log('RET ' +RET);
+      sumaRET+=parseFloat(RET.toFixed(2));
       doc.text(xbase+Anchos[12]-2,posy+Alto_fila/2, pd(RET.toFixed(2)),{ align: "right" });
       // xbase+=Anchos[12];
       posy+=Alto_fila;
@@ -270,11 +275,13 @@ xbase+=Anchos[6];
 // c8
 console.table(sumat);
 doc.rect(xbase,posy,Anchos[7],Alto_fila,'S');
+sumat=(suma_baseimp*FIVA);
 doc.text(xbase+Anchos[7]-2,posy+lineHeight(),(sumat.toFixed(2)).toString(),{ align: "right" });
 xbase+=Anchos[7];
 // c9
 console.table(suma_baseimp);
 doc.rect(xbase,posy,Anchos[8],Alto_fila,'S');
+
 doc.text(xbase+Anchos[8]-2,posy+lineHeight(),pd(sumats.toFixed(2)),{ align: "right" });
 xbase+=Anchos[8];
 // c10
@@ -287,10 +294,12 @@ doc.text(xbase+Anchos[10]/2,posy+lineHeight(),TASA_IVA + " %",{ align: "center" 
 xbase+=Anchos[10];
 // c12
 doc.rect(xbase,posy,Anchos[11],Alto_fila,'S');
+suma_IMPIVA=suma_baseimp*(FIVA-1);
 doc.text(xbase+Anchos[11]-2,posy+lineHeight(),pd(suma_IMPIVA.toFixed(2)),{ align: "right" });
 xbase+=Anchos[11];
 // c13
 doc.rect(xbase,posy,Anchos[12],Alto_fila,'S');
+sumaRET=suma_IMPIVA*FACTOR_RET;
 doc.text(xbase+Anchos[12]-2,posy+lineHeight(),pd(sumaRET.toFixed(2)),{ align: "right" });
 
 // Firmas
@@ -335,6 +344,8 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
     var rif_emp1='J-00041312-6';
     var nomb_emp2='CERVECERIA POLAR C.A.';
     var rif_emp2='J-00006372-9';
+    var nomb_emp3='PEPSI COLA VENEZUELA C.A.';
+    var rif_emp3='J-30137013-9';
     var nomb_emp;
     var rif_emp;
     
@@ -359,10 +370,16 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
     var paragraph='(Ley IVA-Art 11: "Ser\u00E1n responsables del pago del impuesto en calidad de agentes de retenci\u00F3n. los compradores o adquirientes de determinados bienes muebles y los receptores de ciertos servicios, a quienes la administraci\u00F3n tributaria designe como tal"';
     var ylinea=40;
 if (TIPO_RET=="0") {nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+".pdf";}
-     else {nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+"_Alimentos.pdf";}
-    console.log(nombrepdf); 
-   console.log(RIF_FISCAL);
- if (TIPO_RET=="0") {nomb_emp=nomb_emp2;rif_emp=rif_emp2} else {nomb_emp=nomb_emp1;rif_emp=rif_emp1}
+if (TIPO_RET=="1") {nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+"_Alimentos.pdf";}
+if (TIPO_RET=="2") {nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+"_Pepsicola.pdf";}
+
+
+   console.log(nombrepdf); 
+console.log(RIF_FISCAL);
+
+ if (TIPO_RET=="0") {nomb_emp=nomb_emp2;rif_emp=rif_emp2;} 
+ if (TIPO_RET=="1") {nomb_emp=nomb_emp1;rif_emp=rif_emp1;}
+ if (TIPO_RET=="2") {nomb_emp=nomb_emp3;rif_emp=rif_emp3;}
 
 
 
