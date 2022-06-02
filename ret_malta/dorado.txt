@@ -1,0 +1,4 @@
+{"rif":"J-07856341-5","dir":"Calle Bolivar. Casa 102-56, La Candelaria Valencia. Edo Carabobo. Tlf 0426-5555555","nombre_C":"Distribuidora Dorado, C.A.",
+"lista_a":"agente_cerveceria@empresas-polar.com;contador@gmail.com;distribuidoradorado@gmail.com",
+"lista_c":"agente_cerveceria@empresas-polar.com;contador@gmail.com;distribuidoradorado@gmail.com",
+"codigo":"15470987"}
