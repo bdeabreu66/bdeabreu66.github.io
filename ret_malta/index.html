@@ -418,6 +418,7 @@ console.log('fecha_hoy '+fecha_hoy);
 fecha_hoy=fecha_estandar(fecha_hoy);
 console.log('fecha_hoy '+fecha_hoy);
 fecha_min=year_estandar(fecha_hoy)+'-01-01';
+
 divs_datos=document.getElementById("divdata");
 datos_ret[0]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
 datos_ret[1]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
@@ -510,8 +511,8 @@ for (var i=0;i<Max_F;i++){
  }  
 }
 var ok=ok1 && ok2;
-if (!ok1) {mensaje+="No hay facturas con monto base imponible a IVA distinto de 0 \n";}
-if (ok) {hacerRetencion();} else {alert(mensaje);}
+if (!ok1) {mensaje+=" No hay facturas con monto base imponible a IVA distinto de 0 \n";}
+if (ok) {hacerRetencion();} else {alert("\u2639\uFE0F"+mensaje);}
 }
 function copia(j){
 divs_datos.getElementsByTagName("input")[0].value=fecha_date(datos_ret[j-1]["fecha"]);
@@ -523,12 +524,14 @@ divs_datos.getElementsByTagName("input")[4].value=datos_ret[j-1]["nro_debito"];
 
 
 function Agregar_datos(m){
+fecha_max=fecha_date(FECHA_PAGO);
+console.log('fmax '+fecha_max);
 var divpart=divs_datos;
 var texto='';
 var ta='';
 texto+='<h4 align="center"> Factura '+(m+1).toString()+'</h4>';
 texto+='<div class="divfondo">';
-texto+='<span class="titulo">Fecha de la Factura:</span><br> <input type="date" min="'+fecha_min+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">';
+texto+='<span class="titulo">Fecha de la Factura:</span><br> <input type="date" min="'+fecha_min+'" max="'+fecha_max+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">';
 if (m>0) {texto+='&nbsp;&nbsp;&nbsp;<button title="copiar de factura anterior" onclick="copia('+m+');"> Copiar anterior </button><br>';} else {texto+='<br>';}
 //texto+='Nro de factura (afectada <input type="checkbox">):<br> <input type="number" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
 texto+='<span class="titulo">N&deg; de factura:</span><br> <input type="number" value="'+datos_ret[m]["nro_factura"]+'">';
@@ -573,7 +576,7 @@ var divconf=document.getElementById("configuracion");
 var texto='';
 texto+='<div class="divfondo">';
 texto+='<span class="titulo">Tasa del IVA(%):</span><br> <input type="number" value="'+TASA_IVA+'"><br>';
-texto+='<span class="titulo">Porcentaje de retencion(%):</span> <br><input type="number" value="'+FACTOR_RET+'"><br>';
+texto+='<span class="titulo">Fracci&oacute;n de retenci&oacute;n:</span> <br><input type="number" value="'+FACTOR_RET+'"><br>';
 texto+='<span class="titulo">M&aacute;ximo de facturas (1-7):</span> <br><input type="number" value="'+Max_F+'"><br>';
 texto+='</div>';
 texto+='<span class="titulo">Archivo de datos: </span><br> <input id="nombarch" type="text" > <button class="botonf" onclick="carga_data()"> Descargar </button><br>';
@@ -587,7 +590,7 @@ texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <butto
 texto+='<div> <center><h5> Para informaci&oacute;n adicicional y configuraci&oacute;n, escribe al whatsapp <br>';
 var numero='584144728631';
 var tex='\'\'';
-texto+='Dr Braulio De Abreu <button onclick="enviar_whatsapp('+numero+','+tex+');">0414-4728631</button></h5>email: <button onclick="enviar_mail();"> brauliodeabreu@gmail.com </button> </center></div>';
+texto+='Braulio De Abreu <button onclick="enviar_whatsapp('+numero+','+tex+');">0414-4728631</button></h5>email: <button onclick="enviar_mail();"> brauliodeabreu@gmail.com </button> </center></div>';
 divconf.innerHTML=texto;
 divconf.hidden=false;
 document.getElementById("seleccion").hidden=true;

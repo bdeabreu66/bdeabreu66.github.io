@@ -1,5 +1,6 @@
+//02-06-2022 Bloquea fecha de factura mayor que fecha de retencion. Emoticon para error
 //31-05-2022 . Modificado la entrada base imponible para que acepte ''
-const currentCache = 'cache-v1.3';
+const currentCache = 'cache-v1.4';
 const files =
 [
     'index.html',
