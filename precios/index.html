@@ -376,6 +376,7 @@ return (hoy.getDate()).toString() + '/' +mes + '/' +hoy.getFullYear().toString()
 
 }
 function factura2(){
+var Tbs;
 var texto='Fecha: '+fecha_actual()+'<br>';
 texto+=dist+'<br>';
 texto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'<br>';
@@ -393,14 +394,28 @@ if (data[i][6]=="t1") {factor=t1;}
 if (data[i][6]=="t2") {factor=t2;}
 if (data[i][3]==1) {fm=1.16;} else {fm=1;}
 //var pu=Math.ceil(100*fm*data[i][2]/data[i][1])/100;
-var pb=+(fm*data[i][2]*data[i][1]).toFixed(2);
-var pu=+(fm*data[i][2]).toFixed(2);
+
+if (data[i][6]=="t1") {
+var pb=+(fm*data[i][2]*data[i][1]*(1/t2));
+var pu=+(fm*data[i][2]*(1/t2));
+} else {
+var pb=+(fm*data[i][2]*data[i][1]);
+var pu=+(fm*data[i][2]);
+}
+
 //if (data[i][3]==1) { pb=pu*data[i][1];} else { pb=data[i][2];}
 //var Tdolar=data[i][4]*(fm*data[i][2]/data[i][1]) + data[i][5]*fm*(data[i][2]);
-var Tdolar=data[i][4]*(pu) + data[i][5]*pb;
+var Tdolar=+(data[i][4]*(pu) + data[i][5]*pb);
+   if (data[i][6]=="t1") {
+   Tbs= data[i][4]*(fm*data[i][2]) + data[i][5]*fm*data[i][2]*data[i][1];
+   } else 
+        {
+    Tbs=Tdolar*factor;
+   }
+
 if (Tdolar!=0) { 
   totald+=Tdolar;
-  totalb+=factor*Tdolar;
+  totalb+=Tbs;
   Ftexto+='------------\n';
   if (data[i][4]!=0) { 
          texto+='<p style=" font-size:0.8em;" >'+ data[i][4] +'U '+ data[i][0]+'</p>';
@@ -412,8 +427,11 @@ if (Tdolar!=0) {
     { texto+='<p style=" font-size:0.8em;" >'+ data[i][5] +'B  ' + data[i][0]+'</p>';
         Ftexto+=data[i][5] +'B '+ data[i][0]+'\n';;
     }
-  texto+='<table width="100%"><tr><td>'+Tdolar.toFixed(2)+' $'+'</td><td>'+(factor*Tdolar).toFixed(2)+' Bs'+'</td></tr></table>';
-   Ftexto+=Tdolar.toFixed(2)+' $'+"    "+(factor*Tdolar).toFixed(2)+' Bs'+'\n'
+if (Tdolar!=0) { 
+   texto+='<table width="100%"><tr><td>'+Tdolar.toFixed(2)+' $'+'</td><td>'+(Tbs).toFixed(2)+' Bs'+'</td></tr></table>';
+   Ftexto+=Tdolar.toFixed(2)+' $'+"    "+(Tbs).toFixed(2)+' Bs'+'\n'
+
+}
 
 
 if (data[i][3]==1) { 
@@ -495,22 +513,33 @@ var factor;
 var fm;
 for (var i=0;i<data.length;i++){
 if (data[i][0].toUpperCase().indexOf(patron) !=-1)   {
-if (data[i][6]=="t1") {factor=t1;}
+if (data[i][6]=="t1") {factor=t2;}
 if (data[i][6]=="t2") {factor=t2;}
 //console.log(i+" "+data[i][0]);
 texto+='<p  >'+ data[i][0]+'</p>';
-console.log(data[i][0]+' ' +(data[i][2]/data[i][1]).toFixed(2));
+console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
 if (data[i][4]==0) {var vcor='black';} else {var vcor='blue';}
 if (data[i][5]==0) {var vcor1='black';} else {var vcor1='blue';}
 if (data[i][3]==1) {fm=1.16} else {fm=1}
 //var pu=+(fm*data[i][2]/data[i][1]).toFixed(2);
 //var pb=+(fm*data[i][2]).toFixed(2);
-var pu=+(fm*data[i][2]).toFixed(2);
-var pb=+(fm*data[i][2]*data[i][1]).toFixed(2);
+if (data[i][6]=="t1") {
+  var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
+  var pb=+(fm*data[i][2]*data[i][1]*(1/t2)).toFixed(2);
+} else {
+  var pu=+(fm*data[i][2]).toFixed(2);
+  var pb=+(fm*data[i][2]*data[i][1]).toFixed(2);
+}
+if (data[i][6]=="t1") 
+{
+texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (fm*data[i][2]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
+texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]*data[i][1]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+} else 
 
+{
 texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
 texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
-
+}
    if (data[i][3]==1) {
     texto+="<span style='font-size:0.6em;'>Retenci&oacute;n T: "+(fm*data[i][2]/fiva).toFixed(2)+ " $ "+(fm*data[i][2]*factor/fiva).toFixed(2)+" Bs          </span>";
    }
