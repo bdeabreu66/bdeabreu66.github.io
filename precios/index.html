@@ -396,11 +396,16 @@ if (data[i][3]==1) {fm=1.16;} else {fm=1;}
 //var pu=Math.ceil(100*fm*data[i][2]/data[i][1])/100;
 
 if (data[i][6]=="t1") {
-var pb=+(fm*data[i][2]*data[i][1]*(1/t2));
-var pu=+(fm*data[i][2]*(1/t2));
+//var pb=+(fm*data[i][2]*data[i][1]*(1/t2));
+var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
+var pb=+(pu*data[i][1]);
+
+
 } else {
-var pb=+(fm*data[i][2]*data[i][1]);
-var pu=+(fm*data[i][2]);
+//var pb=+(fm*data[i][2]*data[i][1]);
+var pu=+(fm*data[i][2]).toFixed(2);
+var pb=+(pu*data[i][1]);
+
 }
 
 //if (data[i][3]==1) { pb=pu*data[i][1];} else { pb=data[i][2];}
@@ -525,10 +530,10 @@ if (data[i][3]==1) {fm=1.16} else {fm=1}
 //var pb=+(fm*data[i][2]).toFixed(2);
 if (data[i][6]=="t1") {
   var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
-  var pb=+(fm*data[i][2]*data[i][1]*(1/t2)).toFixed(2);
+  var pb=+(pu*data[i][1]).toFixed(2);
 } else {
   var pu=+(fm*data[i][2]).toFixed(2);
-  var pb=+(fm*data[i][2]*data[i][1]).toFixed(2);
+  var pb=+(pu*data[i][1]).toFixed(2);
 }
 if (data[i][6]=="t1") 
 {

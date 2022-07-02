@@ -1,5 +1,5 @@
-// 08-06-2022
-const currentCache = 'cache-v3.7';
+// 02-07-2022
+const currentCache = 'cache-v3.8';
 const files =
 [
     'index.html',
