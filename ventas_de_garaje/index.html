@@ -27,7 +27,17 @@ font-size:1em;
 
 }
 
+.nav {
+font-size:0.5em;
+border: 2px solid red;
+border-radius: 8px;
+padding: 4px 4px ;
+  margin: 4px 0px ;
+  box-sizing: border-box;
+  background-color: white;
+  color: black;
 
+}
 #dsearch {
 position:relative;
 /*display:none;*/
@@ -39,7 +49,7 @@ position:relative;
 
 #divt {
 position:fixed;
-top:150px;
+top:170px;
 height: 70%;
 width:95%;
 overflow-y:auto;
@@ -48,11 +58,11 @@ overflow-y:auto;
 #cat {
 position:fixed;
 left: 0;
-top: 50;
+top: 60;
 height: 20%;
 width:95%;
 overflow-y:auto;
-display:none;
+display:block;
 }
 
 input[type=text]{
@@ -131,10 +141,12 @@ padding:0px;
 
 
 <BODY onload="carga();">
-<div id="cat" hidden=true></div>
-<div id="dsearch">
+
+<div id="dsearch" hidden="true">
 <br><br>
 <input id="search" type="text" placeholder="Buscar" oninput="refresca();"> 
+</div>
+<div id="cat" >
 </div>
 <div id="divt" >
 </div>
@@ -152,7 +164,111 @@ padding:0px;
 //var dist="Distribuidora Pita-Orozco"
 var hoy=new Date();
 
+function Node(val) {
+  this.value = val; // valor del nodo
+  this.children = []; // lista de referencias a los nodos hijos
+}
+function Tree() {
+  this.root = null; // referencia al nodo raíz
+}
+
+Tree.prototype.findBFS = function (value) {
+  var queue = [this.root];
+  while (queue.length) {
+    var node = queue.shift();
+    if (node.value === value) {
+      return node;
+    }
+    for (var i = 0; i < node.children.length; i++) {
+      queue.push(node.children[i]);
+    }
+  }
+  return null;
+};
+
+
+Tree.prototype.add = function (value, toNodeValue) {
+  console.log(value + ' '+ toNodeValue  );
+  if (toNodeValue=='' || this.findBFS(value)==null) {
+      var node = new Node(value);
+      var parent = toNodeValue ? this.findBFS(toNodeValue) : null;
+      if (parent) {
+         parent.children.push(node);
+       }
+       else if (!this.root) {
+           this.root = node;
+        }
+         else {
+          throw new Error('Root node is already assigned');
+         }
+    }
+}
+ 
+
+Tree.prototype.remove = function (value) {
+  // caso especial: si el valor está en el
+  // nodo raíz reseteamos el árbol
+  if (this.root.value === value) {
+    this.root = null;
+  }
+  var queue = [this.root];
+  while (queue.length) {
+    var node = queue.shift();
+    for (var i = 0; i < node.children.length; i++) {
+      if (node.children[i].value === value) {
+        node.children.splice(i, 1);
+      }
+      else {
+        queue.push(node.children[i]);
+      }
+    }
+  }
+};
+
+Tree.prototype.traverseBFS = function (fn) {
+  var queue = [this.root];
+  while (queue.length) {
+    var node = queue.shift();
+    fn && fn(node);
+    for (var i = 0; i < node.children.length; i++) {
+      queue.push(node.children[i]);
+    }
+  }
+};
+
+Tree.prototype.traverseDFS = function (fn, method) {
+  var current = this.root;
+  if (method) {
+    this['_' + method](current, fn);
+  }
+  else {
+    this._preOrder(current, fn);
+  }
+};
+
+Tree.prototype._preOrder = function (node, fn) {
+  if (!node) {
+    return;
+  }
+  fn && fn(node);
+  for (var i = 0; i < node.children.length; i++) {
+    this._preOrder(node.children[i], fn);
+  }
+};
+
+Tree.prototype._postOrder = function (node, fn) {
+  if (!node) {
+    return;
+  }
+  for (var i = 0; i < node.children.length; i++) {
+    this._postOrder(node.children[i], fn);
+  }
+  fn && fn(node);
+};
+
+// Fin funciones manejo de arbol
 function camb(){
+
 var va=document.getElementById("t3").checked; 
 console.log('va '+va);
 localStorage.setItem('p3',va);
@@ -167,6 +283,7 @@ data=JSON.parse(localStorage.getItem('data_garaje'));
   console.error(error);
 }
 }
+
 divt=document.getElementById("divt");
 var j=0;
 var factflag=true;
@@ -186,56 +303,78 @@ if (a.length>=1) {
 }
 }
 var lcat=[];
-
+var Stack_cat=['Tienda'];
+var Cats;
+var cat_actual='Tienda';
+var cat_ant='';
 function set_cat(){
+Cats = new Tree();
+Cats.add('Tienda','');
+var categorias=[];
 var ldatos=data.length;
 for (i=0;i<ldatos;i++){
-  var ind=lcat.indexOf(data[i]["cat"])
-    if (ind ==-1)   {
-      lcat.push(data[i]["cat"]);
-      console.log(data[i]["cat"]);
-      }
+  if  (!categorias.includes(data[i]["cat"])) {
+     categorias.push(data[i]["cat"]);   
+  } 
 }
+var categ;
+var nrocateg;
+var ldatos2=categorias.length;
+console.log(ldatos2);
+for (i=0;i<ldatos2;i++){
+  categ=categorias[i].split('&');
+  nrocateg=categ.length-2;
+  console.log(i + ' '+categ[1]+ ' '+ nrocateg);
+  Cats.add(categ[1],'Tienda');
+  for (var j=2;j<=nrocateg;j++) {
+     console.log('subc '+ j+ ' '+categ[j]);
+     Cats.add(categ[j],categ[j-1]);
+   }
 }
-//var data=[];
-function categorias(){
+
+console.log(Cats);
+}
+
+
+
+function muestra_cat(){
 var divcat=document.getElementById("cat");
+cat_actual=Stack_cat[Stack_cat.length-1];
+var text_cat='';
+for (i=0;i<Stack_cat.length;i++)
+    text_cat+=Stack_cat[i]+'/';
+var nodo=Cats.findBFS(cat_actual) ;
 var texto='';
-texto+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
-texto+= 'Categoria'+ncat+' <button  title="Atras" onclick="subecat();" > Up </button></div> <br><br>';
-var acat=[];
-var lgcat=ncat.length;
-console.log('ncat '+ncat+' lgcat '+lgcat);
-var ldatos=lcat.length;
-for (i=0;i<ldatos;i++){
-   var pos=lcat[i].indexOf(ncat);
-   if (pos !=-1)   {
-      pos2=lcat[i].indexOf('&',pos+lgcat+1);
-      if (pos2!=-1) {
-      catn=lcat[i].substring(pos+lgcat,pos2);
-      console.log('pos '+pos+'pos2 '+pos2+'catn '+catn);
-      ind=acat.indexOf(catn);
-      if (ind==-1) {
-      acat.push(catn);
-      var npath=ncat+catn;
-      var click='onclick="cambiacat(\''+npath+'\');">';
-      console.log('click '+click)
-      console.log(npath);
-      texto+='<p style="color:blue;"' +click +catn+'</p>';
-       }
-      }
-
- }
-  }
-
-divcat.innerHTML=texto;
-divcat.hidden=false;
-refresca2();
+texto+='<span style="font-size:0.7em;">'+text_cat+'</span>';
+if (Stack_cat.length>1) {
+texto+='  '+'<button class="nav" onclick="sube_cat()";>'+'&#9650'+'</button>'
 }
-function cambiacat(camino){
-ncat=camino+'&';
-console.log('camino '+ncat);
-categorias();
+texto+='<br>';
+//cat_ant=cat_actual;
+for (i=0;i<nodo.children.length;i++){
+  var aux=nodo.children[i].value;
+  texto+='  '+'<button class="nav" onclick="cambia_cat(\''+aux+'\')";>'+aux+'</button>';
+
+}
+divcat.innerHTML=texto;
+//divcat.hidden=false;
+
+}
+function sube_cat(){
+if (Stack_cat.length>1) { 
+ Stack_cat.pop();
+ muestra_cat();
+refresca();
+}
+}
+
+function cambia_cat(valor){
+Stack_cat.push(valor)
+cat_ant=cat_actual;
+console.log('cat anterior  '+cat_ant);
+cat_actual=valor.toString();
+muestra_cat();
+refresca();
 }
 function ordena(){
 data.sort(function(a, b){
@@ -280,11 +419,15 @@ factflag=true;
 }
 
 function refresca(){
-var patron=document.getElementById("search").value.toUpperCase();
+//var patron=document.getElementById("search").value.toUpperCase();
 texto="";
 var catant='';
+var cat_comp='&';
+for (var i=1;i<Stack_cat.length;i++) {
+ cat_comp+=Stack_cat[i]+'&';
+}
 for (var i=0;i<data.length;i++){
-if (((data[i]["nombre"]+data[i]["id"]).toUpperCase().indexOf(patron) !=-1) && (data[i]["S"]!=0))  {
+if ((data[i]["cat"].indexOf(cat_comp) !=-1) && (data[i]["S"]!=0))  {
   if (catant!=data[i]["cat"]) {
   catant=data[i]["cat"];
   texto+='<p style="background-color:red;" >'+catant.replaceAll('&', '\\')+ '</p><br>';
@@ -374,7 +517,8 @@ function ajaxPositive(response) {
         //console.log('muestro respuesta: ', _txt);
         localStorage.setItem('data',_txt);
         data=JSON.parse(_txt);
-        //set_cat();
+        set_cat();
+        muestra_cat();
         //categorias();
        // refresca2();
          ordena();
