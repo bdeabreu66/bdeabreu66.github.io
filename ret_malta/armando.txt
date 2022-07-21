@@ -1,4 +1,4 @@
 {"rif":"J-07590071-5","dir":"Calle ppal. Manzana #9 casa #3, Urb Valle Verde. San Diego. Edo Carabobo. Tlf 0414-4405044","nombre_C":"Distribuidora Pita Orozco, C.A.",
-"lista_a":"johana.bernal@empresas-polar.com;joseheulacioc@gmail.com;distribuidorapitaorozcoca@gmail.com;leongerardomartinezbolivar671@gmail.com",
-"lista_c":"jose.sosa@empresas-polar.com;joseheulacioc@gmail.com;merly.vivas@empresas-polar.com;distribuidorapitaorozcoca@gmail.com;leongerardomartinezbolivar671@gmail.com",
+"lista_a":"johana.bernal@empresas-polar.com;joseheulacioc@gmail.com;distribuidorapitaorozcoca@gmail.com;leongerardomartinezbolivar671@gmail.com;brauliodeabreu@gmail.com",
+"lista_c":"jose.sosa@empresas-polar.com;joseheulacioc@gmail.com;merly.vivas@empresas-polar.com;distribuidorapitaorozcoca@gmail.com;leongerardomartinezbolivar671@gmail.com;brauliodeabreu@gmail.com",
 "codigo":"22400666"}
