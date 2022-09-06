@@ -48,6 +48,7 @@ input[type=text]:focus {
 <BODY onload="inicio();">
 <div id="datos">
 TASA: <input id="tas" oninput="guarda_tasa();" type="number" value="0"> <button onclick="procesar()":>P</button><br>
+<button onclick="borrar()":>B</button><br>
 Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 </div>
 
@@ -245,7 +246,8 @@ if (o.innerText=='Bs') {o.innerText='$';
 procesar();
 
 }
-
+var cantidades;
+var cant;
 function inicio(){
 try {
 document.getElementById("tas").value=localStorage.getItem("TASACARNE"); 
@@ -255,27 +257,37 @@ var buffer3=localStorage.getItem("NOMBRES");
 var buffer4=localStorage.getItem("CANTIDADES");
 var mo=buffer2.split(","); 
 var nom=buffer3.split(","); 
-var pr=buffer.split(",");
-var cant=buffer4.split(",");
+var pr=buffer.split(","); cant=buffer4.split(",");
 
 var n=pr.length;
 var precios=document.getElementsByName("p");
 var monedas=document.getElementsByName("m");
 var nombres=document.getElementsByName("np");
-var cantidades=document.getElementsByName("c");
+cantidades=document.getElementsByName("c");
 
 for (j=0;j<n;j++){ 
 precios[j].value=pr[j];
 monedas[j].innerText=mo[j];
 nombres[j].value=nom[j];
 cantidades[j].value=cant[j];
+
 }
 
 }
 catch(e) {}
 }
 
+function borrar(){
 
+var i;
+console.log(cantidades.length);
+for (i=0;i<cantidades.length; i++) {
+cant[i]=0;
+cantidades[i].value="0";
+
+
+}
+}
 
 function procesar(){
 var precios=document.getElementsByName("p");
