@@ -38,7 +38,7 @@
       ["F07003 Maltin Nr.250 ml x 24 U",24,0.00,1,0,0,"t3"],
       ["F07018 Maltin 1.5 L x 6U",6,13.54,1,0,0,"t3"],
       ["F07020 Maltin Nr/Light.250 ml x 24 U",24,0.00,1,0,0,"t3"],
-      ["F07073 Maltin light 1.5 L x 6U",6,13.54,1,0,0,"t2"],
+      ["F07073 Maltin light 1.5 L x 6U",6,13.54,1,0,0,"t3"],
       ["F07086 Maltin polar light ret 222 ml x 36 U",36,12.97,1,0,0,"t3"],
       ["F07088 Maltin light Nr.250 ml x 12 U",12,7.34,1,0,0,"t3"],
       ["F07089 Maltin Nr.250 ml x 12 U",12,7.34,1,0,0,"t3"],
