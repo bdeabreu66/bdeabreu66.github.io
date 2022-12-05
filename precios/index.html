@@ -410,20 +410,16 @@ Ftexto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'\n';
 Ftexto+='$ BCV: '+  impri(document.getElementById("t2").value) +'\n';
 Ftexto+="FACTURA\n"
 for (var i=0;i<data.length;i++){
-if (data[i][6]=="t1") {factor=t1;}
-if (data[i][6]=="t2") {factor=t2;}
+factor=t2;
+//if (data[i][6]=="t1") {factor=t1;}
+//if (data[i][6]=="t2") {factor=t1;}
 if (data[i][3]==1) {fm=1.16;} else {fm=1;}
-//var pu=Math.ceil(100*fm*data[i][2]/data[i][1])/100;
 
 if (data[i][6]=="t1") {
-//var pb=+(fm*data[i][2]*data[i][1]*(1/t2));
-var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
+var pu=+(fm*data[i][2]*(1/factor)).toFixed(2);
 var pb=+(pu*data[i][1]);
-
-
 } else {
   if (data[i][6]=="t2") {
-  //var pb=+(fm*data[i][2]*data[i][1]);
    var pu=+(fm*data[i][2]).toFixed(2);
    var pb=+(pu*data[i][1]);
     } else {
@@ -433,8 +429,6 @@ var pb=+(pu*data[i][1]);
     }
 }
 
-//if (data[i][3]==1) { pb=pu*data[i][1];} else { pb=data[i][2];}
-//var Tdolar=data[i][4]*(fm*data[i][2]/data[i][1]) + data[i][5]*fm*(data[i][2]);
 var Tdolar=+(data[i][4]*(pu) + data[i][5]*pb);
    if (data[i][6]=="t1") {
    Tbs= data[i][4]*(fm*data[i][2]) + data[i][5]*fm*data[i][2]*data[i][1];

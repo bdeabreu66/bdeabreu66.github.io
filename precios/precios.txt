@@ -188,5 +188,9 @@
       ["L358 Jabon Crema Multiuso.500g x 18U",18,3.49,1,0,0,"t2"],
       ["L373 Jabon pastilla Multiuso 130g x 42U",42,1.00,1,0,0,"t2"],
       ["L374 Las llaves Suavizante Bebe  950cc x 12U",12,4.00,1,0,0,"t2"],
-      ["L380 Las llaves Suavizante Bebe 530cc x 12U",12,2.38,1,0,0,"t2"]
-      ]
+      ["L380 Las llaves Suavizante Bebe 530cc x 12U",12,2.38,1,0,0,"t2"],
+      ["PepsiCola 350 ml x24",24,0,42,1,0,0,"t2"],
+      ["PepsiCola lata 355 ml x24",24,0,88,1,0,0,"t2"]
+
+]
+      
