@@ -456,6 +456,10 @@ if (LISTA_C_T!=null) {LISTA_C=LISTA_C_T};
 } catch {console.log('error')};
 
 try {
+var LISTA_P_T=localStorage.getItem('lista_p');
+if (LISTA_P_T!=null) {LISTA_P=LISTA_P_T};
+} catch {console.log('error')};
+try {
 var Max_F_T=localStorage.getItem('max_f');
 if (Max_F_T!=null) {Max_F=parseInt(Max_F_T)};
 } catch {console.log('error')};
@@ -586,6 +590,7 @@ texto+='<span style="color:blue;">Direccion:</span><br> <span id="sal3"></span><
 texto+='<span style="color:blue;">C&oacute;digo:</span><br> <span id="codigo"></span><br>';
 texto+='<span style="color:blue;">Correos para Cervecer&iacute;a: </span><br> <span id="lista_c"></span><br> ';
 texto+='<span style="color:blue;">Correos para Alimentos: </span><br> <span id="lista_a"></span><br> ';
+texto+='<span style="color:blue;">Correos para PepsiCola: </span><br> <span id="lista_p"></span><br> ';
 texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <button class="botonf" onclick="cancelaconfig();">Cancelar</button> ';
 texto+='<div> <center><h5> Para informaci&oacute;n adicicional y configuraci&oacute;n, escribe al whatsapp <br>';
 var numero='584144728631';
@@ -600,6 +605,7 @@ document.getElementById("sal2").innerText=NOMB_DIST;
 document.getElementById("sal3").innerText=DIR_FISCAL;
 document.getElementById("lista_a").innerText=lineas(LISTA_A);
 document.getElementById("lista_c").innerText=lineas(LISTA_C);
+document.getElementById("lista_p").innerText=lineas(LISTA_P);
 document.getElementById("codigo").innerText=CODIGO;
 }
 
@@ -610,6 +616,7 @@ localStorage.setItem('nro_ret',NRO_RET);
 function set_t_ret(){
 if (document.getElementById("t1").checked==true) {TIPO_RET="0";} 
 if (document.getElementById("t2").checked==true) {TIPO_RET="1";}
+if (document.getElementById("t3").checked==true) {TIPO_RET="2";}
 localStorage.setItem('tipo_ret',TIPO_RET);
 }
 function set_fecha_pago(){
@@ -632,11 +639,18 @@ var texto='';
 texto+='<center>';
 texto+='<h4>Retenciones para Franquiciados de Empresas Polar</h4>';
 if (TIPO_RET=="0") {texto+='Cervecer&iacute;a <input type="radio" id="t1" name="tipo" onchange="set_t_ret();" checked>&nbsp;&nbsp;&nbsp;';
- texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();"> <br>';
+ texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();">&nbsp;&nbsp;&nbsp; ';
+ texto+=' Pepsicola <input type="radio" id="t3" name="tipo" onchange="set_t_ret();"> <br>';
 }
-else {texto+='Cervecer&iacute;a <input type="radio" id="t1" name="tipo" onchange="set_t_ret();">&nbsp;&nbsp;&nbsp;';
- texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" checked> <br>';
+if (TIPO_RET=="1") {texto+='Cervecer&iacute;a <input type="radio" id="t1" name="tipo" onchange="set_t_ret();">&nbsp;&nbsp;&nbsp;';
+ texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" checked>&nbsp;&nbsp;&nbsp; ';
+ texto+=' Pepsicola <input type="radio" id="t3" name="tipo" onchange="set_t_ret();"> <br>';
 }
+if (TIPO_RET=="2") {texto+='Cervecer&iacute;a <input type="radio" id="t1" name="tipo" onchange="set_t_ret();">&nbsp;&nbsp;&nbsp;';
+ texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" > &nbsp;&nbsp;&nbsp;';
+ texto+=' Pepsicola <input type="radio" id="t3" name="tipo" onchange="set_t_ret();" checked> <br>';
+}
+
 texto+='</center><br>';
 texto+='<div class="divfondo">';
 texto+='<span class="titulo"> N&deg;de la retenci&oacute;n </span><br><input id="nret" type="number" onchange="set_n_ret();" value="'+NRO_RET+'"> ';
@@ -696,6 +710,7 @@ localStorage.setItem('rif_fiscal',RIF_FISCAL);
 localStorage.setItem('nombre_dist',NOMB_DIST);
 localStorage.setItem('lista_a',LISTA_A);
 localStorage.setItem('lista_c',LISTA_C);
+localStorage.setItem('lista_p',LISTA_P);
 localStorage.setItem('max_f',Max_F.toString());
 localStorage.setItem('codigo',CODIGO);
 
@@ -763,12 +778,14 @@ function ajaxPositiveD(response) {
         NOMB_DIST=txt.nombre_C;
         LISTA_A=txt.lista_a;
         LISTA_C=txt.lista_c;
+        LISTA_P=txt.lista_p;
         CODIGO=txt.codigo;
         document.getElementById("sal1").innerText=RIF_FISCAL;
         document.getElementById("sal2").innerText=NOMB_DIST;
         document.getElementById("sal3").innerText=DIR_FISCAL;
         document.getElementById("lista_a").innerText=lineas(LISTA_A);
         document.getElementById("lista_c").innerText=lineas(LISTA_C);
+        document.getElementById("lista_p").innerText=lineas(LISTA_P);
         document.getElementById("codigo").innerText=CODIGO; 
 
  }
