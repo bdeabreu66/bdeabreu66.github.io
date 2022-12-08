@@ -1,0 +1,15 @@
+{
+  "name": "Facturacion Polar",
+  "description": "Permite facturar",
+  "short_name": "Facturas Polar",
+  "icons": [{
+    "src": "icondef.png",
+    "sizes": "256x256"
+  }],
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "aliceblue",
+  "background_color": "blue",
+  "prefer_related_applications": false 
+  }
