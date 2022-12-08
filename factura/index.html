@@ -961,7 +961,7 @@ var myHeaders = new Headers();
 var myInit = { mode: 'cors' };
 
 //var nombrepag="https://monitordolarvenezuela.com/monitor-dolar-hoy";
-var nombrepag="https://bdeabreu66.github.io/precios/precios.txt";
+var nombrepag="https://bdeabreu66.github.io/factura/precios.txt";
 
 
 fetch(nombrepag,myInit)
@@ -980,6 +980,8 @@ function ajaxPositive(response) {
         //console.log('muestro respuesta: ', txt);
         localStorage.setItem('data',txt);
         data=eval(txt);
+        set_cat();
+        muestra_cat();
         refresca();
   }
 
@@ -1020,7 +1022,7 @@ function showErrorD(err) {
 Fecha_precios();
 
 function Fecha_precios(){
-var nomb="https://bdeabreu66.github.io/precios/fecha.txt";
+var nomb="https://bdeabreu66.github.io/factura/fecha.txt";
 
 
 //var myHeaders = new Headers();
