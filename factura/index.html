@@ -113,8 +113,8 @@ overflow-y:auto;
 position:fixed;
 background-color:green;
 top:30%;
-left:5%;
-height: 50%;
+left:0%;
+height: 40%;
 width:95%;
 overflow-y:scroll;
 }
@@ -795,6 +795,15 @@ return pb;
 function quitar_intro(){
 document.getElementById("introd").style.visibility="hidden";
 }
+
+function cambiaU(num){
+data[num][4]=document.getElementById("entradaU").value;
+intro(num);
+}
+function cambiaB(num){
+data[num][5]=document.getElementById("entradaB").value;
+intro(num);
+}
 function intro(i){
 var totalsivabs;
 var totalsivad;
@@ -810,21 +819,30 @@ var pb=preciob(i);
 var texto='<table width="100%" style="background-color:black;color:white;"><tr ><td >'+data[i][0]+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
 if (data[i][6]=="t1") 
 {
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (fm*data[i][2]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]*data[i][1]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+tex1='U '+(pu).toFixed(2)+' $';
+tex2=(fm*data[i][2]).toFixed(2)+ ' Bs';
+tex3='B '+(pb).toFixed(2)+' $';
+tex4=(fm*data[i][2]*data[i][1]).toFixed(2)+ ' Bs';
 } 
 if (data[i][6]=="t2") 
 {
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+tex1='U '+(pu).toFixed(2)+' $';
+tex2=(pu*factor).toFixed(2)+ ' Bs';
+tex3='B '+(pb).toFixed(2)+' $';
+tex4=(pb*factor).toFixed(2)+ ' Bs';
 }
   
 if (data[i][6]=="t3") 
 {
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
-
+tex1='U '+(pu).toFixed(2)+' $';
+tex2=(pu*factor).toFixed(2)+ ' Bs';
+tex3='B '+(pb).toFixed(2)+' $';
+tex4=(pb*factor).toFixed(2)+ ' Bs';
 }
+texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+data[i][4]+'" oninput="cambiaU('+i+');"></td></tr>';
+texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor+';" value="'+data[i][5]+'" oninput="cambiaB('+i+');"></td></tr></table>';
+
+
 totalsivad=((pu)*data[i][4]+(pb)*data[i][5])/fm;
 totalsivabs=totalsivad*factor;
 
