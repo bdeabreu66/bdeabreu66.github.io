@@ -839,8 +839,8 @@ tex2=(pu*factor).toFixed(2)+ ' Bs';
 tex3='B '+(pb).toFixed(2)+' $';
 tex4=(pb*factor).toFixed(2)+ ' Bs';
 }
-texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+data[i][4]+'" oninput="cambiaU('+i+');"></td></tr>';
-texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor+';" value="'+data[i][5]+'" oninput="cambiaB('+i+');"></td></tr></table>';
+texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+data[i][4]+'" onchange="cambiaU('+i+');"></td></tr>';
+texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor+';" value="'+data[i][5]+'" onchange="cambiaB('+i+');"></td></tr></table>';
 
 
 totalsivad=((pu)*data[i][4]+(pb)*data[i][5])/fm;
