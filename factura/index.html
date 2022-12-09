@@ -59,8 +59,9 @@ font-size:2em;
 
 }
 #divt {
-//position:fixed;
-//height: 60%;
+top:35%;
+left:0%;
+height: 60%;
 text-align:center;
 width:95%;
 overflow-y:auto;
@@ -101,12 +102,14 @@ padding:0px;
 }
 
 #cat {
-//position:fixed;
-//height: 60%;
+position:fixed;
+top:35%;
+left:0px;
+height: 60%;
 font-size:1.5rem;
 text-align:center;
 width:95%;
-overflow-y:auto;
+overflow-y:scroll;
 }
 
 #introd {
@@ -135,14 +138,28 @@ overflow-y:scroll;
   position: fixed;
   left: 0;
   top: 0;
+  height=5%;
   width: 100%;
   background-color: blue;
   color: white;
   text-align: center;
   font-size:0.5em;
 }
+.dolar {
+ // position: fixed;
+ // left: 0;
+ // top: 50px;
+  width: 100%;
+  
+}
+.cont0{
+
+
+}
 .cont1 {
 display:grid;
+
+
 grid-template-columns: 80% 20%;
 border-bottom:1px solid black;
 }
@@ -164,7 +181,7 @@ grid-columns: 2/3;
 
 <br>
 
-
+<div class="dolar">
 <table width="100%">
 <tr><td>Paralelo </td><td><input id="t1" type="text" value="0"></td>
 <td>BCV </td><td><input id="t2" type="text" value="0"></td></tr>
@@ -172,6 +189,7 @@ grid-columns: 2/3;
 <!-- <tr><td><input id="t3" onchange="camb();" type="checkbox" value="Automatico"><label for="t3"> Automatico </label></td></tr> -->
 </table>
 </div>
+<div class="cont0">
 <div class="cont1">
 <div class="con1h1">
 <center>Facturaci&oacute;n <br><span id="fecha_p" style="font-size:1em;"></span></center>
@@ -179,8 +197,9 @@ grid-columns: 2/3;
 <div class="con1h2">
 <button class="nav" onclick="sube_cat()";>&#8630;</button>
 </div>
-<HR>
 </div>
+</div>
+<div id="arbol"></div>
 <div id="cat" ></div>
 <!-- <div id="dsearch"> <input id="search" type="text" placeholder="Buscar" oninput="refresca();"></div>-->
 <div id="divt" ></div>
@@ -236,7 +255,7 @@ console.log(Cats);
 
 function muestra_cat(){
 var divcat=document.getElementById("cat");
-//var divcat=document.getElementById("divt");
+var divarbol=document.getElementById("arbol");
 cat_actual=Stack_cat[Stack_cat.length-1];
 var text_cat='';
 for (i=0;i<Stack_cat.length;i++)
@@ -247,14 +266,18 @@ texto+='<center>'+text_cat+'</center>';
 if (Stack_cat.length>1) {
 //texto+='  '+'<button class="nav" onclick="sube_cat()";>'+'&#9650'+'</button>'
 }
-texto+='<br>';
+//texto+='<br>';
+divarbol.innerHTML=texto;
 //cat_ant=cat_actual;
+texto='';
 for (i=0;i<nodo.children.length;i++){
   var aux=nodo.children[i].value;
   texto+='  '+'<button class="bot3" onclick="cambia_cat(\''+aux+'\')";>'+aux+'</button>';
 
 }
 divcat.innerHTML=texto;
+divcat.style.visibility="visible";
+
 //divcat.hidden=false;
 
 }
@@ -816,14 +839,15 @@ var totalsivabs;
 var totalsivad;
 var fm;
 var factor=t2;
-if (data[i][3]==1) {fm=1.16} else {fm=1}
+var BanderaIva;
+if (data[i][3]==1) {fm=1.16;BanderaIva="C/IVA";} else {fm=1;BanderaIva="S/IVA";}
 var divintro=document.getElementById("introd");
 if (data[i][4]==0) {var vcor='red';} else {var vcor='blue';}
 if (data[i][5]==0) {var vcor1='red';} else {var vcor1='blue';}
 var pu=preciou(i);
 var pb=preciob(i);
 
-var texto='<table width="100%" style="background-color:black;color:white;"><tr ><td >'+data[i][0]+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
+var texto='<table width="100%" style="background-color:black;color:white;"><tr ><td >'+data[i][0]+' '+BanderaIva+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
 if (data[i][6]=="t1") 
 {
 tex1='U '+(pu).toFixed(2)+' $';
@@ -935,7 +959,11 @@ texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ '
 }
 texto+='<br><br>'
 divt.innerHTML=texto;
-if (!hay) {document.getElementById("introd").style.visibility = "hidden";}
+if (!hay) {
+   document.getElementById("introd").style.visibility = "hidden";}
+   else {
+   document.getElementById("cat").style.visibility = "hidden";
+}
 }
 
 function impri(A){
