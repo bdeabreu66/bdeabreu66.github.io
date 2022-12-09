@@ -562,6 +562,7 @@ if (mes.length==1) {mes='0'+mes}
 return (hoy.getDate()).toString() + '/' +mes + '/' +hoy.getFullYear().toString()
 
 }
+
 function factura2(){
 var Tbs;
 var texto='Fecha: '+fecha_actual()+'<br>';
@@ -625,10 +626,16 @@ if (Tdolar!=0) {
 }
 
 
+//if (data[i][3]==1) { 
+//  var fr=data[i][5]+ data[i][4]/data[i][1]; 
+//  texto+='Retencion: '+  (fr*pb/fiva).toFixed(2)+' $ '+(fr*pb*factor/fiva).toFixed(2)+ ' Bs';
+//  Ftexto+='Retencion: '+  (fr*pb/fiva).toFixed(2)+' $ '+(fr*pb*factor/fiva).toFixed(2)+ ' Bs\n';
+//}
+
 if (data[i][3]==1) { 
   var fr=data[i][5]+ data[i][4]/data[i][1]; 
-  texto+='Retencion: '+  (fr*pb/fiva).toFixed(2)+' $ '+(fr*pb*factor/fiva).toFixed(2)+ ' Bs';
-  Ftexto+='Retencion: '+  (fr*pb/fiva).toFixed(2)+' $ '+(fr*pb*factor/fiva).toFixed(2)+ ' Bs\n';
+  texto+='Retencion: '+  (Tdolar/fiva).toFixed(2)+' $ '+(Tbs/fiva).toFixed(2)+ ' Bs';
+  Ftexto+='Retencion: '+  (Tdolar/fiva).toFixed(2)+' $ '+(Tbs/fiva).toFixed(2)+ ' Bs\n';
 }
 
 }
