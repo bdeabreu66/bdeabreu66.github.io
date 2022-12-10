@@ -638,7 +638,7 @@ if (Tdolar!=0) {
   Ftexto+='------------\n';
   texto+='<table width="100%">';
   if (data[i][4]!=0) { 
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:gray;">'+ data[i][4] +'U '+ data[i][0]+'</td></tr>';
+         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:black;color:white;">'+ data[i][4] +'U '+ data[i][0]+'</td></tr>';
          Ftexto+=data[i][4] +'U '+ data[i][0]+'\n';
 //  console.log('pu:'+pu);
 
@@ -648,8 +648,8 @@ if (Tdolar!=0) {
         Ftexto+=data[i][5] +'B '+ data[i][0]+'\n';;
     }
 if (Tdolar!=0) { 
-   texto+='<tr><td>'+(Tdolar/fm).toFixed(2)+' $'+'</td><td>'+ Tdolar.toFixed(2) +'$'+'</td><td>'+(Tbs).toFixed(2)+' Bs'+'</td><td>'+(Tbs/fm).toFixed(2) +'Bs </td></tr>';
-   Ftexto+=(Tdolar/fm).toFixed(2)+' $'+"    "+Tdolar.toFixed(2) + ' $    '+ (Tbs).toFixed(2)+' Bs'+'\n'
+   texto+='<tr align="right"><td style="width:20%;"></td><td style="width:20%;"></td><td style="width:30%;">'+(Tdolar/fm).toFixed(2)+' $'+'</td><td style="width:30%;">'+ Tdolar.toFixed(2) +' $'+'</tr>';
+   Ftexto+=(Tdolar/fm).toFixed(2)+' $'+"    "+Tdolar.toFixed(2) + ' $    \n'
 
 }
 
@@ -673,17 +673,20 @@ texto+='</table>';
 
 texto+='<HR>';
 Ftexto+='============================================\n';
-texto+='<span style="color:yellow; font-size:1em;">Total</span><br>';
-texto+='<table width="100%"><tr><td>'+(totaldsiva).toFixed(2)+' $ </td><td>'+(totald).toFixed(2)+' $</td><td></td><td></td></tr></table>';
+//texto+='<span style="color:yellow; font-size:1em;">Total</span><br>';
+texto+='<table width="100%"><tr align="right"><td style="width:20%;"> </td><td style="width:20%;"></td><td style="width:30%;">'+'S/IVA'+'</td><td style="width:30%;">'+'C/IVA'+'</td></tr></table>';
+texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:20%;"> Total </td><td style="width:20%;"></td><td style="width:30%;">'+(totaldsiva).toFixed(2)+' $ </td><td style="width:30%;">'+(totald).toFixed(2)+' $</td></tr></table>';
+texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:20%;"> IVA </td><td style="width:20%;"></td><td style="width:30%;">'+(totald-totaldsiva).toFixed(2)+' $ </td><td style="width:30%;">'+''+'</td></tr></table>';
 
-texto+=(totalb).toFixed(2)+' Bs';
-Ftexto+=(totaldsiva).toFixed(2)+'$ '+(totald).toFixed(2)+' \n'
-Ftexto+=impri(totalb.toFixed(2))+' Bs';
+texto+='<table width="100%"><tr align="right"><td style="width:20%;"> </td><td style="width:20%;"></td><td style="width:30%;">'+(totalbsiva).toFixed(2)+' Bs </td><td style="width:30%;">'+(totalb).toFixed(2)+' Bs</td></tr></table>';
+
+Ftexto+=(totaldsiva).toFixed(2)+'$ '+(totald).toFixed(2)+' $ \n'
+Ftexto+=(totalb).toFixed(2)+' Bs';
 console.log(Ftexto);
 var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
 textoT+='<button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button> <button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></div><br>';
 divfactura=document.getElementById("factura")
-divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
+divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 100% ; height: 80%; background-color: lightgray;color:white; border: 3px solid #73AD21;";
 //textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
 //textoT+=' <button  title="Compartir" id="btn" onclick="compartir();" > C </button> <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
 textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
