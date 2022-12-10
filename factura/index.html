@@ -588,6 +588,8 @@ return (hoy.getDate()).toString() + '/' +mes + '/' +hoy.getFullYear().toString()
 
 function factura2(){
 var Tbs;
+var totaldsiva=0;
+var totalbsiva=0;
 var texto='Fecha: '+fecha_actual()+'<br>';
 texto+=dist+'<br>';
 texto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'<br>';
@@ -630,21 +632,24 @@ var Tdolar=+(data[i][4]*(pu) + data[i][5]*pb);
 
 if (Tdolar!=0) { 
   totald+=Tdolar;
+  totaldsiva+=parseFloat((Tdolar/fm).toFixed(2));
   totalb+=Tbs;
+  totalbsiva+=parseFloat((Tbs/fm).toFixed(2));
   Ftexto+='------------\n';
+  texto+='<table width="100%">';
   if (data[i][4]!=0) { 
-         texto+='<p style=" font-size:0.8em;" >'+ data[i][4] +'U '+ data[i][0]+'</p>';
+         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:gray;">'+ data[i][4] +'U '+ data[i][0]+'</td></tr>';
          Ftexto+=data[i][4] +'U '+ data[i][0]+'\n';
 //  console.log('pu:'+pu);
 
   }
   if (data[i][5]!=0) 
-    { texto+='<p style=" font-size:0.8em;" >'+ data[i][5] +'B  ' + data[i][0]+'</p>';
+    { texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:gray;">'+ data[i][5] +'B  ' + data[i][0]+' </td></tr>';
         Ftexto+=data[i][5] +'B '+ data[i][0]+'\n';;
     }
 if (Tdolar!=0) { 
-   texto+='<table width="100%"><tr><td>'+Tdolar.toFixed(2)+' $'+'</td><td>'+(Tbs).toFixed(2)+' Bs'+'</td></tr></table>';
-   Ftexto+=Tdolar.toFixed(2)+' $'+"    "+(Tbs).toFixed(2)+' Bs'+'\n'
+   texto+='<tr><td>'+(Tdolar/fm).toFixed(2)+' $'+'</td><td>'+ Tdolar.toFixed(2) +'$'+'</td><td>'+(Tbs).toFixed(2)+' Bs'+'</td><td>'+(Tbs/fm).toFixed(2) +'Bs </td></tr>';
+   Ftexto+=(Tdolar/fm).toFixed(2)+' $'+"    "+Tdolar.toFixed(2) + ' $    '+ (Tbs).toFixed(2)+' Bs'+'\n'
 
 }
 
@@ -655,21 +660,24 @@ if (Tdolar!=0) {
 //  Ftexto+='Retencion: '+  (fr*pb/fiva).toFixed(2)+' $ '+(fr*pb*factor/fiva).toFixed(2)+ ' Bs\n';
 //}
 
-if (data[i][3]==1) { 
+/*if (data[i][3]==1) { 
   var fr=data[i][5]+ data[i][4]/data[i][1]; 
   texto+='Retencion: '+  (Tdolar/fiva).toFixed(2)+' $ '+(Tbs/fiva).toFixed(2)+ ' Bs';
   Ftexto+='Retencion: '+  (Tdolar/fiva).toFixed(2)+' $ '+(Tbs/fiva).toFixed(2)+ ' Bs\n';
 }
-
+*/
 }
+texto+='</table>';
 }
 
 
 texto+='<HR>';
 Ftexto+='============================================\n';
-texto+='<span style="color:yellow; font-size:1em;">Total: </span>'+impri(totald.toFixed(2))+' $ <br>';
-texto+=impri(totalb.toFixed(2))+' Bs';
-Ftexto+='Total:'+impri(totald.toFixed(2))+'$ \n'
+texto+='<span style="color:yellow; font-size:1em;">Total</span><br>';
+texto+='<table width="100%"><tr><td>'+(totaldsiva).toFixed(2)+' $ </td><td>'+(totald).toFixed(2)+' $</td><td></td><td></td></tr></table>';
+
+texto+=(totalb).toFixed(2)+' Bs';
+Ftexto+=(totaldsiva).toFixed(2)+'$ '+(totald).toFixed(2)+' \n'
 Ftexto+=impri(totalb.toFixed(2))+' Bs';
 console.log(Ftexto);
 var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
@@ -870,8 +878,11 @@ tex2=(pu*factor).toFixed(2)+ ' Bs';
 tex3='B '+(pb).toFixed(2)+' $';
 tex4=(pb*factor).toFixed(2)+ ' Bs';
 }
-texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+data[i][4]+'" onchange="cambiaU('+i+');"></td></tr>';
-texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor+';" value="'+data[i][5]+'" onchange="cambiaB('+i+');"></td></tr></table>';
+if (data[i][4]==0) {var valoru="";} else {var valoru=data[i][4];}
+if (data[i][5]==0) {var valorb="";} else {var valorb=data[i][5];}
+
+texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td></tr>';
+texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td></tr></table>';
 
 
 totalsivad=((pu)*data[i][4]+(pb)*data[i][5])/fm;
