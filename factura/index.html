@@ -16,7 +16,7 @@ width: 3em;
 
 
 .btop{
-font-size:2em;
+font-size:1em;
 }
 
 .bot3:hover {
@@ -221,7 +221,15 @@ grid-columns: 2/3;
 
 </div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
- <div id="header"> <button class="btop" onclick="Actualiza_cliente();">C</button>&nbsp&nbsp<button class="btop" onclick="Actualiza_dolar();">A</button>&nbsp&nbsp<button class="btop" onclick="factura();">F</button>&nbsp&nbsp <button class="btop" onclick="anula();">Z</button></div>
+ <div id="header">
+<table width="100%">
+<tr align="center">
+<td width="25%"> <button class="btop" onclick="Actualiza_cliente();">C</button></td>
+<td width="25%"><button class="btop" onclick="Actualiza_dolar();">A</button></td>
+<td width="25%"><button class="btop" onclick="factura();">F</button></td> 
+<td width="25%"><button class="btop" onclick="anula();">Z</button></td>
+</tr></table>
+</div>
 <div id="cliente" hidden="true">
 Cliente: <input style="width:55%;" type="text" id="cli" value="" list="listaclientes">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>'
 <datalist id="listaclientes"></datalist>
