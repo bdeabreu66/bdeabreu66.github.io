@@ -223,7 +223,7 @@ grid-columns: 2/3;
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
  <div id="header"> <button class="btop" onclick="Actualiza_cliente();">C</button>&nbsp&nbsp<button class="btop" onclick="Actualiza_dolar();">A</button>&nbsp&nbsp<button class="btop" onclick="factura();">F</button>&nbsp&nbsp <button class="btop" onclick="anula();">Z</button></div>
 <div id="cliente" hidden="true">
-Cliente: <input style="width:60%;" type="text" id="cli" value="" list="listaclientes">&nbsp&nbsp<button onclick="setcliente();">OK</button>'
+Cliente: <input style="width:55%;" type="text" id="cli" value="" list="listaclientes">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>'
 <datalist id="listaclientes"></datalist>
 </div>
 
@@ -233,6 +233,17 @@ Cliente: <input style="width:60%;" type="text" id="cli" value="" list="listaclie
 <script type="text/javascript">
 var cliente='';
 var AClientes=[];
+function elimina_cliente(){
+var ecliente;
+document.getElementById("cliente").hidden=true;
+ecliente=document.getElementById("cli").value;
+var pos=AClientes.indexOf(ecliente);
+if (pos>=0) {AClientes.splice(pos,1);guarda_clientes();}
+
+
+console.log('LC: '+Lclientes);
+}
+
 
 function setcliente(){
 document.getElementById("cliente").hidden=true;
@@ -245,6 +256,7 @@ console.log(AClientes.indexOf(cliente));
 if (AClientes.indexOf(cliente)==-1) {AClientes.push(cliente);guarda_clientes();}
 console.log('LC: '+Lclientes);
 }
+
 
 function Actualiza_cliente(){
 Lee_clientes();
