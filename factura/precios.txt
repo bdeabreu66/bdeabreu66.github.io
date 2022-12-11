@@ -15,7 +15,7 @@
       ["F03030 Solera Ret 222 ml x 36 UN",36,19.20,0,0,0,"t3","&Cerveceria&Solera&Retornable&",1],
       ["F03076 Solera NR 222 ml x 12 UN",12,8.17,0,0,0,"t3","&Cerveceria&Solera&NR&",1],
       ["F03077 Solera Light NR 222 ml x 12 UN",12,8.17,0,0,0,"t3","&Cerveceria&Solera&NR&",1],
-      ["F04005 Polar Light Ret 222 ml x 36 UN",36,16.79,0,0,0,"t3","&Cerveceria&Light&",1],
+      ["F04005 Polar Light Ret 222 ml x 36 UN",36,14.48,1,0,0,"t3","&Cerveceria&Light&",1],
       ["F04017 Polar Light Barril 30L x 1 PZ",1,71.01,0,0,0,"t3","&Cerveceria&Light&",0],
       ["F04018 Polar Light Barril 50L x 1 PZ",1,118.01,0,0,0,"t3","&Cerveceria&Light&",0],
       ["F04043 Light NR 355 ml x 12 UN",12,11.52,0,0,0,"t3","&Cerveceria&Light&",1],   
