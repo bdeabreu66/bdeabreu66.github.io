@@ -334,6 +334,10 @@ for (var i=0;i<ped.length;i++) {
 
 function salir(){
 guarda_pedido();
+t1=document.getElementById("t1").value;
+t2=document.getElementById("t2").value;
+localStorage.setItem('p1',t1);
+localStorage.setItem('p2',t2);
 }
 var lcat=[];
 var Stack_cat=['Tienda'];
@@ -772,7 +776,7 @@ if (Tdolar!=0) {
         Ftexto+=data[i][5] +'B '+ data[i][0]+'\n';;
     }
 if (Tdolar!=0) { 
-   texto+='<tr style="align-text:right;font-size:0.5em;"><td style="width:15%;"></td><td style="width:15%;"></td><td style="width:35%;">'+(Tdolar/fm).toFixed(2)+' $'+'</td><td style="width:35%;">'+ Tdolar.toFixed(2) +' $&nbsp'+'</tr>';
+   texto+='<tr style="align-text:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+(pb/fm).toFixed(2)+'$'+'</td><td style="width:30%;">'+(Tdolar/fm).toFixed(2)+' $'+'</td><td style="width:30%;">'+ Tdolar.toFixed(2) +' $&nbsp'+'</tr>';
    Ftexto+='S/IVA: '+(Tdolar/fm).toFixed(2)+' $'+"   C/IVA: "+Tdolar.toFixed(2) + ' $    \n'
 
 }
