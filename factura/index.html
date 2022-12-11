@@ -754,13 +754,13 @@ if (Tdolar!=0) {
   Ftexto+='------------\n';
   texto+='<table width="100%">';
   if (data[i][4]!=0) { 
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:black;color:white;">'+ data[i][4] +'U '+ data[i][0]+'</td></tr>';
+         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:black;color:white;" onclick="cintro('+i+');">'+ data[i][4] +'U '+ data[i][0]+'</td></tr>';
          Ftexto+=data[i][4] +'U '+ data[i][0]+'\n';
 //  console.log('pu:'+pu);
 
   }
   if (data[i][5]!=0) 
-    { texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:gray;">'+ data[i][5] +'B  ' + data[i][0]+' </td></tr>';
+    { texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:gray;" onclick="cintro('+i+');">'+ data[i][5] +'B  ' + data[i][0]+' </td></tr>';
         Ftexto+=data[i][5] +'B '+ data[i][0]+'\n';;
     }
 if (Tdolar!=0) { 
@@ -959,6 +959,12 @@ function cambiaB(num){
 data[num][5]=document.getElementById("entradaB").value;
 intro(num);
 }
+function cintro(num){
+document.getElementById("factura").hidden=true;
+factflag=true;
+intro(num);
+}
+
 function intro(i){
 var totalsivabs;
 var totalsivad;
