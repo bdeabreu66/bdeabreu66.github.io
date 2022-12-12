@@ -334,7 +334,9 @@ window.open(url);
 function enviarRetencion(){
 var txt;
 var aux;
-if (TIPO_RET=="0") {txt=LISTA_C;aux="";} else {txt=LISTA_A;aux=" Alimentos";}
+if (TIPO_RET=="0") {txt=LISTA_C;aux=" Cerveceria";} ;
+if (TIPO_RET=="1") {txt=LISTA_A;aux=" Alimentos";} 
+if (TIPO_RET=="2") {txt=LISTA_P;aux=" Pepsicola";} 
 var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+aux+"_"+CODIGO;
 var adjunto='&attachment=';
 console.log(asunto);
