@@ -231,7 +231,7 @@ grid-columns: 2/3;
 </tr></table>
 </div>
 <div id="cliente" hidden="true">
-Cliente: <input style="width:55%;" type="text" id="cli" value="" list="listaclientes">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>'
+<span onclick="limpiaCliente();">Cliente:</span> <input style="width:55%;" type="text" id="cli" value="" list="listaclientes">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>'
 <datalist id="listaclientes"></datalist>
 </div>
 
@@ -241,6 +241,9 @@ Cliente: <input style="width:55%;" type="text" id="cli" value="" list="listaclie
 <script type="text/javascript">
 var cliente='';
 var AClientes=[];
+function limpiaCliente(){
+document.getElementById("cli").value='';
+}
 function elimina_cliente(){
 var ecliente;
 document.getElementById("cliente").hidden=true;
@@ -721,7 +724,7 @@ texto+='Cliente: '+cliente+'<br>';
 //texto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'<br>';
 var bcv=parseFloat(document.getElementById("t2").value);
 texto+='$ BCV: '+ (bcv).toFixed(2) +'<br>';
-texto+="<center>F&aacute;ctura</center>";
+texto+="<center>Factura</center>";
 var totald=0;
 var totalb=0;
 Ftexto='Fecha: '+fecha_actual()+'\n';
@@ -767,17 +770,24 @@ if (Tdolar!=0) {
   texto+='<table width="100%">';
   if (data[i][4]!=0) { 
          texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:black;color:white;" onclick="cintro('+i+');">'+ data[i][4] +'U '+ data[i][0]+'</td></tr>';
+         texto+='<tr style="align-text:right;font-size:0.5em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+(pu/fm).toFixed(2)+'$'+'</td><td style="width:30%;">'+((data[i][4]*pu)/fm).toFixed(2)+' $'+'</td><td style="width:30%;">'+ (data[i][4]*pu).toFixed(2) +' $&nbsp'+'</tr>';
          Ftexto+=data[i][4] +'U '+ data[i][0]+'\n';
-//  console.log('pu:'+pu);
+         Ftexto+=data[i][4]+'U     '+(pu/fm).toFixed(2)+' $'+'S/IVA: '+((data[i][4]*pu)/fm).toFixed(2)+"   C/IVA: "+((data[i][4]*pu)).toFixed(2) + ' $    \n'
+
+
 
   }
   if (data[i][5]!=0) 
-    { texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:gray;" onclick="cintro('+i+');">'+ data[i][5] +'B  ' + data[i][0]+' </td></tr>';
-        Ftexto+=data[i][5] +'B '+ data[i][0]+'\n';;
-    }
+    { texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:black;color:white;" onclick="cintro('+i+');">'+ data[i][5] +'C  ' + data[i][0]+' </td></tr>';
+      texto+='<tr style="align-text:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+(pb/fm).toFixed(2)+'$'+'</td><td style="width:30%;">'+((data[i][5]*pb)/fm).toFixed(2)+' $'+'</td><td style="width:30%;">'+ (data[i][5]*pb).toFixed(2) +' $&nbsp'+'</tr>';
+      Ftexto+=data[i][5] +'B '+ data[i][0]+'\n';;
+      Ftexto+=data[i][5]+'B     '+(pb/fm).toFixed(2)+' $'+'S/IVA: '+((data[i][5]*pb)/fm).toFixed(2)+"   C/IVA: "+((data[i][5]*pb)).toFixed(2) + ' $    \n'
+
+
+
+
+}
 if (Tdolar!=0) { 
-   texto+='<tr style="align-text:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+(pb/fm).toFixed(2)+'$'+'</td><td style="width:30%;">'+(Tdolar/fm).toFixed(2)+' $'+'</td><td style="width:30%;">'+ Tdolar.toFixed(2) +' $&nbsp'+'</tr>';
-   Ftexto+='S/IVA: '+(Tdolar/fm).toFixed(2)+' $'+"   C/IVA: "+Tdolar.toFixed(2) + ' $    \n'
 
 }
 
