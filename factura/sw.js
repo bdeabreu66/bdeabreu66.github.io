@@ -1,9 +1,10 @@
-// 05-12-2022
-const currentCache = 'cache-v4.0';
+// 12-12-2022
+const currentCache = 'cache-v1.0';
 const files =
 [
     'index.html',
-    'icondef.png'
+    'icondef.png',
+    'arbol.js'
  ];
 
 self.addEventListener('install', event => {
