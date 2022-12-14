@@ -190,7 +190,7 @@
       ["L373 Jabon pastilla Multiuso 130g x 42U",42,1.00,1,0,0,"t2","&Alimentos&Limpieza&Multiuso&",1],
       ["L374 Las llaves Suavizante Bebe  950cc x 12U",12,4.00,1,0,0,"t2","&Alimentos&Limpieza&Suavizantes&",1],
       ["L380 Las llaves Suavizante Bebe 530cc x 12U",12,2.38,1,0,0,"t2","&Alimentos&Limpieza&Suavizantes&",1],
-      ["PepsiCola 350 ml x 24",24,10.192,1,0,0,"t3","&Pepsicola&Pepsi&botella&",1],
+      ["PepsiCola 350 ml x 24",24,10.192,1,0,0,"t3","&Pepsicola&Pepsi&Botella&",1],
       ["PepsiCola lata 355 ml x 24",24,21.23,1,0,0,"t3","&Pepsicola&Pepsi&Lata&",1],
       [" 1/4 PepsiCola lata 355 ml x 6",6,5.31,1,0,0,"t3","&Pepsicola&Pepsi&Lata&",1],
       [" PepsiCola lata 320 ml x 24",24,21.23,1,0,0,"t3","&Pepsicola&Pepsi&Lata&",1],
@@ -203,7 +203,7 @@
       [" PepsiCola PET 2 L  x 6",6,10,34,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
       [" PepsiCola MAX PET 2 L  x 6",6,7.19,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
       [" PepsiCola PET 1 L x 6",6,6.06,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
-      [" PepsiCola PET 1,25 L x 6",6,4.83,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
+      [" PepsiCola PET 1,25 L x 6",6,4.83,1,0,0,"t3","&Pepsicola&Pepsi&Botella&",1],
       [" PepsiCola PSH 250 ml x 24",24,17.638,1,0,0,"t3","&Pepsicola&Pepsi&PSH&",1],
       [" PepsiCola PSH 250 ml x 12",12,8.81,1,0,0,"t3","&Pepsicola&Pepsi&PSH&",1],
       [" Mezcladores  PSH 250 ml x 24",24,17.65,1,0,0,"t3","&Pepsicola&Mezcladores&",1], 
@@ -234,8 +234,6 @@
       [" Te Lipton PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Te Lipton&",1],  
       [" Botella 350 ml",1,0.20,0,0,0,"t2","&Pepsicola&Vacios&",1],  
       [" Botella 1.25 L",1,0.51,0,0,0,"t2","&Pepsicola&Vacios&",1], 
-      [" Gavera plastica 350 ml",1,2.01,0,0,0,"t2","&Pepsicola&Vacios&",1],  
-      [" Gavera plastica 1.25 L",1,4.02,0,0,0,"t2","&Pepsicola&Vacios&",1],  
-
-
+      [" Gavera plastica 350 ml",1,2.01,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1],  
+      [" Gavera plastica 1.25 L",1,4.02,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1]  
 ]
