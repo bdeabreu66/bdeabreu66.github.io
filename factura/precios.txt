@@ -200,7 +200,7 @@
       [" PepsiCola MAX PET 1,5 L ml x 12",12,10.78,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
       [" PepsiCola PET 1,5 L x 6",6,8.02,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
       [" PepsiCola MAX PET 1,5 L  x 6",6,5.39,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
-      [" PepsiCola PET 2 L  x 6",6,10,34,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
+      [" PepsiCola PET 2 L  x 6",6,10.34,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
       [" PepsiCola MAX PET 2 L  x 6",6,7.19,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
       [" PepsiCola PET 1 L x 6",6,6.06,1,0,0,"t3","&Pepsicola&Pepsi&PET&",1],
       [" PepsiCola PET 1,25 L x 6",6,4.83,1,0,0,"t3","&Pepsicola&Pepsi&Botella&",1],
