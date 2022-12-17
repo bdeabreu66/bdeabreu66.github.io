@@ -239,6 +239,16 @@ grid-columns: 2/3;
 
 <script src="arbol.js" type="text/javascript"></script>
 <script type="text/javascript">
+function leer_ventas_diarias(fecha){
+//=localStorage,getItem(fecha)
+
+}
+
+function ventas_periodo(fecha1,fecha2){
+
+
+}
+
 var cliente='';
 var AClientes=[];
 function limpiaCliente(){
@@ -272,7 +282,7 @@ console.log('LC: '+Lclientes);
 function Actualiza_cliente(){
 Lee_clientes();
 divcliente=document.getElementById("cliente");
-document.getElementById("cliente").value=cliente;
+document.getElementById("cli").value=cliente;
 //divcliente.innerHTML=texto;
 divcliente.hidden=false;
 
@@ -320,6 +330,7 @@ localStorage.setItem('Cliente',cliente);
 function recupera_pedido(){
 var texto;
 cliente=localStorage.getItem('Cliente');
+document.getElementById("cli").value=cliente;
 texto=localStorage.getItem('Pedido');
 if (texto!='') {
 var ped=texto.split('&');
@@ -740,46 +751,46 @@ factor=parseFloat(document.getElementById("t2").value);
 if (data[i][3]==1) {fm=1.16;} else {fm=1;}
 
 if (data[i][6]=="t1") {
-var pu=+(fm*data[i][2]*(1/factor)).toFixed(2);
+var pu=+(data[i][2]*(1/factor)).toFixed(2);
 var pb=+(pu*data[i][1]);
 } else {
   if (data[i][6]=="t2") {
-   var pu=+(fm*data[i][2]).toFixed(2);
+   var pu=+(data[i][2]).toFixed(2);
    var pb=+(pu*data[i][1]);
     } else {
-   var pb=+(fm*data[i][2]).toFixed(2);
+   var pb=+(data[i][2]).toFixed(2);
    var pu=+(pb/data[i][1]).toFixed(2);
      
     }
 }
 
-var Tdolar=+(data[i][4]*(pu) + data[i][5]*pb);
+var Tdolar=+((data[i][4]*pu + data[i][5]*pb));
    if (data[i][6]=="t1") {
-   Tbs= data[i][4]*(fm*data[i][2]) + data[i][5]*fm*data[i][2]*data[i][1];
+   Tbs= data[i][4]*(data[i][2]) + data[i][5]*data[i][2]*data[i][1];
    } else 
         {
     Tbs=Tdolar*factor;
    }
 
 if (Tdolar!=0) { 
-  totald+=Tdolar;
-  totaldsiva+=parseFloat((Tdolar/fm).toFixed(2));
-  totalb+=Tbs;
-  totalbsiva+=parseFloat((Tbs/fm).toFixed(2));
+  totald+=Tdolar*fm;
+  totaldsiva+=parseFloat((Tdolar).toFixed(2));
+  totalb+=Tbs*fm;
+  totalbsiva+=parseFloat(Tbs.toFixed(2));
   Ftexto+='------------\n';
   texto+='<table width="100%">';
   if (data[i][4]!=0) { 
          texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:black;color:white;" onclick="cintro('+i+');">'+ data[i][4] +'U '+ data[i][0]+'</td></tr>';
-         texto+='<tr style="align-text:right;font-size:0.5em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+(pu/fm).toFixed(2)+'$'+'</td><td style="width:30%;">'+((data[i][4]*pu)/fm).toFixed(2)+' $'+'</td><td style="width:30%;">'+ (data[i][4]*pu).toFixed(2) +' $&nbsp'+'</tr>';
+         texto+='<tr style="align-text:right;font-size:0.5em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+(pu).toFixed(2)+'$'+'</td><td style="width:30%;">'+((data[i][4]*pu)).toFixed(2)+' $'+'</td><td style="width:30%;">'+ (data[i][4]*pu*fm).toFixed(2) +' $&nbsp'+'</tr>';
          Ftexto+=data[i][4] +'U '+ data[i][0]+'\n';
-         Ftexto+=data[i][4]+'U     '+(pu/fm).toFixed(2)+' $'+'S/IVA: '+((data[i][4]*pu)/fm).toFixed(2)+"   C/IVA: "+((data[i][4]*pu)).toFixed(2) + ' $    \n'
+         Ftexto+=data[i][4]+'U     '+(pu).toFixed(2)+' $'+'S/IVA: '+((data[i][4]*pu)).toFixed(2)+"   C/IVA: "+((data[i][4]*pu)*fm).toFixed(2) + ' $    \n'
 
 
 
   }
   if (data[i][5]!=0) 
     { texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:black;color:white;" onclick="cintro('+i+');">'+ data[i][5] +'C  ' + data[i][0]+' </td></tr>';
-      texto+='<tr style="align-text:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+(pb/fm).toFixed(2)+'$'+'</td><td style="width:30%;">'+((data[i][5]*pb)/fm).toFixed(2)+' $'+'</td><td style="width:30%;">'+ (data[i][5]*pb).toFixed(2) +' $&nbsp'+'</tr>';
+      texto+='<tr style="align-text:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+(pb).toFixed(2)+'$'+'</td><td style="width:30%;">'+((data[i][5]*pb)).toFixed(2)+' $'+'</td><td style="width:30%;">'+ (data[i][5]*pb*fm).toFixed(2) +' $&nbsp'+'</tr>';
       Ftexto+=data[i][5] +'B '+ data[i][0]+'\n';;
       Ftexto+=data[i][5]+'B     '+(pb/fm).toFixed(2)+' $'+'S/IVA: '+((data[i][5]*pb)/fm).toFixed(2)+"   C/IVA: "+((data[i][5]*pb)).toFixed(2) + ' $    \n'
 
