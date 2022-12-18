@@ -43,7 +43,7 @@
       ["F07086 Maltin polar light ret 222 ml x 36 U",36,11.18,1,0,0,"t3","&Cerveceria&Malta&Malta Retornable&",1],
       ["F07088 Maltin light Nr.250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta no Retornable&",1],
       ["F07089 Maltin Nr.250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",1],
-      ["F07090 Malta Caracas NR 250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&&",0],
+      ["F07090 Malta Caracas NR 250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",0],
       ["F07101 Maltin polar sleek 355 ml x 24 U",24,15.077,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",1],
       ["H201 Aceite Mazeite 1 lt x 12",12,4.59,0,0,0,"t2","&Alimentos&Aceites&",1],
       ["M324 Dogourmet Parrilla. 18 Kg x 1U",1,38.74,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1],      
