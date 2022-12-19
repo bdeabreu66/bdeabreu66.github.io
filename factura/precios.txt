@@ -34,7 +34,7 @@
       ["FR0123 Carorena tinta 6 unid",6,36.94,1,0,0,"t3","&Cerveceria&Sangria&",1],
       ["FR0120 Carorena blanca 6 unid",6,36.94,1,0,0,"t3","&Cerveceria&Sangria&",1],
       ["FR0123 Carorena rosada 6 unid",6,36.94,1,0,0,"t3","&Cerveceria&Sangria&",1],
-      ["FR0133 Carorena verano x 36",36,31.85,1,0,0,"t3","&Cerveceria&Sangria&",1],
+      ["FR0133 Carorena verano x 36",36,31.24,1,0,0,"t3","&Cerveceria&Sangria&",1],
       ["F07001 Maltin polar ret 222 ml x 36 U",36,11.18,1,0,0,"t3","&Cerveceria&Malta&Malta Retornable&",1],
       ["F07003 Maltin Nr.250 ml x 24 U",24,0.00,0,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",0],
       ["F07018 Maltin 1.5 L x 6U",6,11.67,1,0,0,"t3","&Cerveceria&Malta&Litron&",1],
