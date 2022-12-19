@@ -25,7 +25,7 @@ padding: 4px 4px;
 
 input[type=number]{
 font-size:1em;
-width: 3em;
+width: 5em;
 border: 2px solid red;
 border-radius: 4px;
 padding: 4px 4px;
@@ -46,7 +46,7 @@ input[type=text]:focus {
 
 
 <BODY onload="inicio();">
-<div id="datos">
+<div id="datos"><button onclick="Actualiza_dolar();">A</button><br>
 TASA: <input id="tas" oninput="guarda_tasa();" type="number" value="0"> <button onclick="procesar()":>P</button><br>
 <button onclick="borrar()":>B</button><br>
 Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
@@ -246,6 +246,9 @@ if (o.innerText=='Bs') {o.innerText='$';
 procesar();
 
 }
+var dolarbcv;
+var dolarparalelo;
+
 var cantidades;
 var cant;
 function inicio(){
@@ -324,6 +327,37 @@ document.getElementById("tot").innerText=total.toFixed(2)+ ' Bs';
 document.getElementById("tot2").innerText=(total/tasa).toFixed(2)+ ' $';
 
 }
+
+ function Actualiza_dolar(){
+var nomb="https://s3.amazonaws.com/dolartoday/data.json"
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+ function showResultD(txt) {
+       //console.log('muestro respuesta: ', txt.USD.sicad2);
+       dolarparalelo=txt.USD.promedio;
+       dolarbcv=txt.USD.sicad2;
+       document.getElementById("tas").value=dolarbcv;
+  }
+
+function showErrorD(err) { 
+      console.log('muestor error', err);
+    }
+}
+
+
 
 // Registra el service worker
 if ('serviceWorker' in navigator) {
