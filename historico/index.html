@@ -281,7 +281,7 @@ var histo_T=localStorage.getItem('histo');
 if (histo_T!=null) {Historico=JSON.parse(histo_T)};
 } catch {console.log('error')};
 descarga_historico();
-Consulta();
+
 }
 function set_valor(){
 var n=Historico.length;
@@ -310,7 +310,12 @@ texto+='<input id="fecha" type="date" min="'+fecha_min+'" value="'+fecha_date(fe
 texto+='<h3><span class="titulo"> Dolar BCV:</span><span id="bcv"></span><br>';
 texto+='<span class="titulo"> Dolar Monitor:</span><span id="monitor"></span></h3>';
 //texto+=' <button class="botonf" onclick="anular();">Anular</button><br>'
-for (var i=0;i<10;i++) { texto+='<p>'+Historico[i]["fecha"]+' '+Historico[i]["bcv"]+'</p>';}
+texto+='<table width="100%">'
+var colbak='white';
+for (var i=0;i<10;i++) { texto+='<tr style="background-color:'+colbak+';"><td style="width:50%;color:green;">'+Historico[i]["fecha"]+'<td style="width:50%;color:blue;">'+Historico[i]["bcv"]+'</td></tr>';
+if (colbak=='white') {colbak='lightgray'} else {colbak='white'}
+}
+texto+='</table>'
 div_datos.innerHTML=texto;
 div_datos.hidden=false;
 //divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
@@ -337,9 +342,12 @@ function ajaxPositiveD(response) {
     }
  function showResultD(txt) {
        console.log('muestro respuesta: ', txt);
-        Historico=txt;
+        Historico=txt;localStorage.setItem('histo',JSON.stringify(Historico));
+   Consulta();
     }
-function showErrorD(err) { console.log('muestor error', err); }
+function showErrorD(err) { console.log('muestor error', err); 
+  Historico=JSON.parse(localStorage.getItem('histo'));
+Consulta();}
 
 }
 
