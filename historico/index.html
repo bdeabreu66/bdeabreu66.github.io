@@ -311,8 +311,9 @@ texto+='<h3><span class="titulo"> Dolar BCV:</span><span id="bcv"></span><br>';
 texto+='<span class="titulo"> Dolar Monitor:</span><span id="monitor"></span></h3>';
 //texto+=' <button class="botonf" onclick="anular();">Anular</button><br>'
 texto+='<table width="100%">'
+texto+='<tr style="background-color:;"><th style="width:50%;color:green;">'+'Fecha'+'<th style="width:50%;color:blue;">'+'Dolar(BCV)'+'</th></tr>';
 var colbak='white';
-for (var i=0;i<15;i++) { texto+='<tr style="background-color:'+colbak+';"><td style="width:50%;color:green;">'+Historico[i]["fecha"]+'<td style="width:50%;color:blue;">'+Historico[i]["bcv"]+'</td></tr>';
+for (var i=0;i<15;i++) { texto+='<tr style="text-align:center;background-color:'+colbak+';"><td style="width:50%;color:green;">'+Historico[i]["fecha"]+'<td style="width:50%;color:blue;">'+Historico[i]["bcv"]+'</td></tr>';
 if (colbak=='white') {colbak='lightgray'} else {colbak='white'}
 }
 texto+='</table>'
