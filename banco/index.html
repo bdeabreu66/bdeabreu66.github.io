@@ -1,1 +1,615 @@
+<HTML>
+<HEAD>
+<TITLE>  Extracion de datos de pagos BNC  </TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<link rel="manifest" href="manifest.json">
+<!-- <meta charset="iso-8859-1">  -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
 
+input[type=number]{
+font-size:2em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+
+}
+
+input[type=text]{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: white;
+  color: black;
+}
+
+input[type=email]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+}
+
+input[type=date]{
+font-size:1em;
+width: 12em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+   background-color: #3CBC8D;
+  
+  color: black;
+}
+
+select{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 8px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+
+</style>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align:left;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+
+  transition: 0.8s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.micro {
+   background-image:url(microphone.svg);
+   width:30px;
+	height:30px;
+	font-size:16px;
+	padding:0px 0px 0px 0px;
+	background-size:30px 30px;
+	background-position:-2px 0px;
+    fill: green;
+
+border-radius: 8px;
+}
+.divfondo {
+   width:90%;
+   background-color:#FFFDD0;
+   border-radius: 8px;
+padding: 6px 6px;
+margin-left: 5px;
+margin-right: 5px;
+}
+.micro:active {
+background-color: lightgreen;
+}
+.btop{
+font-size:2em;
+border: 2px solid red;
+border-radius: 8px;
+padding: 4px 4px ;
+  margin: 4px 0px ;
+  box-sizing: border-box;
+  background-color: orange;
+  color: black;
+}
+.btop:active {background-color: lightgreen;}
+.titulo{
+color:blue;
+}
+.botonf{
+font-size:0.8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 8px 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: oldlace;
+  color: black;
+}
+.tablefact {
+padding: 0px 0px;
+margin: 0px 0px;
+font-size: 1em;
+}
+.botonfact{
+width:20em;
+font-size:0.8em;
+text-align:left;
+border: 2px solid red;
+border-radius: 12px;
+padding: 8px 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: #FFFDD0;
+  color: black;
+}
+.botonf:active {background-color: lightgreen;}
+.botonfact:active {background-color: lightgreen;}
+
+#divdata {
+position:fixed;
+top:15%;
+height: 70%;
+width:95%;
+overflow-y: scroll;
+}
+
+#footer {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+#menu {
+  position: fixed;
+  left: 0;
+  top: 5%;
+  width: 100%;
+  background-color: white;
+  color: white;
+  text-align: center;
+  font-size:0.5em; 
+  visibility:visible;
+}
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+</style>
+</HEAD>
+
+<script type="text/javascript" src="selectFile.js"></script>
+
+<script type="text/javascript">
+const t_c=new Map();
+t_c.set('584121401869','Licoreria Baco');
+t_c.set('584140430489','El sabor de Lili');
+t_c.set('584121589089','La gran parada');
+t_c.set('584244541829','Cliente 3');
+t_c.set('584128311132','Cliente 4');
+t_c.set('584144063036','Cliente 5');
+t_c.set('584144145440','Cliente 6');
+t_c.set('584145939707','Cliente 7');
+t_c.set('584142487797','Cliente 8');
+t_c.set('584244078576','Cliente 9');
+t_c.set('0169000288100045870','Cliente 10');
+t_c.set('584122853554','Cliente 11');
+t_c.set('584125012908','Cliente 12');
+const t_d=new Map();
+/*t_d.set('27/12/2022',16.57);
+t_d.set('26/12/2022',16.57);
+t_d.set('25/12/2022',16.45);
+t_d.set('24/12/2022',16.45);
+t_d.set('23/12/2022',16.45);
+t_d.set('22/12/2022',16.18);
+*/
+var productos=[];
+var pagos=[];
+function Activalector_archivos(){
+getFile2 = new selectFile;
+getFile2.targets('choose2','selected');
+archivos2=document.getElementById('choose2');
+archivos2.value=null;
+archivos2.addEventListener('change', function(e){Leer_Archivo(e)}, false);
+getFile2.simulate();
+}
+function Leer_Archivo(e){
+    var archivos=e.target.files;
+    for(var f=0;f<archivos.length;f++){
+       var archivo=archivos[f];
+          var lector=new FileReader();
+          lector.addEventListener("load",function(e){procesa_archivo(e);},false);
+          lector.readAsText(archivo); 
+     } 
+}
+
+function genera_salida1(){
+var divaux=document.getElementById("divdata");
+var texto='';
+pagos.sort(ordena_pagos);
+var fecha_previa=pagos[0].fecha;
+var nombre_previo=pagos[0].nombre;
+//var total_parcial=parseFloat(pagos[0].montodolar);
+var total_parcial=0;
+
+console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
+texto+='<table width="100%">';
+for (var i=0;i<pagos.length;i++){
+ if (pagos[i].fecha!=fecha_previa) {
+    fecha_previa=pagos[i].fecha;
+    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+    texto+='</table>';
+    texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
+
+    texto+='<table width="100%">';
+  }
+  console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
+//texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre+'</p>';
+//texto+='<p>'+' '+pagos[i].hora.substring(0,5)+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre+'</p>';
+texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
+}
+ texto+='</table>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
+}
+
+
+function genera_salida2(){
+var divaux=document.getElementById("divdata");
+var texto='';
+ pagos.sort(ordena_pagos2);
+//var nombre_previo=pagos[0].nombre;
+var nombre_previo='';
+//var total_parcial=parseFloat(pagos[0].montodolar);
+var total_parcial=0;
+ console.log( nombre_previo);
+texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+nombre_previo+'</p>';
+for (var i=0;i<pagos.length;i++){
+ if (pagos[i].nombre!=nombre_previo) {
+    nombre_previo=pagos[i].nombre;
+    if (i!=0) {
+    console.log(total_parcial.toFixed(2));
+    texto+='<p >Total: '+total_parcial.toFixed(2)+'</p>';}
+    total_parcial=parseFloat(pagos[i].montodolar);
+    console.log(pagos[i].nombre);
+    texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+pagos[i].nombre+'</p>';
+ 
+ } else { total_parcial+=parseFloat(pagos[i].montodolar)}
+console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
+texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
+}
+ console.log(total_parcial.toFixed(2));
+texto+='<p>Total :'+total_parcial.toFixed(2)+'</p>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
+}
+
+function genera_salida3(){
+var divaux=document.getElementById("divdata");
+var texto='';
+ pagos.sort(ordena_pagos3);
+var fecha_previa=pagos[0].fecha;
+var nombre_previo=pagos[0].nombre;
+//var total_parcial=parseFloat(pagos[0].montodolar);
+var total_parcial=0;
+
+console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
+texto+='<table width="100%">';
+for (var i=0;i<pagos.length;i++){
+ if (pagos[i].fecha!=fecha_previa) {
+    fecha_previa=pagos[i].fecha;
+    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+    texto+='</table>';
+    texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
+
+    texto+='<table width="100%">';
+  }
+  console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
+//texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre+'</p>';
+//texto+='<p>'+' '+pagos[i].hora.substring(0,5)+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre+'</p>';
+texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
+}
+ texto+='</table>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
+}
+
+function procesa_archivo(e){
+contenido=e.target.result; 
+localStorage.setItem('Arch_datos_banco',contenido);
+procesa_contenido();
+}
+function procesa_contenido(){
+function cumple1(value) {
+if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 ) {return true;} else {return false;}
+}
+
+//document.getElementById("menu").style.visibility="visible";
+//console.log(contenido);
+var nsem;
+var sem;
+var lineas=contenido.split("\r\n");
+console.log(lineas); 
+var result=lineas.filter(cumple1)
+console.log(result);
+for (var i=0;i<result.length;i++){
+  var campos=result[i].split('\t');
+  pagos[i]=new Object();
+  pagos[i].fecha=campos[0];
+  pagos[i].hora=campos[1];
+  pagos[i].ref=campos[2];
+  pagos[i].motivo=campos[6];
+  var telfn=campos[6];
+  var post=telfn.indexOf('CTA');
+  //console.log('post '+post);
+  if (post>0) {pagos[i].telf=telfn.substring(post+5,post+25)}
+    else {post=telfn.indexOf('TELF'); pagos[i].telf=telfn.substring(post+6,post+18)}
+  pagos[i].montoBs=parseFloat(campos[8].replace(',', '.'));
+  var clave=(pagos[i].telf).toString().trim();
+  pagos[i].nombre=t_c.get(clave);
+  if (pagos[i].nombre==undefined) {pagos[i].nombre='Desconocido';}
+  var clave_fecha=pagos[i].fecha.toString();
+  //console.log('clave_fecha'+clave_fecha+' '+clave_fecha.length);
+  pagos[i].dolar=t_d.get(clave_fecha);
+  if (pagos[i].dolar!=undefined) {
+   pagos[i].montodolar=(pagos[i].montoBs/pagos[i].dolar).toFixed(2);
+  } else {pagos[i].montodolar=0}
+}
+//genera_salida2();
+}
+
+function ordena_pagos(a, b) {
+  if (a.fecha<b.fecha) return -1;
+  if (a.fecha>b.fecha) return 1;
+  if (a.fecha==b.fecha) {
+     if (a.hora>b.hora) {return 1;} else{return -1;}
+  } 
+
+}
+
+function ordena_pagos2(a, b) {
+  if (a.nombre<b.nombre) return -1;
+  if (a.nombre>b.nombre) return 1;
+  if (a.nombre==b.nombre) {
+    if (a.fecha<b.fecha) return -1; 
+    if (a.fecha<b.fecha) return 1;
+    if (a.fecha==b.fecha) {
+     if (a.hora>b.hora) {return 1;} else {return -1;}
+   }
+ }
+}
+
+function ordena_pagos3(a, b) {
+  if (a.fecha<b.fecha) return -1;
+  if (a.fecha>b.fecha) return 1;
+  if (a.fecha==b.fecha) {
+    if (a.nombre<b.nombre) return -1; 
+    if (a.nombre<b.nombre) return 1;
+    if (a.nombre==b.nombre) {
+     if (a.hora>b.hora) {return 1;} else {return -1;}
+   }
+ }
+}
+var textoreconocido;
+function obtenerTexto(indice) {
+if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
+// Obtenemos el objeto de reconocimento de texto de forma compatible a diferentes navegadores
+reconocimientoTexto = new ( window.SpeechRecognition || window.webkitSpeechRecognition ) ()
+reconocimientoTexto.lang='es-Ve'; 
+reconocimientoTexto.onerror = function(event) {
+ alert("error "+event.error);
+ textoreconocido="";
+procesar2(indice);
+}
+reconocimientoTexto.onresult = function(event) {
+// Mostramos el texto obtenido
+textoreconocido=event.results[0][0].transcript;
+console.log(textoreconocido);
+procesar2(indice);
+}
+// Empezamos a reconocer texto
+reconocimientoTexto.start();
+} else {
+alert ('El navegador no soporta reconocimiento de voz' );
+}
+}
+
+function procesar2(ind){
+var num=textoreconocido.split(" ");
+var lt=num.length;
+var cant='';
+for (var i=0;i<lt;i++) {
+ cant+=num[i];
+}
+console.log(cant);
+if (ind==1) {divs_datos.getElementsByTagName("input")[1].value=cant;return;}
+if (ind==2) {
+ divs_datos.getElementsByTagName("input")[2].value=cant.substring(0,2);
+ divs_datos.getElementsByTagName("input")[3].value=cant.substring(2);
+return;}
+ if (ind==3) {divs_datos.getElementsByTagName("input")[4].value=cant;return;}
+if (ind==4) {divs_datos.getElementsByTagName("input")[5].value=cant;return;}
+if (ind==5) {
+ document.getElementById("nret").value=cant;
+ set_n_ret();
+return;}
+
+}
+function openNav() {
+var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
+  texto+='<a href="javascript:void(0)">About</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();Configurar();">Configuracion</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();Crea_datos();">Datos de retencion</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();hacerRetencion();">Hacer PDF</a>';
+ document.getElementById("mySidenav").innerHTML=texto;
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+//localStorage.setItem('p3',va);
+
+
+/*
+*/
+//var divs_datos;
+var contador;
+const max_valor=200;
+function inicio(){
+Activalector_archivos();
+descarga_historico();
+contenido=localStorage.getItem('Arch_datos_banco');
+}
+function quitar(nombdiv){
+var div=document.getElementById(nombdiv);
+div.hidden=true;
+}
+
+function enviar_whatsapp(phone,text){
+var url ='https://api.whatsapp.com/send?phone='+phone+'&text='+text;
+console.log(url);
+window.open(url);
+}
+
+
+function enviar_mail(){
+var url ='mailto:brauliodeabreu@gmail.com?subject=Retenciones';
+window.open(url);
+}
+
+ function guarda_data_green(){
+ localStorage.setItem('DAT_GREEN', JSON.stringify(productos));
+}
+
+
+
+
+
+function descarga_historico(){
+var nomb="https://bdeabreu66.github.io/historico/historico.txt";
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+ function showResultD(txt) {
+       console.log('muestro respuesta: ', txt);
+        Historico=txt;
+   for (var i=0;i<Historico.length;i++) {
+   t_d.set(Historico[i]["fecha"],(Historico[i]["bcv"]));
+  }
+  localStorage.setItem('HDOLAR',JSON.stringify(Historico));
+  procesa_contenido();
+    }
+function showErrorD(err) { console.log('muestor error', err); 
+   Historico=JSON.parse(localStorage.getItem('HDOLAR'));
+   for (var i=0;i<Historico.length;i++) {
+   t_d.set(Historico[i]["fecha"],(Historico[i]["bcv"]));
+  }
+ procesa_contenido();
+   }
+
+}
+
+
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+
+</script>
+
+<BODY onload="inicio();">
+<!-- <div id="encabezado" style="text-align: left; border: 1px solid #999999; position: fixed;" >  -->
+<!--<span style="font-size:30px;cursor:pointer; margin-left: 0px;text-align: left;" onclick="openNav()">&#9776; Menu </span>  -->
+<!--</div>  -->
+<div id="mySidenav" class="sidenav" ></div>
+
+<div id="divdata"></div>
+<div id="menu">
+<button class="btop" onclick="genera_salida1();">Fecha</button>
+<button class="btop" onclick="genera_salida2();">Cliente</button>
+<button class="btop" onclick="genera_salida3();">Fecha-Cliente</button>
+</div>
+<div id="header"> <button class="btop" onclick="Activalector_archivos();">Cargar Datos</button>  
+</div>
+
+<div>
+<label hidden id=selected>Nothing selected</label><br>
+<input hidden type=file id="choose2" accept="*.txt">
+</div>
+</body>
+</html>

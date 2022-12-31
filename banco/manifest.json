@@ -1,0 +1,15 @@
+{
+  "name": "Facturacion Polar",
+  "description": "Pagos BNC",
+  "short_name": "Pagos BNC",
+  "icons": [{
+    "src": "icondef.png",
+    "sizes": "256x256"
+  }],
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "aliceblue",
+  "background_color": "red",
+  "prefer_related_applications": false 
+  }
