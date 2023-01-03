@@ -443,8 +443,8 @@ for (var i=0;i<result.length;i++){
   var telfn=campos[6];
   var post=telfn.indexOf('CTA');
   //console.log('post '+post);
-  if (post>0) {pagos[i].telf=telfn.substring(post+5,post+25)}
-    else {post=telfn.indexOf('TELF'); pagos[i].telf=telfn.substring(post+6,post+19)}
+  if (post>0) {pagos[i].telf=telfn.substring(post+5,post+26);console.log(pagos[i].telf);}
+    else {post=telfn.indexOf('TELF'); pagos[i].telf=telfn.substring(post+6,post+18)}
   pagos[i].montoBs=parseFloat(campos[8].replace(',', '.'));
   var clave=(pagos[i].telf).toString().trim();
   pagos[i].nombre=t_c.get(clave);
