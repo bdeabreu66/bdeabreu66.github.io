@@ -665,7 +665,10 @@ refresca();
 
 function  set_clave_indice(){
 clave_ind=new Map();
-for (var i=0;data.length;i++) {
+for (var i=0;i<data.length;i++) {
+console.log(i);
+console.log(data[i][9]);
+
 clave_ind.set(data[i][9],i.toString());
 }
 }
