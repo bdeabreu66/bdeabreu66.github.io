@@ -179,7 +179,7 @@
       ["L389 Multi Clean jabon Frag citrica 200 g x 44U",44,0.48,1,0,0,"t2","&Alimentos&Limpieza&Jabones&",1,'L389'],     
       ["L379 LLaves Lav. Antib liq. 500cc x 18U",18,3.07,1,0,0,"t2","&Alimentos&Limpieza&Lavaplatos&",0,'L379'],
       ["L387 LLaves Lav. Antib liq. 500cc x 18U",18,3.07,1,0,0,"t2","&Alimentos&Limpieza&Lavaplatos&",0,'L387'],     
-      ["L371 LLaves Limp. Marea Cristalina 1L x 12",12,2.70,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",1,'L371'],
+      ["L371 LLaves Limp. Marea Cristalina 1L x 12",12,2.70,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L371'],
       ["L372 LLaves Limp. Brisa Tropical 1L x 12",12,2.70,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L372'],
       ["L377 LLaves Limp. Marea Cristalina 500cc  x 24",24,1.53,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L377'],
       ["L378 LLaves Limp. Brisa Tropical 500cc x 24U",24,1.53,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L378'],
