@@ -235,6 +235,7 @@ overflow-y: scroll;
 
 <script type="text/javascript">
 const t_c=new Map();
+Fecha_hora='';
 t_c.set('584121401869','Licoreria Baco');
 t_c.set('584140430489','El sabor de Lili');
 t_c.set('584121589089','La gran parada');
@@ -291,7 +292,10 @@ t_c.set('584167465405','Panaderia Renacer');
 t_c.set('584128552592','Braulio De Abreu');
 t_c.set('01380008120080196594','Mc Center');
 t_c.set('584124304844','Colegio los pinos');
-
+t_c.set('01910027801127274106','Armando Pita');
+t_c.set('01910148722100062413','Negro Primero');
+t_c.set('01750062720073634371','Rosa De Abreu');
+t_c.set('584140412168','La Zurda');
 const t_d=new Map();
 /*t_d.set('27/12/2022',16.57);
 t_d.set('26/12/2022',16.57);
@@ -301,23 +305,35 @@ t_d.set('23/12/2022',16.45);
 t_d.set('22/12/2022',16.18);
 */
 var productos=[];
-var pagos=[];
+
 function Activalector_archivos(){
 getFile2 = new selectFile;
 getFile2.targets('choose2','selected');
 archivos2=document.getElementById('choose2');
 archivos2.value=null;
-archivos2.addEventListener('change', function(e){Leer_Archivo(e)}, false);
+archivos2.addEventListener('change', Leer_Archivo, false);
 getFile2.simulate();
 }
 function Leer_Archivo(e){
+
     var archivos=e.target.files;
-    for(var f=0;f<archivos.length;f++){
+  var narch=archivos.length;
+    for(var f=0;f<narch;f++){
        var archivo=archivos[f];
+        console.log('nombre archivo'+archivo.lastModifiedDate);
+  
+  Fecha_hora=archivo.lastModifiedDate.toLocaleString('es-US',{});
+//toUTCString();
           var lector=new FileReader();
           lector.addEventListener("load",function(e){procesa_archivo(e);},false);
           lector.readAsText(archivo); 
      } 
+}
+
+function fecha_mayor_igual(f1,f2){
+var a2=f2.split('/');
+var a1=f1.split('/');
+ if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>a1[0]) {return false; } else {return true;}
 }
 
 function genera_salida1(){
@@ -335,9 +351,9 @@ texto+='<table width="100%">';
 for (var i=0;i<pagos.length;i++){
  if (pagos[i].fecha!=fecha_previa) {
     fecha_previa=pagos[i].fecha;
-    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
     texto+='</table>';
-    texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
+    texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $'+'</p>';
 
     texto+='<table width="100%">';
   }
@@ -399,9 +415,9 @@ texto+='<table width="100%">';
 for (var i=0;i<pagos.length;i++){
  if (pagos[i].fecha!=fecha_previa) {
     fecha_previa=pagos[i].fecha;
-    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
     texto+='</table>';
-    texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
+    texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $'+'</p>';
 
     texto+='<table width="100%">';
   }
@@ -420,16 +436,20 @@ contenido=e.target.result;
 localStorage.setItem('Arch_datos_banco',contenido);
 procesa_contenido();
 }
+var Tipocuenta='';
 function procesa_contenido(){
 function cumple1(value) {
-if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 ) {return true;} else {return false;}
+if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 ||value.indexOf("TRANSFERENCIA RECIBIDA")>0) {return true;} else {return false;}
 }
 
-//document.getElementById("menu").style.visibility="visible";
-//console.log(contenido);
+pagos=[];
 var nsem;
 var sem;
 var lineas=contenido.split("\r\n");
+ var post=lineas[0].indexOf('01910027801127274106');
+if (post>=0) Tipocuenta="Cuenta de Ahorro";
+ var post=lineas[0].indexOf('01910027822127000477');
+if (post>=0) Tipocuenta="Cuenta Juridica";
 console.log(lineas); 
 var result=lineas.filter(cumple1)
 console.log(result);
@@ -441,27 +461,41 @@ for (var i=0;i<result.length;i++){
   pagos[i].ref=campos[2];
   pagos[i].motivo=campos[6];
   var telfn=campos[6];
+ pagos[i].telf=telfn;
+console.log(pagos[i].telf);
   var post=telfn.indexOf('CTA');
+  console.log(post + 'CTA');
   //console.log('post '+post);
   if (post>0) {pagos[i].telf=telfn.substring(post+5,post+26);console.log(pagos[i].telf);}
-    else {post=telfn.indexOf('TELF'); pagos[i].telf=telfn.substring(post+6,post+18)}
+    else {
+     post=telfn.indexOf('TELF'); console.log(post + 'TELF');
+     if (post>=0) {
+       pagos[i].telf=telfn.substring(post+6,post+18)
+     } else
+      {
+       post=telfn.indexOf('CUENTA NRO'); console.log(post + 'Cuenta nro');
+       if (post>=0) {pagos[i].telf=telfn.substring(post+12,post+32);console.log(pagos[i].telf);}
+      }
+  }
+ 
   pagos[i].montoBs=parseFloat(campos[8].replace(',', '.'));
   var clave=(pagos[i].telf).toString().trim();
   pagos[i].nombre=t_c.get(clave);
   if (pagos[i].nombre==undefined) {pagos[i].nombre='Desconocido';}
   var clave_fecha=pagos[i].fecha.toString();
-  //console.log('clave_fecha'+clave_fecha+' '+clave_fecha.length);
+  console.log('clave_fecha'+clave_fecha+' '+clave_fecha.length);
   pagos[i].dolar=t_d.get(clave_fecha);
   if (pagos[i].dolar!=undefined) {
    pagos[i].montodolar=(pagos[i].montoBs/pagos[i].dolar).toFixed(2);
   } else {pagos[i].montodolar=0}
 }
+document.getElementById("t_c").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
 //genera_salida2();
 }
 
 function ordena_pagos(a, b) {
-  if (a.fecha<b.fecha) return -1;
-  if (a.fecha>b.fecha) return 1;
+  if (!fecha_mayor_igual(a.fecha,b.fecha)) return -1;
+  if (!fecha_mayor_igual(b.fecha,a.fecha)) return 1;
   if (a.fecha==b.fecha) {
      if (a.hora>b.hora) {return 1;} else{return -1;}
   } 
@@ -472,8 +506,8 @@ function ordena_pagos2(a, b) {
   if (a.nombre<b.nombre) return -1;
   if (a.nombre>b.nombre) return 1;
   if (a.nombre==b.nombre) {
-    if (a.fecha<b.fecha) return -1; 
-    if (a.fecha<b.fecha) return 1;
+  if (!fecha_mayor_igual(a.fecha,b.fecha)) return -1;
+  if (!fecha_mayor_igual(b.fecha,a.fecha)) return 1;
     if (a.fecha==b.fecha) {
      if (a.hora>b.hora) {return 1;} else {return -1;}
    }
@@ -481,9 +515,10 @@ function ordena_pagos2(a, b) {
 }
 
 function ordena_pagos3(a, b) {
-  if (a.fecha<b.fecha) return -1;
-  if (a.fecha>b.fecha) return 1;
+ if (!fecha_mayor_igual(a.fecha,b.fecha)) return -1;
+  if (!fecha_mayor_igual(b.fecha,a.fecha)) return 1;
   if (a.fecha==b.fecha) {
+    console.log(a.nombre+' '+b.nombre);
     if (a.nombre<b.nombre) return -1; 
     if (a.nombre<b.nombre) return 1;
     if (a.nombre==b.nombre) {
@@ -646,6 +681,7 @@ if ('serviceWorker' in navigator) {
 
 <div id="divdata"></div>
 <div id="menu">
+<span style="display:block;font-size:3em;color:red;" id="t_c">Prueba</span>
 <button class="btop" onclick="genera_salida1();">Fecha</button>
 <button class="btop" onclick="genera_salida2();">Cliente</button>
 <button class="btop" onclick="genera_salida3();">Fecha-Cliente</button>
