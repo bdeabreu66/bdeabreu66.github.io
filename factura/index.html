@@ -224,13 +224,14 @@ grid-columns: 2/3;
  <div id="header">
 <table width="100%">
 <tr align="center">
-<td width="16%"> <button class="btop" onclick="Actualiza_cliente();">C</button></td>
-<td width="16%"><button class="btop" onclick="Actualiza_dolar();">A</button></td>
-<td width="16%"><button class="btop" onclick="factura();">F</button></td> 
-<td width="16%"><button class="btop" onclick="anula();">Z</button></td>
-<td width="16%"><button class="btop" onclick="guardar_factura();">G</button></td>
-<td width="16%"><button class="btop" onclick="lee_facturas();">R</button></td>
-<td width="16%"><button class="btop" onclick="total();">T</button></td>
+<td width="12%"> <button class="btop" onclick="Actualiza_cliente();">C</button></td>
+<td width="12%"><button class="btop" onclick="descarga_historico();">A</button></td>
+<td width="12%"><button class="btop" onclick="factura();">F</button></td> 
+<td width="12%"><button class="btop" onclick="anula();">Z</button></td>
+<td width="12%"><button class="btop" onclick="guardar_factura();">G</button></td>
+<td width="12%"><button class="btop" onclick="lee_facturas();">R</button></td>
+<td width="12%"><button class="btop" onclick="total();">T</button></td>
+<td width="12%"><button class="btop" onclick="desp_inventario();">I</button></td>
 
 </tr></table>
 </div>
@@ -250,7 +251,7 @@ function leer_ventas_diarias(fecha){
 }
 var totalunid=[];
 var totalcajas=[];
-
+var modo_inv=false;
 function muestra_total_ventas(){
 var nd=data.length;
 var texto='';
@@ -319,7 +320,7 @@ var f2=document.getElementById("f2").value;
 f1=inv_fecha_date(f1);
 f2=inv_fecha_date(f2);
 quitarlista();
-console.log(f1+' '+f2);
+console.log('rango de fechas'+f1+' '+f2);
 
 var nd=data.length;
 console.log(nd);
@@ -343,7 +344,7 @@ if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) 
     //console.log(ped.length);
     for (var j=1;j<ped.length;j++) {
       var items=ped[j].split('#');
-      var ind=parseInt(items[0]);
+      var ind=clave_ind.get(items[0]);
       totalunid[ind]+=parseInt(items[1]);
       totalcajas[ind]+=parseInt(items[3]);
     }
@@ -353,10 +354,98 @@ if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) 
 }
  muestra_total_ventas();
 }
+inventario=[];
+
+function carga_inventario(){
+var invent=localStorage.getItem('Inventario_PO');
+if (invent!=null) {
+ var items=invent.split('&');
+  for (var i=0;i<items.length;i++){
+   console.log(items[i]);
+   var partes=items[i].split('#');
+    ind=inventario.findIndex(element => element.CLAVE==partes[0])
+   inventario[ind]={"CLAVE":partes[0],"UNID":partes[1],"CAJAS":partes[2]};
+  }
+}
+console.log(inventario);
+}
+function desp_inventario(){
+texto='';
+carga_inventario();
+var div3 = document.getElementById("lista");
+div3.style="position: fixed;top :7%; left: 0%; width: 100%;height:80%;background-color:lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
+texto+='<div style="position: fixed;top :7%; text-align:right;background-color: gray;width:100%;">';
+texto+=' <button  title="Salir" onclick="quitarlista();" > x </button></div><br>';
+texto+='<div style="overflow:auto;height:90%;font-size:0.8rem;"><table style="width:100%;">';
+ console.log(inventario);
+for(var i=0;i<inventario.length;i++){
+console.log('clave '+inventario[i]["CLAVE"]);
+ var ind=clave_ind.get(inventario[i]["CLAVE"]);
+ console.log('indice '+ind);
+ if (inventario[i]["UNID"]!=0) {
+console.log(data[ind][0]+inventario[i]["UNID"]+ " cajas");
+texto+='<tr><td style="width:80%;">'+data[ind][0]+'</td><td style="width:15%;">'+inventario[i]["UNID"]+'<td style="width:5%;">U</td>'+'</td></tr>';
+}
+ if (inventario[i]["CAJAS"]!=0) {
+console.log(data[ind][0]+" "+inventario[i]["CAJAS"]+" unidades");
+texto+='<tr><td style="width:80%;">'+data[ind][0]+'</td><td style="width:15%;">'+inventario[i]["CAJAS"]+'<td style="width:5%;">C</td>'+'</td></tr>';
+}
+
+}
+texto+='</table></div>';
+div3.innerHTML=texto;
+}
+
+
+function guarda_inventario(){
+var texto="";
+  for (var i=0;i<inventario.length;i++){
+      texto+='&'+inventario[i]["CLAVE"]+'#'+inventario[i]["UNID"]+'#'+inventario[i]["CAJAS"];
+  }
+if (texto.length>0) {localStorage.setItem('Inventario_PO',texto.substr(1));} else {localStorage.setItem('Inventario_PO','');}
+}
+
+function resta_inventario(){
+  for (var i=0;i<data.length;i++){
+      if (data[i][4]!=0 || data[i][5]!=0) {
+       ind=inventario.findIndex(element => element.CLAVE==data[i][9])
+       inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])-data[i][4]).toString();
+       inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])-data[i][5]).toString();
+         if (inventario[ind]["UNID"]<0) {
+           var cj=1+Math.abs(parseInt(inventario[ind]["UNID"])/parseInt(data[i][1]));
+           cj=parseInt(cj);
+           inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])+cj*parseInt(data[i][1])).toString();
+           inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])-cj).toString();
+         }
+       }
+ }
+guarda_inventario();
+}
+
+function inicio_inventario(){
+ for (var i=0;i<data.length;i++){
+    inventario[i]={"CLAVE":data[i][9],"UNID":"0","CAJAS":"0"}
+}
+console.log(inventario);
+carga_inventario();
+
+console.log(inventario);
+}
+
+function suma_inventario(){
+  for (var i=0;i<data.length;i++){
+      if (data[i][4]!=0 || data[i][5]!=0) {
+       ind=inventario.findIndex(element => element.CLAVE==data[i][9])
+    console.log('ind '+ind);
+       inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])+parseInt(data[i][4])).toString();
+       inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])+parseInt(data[i][5])).toString();
+      }
+ }
+console.log(inventario);
+guarda_inventario();
+}
 
 function ventas_periodo(fecha1,fecha2){
-
-
 }
 
 var cliente='';
@@ -430,7 +519,7 @@ function guarda_pedido(){
 var texto='';
 for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
- texto+='&'+i+'#'+data[i][4]+'#'+data[i][5];
+ texto+='&'+data[i][9]+'#'+data[i][4]+'#'+data[i][5];
 }
 if (texto.length>2) {localStorage.setItem('Pedido',texto.substr(1));} else {localStorage.setItem('Pedido','');}
 } 
@@ -502,10 +591,11 @@ for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
  [pu,pb]=precio(i);
 console.log('pu '+pu+'pb '+pb);
- texto+='&'+i+'#'+data[i][4]+'#'+(pu).toFixed(2)+'#'+data[i][5]+'#'+(pb).toFixed(2);
+ texto+='&'+data[i][9]+'#'+data[i][4]+'#'+(pu).toFixed(2)+'#'+data[i][5]+'#'+(pb).toFixed(2);
 }
 }
 if (texto.length>2) {localStorage.setItem(nomb,texto);} 
+if (cliente=='POLAR') {suma_inventario();} else {resta_inventario();}
 }
 
 
@@ -525,7 +615,7 @@ var ped=texto.split('&');
 //console.log(ped.length);
 for (var i=0;i<ped.length;i++) {
   var items=ped[i].split('#');
-  var ind=parseInt(items[0]);
+  var ind=clave_ind.get(items[0]);
   data[ind][4]=parseInt(items[1]);
   data[ind][5]=parseInt(items[2]);
 }
@@ -560,7 +650,8 @@ numero_factura=archivo.split('_')[3];
 //console.log(ped.length);
 for (var i=1;i<ped.length;i++) {
   var items=ped[i].split('#');
-  var ind=parseInt(items[0]);
+//  var ind=parseInt(items[0]);
+ var ind=clave_ind.get(items[0]);
 console.log('ind'+ind);
   datfac[ind].unidad=parseInt(items[1]);
   datfac[ind].pu=parseFloat(items[2]);
@@ -963,7 +1054,10 @@ data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,63,0,0,0,"t1","&Cerveceria&Vacio
 ];
 set_cat();
 muestra_cat();
+set_clave_indice();
+inicio_inventario();
 refresca();
+recupera_pedido("Pedido");
 }
 function actT(ind){
 var valor=prompt("Introduzca cantidad", "");
@@ -987,9 +1081,11 @@ if (factflag) {factflag=false; factura2(); } else { factflag=true; quitar()};
 var Ftexto;
 
 function fecha_actual(){
+var dia=(hoy.getDate()).toString() ;
+if (dia.length==1) {dia='0'+dia}
 var mes=(hoy.getMonth()+1).toString();
 if (mes.length==1) {mes='0'+mes}
-return (hoy.getDate()).toString() + '/' +mes + '/' +hoy.getFullYear().toString()
+return dia + '/' +mes + '/' +hoy.getFullYear().toString()
 
 }
 
@@ -1001,7 +1097,7 @@ var texto='Fecha: '+fecha_factura+'<br>';
 texto+=dist+'<br>';
 texto+='Cliente: '+cliente_factura+'<br>';
 var bcv=parseFloat(bcv_factura);
-texto+='$ BCV: '+ (bcv).toFixed(2) +'<br>';
+texto+='$ BCV: '+ (bcv).toFixed(4) +'<br>';
 texto+='<center>Factura '+numero_factura+'</center>';
 texto+='<center><span id="contad" ></span></center>';
 var totald=0;
@@ -1009,16 +1105,16 @@ var totalb=0;
 Ftexto='Fecha: '+fecha_factura+'\n';
 Ftexto+=dist+'\n';
 Ftexto+='Cliente: '+cliente_factura+'\n';
-Ftexto+='$ BCV: '+  (bcv).toFixed(2) +'\n';
+Ftexto+='$ BCV: '+  (bcv).toFixed(4) +'\n';
 Ftexto+="FACTURA "+numero_factura+"\n"
 var contador=0;
-
+var colorb='black';
 for (var i=0;i<datfac.length;i++){
  if (datfac[i].unidad!=0 || datfac[i].cajas!=0) {
  contador++;
  console.log(i+ " "+contador);
  factor=bcv;
- if (data[i][3]==1) {fm=1.16;} else {fm=1;}
+ if (data[i][3]==1) {fm=1.16;colorb='black';} else {fm=1;colorb='blue';}
 
  pu=datfac[i].pu;
  pb=datfac[i].pb;
@@ -1041,7 +1137,7 @@ if (Tdolar!=0) {
       v4=(parseFloat(v3)*fm).toFixed(2);
       if (tipo2==1) {totalb+=parseFloat(v4); totalbsiva+=parseFloat(v3);} else 
          {totald+=parseFloat(v4); totaldsiva+=parseFloat(v3);}
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:black;color:white;" >'+ datfac[i].unidad +' U '+ data[i][0]+'</td></tr>';
+         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" >'+ datfac[i].unidad +' U '+ data[i][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+datfac[i].unidad+'</td><td style="width:30%;">'+v2+mone+'</td><td style="width:30%;">'+v3+mone+'</td><td style="width:30%;">'+ v4 +mone+'&nbsp'+'</tr>';
          Ftexto+=datfac[i].unidad +' U '+ data[i][0]+'\n';
          Ftexto+=datfac[i].unidad+' U     '+v2+mone+' S/IVA: '+v3+mone+"   C/IVA: "+ v4 + mone +'    \n'
@@ -1052,7 +1148,7 @@ if (Tdolar!=0) {
       v4=(parseFloat(v3)*fm).toFixed(2);
       if (tipo2==1) {totalb+=parseFloat(v4); totalbsiva+=parseFloat(v3);} else 
          {totald+=parseFloat(v4); totaldsiva+=parseFloat(v3);}
-      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:black;color:white;" >'+ datfac[i].cajas +' C  ' + data[i][0]+' </td></tr>';
+      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" >'+ datfac[i].cajas +' C  ' + data[i][0]+' </td></tr>';
       texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+datfac[i].cajas+'</td><td style="width:30%;">'+v2+mone+'</td><td style="width:30%;">'+v3+mone+'</td><td style="width:30%;">'+ v4 +mone+'&nbsp'+'</tr>';
       Ftexto+=datfac[i].cajas +' C '+ data[i][0]+'\n';;
       Ftexto+=datfac[i].cajas +' C     '+v2+mone+' S/IVA: '+v3+"   C/IVA: "+v4 + mone+'    \n'
@@ -1113,7 +1209,7 @@ texto+=dist+'<br>';
 texto+='Cliente: '+cliente+'<br>';
 //texto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'<br>';
 var bcv=parseFloat(document.getElementById("t2").value);
-texto+='$ BCV: '+ (bcv).toFixed(2) +'<br>';
+texto+='$ BCV: '+ (bcv).toFixed(4) +'<br>';
 texto+="<center>Factura</center>";
 texto+='<center><span id="contad" ></span></center>';
 var totald=0;
@@ -1122,16 +1218,16 @@ Ftexto='Fecha: '+fecha_actual()+'\n';
 Ftexto+=dist+'\n';
 Ftexto+='Cliente: '+cliente+'\n';
 //Ftexto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'\n';
-Ftexto+='$ BCV: '+  (bcv).toFixed(2) +'\n';
+Ftexto+='$ BCV: '+  (bcv).toFixed(4) +'\n';
 Ftexto+="FACTURA\n"
 var contador=0;
-
+var colorb='black';
 for (var i=0;i<data.length;i++){
 if (data[i][4]!=0 || data[i][5]!=0) {
 contador++;
 //console.log(i+ " "+contador);
 factor=parseFloat(document.getElementById("t2").value);
-if (data[i][3]==1) {fm=1.16;} else {fm=1;}
+if (data[i][3]==1) {fm=1.16;colorb='black'} else {fm=1;colorb='blue'}
 [pu,pb]=precio(i);
 var Tdolar=+((data[i][4]*pu + data[i][5]*pb));
    if (data[i][6]=="t1") {
@@ -1155,7 +1251,7 @@ if (Tdolar!=0) {
      v3=(parseFloat(v2)*data[i][4]).toFixed(2);
      v4=(parseFloat(v3)*fm).toFixed(2);
 
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:black;color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
+         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+ v4 +' $&nbsp'+'</tr>';
          Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
          Ftexto+=data[i][4]+' U     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
@@ -1164,7 +1260,7 @@ if (Tdolar!=0) {
      v2=(pb).toFixed(2);
      v3=(parseFloat(v2)*data[i][5]).toFixed(2);
      v4=(parseFloat(v3)*fm).toFixed(2);
-      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:black;color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
+      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
       texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+v4 +' $&nbsp'+'</tr>';
       Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
       Ftexto+=data[i][5]+' C     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
@@ -1179,7 +1275,7 @@ if (Tdolar!=0) {
   totalb+=parseFloat(v4);
   totalbsiva+=parseFloat(v3);
 
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:black;color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
+         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:'+colorb+';" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
          Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
          Ftexto+=data[i][4]+' U     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
@@ -1190,7 +1286,7 @@ if (Tdolar!=0) {
   v4=(parseFloat(v3)*fm).toFixed(2);
   totalb+=parseFloat(v4);
   totalbsiva+=parseFloat(v3);
-      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:black;color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
+      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
       texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
       Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
       Ftexto+=data[i][5]+' C     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
@@ -1199,19 +1295,6 @@ if (Tdolar!=0) {
 
 
 
-
-//if (data[i][3]==1) { 
-//  var fr=data[i][5]+ data[i][4]/data[i][1]; 
-//  texto+='Retencion: '+  (fr*pb/fiva).toFixed(2)+' $ '+(fr*pb*factor/fiva).toFixed(2)+ ' Bs';
-//  Ftexto+='Retencion: '+  (fr*pb/fiva).toFixed(2)+' $ '+(fr*pb*factor/fiva).toFixed(2)+ ' Bs\n';
-//}
-
-/*if (data[i][3]==1) { 
-  var fr=data[i][5]+ data[i][4]/data[i][1]; 
-  texto+='Retencion: '+  (Tdolar/fiva).toFixed(2)+' $ '+(Tbs/fiva).toFixed(2)+ ' Bs';
-  Ftexto+='Retencion: '+  (Tdolar/fiva).toFixed(2)+' $ '+(Tbs/fiva).toFixed(2)+ ' Bs\n';
-}
-*/
 }
 texto+='</table>';
 }
@@ -1626,6 +1709,7 @@ if ('serviceWorker' in navigator) {
   });
 }
 Act_data();
+
 function Act_data(){
 var myHeaders = new Headers();
 
@@ -1654,6 +1738,7 @@ function ajaxPositive(response) {
         set_clave_indice();
         set_cat();
         muestra_cat();
+        inicio_inventario();
         refresca();
         recupera_pedido("Pedido");
   }
@@ -1693,6 +1778,37 @@ function showErrorD(err) {
 }
 
 Fecha_precios();
+
+//descarga_historico();
+function descarga_historico(){
+var nomb="https://bdeabreu66.github.io/historico/historico.txt";
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+ function showResultD(txt) {
+       console.log('muestro respuesta: ', txt);
+        Historico=txt;
+        var ind=Historico.findIndex(elemento => elemento.fecha==fecha_actual());
+        if (ind>=0) { document.getElementById("t2").value =Historico[ind].bcv};
+    }
+function showErrorD(err) {
+ console.log('muestor error', err); 
+  }
+ 
+  
+
+}
 
 function Fecha_precios(){
 var nomb="https://bdeabreu66.github.io/factura/fecha.txt";
