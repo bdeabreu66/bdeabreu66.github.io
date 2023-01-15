@@ -190,7 +190,7 @@ padding: 8px 8px;
 
 #divdata {
 position:fixed;
-top:15%;
+top:20%;
 height: 70%;
 width:95%;
 overflow-y: scroll;
@@ -210,7 +210,7 @@ overflow-y: scroll;
 #menu {
   position: fixed;
   left: 0;
-  top: 5%;
+  top: 8%;
   width: 100%;
   background-color: white;
   color: white;
@@ -256,7 +256,7 @@ t_c.set('584124203948','Lic. San Rafael');
 t_c.set('584144853637','Andres Mijares');
 t_c.set('584145936061','Heladeria Unica');
 t_c.set('584144791658','Bull Pen Joselyn');
-t_c.set('584244021067','Bull buja');
+//t_c.set('584244021067','Bull buja');
 t_c.set('584124072605','Malave Claudia');
 t_c.set('01020152750000507309','Mc Center pool');
 t_c.set('01380008190085381160','Mc Center pool');
@@ -264,6 +264,7 @@ t_c.set('584144033621','Bodegon JR');
 t_c.set('584128314388','Carn. la Embocada');
 t_c.set('584244541829','Bodega Moya');
 t_c.set('584244469305','Bodega Moya');
+t_c.set('584244285516','Bodega Moya');
 t_c.set('584140389048','Negro Primero');
 t_c.set('584244069799','Negro Primero');
 t_c.set('584124067144','Ana Beatriz sobrina');
@@ -295,7 +296,44 @@ t_c.set('584124304844','Colegio los pinos');
 t_c.set('01910027801127274106','Armando Pita');
 t_c.set('01910148722100062413','Negro Primero');
 t_c.set('01750062720073634371','Rosa De Abreu');
-t_c.set('584140412168','La Zurda');
+t_c.set('584140412168','Bull Pen');
+t_c.set('584244021067','Inversiones del Valle');
+t_c.set('584127820477','Negro Primero');
+t_c.set('584128529762','Carlos Hernandez');
+t_c.set('584124346526','Carlos Hernandez');
+t_c.set('584144978575','Carlos Hernandez');
+t_c.set('584127848852','Carlos Hernandez');
+t_c.set('584145936335','Carlos Hernandez');
+t_c.set('01140162731620081589','Jairo Rojas');
+t_c.set('01020142000100004572','La luz');
+t_c.set('01340419444191042090','Venvidrio');
+t_c.set('01020406290000103046','Alianza cafe');
+t_c.set('01380008190080143008','Euro Licores');
+t_c.set('01680052095101387169','Euro Licores');
+t_c.set('01910027812127041189','Leticia');
+t_c.set('01340419414191032727','Club emboscada');
+t_c.set('01910027821127272510','La gran parada');
+t_c.set('01910362502100027278','El propio');
+t_c.set('01050758831758117052','Churumal');
+t_c.set('01080927480100022435','Vikingo');
+t_c.set('01020114420000585059','Materiales Alianza');
+t_c.set('01340346533461027171','Licoreria Baco');
+t_c.set('01910203342100024431','Panaderia la Unidad 2012');
+t_c.set('584242069117','Bodegon JR');
+t_c.set('584124203947','Lic. San Rafael');
+t_c.set('00000000001081871016','Pan. Trigo Pan SRL');
+t_c.set('00000000001070094427','Hotel Gold Parade');
+t_c.set('00000000000000150028','IGRIVAL CA');
+t_c.set('00000000001068508786','Arepera el Paisita');
+t_c.set('0000000029J301370139','Pepsicola de Venezuela');
+t_c.set('00000000000000152233','Materiales Alianza');
+t_c.set('01020857200000136026','Materiales Alianza');
+t_c.set('01910148722100041321','Centeno Wilmer');
+t_c.set('01910369212100007816','El propio');
+t_c.set('00000000001072963269','Hotel Gold Parade');
+t_c.set('01340419414193020946','Club emboscada');
+t_c.set('00000000001071701703','Arepera el Paisita');
+t_c.set('01740124661244144208','Licolla');
 const t_d=new Map();
 /*t_d.set('27/12/2022',16.57);
 t_d.set('26/12/2022',16.57);
@@ -439,7 +477,7 @@ procesa_contenido();
 var Tipocuenta='';
 function procesa_contenido(){
 function cumple1(value) {
-if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 ||value.indexOf("TRANSFERENCIA RECIBIDA")>0) {return true;} else {return false;}
+if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 ) ) {return true;} else {return false;}
 }
 
 pagos=[];
@@ -464,7 +502,7 @@ for (var i=0;i<result.length;i++){
  pagos[i].telf=telfn;
 console.log(pagos[i].telf);
   var post=telfn.indexOf('CTA');
-  console.log(post + 'CTA');
+  //console.log(post + 'CTA');
   //console.log('post '+post);
   if (post>0) {pagos[i].telf=telfn.substring(post+5,post+26);console.log(pagos[i].telf);}
     else {
@@ -475,13 +513,19 @@ console.log(pagos[i].telf);
       {
        post=telfn.indexOf('CUENTA NRO'); console.log(post + 'Cuenta nro');
        if (post>=0) {pagos[i].telf=telfn.substring(post+12,post+32);console.log(pagos[i].telf);}
+         else {
+          post=telfn.indexOf('00000000');
+          if (post>0) { pagos[i].telf=telfn.substring(post,post+20); }
+
+         } 
+
       }
   }
  
   pagos[i].montoBs=parseFloat(campos[8].replace(',', '.'));
   var clave=(pagos[i].telf).toString().trim();
   pagos[i].nombre=t_c.get(clave);
-  if (pagos[i].nombre==undefined) {pagos[i].nombre='Desconocido';}
+  if (pagos[i].nombre==undefined) {pagos[i].nombre=clave;}
   var clave_fecha=pagos[i].fecha.toString();
   console.log('clave_fecha'+clave_fecha+' '+clave_fecha.length);
   pagos[i].dolar=t_d.get(clave_fecha);
@@ -681,7 +725,7 @@ if ('serviceWorker' in navigator) {
 
 <div id="divdata"></div>
 <div id="menu">
-<span style="display:block;font-size:3em;color:red;" id="t_c">Prueba</span>
+<span style="display:block;font-size:2em;color:red;" id="t_c">Prueba</span>
 <button class="btop" onclick="genera_salida1();">Fecha</button>
 <button class="btop" onclick="genera_salida2();">Cliente</button>
 <button class="btop" onclick="genera_salida3();">Fecha-Cliente</button>
