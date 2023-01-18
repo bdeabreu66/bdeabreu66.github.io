@@ -335,10 +335,13 @@ for(var i=0;i<localStorage.length;i++){
  if (nomb.indexOf("FAC_")==0 )  
 { 
   var fech=nomb.split('_')[2];
+  var nombcli=nomb.split('_')[1];
+  console.log('nc'+nombcli);
+
   texto=localStorage.getItem(nomb);
   
 console.log('fech'+fech);
-if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) ) {
+if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && nombcli!="POLAR") {
     var ped=texto.split('&');
     console.log(texto+" "+texto.length);
     //console.log(ped.length);
