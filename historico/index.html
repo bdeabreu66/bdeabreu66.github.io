@@ -187,6 +187,18 @@ hidden:true;
   text-align: center;
   font-size:0.5em;
 }
+#div3 {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 80%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  visibility: hidden;
+  font-size:0.5em;
+}
 </style>
 </HEAD>
 
@@ -230,7 +242,7 @@ var Historico=[];
 
 function fecha_date(f){
 var comp=f.split('/');
-var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
+var sal=comp[0]+'-'+comp[1]+'-'+comp[2];
 console.log('sal '+sal)
 return sal;
 }
@@ -301,6 +313,18 @@ document.getElementById("monitor").innerText="No disponible";
 return;
 }
 
+function imagen(num){
+var texto='';
+var div3=document.getElementById("div3");
+var fec=Historico[num]["fecha"].toString();
+console.log('num '+num);
+texto+='<img src='+'BCV-'+fecha_date(fec)+'.jpg'+' alt="Dolar BCV" width="95%" height="95%" onclick="quitar_imagen()">'
+div3.innerHTML=texto;
+document.getElementById("div3").style.visibility="visible";
+}
+function quitar_imagen(num){
+document.getElementById("div3").style.visibility="hidden";
+}
 function Consulta(){
 //var divpart=divs_datos;
 var texto='';
@@ -313,7 +337,7 @@ texto+='<span class="titulo"> Dolar Monitor:</span><span id="monitor"></span></h
 texto+='<table width="100%">'
 texto+='<tr style="background-color:;"><th style="width:50%;color:green;">'+'Fecha'+'<th style="width:50%;color:blue;">'+'Dolar(BCV)'+'</th></tr>';
 var colbak='white';
-for (var i=0;i<15;i++) { texto+='<tr style="text-align:center;background-color:'+colbak+';"><td style="width:50%;color:green;">'+Historico[i]["fecha"]+'<td style="width:50%;color:blue;">'+Historico[i]["bcv"]+'</td></tr>';
+for (var i=0;i<30;i++) { texto+='<tr onclick="imagen('+i+');"style="text-align:center;background-color:'+colbak+';"><td style="width:50%;color:green;">'+Historico[i]["fecha"]+'<td style="width:50%;color:blue;">'+Historico[i]["bcv"]+'</td></tr>';
 if (colbak=='white') {colbak='lightgray'} else {colbak='white'}
 }
 texto+='</table>'
@@ -376,7 +400,7 @@ if ('serviceWorker' in navigator) {
 <div id="divdata"></div>
 
 <div id="header"> </div>
-
+<div id="div3"> </div>
 
 <!--   -->
 </BODY>
