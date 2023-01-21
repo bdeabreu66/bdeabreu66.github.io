@@ -1540,14 +1540,15 @@ var totalsivad;
 var fm;
 var factor=parseFloat(document.getElementById("t2").value);
 var BanderaIva;
-if (data[i][3]==1) {fm=1.16;BanderaIva="C/IVA";} else {fm=1;BanderaIva="S/IVA";}
+var colb="black";
+if (data[i][3]==1) {fm=1.16;BanderaIva="C/IVA";colb="black";} else {fm=1;BanderaIva="S/IVA";colb="blue";}
 var divintro=document.getElementById("introd");
 if (data[i][4]==0) {var vcor='red';} else {var vcor='blue';}
 if (data[i][5]==0) {var vcor1='red';} else {var vcor1='blue';}
 var pu=preciou(i);
 var pb=preciob(i);
 
-var texto='<table width="100%" style="background-color:black;color:white;"><tr ><td >'+data[i][0]+' '+BanderaIva+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
+var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+data[i][0]+' '+BanderaIva+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
 if (data[i][6]=="t1") 
 {
 tex1='U '+(pu).toFixed(2)+' $';
