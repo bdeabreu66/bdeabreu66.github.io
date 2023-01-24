@@ -165,14 +165,10 @@ overflow-y:scroll;
   width: 100%;
   }
 .cont0{
-
-
 }
 .cont1 {
 display:grid;
-
-
-grid-template-columns: 80% 20%;
+grid-template-columns: 20% 60% 20%;
 border-bottom:1px solid black;
 }
 
@@ -181,6 +177,9 @@ grid-columns: 1/2;
 }
 .conth2 {
 grid-columns: 2/3;
+}
+.conth3 {
+grid-columns: 3/4;
 }
 
 
@@ -194,19 +193,22 @@ grid-columns: 2/3;
 <br>
 
 <div class="dolar">
-<table width="100%">
+<!-- <table width="100%"> -->
 <!-- <tr><td>Paralelo </td><td><input id="t1" type="text" value="0"></td> -->
-<tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr>
-<!--<div id="menu"></div> -->
+<!-- <tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr> -->
+<!-- <div id="menu"></div> -->
 <!-- <tr><td><input id="t3" onchange="camb();" type="checkbox" value="Automatico"><label for="t3"> Automatico </label></td></tr> -->
-</table>
+<!-- </table> -->
 </div>
 <div class="cont0">
 <div class="cont1">
 <div class="con1h1">
-<center>Facturaci&oacute;n <br><span id="fecha_p" style="font-size:1em;"></span></center>
+<center>BCV: <input id="t2" type="text" value="0"></center>
 </div>
 <div class="con1h2">
+<center>Facturaci&oacute;n <br><span id="fecha_p" style="font-size:1em;"></span></center>
+</div>
+<div class="con1h3">
 <button class="nav" onclick="sube_cat()";>&#8630;</button>
 </div>
 </div>
