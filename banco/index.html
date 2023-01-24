@@ -228,6 +228,16 @@ overflow-y: scroll;
   text-align: center;
   font-size:0.5em;
 }
+#div3 {
+  position: fixed;
+  left: 0;
+  top: 90%;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-size:1em;
+}
 </style>
 </HEAD>
 
@@ -236,105 +246,122 @@ overflow-y: scroll;
 <script type="text/javascript">
 const t_c=new Map();
 Fecha_hora='';
-t_c.set('584121401869','Licoreria Baco');
-t_c.set('01340346533461027171','Licoreria Baco');
-t_c.set('584140430489','El sabor de Lili');
-t_c.set('584121589089','La gran parada');
-t_c.set('584244541829','Roger Dona');
-t_c.set('584144063036','Mary Pita');
-t_c.set('584144145440','Malave');// Simon
-t_c.set('584124072605','Malave');// Claudia
-t_c.set('584145939707','Lic Felix Yorman');
-t_c.set('584142487797','Guaicamari');
-t_c.set('584244078576','Guaicamari');
-t_c.set('01690002881000458707','La cuna la negra');
-t_c.set('584122853554','La cuna la negra');
-t_c.set('584128311132','La cuna la negra');
-t_c.set('584125012908','Bodega Felix');
-t_c.set('584146784460','El chivato Rosa');
-t_c.set('010201527200057471','La ermita');
-t_c.set('584128808329','Rest. Pio pio');
-t_c.set('584124203948','Lic. San Rafael');
+t_c.set('584144202172','Alejandro Naranjo');
+t_c.set('01020406290000103046','Alianza cafe');
+t_c.set('584124067144','Ana Beatriz sobrina');
+t_c.set('584244244676','Ana Luisa Caldera');
+t_c.set('584126153631','Anderson Pita');
 t_c.set('584144853637','Andres Mijares');
-t_c.set('584145936061','Heladeria Unica');
-t_c.set('584144791658','Bull Pen Joselyn');
-//t_c.set('584244021067','Bull buja');
-t_c.set('01020152750000507309','Mc Center pool');
-t_c.set('01380008190085381160','Mc Center pool');
-t_c.set('584128314388','Carn. la Embocada');
-t_c.set('584244541829','Bodega Moya');
+t_c.set('AREPA EL PAISITA','AREPA EL PAISITA');
+t_c.set('01910027801127274106','Armando Pita');
+t_c.set('584125012908','Bodega Felix');
+t_c.set('584144973532','Bodega Marcos');
+//t_c.set('584244541829','Bodega Moya');
 t_c.set('584244469305','Bodega Moya');
 t_c.set('584244285516','Bodega Moya');
-t_c.set('584124067144','Ana Beatriz sobrina');
-t_c.set('584123441007','Rafael Pita');
-t_c.set('584148944498','Rafael Pita');
-t_c.set('584126153631','Anderson Pita');
-t_c.set('584244244676','Ana Luisa Caldera');
-t_c.set('584144397087','Tequenack');
-t_c.set('584125100639','Colegio Teresiano');
-t_c.set('584124097520','Maximum Carnes');
-t_c.set('584124566786','Sazon de la abuela');
-t_c.set('584144314028','Quiosco Sara');
-t_c.set('584144185616','Pan Center');
+t_c.set('01140162731620081589','Bodegon JR');
+t_c.set('584242069117','Bodegon JR');
+t_c.set('584144033621','Bodegon JR');
+t_c.set('584125091226','Bodegon JR');
+t_c.set('584128552592','Braulio De Abreu');
+t_c.set('584244021067','Bull buja');
+t_c.set('584144791658','Bull Pen Joselyn');
+t_c.set('584140412168','Bull Pen');
+t_c.set('584244063691','Bull Pen');
 t_c.set('584145822722','Canapiale');
 t_c.set('584141863212','Canapiale');
-t_c.set('584124548273','Ciudad Market');
-t_c.set('01140226742260075694','Piedra pintada');
-t_c.set('01380008100080137300','Piedra pintada');
-t_c.set('584144973532','Bodega Marcos');
-t_c.set('584128568459','La Ermita');
-t_c.set('01340464034643019505','Liconan');
-t_c.set('584144807588','Liconan');
-t_c.set('584144390582','Haydee Martinez');
-t_c.set('584167465405','Panaderia Renacer');
-t_c.set('584128552592','Braulio De Abreu');
-t_c.set('01380008120080196594','Mc Center');
-t_c.set('584124304844','Colegio los pinos');
-t_c.set('01910027801127274106','Armando Pita');
-t_c.set('01750062720073634371','Rosa De Abreu');
-t_c.set('584140412168','Bull Pen');
-t_c.set('584244021067','Inversiones del Valle');
-t_c.set('584127820477','Negro Primero');
-t_c.set('584140389048','Negro Primero');
-t_c.set('584244069799','Negro Primero');
-t_c.set('01910148722100062413','Negro Primero');
 t_c.set('584128529762','Carlos Hernandez');
 t_c.set('584124346526','Carlos Hernandez');
 t_c.set('584144978575','Carlos Hernandez');
 t_c.set('584127848852','Carlos Hernandez');
 t_c.set('584145936335','Carlos Hernandez');
-t_c.set('01140162731620081589','Bodegon JR');
-t_c.set('01020142000100004572','La luz');
-t_c.set('01340419444191042090','Venvidrio');
-t_c.set('01020406290000103046','Alianza cafe');
+t_c.set('584128314388','Carn. la Embocada');
+t_c.set('01910243272100053204','Carn. la Embocada');
+t_c.set('584244392499','Carolina');
+t_c.set('584121396715','Casa Mayor');
+t_c.set('01910148722100041321','Centeno Wilmer');
+t_c.set('01050758831758117052','Churumal');
+t_c.set('584124548273','Ciudad Market');
+t_c.set('01340419414191032727','Club la emboscada');
+t_c.set('01340419414193020946','Club la emboscada');
+t_c.set('584124304844','Colegio los pinos');
+t_c.set('584125100639','Colegio Teresiano');
+t_c.set('584149479895','Darley De Abreu');
+t_c.set('584146784460','El chivato Rosa');
+t_c.set('584140430489','El sabor de Lili');
+t_c.set('584144791429','Esposa de Ludi');
 t_c.set('01380008190080143008','Euro Licores');
 t_c.set('01680052095101387169','Euro Licores');
+t_c.set('584144408427','Euro Licores');
+t_c.set('01910148792100048675','Garcia T. Antonio J.');
+t_c.set('584142487797','Guaicamari');
+t_c.set('584244078576','Guaicamari');
+t_c.set('01340791657911005013','Guaicamari');
+t_c.set('584144390582','Haydee Martinez');
+t_c.set('584145936061','Heladeria Unica');
+t_c.set('HOTEL GOLD','Hotel Gold Parade');
+//t_c.set('584244021067','Inversiones del Valle');// Bull buja
+t_c.set('584122853554','La cuna la negra');
+t_c.set('584128311132','La cuna la negra');
+t_c.set('584144202063','La cuna la negra');
+t_c.set('584128568459','La Ermita');
+t_c.set('01020152720000574471','La Ermita');
+t_c.set('01020142000100004572','La luz');
 t_c.set('01910027812127041189','Leticia');
-t_c.set('01340419414191032727','Club la emboscada');
-t_c.set('01910027821127272510','Martinez B. Antonio');
-t_c.set('01910362502100027278','Rest. Pio pio');
-t_c.set('01050758831758117052','Churumal');
-t_c.set('01080927480100022435','Vikingo');
-t_c.set('01910203342100024431','Panaderia la Unidad 2012');
-t_c.set('584242069117','Bodegon JR');
-t_c.set('584144033621','Bodegon JR');
+t_c.set('584145939707','Lic Felix Yorman');
+t_c.set('584124203948','Lic. San Rafael');
 t_c.set('584124203947','Lic. San Rafael');
-t_c.set('00000000001081871016','Pan. Trigo Pan SRL');
-t_c.set('00000000001070094427','Hotel Gold Parade');
-t_c.set('00000000001068508786','Arepera el Paisita');
-t_c.set('0000000029J301370139','Pepsicola de Venezuela');
-t_c.set('00000000000000152233','Materiales Alianza');
+t_c.set('01340464034643019505','Liconan');
+t_c.set('01740124661244144208','Liconan');
+t_c.set('584144807588','Liconan');
+t_c.set('584244342559','Liconan');
+t_c.set('584121401869','Licoreria Baco');
+t_c.set('01340346533461027171','Licoreria Baco');
+t_c.set('584140459037','Luncheria Unicasa');
+t_c.set('584144145440','Malave');// Simon
+t_c.set('584124072605','Malave');// Claudia
+t_c.set('01910027821127272510','Martinez B. Antonio');
 t_c.set('01020857200000136026','Materiales Alianza');
 t_c.set('01020114420000595059','Materiales Alianza');
 t_c.set('01020114420000585059','Materiales Alianza');
-t_c.set('00000000000000150028','Materiales Alianza');
-t_c.set('01910148722100041321','Centeno Wilmer');
+t_c.set('IGRIVAL','Materiales Alianza');
+t_c.set('584124097520','Maximum Carnes');
+t_c.set('01050137711137063955','Maximum Carnes');
+t_c.set('01020152750000507309','Mc Center Pool');
+t_c.set('01380008190085381160','Mc Center Pool');
+t_c.set('01380008120080196594','Mc Center Pool');
+t_c.set('584144063036','Mary Pita');
+t_c.set('584127820477','Negro Primero');
+t_c.set('584140389048','Negro Primero');
+t_c.set('584244069799','Negro Primero');
+t_c.set('01910148722100062413','Negro Primero');
+t_c.set('584144185616','Pan Center');
+t_c.set('01910203342100024431','Panaderia la Unidad 2012');
+t_c.set('01690002881000458707','Pan. Trigo Pan SRL');
+t_c.set('TRIGOPAN','Pan. Trigo Pan SRL');
+t_c.set('584167465405','Panaderia Renacer');
+t_c.set('584126903878','Peluquero Roro');
+t_c.set('PEPSI COLA','PEPSI COLA');
+t_c.set('01140226742260075694','Piedra pintada');
+t_c.set('01380008100080137300','Piedra pintada');
+t_c.set('584144314028','Quiosco Sara');
+t_c.set('584123441007','Rafael Pita');
+t_c.set('584148944498','Rafael Pita');
+t_c.set('584128808329','Rest. Pio pio');
 t_c.set('01910369212100007816','Rest. Pio pio');
-t_c.set('00000000001072963269','Hotel Gold Parade');
-t_c.set('01340419414193020946','Club emboscada');
-t_c.set('00000000001071701703','Arepera el Paisita');
-t_c.set('01740124661244144208','Liconan');
-t_c.set('584149479895','Darley De Abreu');
+t_c.set('01910362502100027278','Rest. Pio pio');
+t_c.set('584244541829','Roger Dona');
+t_c.set('01750062720073634371','Rosa De Abreu');
+t_c.set('584124566786','Sazon de la abuela');
+t_c.set('584144397087','Tequenack');
+t_c.set('01340419444191042090','Venvidrio');
+t_c.set('584144159903','Venvidrio');
+t_c.set('584120386419','Venvidrio');
+t_c.set('584121589089','Vicente');
+t_c.set('584144125422','Vilmar');
+t_c.set('01080927480100022435','Vikingo');
+t_c.set('584124465846','Yoni el cauchero');
+dat_especial=["AREPA EL PAISITA","IGRIVAL","HOTEL GOLD","TRIGOPAN","PEPSI COLA"];
 const t_d=new Map();
 /*t_d.set('27/12/2022',16.57);
 t_d.set('26/12/2022',16.57);
@@ -375,6 +402,13 @@ var a1=f1.split('/');
  if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>a1[0]) {return false; } else {return true;}
 }
 
+function muestra(num){
+var texto='';
+var div3=document.getElementById("div3");
+texto+=pagos[num].motivo;
+div3.innerHTML=texto;
+}
+
 function genera_salida1(){
 var divaux=document.getElementById("divdata");
 var texto='';
@@ -398,7 +432,7 @@ for (var i=0;i<pagos.length;i++){
   }
   console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
 //texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
-texto+='<tr><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
+texto+='<tr onclick="muestra('+i+')";><td>'+pagos[i].telf+'</td><td>'+pagos[i].hora+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
 
 }
  texto+='</table>';
@@ -411,29 +445,47 @@ function genera_salida2(){
 var divaux=document.getElementById("divdata");
 var texto='';
  pagos.sort(ordena_pagos2);
-//var nombre_previo=pagos[0].nombre;
 var nombre_previo='';
-//var total_parcial=parseFloat(pagos[0].montodolar);
+var fecha_previa=pagos[0].fecha;
 var total_parcial=0;
+var montop='';
  console.log( nombre_previo);
 texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+nombre_previo+'</p>';
 for (var i=0;i<pagos.length;i++){
+  
  if (pagos[i].nombre!=nombre_previo) {
+    
     nombre_previo=pagos[i].nombre;
     if (i!=0) {
-    console.log(total_parcial.toFixed(2));
-    texto+='<p >Total: '+total_parcial.toFixed(2)+'</p>';}
+      console.log(total_parcial.toFixed(2));
+     texto+='<p style="color:blue;">Fecha:'+fecha_previa+'Total parcial: '+montop.toFixed(2)+'</p>';
+      fecha_previa=pagos[i].fecha;texto 
+      texto+='<p>Total: '+total_parcial.toFixed(2)+'</p>';
+    }
+
     total_parcial=parseFloat(pagos[i].montodolar);
+     montop=total_parcial;
     console.log(pagos[i].nombre);
     texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+pagos[i].nombre+'</p>';
  
- } else { total_parcial+=parseFloat(pagos[i].montodolar)}
+ } else { 
+    total_parcial+=parseFloat(pagos[i].montodolar)
+    if (pagos[i].fecha!=fecha_previa) { 
+       texto+='<p style="color:blue;"> Fecha:'+ fecha_previa+'Total parcial: '+montop.toFixed(2)+'</p>'; montop=parseFloat(pagos[i].montodolar)
+       fecha_previa=pagos[i].fecha; 
+     }  else  {
+        montop+=parseFloat(pagos[i].montodolar);
+        }
+  }
 console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
 //texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora.substring(0,5)+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
 texto+='<p>'+pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
+} // for i
 
-}
  console.log(total_parcial.toFixed(2));
+ texto+='<p>Fecha:'+fecha_previa;+'Total parcial: '+montop.toFixed(2)+'</p>';
+     
+
 texto+='<p>Total :'+total_parcial.toFixed(2)+'</p>';
 divaux.innerHTML=texto;
 divaux.style.visibility="visible";
@@ -445,7 +497,6 @@ var texto='';
  pagos.sort(ordena_pagos3);
 var fecha_previa=pagos[0].fecha;
 var nombre_previo=pagos[0].nombre;
-//var total_parcial=parseFloat(pagos[0].montodolar);
 var total_parcial=0;
 
 console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
@@ -462,7 +513,7 @@ for (var i=0;i<pagos.length;i++){
   }
   console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
 //texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
-texto+='<tr><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
+texto+='<tr  onclick="muestra('+i+')";><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
 
 }
  texto+='</table>';
@@ -476,6 +527,17 @@ localStorage.setItem('Arch_datos_banco',contenido);
 procesa_contenido();
 }
 var Tipocuenta='';
+
+function caso_especial(dato){
+ var post;
+ console.log('Caso especial');
+for (var i=0;i<dat_especial.length;i++) {
+  post=dato.indexOf(dat_especial[i]);
+  console.log('post '+ post);
+  if (post>0) {return dat_especial[i];}
+ }
+return dato;
+}
 function procesa_contenido(){
 function cumple1(value) {
 if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 ) ) {return true;} else {return false;}
@@ -515,8 +577,10 @@ console.log(pagos[i].telf);
        post=telfn.indexOf('CUENTA NRO'); console.log(post + 'Cuenta nro');
        if (post>=0) {pagos[i].telf=telfn.substring(post+12,post+32);console.log(pagos[i].telf);}
          else {
-          post=telfn.indexOf('00000000');
-          if (post>0) { pagos[i].telf=telfn.substring(post,post+20); }
+
+          post=result[i].indexOf('Abono por Creditos Directos');
+//alert(post);
+          if (post>=0) { pagos[i].telf=caso_especial(telfn); }
 
          } 
 
@@ -738,5 +802,8 @@ if ('serviceWorker' in navigator) {
 <label hidden id=selected>Nothing selected</label><br>
 <input hidden type=file id="choose2" accept="*.txt">
 </div>
+<div id="div3">
+</div>
+
 </body>
 </html>
