@@ -666,7 +666,7 @@ console.log('ind'+ind);
 }
 function salir(){
 guarda_pedido();
-t1=document.getElementById("t1").value;
+//t1=document.getElementById("t1").value;
 t2=document.getElementById("t2").value;
 localStorage.setItem('p1',t1);
 localStorage.setItem('p2',t2);
@@ -786,7 +786,7 @@ data=[];
 try {
 nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
 console.log('nf '+nro_factura);
-document.getElementById("t1").value = localStorage.getItem('p1');
+//document.getElementById("t1").value = localStorage.getItem('p1');
 document.getElementById("t2").value = localStorage.getItem('p2');
 document.getElementById("fecha_p").innerText = localStorage.getItem('FECHA_P');
 //document.getElementById("t3").checked = localStorage.getItem('p3');
@@ -1417,7 +1417,7 @@ function refresca2(){
 var patron=document.getElementById("search").value.toUpperCase();
 var pb;
 var pu;
-t1=document.getElementById("t1").value;
+//t1=document.getElementById("t1").value;
 t2=document.getElementById("t2").value;
 localStorage.setItem('p1',t1);
 localStorage.setItem('p2',t2);
@@ -1604,7 +1604,7 @@ function refresca(){
 //var patron=document.getElementById("search").value.toUpperCase();
 var pb;
 var pu;
-t1=document.getElementById("t1").value;
+//t1=document.getElementById("t1").value;
 t2=document.getElementById("t2").value;
 localStorage.setItem('p1',t1);
 localStorage.setItem('p2',t2);
@@ -1771,7 +1771,7 @@ function ajaxPositiveD(response) {
     }
  function showResultD(txt) {
        console.log('muestro respuesta: ', txt.USD.sicad2);
-       document.getElementById("t1").value = txt.USD.promedio;
+       //document.getElementById("t1").value = txt.USD.promedio;
        document.getElementById("t2").value = txt.USD.sicad2;
        refresca();
   }
