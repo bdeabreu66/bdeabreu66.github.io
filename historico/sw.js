@@ -1,5 +1,5 @@
-// 30-12-2022
-const currentCache = 'cache-v1.2';
+// 23-01-2023
+const currentCache = 'Histo-cache-23-01-2023';
 const files =
 [
     'index.html',
