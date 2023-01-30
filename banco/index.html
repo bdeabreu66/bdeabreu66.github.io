@@ -253,6 +253,7 @@ t_c.set('584244244676','Ana Luisa Caldera');
 t_c.set('584126153631','Anderson Pita');
 t_c.set('584144853637','Andres Mijares');
 t_c.set('AREPA EL PAISITA','AREPA EL PAISITA');
+t_c.set('01740124621244237572','AREPA EL PAISITA');
 t_c.set('01910027801127274106','Armando Pita');
 t_c.set('584125012908','Bodega Felix');
 t_c.set('584144973532','Bodega Marcos');
@@ -275,6 +276,7 @@ t_c.set('584124346526','Carlos Hernandez');
 t_c.set('584144978575','Carlos Hernandez');
 t_c.set('584127848852','Carlos Hernandez');
 t_c.set('584145936335','Carlos Hernandez');
+t_c.set('584124500070','Carlos Hernandez');
 t_c.set('584128314388','Carn. la Embocada');
 t_c.set('01910243272100053204','Carn. la Embocada');
 t_c.set('584244392499','Carolina');
@@ -289,6 +291,11 @@ t_c.set('584125100639','Colegio Teresiano');
 t_c.set('584149479895','Darley De Abreu');
 t_c.set('584146784460','El chivato Rosa');
 t_c.set('584140430489','El sabor de Lili');
+t_c.set('584124613036','El sazon de la Abuela')
+t_c.set('584149487610','Igual que en casa')
+t_c.set('01080923150100080735','Rincon Italiano')
+t_c.set('584143419930','Panaderia hogar pan')
+t_c.set('584244988456','Cesar Perrero Paveca')
 t_c.set('584144791429','Esposa de Ludi');
 t_c.set('01380008190080143008','Euro Licores');
 t_c.set('01680052095101387169','Euro Licores');
@@ -326,7 +333,7 @@ t_c.set('01020114420000595059','Materiales Alianza');
 t_c.set('01020114420000585059','Materiales Alianza');
 t_c.set('IGRIVAL','Materiales Alianza');
 t_c.set('584124097520','Maximum Carnes');
-t_c.set('01050137711137063955','Maximum Carnes');
+t_c.set('01020430580000079701','Maximum Carnes');
 t_c.set('01020152750000507309','Mc Center Pool');
 t_c.set('01380008190085381160','Mc Center Pool');
 t_c.set('01380008120080196594','Mc Center Pool');
@@ -344,6 +351,7 @@ t_c.set('584126903878','Peluquero Roro');
 t_c.set('PEPSI COLA','PEPSI COLA');
 t_c.set('01140226742260075694','Piedra pintada');
 t_c.set('01380008100080137300','Piedra pintada');
+t_c.set('01340419414191041936','Piedra pintada');
 t_c.set('584144314028','Quiosco Sara');
 t_c.set('584123441007','Rafael Pita');
 t_c.set('584148944498','Rafael Pita');
@@ -357,7 +365,7 @@ t_c.set('584144397087','Tequenack');
 t_c.set('01340419444191042090','Venvidrio');
 t_c.set('584144159903','Venvidrio');
 t_c.set('584120386419','Venvidrio');
-t_c.set('584121589089','Vicente');
+t_c.set('584121589089','La gran parada');// Vicente
 t_c.set('584144125422','Vilmar');
 t_c.set('01080927480100022435','Vikingo');
 t_c.set('584124465846','Yoni el cauchero');
@@ -372,6 +380,14 @@ t_d.set('22/12/2022',16.18);
 */
 var productos=[];
 
+
+function removeDuplicates(arr) {
+ const unique = arr.filter((item, index) => (arr.indexOf(item) === index));
+return unique;
+   }
+ 
+    
+
 function Activalector_archivos(){
 getFile2 = new selectFile;
 getFile2.targets('choose2','selected');
@@ -381,18 +397,17 @@ archivos2.addEventListener('change', Leer_Archivo, false);
 getFile2.simulate();
 }
 function Leer_Archivo(e){
-
-    var archivos=e.target.files;
+  var archivos=e.target.files;
   var narch=archivos.length;
-    for(var f=0;f<narch;f++){
+
+for(var f=0;f<narch;f++){
        var archivo=archivos[f];
         console.log('nombre archivo'+archivo.lastModifiedDate);
-  
-  Fecha_hora=archivo.lastModifiedDate.toLocaleString('es-US',{});
-//toUTCString();
-          var lector=new FileReader();
-          lector.addEventListener("load",function(e){procesa_archivo(e);},false);
-          lector.readAsText(archivo); 
+        Fecha_hora=archivo.lastModifiedDate.toLocaleString('es-US',{});
+        var lector=new FileReader();
+        lector.addEventListener("load",function(e){procesa_archivo(e);},false);
+        lector.readAsText(archivo); 
+          
      } 
 }
 
@@ -410,6 +425,7 @@ div3.innerHTML=texto;
 }
 
 function genera_salida1(){
+if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
 var texto='';
 pagos.sort(ordena_pagos);
@@ -421,7 +437,10 @@ var total_parcial=0;
 console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
 texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
 texto+='<table width="100%">';
+alert(pagos.length);
 for (var i=0;i<pagos.length;i++){
+ if (pagos[i].tc=='A') {colb='SkyBlue';} else {colb='DodgerBlue';}
+ console.log('i: '+i);
  if (pagos[i].fecha!=fecha_previa) {
     fecha_previa=pagos[i].fecha;
     console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
@@ -431,17 +450,20 @@ for (var i=0;i<pagos.length;i++){
     texto+='<table width="100%">';
   }
   console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
+
 //texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
-texto+='<tr onclick="muestra('+i+')";><td>'+pagos[i].telf+'</td><td>'+pagos[i].hora+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
+texto+='<tr onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].telf+'</td><td>'+pagos[i].hora+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
 
 }
  texto+='</table>';
 divaux.innerHTML=texto;
 divaux.style.visibility="visible";
 }
+}
 
 
 function genera_salida2(){
+if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
 var texto='';
  pagos.sort(ordena_pagos2);
@@ -452,7 +474,8 @@ var montop='';
  console.log( nombre_previo);
 texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+nombre_previo+'</p>';
 for (var i=0;i<pagos.length;i++){
-  
+    if (pagos[i].tc=='A') {colb='SkyBlue';} else {colb='DodgerBlue';}
+
  if (pagos[i].nombre!=nombre_previo) {
     
     nombre_previo=pagos[i].nombre;
@@ -479,7 +502,7 @@ for (var i=0;i<pagos.length;i++){
   }
 console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
 //texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora.substring(0,5)+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
-texto+='<p>'+pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
+texto+='<p style="background-color:'+colb+';">'+pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
 } // for i
 
  console.log(total_parcial.toFixed(2));
@@ -490,8 +513,10 @@ texto+='<p>Total :'+total_parcial.toFixed(2)+'</p>';
 divaux.innerHTML=texto;
 divaux.style.visibility="visible";
 }
+}
 
 function genera_salida3(){
+if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
 var texto='';
  pagos.sort(ordena_pagos3);
@@ -503,6 +528,8 @@ console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
 texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
 texto+='<table width="100%">';
 for (var i=0;i<pagos.length;i++){
+   if (pagos[i].tc=='A') {colb='SkyBlue';} else {colb='DodgerBlue';}
+
  if (pagos[i].fecha!=fecha_previa) {
     fecha_previa=pagos[i].fecha;
     console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
@@ -513,17 +540,18 @@ for (var i=0;i<pagos.length;i++){
   }
   console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
 //texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
-texto+='<tr  onclick="muestra('+i+')";><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
+texto+='<tr  onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
 
 }
  texto+='</table>';
 divaux.innerHTML=texto;
 divaux.style.visibility="visible";
 }
+}
 
 function procesa_archivo(e){
 contenido=e.target.result; 
-localStorage.setItem('Arch_datos_banco',contenido);
+//localStorage.setItem('Arch_datos_banco',contenido);
 procesa_contenido();
 }
 var Tipocuenta='';
@@ -538,29 +566,33 @@ for (var i=0;i<dat_especial.length;i++) {
  }
 return dato;
 }
+var posi=0;
+var pagos=[];
+var TC;
 function procesa_contenido(){
 function cumple1(value) {
 if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 ) ) {return true;} else {return false;}
 }
-
-pagos=[];
 var nsem;
 var sem;
 var lineas=contenido.split("\r\n");
  var post=lineas[0].indexOf('01910027801127274106');
-if (post>=0) Tipocuenta="Cuenta de Ahorro";
+if (post>=0) {Tipocuenta="Cuenta de Ahorro"; TC='A';}
  var post=lineas[0].indexOf('01910027822127000477');
-if (post>=0) Tipocuenta="Cuenta Juridica";
-console.log(lineas); 
+if (post>=0) {Tipocuenta="Cuenta Juridica";TC='J';}
+//console.log(lineas); 
 var result=lineas.filter(cumple1)
-console.log(result);
-for (var i=0;i<result.length;i++){
-  var campos=result[i].split('\t');
+//console.log(result);
+alert('pi '+posi);
+alert('long '+result.length);
+for (var i=posi;i<(posi+result.length);i++){
+  var campos=result[i-posi].split('\t');
   pagos[i]=new Object();
   pagos[i].fecha=campos[0];
   pagos[i].hora=campos[1];
   pagos[i].ref=campos[2];
   pagos[i].motivo=campos[6];
+  pagos[i].tc=TC;
   var telfn=campos[6];
  pagos[i].telf=telfn;
 console.log(pagos[i].telf);
@@ -578,7 +610,7 @@ console.log(pagos[i].telf);
        if (post>=0) {pagos[i].telf=telfn.substring(post+12,post+32);console.log(pagos[i].telf);}
          else {
 
-          post=result[i].indexOf('Abono por Creditos Directos');
+          post=result[i-posi].indexOf('Abono por Creditos Directos');
 //alert(post);
           if (post>=0) { pagos[i].telf=caso_especial(telfn); }
 
@@ -600,6 +632,19 @@ console.log(pagos[i].telf);
 }
 document.getElementById("t_c").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
 //genera_salida2();
+
+//const unique = pagos.filter((item, index) => (pagos.indexOf(item) === index));
+//pagos=unique;
+
+//const dataArr = new Set(pagos);
+
+//  pagos = [...dataArr];
+
+let set= new Set( pagos.map( JSON.stringify ) )
+pagos = Array.from( set ).map( JSON.parse );
+posi=pagos.length;
+alert('posi2 '+posi);
+localStorage.setItem('pagos_banco',JSON.stringify(pagos));
 }
 
 function ordena_pagos(a, b) {
@@ -704,8 +749,13 @@ const max_valor=200;
 function inicio(){
 Activalector_archivos();
 descarga_historico();
-contenido=localStorage.getItem('Arch_datos_banco');
+//contenido=localStorage.getItem('Arch_datos_banco');
+pagos=JSON.parse(localStorage.getItem('pagos_banco'));
+if (pagos==null) {pagos=[];}
+posi=pagos.length;
+console.log(pagos);
 }
+
 function quitar(nombdiv){
 var div=document.getElementById(nombdiv);
 div.hidden=true;
@@ -754,7 +804,7 @@ function ajaxPositiveD(response) {
    t_d.set(Historico[i]["fecha"],(Historico[i]["bcv"]));
   }
   localStorage.setItem('HDOLAR',JSON.stringify(Historico));
-  procesa_contenido();
+  // procesa_contenido();
     }
 function showErrorD(err) { console.log('muestor error', err); 
    Historico=JSON.parse(localStorage.getItem('HDOLAR'));
@@ -800,7 +850,7 @@ if ('serviceWorker' in navigator) {
 
 <div>
 <label hidden id=selected>Nothing selected</label><br>
-<input hidden type=file id="choose2" accept="*.txt">
+<input hidden type=file id="choose2" accept="*.txt" multiple>
 </div>
 <div id="div3">
 </div>
