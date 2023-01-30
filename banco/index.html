@@ -437,10 +437,10 @@ var total_parcial=0;
 console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
 texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
 texto+='<table width="100%">';
-alert(pagos.length);
+//alert(pagos.length);
 for (var i=0;i<pagos.length;i++){
  if (pagos[i].tc=='A') {colb='SkyBlue';} else {colb='DodgerBlue';}
- console.log('i: '+i);
+// console.log('i: '+i);
  if (pagos[i].fecha!=fecha_previa) {
     fecha_previa=pagos[i].fecha;
     console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
@@ -449,10 +449,10 @@ for (var i=0;i<pagos.length;i++){
 
     texto+='<table width="100%">';
   }
-  console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
+//  console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
 
 //texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
-texto+='<tr onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].telf+'</td><td>'+pagos[i].hora+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
+texto+='<tr onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].nombre+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td></tr>';
 
 }
  texto+='</table>';
@@ -502,7 +502,7 @@ for (var i=0;i<pagos.length;i++){
   }
 console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
 //texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora.substring(0,5)+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
-texto+='<p style="background-color:'+colb+';">'+pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
+texto+='<p style="background-color:'+colb+';">'+pagos[i].fecha+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
 } // for i
 
  console.log(total_parcial.toFixed(2));
@@ -540,7 +540,7 @@ for (var i=0;i<pagos.length;i++){
   }
   console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
 //texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
-texto+='<tr  onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
+texto+='<tr  onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].nombre+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td></tr>';
 
 }
  texto+='</table>';
@@ -583,8 +583,8 @@ if (post>=0) {Tipocuenta="Cuenta Juridica";TC='J';}
 //console.log(lineas); 
 var result=lineas.filter(cumple1)
 //console.log(result);
-alert('pi '+posi);
-alert('long '+result.length);
+//alert('pi '+posi);
+//alert('long '+result.length);
 for (var i=posi;i<(posi+result.length);i++){
   var campos=result[i-posi].split('\t');
   pagos[i]=new Object();
@@ -643,7 +643,7 @@ document.getElementById("t_c").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
 let set= new Set( pagos.map( JSON.stringify ) )
 pagos = Array.from( set ).map( JSON.parse );
 posi=pagos.length;
-alert('posi2 '+posi);
+//alert('posi2 '+posi);
 localStorage.setItem('pagos_banco',JSON.stringify(pagos));
 }
 
