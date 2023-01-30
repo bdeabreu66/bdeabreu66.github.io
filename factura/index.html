@@ -1209,6 +1209,7 @@ function factura2(){
 var Tbs;
 var totaldsiva=0;
 var totalbsiva=0;
+var BIMD=0;
 var texto='Fecha: '+fecha_actual()+'<br>';
 texto+=dist+'<br>';
 texto+='Cliente: '+cliente+'<br>';
@@ -1243,10 +1244,9 @@ var Tdolar=+((data[i][4]*pu + data[i][5]*pb));
    }
 
 if (Tdolar!=0) { 
+  if (fm!=1) {BIMD+=Tdolar;}
   totald+=parseFloat((Tdolar*fm).toFixed(2));
   totaldsiva+=parseFloat((Tdolar).toFixed(2));
-  //totalb+=parseFloat((Tbs*fm).toFixed(2));
-  //totalbsiva+=parseFloat(Tbs.toFixed(2));
   Ftexto+='------------\n';
  // if (tipo==0) {texto+='<table width="100%">';} else  {texto+='<table style="font-size:1em;" width="100%">';}
  texto+='<table width="100%">';
@@ -1309,33 +1309,51 @@ texto+='</table>';
 texto+='<HR>';
 Ftexto+='============================================\n';
 //texto+='<span style="color:yellow; font-size:1em;">Total</span><br>';
-if (tipo==0) {
-texto+='<table width="100%"><tr align="right"><td style="width:15%;"> </td><td style="width:15%;"></td><td style="width:35%;">'+'S/IVA'+'</td><td style="width:35%;">'+'C/IVA'+'</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> Total </td><td style="width:15%;"></td><td style="width:35%;">'+(totaldsiva).toFixed(2)+' $ </td><td style="width:35%;">'+(totald).toFixed(2)+' $&nbsp</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> IVA </td><td style="width:15%;"></td><td style="width:35%;">'+(totald-totaldsiva).toFixed(2)+' $ </td><td style="width:35%;">'+''+'</td></tr></table>';
-//texto+='<table width="100%"><tr align="right"><td style="width:20%;"> </td><td style="width:20%;"></td><td style="width:30%;">'+(totalbsiva).toFixed(2)+' Bs </td><td style="width:30%;">'+(totalb).toFixed(2)+' Bs&nbsp</td></tr></table>';
 
-Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+'$  C/IVA: '+(totald).toFixed(2)+' $ \n'
-Ftexto+='IVA: '+(totald-totaldsiva).toFixed(2)+'$\n';
+var TM="";
+if (tipo==0) {TM="$";} else {TM="Bs";}
+
+var IVAD=(totald-totaldsiva).toFixed(2);
+var BIMD=(BIMD).toFixed(2);
+var BIMB=(parseFloat(BIMD)*factor).toFixed(2);
+var descd=(parseFloat(IVAD)*0.75).toFixed(2);
+var IVAB=(parseFloat(IVAD)*factor).toFixed(2);
+var descb=(parseFloat(IVAB)*0.75).toFixed(2);
+if (tipo==0) {
+
+texto+='<table width="60%">';
+texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total S/IVA </td><td style="width:50%;">'+(totaldsiva).toFixed(2)+' '+TM+'</td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMD+' '+TM+' </td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAD+' '+TM+' </td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totald).toFixed(2)+' '+TM+' </td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dscto AR </td><td style="width:50%;">'+(parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totald-parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
+
+texto+='</table>';
+Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+' '+TM+'  C/IVA: '+(totald).toFixed(2)+' '+TM+ ' \n'
+Ftexto+='IVA: '+IVAD+' '+TM+' \n';
 
 }
 
 if (tipo==1) {
-texto+='<table width="100%"><tr align="right"><td style="width:15%;"> </td><td style="width:15%;"></td><td style="width:35%;">'+'S/IVA'+'</td><td style="width:35%;">'+'C/IVA'+'</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> Total </td><td style="width:15%;"></td><td style="width:35%;">'+(totalbsiva).toFixed(2)+' Bs </td><td style="width:35%;">'+(totalb).toFixed(2)+' Bs&nbsp</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> IVA </td><td style="width:15%;"></td><td style="width:35%;">'+(totalb-totalbsiva).toFixed(2)+' Bs </td><td style="width:35%;">'+''+'</td></tr></table>';
-//texto+='<table width="100%"><tr align="right"><td style="width:20%;"> </td><td style="width:20%;"></td><td style="width:30%;">'+(totalbsiva).toFixed(2)+' Bs </td><td style="width:30%;">'+(totalb).toFixed(2)+' Bs&nbsp</td></tr></table>';
+texto+='<table width="60%">';
+texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </td><td style="width:50%;">'+(totalbsiva).toFixed(2)+' '+TM+ '</td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMB+' '+TM+' </td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAB+' '+TM+'</td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totalb).toFixed(2)+' '+TM+'</td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
+texto+='</table>';
 
-Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+'Bs C/IVA: '+(totalb).toFixed(2)+' Bs \n'
-Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+'Bs\n';
+Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+TM+' C/IVA: '+(totalb).toFixed(2)+' '+TM+' \n'
+Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+TM+ ' \n';
 }
 console.log(Ftexto);
 
 
 
 
-var TM="";
-if (tipo==0) {TM="$";} else {TM="Bs";}
+
 
 var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
 textoT+='<table width="100%"';
@@ -1353,12 +1371,13 @@ divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width:
 textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
 divfactura.innerHTML=textoT;
 divfactura.hidden=false;
-console.log("contador: "+contador);
+//console.log("contador: "+contador);
 document.getElementById("contad").innerText=contador+ " Productos";
 }
 
 var tipo=0;
 var tipo2=0;
+
 function cambia_moneda(){
 tipo=1-tipo;
 factura2();
