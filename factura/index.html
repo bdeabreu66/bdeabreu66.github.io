@@ -282,7 +282,7 @@ texto+='<tr><td style="width:80%;font-size:1em;">'+data[i][0]+'</td><td style="w
 
 }
 texto+='</table></div>';
-texto+='<p>Monto: '+Monto+ '</p>';
+texto+='<p>Monto: '+Monto.toFixed(2)+ ' $ </p>';
 div3.innerHTML=texto;
 }
 
@@ -566,6 +566,7 @@ for(var i=0;i<localStorage.length;i++){
 var nomb=localStorage.key(i); 
 if (nomb.indexOf("FAC_")==0) {listasel.unshift(nomb.substr(4));} 
  } 
+listasel=listasel.sort();
 selectlista();
 }
 
