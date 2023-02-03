@@ -1316,7 +1316,8 @@ document.getElementById("contad").innerText=contador+ " Productos";
 
 function pedido(){
 var Ptexto='Pedido de alimentos de Distribuidora Pita Orozco\n';
-Ptexto+='------------\n';
+Ptexto+='Codigo: 2240066\n'
+Ptexto+='-----------\n';
 for (var i=0;i<data.length;i++){
 if (data[i][4]!=0 ) {Ptexto+= data[i][4]+' U '+data[i][0]+'\n';}
   if (data[i][5]!=0) {Ptexto+= data[i][5]+' '+data[i][0]+'\n';}
