@@ -1314,6 +1314,22 @@ console.log("contador: "+contador);
 document.getElementById("contad").innerText=contador+ " Productos";
 }
 
+function pedido(){
+var Ptexto='Pedido de alimentos de Distribuidora Pita Orozco\n';
+Ptexto+='------------\n';
+for (var i=0;i<data.length;i++){
+if (data[i][4]!=0 ) {Ptexto+= data[i][4]+' U '+data[i][0]+'\n';}
+  if (data[i][5]!=0) {Ptexto+= data[i][5]+' '+data[i][0]+'\n';}
+
+}
+console.log(Ptexto);
+
+const shareData = {
+  title: 'Pedido',
+  text: Pexto
+}
+comparte(shareData);
+}
 
 function factura2(){
 var Tbs;
@@ -1475,6 +1491,7 @@ textoT+='<td width="15%"><button class="btop" onclick="lee_facturas();">Ver</but
 textoT+='<td width="25%"></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda();">' + TM +'</button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
+textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Pedido" id="btnc" onclick="pedido();"> P </button></td>';
 textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
 textoT+='</tr></table></div><br>';
 divfactura=document.getElementById("factura")
