@@ -647,6 +647,11 @@ posi=pagos.length;
 localStorage.setItem('pagos_banco',JSON.stringify(pagos));
 }
 
+function borrar_datos(){
+pagos=[];
+localStorage.setItem('pagos_banco','');
+}
+
 function ordena_pagos(a, b) {
   if (!fecha_mayor_igual(a.fecha,b.fecha)) return -1;
   if (!fecha_mayor_igual(b.fecha,a.fecha)) return 1;
@@ -750,8 +755,8 @@ function inicio(){
 Activalector_archivos();
 descarga_historico();
 //contenido=localStorage.getItem('Arch_datos_banco');
-pagos=JSON.parse(localStorage.getItem('pagos_banco'));
-if (pagos==null) {pagos=[];}
+var texto=localStorage.getItem('pagos_banco')
+if ( texto!='') {pagos=JSON.parse(texto);} else {pagos=[];}
 posi=pagos.length;
 console.log(pagos);
 }
@@ -773,10 +778,7 @@ var url ='mailto:brauliodeabreu@gmail.com?subject=Retenciones';
 window.open(url);
 }
 
- function guarda_data_green(){
- localStorage.setItem('DAT_GREEN', JSON.stringify(productos));
-}
-
+ 
 
 
 
@@ -845,7 +847,9 @@ if ('serviceWorker' in navigator) {
 <button class="btop" onclick="genera_salida2();">Cliente</button>
 <button class="btop" onclick="genera_salida3();">Fecha-Cliente</button>
 </div>
-<div id="header"> <button class="btop" onclick="Activalector_archivos();">Cargar Datos</button>  
+<div id="header"> 
+<button class="btop" onclick="Activalector_archivos();">Cargar Datos</button>  
+<button class="btop" onclick="borrar_datos();">Borrar Datos</button>
 </div>
 
 <div>
