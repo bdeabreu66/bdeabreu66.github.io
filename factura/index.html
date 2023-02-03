@@ -1313,9 +1313,9 @@ divfactura.hidden=false;
 console.log("contador: "+contador);
 document.getElementById("contad").innerText=contador+ " Productos";
 }
-
+var Ptexto;
 function pedido(){
-var Ptexto='Pedido de alimentos de Distribuidora Pita Orozco\n';
+Ptexto='Pedido de alimentos de Distribuidora Pita Orozco\n';
 Ptexto+='Codigo: 2240066\n'
 Ptexto+='-----------\n';
 for (var i=0;i<data.length;i++){
@@ -1327,7 +1327,7 @@ console.log(Ptexto);
 
 const shareData = {
   title: 'Pedido',
-  text: Pexto
+  text: Ptexto
 }
 comparte(shareData);
 }
