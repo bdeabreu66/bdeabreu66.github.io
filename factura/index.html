@@ -282,6 +282,7 @@ texto+='<tr><td style="width:80%;font-size:1em;">'+data[i][0]+'</td><td style="w
 
 }
 texto+='</table></div>';
+texto+='<p>Monto: '+Monto+ '</p>';
 div3.innerHTML=texto;
 }
 
@@ -323,8 +324,9 @@ textoT+='<button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<but
 div3.innerHTML=textoT;
 
 }
-
+var Monto=0;
 function total_unidades_vendidas(){
+Mont0=0;
 var f1=document.getElementById("f1").value;
 var f2=document.getElementById("f2").value;
 f1=inv_fecha_date(f1);
@@ -344,8 +346,10 @@ for(var i=0;i<localStorage.length;i++){
  var nomb=localStorage.key(i); 
  if (nomb.indexOf("FAC_")==0 )  
 { 
+
   var fech=nomb.split('_')[2];
   var nombcli=nomb.split('_')[1];
+var iva=1;
   console.log('nc'+nombcli);
 
   texto=localStorage.getItem(nomb);
@@ -358,8 +362,11 @@ if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) 
     for (var j=1;j<ped.length;j++) {
       var items=ped[j].split('#');
       var ind=clave_ind.get(items[0]);
+  if (data[ind][3]==0) {iva=1;} else {iva=1.16;}
       totalunid[ind]+=parseInt(items[1]);
+ Monto+=parseInt(items[1])*parseFloat(items[2])*iva;
       totalcajas[ind]+=parseInt(items[3]);
+ Monto+=parseInt(items[3])*parseFloat(items[4])*iva;
     }
  
   } 
@@ -588,18 +595,21 @@ var nomb="FAC_"+listasel[num];
 const resp = confirm("Esta seguro de eliminar la factura");
 //var resp=prompt(,'S/N'); 
 if (resp) {localStorage.removeItem(nomb);}
+cancelar();
 quitarlista();
 lee_facturas();
 }
 function borra2(num){
 var nomb="FAC_"+listasel[num];
 localStorage.removeItem(nomb);
-quitarlista();
-lee_facturas();
+cancelar();
+//quitarlista();
+//lee_facturas();
 }
 function factura_ver(num){
 var nomb=listasel[num];
 recupera_factura("FAC_"+nomb);
+cancelar();
 factura3();
 
 }
@@ -636,8 +646,8 @@ if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
 console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
 }
 } 
-//factura3();
-quitarlista();
+factura2();
+cancelar();
 }
 function revertir_factura(num){
 var nomb=listasel[num];
@@ -646,6 +656,7 @@ suma_inventario2();
 borra2(num);
 //factura3();
 //quitarlista();
+cancelar();
 }
 
 function guardar_factura(){
