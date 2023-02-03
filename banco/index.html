@@ -756,7 +756,8 @@ Activalector_archivos();
 descarga_historico();
 //contenido=localStorage.getItem('Arch_datos_banco');
 var texto=localStorage.getItem('pagos_banco')
-if ( texto!='') {pagos=JSON.parse(texto);} else {pagos=[];}
+
+if ( texto!='' && texto!=null) {pagos=JSON.parse(texto);} else {pagos=[];}
 posi=pagos.length;
 console.log(pagos);
 }
