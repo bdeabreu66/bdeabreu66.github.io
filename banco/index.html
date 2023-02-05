@@ -396,19 +396,46 @@ archivos2.value=null;
 archivos2.addEventListener('change', Leer_Archivo, false);
 getFile2.simulate();
 }
-function Leer_Archivo(e){
-  var archivos=e.target.files;
-  var narch=archivos.length;
 
-for(var f=0;f<narch;f++){
-       var archivo=archivos[f];
-        console.log('nombre archivo'+archivo.lastModifiedDate);
-        Fecha_hora=archivo.lastModifiedDate.toLocaleString('es-US',{});
-        var lector=new FileReader();
-        lector.addEventListener("load",function(e){procesa_archivo(e);},false);
-        lector.readAsText(archivo); 
-          
-     } 
+
+function readFileAsText(file){
+  return new Promise(function(resolve,reject){
+  let fr = new FileReader();
+  fr.onload = function(){
+     resolve(fr.result);
+   };
+   fr.onerror = function(){
+     reject(fr);
+   };
+   fr.readAsText(file);
+   });
+}
+//function Leer_Archivo(e){}
+
+function Leer_Archivo(e){
+ var archivos=e.target.files;
+var narch=archivos.length;
+let readers=[];
+ for(var f=0;f<narch;f++){
+  readers.push(readFileAsText(archivos[f]));
+  console.log('nombre archivo'+archivos[f].lastModifiedDate);
+  Fecha_hora=archivos[f].lastModifiedDate.toLocaleString('es-US',{});
+ } 
+ Promise.all(readers).then((values) => {
+  console.log(values);
+  contenido='';
+  for(var f=0;f<narch;f++){
+     contenido+=values;
+     }
+     procesa_contenido();
+ });
+
+}
+var contenido='';
+function procesa_archivo(e){
+//contenido=e.target.result; 
+//localStorage.setItem('Arch_datos_banco',contenido);
+//procesa_contenido();
 }
 
 function fecha_mayor_igual(f1,f2){
@@ -549,11 +576,7 @@ divaux.style.visibility="visible";
 }
 }
 
-function procesa_archivo(e){
-contenido=e.target.result; 
-//localStorage.setItem('Arch_datos_banco',contenido);
-procesa_contenido();
-}
+
 var Tipocuenta='';
 
 function caso_especial(dato){
@@ -575,6 +598,7 @@ if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibi
 }
 var nsem;
 var sem;
+console.log(contenido);
 var lineas=contenido.split("\r\n");
  var post=lineas[0].indexOf('01910027801127274106');
 if (post>=0) {Tipocuenta="Cuenta de Ahorro"; TC='A';}
