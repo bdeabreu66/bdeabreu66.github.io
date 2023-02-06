@@ -404,15 +404,25 @@ for(var i=0;i<inventario.length;i++){
 console.log('clave '+inventario[i]["CLAVE"]);
  var ind=clave_ind.get(inventario[i]["CLAVE"]);
  console.log('indice '+ind);
- if (inventario[i]["UNID"]!=0) {
-console.log(data[ind][0]+inventario[i]["UNID"]+ " cajas");
-texto+='<tr><td style="width:80%;font-size:1em;">'+data[ind][0]+'</td><td style="width:15%;font-size:1em;">'+inventario[i]["UNID"]+'<td style="width:5%;font-size:1em;">U</td>'+'</td></tr>';
-}
- if (inventario[i]["CAJAS"]!=0) {
-console.log(data[ind][0]+" "+inventario[i]["CAJAS"]+" unidades");
-texto+='<tr><td style="width:80%;font-size:1em;">'+data[ind][0]+'</td><td style="width:15%;font-size:1em;">'+inventario[i]["CAJAS"]+'<td style="width:5%;font-size:1em;">C</td>'+'</td></tr>';
-}
+ if (inventario[i]["UNID"]!=0 || inventario[i]["CAJAS"]!=0 ) {
+  var nuc=parseInt(data[ind][1]);
+  var tu=parseInt(inventario[i]["CAJAS"])*nuc+parseInt(inventario[i]["UNID"]);
+   var tc=Math.floor(tu/nuc);
 
+  var ru=tu % nuc;
+
+  texto+='<tr><td style="width:70%;font-size:1em;">'+data[ind][0]+'</td>';
+  if (tc>0) {
+   texto+='<td style="width:15%;font-size:1em;">'+tc+' C</td>';
+  } else  {
+   texto+='<td style="width:15%;font-size:1em;"></td>';
+  }
+  if (ru>0) {
+   texto+='<td style="width:15%;font-size:1em;">'+ru+' U</td>';
+  } else  {
+   texto+='<td style="width:15%;font-size:1em;"></td>';
+  }
+ }
 }
 texto+='</table></div>';
 div3.innerHTML=texto;
@@ -434,17 +444,23 @@ function anula_inventario(){
 }
 function resta_inventario(){
   for (var i=0;i<data.length;i++){
-      if (data[i][4]!=0 || data[i][5]!=0) {
+   if (data[i][4]!=0 || data[i][5]!=0) {
        ind=inventario.findIndex(element => element.CLAVE==data[i][9])
-       inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])-data[i][4]).toString();
-       inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])-data[i][5]).toString();
-         if (inventario[ind]["UNID"]<0) {
+       if (ind==-1) {ind=inventario.length;
+         inventario[ind]["CLAVE"]=data[i][9];
+         inventario[ind]["UNID"]=0;
+         inventario[ind]["CAJAS"]=0;
+       }
+ inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])-data[i][4]).toString();
+ inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])-data[i][5]).toString();
+ /*
+       if (inventario[ind]["UNID"]<0) {
            var cj=1+Math.abs(parseInt(inventario[ind]["UNID"])/parseInt(data[i][1]));
            cj=parseInt(cj);
            inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])+cj*parseInt(data[i][1])).toString();
            inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])-cj).toString();
-         }
-       }
+         }*/
+    }
  }
 guarda_inventario();
 }
@@ -463,7 +479,7 @@ function suma_inventario(){
   for (var i=0;i<data.length;i++){
       if (data[i][4]!=0 || data[i][5]!=0) {
        ind=inventario.findIndex(element => element.CLAVE==data[i][9])
-  if (ind==-1) { ind=inventario.length;
+  if (ind==-1) {ind=inventario.length;
     inventario[ind]["CLAVE"]=data[i][9];
     inventario[ind]["UNID"]=0;
     inventario[ind]["CAJAS"]=0;
@@ -480,7 +496,11 @@ function suma_inventario2(){
   for (var i=0;i<datfac.length;i++){
       if (datfac[i].unidad!=0 || datfac[i].cajas!=0) {
        ind=inventario.findIndex(element => element.CLAVE==data[i][9])
-    console.log('ind '+ind);
+      if (ind==-1) {ind=inventario.length;
+        inventario[ind]["CLAVE"]=data[i][9];
+        inventario[ind]["UNID"]=0;
+        inventario[ind]["CAJAS"]=0;
+ }
        inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])+parseInt(datfac[i].unidad)).toString();
        inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])+parseInt(datfac[i].cajas)).toString();
       }
@@ -683,7 +703,7 @@ function guarda_factura(){
 var pu,pb;
 var bcv=parseFloat(document.getElementById("t2").value);
 var texto=(bcv).toFixed(4);
-alert(texto);
+
 var nomb='FAC'+'_'+cliente+'_'+fecha_actual()+'_'+nro_factura;
 console.log('nomb '+nomb);
 for (var i=0;i<data.length;i++) {
