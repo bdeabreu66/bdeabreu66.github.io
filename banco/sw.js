@@ -1,5 +1,5 @@
-// 06-02-2023
-const currentCache = 'banco-cache-v1.1';
+// 08-02-2023
+const currentCache = 'banco-cache-v1.2';
 const files =
 [
     'index.html',
