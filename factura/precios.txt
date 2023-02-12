@@ -167,7 +167,7 @@
       ["Y007 Yogurt Fruta Fresa Migurt 750 x 12",12,6.21,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y007',5.71],
       ["Y008 Yogurt Fruta Durazno Migurt 750 x 12",12,6.21,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y008',5.71],
       ["Y009 Yogurt sabor dulce Migurt 750 x 12",12,6.21,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y009',5.71],
-      ["Y036 Yogurt sabor fresa Migurt 125 x 24",24,1.33,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y036'1.22],
+      ["Y036 Yogurt sabor fresa Migurt 125 x 24",24,1.33,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y036',1.22],
       ["L260 Las llaves Detergente Bebe 400g x 30",30,1.38,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",1,'L260',1.27],
       ["L073 Las llaves Detergente P. LI 900g x 20",20,3.05,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",1,'L073',2.81],
       ["L081 Las llaves Detergente Floral 400g x 30",20,1.38,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",1,'L081',1.27],
