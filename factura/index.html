@@ -20,23 +20,23 @@ font-size:0.6em;
 }
 
 .bot3:hover {
-  background-color: #4CAF50; /* Green */
+  background-color: SteelBlue; /* Green */
   color: blue;
 }
 .bot3{
 transition-duration: 0.4s;
-background-color: #4CAF50; /* Green */
+background-color: SkyBlue; /* Green */
 padding:15px;
 font-size:1.5em;
 width:70%;
 }
 
 .bot4:hover {
-  background-color: #4CAF50; /* Green */
+  background-color: SteelBlue; /* Green */
   color: white;
 }
 .bot4{
-background-color: #4CAF50; /* Green */
+background-color: PowderBlue; /* Green */
 transition-duration: 0.4s;
 padding:15px;
 font-size:1.0em;
@@ -124,7 +124,8 @@ overflow-y:scroll;
 
 #introd {
 position:fixed;
-background-color:green;
+background-color:Aqua;
+border-radius: 5% 5%;
 top:30%;
 left:0%;
 height: 40%;
@@ -160,9 +161,9 @@ overflow-y:scroll;
   position: fixed;
   left: 0;
   top: 5%;
-  height=10%;
+  height:60%;
    width: 100%;
-  background-color: black;
+  background-color: Turquoise;
   color: red;
   text-align: left;
   font-size:0.8em;
@@ -245,8 +246,12 @@ grid-columns: 3/4;
 </tr></table>
 </div>
 <div id="cliente" hidden="true">
-<span onclick="limpiaCliente();">Cliente:</span> <input style="width:55%;" type="text" id="cli" value="" list="listaclientes">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>'
-<datalist id="listaclientes"></datalist>
+<span onclick="limpiaCliente();">Cliente:</span> <input style="width:55%;" type="text" id="cli" value="" list="listaclientes" oninput="datos_cliente();">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>'
+<datalist id="listaclientes"></datalist><br>
+Direcci&oacute;n:<textarea style="width:55%;" type="text" id="dircli" value="" ></textarea><br>
+Rif:<input style="width:55%;" type="text" id="rifcli" value="" ><br>
+AR:<input style="width:55%;" type="checkbox" id="espcli" value="" ><br>
+Deuda:<input style="width:55%;" type="number" id="deucli" value="" >
 </div>
 
 <div id="lista" > </div>
@@ -515,67 +520,95 @@ var cliente='';
 var AClientes=[];
 function limpiaCliente(){
 document.getElementById("cli").value='';
+datos_cliente();
 }
 function elimina_cliente(){
 var ecliente;
 document.getElementById("cliente").hidden=true;
 ecliente=document.getElementById("cli").value;
-var pos=AClientes.indexOf(ecliente);
+var pos=AClientes.findIndex(x=>x.nombre===ecliente);
 if (pos>=0) {AClientes.splice(pos,1);guarda_clientes();}
-
 
 //console.log('LC: '+Lclientes);
 }
 
 
 function setcliente(){
-document.getElementById("cliente").hidden=true;
 cliente=document.getElementById("cli").value;
 if (document.getElementById("factura").hidden==false) {factura2();}
-//console.log('LC: '+Lclientes);
-//console.log('C: '+cliente);
-//console.log('Lo: '+AClientes.length);
-//console.log(AClientes.indexOf(cliente));
-if (AClientes.indexOf(cliente)==-1) {AClientes.push(cliente);guarda_clientes();}
+if (cliente!='') {
+direccion=document.getElementById("dircli").value;
+rifcliente=document.getElementById("rifcli").value;
+cliente_especial=document.getElementById("espcli").checked;
+//alert(cliente_especial);
+deuda_cliente=document.getElementById("deucli").value;
+Ocliente.nombre=cliente;
+Ocliente.dir=direccion;
+Ocliente.rif=rifcliente;
+Ocliente.esp=cliente_especial;
+Ocliente.deuda=deuda_cliente;
+
+if (AClientes!=null) {var indic=AClientes.findIndex(x => x.nombre === cliente);} else {indic=-1;}
+//alert(indic);
+if (indic==-1) {AClientes.push(Ocliente);}
+guarda_clientes();
 //console.log('LC: '+Lclientes);
 }
+document.getElementById("cliente").hidden=true;
 
+}
 
+var Ocliente=new Object();
 function Actualiza_cliente(){
 Lee_clientes();
 divcliente=document.getElementById("cliente");
-document.getElementById("cli").value=cliente;
 //divcliente.innerHTML=texto;
 divcliente.hidden=false;
-
+datos_cliente();
 }
 
+function datos_cliente(){
+cliente=document.getElementById("cli").value;
+var ind=AClientes.findIndex(x=>x.nombre===cliente);
 
+if (ind>=0) {
+ Ocliente=AClientes[ind];
+ document.getElementById("rifcli").value=Ocliente.rif;
+ document.getElementById("espcli").checked=Ocliente.esp;
+ document.getElementById("dircli").value=Ocliente.dir;
+ document.getElementById("deucli").value=Ocliente.deuda;
+} else {
+
+ document.getElementById("rifcli").value='';
+ document.getElementById("espcli").checked=false;
+ document.getElementById("dircli").value='';
+ document.getElementById("deucli").value=0;
+
+}
+}
 function guarda_clientes(){
 var Lclientes='';
-for (var i = 0; i < AClientes.length; i++){
-Lclientes+='&'+AClientes[i];
-}
-//console.log('LC: '+Lclientes);
-if (Lclientes.length>0) {localStorage.setItem('Clientes',Lclientes.substr(1));}
+
+if (AClientes.length>0) {localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));}
    else 
-{localStorage.setItem('Clientes','');}
+{localStorage.setItem('Clientes_Pita','');}
 
 }
-
 
 function Lee_clientes(){
-Lclientes=localStorage.getItem('Clientes');
-if (Lclientes!='' && Lclientes!=null) {
-AClientes=Lclientes.split('&');
-var options='';
-for (var i = 0; i < AClientes.length; i++) {
-  options += '<option value="' + AClientes[i] + '" />';
-}
-
+Lclientes=localStorage.getItem('Clientes_Pita');
+AClientes=JSON.parse(Lclientes);
+console.log(AClientes);
+//alert(JSON.stringify(AClientes));
+if (AClientes!=null) {
+ var options='';
+ for (var i = 0; i < AClientes.length; i++) {
+   options += '<option value="' + AClientes[i]["nombre"] + '" />';
+ }
 //console.log('op'+options)
 document.getElementById('listaclientes').innerHTML = options;
-}
+} else {AClientes=[];}
+
 }
 
 function guarda_pedido(){
@@ -642,12 +675,18 @@ function factura_ver(num){
 var nomb=listasel[num];
 recupera_factura("FAC_"+nomb);
 cancelar();
-factura3();
+factura3(num);
 
 }
 
 function clickp(num){
+
+var nomb=listasel[num];
+recupera_factura("FAC_"+nomb);
+factura();
+factura3(num);
 quitarlista();
+/*
 var div3 = document.getElementById("auxiliar");
 var texto='';
 texto+='<div><button onclick="factura_ver('+num+');"> Ver </button>';
@@ -659,6 +698,7 @@ div3.innerHTML=texto;
 div3.style="display: block;";
 
 console.log(div3.innerHTML);
+*/
 }
 
 function cancelar(){
@@ -685,17 +725,21 @@ function revertir_factura(num){
 var nomb=listasel[num];
 recupera_factura("FAC_"+nomb);
 suma_inventario2();
+fact_base(num);
 borra2(num);
+cliente=cliente_factura;
 //factura3();
 //quitarlista();
 cancelar();
 }
 
 function guardar_factura(){
-//nro_factura=1;
-nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
-var resp=prompt("Cliente: "+cliente+"Introduzca el numero de la factura:",nro_factura)
-if (resp!='') {nro_factura=parseInt(resp);guarda_factura(); localStorage.setItem('FACT_NRO',(nro_factura+1).toString())}
+if (cliente=='') {alert('Falta Cliente en factura');} else
+ {nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
+   var resp=prompt("Cliente: "+cliente+" Introduzca el numero de la factura:",nro_factura)
+   if (resp!=null) {nro_factura=parseInt(resp);guarda_factura(); localStorage.setItem('FACT_NRO',(nro_factura+1).toString())}
+}
+
 }
 
 
@@ -921,13 +965,11 @@ data=eval(localStorage.getItem('data'));
 
 }
 
-
-
 divt=document.getElementById("divt");
 fiva=7.25;
 
 var j=0;
-
+Lee_clientes();
 
 
 data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,63,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV001'],
@@ -1226,7 +1268,7 @@ return dia + '/' +mes + '/' +hoy.getFullYear().toString()
 
 }
 
-function factura3(){
+function factura3(numf){
 var Tbs;
 var totaldsiva=0;
 var totalbsiva=0;
@@ -1356,7 +1398,16 @@ var TM2="";
 if (tipo2==0) {TM2="$";} else {TM2="Bs";}
 
 var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
-textoT+='<button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda2();">' + TM2 + '</button>&nbsp<button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button> <button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></div><br>';
+textoT+='<table width="100%"';
+textoT+='<tr>';
+textoT+='<td width="15%"><button class="btop" onclick="borra('+numf+');">Borrar</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="revertir_factura('+numf+');">Revertir</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="fact_base('+numf+');">Estab</button></td>';
+textoT+='<td width="5%"></td>';
+textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda2(numf);">' + TM2 +'</button></td>';
+textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
+textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
+textoT+='</tr></table></div><br>';
 divfactura=document.getElementById("factura")
 divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 100% ; height: 80%; background-color: lightgray;color:white; border: 3px solid #73AD21;";
 textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
@@ -1389,13 +1440,17 @@ var Tbs;
 var totaldsiva=0;
 var totalbsiva=0;
 var BIMD=0;
+var bcv=parseFloat(document.getElementById("t2").value);
 var factor=parseFloat(bcv);
-var texto='Fecha: '+fecha_actual()+'<br>';
+var texto='<table width="100%" ><tr><td>Fecha: '+fecha_actual()+'</td><td>  $ BCV: '+ (bcv).toFixed(4) +'</td></tr></table>';
 texto+=dist+'<br>';
 texto+='Cliente: '+cliente+'<br>';
+texto+='Direcci&oacute;n: '+Ocliente.dir+'<br>';
+texto+='Rif: '+Ocliente.rif;
+if (Ocliente.esp) {texto+=' AR';}
+texto+='<br>'
 //texto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'<br>';
-var bcv=parseFloat(document.getElementById("t2").value);
-texto+='$ BCV: '+ (bcv).toFixed(4) +'<br>';
+//texto+='$ BCV: '+ (bcv).toFixed(4) +'<br>';
 texto+="<center>Factura</center>";
 texto+='<center><span id="contad" ></span></center>';
 var totald=0;
@@ -1403,7 +1458,6 @@ var totalb=0;
 Ftexto='Fecha: '+fecha_actual()+'\n';
 Ftexto+=dist+'\n';
 Ftexto+='Cliente: '+cliente+'\n';
-//Ftexto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'\n';
 Ftexto+='$ BCV: '+  (bcv).toFixed(4) +'\n';
 Ftexto+="FACTURA\n"
 var contador=0;
@@ -1460,7 +1514,7 @@ if (Tdolar!=0) {
   totalb+=parseFloat(v4);
   totalbsiva+=parseFloat(v3);
 
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:'+colorb+';" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
+         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
          Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
          Ftexto+=data[i][4]+' U     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
@@ -1506,9 +1560,10 @@ texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total 
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMD+' '+TM+' </td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAD+' '+TM+' </td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totald).toFixed(2)+' '+TM+' </td></tr>';
+if (Ocliente.esp) {
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dscto AR </td><td style="width:50%;">'+(parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totald-parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
-
+}
 texto+='</table>';
 Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+' '+TM+'  C/IVA: '+(totald).toFixed(2)+' '+TM+ ' \n'
 Ftexto+='IVA: '+IVAD+' '+TM+' \n';
@@ -1521,8 +1576,10 @@ texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </t
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMB+' '+TM+' </td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAB+' '+TM+'</td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totalb).toFixed(2)+' '+TM+'</td></tr>';
+if (Ocliente.esp) {
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
+}
 texto+='</table>';
 
 Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+TM+' C/IVA: '+(totalb).toFixed(2)+' '+TM+' \n'
@@ -1565,9 +1622,9 @@ tipo=1-tipo;
 factura2();
 }
 
-function cambia_moneda2(){
+function cambia_moneda2(num){
 tipo2=1-tipo2;
-factura3();
+factura3(num);
 }
 
 function compartir(){
