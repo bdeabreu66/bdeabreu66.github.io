@@ -1,10 +1,9 @@
-// 09-02-2023
-const currentCache = 'banco-cache-v1.2';
+// 23-01-2023
+const currentCache = 'Histo-cache-23-01-2023';
 const files =
 [
     'index.html',
-    'icondef.png',
-    'selectFile.js'
+    'icondef.png'
  ];
 
 self.addEventListener('install', event => {
