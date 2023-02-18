@@ -263,6 +263,11 @@ function leer_ventas_diarias(fecha){
 //=localStorage,getItem(fecha)
 
 }
+function fecha_mayor_igual(f1,f2){
+var a2=f2.split('/');
+var a1=f1.split('/');
+ if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>a1[0]) {return false; } else {return true;}
+}
 var totalunid=[];
 var totalcajas=[];
 var modo_inv=false;
@@ -640,17 +645,50 @@ if (nomb.indexOf("FAC_")==0) {listasel.unshift(nomb.substr(4));}
 listasel=listasel.sort();
 selectlista();
 }
+function ord_nomb(a,b){
+var ela=a.split('_');
+var elb=b.split('_');
+ if (ela[0]<elb[0]) return -1;
+  if (ela[0]>elb[0]) return 1;
+  if (!fecha_mayor_igual(ela[1],elb[1])) return -1;
+  if (!fecha_mayor_igual(elb[1],ela[1])) return 1;
 
+ return 0;
+}
+function ord_fecha(a,b){
+var ela=a.split('_');
+var elb=b.split('_');
+  if (!fecha_mayor_igual(ela[1],elb[1])) return 1;
+  if (!fecha_mayor_igual(elb[1],ela[1])) return -1;
+  if (ela[0]<elb[0]) return -1;
+  if (ela[0]>elb[0]) return 1;
+  return 0;
+}
+
+function ordena_nombre(){
+listasel=listasel.sort(ord_nomb);
+selectlista();
+}
+
+function ordena_fecha(){
+listasel=listasel.sort(ord_fecha);
+selectlista();
+}
 function selectlista(){
 var textoT="";
 var div3 = document.getElementById("lista");
 div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
 textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
-textoT+='<table width="100%"><tr><td style="width:90%;text-align:center;color:blue;" >Facturas anteriores</td><td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td></tr></table></div><br>';
+textoT+='<table width="100%"><tr>';
+textoT+='<td style="width:70%;text-align:center;color:blue;" >Facturas anteriores</td>';
+textoT+='<td width="10%"><button  title="Nombre" onclick="ordena_nombre();" > N </button></td>';
+textoT+='<td width="10%"><button  title="Fecha" onclick="ordena_fecha();" > F </button></td>';
+textoT+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td>';
+textoT+='</tr></table></div><br>';
 textoT+='<div style="overflow:auto;height:90%;font-size:0.8rem;">';
 textoT+='<table width="100%">';
 for (var i=0;i<listasel.length;i++) {
-textoT+='<tr><td style="width:85%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:15%;"><button onclick="borra('+i+')";>E</button></td></tr>'; 
+textoT+='<tr><td style="width:85%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:15%;"></td></tr>'; 
 }
 textoT+='</table></div>';
 div3.innerHTML=textoT;
@@ -1221,7 +1259,7 @@ data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,120,0,0,0,"t1","&Cerveceria&Vaci
       [" Golden Pina PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP152',5.60],
       [" Golden Manzana PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP153',5.60],
       [" PepsiCola 1,25 L x 6U",6,5.09,1,0,0,"t3","&Pepsicola&Refrescos&Botella 1.25 Litros&",1,'PP054',4.35],
-      [" PepsiCola PSH 250 ml x 24U",24,17.83,1,0,0,"t3","&Pepsicola&Refrescos&PSH&",1,'PP058',17.83],
+      [" PepsiCola PSH 250 ml x 24U",24,17.63,1,0,0,"t3","&Pepsicola&Refrescos&PSH&",1,'PP058',17.83],
       [" PepsiCola PSH 250 ml x 12U",12,8.81,1,0,0,"t3","&Pepsicola&Refrescos&PSH&",1,'PP062',8.81],
       [" Soda PSH 250 ml x 24U",24,17.65,1,0,0,"t3","&Pepsicola&Soda&",1,'PM004',17.65], 
       [" Soda  Lata 355 ml x 24U",24,20.19,1,0,0,"t3","&Pepsicola&Soda&",1,'PM008',20.19], 
@@ -1240,18 +1278,34 @@ data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,120,0,0,0,"t1","&Cerveceria&Vaci
       [" Gatorade Mandarina 500 ml x 12",12,15.98,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 500 ml&",1,'PG008',15.02], 
       [" Gatorade Mora 500 ml x 12",12,15.98,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 500 ml&",1,'PG009',15.02], 
       [" Gatorade Frutas Trop 500 ml x 12",12,15.98,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 500 ml&",1,'PG010',15.02], 
-      [" YUKY-PAK 250 ml x 24",24,16.78,1,0,0,"t3","&Pepsicola&Yukery&",1,'PY004',16.78],  
-      [" Yukery Botella 250 ml x 24",24,16.78,1,0,0,"t3","&Pepsicola&Yukery&",0,'PY008',16.78],  
-      [" Yukery Naranja Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Botella 250 ml&",1,'PY012',7.88],  
-      [" Yukery Pera Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Botella 250 ml&",1,'PY013',7.88],  
-      [" Yukery Manzana Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Botella 250 ml&",1,'PY014',7.88],  
-      [" Yukery Durazno Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Botella 250 ml&",1,'PY015',7.88],  
-      [" Yukery Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&",1,'PY016',13.40],  
-      [" Yukery PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&",1,'PY020',13.55],  
-      [" Yukery PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&",1,'PY024',33.65],  
-      [" Yukery PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&",1,'PY028',15.81],  
-      [" Yuky Fresh 1.5 L x 6",6,8.41,1,0,0,"t3","&Pepsicola&Yukery&",1,'PY032',8.41],  
-      [" Yuky Fresh PET 500 ml x 12",12,8.41,1,0,0,"t3","&Pepsicola&Yukery&",1,'PY00436',8.41],  
+      [" YUKY-PAK 250 ml x 24",24,16.78,1,0,0,"t3","&Pepsicola&Yukery&Yuky-Pak 250ml&",1,'PY004',16.78],  
+      [" Yukery Durazno Botella 250 ml x 24",24,16.78,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",0,'PY008',16.78],  
+      [" Yukery Naranja Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY012',7.88],  
+      [" Yukery Pera Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY013',7.88],  
+      [" Yukery Manzana Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY014',7.88],  
+      [" Yukery Mango Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY015',7.88],  
+      [" Yukery Durazno Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY016',13.40],  
+      [" Yukery Naranja Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY017',13.40],  
+      [" Yukery Pera Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY018',13.40],  
+      [" Yukery Manzana Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY019',13.40],  
+      [" Yukery Mango Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY119',13.40],  
+      [" Yukery Durazno PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY020',13.55],  
+      [" Yukery Pera PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY021',13.55],  
+      [" Yukery Manzana PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY022',13.55],  
+      [" Yukery Naranja PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY023',13.55],  
+      [" Yukery Mango PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY123',13.55],  
+      [" Yukery Durazno PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY024',33.65],  
+      [" Yukery Pera PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY025',33.65],  
+      [" Yukery Manzana PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY026',33.65],  
+      [" Yukery Naranja PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY027',33.65],  
+      [" Yukery Mango PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY127',33.65],  
+      [" Yukery Durazno PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY028',15.81],  
+      [" Yukery Pera PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY029',15.81],  
+      [" Yukery Manzana PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY030',15.81],  
+      [" Yukery Naranja PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY031',15.81],  
+      [" Yukery Mango PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY131',15.81],  
+      [" Yuky Fresh 1.5 L x 6",6,8.41,1,0,0,"t3","&Pepsicola&Yukery&Yuky Fresh&",1,'PY032',8.41],  
+      [" Yuky Fresh PET 500 ml x 12",12,8.41,1,0,0,"t3","&Pepsicola&Yukery&Yuky Fresh&",1,'PY00436',8.41],  
       [" Te Lipton Botella 250 ml x 24",24,10.63,1,0,0,"t3","&Pepsicola&Te Lipton&Botella 250 ml&",1,'PT004',10.63],  
       [" Te Lipton Lata 335 ml x 24",24,14.67,1,0,0,"t3","&Pepsicola&Te Lipton&Lata 335 ml",1,'PT008',14.67],  
       [" Te Lipton Durazno PET 500 ml x 12",24,13.45,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 500 ml&",1,'PT012',13.45],  

@@ -26,7 +26,7 @@ self.addEventListener('activate', event => {
         ))
   );
 });
-*/
+
 self.addEventListener('activate', function(event) {
     event.waitUntil(caches.keys().then(function(names) {
         return Promise.all(
@@ -40,6 +40,8 @@ self.addEventListener('activate', function(event) {
         return self.clients.claim();
     }));
 });
+*/
+
 // carga de los cache si existen
 self.addEventListener('fetch', function(e){
 	e.respondWith(
@@ -50,3 +52,11 @@ self.addEventListener('fetch', function(e){
 });
 
 
+self.addEventListener("install", (e) => {
+  e.waitUntil(
+    (async () => {
+      const cache = await caches.open(currentCache);
+      await cache.addAll(contentToCache);
+    })()
+  );
+});
