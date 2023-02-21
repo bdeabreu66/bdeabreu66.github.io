@@ -318,7 +318,7 @@ t_c.set('HOTEL GOLD','Hotel Gold Parade');
 t_c.set('584244188209','Lo mejor del toco');
 //t_c.set('584244021067','Inversiones del Valle');// Bull buja
 t_c.set('01050041981041334605','Keny Pita');
-
+t_c.set('584122739761','Mini market Kapf');
 t_c.set('584122853554','La cuna la negra');
 t_c.set('584128311132','La cuna la negra');
 t_c.set('584144202063','La cuna la negra');
@@ -353,6 +353,9 @@ t_c.set('584127820477','Negro Primero');
 t_c.set('584140389048','Negro Primero');
 t_c.set('584244069799','Negro Primero');
 t_c.set('01910148722100062413','Negro Primero');
+t_c.set('01020391140000877505','Noir Guacara');
+t_c.set('01341089560001005231','Noir Guacara');
+t_c.set('01341089560001006542','Noir Guacara');
 t_c.set('584144185616','Pan Center');
 t_c.set('01910203342100024431','Panaderia la Unidad 2012');
 t_c.set('01910203382100035457','Francis pan');
@@ -376,6 +379,7 @@ t_c.set('01340592135921000679','Vama Cafe');
 t_c.set('584244541829','Roger Dona');
 t_c.set('01750062720073634371','Rosa De Abreu');
 t_c.set('584124566786','Sazon de la abuela');
+t_c.set('584244203234','Sosa Almacen');
 t_c.set('584144397087','Tequenack');
 t_c.set('01340419444191042090','Venvidrio');
 t_c.set('584144159903','Venvidrio');
@@ -483,7 +487,7 @@ texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+'
 texto+='<table width="100%">';
 
 for (var i=0;i<pagos.length;i++){
- if (pagos[i].tc=='A') {colb='SkyBlue';} else {colb='DodgerBlue';}
+colb=colorcuenta(pagos[i].tc);
 // console.log('i: '+i);
  if (pagos[i].fecha!=fecha_previa) {
     fecha_previa=pagos[i].fecha;
@@ -518,7 +522,7 @@ var montop='';
  console.log( nombre_previo);
 texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+nombre_previo+'</p>';
 for (var i=0;i<pagos.length;i++){
-    if (pagos[i].tc=='A') {colb='SkyBlue';} else {colb='DodgerBlue';}
+colb=colorcuenta(pagos[i].tc);
 
  if (pagos[i].nombre!=nombre_previo) {
     
@@ -559,6 +563,12 @@ divaux.style.visibility="visible";
 }
 }
 
+function colorcuenta(C){
+   if (C=='A') {return 'SkyBlue';} 
+   if (C=='J') {return 'DodgerBlue';}
+   if (C=='C') {return 'Yelow';}
+}
+
 function genera_salida3(){
 if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
@@ -572,9 +582,8 @@ console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
 texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
 texto+='<table width="100%">';
 for (var i=0;i<pagos.length;i++){
-   if (pagos[i].tc=='A') {colb='SkyBlue';} else {colb='DodgerBlue';}
-
- if (pagos[i].fecha!=fecha_previa) {
+   colb=colorcuenta(pagos[i].tc);
+if (pagos[i].fecha!=fecha_previa) {
     fecha_previa=pagos[i].fecha;
     console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
     texto+='</table>';
@@ -612,7 +621,7 @@ var TC;
 function procesa_contenido(){
 
 function cumple1(value) {
-if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 ) ) {return true;} else {return false;}
+if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 && value.indexOf("DE LA CUENTA NRO. 01910148772100070936")<0) ) {return true;} else {return false;}
 }
 var nsem;
 var sem;
@@ -627,6 +636,8 @@ var lineas=archivos[jj].split("\r\n");
 if (post>=0) {Tipocuenta="Cuenta de Ahorro"; TC='A';}
  var post=lineas[0].indexOf('01910027822127000477');
 if (post>=0) {Tipocuenta="Cuenta Juridica";TC='J';}
+ var post=lineas[0].indexOf('01910148772100070936');
+if (post>=0) {Tipocuenta="Cuenta Corriente";TC='C';}
 
 var result=lineas.filter(cumple1)
 //console.log(result);
@@ -680,14 +691,6 @@ post=result[i-posi].indexOf('TRANSFERENCIA RECIBIDA');
   } else {pagos[i].montodolar=0}
 }
 document.getElementById("t_c").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
-//genera_salida2();
-
-//const unique = pagos.filter((item, index) => (pagos.indexOf(item) === index));
-//pagos=unique;
-
-//const dataArr = new Set(pagos);
-
-//  pagos = [...dataArr];
 
 let set= new Set( pagos.map( JSON.stringify ) )
 pagos = Array.from( set ).map( JSON.parse );
