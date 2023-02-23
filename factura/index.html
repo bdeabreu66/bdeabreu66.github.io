@@ -1492,7 +1492,7 @@ textoT+='<td width="15%"><button class="btop" onclick="borra('+numf+');">Borrar<
 textoT+='<td width="15%"><button class="btop" onclick="revertir_factura('+numf+');">Revertir</button></td>';
 textoT+='<td width="15%"><button class="btop" onclick="fact_base('+numf+');">Estab</button></td>';
 textoT+='<td width="5%"></td>';
-textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda2(numf);">' + TM2 +'</button></td>';
+textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda2('+numf+');">' + TM2 +'</button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
 textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
 textoT+='</tr></table></div><br>';
@@ -1718,6 +1718,7 @@ factura2();
 
 function cambia_moneda2(num){
 tipo2=1-tipo2;
+//alert();
 factura3(num);
 }
 
