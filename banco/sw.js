@@ -60,3 +60,15 @@ self.addEventListener("install", (e) => {
     })()
   );
 });
+
+async function detectSWUpdate() {
+  const registration = await navigator.serviceWorker.ready;
+
+  registration.addEventListener("updatefound", event => {
+    const newSW = registration.installing;
+    newSW.addEventListener("statechange", event => {
+      if (newSW.state == "installed") {
+         // New service worker is installed, but waiting activation
+      }
+    });
+  })
