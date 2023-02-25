@@ -374,7 +374,8 @@ t_c.set('CREACIONES PITA','Rafael Pita');
 t_c.set('584128808329','Rest. Pio pio');
 t_c.set('01910369212100007816','Rest. Pio pio');
 t_c.set('01910362502100027278','Rest. Pio pio');
-t_c.set('01080083840100274933','Rest. Pio pio');
+t_c.set('01080083840100274933','Rest. Pio pio'); 
+t_c.set('01910107072100074333','Rest. Pio pio');
 t_c.set('01340592135921000679','Vama Cafe');
 t_c.set('584244541829','Roger Dona');
 t_c.set('01750062720073634371','Rosa De Abreu');
@@ -447,7 +448,7 @@ let readers=[];
   for(var t=0;t<narch;t++){
      if (t!=0) {contenido+=sep+values[t]} else {contenido+=values[t];}
      }
- console.log(contenido);
+ //console.log(contenido);
      procesa_contenido();
  });
 
@@ -511,6 +512,11 @@ divaux.style.visibility="visible";
 
 
 function genera_salida2(){
+for (var j=0;j<pagos.length;j++) {
+ pos[j]=0;
+}
+suma=0;
+document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
 if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
 var texto='';
@@ -522,6 +528,7 @@ var montop='';
  console.log( nombre_previo);
 texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+nombre_previo+'</p>';
 for (var i=0;i<pagos.length;i++){
+  
 colb=colorcuenta(pagos[i].tc);
 
  if (pagos[i].nombre!=nombre_previo) {
@@ -550,7 +557,7 @@ colb=colorcuenta(pagos[i].tc);
   }
 console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
 //texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora.substring(0,5)+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
-texto+='<p style="background-color:'+colb+';">'+pagos[i].fecha+' '+pagos[i].hora+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
+texto+='<p style="background-color:'+colb+';" onclick=permuta(this,'+i+');>'+pagos[i].fecha+' '+pagos[i].hora+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
 } // for i
 
  console.log(total_parcial.toFixed(2));
@@ -602,26 +609,42 @@ divaux.style.visibility="visible";
 }
 }
 
-
+var suma=0;
 var Tipocuenta='';
+var pos=[];
+function permuta(o,ind){
+//alert(ind+' '+pos[ind]);
+pos[ind]=1-pos[ind];
+if (pos[ind]==0) {o.style.color='black'} else {o.style.color='yellow'}
+
+for (var i=0;i<pos.length;i++){
+if (pos[i]==1) {suma+=parseFloat(pagos[i].montodolar)}
+}
+document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
+}
 
 function caso_especial(dato){
  var post;
- console.log('Caso especial');
+ //console.log('Caso especial');
 for (var i=0;i<dat_especial.length;i++) {
   post=dato.indexOf(dat_especial[i]);
-  console.log('post '+ post);
+  //console.log('post '+ post);
   if (post>0) {return dat_especial[i];}
  }
 return dato;
 }
 var posi=0;
 var pagos=[];
+var domicilios=[];
+
 var TC;
 function procesa_contenido(){
 
 function cumple1(value) {
 if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 && value.indexOf("DE LA CUENTA NRO. 01910148772100070936")<0) ) {return true;} else {return false;}
+}
+function cumple2(value) {
+if (value.indexOf("Cargo Domiciliacion")>0 || value.indexOf("Cargo por Domiciliacion")>0) {return true;} else {return false;}
 }
 var nsem;
 var sem;
@@ -640,8 +663,19 @@ if (post>=0) {Tipocuenta="Cuenta Juridica";TC='J';}
 if (post>=0) {Tipocuenta="Cuenta Corriente";TC='C';}
 
 var result=lineas.filter(cumple1)
+var result_2=lineas.filter(cumple2)
+//console.log(result_2);
 //console.log(result);
+//Domicilizaciones
 
+for(var ii=posi2;ii<(posi2+result_2.length);ii++){
+ var campos2=result_2[ii-posi2].split('\t');
+domicilios[ii]=new Object();
+domicilios[ii].fecha =campos2[0];
+domicilios[ii].monto =campos2[7];
+domicilios[ii].factura =campos2[6];
+
+}
 
 for (var i=posi;i<(posi+result.length);i++){
   var campos=result[i-posi].split('\t');
@@ -653,19 +687,19 @@ for (var i=posi;i<(posi+result.length);i++){
   pagos[i].tc=TC;
   var telfn=campos[6];
  pagos[i].telf=telfn;
-console.log(pagos[i].telf);
+//console.log(pagos[i].telf);
   var post=telfn.indexOf('CTA');
   //console.log(post + 'CTA');
   //console.log('post '+post);
-  if (post>0) {pagos[i].telf=telfn.substring(post+5,post+26);console.log(pagos[i].telf);}
+  if (post>0) {pagos[i].telf=telfn.substring(post+5,post+26);}
     else {
-     post=telfn.indexOf('TELF'); console.log(post + 'TELF');
+     post=telfn.indexOf('TELF'); 
      if (post>=0) {
        pagos[i].telf=telfn.substring(post+6,post+18)
      } else
       {
-       post=telfn.indexOf('CUENTA NRO'); console.log(post + 'Cuenta nro');
-       if (post>=0) {pagos[i].telf=telfn.substring(post+12,post+32);console.log(pagos[i].telf);}
+       post=telfn.indexOf('CUENTA NRO'); 
+       if (post>=0) {pagos[i].telf=telfn.substring(post+12,post+32);}
          else {
 
           post2=result[i-posi].indexOf('Abono por Creditos Directos');
@@ -684,25 +718,36 @@ post=result[i-posi].indexOf('TRANSFERENCIA RECIBIDA');
   pagos[i].nombre=t_c.get(clave);
   if (pagos[i].nombre==undefined) {pagos[i].nombre=clave;}
   var clave_fecha=pagos[i].fecha.toString();
-  console.log('clave_fecha'+clave_fecha+' '+clave_fecha.length);
+  //console.log('clave_fecha'+clave_fecha+' '+clave_fecha.length);
   pagos[i].dolar=t_d.get(clave_fecha);
   if (pagos[i].dolar!=undefined) {
    pagos[i].montodolar=(pagos[i].montoBs/pagos[i].dolar).toFixed(2);
   } else {pagos[i].montodolar=0}
 }
-document.getElementById("t_c").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
+document.getElementById("suma").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
 
 let set= new Set( pagos.map( JSON.stringify ) )
 pagos = Array.from( set ).map( JSON.parse );
 posi=pagos.length;
+let set2= new Set( domicilios.map( JSON.stringify ) )
+domicilios = Array.from( set2 ).map( JSON.parse );
+posi2=domicilios.length;
 
+
+for (var j=0;j<pagos.length;j++) {
+ pos[j]=0;
 }
+}
+localStorage.setItem('domicilios_banco',JSON.stringify(domicilios));
+
 localStorage.setItem('pagos_banco',JSON.stringify(pagos));
+console.log(domicilios);
 }
 
 function borrar_datos(){
-pagos=[];
+pagos=[];pos=[];domicilios=[];
 localStorage.setItem('pagos_banco','');
+localStorage.setItem('domicilios_banco','');
 }
 
 function ordena_pagos(a, b) {
@@ -809,10 +854,16 @@ Activalector_archivos();
 descarga_historico();
 //contenido=localStorage.getItem('Arch_datos_banco');
 var texto=localStorage.getItem('pagos_banco')
-
+var texto2=localStorage.getItem('domicilios_banco')
+if ( texto2!='' && texto2!=null) {domicilios=JSON.parse(texto2);} else {domicilios=[];}
 if ( texto!='' && texto!=null) {pagos=JSON.parse(texto);} else {pagos=[];}
 posi=pagos.length;
-console.log(pagos);
+posi2=domicilios.length;
+
+//console.log(pagos);
+for (var j=0;j<pagos.length;j++) {
+ pos[j]=0;
+}
 }
 
 function quitar(nombdiv){
@@ -896,13 +947,13 @@ if ('serviceWorker' in navigator) {
 
 <div id="divdata"></div>
 <div id="menu">
-<span style="display:block;font-size:2em;color:red;" id="t_c">Prueba</span>
+<span style="display:block;font-size:2em;color:red;" id="suma">Prueba</span>
 <button class="btop" onclick="genera_salida1();">Fecha</button>
 <button class="btop" onclick="genera_salida2();">Cliente</button>
 <button class="btop" onclick="genera_salida3();">Fecha-Cliente</button>
 </div>
 <div id="header"> 
-<button class="btop" onclick="Activalector_archivos();">Cargar Datos V3</button>  
+<button class="btop" onclick="Activalector_archivos();">Cargar Datos V4</button>  
 <button class="btop" onclick="borrar_datos();">Borrar Datos</button>
 </div>
 
