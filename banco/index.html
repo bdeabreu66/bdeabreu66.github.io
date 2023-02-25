@@ -616,7 +616,7 @@ function permuta(o,ind){
 //alert(ind+' '+pos[ind]);
 pos[ind]=1-pos[ind];
 if (pos[ind]==0) {o.style.color='black'} else {o.style.color='yellow'}
-
+suma=0;
 for (var i=0;i<pos.length;i++){
 if (pos[i]==1) {suma+=parseFloat(pagos[i].montodolar)}
 }
@@ -673,7 +673,10 @@ for(var ii=posi2;ii<(posi2+result_2.length);ii++){
 domicilios[ii]=new Object();
 domicilios[ii].fecha =campos2[0];
 domicilios[ii].monto =campos2[7];
-domicilios[ii].factura =campos2[6];
+domicilios[ii].descripcion =campos2[6];
+var post=campos2[6].indexOf('FACTURA')
+if (post>0) {domicilios[ii].factura=campos2[6].substr(post+9,post+25)} else {domicilios[ii].factura='';}
+
 
 }
 
@@ -783,6 +786,34 @@ function ordena_pagos3(a, b) {
    }
  }
 }
+function pagos_alim(){
+var divaux=document.getElementById("divdata");
+var texto='<table width="100%"';
+ for (var i=0;i<domicilios.length;i++){
+  if (domicilios[i].descripcion.indexOf('ALIMENTOS')>0) {
+   texto+='<tr><td>'+domicilios[i].fecha+'</td><td>'+domicilios[i].monto+'</td></tr>';
+  }
+ }
+texto+='</table>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
+}
+
+function pagos_cerv(){
+var divaux=document.getElementById("divdata");
+var texto='<table width="100%"';
+ for (var i=0;i<domicilios.length;i++){
+  if (domicilios[i].descripcion.indexOf('Cerveceria Polar')>0) {
+   
+   texto+='<tr><td>'+domicilios[i].fecha+'</td><td>'+domicilios[i].factura+'</td><td>'+domicilios[i].monto+'</td></tr>';
+  }
+ }
+texto+='</table>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
+
+}
+
 var textoreconocido;
 function obtenerTexto(indice) {
 if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
@@ -948,9 +979,14 @@ if ('serviceWorker' in navigator) {
 <div id="divdata"></div>
 <div id="menu">
 <span style="display:block;font-size:2em;color:red;" id="suma">Prueba</span>
-<button class="btop" onclick="genera_salida1();">Fecha</button>
-<button class="btop" onclick="genera_salida2();">Cliente</button>
-<button class="btop" onclick="genera_salida3();">Fecha-Cliente</button>
+<table width="100%" ><tr>
+<td  style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida1();">Fecha</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida2();">Cliente</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida3();">Fecha-Cliente</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="pagos_alim();">Pagos-Alim</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="pagos_cerv();">Pagos-Cerv</button></td>
+
+</tr></table>
 </div>
 <div id="header"> 
 <button class="btop" onclick="Activalector_archivos();">Cargar Datos V4</button>  
