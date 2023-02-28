@@ -349,6 +349,7 @@ t_c.set('01020152750000507309','Mc Center Pool');
 t_c.set('01380008190085381160','Mc Center Pool');
 t_c.set('01380008120080196594','Mc Center Pool');
 t_c.set('584144063036','Mary Pita');
+t_c.set('584128999549','Mini Market PM03');
 t_c.set('584127820477','Negro Primero');
 t_c.set('584140389048','Negro Primero');
 t_c.set('584244069799','Negro Primero');
@@ -672,12 +673,13 @@ for(var ii=posi2;ii<(posi2+result_2.length);ii++){
  var campos2=result_2[ii-posi2].split('\t');
 domicilios[ii]=new Object();
 domicilios[ii].fecha =campos2[0];
-domicilios[ii].monto =campos2[7];
+domicilios[ii].monto =parseFloat(campos2[7].replace(',', '.'));
 domicilios[ii].descripcion =campos2[6];
+var fd=parseFloat(t_d.get(campos2[0]));
+console.log(fd)
+domicilios[ii].montod=(domicilios[ii].monto/fd).toFixed(2);
 var post=campos2[6].indexOf('FACTURA')
 if (post>0) {domicilios[ii].factura=campos2[6].substr(post+9,post+25)} else {domicilios[ii].factura='';}
-
-
 }
 
 for (var i=posi;i<(posi+result.length);i++){
@@ -791,7 +793,7 @@ var divaux=document.getElementById("divdata");
 var texto='<table width="100%"';
  for (var i=0;i<domicilios.length;i++){
   if (domicilios[i].descripcion.indexOf('ALIMENTOS')>0) {
-   texto+='<tr><td>'+domicilios[i].fecha+'</td><td>'+domicilios[i].monto+'</td></tr>';
+   texto+='<tr><td>'+domicilios[i].fecha+'</td><td>'+domicilios[i].monto+'</td><td>'+domicilios[i].montod+'</td></tr>';
   }
  }
 texto+='</table>';
@@ -804,8 +806,10 @@ var divaux=document.getElementById("divdata");
 var texto='<table width="100%"';
  for (var i=0;i<domicilios.length;i++){
   if (domicilios[i].descripcion.indexOf('Cerveceria Polar')>0) {
-   
-   texto+='<tr><td>'+domicilios[i].fecha+'</td><td>'+domicilios[i].factura+'</td><td>'+domicilios[i].monto+'</td></tr>';
+   texto+='<tr><td width="20%">'+domicilios[i].fecha+'</td>';
+   texto+='<td width="20%">'+domicilios[i].factura+'</td>';
+   texto+='<td width="15%">'+domicilios[i].monto+'</td>';
+   texto+='<td width="10%">'+domicilios[i].montod+'</td></tr>';
   }
  }
 texto+='</table>';

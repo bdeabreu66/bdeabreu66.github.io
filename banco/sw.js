@@ -26,7 +26,7 @@ self.addEventListener('activate', event => {
         ))
   );
 });
-
+*/
 self.addEventListener('activate', function(event) {
     event.waitUntil(caches.keys().then(function(names) {
         return Promise.all(
@@ -41,7 +41,7 @@ self.addEventListener('activate', function(event) {
     }));
 });
 
-*/
+
 // carga de los cache si existen
 self.addEventListener('fetch', function(e){
 	e.respondWith(
@@ -51,7 +51,7 @@ self.addEventListener('fetch', function(e){
                       );
 });
 
-
+/*
 self.addEventListener("install", (e) => {
   e.waitUntil(
     (async () => {
@@ -72,3 +72,4 @@ async function detectSWUpdate() {
       }
     });
   })
+*/
