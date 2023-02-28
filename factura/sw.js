@@ -26,6 +26,7 @@ self.addEventListener('activate', event => {
         ))
   );
 });
+*/
 
 self.addEventListener('activate', function(event) {
     event.waitUntil(caches.keys().then(function(names) {
@@ -40,7 +41,6 @@ self.addEventListener('activate', function(event) {
         return self.clients.claim();
     }));
 });
-*/
 
 // carga de los cache si existen
 self.addEventListener('fetch', function(e){
@@ -51,7 +51,7 @@ self.addEventListener('fetch', function(e){
                       );
 });
 
-
+/*
 self.addEventListener("install", (e) => {
   e.waitUntil(
     (async () => {
@@ -60,3 +60,4 @@ self.addEventListener("install", (e) => {
     })()
   );
 });
+*/
