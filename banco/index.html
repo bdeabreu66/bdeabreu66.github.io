@@ -406,7 +406,30 @@ t_d.set('23/12/2022',16.45);
 t_d.set('22/12/2022',16.18);
 */
 var productos=[];
+function clickp_cliente(pos){
+document.getElementById("div3").style.visibility='hidden';
+const posic=document.getElementsByName("pcliente")[pos].offsetTop;
+document.getElementById("lclientes").scrollTop=posic-30;
+}
 
+var lista_clientes=[];
+function Selecciona_cliente(){
+var textoT="";
+var div3 = document.getElementById("div3");
+div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
+textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+textoT+='<table width="100%"><tr>';
+textoT+='<td style="width:70%;text-align:center;color:blue;" >Clientes</td>';
+textoT+='<td width="10%"><button  title="Salir" onclick=quitar_div("div3");> x </button></td>';
+textoT+='</tr></table></div><br>';
+textoT+='<div style="overflow:auto;height:90%;font-size:0.8rem;">';
+textoT+='<table width="100%">';
+for (var i=0;i<lista_clientes.length;i++) {
+textoT+='<tr><td style="width:85%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp_cliente('+i+')";>'+lista_clientes[i]+'</td><td style="width:15%;"></td></tr>'; 
+}
+textoT+='</table></div>';
+div3.innerHTML=textoT;
+}
 
 
 function Activalector_archivos(){
@@ -511,6 +534,9 @@ divaux.style.visibility="visible";
 }
 }
 
+function quitar_div(div_b){
+document.getElementById(div_b).style.visibility='hidden';
+}
 
 function genera_salida2(){
 for (var j=0;j<pagos.length;j++) {
@@ -520,12 +546,24 @@ suma=0;
 document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
 if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
+divaux.style="position: fixed;top :20%; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;overflow-y: scroll;";
 var texto='';
+texto+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+texto+='<table width="100%"><tr>';
+texto+='<td style="width:70%;text-align:center;color:blue;" >Clientes</td>';
+texto+='<td width="10%"><button  title="Nombre" onclick="Selecciona_cliente();" > Sel </button></td>';
+texto+='<td width="10%"><button  title="Salir" onclick=quitar_div("divdata"); <button> x </button></td>';
+texto+='</tr></table></div><br>';
+texto+='<div id="lclientes" style="overflow:auto;height:90%;font-size:0.8rem;">';
+
+
  pagos.sort(ordena_pagos2);
 var nombre_previo='';
 var fecha_previa=pagos[0].fecha;
 var total_parcial=0;
 var montop='';
+var cont_c=0;
+lista_clientes=[];
  console.log( nombre_previo);
 texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+nombre_previo+'</p>';
 for (var i=0;i<pagos.length;i++){
@@ -533,8 +571,8 @@ for (var i=0;i<pagos.length;i++){
 colb=colorcuenta(pagos[i].tc);
 
  if (pagos[i].nombre!=nombre_previo) {
-    
-    nombre_previo=pagos[i].nombre;
+  
+    nombre_previo=pagos[i].nombre;lista_clientes[cont_c]=nombre_previo;cont_c++;
     if (i!=0) {
       console.log(total_parcial.toFixed(2));
      texto+='<p style="color:blue;">Fecha:'+fecha_previa+'Total parcial: '+montop.toFixed(2)+'</p>';
@@ -545,7 +583,7 @@ colb=colorcuenta(pagos[i].tc);
     total_parcial=parseFloat(pagos[i].montodolar);
      montop=total_parcial;
     console.log(pagos[i].nombre);
-    texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+pagos[i].nombre+'</p>';
+    texto+='<p name="pcliente" style="color:red;font-size:1.5em;text-align:center;">'+pagos[i].nombre+'</p>';
  
  } else { 
     total_parcial+=parseFloat(pagos[i].montodolar)
@@ -558,7 +596,12 @@ colb=colorcuenta(pagos[i].tc);
   }
 console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
 //texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora.substring(0,5)+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
-texto+='<p style="background-color:'+colb+';" onclick=permuta(this,'+i+');>'+pagos[i].fecha+' '+pagos[i].hora+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
+texto+='<p style="background-color:'+colb+';" onclick=permuta(this,'+i+');>'+' '+pagos[i].fecha+'     '+pagos[i].montoBs+' Bs '+'     '+pagos[i].montodolar+' $ '+'</p>';
+texto+='<table width="100%"><tr onclick="permuta(this,'+i+');" style="background-color:'+colb+';" x>';
+texto+='<td width="36%">'+pagos[i].fecha+'</td>';
+texto+='<td width="27%">'+pagos[i].montoBs+' Bs '+'</td>';
+texto+='<td width="27%">'+pagos[i].montodolar+' $ '+'</td></tr></table>';
+
 } // for i
 
  console.log(total_parcial.toFixed(2));
@@ -566,6 +609,7 @@ texto+='<p style="background-color:'+colb+';" onclick=permuta(this,'+i+');>'+pag
      
 
 texto+='<p>Total :'+total_parcial.toFixed(2)+'</p>';
+texto+='</div>';
 divaux.innerHTML=texto;
 divaux.style.visibility="visible";
 }
@@ -753,6 +797,8 @@ function borrar_datos(){
 pagos=[];pos=[];domicilios=[];
 localStorage.setItem('pagos_banco','');
 localStorage.setItem('domicilios_banco','');
+posi=0;
+posi2=0;
 }
 
 function ordena_pagos(a, b) {
