@@ -533,15 +533,18 @@ function ventas_periodo(fecha1,fecha2){
 
 var cliente='';
 var AClientes=[];
+
 function limpiaCliente(){
 document.getElementById("cli").value='';
 datos_cliente();
 }
+
 function elimina_cliente(){
 var ecliente;
 document.getElementById("cliente").hidden=true;
 ecliente=document.getElementById("cli").value;
 var pos=AClientes.findIndex(x=>x.nombre===ecliente);
+console.log(pos);
 if (pos>=0) {AClientes.splice(pos,1);guarda_clientes();}
 
 //console.log('LC: '+Lclientes);
@@ -550,7 +553,6 @@ if (pos>=0) {AClientes.splice(pos,1);guarda_clientes();}
 
 function setcliente(){
 cliente=document.getElementById("cli").value;
-if (document.getElementById("factura").hidden==false) {factura2();}
 if (cliente!='') {
 direccion=document.getElementById("dircli").value;
 rifcliente=document.getElementById("rifcli").value;
@@ -562,7 +564,7 @@ Ocliente.dir=direccion;
 Ocliente.rif=rifcliente;
 Ocliente.esp=cliente_especial;
 Ocliente.deuda=deuda_cliente;
-
+if (document.getElementById("factura").hidden==false) {factura2();}
 if (AClientes!=null) {var indic=AClientes.findIndex(x => x.nombre === cliente);} else {indic=-1;}
 //alert(indic);
 if (indic==-1) {AClientes.push(Ocliente);}
@@ -1780,7 +1782,7 @@ return [pcu,pcb];
 function precio(ind){
 var factor=parseFloat(document.getElementById("t2").value);
 if (data[ind][6]=="t1") {
- var pu=+(data[ind][2]*(1/factor)).toFixed(2);
+ var pu=+(data[ind][2]*(1/factor)).toFixed(8);
  var pb=+(pu*data[ind][1]);
 } 
 if (data[ind][6]=="t2") {
@@ -1792,8 +1794,8 @@ if (data[ind][6]=="t3") {
    var pu=+((pb/data[ind][1]).toFixed(2));
     }
 
-pu=parseFloat(pu.toFixed(2));
-pb=parseFloat(pb.toFixed(2));
+pu=parseFloat(pu.toFixed(8));
+pb=parseFloat(pb.toFixed(8));
 //alert('pu'+pu+' pb '+pb);
 return [pu,pb];
 }
