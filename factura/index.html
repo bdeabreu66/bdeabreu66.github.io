@@ -250,6 +250,7 @@ grid-columns: 3/4;
 <datalist id="listaclientes"></datalist><br>
 Direcci&oacute;n:<textarea style="width:55%;" type="text" id="dircli" value="" ></textarea><br>
 Rif:<input style="width:55%;" type="text" id="rifcli" value="" ><br>
+Tlf:<input style="width:55%;" type="text" id="tlfcli" value="" ><br>
 AR:<input style="width:55%;" type="checkbox" id="espcli" value="" ><br>
 Deuda:<input style="width:55%;" type="number" id="deucli" value="" >
 </div>
@@ -545,7 +546,7 @@ document.getElementById("cliente").hidden=true;
 ecliente=document.getElementById("cli").value;
 var pos=AClientes.findIndex(x=>x.nombre===ecliente);
 console.log(pos);
-if (pos>=0) {AClientes.splice(pos,1);guarda_clientes();}
+if (pos>=0) {AClientes.splice(pos,1);guarda_clientes();limpiaCliente();}
 
 //console.log('LC: '+Lclientes);
 }
