@@ -546,37 +546,38 @@ document.getElementById("cliente").hidden=true;
 ecliente=document.getElementById("cli").value;
 var pos=AClientes.findIndex(x=>x.nombre===ecliente);
 console.log(pos);
-if (pos>=0) {AClientes.splice(pos,1);guarda_clientes();limpiaCliente();}
-
+if (pos>=0) {AClientes.splice(pos,1);guarda_clientes();}
+limpiaCliente();
 //console.log('LC: '+Lclientes);
 }
 
 
 function setcliente(){
+var indic;
 cliente=document.getElementById("cli").value;
 if (cliente!='') {
-direccion=document.getElementById("dircli").value;
-rifcliente=document.getElementById("rifcli").value;
-cliente_especial=document.getElementById("espcli").checked;
-//alert(cliente_especial);
-deuda_cliente=document.getElementById("deucli").value;
-Ocliente.nombre=cliente;
-Ocliente.dir=direccion;
-Ocliente.rif=rifcliente;
-Ocliente.esp=cliente_especial;
-Ocliente.deuda=deuda_cliente;
-if (document.getElementById("factura").hidden==false) {factura2();}
-if (AClientes!=null) {var indic=AClientes.findIndex(x => x.nombre === cliente);} else {indic=-1;}
-//alert(indic);
-if (indic==-1) {AClientes.push(Ocliente);}
-guarda_clientes();
-//console.log('LC: '+Lclientes);
-}
-document.getElementById("cliente").hidden=true;
-
+  direccion=document.getElementById("dircli").value;
+  telefono=document.getElementById("tlfcli").value;
+  rifcliente=document.getElementById("rifcli").value;
+  cliente_especial=document.getElementById("espcli").checked;
+  deuda_cliente=document.getElementById("deucli").value;
+  indic=-1;
+  if (AClientes.length>0) {indic=AClientes.findIndex(x => x.nombre === cliente);} 
+  Ocliente.nombre=cliente;
+  Ocliente.dir=direccion;
+  Ocliente.tlf=telefono;
+  Ocliente.rif=rifcliente;
+  Ocliente.esp=cliente_especial;
+  Ocliente.deuda=deuda_cliente;
+  if (indic==-1) {AClientes.push(Ocliente); } else {Object.assign(AClientes[indic],Ocliente)}
+  guarda_clientes();
+ }
+  document.getElementById("cliente").hidden=true;
+  if (document.getElementById("factura").hidden==false) {factura2();}
 }
 
 var Ocliente=new Object();
+
 function Actualiza_cliente(){
 Lee_clientes();
 divcliente=document.getElementById("cliente");
@@ -590,8 +591,9 @@ cliente=document.getElementById("cli").value;
 var ind=AClientes.findIndex(x=>x.nombre===cliente);
 
 if (ind>=0) {
- Ocliente=AClientes[ind];
+ Object.assign(Ocliente,AClientes[ind]);
  document.getElementById("rifcli").value=Ocliente.rif;
+ document.getElementById("tlfcli").value=Ocliente.tlf;
  document.getElementById("espcli").checked=Ocliente.esp;
  document.getElementById("dircli").value=Ocliente.dir;
  document.getElementById("deucli").value=Ocliente.deuda;
@@ -601,7 +603,7 @@ if (ind>=0) {
  document.getElementById("espcli").checked=false;
  document.getElementById("dircli").value='';
  document.getElementById("deucli").value=0;
-
+ document.getElementById("tlfcli").value='';
 }
 }
 function guarda_clientes(){
@@ -615,10 +617,10 @@ if (AClientes.length>0) {localStorage.setItem('Clientes_Pita',JSON.stringify(ACl
 
 function Lee_clientes(){
 Lclientes=localStorage.getItem('Clientes_Pita');
-AClientes=JSON.parse(Lclientes);
+if (Lclientes!='') { AClientes=JSON.parse(Lclientes);} else {AClientes=[];}
+
 //console.log(AClientes);
-//alert(JSON.stringify(AClientes));
-if (AClientes!=null) {
+if (AClientes.length>0) {
  var options='';
  for (var i = 0; i < AClientes.length; i++) {
    options += '<option value="' + AClientes[i]["nombre"] + '" />';
