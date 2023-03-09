@@ -783,11 +783,24 @@ suma_inventario2();
 fact_base(num);
 borra2(num);
 cliente=cliente_factura;
-var indcliente=Aclientes.findIndex(x=>x.name===cliente);
-if (indcliente>=0) {Ocliente=Aclientes[indcliente];} else {Ocliente=null;}
+var indcliente=AClientes.findIndex(x=>x.name===cliente);
+if (indcliente>=0) {Ocliente=AClientes[indcliente];} else {Ocliente=null;}
 //factura3();
 //quitarlista();
 cancelar();
+}
+var MONTOF='';
+function Actualiza_deuda(){
+var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
+alert(indcliente);
+if (indcliente>=0) {
+AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)+parseFloat(MONTOF)).toFixed(2);
+localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
+}
+}
+function Revierte_deuda(){
+
+
 }
 
 function guardar_factura(){
@@ -795,6 +808,7 @@ if (cliente=='') {alert('Falta Cliente en factura');} else
  {nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
    var resp=prompt("Cliente: "+cliente+" Introduzca el numero de la factura:",nro_factura)
    if (resp!=null) {nro_factura=parseInt(resp);guarda_factura(); localStorage.setItem('FACT_NRO',(nro_factura+1).toString())}
+   Actualiza_deuda();
 }
 
 }
@@ -1652,6 +1666,8 @@ var BIMB=(parseFloat(BIMD)*factor).toFixed(2);
 var descd=(parseFloat(IVAD)*0.75).toFixed(2);
 var IVAB=(parseFloat(IVAD)*factor).toFixed(2);
 var descb=(parseFloat(IVAB)*0.75).toFixed(2);
+
+
 if (tipo==0) {
 
 texto+='<table width="60%">';
@@ -1669,15 +1685,22 @@ Ftexto+='IVA: '+IVAD+' '+TM+' \n';
 
 }
 
+if (Ocliente.esp) {
+ MONTOF=(totald-parseFloat(descd)).toFixed(2);
+} else {MONTOF=(totald).toFixed(2)}
+
+
 if (tipo==1) {
 texto+='<table width="60%">';
 texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </td><td style="width:50%;">'+(totalbsiva).toFixed(2)+' '+TM+ '</td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMB+' '+TM+' </td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAB+' '+TM+'</td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totalb).toFixed(2)+' '+TM+'</td></tr>';
+
 if (Ocliente.esp) {
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
+
 }
 texto+='</table>';
 
