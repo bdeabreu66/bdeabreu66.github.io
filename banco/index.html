@@ -552,14 +552,20 @@ if (ind>=0) {document.getElementById('suma').innerText='Deuda: '+Clientes[ind].d
 
 function chequeado(o,pos){
 
-var ind1=Clientes.findIndex(x=>x.nombre==pagos[pos].nombre);
+//var ind1=Clientes.findIndex(x=>x.nombre==pagos[pos].nombre);
 
-if (o.checked && ind1>=0) {
+if (o.checked) {
  var ind=pagos_hechos.findIndex(x=>x.fecha==pagos[pos].fecha && x.hora==pagos[pos].hora);
  if (ind<0) { pagos_hechos.push({"fecha":pagos[pos].fecha,"hora":pagos[pos].hora});
  localStorage.setItem('pagos_hechos_banco',JSON.stringify(pagos_hechos));}
- Clientes[ind1].deuda=(parseFloat(Clientes[ind1].deuda)-parseFloat(pagos[pos].montodolar)).toFixed(2);
- localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
+ //Clientes[ind1].deuda=(parseFloat(Clientes[ind1].deuda)-parseFloat(pagos[pos].montodolar)).toFixed(2);
+ //localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
+  o.parentElement.parentElement.style.color="white";} 
+ else {
+var ind=pagos_hechos.findIndex(x=>x.fecha==pagos[pos].fecha && x.hora==pagos[pos].hora);
+  if (ind>=0) { pagos_hechos.splice(ind,1);
+  localStorage.setItem('pagos_hechos_banco',JSON.stringify(pagos_hechos));}
+  o.parentElement.parentElement.style.color="black";
 }
 
 }
@@ -622,10 +628,10 @@ colb=colorcuenta(pagos[i].tc);
 console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
 //texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora.substring(0,5)+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
 //texto+='<p style="background-color:'+colb+';" onclick=permuta(this,'+i+');>'+' '+pagos[i].fecha+'     '+pagos[i].montoBs+' Bs '+'     '+pagos[i].montodolar+' $ '+'</p>';
-texto+='<table width="100%"><tr  style="background-color:'+colb+';" >';
+texto+='<table width="100%">';
 var indip=pagos_hechos.findIndex(x=>x.fecha==pagos[i].fecha || x.hora==pagos[i].hora);
-if (indip>=0) {texto+='<td width="5%"> <input type="checkbox" checked onclick=chequeado(this,'+i+');>'+'</td>';}
-  else {texto+='<td width="5%"> <input type="checkbox" onclick=chequeado(this,'+i+');>'+'</td>';}
+if (indip>=0) {texto+='<tr style="color:white; background-color:'+colb+';" ><td width="5%"> <input type="checkbox" checked onclick=chequeado(this,'+i+');>'+'</td>';}
+  else {texto+='<tr style="color:black;background-color:'+colb+';" ><td width="5%"> <input type="checkbox" onclick=chequeado(this,'+i+');>'+'</td>';}
 texto+='<td width="31%">'+pagos[i].fecha+'</td>';
 texto+='<td width="27%">'+pagos[i].montoBs+' Bs '+'</td>';
 texto+='<td width="27%" onclick="permuta(this,'+i+');">'+pagos[i].montodolar+' $ '+'</td></tr></table>';
@@ -1075,7 +1081,6 @@ if ('serviceWorker' in navigator) {
 <div id="header"> 
 <button class="btop" onclick="Activalector_archivos();">Cargar Datos V4</button>  
 <button class="btop" onclick="borrar_datos();">Borrar Datos</button>
-<button class="btop" onclick="borrar_pagos_hechos();">Borrar Pagos</button>
 
 </div>
 
