@@ -247,7 +247,10 @@ overflow-y: scroll;
 const t_c=new Map();
 Fecha_hora='';
 t_c.set('584144202172','Alejandro Naranjo');
+t_c.set('01340067960673057959','Alexis Pool personal');
+t_c.set('584121308516','Alexis Pool personal');
 t_c.set('01020406290000103046','Alianza cafe');
+t_c.set('01910027851127292097','Alvaro Jardim');
 t_c.set('584124067144','Ana Beatriz sobrina');
 t_c.set('584244244676','Ana Luisa Caldera');
 t_c.set('584126153631','Anderson Pita');
@@ -344,6 +347,7 @@ t_c.set('01910027821127272510','Martinez B. Antonio');
 t_c.set('01020857200000136026','Materiales Alianza');
 t_c.set('01020114420000595059','Materiales Alianza');
 t_c.set('01020114420000585059','Materiales Alianza');
+t_c.set('01630265142653009253','Materiales Alianza');
 t_c.set('IGRIVAL','Materiales Alianza');
 t_c.set('584124097520','Maximum Carnes');
 t_c.set('01020430580000079701','Maximum Carnes');
@@ -370,6 +374,7 @@ t_c.set('PEPSI COLA','PEPSI COLA');
 t_c.set('01140226742260075694','Licoreria Piedra pintada');
 t_c.set('01380008100080137300','Licoreria Piedra pintada');
 t_c.set('01340419414191041936','Licoreria Piedra pintada');
+t_c.set('01140150341500503056','Pizzeria Traqui');
 t_c.set('584144314028','Quiosco Sara');
 t_c.set('584123441007','Rafael Pita');
 t_c.set('584148944498','Rafael Pita');
@@ -528,7 +533,7 @@ colb=colorcuenta(pagos[i].tc);
 //  console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
 
 //texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
-texto+='<tr onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].nombre+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td></tr>';
+texto+='<tr onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].nombre+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td>'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
 
 }
  texto+='</table>';
@@ -626,23 +631,23 @@ colb=colorcuenta(pagos[i].tc);
         }
   }
 console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
-//texto+='<p>'+pagos[i].fecha+' '+pagos[i].hora.substring(0,5)+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
+//texto+='<p>'+pagos[i].fecha+'&nbsp&nbsp'+pagos[i].hora.substring(0,5)+'&nbsp&nbsp'+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
 //texto+='<p style="background-color:'+colb+';" onclick=permuta(this,'+i+');>'+' '+pagos[i].fecha+'     '+pagos[i].montoBs+' Bs '+'     '+pagos[i].montodolar+' $ '+'</p>';
 texto+='<table width="100%">';
-var indip=pagos_hechos.findIndex(x=>x.fecha==pagos[i].fecha || x.hora==pagos[i].hora);
+var indip=pagos_hechos.findIndex(x=>x.fecha==pagos[i].fecha && x.hora==pagos[i].hora);
 if (indip>=0) {texto+='<tr style="color:white; background-color:'+colb+';" ><td width="5%"> <input type="checkbox" checked onclick=chequeado(this,'+i+');>'+'</td>';}
   else {texto+='<tr style="color:black;background-color:'+colb+';" ><td width="5%"> <input type="checkbox" onclick=chequeado(this,'+i+');>'+'</td>';}
-texto+='<td width="31%">'+pagos[i].fecha+'</td>';
-texto+='<td width="27%">'+pagos[i].montoBs+' Bs '+'</td>';
-texto+='<td width="27%" onclick="permuta(this,'+i+');">'+pagos[i].montodolar+' $ '+'</td></tr></table>';
+texto+='<td width="31%">'+'&nbsp&nbsp'+pagos[i].fecha+'</td>';
+texto+='<td width="27%">'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td>';
+texto+='<td width="27%" onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr></table>';
 
 } // for i
 
  console.log(total_parcial.toFixed(2));
- texto+='<p>Fecha:'+fecha_previa;+'Total parcial: '+montop.toFixed(2)+'</p>';
+// texto+='<p>Fecha:'+fecha_previa;+'Total parcial: '+montop.toFixed(2)+'</p>';
      
 
-texto+='<p>Total :'+total_parcial.toFixed(2)+'</p>';
+//texto+='<p>Total :'+total_parcial.toFixed(2)+'</p>';
 texto+='</div>';
 divaux.innerHTML=texto;
 divaux.style.visibility="visible";
@@ -652,7 +657,7 @@ divaux.style.visibility="visible";
 function colorcuenta(C){
    if (C=='A') {return 'SkyBlue';} 
    if (C=='J') {return 'DodgerBlue';}
-   if (C=='C') {return 'Chocolate';}
+   if (C=='C') {return 'SteelBlue';}
 }
 
 function genera_salida3(){
@@ -677,9 +682,9 @@ if (pagos[i].fecha!=fecha_previa) {
 
     texto+='<table width="100%">';
   }
-  console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
+  console.log(pagos[i].fecha+'&nbsp'+pagos[i].telf+'&nbsp'+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+pagos[i].nombre);
 //texto+='<tr><td>'+pagos[i].hora.substring(0,5)+'</td><td>'+pagos[i].telf+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td><td>'+pagos[i].nombre+'</td></tr>';
-texto+='<tr  onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].nombre+'</td><td>'+pagos[i].montoBs+' Bs '+'</td><td>'+pagos[i].montodolar+' $ '+'</td></tr>';
+texto+='<tr  onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+pagos[i].nombre+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td>'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
 
 }
  texto+='</table>';
@@ -873,7 +878,7 @@ var divaux=document.getElementById("divdata");
 var texto='<table width="100%"';
  for (var i=0;i<domicilios.length;i++){
   if (domicilios[i].descripcion.indexOf('ALIMENTOS')>0) {
-   texto+='<tr><td>'+domicilios[i].fecha+'</td><td>'+domicilios[i].monto+'</td><td>'+domicilios[i].montod+'</td></tr>';
+   texto+='<tr><td>'+'&nbsp&nbsp'+domicilios[i].fecha+'</td><td>'+'&nbsp&nbsp'+domicilios[i].monto+'</td><td>'+domicilios[i].montod+'</td></tr>';
   }
  }
 texto+='</table>';
@@ -887,9 +892,9 @@ var texto='<table width="100%"';
  for (var i=0;i<domicilios.length;i++){
   if (domicilios[i].descripcion.indexOf('Cerveceria Polar')>0) {
    texto+='<tr><td width="20%">'+domicilios[i].fecha+'</td>';
-   texto+='<td width="20%">'+domicilios[i].factura+'</td>';
-   texto+='<td width="15%">'+domicilios[i].monto+'</td>';
-   texto+='<td width="10%">'+domicilios[i].montod+'</td></tr>';
+   texto+='<td width="20%">'+'&nbsp&nbsp'+domicilios[i].factura+'</td>';
+   texto+='<td width="15%">'+'&nbsp&nbsp'+domicilios[i].monto+'</td>';
+   texto+='<td width="10%">'+'&nbsp&nbsp'+domicilios[i].montod+'</td></tr>';
   }
  }
 texto+='</table>';
