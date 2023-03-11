@@ -785,9 +785,8 @@ borra2(num);
 cliente=cliente_factura;
 var indcliente=AClientes.findIndex(x=>x.name===cliente);
 if (indcliente>=0) {Ocliente=AClientes[indcliente];} else {Ocliente=null;}
-//factura3();
-//quitarlista();
 cancelar();
+Revierte_deuda();
 }
 var MONTOF='';
 function Actualiza_deuda(){
@@ -799,7 +798,12 @@ localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
 }
 }
 function Revierte_deuda(){
-
+var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
+alert(indcliente);
+if (indcliente>=0) {
+AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)-parseFloat(MONTOF)).toFixed(2);
+localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
+}
 
 }
 
@@ -1999,6 +2003,7 @@ divintro.innerHTML=texto;
 divintro.style.visibility = "visible";
 console.log('num '+i);
 console.log(divintro);
+guarda_pedido();
 }
 
 function refresca(){
