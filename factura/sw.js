@@ -1,5 +1,5 @@
 // 27-02-2023
-const currentCache = 'FACPOLAR-cache-v3.1';
+const currentCache = 'FACPOLAR_cache_v3.4';
 const files =
 [
     'index.html',
@@ -16,17 +16,7 @@ self.addEventListener('install', event => {
 });
 
 // Borra las cache anteriores
-/*
-self.addEventListener('activate', event => {
-  event.waitUntil(
-       caches.keys().then(cacheNames => Promise.all(
-       cacheNames.filter(cacheName => {
-           return cacheName !== currentCache
-         }).map(cacheName => caches.delete(cacheName))
-        ))
-  );
-});
-*/
+
 
 self.addEventListener('activate', function(event) {
     event.waitUntil(caches.keys().then(function(names) {
@@ -51,13 +41,3 @@ self.addEventListener('fetch', function(e){
                       );
 });
 
-/*
-self.addEventListener("install", (e) => {
-  e.waitUntil(
-    (async () => {
-      const cache = await caches.open(currentCache);
-      await cache.addAll(contentToCache);
-    })()
-  );
-});
-*/
