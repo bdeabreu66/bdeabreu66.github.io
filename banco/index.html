@@ -238,6 +238,16 @@ overflow-y: scroll;
   text-align: center;
   font-size:1em;
 }
+#div4 {
+  position: fixed;
+  left: 0;
+  top: 30%;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-size:1em;
+}
 </style>
 </HEAD>
 
@@ -549,10 +559,35 @@ function borrar_pagos_hechos(){
 localStorage.setItem('pagos_hechos_banco','');
 
 }
-function muestra_deuda(j){
+function agrega_deuda(j){
 var ind=Clientes.findIndex(x=>x.nombre==pagos[j].nombre);
+var valor=parseFloat(document.getElementById('intro').value);
+Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-valor).toFixed(2);
+localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
+document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
+document.getElementById('intro').value='';
+}
 
-if (ind>=0) {document.getElementById('suma').innerText='Deuda: '+Clientes[ind].deuda;console.log(Clientes[ind].deuda)}
+function agrega_pago(){
+document.getElementById('intro').value=suma;
+}
+function muestra_deuda(j){
+var divaux=document.getElementById("div4");
+var texto='';
+
+texto+='<p>'+pagos[j].nombre+'</p>';
+Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
+var ind=Clientes.findIndex(x=>x.nombre==pagos[j].nombre);
+if (ind>=0) {
+var total=document.getElementById('suma').innerText;
+console.log(Clientes[ind].deuda)
+texto+='<span id="deu"> Deuda :'+Clientes[ind].deuda+'</span>';
+texto+='<span id="abo"> Abono :'+total+'</span><button onclick=agrega_pago()>+</button>';
+texto+='<input id="intro" type="text" value="0"><button onclick=agrega_deuda('+j+')>Ok</button>';
+}
+texto+='<button onclick=quitar_div("div4")>Salir</button>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
 }
 
 function chequeado(o,pos){
@@ -1095,6 +1130,7 @@ if ('serviceWorker' in navigator) {
 </div>
 <div id="div3">
 </div>
-
+<div id="div4">
+</div>
 </body>
 </html>
