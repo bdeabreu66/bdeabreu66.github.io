@@ -1,5 +1,5 @@
 {"rif":"J-YYYYYYYY-Y","dir":"Guacara ","nombre_C":"Distribuidora Jardim, C.A.",
-"lista_a":"greivys.gutierez@empresas-polar.com;johana.bernal@empresas-polar.com;joseheulacioc@gmail.com;",
+"lista_a":"greivys.gutierez@empresas-polar.com;johana.bernal@empresas-polar.com;joseheulacioc@gmail.com",
 "lista_c":"johana.bernal@empresas-polar.com;jose.sosa@empresas-polar.com;joseheulacioc@gmail.com;temporal.susana.colina@empresas-polar.com",
 "lista_p":"genesis.reforgiato@empresas-polar.com;jhon.villegas@empresas-polar.com;francys.tabares@empresas-polar.com;dayanna.franco@empresas-polar.com;humberto.velazco@empresas-polar.com;joseheulacioc@gmail.com",
 "codigo":"XXXXXX"}
