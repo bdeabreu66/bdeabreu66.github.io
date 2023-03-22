@@ -84,7 +84,7 @@
       ["Q114 KONGA SABOR NARANJA (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q114',4.62],
       ["Q115 KONGA SABOR MORA (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q115',4.62],
       ["Q123 KONGA SABOR PARCHITA (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q123',4.62],
-      ["H172 Pan/Mezcla cachapas 500g x 12",12,1.56,1,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Cachapas&",1,'H172',1.44],
+      ["H172 Pan/Mezcla cachapas 500g x 12",12,1.56,1,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H172',1.44],
       ["H330 Primor Crema/Arroz Enriq 450g x 24U Pote",24,1.42,0,0,0,"t2","&Alimentos&Cereales I&",1,'H330',1.31],
       ["H331 Primor Crema/Arroz Enriq 900g x 12U Pote",12,2.26,0,0,0,"t2","&Alimentos&Cereales I&",1,'H331',2.08],
       ["H369 Primor Crema/Arroz (Bolsa) 225g x 34U",34,0.63,0,0,0,"t2","&Alimentos&Cereales I&",1,'H369',0.58],
