@@ -526,7 +526,10 @@ var a1=f1.split('/');
 function muestra(num){
 var texto='';
 var div3=document.getElementById("div3");
-texto+=pagos[num].motivo;
+div3.style="position: fixed;top :50%; left: 0%; width: 80%;height:30%;background-color:Coral;color:white; text-align: left; border: 3px solid #73AD21;";
+texto+='<p>'+pagos[num].motivo+'</p>';
+texto+='<p> Referencia: '+pagos[num].ref+'</p>';
+texto+='<button onclick=quitar_div("div3")> Ok </button>';
 div3.innerHTML=texto;
 }
 function Obten_nombre(tel){
@@ -1036,6 +1039,8 @@ var texto4=localStorage.getItem('Clientes_Pita');
 var texto=localStorage.getItem('pagos_banco');
 var texto2=localStorage.getItem('domicilios_banco');
 var texto3=localStorage.getItem('pagos_hechos_banco');
+//var texto5=localStorage.getItem('pagos_efectivo');
+
 if (texto4!='' && texto4!=null) {Clientes=JSON.parse(texto4);} else {Clientes=[];}
 
 if ( texto3!='' && texto3!=null) {pagos_hechos=JSON.parse(texto3);} else {pagos_hechos=[];}
