@@ -300,6 +300,9 @@ t_c.set('584140487771','Carlos Hernandez');
 //t_c.set('01050041981041334605','Carlos Hernandez');
 t_c.set('584125026326','Carlos Hernandez');
 t_c.set('584124544871','Carlos Hernandez');
+t_c.set('584143411572','Carol Cream');
+t_c.set('584163324638','Basetti Mall');
+t_c.set('584120453816','Leticia Eurolicores');
 t_c.set('584128314388','Carniceria la emboscada');
 t_c.set('01910243272100053204','Carniceria la emboscada');
 t_c.set('584244392499','Star market place CA');
@@ -377,10 +380,16 @@ t_c.set('01020152750000507309','Mc Center Pool');
 t_c.set('01380008190085381160','Mc Center Pool');
 t_c.set('01380008120080196594','Mc Center Pool');
 t_c.set('584144063036','Mary Pita');
+t_c.set('584143042870','Mary Pita');
+t_c.set('584144147018','Mary Pita');
+t_c.set('584144220289','Ikoa express');
+t_c.set('584144353156','Repuestos Mundo CA');
 t_c.set('584128999549','Mini Market PM03');
 t_c.set('584127820477','Negro Primero');
 t_c.set('584140389048','Negro Primero');
 t_c.set('584244069799','Negro Primero');
+t_c.set('584145961360','Negro Primero');
+t_c.set('584144857176','Negro Primero');
 t_c.set('01910148722100062413','Negro Primero');
 t_c.set('01020391140000877505','Noir Guacara');
 t_c.set('01341089560001005231','Noir Guacara');
@@ -582,12 +591,23 @@ localStorage.setItem('pagos_hechos_banco','');
 
 }
 function agrega_deuda(j){
-var ind=Clientes.findIndex(x=>x.nombre==Obten_nombre(pagos[j].telf));
 var valor=parseFloat(document.getElementById('intro').value);
-Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-valor).toFixed(2);
-localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
-document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
-document.getElementById('intro').value='';
+if (valor!=0) {
+ var ind=Clientes.findIndex(x=>x.nombre==Obten_nombre(pagos[j].telf));
+ Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-valor).toFixed(2);
+ localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
+ document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
+ document.getElementById('intro').value='';
+ var today = new Date();
+ var fecha_a = today.toLocaleDateString('es-ES',{year:"numeric",month:"2-digit",day:"2-digit"});
+ console.log(fecha_a);
+ var hora_a = today.toLocaleTimeString('es-ES',{hour12:false,hour:"2-digit",minute:"2-digit",second:"numeric"});
+ console.log(hora_a);
+ dolarhoy=t_d.get(fecha_a);
+ console.log(dolarhoy);
+
+//var record={"fecha":fecha_a,"hora":hora_a,"ref":'',"dolar":dolarhoy,"montoBs":mBs;"montodolar":mDs,"motivo":'',"tc":te,"telf":pagos[j].telf)};
+}
 }
 
 function agrega_pago(){
@@ -1039,14 +1059,15 @@ var texto4=localStorage.getItem('Clientes_Pita');
 var texto=localStorage.getItem('pagos_banco');
 var texto2=localStorage.getItem('domicilios_banco');
 var texto3=localStorage.getItem('pagos_hechos_banco');
-//var texto5=localStorage.getItem('pagos_efectivo');
 
 if (texto4!='' && texto4!=null) {Clientes=JSON.parse(texto4);} else {Clientes=[];}
 
 if ( texto3!='' && texto3!=null) {pagos_hechos=JSON.parse(texto3);} else {pagos_hechos=[];}
 if ( texto2!='' && texto2!=null) {domicilios=JSON.parse(texto2);} else {domicilios=[];}
 if ( texto!='' && texto!=null) {pagos=JSON.parse(texto);} else {pagos=[];}
-
+//var texto5=localStorage.getItem('pagos_efectivo');
+//if (texto5!='' && texto5!=null) {pagos_ef=JSON.parse(texto5);} else {pagos_ef=[];}
+//pagos=pagos.concat(pagos_ef);
 posi=pagos.length;
 posi2=domicilios.length;
 //console.log(pagos);
