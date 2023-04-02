@@ -323,6 +323,7 @@ function fecha_estandar(f){
   var day=f.getDate();if (day<10) {day='0'+day}
 return day+'/'+mes+'/'+year;
 }
+
 function total(){
 var textoT="";
 var div3 = document.getElementById("lista");
@@ -330,18 +331,21 @@ div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:40%;backgrou
 
 textoT+='Desde: <input id="f1" type="date" value="'+fecha_date(fecha_actual())+'"><br>';
 textoT+='Hasta: <input id="f2" type="date" value="'+fecha_date(fecha_actual())+'"><br><br>';
-
-textoT+='<button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="total_unidades_vendidas();" >Ok </button>';
+textoT+='<span onclick="limpiaCliente2();">Cliente:</span>';
+textoT+='<input style="width:30%;" type="text" id="cli2" value="" list="listaclientes">';
+textoT+='<datalist id="listaclientes"></datalist>';
+textoT+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="total_unidades_vendidas();" >Ok </button>';
 div3.innerHTML=textoT;
-
 }
 var Monto=0;
 var Costo=0;
+
 function total_unidades_vendidas(){
 Monto=0;
 Costo=0;
 var f1=document.getElementById("f1").value;
 var f2=document.getElementById("f2").value;
+var clib=document.getElementById("cli2").value;
 f1=inv_fecha_date(f1);
 f2=inv_fecha_date(f2);
 quitarlista();
@@ -368,7 +372,7 @@ var iva=1;
   texto=localStorage.getItem(nomb);
   
 console.log('fech'+fech);
-if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && nombcli!="POLAR") {
+if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && (nombcli==clib || clib=='')) {
     var ped=texto.split('&');
     console.log(texto+" "+texto.length);
     //console.log(ped.length);
@@ -534,6 +538,10 @@ function ventas_periodo(fecha1,fecha2){
 
 var cliente='';
 var AClientes=[];
+
+function limpiaCliente2(){
+document.getElementById("cli2").value='';
+}
 
 function limpiaCliente(){
 document.getElementById("cli").value='';
@@ -1396,6 +1404,8 @@ texto+='<center>Factura '+numero_factura+'</center>';
 texto+='<center><span id="contad" ></span></center>';
 var totald=0;
 var totalb=0;
+var indc=AClientes.findIndex(x=>x.nombre==cliente_factura);
+if (indc>=0) {var cesp=AClientes[indc].esp} else {var cesp=false}
 Ftexto='Fecha: '+fecha_factura+'\n';
 Ftexto+=dist+'\n';
 Ftexto+='Cliente: '+cliente_factura+'\n';
@@ -1466,8 +1476,10 @@ texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total 
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMD+' '+mone+' </td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAD+' '+mone+' </td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totald).toFixed(2)+' '+mone+' </td></tr>';
+if (cesp) {
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descd)).toFixed(2)+' '+mone+' </td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totald-parseFloat(descd)).toFixed(2)+' '+mone+' </td></tr>';
+}
 texto+='</table>';
 Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+' '+mone+'  C/IVA: '+(totald).toFixed(2)+' '+mone+ ' \n'
 Ftexto+='IVA: '+IVAD+' '+mone+' \n';
@@ -1488,8 +1500,10 @@ texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </t
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMB+' '+mone+' </td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAB+' '+mone+'</td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totalb).toFixed(2)+' '+mone+'</td></tr>';
+if (cesp) {
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+mone+'</td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+mone+'</td></tr>';
+}
 texto+='</table>';
 Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+mone+' C/IVA: '+(totalb).toFixed(2)+' '+mone+' \n'
 Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+mone+ ' \n';
@@ -1944,10 +1958,12 @@ document.getElementById("introd").style.visibility="hidden";
 function cambiaU(num){
 data[num][4]=document.getElementById("entradaU").value;
 intro(num);
+salir();
 }
 function cambiaB(num){
 data[num][5]=document.getElementById("entradaB").value;
 intro(num);
+salir();
 }
 function cintro(num){
 document.getElementById("factura").hidden=true;
@@ -1983,7 +1999,7 @@ if (data[i][4]==0) {var valoru="";} else {var valoru=data[i][4];}
 if (data[i][5]==0) {var valorb="";} else {var valorb=data[i][5];}
 
 texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td></tr>';
-texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td></tr></table>';
+texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor1+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td></tr></table>';
 
 
 totalsivad=((pu)*data[i][4]+(pb)*data[i][5]);
@@ -1994,19 +2010,11 @@ totalsivabs=totalsivad*factor;
  texto+='<tr><td>Diferencia IVA</td><td style="text-align:right;">'+(totalsivad*(fm-1)).toFixed(2)+'</td><td>$</td><td style="text-align:right;">'+(totalsivabs*(fm-1)).toFixed(2)+'</td><td>Bs</td></tr>';
  
 texto+='</table>';
-// if (data[i][3]==1) {
-//    texto+="<span style='font-size:0.6em;'>Retenci&oacute;n T: "+(fm*data[i][2]/fiva).toFixed(2)+ " $ "+(fm*data[i][2]*factor/fiva).toFixed(2)+" Bs          </span>";
-//   }
-
-//texto+='U:'+pu+'<br>';
-//texto+='B:'+pb+'<br>';
-
 
 divintro.innerHTML=texto;
 divintro.style.visibility = "visible";
 console.log('num '+i);
 console.log(divintro);
-guarda_pedido();
 }
 
 function refresca(){
@@ -2026,48 +2034,16 @@ for (var i=1;i<Stack_cat.length;i++) {
 }
 var hay=false;
 for (var i=0;i<data.length;i++){
-//if (data[i][0].toUpperCase().indexOf(patron) !=-1) 
-//console.log(i + " " +data[i][7]);  
-//if (data[i][7].indexOf(cat_comp) !=-1) 
-
 if ((data[i][7]==cat_comp) && (data[i][8]==1))  
 {
-console.log(data[i][8]);
-hay=true;
-if (data[i][6]=="t1") {factor=t2;}
-if (data[i][6]=="t2") {factor=t2;}
-//console.log(i+" "+data[i][0]);
+ console.log(data[i][8]);
+ hay=true;
+ if (data[i][6]=="t1") {factor=t2;}
+ if (data[i][6]=="t2") {factor=t2;}
+console.log(i+" "+data[i][0]);
 texto+='<button class="bot4" onclick="intro('+i+');">'+ data[i][0]+'</button><br>';
 console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
-/*if (data[i][4]==0) {var vcor='black';} else {var vcor='blue';}
-if (data[i][5]==0) {var vcor1='black';} else {var vcor1='blue';}
-if (data[i][3]==1) {fm=1.16} else {fm=1}
-//var pu=+(fm*data[i][2]/data[i][1]).toFixed(2);
-//var pb=+(fm*data[i][2]).toFixed(2);
 
-
-if (data[i][6]=="t1") 
-{
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (fm*data[i][2]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]*data[i][1]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
-} 
-if (data[i][6]=="t2") 
-{
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
-}
-  
-if (data[i][6]=="t3") 
-{
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
-}
-
-
- if (data[i][3]==1) {
-    texto+="<span style='font-size:0.6em;'>Retenci&oacute;n T: "+(fm*data[i][2]/fiva).toFixed(2)+ " $ "+(fm*data[i][2]*factor/fiva).toFixed(2)+" Bs          </span>";
-   }
-*/
 }
 
 }
@@ -2212,6 +2188,7 @@ function ajaxPositiveD(response) {
  function showResultD(txt) {
        console.log('muestro respuesta: ', txt);
         Historico=txt;
+ console.log(fecha_actual());
         var ind=Historico.findIndex(elemento => elemento.fecha==fecha_actual());
         if (ind>=0) { document.getElementById("t2").value =Historico[ind].bcv};
     }
