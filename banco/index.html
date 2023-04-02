@@ -593,7 +593,8 @@ localStorage.setItem('pagos_hechos_banco','');
 function agrega_deuda(j){
 var valor=parseFloat(document.getElementById('intro').value);
 if (valor!=0) {
- var ind=Clientes.findIndex(x=>x.nombre==Obten_nombre(pagos[j].telf));
+ var nombcli=Obten_nombre(pagos[j].telf)
+ var ind=Clientes.findIndex(x=>x.nombre==nombcli);
  Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-valor).toFixed(2);
  localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
  document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
@@ -605,14 +606,27 @@ if (valor!=0) {
  console.log(hora_a);
  dolarhoy=t_d.get(fecha_a);
  console.log(dolarhoy);
+ if (tmon=='$') {te='ED'; mDs=parseFloat(valor).toFixed(2); mBs=parseFloat(mDs*dolarhoy).toFixed(2)}
+   else
+ {te='EB'; mBs=parseFloat(valor).toFixed(2); mDs=parseFloat(mBs/dolarhoy).toFixed(2)}
 
-//var record={"fecha":fecha_a,"hora":hora_a,"ref":'',"dolar":dolarhoy,"montoBs":mBs;"montodolar":mDs,"motivo":'',"tc":te,"telf":pagos[j].telf)};
+var record={"fecha":fecha_a,"hora":hora_a,"ref":"","dolar":dolarhoy,"montoBs":mBs,"montodolar":mDs,"motivo":"","tc":te,"telf":pagos[j].telf};
+pagos_ef.push(record);
+localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
 }
 }
 
 function agrega_pago(){
 document.getElementById('intro').value=suma;
 }
+var tmon='$';
+
+function cambia_mon(){
+if (tmon=='Bs') {tmon='$'} else {tmon='Bs'}
+document.getElementById("bmon").innerText=tmon;
+
+}
+
 function muestra_deuda(j){
 var divaux=document.getElementById("div4");
 var texto='';
@@ -627,7 +641,9 @@ texto+='<td width="50%"><span id="deu"> Deuda :'+Clientes[ind].deuda+'</span></t
 texto+='<td width="25%"><span id="abo"> Abono :'+suma+'</span></td>';
 texto+='<td style="width:25%;text-align:rigth;"><button onclick=agrega_pago()>+</button></td>';
 texto+='</tr></table>';
-texto+='<input id="intro" type="text" value="0"><button onclick=agrega_deuda('+j+')>Ok</button><br>';
+texto+='<button id="bmon"onclick=cambia_mon()>'+tmon+'</button>';
+texto+='<input id="intro" type="text" value="0">';
+texto+='<button onclick=agrega_deuda('+j+')>Ok</button><br>';
 }
 texto+='<button onclick=quitar_div("div4")>Salir</button>';
 texto+='</div>';
@@ -1065,9 +1081,9 @@ if (texto4!='' && texto4!=null) {Clientes=JSON.parse(texto4);} else {Clientes=[]
 if ( texto3!='' && texto3!=null) {pagos_hechos=JSON.parse(texto3);} else {pagos_hechos=[];}
 if ( texto2!='' && texto2!=null) {domicilios=JSON.parse(texto2);} else {domicilios=[];}
 if ( texto!='' && texto!=null) {pagos=JSON.parse(texto);} else {pagos=[];}
-//var texto5=localStorage.getItem('pagos_efectivo');
-//if (texto5!='' && texto5!=null) {pagos_ef=JSON.parse(texto5);} else {pagos_ef=[];}
-//pagos=pagos.concat(pagos_ef);
+var texto5=localStorage.getItem('pagos_efectivo');
+if (texto5!='' && texto5!=null) {pagos_ef=JSON.parse(texto5);} else {pagos_ef=[];}
+pagos=pagos.concat(pagos_ef);
 posi=pagos.length;
 posi2=domicilios.length;
 //console.log(pagos);
