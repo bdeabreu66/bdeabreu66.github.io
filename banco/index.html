@@ -612,7 +612,10 @@ if (valor!=0) {
 
 var record={"fecha":fecha_a,"hora":hora_a,"ref":"","dolar":dolarhoy,"montoBs":mBs,"montodolar":mDs,"motivo":"","tc":te,"telf":pagos[j].telf};
 pagos_ef.push(record);
+pagos.push(record);
 localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
+localStorage.setItem('pagos_banco',JSON.stringify(pagos));
+
 }
 }
 
@@ -752,6 +755,8 @@ function colorcuenta(C){
    if (C=='A') {return 'SkyBlue';} 
    if (C=='J') {return 'DodgerBlue';}
    if (C=='C') {return 'SteelBlue';}
+   if (C=='EB') {return 'Olive';}
+   if (C=='ED') {return 'Lime';}
 }
 
 function genera_salida3(){
@@ -926,7 +931,7 @@ console.log(domicilios);
 
 function borrar_datos(){
 pagos=[];pos=[];domicilios=[];
-localStorage.setItem('pagos_banco','');
+localStorage.setItem('pagos_banco',JSON.stringify(pagos_ef));
 localStorage.setItem('domicilios_banco','');
 posi=0;
 posi2=0;
@@ -1083,7 +1088,8 @@ if ( texto2!='' && texto2!=null) {domicilios=JSON.parse(texto2);} else {domicili
 if ( texto!='' && texto!=null) {pagos=JSON.parse(texto);} else {pagos=[];}
 var texto5=localStorage.getItem('pagos_efectivo');
 if (texto5!='' && texto5!=null) {pagos_ef=JSON.parse(texto5);} else {pagos_ef=[];}
-pagos=pagos.concat(pagos_ef);
+console.log(pagos_ef);
+//pagos=pagos.concat(pagos_ef);
 posi=pagos.length;
 posi2=domicilios.length;
 //console.log(pagos);
