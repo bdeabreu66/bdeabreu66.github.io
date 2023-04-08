@@ -357,6 +357,7 @@ t_c.set('584124203947','Licoreria San Rafael');
 t_c.set('584140422874','Licoreria San Rafael');
 t_c.set('584147884840','Licoreria San Rafael');
 t_c.set('01080029370100222874','Licoreria San Rafael');
+t_c.set('01050119921119222443','Licoreria San Rafael');
 t_c.set('01340464034643019505','Liconan');
 t_c.set('01740124661244144208','Liconan');
 t_c.set('584144807588','Liconan');
@@ -385,6 +386,7 @@ t_c.set('584144147018','Mary Pita');
 t_c.set('584144220289','Ikoa express');
 t_c.set('584144353156','Repuestos Mundo CA');
 t_c.set('584128999549','Mini Market PM03');
+t_c.set('584244912883','Evento Malave');
 t_c.set('584127820477','Negro Primero');
 t_c.set('584140389048','Negro Primero');
 t_c.set('584244069799','Negro Primero');
@@ -531,6 +533,20 @@ var a2=f2.split('/');
 var a1=f1.split('/');
  if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>a1[0]) {return false; } else {return true;}
 }
+function borrar_pago(num){
+quitar_div("div3");
+if (pagos[num].tc=='EB' || pagos[num].tc=='ED') {
+  var resp=confirm('Esta seguro de borrar el pago');
+  if (resp) {
+   var ind=pagos_ef.findIndex(x=>x.telf===pagos[num].telf && x.hora===pagos[num].hora);
+   if (ind>=0) {pagos_ef.splice(ind,1);pagos.splice(num,1);
+    localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
+    localStorage.setItem('pagos_banco',JSON.stringify(pagos));
+    }
+   console.log(ind);
+  }
+}
+}
 
 function muestra(num){
 var texto='';
@@ -539,6 +555,7 @@ div3.style="position: fixed;top :50%; left: 0%; width: 80%;height:30%;background
 texto+='<p>'+pagos[num].motivo+'</p>';
 texto+='<p> Referencia: '+pagos[num].ref+'</p>';
 texto+='<button onclick=quitar_div("div3")> Ok </button>';
+texto+='<button onclick=borrar_pago('+num+') >Borrar</button>';
 div3.innerHTML=texto;
 }
 function Obten_nombre(tel){
@@ -1088,6 +1105,7 @@ if ( texto2!='' && texto2!=null) {domicilios=JSON.parse(texto2);} else {domicili
 if ( texto!='' && texto!=null) {pagos=JSON.parse(texto);} else {pagos=[];}
 var texto5=localStorage.getItem('pagos_efectivo');
 if (texto5!='' && texto5!=null) {pagos_ef=JSON.parse(texto5);} else {pagos_ef=[];}
+console.log('pagos_ef');
 console.log(pagos_ef);
 //pagos=pagos.concat(pagos_ef);
 posi=pagos.length;
