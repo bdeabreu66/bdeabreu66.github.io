@@ -252,7 +252,8 @@ Direcci&oacute;n:<textarea style="width:55%;" type="text" id="dircli" value="" >
 Rif:<input style="width:55%;" type="text" id="rifcli" value="" ><br>
 Tlf:<input style="width:55%;" type="text" id="tlfcli" value="" ><br>
 AR:<input style="width:55%;" type="checkbox" id="espcli" value="" ><br>
-Deuda:<input style="width:55%;" type="text" id="deucli" value="" >
+Deuda:<input style="width:55%;" type="text" id="deucli" value="" ><br>
+Vacios:<input style="width:55%;" type="text" id="vaccli" value="" ><br>
 </div>
 
 <div id="lista" > </div>
@@ -569,6 +570,7 @@ if (cliente!='') {
   rifcliente=document.getElementById("rifcli").value;
   cliente_especial=document.getElementById("espcli").checked;
   deuda_cliente=document.getElementById("deucli").value;
+  vacio_cliente=document.getElementById("vaccli").value;
   indic=-1;
   if (AClientes.length>0) {indic=AClientes.findIndex(x => x.nombre === cliente);} 
   Ocliente=new Object();
@@ -578,6 +580,7 @@ if (cliente!='') {
   Ocliente.rif=rifcliente;
   Ocliente.esp=cliente_especial;
   Ocliente.deuda=deuda_cliente;
+  Ocliente.vacio=vacio_cliente;
   if (indic==-1) {AClientes.push(Ocliente); } else {Object.assign(AClientes[indic],Ocliente)}
   guarda_clientes();
  }
@@ -607,6 +610,8 @@ if (ind>=0) {
  document.getElementById("espcli").checked=AClientes[ind].esp;
  document.getElementById("dircli").value=AClientes[ind].dir;
  document.getElementById("deucli").value=AClientes[ind].deuda;
+ document.getElementById("vaccli").value=AClientes[ind].vacio;
+
 } else {
 
  document.getElementById("rifcli").value='';
@@ -1611,7 +1616,7 @@ Gdolar+=fm*((data[i][4]*(pu-pcu) + data[i][5]*(pb-pcb)));
     Tbs=parseFloat((Tdolar*factor).toFixed(2));
    }
 
-if (Tdolar!=0) { 
+if (Tdolar==Tdolar) { 
   if (fm!=1) {BIMD+=Tdolar;}
   totald+=parseFloat((Tdolar*fm).toFixed(2));
   totaldsiva+=parseFloat((Tdolar).toFixed(2));
