@@ -798,7 +798,8 @@ suma_inventario2();
 fact_base(num);
 borra2(num);
 cliente=cliente_factura;
-var indcliente=AClientes.findIndex(x=>x.name===cliente);
+var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
+console.log(indcliente);
 if (indcliente>=0) {Ocliente=AClientes[indcliente];} else {Ocliente=null;}
 cancelar();
 Revierte_deuda();
