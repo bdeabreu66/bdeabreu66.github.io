@@ -437,7 +437,8 @@ t_c.set('584129546298','Kiosko Hospital');
 t_c.set('584124465846','Yoni el cauchero');
 t_c.set('584244030883','Energym Coffe');
 t_c.set('584121978971','Marlin hija Sonia');
-t_c.set('01050137711137023074','Maxi Carnes Vigirima');
+t_c.set('01050137711137023074','Maxi Carnes');
+t_c.set('01050137711137063955','Maxi Carnes');
 t_c.set('584146443242','Farmacia Sunacar');
 t_c.set('ISO HOME','Iso Home');
 dat_especial=["AREPA EL PAISITA","IGRIVAL","HOTEL GOLD","TRIGOPAN","PEPSI COLA","CREACIONES PITA","ISO HOME"];
@@ -554,7 +555,7 @@ var div3=document.getElementById("div3");
 div3.style="position: fixed;top :50%; left: 0%; width: 80%;height:30%;background-color:Coral;color:white; text-align: left; border: 3px solid #73AD21;";
 texto+='<p>'+pagos[num].motivo+'</p>';
 texto+='<p> Referencia: '+pagos[num].ref+'</p>';
-texto+='<button onclick=quitar_div("div3")> Ok </button>';
+texto+='<button onclick=quitar_div("div3")> Ok </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 texto+='<button onclick=borrar_pago('+num+') >Borrar</button>';
 div3.innerHTML=texto;
 }
@@ -636,9 +637,18 @@ localStorage.setItem('pagos_banco',JSON.stringify(pagos));
 }
 }
 
-function agrega_pago(){
-document.getElementById('intro').value=suma;
+function agrega_pago(j){
+if (suma!=0) {
+ suma=parseFloat(parseFloat(suma).toFixed(2));
+ var nombcli=Obten_nombre(pagos[j].telf)
+ var ind=Clientes.findIndex(x=>x.nombre==nombcli);
+ Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-suma).toFixed(2);
+ localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
+ document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
+ 
 }
+}
+
 var tmon='$';
 
 function cambia_mon(){
@@ -659,7 +669,7 @@ console.log(Clientes[ind].deuda);
 texto+='<table width="100%"><tr>';
 texto+='<td width="50%"><span id="deu"> Deuda :'+Clientes[ind].deuda+'</span></td>';
 texto+='<td width="25%"><span id="abo"> Abono :'+suma+'</span></td>';
-texto+='<td style="width:25%;text-align:rigth;"><button onclick=agrega_pago()>+</button></td>';
+texto+='<td style="width:25%;text-align:rigth;"><button onclick=agrega_pago('+j+')>+</button></td>';
 texto+='</tr></table>';
 texto+='<button id="bmon"onclick=cambia_mon()>'+tmon+'</button>';
 texto+='<input id="intro" type="text" value="0">';
