@@ -476,14 +476,7 @@ function resta_inventario(){
        }
  inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])-data[i][4]).toString();
  inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])-data[i][5]).toString();
- /*
-       if (inventario[ind]["UNID"]<0) {
-           var cj=1+Math.abs(parseInt(inventario[ind]["UNID"])/parseInt(data[i][1]));
-           cj=parseInt(cj);
-           inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])+cj*parseInt(data[i][1])).toString();
-           inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])-cj).toString();
-         }*/
-    }
+     }
  }
 guarda_inventario();
 }
@@ -1751,6 +1744,7 @@ textoT+='<td width="5%"></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda();">' + TM +'</button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="suma_inventario();"> +I </button></td>';
+textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="resta_inventario();"> -I </button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Pedido" id="btnc" onclick="pedido();"> P </button></td>';
 textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
 textoT+='</tr></table></div><br>';
