@@ -161,7 +161,7 @@ overflow-y:scroll;
   position: fixed;
   left: 0;
   top: 5%;
-  height:60%;
+  height:70%;
    width: 100%;
   background-color: Turquoise;
   color: red;
@@ -253,7 +253,10 @@ Rif:<input style="width:55%;" type="text" id="rifcli" value="" ><br>
 Tlf:<input style="width:55%;" type="text" id="tlfcli" value="" ><br>
 AR:<input style="width:55%;" type="checkbox" id="espcli" value="" ><br>
 Deuda:<input style="width:55%;" type="text" id="deucli" value="" ><br>
-Vacios:<input style="width:55%;" type="text" id="vaccli" value="" ><br>
+Vacios polar:<input style="width:55%;" type="text" id="vaccli" value="" ><br>
+Vacios 350 ml:<input style="width:55%;" type="text" id="vacclir1" value="" ><br>
+Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
+
 </div>
 
 <div id="lista" > </div>
@@ -283,13 +286,12 @@ texto+='<table width="100%"><tr><td style="width:90%;text-align:center;color:blu
 texto+='<div style="overflow:auto;height:90%;">';
 texto+='<table style="width:100%;">';
 for(var i=0;i<nd;i++){
- if (totalcajas[i]!=0) {
+ if (totalcajas[i]!=0 ||totalunid[i]!=0 ) {
 console.log(data[i][0]+" "+totalcajas[i]+ " cajas");
-texto+='<tr><td style="width:80%;font-size:1em;">'+data[i][0]+'</td><td style="width:15%;font-size:1em;">'+totalcajas[i]+'<td style="width:5%;font-size:1em;">C</td>'+'</td></tr>';
-}
- if (totalunid[i]!=0) {
-console.log(data[i][0]+" "+totalunid[i]+" unidades");
-texto+='<tr><td style="width:80%;font-size:1em;">'+data[i][0]+'</td><td style="width:15%;font-size:1em;">'+totalunid[i]+'<td style="width:5%;font-size:1em;">U</td>'+'</td></tr>';
+var tot=totalcajas[i]*data[i][1]+totalunid[i];
+var ncaj=Math.floor(tot/data[i][1]);
+var nunid=tot % data[i][1];
+texto+='<tr><td style="width:80%;font-size:1em;">'+data[i][0]+'</td><td style="width:10%;font-size:1em;">'+ncaj+' C</td><td style="width:10%;font-size:1em;">'+nunid+' U</td>'+'</tr>';
 }
 
 }
@@ -435,19 +437,11 @@ console.log('clave '+inventario[i]["CLAVE"]);
   var ru=tu % nuc;
 
   texto+='<tr><td style="width:70%;font-size:1em;">'+data[ind][0]+'</td>';
-  if (tc>0) {
-   texto+='<td style="width:15%;font-size:1em;">'+tc+' C</td>';
-  } else  {
-   texto+='<td style="width:15%;font-size:1em;"></td>';
+  texto+='<td style="width:15%;font-size:1em;">'+tc+' C</td>';
+  texto+='<td style="width:15%;font-size:1em;">'+ru+' U</td>';
   }
-  if (ru>0) {
-   texto+='<td style="width:15%;font-size:1em;">'+ru+' U</td>';
-  } else  {
-   texto+='<td style="width:15%;font-size:1em;"></td>';
-  }
- }
 }
-texto+='</table></div>';
+texto+='</tr></table></div>';
 div3.innerHTML=texto;
 }
 
@@ -461,9 +455,13 @@ if (texto.length>0) {localStorage.setItem('Inventario_PO',texto.substr(1));} els
 }
 
 function anula_inventario(){
+const resp = confirm("Esta seguro de eliminar el inventario");
+
+if (resp) {
   inventario=[]; 
   guarda_inventario();
   desp_inventario();
+}
 }
 function resta_inventario(){
   for (var i=0;i<data.length;i++){
@@ -548,8 +546,10 @@ document.getElementById("cliente").hidden=true;
 ecliente=document.getElementById("cli").value;
 var pos=AClientes.findIndex(x=>x.nombre===ecliente);
 console.log(pos);
-if (pos>=0) {AClientes.splice(pos,1);guarda_clientes();}
-limpiaCliente();
+const resp = confirm("Esta seguro de eliminar el cliente");
+if (pos>=0 && resp) {AClientes.splice(pos,1);guarda_clientes();
+   limpiaCliente();
+ }
 //console.log('LC: '+Lclientes);
 }
 
@@ -564,6 +564,9 @@ if (cliente!='') {
   cliente_especial=document.getElementById("espcli").checked;
   deuda_cliente=document.getElementById("deucli").value;
   vacio_cliente=document.getElementById("vaccli").value;
+  vacio_cliente1=document.getElementById("vacclir1").value;
+  vacio_cliente2=document.getElementById("vacclir2").value;
+
   indic=-1;
   if (AClientes.length>0) {indic=AClientes.findIndex(x => x.nombre === cliente);} 
   Ocliente=new Object();
@@ -574,6 +577,9 @@ if (cliente!='') {
   Ocliente.esp=cliente_especial;
   Ocliente.deuda=deuda_cliente;
   Ocliente.vacio=vacio_cliente;
+  Ocliente.vacio1=vacio_cliente1;
+  Ocliente.vacio2=vacio_cliente2;
+
   if (indic==-1) {AClientes.push(Ocliente); } else {Object.assign(AClientes[indic],Ocliente)}
   guarda_clientes();
  }
@@ -604,6 +610,8 @@ if (ind>=0) {
  document.getElementById("dircli").value=AClientes[ind].dir;
  document.getElementById("deucli").value=AClientes[ind].deuda;
  document.getElementById("vaccli").value=AClientes[ind].vacio;
+ document.getElementById("vacclir1").value=AClientes[ind].vacio1;
+ document.getElementById("vacclir2").value=AClientes[ind].vacio2;
 
 } else {
 
