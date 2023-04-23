@@ -568,7 +568,7 @@ if (cliente!='') {
   vacio_cliente2=document.getElementById("vacclir2").value;
 
   indic=-1;
-  if (AClientes.length>0) {indic=AClientes.findIndex(x => x.nombre === cliente);} 
+  if (AClientes.length>0) {indic=AClientes.findIndex(x => x.nombre == cliente);} 
   Ocliente=new Object();
   Ocliente.nombre=cliente;
   Ocliente.dir=direccion;
@@ -660,8 +660,7 @@ if (texto.length>2) {localStorage.setItem('Pedido',texto.substr(1));} else {loca
 localStorage.setItem('Cliente',cliente);
 }
 
-
-function lee_facturas(){
+function crea_lista_facturas(){
 listasel=[];
 console.log("paso");
 for(var i=0;i<localStorage.length;i++){
@@ -669,6 +668,11 @@ var nomb=localStorage.key(i);
 if (nomb.indexOf("FAC_")==0) {listasel.unshift(nomb.substr(4));} 
  } 
 listasel=listasel.sort();
+
+}
+
+function lee_facturas(){
+crea_lista_facturas();
 selectlista();
 }
 function ord_nomb(a,b){
@@ -692,21 +696,32 @@ var elb=b.split('_');
 }
 
 function ordena_nombre(){
+crea_lista_facturas();
 listasel=listasel.sort(ord_nomb);
 selectlista();
 }
 
 function ordena_fecha(){
+crea_lista_facturas();
 listasel=listasel.sort(ord_fecha);
 selectlista();
 }
+function ordena_cliente(){
+crea_lista_facturas();
+
+listasel=listasel.filter(x=>x.split('_')[0]==cliente);
+listasel=listasel.sort(ord_fecha);
+selectlista();
+}
+var total_factura=0;
 function selectlista(){
 var textoT="";
 var div3 = document.getElementById("lista");
 div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
 textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
 textoT+='<table width="100%"><tr>';
-textoT+='<td style="width:70%;text-align:center;color:blue;" >Facturas anteriores</td>';
+textoT+='<td style="width:60%;text-align:center;color:blue;" >Facturas anteriores</td>';
+textoT+='<td width="10%"><button  title="Nombre" onclick="ordena_cliente();" > C </button></td>';
 textoT+='<td width="10%"><button  title="Nombre" onclick="ordena_nombre();" > N </button></td>';
 textoT+='<td width="10%"><button  title="Fecha" onclick="ordena_fecha();" > F </button></td>';
 textoT+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td>';
@@ -714,7 +729,7 @@ textoT+='</tr></table></div><br>';
 textoT+='<div style="overflow:auto;height:90%;font-size:0.8rem;">';
 textoT+='<table width="100%">';
 for (var i=0;i<listasel.length;i++) {
-textoT+='<tr><td style="width:85%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:15%;"></td></tr>'; 
+textoT+='<tr><td style="width:80%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:20%;">'+monto_factura(i)+' $</td></tr>'; 
 }
 textoT+='</table></div>';
 div3.innerHTML=textoT;
@@ -880,11 +895,18 @@ for (var i=0;i<ped.length;i++) {
 }
 
 var datfac=[];
+function monto_factura(num){
+var nomb=listasel[num];
+recupera_factura("FAC_"+nomb);
+factura3(num);
+document.getElementById("factura").hidden=true;
+return (total_factura).toFixed(2);
+}
 function recupera_factura(archivo){
 var texto;
 
-cliente=localStorage.getItem('Cliente');
-document.getElementById("cli").value=cliente;
+//cliente=localStorage.getItem('Cliente');
+//document.getElementById("cli").value=cliente;
 for (var i=0;i<data.length;i++) {
 datfac[i]=new Object();
 datfac[i].unidad=0;
@@ -1477,6 +1499,8 @@ var BIMB=(parseFloat(BIMD)*factor).toFixed(2);
 var descd=(parseFloat(IVAD)*0.75).toFixed(2);
 var IVAB=(totalb-totalbsiva).toFixed(2);
 var descb=(parseFloat(IVAB)*0.75).toFixed(2);
+
+
 if (tipo2==0){
 texto+='<table width="60%">';
 texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total S/IVA </td><td style="width:50%;">'+(totaldsiva).toFixed(2)+' '+mone+'</td></tr>';
@@ -1500,7 +1524,10 @@ Ftexto+='IVA: '+(totald-totaldsiva).toFixed(2)+'$\n';
 */
 }
 
-
+total_factura=totald;
+if (cesp) {
+total_factura=totald-parseFloat(descd);
+}
 if (tipo2==1) {
 texto+='<table width="60%">';
 texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </td><td style="width:50%;">'+(totalbsiva).toFixed(2)+' '+mone+ '</td></tr>';
@@ -1510,18 +1537,13 @@ texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td 
 if (cesp) {
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+mone+'</td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+mone+'</td></tr>';
+
 }
 texto+='</table>';
 Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+mone+' C/IVA: '+(totalb).toFixed(2)+' '+mone+' \n'
 Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+mone+ ' \n';
 
-/*
-texto+='<table width="100%"><tr align="right"><td style="width:15%;"> </td><td style="width:15%;"></td><td style="width:35%;">'+'S/IVA'+'</td><td style="width:35%;">'+'C/IVA'+'</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> Total </td><td style="width:15%;"></td><td style="width:35%;">'+(totalbsiva).toFixed(2)+' Bs </td><td style="width:35%;">'+(totalb).toFixed(2)+' Bs&nbsp</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> IVA </td><td style="width:15%;"></td><td style="width:35%;">'+(totalb-totalbsiva).toFixed(2)+' Bs </td><td style="width:35%;">'+''+'</td></tr></table>';
-Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+'Bs C/IVA: '+(totalb).toFixed(2)+' Bs \n'
-Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+'Bs\n';
-*/
+
 }
 
 

@@ -1,4 +1,4 @@
-// 17 currentCache = 'FACPOLAR_cache_v3.9';
+// 22 currentCache = 'FACPOLAR_cache_v4.0';
 const files =
 [
     'index.html',
