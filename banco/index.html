@@ -364,6 +364,7 @@ t_c.set('584144807588','Liconan');
 t_c.set('584244342559','Liconan');
 t_c.set('584144326744','Yonatan mecanico');
 t_c.set('584121401869','Licoreria Baco');
+t_c.set('584244734877','Licoreria Baco');
 t_c.set('01340346533461027171','Licoreria Baco');
 t_c.set('584140459037','Luncheria Unicasa');
 t_c.set('584144145440','Licoreria Malave');// Simon
@@ -618,8 +619,8 @@ var valor=parseFloat(document.getElementById('intro').value);
 if (valor!=0) {
  var nombcli=Obten_nombre(pagos[j].telf)
  var ind=Clientes.findIndex(x=>x.nombre==nombcli);
- Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-valor).toFixed(2);
- localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
+ //Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-valor).toFixed(2);
+ //localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
  document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
  document.getElementById('intro').value='';
  var today = new Date();
