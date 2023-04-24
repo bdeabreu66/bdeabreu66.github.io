@@ -673,7 +673,7 @@ listasel=listasel.sort();
 
 function lee_facturas(){
 crea_lista_facturas();
-selectlista();
+selectlista(0);
 }
 function ord_nomb(a,b){
 var ela=a.split('_');
@@ -698,23 +698,22 @@ var elb=b.split('_');
 function ordena_nombre(){
 crea_lista_facturas();
 listasel=listasel.sort(ord_nomb);
-selectlista();
+selectlista(0);
 }
 
 function ordena_fecha(){
 crea_lista_facturas();
 listasel=listasel.sort(ord_fecha);
-selectlista();
+selectlista(0);
 }
 function ordena_cliente(){
 crea_lista_facturas();
-
 listasel=listasel.filter(x=>x.split('_')[0]==cliente);
 listasel=listasel.sort(ord_fecha);
-selectlista();
+selectlista(1);
 }
 var total_factura=0;
-function selectlista(){
+function selectlista(t){
 var textoT="";
 var div3 = document.getElementById("lista");
 div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
@@ -729,7 +728,11 @@ textoT+='</tr></table></div><br>';
 textoT+='<div style="overflow:auto;height:90%;font-size:0.8rem;">';
 textoT+='<table width="100%">';
 for (var i=0;i<listasel.length;i++) {
-textoT+='<tr><td style="width:80%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:20%;">'+monto_factura(i)+' $</td></tr>'; 
+if (t=="0") {
+textoT+='<tr><td style="width:80%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:20%;"></td></tr>'; 
+} else {
+ textoT+='<tr><td style="width:80%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:20%;">'+monto_factura(i)+' $</td></tr>'; 
+}
 }
 textoT+='</table></div>';
 div3.innerHTML=textoT;

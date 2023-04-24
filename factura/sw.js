@@ -1,4 +1,5 @@
-// 22 currentCache = 'FACPOLAR_cache_v4.0';
+// 24-04
+currentCache = 'FACPOLAR_cache_v4.1';
 const files =
 [
     'index.html',
