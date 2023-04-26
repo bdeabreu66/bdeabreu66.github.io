@@ -337,7 +337,7 @@ var aux;
 if (TIPO_RET=="0") {txt=LISTA_C;aux=" Cerveceria";} ;
 if (TIPO_RET=="1") {txt=LISTA_A;aux=" Alimentos";} 
 if (TIPO_RET=="2") {txt=LISTA_P;aux=" Pepsicola";} 
-var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+aux+"_"+CODIGO;
+var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+' '+AGENCIA+aux+"_"+CODIGO;
 var adjunto='&attachment=';
 console.log(asunto);
 var url ='mailto:'+txt+asunto+adjunto;
@@ -352,6 +352,8 @@ var PERIODO_FISCAL;
 var DIR_FISCAL='Direccion del Franquiciado Tlf 04XX-XXXXXXX';
 var RIF_FISCAL='J-XXXXXXXX-X';
 var NOMB_DIST='Distribuidora XXXXXXXXX C.A.';
+var AGENCIA='AGENCIA GUACARA ';
+
 var data=[];
 var datos_ret=[];
 var datos_ret_base;

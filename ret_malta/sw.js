@@ -2,7 +2,8 @@
 //31-05-2022 . Modificado la entrada base imponible para que acepte ''
 //07-12-2022 Incorporada retencion pepsi
 //12-12-2022 Corregido detalles para pepsi
-const currentCache = 'RETEN-cache-v1.5';
+//26-04-2012 Agragada agencia
+const currentCache = 'RETEN-cache-v1.6';
 const files =
 [
     'index.html',
