@@ -355,11 +355,13 @@ t_c.set('584122853554','Bodegon La cuna');
 t_c.set('584128311132','Bodegon La cuna');
 t_c.set('584144202063','Bodegon La cuna');
 t_c.set('584128568459','La Ermita');
+t_c.set('584143950447','Jorge Castillo');
 t_c.set('01020152720000574471','La Ermita');
 t_c.set('01020142000100004572','Bodegon La luz');
 t_c.set('01910027812127041189','Leticia');
 t_c.set('00010001365042007000','Patria');
-t_c.set('584145939707','Licoreria Yorman');
+t_c.set('584145939707','Licoreria Alex');
+t_c.set('584127587474','Licoreria Alex');
 t_c.set('584124203948','Licoreria San Rafael');
 t_c.set('584124203947','Licoreria San Rafael');
 t_c.set('584140422874','Licoreria San Rafael');
@@ -371,6 +373,8 @@ t_c.set('01740124661244144208','Liconan');
 t_c.set('584144807588','Liconan');
 t_c.set('584244342559','Liconan');
 t_c.set('584144326744','Yonatan mecanico');
+t_c.set('584122364480','Yonatan mecanico');
+t_c.set('584120425496','Yonatan mecanico');
 t_c.set('584121401869','Licoreria Baco');
 t_c.set('584244734877','Licoreria Baco');
 t_c.set('01340346533461027171','Licoreria Baco');
@@ -440,6 +444,7 @@ t_c.set('584244203234','Sosa Almacen');
 t_c.set('584144397087','Tequenack');
 t_c.set('01340153541531021352','Santa Fe market');
 t_c.set('01340419444191042090','Venvidrio');
+t_c.set('J501880239','Venvidrio');
 t_c.set('584144159903','Venvidrio');
 t_c.set('584120386419','Venvidrio');
 t_c.set('584121589089','La gran parada');// Vicente
@@ -451,13 +456,14 @@ t_c.set('584244030883','Energym Coffe');
 t_c.set('584121978971','Marlin hija Sonia');
 t_c.set('01050137711137023074','Maxi Carnes');
 t_c.set('01050137711137063955','Maxi Carnes');
+t_c.set('01050137711137063955','Licoreria Brisas del Lago');
 t_c.set('584146443242','Farmacia Sunacar');
 t_c.set('584144127966','Panaderia Kakau II');
 t_c.set('584120398368','Mi viejo Araguaney');
 t_c.set('584128890498','Mi viejo Araguaney');
 t_c.set('584145555555','Papa Leon');
 t_c.set('ISO HOME','Iso Home');
-dat_especial=["AREPA EL PAISITA","IGRIVAL","HOTEL GOLD","TRIGOPAN","PEPSI COLA","CREACIONES PITA","ISO HOME"];
+dat_especial=["AREPA EL PAISITA","IGRIVAL","HOTEL GOLD","TRIGOPAN","PEPSI COLA","CREACIONES PITA","ISO HOME","J501880239"];
 const t_d=new Map();
 /*t_d.set('27/12/2022',16.57);
 t_d.set('26/12/2022',16.57);
@@ -491,8 +497,6 @@ textoT+='<tr style="font-size:1.2em;"><td style="color:black;background-color:Sk
 textoT+='</table></div>';
 div3.innerHTML=textoT;
 }
-
-
 function Activalector_archivos(){
 getFile2 = new selectFile;
 getFile2.targets('choose2','selected');
@@ -500,6 +504,15 @@ archivos2=document.getElementById('choose2');
 archivos2.value=null;
 archivos2.addEventListener('change', Leer_Archivo, false);
 getFile2.simulate();
+}
+
+function Activalector_importar(){
+getFile3 = new selectFile;
+getFile3.targets('choose3','selected');
+archivos3=document.getElementById('choose3');
+archivos3.value=null;
+archivos3.addEventListener('change', Leer_Archivo2, false);
+getFile3.simulate();
 }
 
 
@@ -516,6 +529,25 @@ function readFileAsText(file){
    });
 }
 //function Leer_Archivo(e){}
+
+function exportar_datos(){
+
+
+
+}
+ 
+function Leer_Archivo2(e){
+ var archivos=e.currentTarget.files;
+ //alert(archivos);
+  var lector=new FileReader();
+  lector.addEventListener("load",(e) => {
+    datos_imp = e.target.result;
+    //Pagos=JSON.parse(datos_imp);
+    //LocalSorage.setItem('pagos_banco',datos_imp);
+    alert(datos_imp.length);
+  });
+  lector.readAsText(archivos[0]);
+}
 
 function Leer_Archivo(e){
  var archivos=e.currentTarget.files;
@@ -1234,15 +1266,22 @@ if ('serviceWorker' in navigator) {
 </tr></table>
 </div>
 <div id="header"> 
-<button class="btop" onclick="Activalector_archivos();">Cargar Datos V4</button>  
-<button class="btop" onclick="borrar_datos();">Borrar Datos</button>
-
+<button class="btop" onclick="Activalector_archivos();">Cargar V4</button>  
+<button class="btop" onclick="borrar_datos();">Borrar</button>
+<button class="btop" onclick="exportar_datos();">Ex</button>
+<button class="btop" onclick="Activalector_importar();">Im</button>
 </div>
 
 <div>
 <label hidden id=selected>Nothing selected</label><br>
 <input hidden type=file id="choose2" accept="*.txt" multiple>
 </div>
+
+<div>
+<label hidden id=selected2>Nothing selected</label><br>
+<input hidden type=file id="choose3" accept="*.txt" >
+</div>
+
 <div id="div3">
 </div>
 <div id="div4">
