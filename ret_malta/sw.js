@@ -3,7 +3,7 @@
 //07-12-2022 Incorporada retencion pepsi
 //12-12-2022 Corregido detalles para pepsi
 //26-04-2012 Agragada agencia
-const currentCache = 'RETEN-cache-v1.6';
+const currentCache = 'RETEN-cache-v1.7';
 const files =
 [
     'index.html',
