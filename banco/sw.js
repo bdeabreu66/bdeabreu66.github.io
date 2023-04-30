@@ -4,7 +4,8 @@ const files =
 [
     'index.html',
     'icondef.png',
-    'selectFile.js'
+    'selectFile.js',
+    'FileSaver.js'
  ];
 
 self.addEventListener('install', event => {
