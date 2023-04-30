@@ -252,6 +252,7 @@ overflow-y: scroll;
 </HEAD>
 
 <script type="text/javascript" src="selectFile.js"></script>
+<script type="text/javascript" src="FileSaver.js"></script>
 
 <script type="text/javascript">
 const t_c=new Map();
@@ -531,7 +532,10 @@ function readFileAsText(file){
 //function Leer_Archivo(e){}
 
 function exportar_datos(){
-
+ var data;
+ data=JSON.stringify(pagos)+"^^"+JSON.stringify(pagos_ef)+"^^"+JSON.stringify(pagos_hechos)+"^^"+JSON.stringify(domicilios);
+ var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,"datosBNC.txt");
 
 
 }
@@ -542,8 +546,15 @@ function Leer_Archivo2(e){
   var lector=new FileReader();
   lector.addEventListener("load",(e) => {
     datos_imp = e.target.result;
-    //Pagos=JSON.parse(datos_imp);
-    //LocalSorage.setItem('pagos_banco',datos_imp);
+    var textos=datos_imp.split('^^');
+    pagos=JSON.parse(textos[0]);
+    localStorage.setItem('pagos_banco',textos[0]);
+    pagos_ef=JSON.parse(textos[1]);
+    localStorage.setItem('pagos_efectivo',textos[1]);
+    pagos_hechos=JSON.parse(textos[2]);
+    localStorage.setItem('pagos_hechos_banco',textos[2]);
+    domicilios=JSON.parse(textos[3]);
+    localStorage.setItem('domicilios_banco',textos[3]);
     alert(datos_imp.length);
   });
   lector.readAsText(archivos[0]);
