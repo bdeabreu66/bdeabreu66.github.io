@@ -1,10 +1,12 @@
-// 24-04
-currentCache = 'FACPOLAR_cache_v4.1';
+// 07-05
+currentCache = 'FACPOLAR_cache_v4.2';
 const files =
 [
     'index.html',
     'icondef.png',
-    'arbol.js'
+    'arbol.js',
+    'filesaver.js',
+    'selectfile.js'
  ];
 
 self.addEventListener('install', event => {

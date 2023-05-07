@@ -237,9 +237,10 @@ grid-columns: 3/4;
  <div id="header">
 <table width="100%">
 <tr align="center">
-<td width="12%"> <button class="btop" onclick="Actualiza_cliente();">Cliente</button></td>
+<td width="12%"> <button class="btop" onclick="Mantenimiento();">Mant</button></td>
+<td width="12%"> <button class="btop" onclick="Actualiza_cliente();">Cli</button></td>
 <td width="12%"><button class="btop" onclick="descarga_historico();">Dolar</button></td>
-<td width="12%"><button class="btop" onclick="factura();">Factura</button></td> 
+<td width="12%"><button class="btop" onclick="factura();">Fact</button></td> 
 <td width="12%"><button class="btop" onclick="total();">Ventas</button></td>
 <td width="12%"><button class="btop" onclick="desp_inventario();">Inv</button></td>
 
@@ -258,15 +259,64 @@ Vacios 350 ml:<input style="width:55%;" type="text" id="vacclir1" value="" ><br>
 Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
 
 </div>
-
+<div>
+<label hidden id=selected>Nothing selected</label><br>
+<input hidden type=file id="choose" accept="*.txt" >
+</div>
 <div id="lista" > </div>
 <!--   -->
 <div id="auxiliar" hidden="true"></div>
 <script src="arbol.js" type="text/javascript"></script>
+<script type="text/javascript" src="FileSaver.js"></script>
+<script type="text/javascript" src="selectFile.js"></script>
 <script type="text/javascript">
 function leer_ventas_diarias(fecha){
 //=localStorage,getItem(fecha)
 
+}
+function importar(){
+getFile = new selectFile;
+getFile.targets('choose','selected');
+archivos=document.getElementById('choose');
+archivos.value=null;
+archivos.addEventListener('change', Leer_Archivo, false);
+getFile.simulate();
+}
+
+function Leer_Archivo(e){
+ var archivos=e.currentTarget.files;
+ //alert(archivos);
+  var lector=new FileReader();
+  lector.addEventListener("load",(e) => {
+    datos_imp = e.target.result;
+    var data_sep=datos_imp.split('*#*');
+    var n=Math.trunc(data_sep.length/2);
+    for (var i=0;i<n;i++) {
+  alert(data_sep[2*i]);
+  alert(data_sep[2*i+1]);
+
+   // localStorage.setItem(data_sep[2*i],data_sep[2*i+1]);
+    }
+//    alert(datos_imp.length);
+  });
+  lector.readAsText(archivos[0]);
+}
+
+function exportar(){
+ var data='';
+ var sep='*#*';
+for(var i=0;i<localStorage.length;i++){
+ var nomb=localStorage.key(i); 
+ if (nomb.indexOf("FAC_")==0 )  
+  { 
+  texto=localStorage.getItem(nomb);
+  if (data=='' ) {data+=nomb+sep+texto} else {data+=sep+nomb+sep+texto}
+  }
+}
+ data+=sep+'Clientes_Pita'+sep+localStorage.getItem('Clientes_Pita');
+
+ var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,"facturas.txt");
 }
 function fecha_mayor_igual(f1,f2){
 var a2=f2.split('/');
@@ -325,6 +375,23 @@ function fecha_estandar(f){
   var mes=f.getMonth();mes++;if (mes<10) {mes='0'+mes}
   var day=f.getDate();if (day<10) {day='0'+day}
 return day+'/'+mes+'/'+year;
+}
+
+function Mantenimiento(){
+var div3 = document.getElementById("lista");
+div3.style="position: fixed;top :30px; left: 0px; width: 100%;height:40%;background-color: blue;color:white; text-align: left; border: 3px solid #73AD21;";
+var texto='';
+texto+='<div>';
+texto+='<button onclick=importar()>Importar Facturas</button><br>';
+texto+='<button onclick=exportar()>Exportar Facturas</button><br>';
+texto+='<button onclick=quitar_div("lista");>Salir</button><br>';
+texto+='</div>';
+div3.innerHTML=texto;
+}
+
+
+function quitar_div(div_b){
+document.getElementById(div_b).style.visibility='hidden';
 }
 
 function total(){
