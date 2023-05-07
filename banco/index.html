@@ -265,6 +265,19 @@ window.speechSynthesis.onvoiceschanged = () => {
 
  };
 */
+const allVoicesObtained = new Promise(function(resolve, reject) {
+  let voices = window.speechSynthesis.getVoices();
+  if (voices.length !== 0) {
+    resolve(voices);
+  } else {
+    window.speechSynthesis.addEventListener("voiceschanged", function() {
+      voices = window.speechSynthesis.getVoices();
+      resolve(voices);
+    });
+  }
+});
+
+var voice;
 function speak(Texto){
 if('speechSynthesis' in window){
 	console.log("Web Speech API supported!")
@@ -272,6 +285,8 @@ if('speechSynthesis' in window){
 	console.log("Web Speech API not supported :-(")   
 }
 const synth = window.speechSynthesis
+synth.voice = voice[10];
+console.log('voz '+voice[7]);
 let ourText = Texto;
 const utterThis = new SpeechSynthesisUtterance(ourText)
 
@@ -279,9 +294,9 @@ synth.speak(utterThis);
 /*
 var speech = new SpeechSynthesisUtterance();
 speech.lang = "es";
-voices = window.speechSynthesis.getVoices();
 
-  speech.voice = voices[1];
+
+  
   speech.text = Texto;
   speech.volume = 0.8;
   speech.pitch = 1
@@ -292,6 +307,18 @@ voices = window.speechSynthesis.getVoices();
 }
 const t_c=new Map();
 Fecha_hora='';
+
+var data=eval(localStorage.getItem('data'));
+function set_clave_indice(){
+clave_ind=new Map();
+for (var i=0;i<data.length;i++) {
+console.log(i);
+console.log(data[i][9]);
+clave_ind.set(data[i][9],i.toString());
+}}
+set_clave_indice();
+
+
 t_c.set('584144202172','Alejandro Naranjo');
 t_c.set('01340067960673057959','Alexis Pool personal');
 t_c.set('584121308516','Alexis Pool personal');
@@ -511,6 +538,7 @@ t_d.set('22/12/2022',16.18);
 */
 var productos=[];
 function clickp_cliente(pos){
+//alert(pos);
 document.getElementById("div3").style.visibility='hidden';
 const posic=document.getElementsByName("pcliente")[pos].offsetTop;
 document.getElementById("lclientes").scrollTop=posic-30;
@@ -542,6 +570,7 @@ archivos2.value=null;
 archivos2.addEventListener('change', Leer_Archivo, false);
 getFile2.simulate();
 }
+
 
 function Activalector_importar(){
 getFile3 = new selectFile;
@@ -591,7 +620,7 @@ function Leer_Archivo2(e){
     localStorage.setItem('pagos_hechos_banco',textos[2]);
     domicilios=JSON.parse(textos[3]);
     localStorage.setItem('domicilios_banco',textos[3]);
-    alert(datos_imp.length);
+//    alert(datos_imp.length);
   });
   lector.readAsText(archivos[0]);
 }
@@ -662,6 +691,8 @@ return tmp;
 }
 
 function genera_salida1(){
+allVoicesObtained.then(voices => voice=voices);
+console.log(voice);
 if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
 var texto='';
@@ -706,8 +737,8 @@ localStorage.setItem('pagos_hechos_banco','');
 function agrega_deuda(j){
 var valor=parseFloat(document.getElementById('intro').value);
 if (valor!=0) {
- var nombcli=Obten_nombre(pagos[j].telf)
- var ind=Clientes.findIndex(x=>x.nombre==nombcli);
+ var nombcli=Obten_nombre(pagos[j].telf);
+  var ind=Clientes.findIndex(x=>x.nombre==nombcli);
  //Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-valor).toFixed(2);
  //localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
  document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
@@ -728,6 +759,11 @@ pagos_ef.push(record);
 pagos.push(record);
 localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
 localStorage.setItem('pagos_banco',JSON.stringify(pagos));
+quitar_div("div4");
+//alert('ind '+ind);
+var ind2=lista_clientes.findIndex(x=>x==nombcli);
+ //alert('ind '+ind2);
+genera_salida2(ind2);
 
 }
 }
@@ -752,26 +788,81 @@ document.getElementById("bmon").innerText=tmon;
 
 }
 
+function Monto_factura(nomb){
+var fact=localStorage.getItem(nomb);
+console.log(nomb);
+var ped=fact.split('&');
+var total=0;
+var iva,unidad,cajas,pu,pb;
+var totalp=0;
+var totaliva=0;
+for (var i=1;i<ped.length;i++) {
+  var items=ped[i].split('#');
+  var ind=clave_ind.get(items[0]);
+  if (data[ind][3]==0) {iva=0} else {iva=0.16}
+  console.log(data[ind][0]);
+  unidad=parseInt(items[1]);
+  pu=parseFloat(items[2]);
+  cajas=parseInt(items[3]);
+  pb=parseFloat(items[4]);
+  
+  totalp=(unidad*pu+cajas*pb);
+  console.log(totalp);
+  totaliva+=totalp*iva;
+ console.log(totaliva);
+  total+=totalp+totaliva;
+ 
+}
+ console.log('total '+total);
+return total.toFixed(2);
+
+}
+
+
 function muestra_deuda(j){
+//alert(j);
 var divaux=document.getElementById("div4");
 var texto='';
 texto+='<div style="border: 5px solid red;">';
-texto+='<p>'+Obten_nombre(pagos[j].telf)+'</p>';
+var cl=Obten_nombre(pagos[j].telf)
+texto+='<p>'+cl+'</p>';
 Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
 var ind=Clientes.findIndex(x=>x.nombre==Obten_nombre(pagos[j].telf));
 if (ind>=0) {
-console.log(Clientes[ind].deuda);
-texto+='<table width="100%"><tr>';
-texto+='<td width="50%"><span id="deu"> Deuda :'+Clientes[ind].deuda+'</span></td>';
-texto+='<td width="25%"><span id="abo"> Abono :'+suma+'</span></td>';
-texto+='<td style="width:25%;text-align:rigth;"><button onclick=agrega_pago('+j+')>+</button></td>';
-texto+='</tr></table>';
-texto+='<button id="bmon"onclick=cambia_mon()>'+tmon+'</button>';
-texto+='<input id="intro" type="text" value="0">';
-texto+='<button onclick=agrega_deuda('+j+')>Ok</button><br>';
-}
-texto+='<button onclick=quitar_div("div4")>Salir</button>';
-texto+='</div>';
+ console.log(Clientes[ind].deuda);
+ texto+='<table width="100%"><tr>';
+ texto+='<td width="50%"><span id="deu"> Deuda :'+Clientes[ind].deuda+'</span></td>';
+ texto+='<td width="25%"><span id="abo"> Abono :'+suma+'</span></td>';
+ texto+='<td style="width:25%;text-align:rigth;"><button onclick=agrega_pago('+j+')>+</button></td>';
+ texto+='</tr></table>';
+ texto+='<button id="bmon"onclick=cambia_mon()>'+tmon+'</button>';
+ texto+='<input id="intro" type="text" value="0">';
+ texto+='<button onclick=agrega_deuda('+j+')>Ok</button><br>';
+ texto+='<button onclick=quitar_div("div4")>Salir</button>';
+ texto+='</div>';
+ texto+='<div style="height:10%;overflow-y: auto;">';
+ listasel=[];
+ for(var i=0;i<localStorage.length;i++) {
+   var nomb=localStorage.key(i); 
+   if (nomb.indexOf('FAC_'+cl)==0 )  
+    {  
+      var fec=nomb.substr(4).split('_')[1];
+     listasel.unshift(nomb); 
+     
+     
+    }
+ }
+ listasel=listasel.sort(ord_fecha);
+ for (var k=0;k<listasel.length;k++) {
+  //  console.log(k+' '+nomb);
+   var tot=Monto_factura(listasel[k]);
+   texto+='<p> '+listasel[k].split('_')[2]+'  '+tot+' $</p>';
+ }
+ texto+='</div>';
+} 
+else {texto+='<button onclick=quitar_div("div4")>Salir</button>';
+texto+='</div>';}
+
 divaux.innerHTML=texto;
 divaux.style.visibility="visible";
 }
@@ -794,7 +885,7 @@ var ind=pagos_hechos.findIndex(x=>x.fecha==pagos[pos].fecha && x.hora==pagos[pos
 }
 
 }
-function genera_salida2(){
+function genera_salida2(pos_ini){
 for (var j=0;j<pagos.length;j++) {
  pos[j]=0;
 }
@@ -870,7 +961,18 @@ texto+='<td width="27%" onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].m
 texto+='</div>';
 divaux.innerHTML=texto;
 divaux.style.visibility="visible";
+
 }
+clickp_cliente(pos_ini);
+}
+function ord_fecha(a,b){
+var ela=a.split('_');
+var elb=b.split('_');
+  if (!fecha_mayor_igual(ela[2],elb[2])) return 1;
+  if (!fecha_mayor_igual(elb[2],ela[2])) return -1;
+//  if (ela[0]<elb[0]) return -1;
+//  if (ela[0]>elb[0]) return 1;
+  return 0;
 }
 
 function colorcuenta(C){
@@ -882,6 +984,7 @@ function colorcuenta(C){
 }
 
 function genera_salida3(){
+
 speak('Ordenado por fecha y por cliente');
 if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
