@@ -808,9 +808,10 @@ for (var i=1;i<ped.length;i++) {
   
   totalp=(unidad*pu+cajas*pb);
   console.log(totalp);
-  totaliva+=totalp*iva;
+  tiva=totalp*iva
+  totaliva+=iva;
  console.log(totaliva);
-  total+=totalp+totaliva;
+  total+=totalp+tiva;
  
 }
  console.log('total '+total);
@@ -823,7 +824,7 @@ function muestra_deuda(j){
 //alert(j);
 var divaux=document.getElementById("div4");
 var texto='';
-texto+='<div style="border: 5px solid red;">';
+texto+='<div style="border: 5px solid red;background-color:lightblue">';
 var cl=Obten_nombre(pagos[j].telf)
 texto+='<p>'+cl+'</p>';
 Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
