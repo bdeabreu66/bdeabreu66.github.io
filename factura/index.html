@@ -442,7 +442,7 @@ var iva=1;
   texto=localStorage.getItem(nomb);
   
 console.log('fech'+fech);
-if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && (nombcli==clib || clib=='')) {
+if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && (nombcli==clib || clib=='') && (nombcli.indexOf("Pedido")==-1 ) ) {
     var ped=texto.split('&');
     console.log(texto+" "+texto.length);
     //console.log(ped.length);
@@ -880,7 +880,7 @@ cancelar();
 function revertir_factura(num){
 var nomb=listasel[num];
 recupera_factura("FAC_"+nomb);
-suma_inventario2();
+ if (cliente.indexOf('Pedido')==-1) {suma_inventario2();}
 fact_base(num);
 borra2(num);
 cliente=cliente_factura;
@@ -936,7 +936,8 @@ console.log('pu '+pu+'pb '+pb);
 }
 }
 if (texto.length>2) {localStorage.setItem(nomb,texto);} 
-resta_inventario();
+if (cliente.indexOf('Pedido')==-1) {alert(cliente);resta_inventario();}
+
 }
 
 
