@@ -442,7 +442,7 @@ var iva=1;
   texto=localStorage.getItem(nomb);
   
 console.log('fech'+fech);
-if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && (nombcli==clib || clib=='') && (nombcli.indexOf("Pedido")==-1 ) ) {
+if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && (nombcli==clib || clib=='') ) {
     var ped=texto.split('&');
     console.log(texto+" "+texto.length);
     //console.log(ped.length);
