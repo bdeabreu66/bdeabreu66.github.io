@@ -935,7 +935,8 @@ if (cliente=='') {alert('Falta Cliente en factura');} else
 }
 
 function guarda_factura2(){
-fecha_factura=document.getElementById('ffac').value;
+fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
+alert(fecha_factura);
 cliente_factura=document.getElementById('cli2').value;
 guarda_factura(); 
 localStorage.setItem('FACT_NRO',(nro_factura+1).toString());
