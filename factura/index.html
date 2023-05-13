@@ -442,7 +442,8 @@ var iva=1;
   texto=localStorage.getItem(nomb);
   
 console.log('fech'+fech);
-if ((texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && (nombcli==clib || clib=='') ) {
+if ( (texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && ( ((nombcli.indexOf(clib)==0) && clib!='' ) || (clib=='' && nombcli.indexOf('Pedido')!=0) ) ) {
+//    alert('nombcli '+nombcli+' clib  '+clib+' ind Pedido '+nombcli.indexOf('Pedido')+' ind clib '+(nombcli.indexOf('clib')==0)+' '+(clib=='' && nombcli.indexOf('Pedido')!=0));
     var ped=texto.split('&');
     console.log(texto+" "+texto.length);
     //console.log(ped.length);
@@ -911,23 +912,46 @@ localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
 }
 
 function guardar_factura(){
+var div3 = document.getElementById("lista");
+div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
+nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
+texto='';
+texto+='Fecha: <input id="ffac" type="date" value="'+fecha_date(fecha_actual())+'"><br>';
+texto+='<span onclick="limpiaCliente2();">Cliente:</span>';
+texto+='<input style="width:30%;" type="text" id="cli2" value="'+cliente+'" list="listaclientes">';
+texto+='<datalist id="listaclientes"></datalist>';
+texto+='<input style="width:30%;" type="text" id="nfact" value="'+nro_factura+'" list="listaclientes">';
+texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="guarda_factura2();" >Ok </button>';
+div3.innerHTML=texto;
+
+/*
 if (cliente=='') {alert('Falta Cliente en factura');} else
  {nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
    var resp=prompt("Cliente: "+cliente+" Introduzca el numero de la factura:",nro_factura)
    if (resp!=null) {nro_factura=parseInt(resp);guarda_factura(); localStorage.setItem('FACT_NRO',(nro_factura+1).toString())}
    Actualiza_deuda();
 }
-
+*/
 }
 
-
+function guarda_factura2(){
+fecha_factura=document.getElementById('ffac').value;
+cliente_factura=document.getElementById('cli2').value;
+guarda_factura(); 
+localStorage.setItem('FACT_NRO',(nro_factura+1).toString());
+Actualiza_deuda();
+quitarlista();
+}
+ 
 function guarda_factura(){
 var pu,pb;
 var bcv=parseFloat(document.getElementById("t2").value);
 var texto=(bcv).toFixed(4);
 
-var nomb='FAC'+'_'+cliente+'_'+fecha_actual()+'_'+nro_factura;
-console.log('nomb '+nomb);
+var nomb='FAC'+'_'+cliente_factura+'_'+fecha_factura+'_'+nro_factura;
+nro_factura++;
+localStorage.setItem('FACT_NRO',(nro_factura).toString());
+
 for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
  [pu,pb]=precio(i);
@@ -935,7 +959,7 @@ console.log('pu '+pu+'pb '+pb);
  texto+='&'+data[i][9]+'#'+data[i][4]+'#'+(pu).toFixed(2)+'#'+data[i][5]+'#'+(pb).toFixed(2);
 }
 }
-if (texto.length>2) {localStorage.setItem(nomb,texto);} 
+if (texto.length>2) {localStorage.setItem(nomb,texto); alert(nomb)} 
 if (cliente.indexOf('Pedido')==-1) {alert(cliente);resta_inventario();}
 
 }
