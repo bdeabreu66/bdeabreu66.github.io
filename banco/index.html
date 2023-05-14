@@ -382,6 +382,7 @@ t_c.set('01340419414193020946','Club la emboscada');
 t_c.set('584124304844','Colegio los pinos');
 t_c.set('584125100639','Colegio Teresiano');
 t_c.set('584149479895','Darley De Abreu');
+t_c.set('01050060527060011757','Darley De Abreu');
 t_c.set('584148737746','Denis Supervisor');
 t_c.set('584146784460','Licoreria El Chivato');
 t_c.set('584140430489','El sabor de Lili');
@@ -523,7 +524,7 @@ t_c.set('584121978971','Marlin hija Sonia');
 t_c.set('01050137711137023074','Maxi Carnes');
 t_c.set('01050137711137063955','Maxi Carnes');
 t_c.set('01020857270000023087','Licoreria Brisas del Lago');
-t_c.set('584146443242','Farmacia Sunacar');
+t_c.set('584146443242','Farmasurca');
 t_c.set('584144127966','Panaderia Kakau II');
 t_c.set('584120398368','Mi viejo Araguaney');
 t_c.set('584128890498','Mi viejo Araguaney');
@@ -991,7 +992,7 @@ function colorcuenta(C){
 
 function genera_salida3(){
 
-speak('Ordenado por fecha y por cliente');
+//speak('Ordenado por fecha y por cliente');
 if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
 var texto='';
@@ -1192,20 +1193,28 @@ var  nombrb=Obten_nombre(b.telf);
    }
  }
 }
-
+var orden_tipo=new Array();
+orden_tipo['J']=0;
+orden_tipo['C']=1;
+orden_tipo['A']=2;
+orden_tipo['ED']=3;
+orden_tipo['EB']=4;
 function ordena_pagos3(a, b) {
 var  nombra=Obten_nombre(a.telf);
 var  nombrb=Obten_nombre(b.telf);
  if (!fecha_mayor_igual(a.fecha,b.fecha)) return 1;
   if (!fecha_mayor_igual(b.fecha,a.fecha)) return -1;
-  if (a.fecha==b.fecha) {
-   // console.log(a.nombre+' '+b.nombre);
-    if (nombra<nombrb) return -1; 
-    if (nombra<nombrb) return 1;
-    if (nombra==nombrb) {
-     if (a.hora>b.hora) {return -1;} else {return 1;}
-   }
- }
+    if (a.fecha==b.fecha) {
+      if (orden_tipo[a.tc]>orden_tipo[b.tc]) return 1;
+      if (orden_tipo[a.tc]<orden_tipo[b.tc]) return -1;
+      if (orden_tipo[a.tc]==orden_tipo[b.tc]) {
+//       if (nombra<nombrb) return -1; 
+//       if (nombra>nombrb) return 1;
+//       if (nombra==nombrb) {
+       if (a.hora>b.hora) {return -1;} else {return 1;}
+  //   }
+  }
+}
 }
 function pagos_alim(){
 var divaux=document.getElementById("divdata");
