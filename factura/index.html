@@ -878,16 +878,31 @@ console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].
 factura2();
 cancelar();
 }
+
+function fact_agrega(num){
+var nomb=listasel[num];
+//anula();
+recupera_factura("FAC_"+nomb);
+for (var i=0;i<datfac.length;i++) {
+if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
+ data[i][4]+=datfac[i].unidad;
+ data[i][5]+=datfac[i].cajas;
+console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
+}
+} 
+factura2();
+cancelar();
+}
 function revertir_factura(num){
 var nomb=listasel[num];
 recupera_factura("FAC_"+nomb);
  if (cliente.indexOf('Pedido')==-1) {suma_inventario2();}
-fact_base(num);
-borra2(num);
 cliente=cliente_factura;
 var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
 console.log(indcliente);
 if (indcliente>=0) {Ocliente=AClientes[indcliente];} else {Ocliente=null;}
+fact_base(num);
+borra2(num);
 cancelar();
 Revierte_deuda();
 }
@@ -1654,7 +1669,8 @@ textoT+='<tr>';
 textoT+='<td width="15%"><button class="btop" onclick="borra('+numf+');">Borrar</button></td>';
 textoT+='<td width="15%"><button class="btop" onclick="revertir_factura('+numf+');">Revertir</button></td>';
 textoT+='<td width="15%"><button class="btop" onclick="fact_base('+numf+');">Estab</button></td>';
-textoT+='<td width="5%"></td>';
+textoT+='<td width="15%"><button class="btop" onclick="fact_agrega('+numf+');">Agrega</button></td>';
+textoT+='<td width="10%"></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda2('+numf+');">' + TM2 +'</button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
 textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
@@ -2113,7 +2129,11 @@ if (data[i][5]==0) {var vcor1='red';} else {var vcor1='blue';}
 [pu,pb]=precio(i);
 var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+data[i][0]+' '+BanderaIva+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
 
+var pc=parseFloat(data[i][10]);
 
+var ga;
+if (data[i][6]=='t3')   {ga=(((pb-pc)/pb)*100).toFixed(2);}
+if (data[i][6]=='t2')   {ga=(((pu-pc)/pu)*100).toFixed(2);}
 var puiva=(pu*fm).toFixed(2)
 var pbiva=(pb*fm).toFixed(2)
 tex1='U '+puiva+' $';
@@ -2124,8 +2144,8 @@ tex4=(pbiva*factor).toFixed(2)+ ' Bs';
 if (data[i][4]==0) {var valoru="";} else {var valoru=data[i][4];}
 if (data[i][5]==0) {var valorb="";} else {var valorb=data[i][5];}
 
-texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td></tr>';
-texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor1+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td></tr></table>';
+texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td><td>'+ga+ '</td></tr>';
+texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor1+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td><td></td></tr></table>';
 
 
 totalsivad=((pu)*data[i][4]+(pb)*data[i][5]);
