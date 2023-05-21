@@ -1,136 +1,199 @@
 <HTML>
 <HEAD>
-<TITLE>  Facturacion Polar</TITLE>
+<TITLE>  Extracion de datos de pagos BNC  </TITLE>
 <!-- <link rel="stylesheet" href="styles.css" > -->
-<link rel="manifest" href="manifest.json"> 
-
+<link rel="manifest" href="manifest.json">
+<!-- <meta charset="iso-8859-1">  -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 <style>
 
-body{
-font-size:30px;
-}
 input[type=number]{
-width: 3em;
-}
-
-
-.btop{
-font-size:0.6em;
-}
-
-.bot3:hover {
-  background-color: SteelBlue; /* Green */
-  color: blue;
-}
-.bot3{
-transition-duration: 0.4s;
-background-color: SkyBlue; /* Green */
-padding:15px;
-font-size:1.5em;
-width:70%;
-}
-
-.bot4:hover {
-  background-color: SteelBlue; /* Green */
-  color: white;
-}
-.bot4{
-background-color: PowderBlue; /* Green */
-transition-duration: 0.4s;
-padding:15px;
-font-size:1.0em;
-width:70%;
-}
-.btn2{
-font-size:1em;
-}
-
-
-#dsearch {
-position:relative;
-}
-
-#enc {
-position:relative;
-}
-.nav {
 font-size:2em;
-
-}
-#divt {
-top:35%;
-left:0%;
-height: 60%;
-text-align:center;
-width:95%;
-overflow-y:auto;
-}
-
-#auxiliar {
-position:fixed;
-background-color:green;
-top:30%;
-left:0%;
-height: 40%;
-width:98%;
-overflow-y:scroll;
-}
-
-input[type=text]{
-font-size:0.8em;
-width: 4em;
+width: 8em;
 border: 2px solid red;
 border-radius: 4px;
 padding: 4px 4px;
   margin: 4px 0;
   box-sizing: border-box;
   background-color: #3CBC8D;
-  color: white;
+  color: red;
+
+}
+
+input[type=text]{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: white;
+  color: black;
+}
+
+input[type=email]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+}
+
+input[type=date]{
+font-size:1em;
+width: 12em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+   background-color: #3CBC8D;
+  
+  color: black;
+}
+
+select{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 8px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
 }
 
 input[type=text]:focus {
   background-color: lightblue;
 }
 
-p{
-font-size:1.5rem;
-background-color:black;
-color:white;
-padding:0px;
-margin:0px;
 
-}
-td{
-font-size:1.5rem;
-padding:1px;
-}
-table{
-margin:0px;
-padding:0px;
-
+</style>
+<style>
+body {
+  font-family: "Lato", sans-serif;
 }
 
-#cat {
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align:left;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+
+  transition: 0.8s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.micro {
+   background-image:url(microphone.svg);
+   width:30px;
+	height:30px;
+	font-size:16px;
+	padding:0px 0px 0px 0px;
+	background-size:30px 30px;
+	background-position:-2px 0px;
+    fill: green;
+
+border-radius: 8px;
+}
+.divfondo {
+   width:90%;
+   background-color:#FFFDD0;
+   border-radius: 8px;
+padding: 6px 6px;
+margin-left: 5px;
+margin-right: 5px;
+}
+.micro:active {
+background-color: lightgreen;
+}
+.btop{
+font-size:2em;
+border: 2px solid red;
+border-radius: 8px;
+padding: 4px 4px ;
+  margin: 4px 0px ;
+  box-sizing: border-box;
+  background-color: orange;
+  color: black;
+}
+.btop:active {background-color: lightgreen;}
+.titulo{
+color:blue;
+}
+.botonf{
+font-size:0.8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 8px 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: oldlace;
+  color: black;
+}
+.tablefact {
+padding: 0px 0px;
+margin: 0px 0px;
+font-size: 1em;
+}
+.botonfact{
+width:20em;
+font-size:0.8em;
+text-align:left;
+border: 2px solid red;
+border-radius: 12px;
+padding: 8px 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: #FFFDD0;
+  color: black;
+}
+.botonf:active {background-color: lightgreen;}
+.botonfact:active {background-color: lightgreen;}
+
+#divdata {
 position:fixed;
-top:35%;
-left:0px;
-height: 60%;
-font-size:1.5rem;
-text-align:center;
+top:20%;
+height: 70%;
 width:95%;
-overflow-y:scroll;
-}
-
-#introd {
-position:fixed;
-background-color:Aqua;
-border-radius: 5% 5%;
-top:30%;
-left:0%;
-height: 40%;
-width:98%;
-overflow-y:scroll;
+overflow-y: scroll;
 }
 
 #footer {
@@ -144,2177 +207,1164 @@ overflow-y:scroll;
   text-align: center;
   font-size:0.5em;
 }
-
+#menu {
+  position: fixed;
+  left: 0;
+  top: 8%;
+  width: 100%;
+  background-color: white;
+  color: white;
+  text-align: center;
+  font-size:0.5em; 
+  visibility:visible;
+}
 #header {
   position: fixed;
   left: 0;
   top: 0;
-  height=5%;
   width: 100%;
-  background-color: blue;
+  background-color: white;
   color: white;
   text-align: center;
   font-size:0.5em;
 }
-
-#cliente {
+#div3 {
   position: fixed;
   left: 0;
-  top: 5%;
-  height:70%;
-   width: 100%;
-  background-color: Turquoise;
-  color: red;
-  text-align: left;
-  font-size:0.8em;
-}
-
-.dolar {
- // position: fixed;
- // left: 0;
- // top: 50px;
+  top: 90%;
   width: 100%;
-  }
-.cont0{
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-size:1em;
 }
-.cont1 {
-display:grid;
-grid-template-columns: 20% 60% 20%;
-border-bottom:1px solid black;
+#div4 {
+  position: fixed;
+  left: 0;
+  top: 30%;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-size:1em;
 }
-
-.conth1 {
-grid-columns: 1/2;
-}
-.conth2 {
-grid-columns: 2/3;
-}
-.conth3 {
-grid-columns: 3/4;
-}
-
-
 </style>
-
 </HEAD>
 
-
-<BODY onload="carga();" onunload="salir();">
-
-<br>
-
-<div class="dolar">
-<!-- <table width="100%"> -->
-<!-- <tr><td>Paralelo </td><td><input id="t1" type="text" value="0"></td> -->
-<!-- <tr><td>BCV </td><td><input id="t2" type="text" value="0"></td></tr> -->
-<!-- <div id="menu"></div> -->
-<!-- <tr><td><input id="t3" onchange="camb();" type="checkbox" value="Automatico"><label for="t3"> Automatico </label></td></tr> -->
-<!-- </table> -->
-</div>
-<div class="cont0">
-<div class="cont1">
-<div class="con1h1">
-<center>BCV: <input id="t2" type="text" value="0"></center>
-</div>
-<div class="con1h2">
-<center>Facturaci&oacute;n <br><span id="fecha_p" style="font-size:0.8em;"></span></center>
-</div>
-<div class="con1h3">
-<button class="nav" onclick="sube_cat()";>&#8630;</button>
-</div>
-</div>
-</div>
-<div id="arbol" style="font-size:0.4em;"></div>
-<div id="cat" ></div>
-<!-- <div id="dsearch"> <input id="search" type="text" placeholder="Buscar" oninput="refresca();"></div>-->
-<div id="divt" ></div>
-<div id="introd" ></div>
-<div id="content" hidden="false"></div>
-<div id="factura" hidden="true">
-
-</div>
- <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
- <div id="header">
-<table width="100%">
-<tr align="center">
-<td width="12%"> <button class="btop" onclick="Mantenimiento();">Mant</button></td>
-<td width="12%"> <button class="btop" onclick="Actualiza_cliente();">Cli</button></td>
-<td width="12%"><button class="btop" onclick="descarga_historico();">Dolar</button></td>
-<td width="12%"><button class="btop" onclick="factura();">Fact</button></td> 
-<td width="12%"><button class="btop" onclick="total();">Ventas</button></td>
-<td width="12%"><button class="btop" onclick="desp_inventario();">Inv</button></td>
-
-</tr></table>
-</div>
-<div id="cliente" hidden="true">
-<span onclick="limpiaCliente();">Cliente:</span> <input style="width:55%;" type="text" id="cli" value="" list="listaclientes" oninput="datos_cliente();">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>'
-<datalist id="listaclientes"></datalist><br>
-Direcci&oacute;n:<textarea style="width:55%;" type="text" id="dircli" value="" ></textarea><br>
-Rif:<input style="width:55%;" type="text" id="rifcli" value="" ><br>
-Tlf:<input style="width:55%;" type="text" id="tlfcli" value="" ><br>
-AR:<input style="width:55%;" type="checkbox" id="espcli" value="" ><br>
-Deuda:<input style="width:55%;" type="text" id="deucli" value="" ><br>
-Vacios polar:<input style="width:55%;" type="text" id="vaccli" value="" ><br>
-Vacios 350 ml:<input style="width:55%;" type="text" id="vacclir1" value="" ><br>
-Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
-
-</div>
-<div>
-<label hidden id=selected>Nothing selected</label><br>
-<input hidden type=file id="choose" accept="*.txt" >
-</div>
-<div id="lista" > </div>
-<!--   -->
-<div id="auxiliar" hidden="true"></div>
-<script src="arbol.js" type="text/javascript"></script>
-<script type="text/javascript" src="FileSaver.js"></script>
 <script type="text/javascript" src="selectFile.js"></script>
+<script type="text/javascript" src="FileSaver.js"></script>
+
 <script type="text/javascript">
-function leer_ventas_diarias(fecha){
-//=localStorage,getItem(fecha)
+var voices;
+/*
+window.speechSynthesis.onvoiceschanged = () => {
+  // Get List of Voices
+  voices = window.speechSynthesis.getVoices();
+
+  speech.voice = voices[0];
+
+ };
+*/
+const allVoicesObtained = new Promise(function(resolve, reject) {
+  let voices = window.speechSynthesis.getVoices();
+  if (voices.length !== 0) {
+    resolve(voices);
+  } else {
+    window.speechSynthesis.addEventListener("voiceschanged", function() {
+      voices = window.speechSynthesis.getVoices();
+      resolve(voices);
+    });
+  }
+});
+
+var voice;
+function speak(Texto){
+if('speechSynthesis' in window){
+	console.log("Web Speech API supported!")
+} else {
+	console.log("Web Speech API not supported :-(")   
+}
+const synth = window.speechSynthesis
+synth.voice = voice[10];
+console.log('voz '+voice[7]);
+let ourText = Texto;
+const utterThis = new SpeechSynthesisUtterance(ourText)
+
+synth.speak(utterThis);
+/*
+var speech = new SpeechSynthesisUtterance();
+speech.lang = "es";
+
+
+  
+  speech.text = Texto;
+  speech.volume = 0.8;
+  speech.pitch = 1
+  speech.rate = 0.1;
+  window.speechSynthesis.speak(speech);
+*/
+  console.log('prueba de voz');
+}
+const t_c=new Map();
+Fecha_hora='';
+
+var data=eval(localStorage.getItem('data'));
+function set_clave_indice(){
+clave_ind=new Map();
+for (var i=0;i<data.length;i++) {
+console.log(i);
+console.log(data[i][9]);
+clave_ind.set(data[i][9],i.toString());
+}}
+set_clave_indice();
+
+
+t_c.set('584144202172','Alejandro Naranjo');
+t_c.set('01340067960673057959','Alexis Pool personal');
+t_c.set('584121308516','Alexis Pool personal');
+t_c.set('01020406290000103046','Alianza cafe');
+t_c.set('01910027851127292097','Alvaro Jardim');
+t_c.set('584124067144','Ana Beatriz');
+t_c.set('584244244676','Ana Luisa Caldera');
+t_c.set('584143711677','Ana Luisa Caldera');
+t_c.set('584126153631','Anderson Pita');
+t_c.set('584144853637','Andres Mijares');
+t_c.set('AREPA EL PAISITA','AREPA EL PAISITA');
+t_c.set('01740124621244237572','AREPA EL PAISITA');
+t_c.set('01910027801127274106','Armando Pita');
+t_c.set('584125012908','Bodega Felix');
+t_c.set('584144973532','Bodega Marcos');
+//t_c.set('584244541829','Bodega Moya');
+t_c.set('584244469305','Bodega Moya');
+t_c.set('584244285516','Bodega Moya');
+t_c.set('01140162731620081589','Bodegon JR');
+t_c.set('584242069117','Bodegon JR');
+t_c.set('584144211189','Rupi');
+t_c.set('584127863757','Rupi');
+t_c.set('584267267024','Rupi');
+t_c.set('584144033621','Bodegon JR');
+t_c.set('584125091226','Bodegon JR');
+t_c.set('584128552592','Braulio De Abreu');
+t_c.set('584244021067','Inversiones del Valle');//Bull buja
+t_c.set('584123640140','Inversiones Luis Fer');
+t_c.set('01910249132100055964','Inversiones Maria');
+t_c.set('584144791658','Bull Pen');
+t_c.set('584140412168','Bull Pen');
+t_c.set('584244063691','Bull Pen');
+t_c.set('584125028337','Gimnasio Body Pump');
+t_c.set('584145822722','Licoreria Canapiales');
+t_c.set('584141863212','Licoreria Canapiales');
+t_c.set('584125062019','Licoreria Canapiales');
+t_c.set('584128529762','Carlos Hernandez');
+t_c.set('584124346526','Carlos Hernandez');
+t_c.set('584144978575','Carlos Hernandez');
+t_c.set('584127848852','Carlos Hernandez');
+t_c.set('584145936335','Carlos Hernandez');
+t_c.set('584124500070','Carlos Hernandez');
+t_c.set('584124336110','Carlos Hernandez');
+t_c.set('584140487771','Carlos Hernandez');
+//t_c.set('01050041981041334605','Carlos Hernandez');
+t_c.set('584125026326','Carlos Hernandez');
+t_c.set('584124544871','Carlos Hernandez');
+t_c.set('584144218798','Carlos Hernandez');
+t_c.set('584143411572','Carol Cream');
+t_c.set('584163324638','Basetti Mall');
+t_c.set('584120453816','Leticia Eurolicores');
+t_c.set('584128314388','Carniceria la emboscada');
+t_c.set('01910243272100053204','Carniceria la emboscada');
+t_c.set('584244392499','Star market place CA');
+t_c.set('584121396715','Casa Mayor');
+t_c.set('01910148722100041321','Centeno Wilmer');
+t_c.set('01050758831758117052','Churumal');
+t_c.set('584144366480','Churumal');
+t_c.set('584124548273','Ciudad Market');
+t_c.set('01340419414191032727','Club la emboscada');
+t_c.set('01340419414193020946','Club la emboscada');
+t_c.set('584124304844','Colegio los pinos');
+t_c.set('584125100639','Colegio Teresiano');
+t_c.set('584149479895','Darley De Abreu');
+t_c.set('01050060527060011757','Darley De Abreu');
+t_c.set('584148737746','Denis Supervisor');
+t_c.set('584146784460','Licoreria El Chivato');
+t_c.set('584140430489','El sabor de Lili');
+t_c.set('584124613036','El sazon de la abuela');
+t_c.set('01020857280000164412','El sazon de la abuela')
+t_c.set('584149487610','igual que en casa')
+t_c.set('01080923150100080735','Rincon Italiano')
+t_c.set('584143419930','Panaderia hogar pan')
+t_c.set('584244988456','Cesar Perrero Paveca')
+t_c.set('584144791429','Esposa de Ludi');
+t_c.set('01380008190080143008','Euro Licores');
+t_c.set('01680052095101387169','Euro Licores');
+t_c.set('584144408427','Euro Licores');
+t_c.set('584124593210','Fotocopia los pinos');
+t_c.set('01910148792100048675','Garcia T. Antonio J.');
+t_c.set('584142487797','Guaicamari');
+t_c.set('584244078576','Guaicamari');
+t_c.set('01340791657911005013','Guaicamari');
+t_c.set('584144390582','Haydee Martinez');
+t_c.set('584149497304','Pizzeria de Verdad');
+t_c.set('584127693955','Gerardo');
+t_c.set('584127700523','Carmen deposito');
+t_c.set('01740124671244393003','Pizzeria de Verdad');
+t_c.set('584145936061','Heladeria Unicasa');
+t_c.set('01910243222100017346','Heladeria Unicasa');
+t_c.set('HOTEL GOLD','Hotel Gold');
+t_c.set('01380008100080195830','Hotel Gold');
+t_c.set('01740124661244225502','Hotel Gold');
+t_c.set('584244188209','Lo mejor del toco');
+//t_c.set('584244021067','Inversiones del Valle');// Bull buja
+t_c.set('01050041981041334605','Keny Pita');
+t_c.set('584122739761','Mini market Kapf');
+t_c.set('584122853554','Bodegon La cuna');
+t_c.set('584128311132','Bodegon La cuna');
+t_c.set('584144202063','Bodegon La cuna');
+t_c.set('584128568459','La Ermita');
+t_c.set('584143950447','Jorge Castillo');
+t_c.set('01020152720000574471','La Ermita');
+t_c.set('01020142000100004572','Bodegon La luz');
+t_c.set('01910027812127041189','Leticia');
+t_c.set('00010001365042007000','Patria');
+t_c.set('584145939707','Licoreria Alex');
+t_c.set('584127587474','Licoreria Alex');
+t_c.set('584124203948','Licoreria San Rafael');
+t_c.set('584124203947','Licoreria San Rafael');
+t_c.set('584140422874','Licoreria San Rafael');
+t_c.set('584147884840','Licoreria San Rafael');
+t_c.set('01080029370100222874','Licoreria San Rafael');
+t_c.set('01050119921119222443','Licoreria San Rafael');
+t_c.set('01340464034643019505','Liconan');
+t_c.set('01740124661244144208','Liconan');
+t_c.set('584144807588','Liconan');
+t_c.set('584244342559','Liconan');
+t_c.set('584144326744','Yonatan mecanico');
+t_c.set('584122364480','Yonatan mecanico');
+t_c.set('584120425496','Yonatan mecanico');
+t_c.set('584121401869','Licoreria Baco');
+t_c.set('584244734877','Licoreria Baco');
+t_c.set('01340346533461027171','Licoreria Baco');
+t_c.set('584140459037','Luncheria Unicasa');
+t_c.set('584144145440','Licoreria Malave');// Simon
+t_c.set('584124072605','Bodega Claudia');// Claudia
+t_c.set('01910027821127272510','Martinez B. Antonio');
+t_c.set('01020857200000136026','Materiales Alianza');
+t_c.set('01020114420000595059','Materiales Alianza');
+t_c.set('01020114420000585059','Materiales Alianza');
+t_c.set('01630265142653009253','Materiales Alianza');
+t_c.set('01140224172249007580','Materiales Alianza');
+t_c.set('01630265182655007190','Materiales Alianza');
+t_c.set('IGRIVAL','Materiales Alianza');
+t_c.set('584124097520','Maximum Carnes');
+t_c.set('01020430580000079701','Maximum Carnes');
+t_c.set('01020152750000507309','Mc Center Pool');
+t_c.set('01380008190085381160','Mc Center Pool');
+t_c.set('01380008120080196594','Mc Center Pool');
+t_c.set('01740114971144059845','Mc Center Pool');
+t_c.set('584144063036','Mary Pita');
+t_c.set('584143042870','Mary Pita');
+t_c.set('584144147018','Mary Pita');
+t_c.set('584144220289','Ikoa express');
+t_c.set('584144353156','Repuestos Mundo CA');
+t_c.set('584128999549','Mini Market PM03');
+t_c.set('584244912883','Evento Malave');
+t_c.set('584127820477','Negro Primero');
+t_c.set('584140389048','Negro Primero');
+t_c.set('584244069799','Negro Primero');
+t_c.set('584145961360','Negro Primero');
+t_c.set('584144857176','Negro Primero');
+t_c.set('01910148722100062413','Negro Primero');
+t_c.set('01020391140000877505','Noir Guacara');
+t_c.set('01341089560001005231','Noir Guacara');
+t_c.set('01341089560001006542','Noir Guacara');
+t_c.set('584144185616','Pan Center');
+t_c.set('01910203342100024431','Panaderia la Unidad 2012');
+t_c.set('01910203382100035457','Francis Pan');
+t_c.set('01690002881000458707','Pan. Trigo Pan SRL');
+t_c.set('01340464044641021121','Pan. Trigo Pan SRL');
+t_c.set('TRIGOPAN','Pan. Trigo Pan SRL');
+t_c.set('584167465405','Panaderia Renacer');
+t_c.set('584126903878','Peluquero Roro');
+t_c.set('PEPSI COLA','PEPSI COLA');
+t_c.set('01140226742260075694','Licoreria Piedra pintada');
+t_c.set('01340419424191035433','Licoreria Piedra pintada');
+t_c.set('01380008100080137300','Licoreria Piedra pintada');
+t_c.set('01340419414191041936','Licoreria Piedra pintada');
+t_c.set('01340419404191021199','Licoreria Piedra pintada');
+t_c.set('01140150341500503056','Agencia Caracas 789');
+t_c.set('584144314028','Quiosco Sara');
+t_c.set('584144341395','Kiosco azul');
+t_c.set('584128889513','Wiling polar');
+t_c.set('584123441007','Rafael Pita');
+t_c.set('584148944498','Rafael Pita');
+t_c.set('584121762310','Rafael Pita');
+t_c.set('584244182958','Rafael Pita');
+t_c.set('CREACIONES PITA','Rafael Pita');
+t_c.set('584128808329','Rest. Pio pio');
+t_c.set('01910369212100007816','Rest. Pio pio');
+t_c.set('01910362502100027278','Rest. Pio pio');
+t_c.set('01080083840100274933','Rest. Pio pio'); 
+t_c.set('01910107072100074333','Rest. Pio pio');
+t_c.set('01340592135921000679','Vama Cafe');
+t_c.set('01050758831758092394','Vama Cafe');
+t_c.set('584244541829','Roger Dona');
+t_c.set('01750062720073634371','Rosa De Abreu');
+t_c.set('584124566786','El sazon de la abuela');
+t_c.set('584244203234','Sosa Almacen');
+t_c.set('584144397087','Tequenack');
+t_c.set('01340153541531021352','Santa Fe market');
+t_c.set('01340419444191042090','Venvidrio');
+t_c.set('J501880239','Venvidrio');
+t_c.set('584144159903','Venvidrio');
+t_c.set('584120386419','Venvidrio');
+t_c.set('584121589089','La gran parada');// Vicente
+t_c.set('584144125422','Inversiones Vilmar');
+t_c.set('01080927480100022435','Vikingo');
+t_c.set('01340419444191031283','Vikingo');
+t_c.set('584129546298','Kiosko Hospital');
+t_c.set('584124465846','Yoni el cauchero');
+t_c.set('584244030883','Energym Coffe');
+t_c.set('584121978971','Marlin hija Sonia');
+t_c.set('01050137711137023074','Maxi Carnes');
+t_c.set('01050137711137063955','Maxi Carnes');
+t_c.set('01020857270000023087','Licoreria Brisas del Lago');
+t_c.set('584146443242','Farmasurca');
+t_c.set('584144127966','Panaderia Kakau II');
+t_c.set('584120398368','Mi viejo Araguaney');
+t_c.set('584128890498','Mi viejo Araguaney');
+t_c.set('584145555555','Papa Leon');
+t_c.set('ISO HOME','Iso Home');
+dat_especial=["AREPA EL PAISITA","IGRIVAL","HOTEL GOLD","TRIGOPAN","PEPSI COLA","CREACIONES PITA","ISO HOME","J501880239"];
+const t_d=new Map();
+/*t_d.set('27/12/2022',16.57);
+t_d.set('26/12/2022',16.57);
+t_d.set('25/12/2022',16.45);
+t_d.set('24/12/2022',16.45);
+t_d.set('23/12/2022',16.45);
+t_d.set('22/12/2022',16.18);
+*/
+var productos=[];
+function clickp_cliente(pos){
+//alert(pos);
+document.getElementById("div3").style.visibility='hidden';
+const posic=document.getElementsByName("pcliente")[pos].offsetTop;
+document.getElementById("lclientes").scrollTop=posic-30;
+}
+
+var lista_clientes=[];
+function Selecciona_cliente(){
+var textoT="";
+var div3 = document.getElementById("div3");
+div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
+textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+textoT+='<table width="100%"><tr>';
+textoT+='<td style="width:70%;text-align:center;color:blue;" >Clientes</td>';
+textoT+='<td width="10%"><button  title="Salir" onclick=quitar_div("div3");> x </button></td>';
+textoT+='</tr></table></div><br>';
+textoT+='<div style="overflow:auto;height:90%;font-size:0.8rem;">';
+textoT+='<table width="100%">';
+for (var i=0;i<lista_clientes.length;i++) {
+textoT+='<tr style="font-size:1.2em;"><td style="color:black;background-color:SkyBlue;cursor:pointer;text-align:center;" onclick="clickp_cliente('+i+')";>'+lista_clientes[i]+'</td></tr>'; 
+}
+textoT+='</table></div>';
+div3.innerHTML=textoT;
+}
+function Activalector_archivos(){
+getFile2 = new selectFile;
+getFile2.targets('choose2','selected');
+archivos2=document.getElementById('choose2');
+archivos2.value=null;
+archivos2.addEventListener('change', Leer_Archivo, false);
+getFile2.simulate();
+}
+
+
+function Activalector_importar(){
+getFile3 = new selectFile;
+getFile3.targets('choose3','selected');
+archivos3=document.getElementById('choose3');
+archivos3.value=null;
+archivos3.addEventListener('change', Leer_Archivo2, false);
+getFile3.simulate();
+}
+
+
+function readFileAsText(file){
+  return new Promise(function(resolve,reject){
+  let fr = new FileReader();
+  fr.onload = function(){
+     resolve(fr.result);
+   };
+   fr.onerror = function(){
+     reject(fr);
+   };
+   fr.readAsText(file);
+   });
+}
+//function Leer_Archivo(e){}
+
+function exportar_datos(){
+ var data;
+ data=JSON.stringify(pagos)+"^^"+JSON.stringify(pagos_ef)+"^^"+JSON.stringify(pagos_hechos)+"^^"+JSON.stringify(domicilios);
+ var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,"datosBNC.txt");
+
 
 }
-function importar(){
-getFile = new selectFile;
-getFile.targets('choose','selected');
-archivos=document.getElementById('choose');
-archivos.value=null;
-archivos.addEventListener('change', Leer_Archivo, false);
-getFile.simulate();
-}
-
-function Leer_Archivo(e){
+ 
+function Leer_Archivo2(e){
  var archivos=e.currentTarget.files;
  //alert(archivos);
   var lector=new FileReader();
   lector.addEventListener("load",(e) => {
     datos_imp = e.target.result;
-    var data_sep=datos_imp.split('*#*');
-    var n=Math.trunc(data_sep.length/2);
-    for (var i=0;i<n;i++) {
- // alert(data_sep[2*i]);
- // alert(data_sep[2*i+1]);
-
-  localStorage.setItem(data_sep[2*i],data_sep[2*i+1]);
-    }
+    var textos=datos_imp.split('^^');
+    pagos=JSON.parse(textos[0]);
+    localStorage.setItem('pagos_banco',textos[0]);
+    pagos_ef=JSON.parse(textos[1]);
+    localStorage.setItem('pagos_efectivo',textos[1]);
+    pagos_hechos=JSON.parse(textos[2]);
+    localStorage.setItem('pagos_hechos_banco',textos[2]);
+    domicilios=JSON.parse(textos[3]);
+    localStorage.setItem('domicilios_banco',textos[3]);
 //    alert(datos_imp.length);
   });
   lector.readAsText(archivos[0]);
 }
 
-function exportar(){
- var data='';
- var sep='*#*';
-for(var i=0;i<localStorage.length;i++){
- var nomb=localStorage.key(i); 
- if (nomb.indexOf("FAC_")==0 )  
-  { 
-  texto=localStorage.getItem(nomb);
-  if (data=='' ) {data+=nomb+sep+texto} else {data+=sep+nomb+sep+texto}
+function Leer_Archivo(e){
+ var archivos=e.currentTarget.files;
+var narch=archivos.length;
+let readers=[];
+ for(var f=0;f<narch;f++){
+  readers.push(readFileAsText(archivos[f]));
+ 
+  //console.log('nombre archivo'+archivos[f].lastModifiedDate);
+  Fecha_hora=archivos[f].lastModifiedDate.toLocaleString('es-US',{});
+ } 
+ Promise.all(readers).then((values) => {
+  var sep="&&&&";
+  contenido='';
+  for(var t=0;t<narch;t++){
+     if (t!=0) {contenido+=sep+values[t]} else {contenido+=values[t];}
+     }
+ //console.log(contenido);
+     procesa_contenido();
+ });
+
+}
+var contenido='';
+function procesa_archivo(e){
+//contenido=e.target.result; 
+//localStorage.setItem('Arch_datos_banco',contenido);
+//procesa_contenido();
+}
+
+function fecha_mayor_igual(f1,f2){
+var a2=f2.split('/');
+var a1=f1.split('/');
+ if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>a1[0]) {return false; } else {return true;}
+}
+function borrar_pago(num){
+quitar_div("div3");
+if (pagos[num].tc=='EB' || pagos[num].tc=='ED') {
+  var resp=confirm('Esta seguro de borrar el pago');
+  if (resp) {
+   var ind=pagos_ef.findIndex(x=>x.telf===pagos[num].telf && x.hora===pagos[num].hora);
+   if (ind>=0) {pagos_ef.splice(ind,1);pagos.splice(num,1);
+    localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
+    localStorage.setItem('pagos_banco',JSON.stringify(pagos));
+    }
+   console.log(ind);
   }
 }
- data+=sep+'Clientes_Pita'+sep+localStorage.getItem('Clientes_Pita');
+}
 
- var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
- saveAs(blob,"facturas.txt");
-}
-function fecha_mayor_igual(f1,f2){
-var a2=f2.split('/');
-var a1=f1.split('/');
- if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>a1[0]) {return false; } else {return true;}
-}
-var totalunid=[];
-var totalcajas=[];
-var modo_inv=false;
-function muestra_total_ventas(){
-var nd=data.length;
+function muestra(num){
 var texto='';
-var div3 = document.getElementById("lista");
-div3.style="position: fixed;top :7%; left: 0px; width: 100%;height:80%;background-color:lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
-texto+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
-texto+='<table width="100%"><tr><td style="width:90%;text-align:center;color:blue;" >Productos vendidos</td><td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td></tr></table></div><br>';
-texto+='<div style="overflow:auto;height:90%;">';
-texto+='<table style="width:100%;">';
-for(var i=0;i<nd;i++){
- if (totalcajas[i]!=0 ||totalunid[i]!=0 ) {
-console.log(data[i][0]+" "+totalcajas[i]+ " cajas");
-var tot=totalcajas[i]*data[i][1]+totalunid[i];
-var ncaj=Math.floor(tot/data[i][1]);
-var nunid=tot % data[i][1];
-texto+='<tr><td style="width:80%;font-size:1em;">'+data[i][0]+'</td><td style="width:10%;font-size:1em;">'+ncaj+' C</td><td style="width:10%;font-size:1em;">'+nunid+' U</td>'+'</tr>';
-}
-
-}
-texto+='</table></div>';
-texto+='<p>Monto: '+Monto.toFixed(2)+ ' $ Ganancia:'+(Monto-Costo).toFixed(2)+'</p>';
+var div3=document.getElementById("div3");
+div3.style="position: fixed;top :50%; left: 0%; width: 80%;height:30%;background-color:Coral;color:white; text-align: left; border: 3px solid #73AD21;";
+texto+='<p>'+pagos[num].motivo+'</p>';
+texto+='<p> Referencia: '+pagos[num].ref+'</p>';
+texto+='<button onclick=quitar_div("div3")> Ok </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+texto+='<button onclick=borrar_pago('+num+') >Borrar</button>';
 div3.innerHTML=texto;
 }
-
-function fecha_mayor_igual(f1,f2){
-var a2=f2.split('/');
-var a1=f1.split('/');
- if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>a1[0]) {return false; } else {return true;}
+function Obten_nombre(tel){
+var clave=(tel).toString().trim();
+var tmp=t_c.get(clave);
+if (tmp==undefined) {tmp=clave;}
+return tmp;
 }
 
-function inv_fecha_date(f){
-var comp=f.split('-');
-var sal=comp[2]+'/'+comp[1]+'/'+comp[0];
-//console.log('sal2 '+sal);
-return sal;
-}
-
-function fecha_date(f){
-var comp=f.split('/');
-var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
-console.log('sal '+sal)
-return sal;
-}
-
-function fecha_estandar(f){
-  var year=f.getFullYear();
-  var mes=f.getMonth();mes++;if (mes<10) {mes='0'+mes}
-  var day=f.getDate();if (day<10) {day='0'+day}
-return day+'/'+mes+'/'+year;
-}
-
-function Mantenimiento(){
-var div3 = document.getElementById("lista");
-div3.style="position: fixed;top :30px; left: 0px; width: 100%;height:40%;background-color: blue;color:white; text-align: left; border: 3px solid #73AD21;";
+function genera_salida1(){
+allVoicesObtained.then(voices => voice=voices);
+console.log(voice);
+if (pagos.length>0) {
+var divaux=document.getElementById("divdata");
 var texto='';
-texto+='<div> <table style="text-align:center;margin:auto;">';
-texto+='<tr><td><button onclick=importar()>Importar Facturas</button></td></tr>';
-texto+='<tr><td><button onclick=exportar()>Exportar Facturas</button></td></tr>';
-texto+='<tr><td><button onclick=quitar_div("lista");>Salir</button></td></tr>';
-texto+='</table></div>';
-div3.innerHTML=texto;
-}
+pagos.sort(ordena_pagos);
+var fecha_previa=pagos[0].fecha;
+var nombre_previo=Obten_nombre(pagos[0].telf);
+//var total_parcial=parseFloat(pagos[0].montodolar);
+var total_parcial=0;
 
+console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
+texto+='<table width="100%">';
+
+for (var i=0;i<pagos.length;i++){
+colb=colorcuenta(pagos[i].tc);
+// console.log('i: '+i);
+ if (pagos[i].fecha!=fecha_previa) {
+    fecha_previa=pagos[i].fecha;
+    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
+    texto+='</table>';
+    texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $'+'</p>';
+
+    texto+='<table width="100%">';
+  }
+
+texto+='<tr onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+Obten_nombre(pagos[i].telf)+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td>'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
+
+}
+ texto+='</table>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
+}
+}
 
 function quitar_div(div_b){
 document.getElementById(div_b).style.visibility='hidden';
 }
+function borrar_pagos_hechos(){
+localStorage.setItem('pagos_hechos_banco','');
 
-function total(){
-var textoT="";
-var div3 = document.getElementById("lista");
-div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
-
-textoT+='Desde: <input id="f1" type="date" value="'+fecha_date(fecha_actual())+'"><br>';
-textoT+='Hasta: <input id="f2" type="date" value="'+fecha_date(fecha_actual())+'"><br><br>';
-textoT+='<span onclick="limpiaCliente2();">Cliente:</span>';
-textoT+='<input style="width:30%;" type="text" id="cli2" value="" list="listaclientes">';
-textoT+='<datalist id="listaclientes"></datalist>';
-textoT+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="total_unidades_vendidas();" >Ok </button>';
-div3.innerHTML=textoT;
 }
-var Monto=0;
-var Costo=0;
+function agrega_deuda(j){
+var valor=parseFloat(document.getElementById('intro').value);
+if (valor!=0) {
+ var nombcli=Obten_nombre(pagos[j].telf);
+  var ind=Clientes.findIndex(x=>x.nombre==nombcli);
+ //Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-valor).toFixed(2);
+ //localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
+ document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
+ document.getElementById('intro').value='';
+ var today = new Date();
+ var fecha_a = today.toLocaleDateString('es-ES',{year:"numeric",month:"2-digit",day:"2-digit"});
+ console.log(fecha_a);
+ var hora_a = today.toLocaleTimeString('es-ES',{hour12:false,hour:"2-digit",minute:"2-digit",second:"numeric"});
+ console.log(hora_a);
+ dolarhoy=t_d.get(fecha_a);
+ console.log(dolarhoy);
+ if (tmon=='$') {te='ED'; mDs=parseFloat(valor).toFixed(2); mBs=parseFloat(mDs*dolarhoy).toFixed(2)}
+   else
+ {te='EB'; mBs=parseFloat(valor).toFixed(2); mDs=parseFloat(mBs/dolarhoy).toFixed(2)}
 
-function total_unidades_vendidas(){
-Monto=0;
-Costo=0;
-var f1=document.getElementById("f1").value;
-var f2=document.getElementById("f2").value;
-var clib=document.getElementById("cli2").value;
-f1=inv_fecha_date(f1);
-f2=inv_fecha_date(f2);
-quitarlista();
-console.log('rango de fechas'+f1+' '+f2);
+var record={"fecha":fecha_a,"hora":hora_a,"ref":"","dolar":dolarhoy,"montoBs":mBs,"montodolar":mDs,"motivo":"","tc":te,"telf":pagos[j].telf};
+pagos_ef.push(record);
+pagos.push(record);
+localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
+localStorage.setItem('pagos_banco',JSON.stringify(pagos));
+quitar_div("div4");
+//alert('ind '+ind);
+var ind2=lista_clientes.findIndex(x=>x==nombcli);
+ //alert('ind '+ind2);
+genera_salida2(ind2);
 
-var nd=data.length;
-console.log(nd);
-for(var i=0;i<nd;i++){
- totalunid[i]=0;
- totalcajas[i]=0;
 }
-var fecha=fecha_actual();
-console.log(fecha);
-for(var i=0;i<localStorage.length;i++){
- var nomb=localStorage.key(i); 
- if (nomb.indexOf("FAC_")==0 )  
-{ 
+}
 
-  var fech=nomb.split('_')[2];
-  var nombcli=nomb.split('_')[1];
-var iva=1;
-  console.log('nc'+nombcli);
+function agrega_pago(j){
+if (suma!=0) {
+ suma=parseFloat(parseFloat(suma).toFixed(2));
+ var nombcli=Obten_nombre(pagos[j].telf)
+ var ind=Clientes.findIndex(x=>x.nombre==nombcli);
+ Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-suma).toFixed(2);
+ localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
+ document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
+ alert('Deuda modificada');
+ suma=0;
+ document.getElementById('abo').innerText='Abono : 0';
+ document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
+}
+}
 
-  texto=localStorage.getItem(nomb);
+var tmon='$';
+
+function cambia_mon(){
+if (tmon=='Bs') {tmon='$'} else {tmon='Bs'}
+document.getElementById("bmon").innerText=tmon;
+
+}
+
+function Monto_factura(nomb){
+var fact=localStorage.getItem(nomb);
+console.log(nomb);
+var ped=fact.split('&');
+var total=0;
+var iva,unidad,cajas,pu,pb;
+var totalp=0;
+var totaliva=0;
+for (var i=1;i<ped.length;i++) {
+  var items=ped[i].split('#');
+  var ind=clave_ind.get(items[0]);
+  if (data[ind][3]==0) {iva=0} else {iva=0.16}
+  console.log(data[ind][0]);
+  unidad=parseInt(items[1]);
+  pu=parseFloat(items[2]);
+  cajas=parseInt(items[3]);
+  pb=parseFloat(items[4]);
   
-console.log('fech'+fech);
-if ( (texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && ( ((nombcli.indexOf(clib)==0) && clib!='' ) || (clib=='' && nombcli.indexOf('Pedido')!=0) ) ) {
-//    alert('nombcli '+nombcli+' clib  '+clib+' ind Pedido '+nombcli.indexOf('Pedido')+' ind clib '+(nombcli.indexOf('clib')==0)+' '+(clib=='' && nombcli.indexOf('Pedido')!=0));
-    var ped=texto.split('&');
-    console.log(texto+" "+texto.length);
-    //console.log(ped.length);
-    for (var j=1;j<ped.length;j++) {
-      var items=ped[j].split('#');
-      var ind=clave_ind.get(items[0]);
-  if (data[ind][3]==0) {iva=1;} else {iva=1.16;}
-      totalunid[ind]+=parseInt(items[1]);
-[pcu,pcb]=precio_costo(ind);
-
- Costo+=parseInt(items[1])*parseFloat(pcu)*iva
- Monto+=parseInt(items[1])*parseFloat(items[2])*iva;
-      totalcajas[ind]+=parseInt(items[3]);
- Monto+=parseInt(items[3])*parseFloat(items[4])*iva;
- Costo+=parseInt(items[3])*parseFloat(pcb)*iva;
-
-    }
+  totalp=(unidad*pu+cajas*pb);
+  console.log(totalp);
+  tiva=totalp*iva
+  totaliva+=iva;
+ console.log(totaliva);
+  total+=totalp+tiva;
  
-  } 
- } 
 }
- muestra_total_ventas();
-}
-inventario=[];
+ console.log('total '+total);
+return total.toFixed(2);
 
-function carga_inventario(){
-var invent=localStorage.getItem('Inventario_PO');
-if (invent!=null) {
- var items=invent.split('&');
-  for (var i=0;i<items.length;i++){
-   console.log(items[i]);
-   var partes=items[i].split('#');
-    ind=inventario.findIndex(element => element.CLAVE==partes[0])
-   inventario[ind]={"CLAVE":partes[0],"UNID":partes[1],"CAJAS":partes[2]};
-  }
-}
-console.log(inventario);
-}
-function desp_inventario(){
-texto='';
-carga_inventario();
-var div3 = document.getElementById("lista");
-div3.style="position: fixed;top :7%; left: 0%; width: 100%;height:80%;background-color:lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
-texto+='<div style="position: fixed;top :7%; text-align:right;background-color: gray;width:100%;">';
-texto+='<table width="100%"><tr><td style="width:90%;text-align:center;color:blue;" >Inventario</td>';
-texto+='<td width="10%"><button  title="Borra" onclick="anula_inventario();" > B </button></td>';
-texto+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td></tr></table></div><br>';
-texto+='<div style="overflow:auto;height:90%;">';
-texto+='<table style="width:100%;">';
-for(var i=0;i<inventario.length;i++){
-console.log('clave '+inventario[i]["CLAVE"]);
- var ind=clave_ind.get(inventario[i]["CLAVE"]);
- console.log('indice '+ind);
- if (inventario[i]["UNID"]!=0 || inventario[i]["CAJAS"]!=0 ) {
-  var nuc=parseInt(data[ind][1]);
-  var tu=parseInt(inventario[i]["CAJAS"])*nuc+parseInt(inventario[i]["UNID"]);
-   var tc=Math.floor(tu/nuc);
-
-  var ru=tu % nuc;
-
-  texto+='<tr><td style="width:70%;font-size:1em;">'+data[ind][0]+'</td>';
-  texto+='<td style="width:15%;font-size:1em;">'+tc+' C</td>';
-  texto+='<td style="width:15%;font-size:1em;">'+ru+' U</td>';
-  }
-}
-texto+='</tr></table></div>';
-div3.innerHTML=texto;
 }
 
 
-function guarda_inventario(){
-var texto="";
-  for (var i=0;i<inventario.length;i++){
-      texto+='&'+inventario[i]["CLAVE"]+'#'+inventario[i]["UNID"]+'#'+inventario[i]["CAJAS"];
-  }
-if (texto.length>0) {localStorage.setItem('Inventario_PO',texto.substr(1));} else {localStorage.setItem('Inventario_PO','');}
-}
-
-function anula_inventario(){
-const resp = confirm("Esta seguro de eliminar el inventario");
-
-if (resp) {
-  inventario=[]; 
-  guarda_inventario();
-  desp_inventario();
-}
-}
-function resta_inventario(){
-  for (var i=0;i<data.length;i++){
-   if (data[i][4]!=0 || data[i][5]!=0) {
-       ind=inventario.findIndex(element => element.CLAVE==data[i][9])
-       if (ind==-1) {ind=inventario.length;
-         inventario[ind]["CLAVE"]=data[i][9];
-         inventario[ind]["UNID"]=0;
-         inventario[ind]["CAJAS"]=0;
-       }
- inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])-data[i][4]).toString();
- inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])-data[i][5]).toString();
-     }
- }
-guarda_inventario();
-}
-
-function inicio_inventario(){
- for (var i=0;i<data.length;i++){
-    inventario[i]={"CLAVE":data[i][9],"UNID":"0","CAJAS":"0"}
-}
-console.log(inventario);
-carga_inventario();
-
-console.log(inventario);
-}
-
-function suma_inventario(){
-const resp = confirm("Esta seguro de agregar al Inventario");
-if (resp) {
-  for (var i=0;i<data.length;i++){
-      if (data[i][4]!=0 || data[i][5]!=0) {
-       ind=inventario.findIndex(element => element.CLAVE==data[i][9])
-  if (ind==-1) {ind=inventario.length;
-    inventario[ind]["CLAVE"]=data[i][9];
-    inventario[ind]["UNID"]=0;
-    inventario[ind]["CAJAS"]=0;
- }
-       inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])+parseInt(data[i][4])).toString();
-       inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])+parseInt(data[i][5])).toString();
-      }
- }
-console.log(inventario);
-guarda_inventario();
-}
-}
-
-function suma_inventario2(){
-  for (var i=0;i<datfac.length;i++){
-      if (datfac[i].unidad!=0 || datfac[i].cajas!=0) {
-       ind=inventario.findIndex(element => element.CLAVE==data[i][9])
-      if (ind==-1) {ind=inventario.length;
-        inventario[ind]["CLAVE"]=data[i][9];
-        inventario[ind]["UNID"]=0;
-        inventario[ind]["CAJAS"]=0;
- }
-       inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])+parseInt(datfac[i].unidad)).toString();
-       inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])+parseInt(datfac[i].cajas)).toString();
-      }
- }
-console.log(inventario);
-guarda_inventario();
-}
-function ventas_periodo(fecha1,fecha2){
-}
-
-var cliente='';
-var AClientes=[];
-
-function limpiaCliente2(){
-document.getElementById("cli2").value='';
-}
-
-function limpiaCliente(){
-document.getElementById("cli").value='';
-datos_cliente();
-}
-
-function elimina_cliente(){
-var ecliente;
-document.getElementById("cliente").hidden=true;
-ecliente=document.getElementById("cli").value;
-var pos=AClientes.findIndex(x=>x.nombre===ecliente);
-console.log(pos);
-const resp = confirm("Esta seguro de eliminar el cliente");
-if (pos>=0 && resp) {AClientes.splice(pos,1);guarda_clientes();
-   limpiaCliente();
- }
-//console.log('LC: '+Lclientes);
-}
-
-
-function setcliente(){
-var indic;
-cliente=document.getElementById("cli").value;
-if (cliente!='') {
-  direccion=document.getElementById("dircli").value;
-  telefono=document.getElementById("tlfcli").value;
-  rifcliente=document.getElementById("rifcli").value;
-  cliente_especial=document.getElementById("espcli").checked;
-  deuda_cliente=document.getElementById("deucli").value;
-  vacio_cliente=document.getElementById("vaccli").value;
-  vacio_cliente1=document.getElementById("vacclir1").value;
-  vacio_cliente2=document.getElementById("vacclir2").value;
-
-  indic=-1;
-  if (AClientes.length>0) {indic=AClientes.findIndex(x => x.nombre == cliente);} 
-  Ocliente=new Object();
-  Ocliente.nombre=cliente;
-  Ocliente.dir=direccion;
-  Ocliente.tlf=telefono;
-  Ocliente.rif=rifcliente;
-  Ocliente.esp=cliente_especial;
-  Ocliente.deuda=deuda_cliente;
-  Ocliente.vacio=vacio_cliente;
-  Ocliente.vacio1=vacio_cliente1;
-  Ocliente.vacio2=vacio_cliente2;
-
-  if (indic==-1) {AClientes.push(Ocliente); } else {Object.assign(AClientes[indic],Ocliente)}
-  guarda_clientes();
- }
-  document.getElementById("cliente").hidden=true;
-  if (document.getElementById("factura").hidden==false) {factura2();}
-}
-
-var Ocliente=new Object();
-
-function Actualiza_cliente(){
-Lee_clientes();
-divcliente=document.getElementById("cliente");
-//divcliente.innerHTML=texto;
-divcliente.hidden=false;
-datos_cliente();
-}
-
-function datos_cliente(){
-cliente=document.getElementById("cli").value;
-var ind=AClientes.findIndex(x=>x.nombre==cliente);
-//alert('datos '+ ind);
-if (ind>=0) {
-// alert(AClientes[ind].deuda);
- //Object.assign(Ocliente,AClientes[ind]);
- document.getElementById("rifcli").value=AClientes[ind].rif;
- document.getElementById("tlfcli").value=AClientes[ind].tlf;
- document.getElementById("espcli").checked=AClientes[ind].esp;
- document.getElementById("dircli").value=AClientes[ind].dir;
- document.getElementById("deucli").value=AClientes[ind].deuda;
- document.getElementById("vaccli").value=AClientes[ind].vacio;
- document.getElementById("vacclir1").value=AClientes[ind].vacio1;
- document.getElementById("vacclir2").value=AClientes[ind].vacio2;
-
-} else {
-
- document.getElementById("rifcli").value='';
- document.getElementById("espcli").checked=false;
- document.getElementById("dircli").value='';
- document.getElementById("deucli").value=0;
- document.getElementById("tlfcli").value='';
-}
-}
-function guarda_clientes(){
-var Lclientes='';
-
-if (AClientes.length>0) {localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));}
-   else 
-{localStorage.setItem('Clientes_Pita','');}
-
-}
-
-function Lee_clientes(){
-Lclientes=localStorage.getItem('Clientes_Pita');
-if (Lclientes!='') { AClientes=JSON.parse(Lclientes);} else {AClientes=[];}
-
-//console.log(AClientes);
-if (AClientes.length>0) {
- var options='';
- for (var i = 0; i < AClientes.length; i++) {
-   options += '<option value="' + AClientes[i]["nombre"] + '" />';
- }
-//console.log('op'+options)
-
-document.getElementById('listaclientes').innerHTML = options;
-} else {AClientes=[];}
-cliente=localStorage.getItem('Cliente');
-var indcliente=AClientes.findIndex(x=>x.name===cliente);
-}
-
-function guarda_pedido(){
+function muestra_deuda(j){
+//alert(j);
+var divaux=document.getElementById("div4");
 var texto='';
-for (var i=0;i<data.length;i++) {
-if ((data[i][4]!=0) || (data[i][5]!=0)) { 
- texto+='&'+data[i][9]+'#'+data[i][4]+'#'+data[i][5];
-}
-if (texto.length>2) {localStorage.setItem('Pedido',texto.substr(1));} else {localStorage.setItem('Pedido','');}
+texto+='<div style="border: 5px solid red;background-color:lightblue">';
+var cl=Obten_nombre(pagos[j].telf)
+texto+='<p>'+cl+'</p>';
+Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
+var ind=Clientes.findIndex(x=>x.nombre==Obten_nombre(pagos[j].telf));
+if (ind>=0) {
+ console.log(Clientes[ind].deuda);
+ texto+='<table width="100%"><tr>';
+ texto+='<td width="50%"><span id="deu"> Deuda :'+Clientes[ind].deuda+'</span></td>';
+ texto+='<td width="25%"><span id="abo"> Abono :'+suma.toFixed(2)+'</span></td>';
+ texto+='<td style="width:25%;text-align:rigth;"><button onclick=agrega_pago('+j+')>+</button></td>';
+ texto+='</tr></table>';
+ texto+='<button id="bmon"onclick=cambia_mon()>'+tmon+'</button>';
+ texto+='<input id="intro" type="text" value="0">';
+ texto+='<button onclick=agrega_deuda('+j+')>Ok</button><br>';
+ texto+='<button onclick=quitar_div("div4")>Salir</button>';
+ texto+='</div>';
+ texto+='<div style="height:10%;overflow-y: auto;">';
+ listasel=[];
+ for(var i=0;i<localStorage.length;i++) {
+   var nomb=localStorage.key(i); 
+   if (nomb.indexOf('FAC_'+cl)==0 )  
+    {  
+      var fec=nomb.substr(4).split('_')[1];
+     listasel.unshift(nomb); 
+     
+     
+    }
+ }
+ listasel=listasel.sort(ord_fecha);
+ for (var k=0;k<listasel.length;k++) {
+  //  console.log(k+' '+nomb);
+   var tot=Monto_factura(listasel[k]);
+   texto+='<p> '+listasel[k].split('_')[2]+'  '+tot+' $</p>';
+ }
+ texto+='</div>';
 } 
-localStorage.setItem('Cliente',cliente);
+else {texto+='<button onclick=quitar_div("div4")>Salir</button>';
+texto+='</div>';}
+
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
 }
 
-function crea_lista_facturas(){
-listasel=[];
-console.log("paso");
-for(var i=0;i<localStorage.length;i++){
-var nomb=localStorage.key(i); 
-if (nomb.indexOf("FAC_")==0) {listasel.unshift(nomb.substr(4));} 
- } 
-listasel=listasel.sort();
+function chequeado(o,pos){
 
+
+if (o.checked) {
+ var ind=pagos_hechos.findIndex(x=>x.fecha==pagos[pos].fecha && x.hora==pagos[pos].hora);
+ if (ind<0) { pagos_hechos.push({"fecha":pagos[pos].fecha,"hora":pagos[pos].hora});
+ localStorage.setItem('pagos_hechos_banco',JSON.stringify(pagos_hechos));}
+ //Clientes[ind1].deuda=(parseFloat(Clientes[ind1].deuda)-parseFloat(pagos[pos].montodolar)).toFixed(2);
+ //localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
+  o.parentElement.parentElement.style.color="white";} 
+ else {
+var ind=pagos_hechos.findIndex(x=>x.fecha==pagos[pos].fecha && x.hora==pagos[pos].hora);
+  if (ind>=0) { pagos_hechos.splice(ind,1);
+  localStorage.setItem('pagos_hechos_banco',JSON.stringify(pagos_hechos));}
+  o.parentElement.parentElement.style.color="black";
 }
 
-function lee_facturas(){
-crea_lista_facturas();
-selectlista(0);
 }
-function ord_nomb(a,b){
-var ela=a.split('_');
-var elb=b.split('_');
- if (ela[0]<elb[0]) return -1;
-  if (ela[0]>elb[0]) return 1;
-  if (!fecha_mayor_igual(ela[1],elb[1])) return -1;
-  if (!fecha_mayor_igual(elb[1],ela[1])) return 1;
+function genera_salida2(pos_ini){
+for (var j=0;j<pagos.length;j++) {
+ pos[j]=0;
+}
+suma=0;
+document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
+if (pagos.length>0) {
+var divaux=document.getElementById("divdata");
+divaux.style="position: fixed;top :20%; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;overflow-y: scroll;";
+var texto='';
+texto+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+texto+='<table width="100%"><tr>';
+texto+='<td style="width:70%;text-align:center;color:blue;" >Clientes</td>';
+texto+='<td width="10%"><button  title="Nombre" onclick="Selecciona_cliente();" > Sel </button></td>';
+texto+='<td width="10%"><button  title="Salir" onclick=quitar_div("divdata"); <button> x </button></td>';
+texto+='</tr></table></div><br>';
+texto+='<div id="lclientes" style="overflow:auto;height:90%;font-size:0.8rem;">';
 
- return 0;
+
+ pagos.sort(ordena_pagos2);
+var nombre_previo='';
+var fecha_previa=pagos[0].fecha;
+var total_parcial=0;
+var montop='';
+var cont_c=0;
+lista_clientes=[];
+ console.log( nombre_previo);
+texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+nombre_previo+'</p>';
+for (var i=0;i<pagos.length;i++){
+  
+colb=colorcuenta(pagos[i].tc);
+
+ if (Obten_nombre(pagos[i].telf)!=nombre_previo) {
+  
+    nombre_previo=Obten_nombre(pagos[i].telf);lista_clientes[cont_c]=nombre_previo;cont_c++;
+    if (i!=0) {
+      console.log(total_parcial.toFixed(2));
+     //texto+='<p style="color:blue;">Fecha:'+fecha_previa+'Total parcial: '+montop.toFixed(2)+'</p>';
+      fecha_previa=pagos[i].fecha;texto 
+      //texto+='<p>Total: '+total_parcial.toFixed(2)+'</p>';
+    }
+
+    total_parcial=parseFloat(pagos[i].montodolar);
+     montop=total_parcial;
+    texto+='<p name="pcliente" onclick="muestra_deuda('+i+');" style="color:red;font-size:1.5em;text-align:center;">'+Obten_nombre(pagos[i].telf)+'</p>';
+ 
+ } else { 
+    total_parcial+=parseFloat(pagos[i].montodolar)
+    if (pagos[i].fecha!=fecha_previa) { 
+       //texto+='<p style="color:blue;"> Fecha:'+ fecha_previa+'Total parcial: '+montop.toFixed(2)+'</p>'; montop=parseFloat(pagos[i].montodolar)
+       fecha_previa=pagos[i].fecha; 
+     }  else  {
+        montop+=parseFloat(pagos[i].montodolar);
+        }
+  }
+console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
+//texto+='<p>'+pagos[i].fecha+'&nbsp&nbsp'+pagos[i].hora.substring(0,5)+'&nbsp&nbsp'+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
+//texto+='<p style="background-color:'+colb+';" onclick=permuta(this,'+i+');>'+' '+pagos[i].fecha+'     '+pagos[i].montoBs+' Bs '+'     '+pagos[i].montodolar+' $ '+'</p>';
+texto+='<table width="100%">';
+var indip=pagos_hechos.findIndex(x=>x.fecha==pagos[i].fecha && x.hora==pagos[i].hora);
+if (indip>=0) {texto+='<tr style="color:white; background-color:'+colb+';" ><td width="5%"> <input type="checkbox" checked onclick=chequeado(this,'+i+');>'+'</td>';}
+  else {texto+='<tr style="color:black;background-color:'+colb+';" ><td width="5%"> <input type="checkbox" onclick=chequeado(this,'+i+');>'+'</td>';}
+texto+='<td width="31%">'+'&nbsp&nbsp'+pagos[i].fecha+'</td>';
+texto+='<td width="27%">'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td>';
+texto+='<td width="27%" onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr></table>';
+
+} // for i
+
+ console.log(total_parcial.toFixed(2));
+// texto+='<p>Fecha:'+fecha_previa;+'Total parcial: '+montop.toFixed(2)+'</p>';
+     
+
+//texto+='<p>Total :'+total_parcial.toFixed(2)+'</p>';
+texto+='</div>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
+
+}
+clickp_cliente(pos_ini);
 }
 function ord_fecha(a,b){
 var ela=a.split('_');
 var elb=b.split('_');
-  if (!fecha_mayor_igual(ela[1],elb[1])) return 1;
-  if (!fecha_mayor_igual(elb[1],ela[1])) return -1;
-  if (ela[0]<elb[0]) return -1;
-  if (ela[0]>elb[0]) return 1;
+  if (!fecha_mayor_igual(ela[2],elb[2])) return 1;
+  if (!fecha_mayor_igual(elb[2],ela[2])) return -1;
+//  if (ela[0]<elb[0]) return -1;
+//  if (ela[0]>elb[0]) return 1;
   return 0;
 }
 
-function ordena_nombre(){
-crea_lista_facturas();
-listasel=listasel.sort(ord_nomb);
-selectlista(0);
+function colorcuenta(C){
+   if (C=='A') {return 'SkyBlue';} 
+   if (C=='J') {return 'DodgerBlue';}
+   if (C=='C') {return 'SteelBlue';}
+   if (C=='EB') {return 'Olive';}
+   if (C=='ED') {return 'Lime';}
 }
 
-function ordena_fecha(){
-crea_lista_facturas();
-listasel=listasel.sort(ord_fecha);
-selectlista(0);
-}
-function ordena_cliente(){
-crea_lista_facturas();
-listasel=listasel.filter(x=>x.split('_')[0]==cliente);
-listasel=listasel.sort(ord_fecha);
-selectlista(1);
-}
-var total_factura=0;
-function selectlista(t){
-var textoT="";
-var div3 = document.getElementById("lista");
-div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
-textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
-textoT+='<table width="100%"><tr>';
-textoT+='<td style="width:60%;text-align:center;color:blue;" >Facturas anteriores</td>';
-textoT+='<td width="10%"><button  title="Nombre" onclick="ordena_cliente();" > C </button></td>';
-textoT+='<td width="10%"><button  title="Nombre" onclick="ordena_nombre();" > N </button></td>';
-textoT+='<td width="10%"><button  title="Fecha" onclick="ordena_fecha();" > F </button></td>';
-textoT+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td>';
-textoT+='</tr></table></div><br>';
-textoT+='<div style="overflow:auto;height:90%;font-size:0.8rem;">';
-textoT+='<table width="100%">';
-for (var i=0;i<listasel.length;i++) {
-if (t=="0") {
-textoT+='<tr><td style="width:80%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:20%;"></td></tr>'; 
-} else {
- textoT+='<tr><td style="width:80%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:20%;">'+monto_factura(i)+' $</td></tr>'; 
-}
-}
-textoT+='</table></div>';
-div3.innerHTML=textoT;
-}
+function genera_salida3(){
 
-function quitarlista(){
-var div3 = document.getElementById("lista");
-div3.style="display: none;";
-}
-
-
-function borra(num){
-var nomb="FAC_"+listasel[num];
-const resp = confirm("Esta seguro de eliminar la factura");
-//var resp=prompt(,'S/N'); 
-if (resp) {localStorage.removeItem(nomb);}
-cancelar();
-quitarlista();
-lee_facturas();
-}
-function borra2(num){
-var nomb="FAC_"+listasel[num];
-localStorage.removeItem(nomb);
-cancelar();
-//quitarlista();
-//lee_facturas();
-}
-function factura_ver(num){
-var nomb=listasel[num];
-recupera_factura("FAC_"+nomb);
-cancelar();
-factura3(num);
-
-}
-
-function clickp(num){
-
-var nomb=listasel[num];
-recupera_factura("FAC_"+nomb);
-factura();
-factura3(num);
-quitarlista();
-/*
-var div3 = document.getElementById("auxiliar");
+//speak('Ordenado por fecha y por cliente');
+if (pagos.length>0) {
+var divaux=document.getElementById("divdata");
 var texto='';
-texto+='<div><button onclick="factura_ver('+num+');"> Ver </button>';
-texto+='<div><button onclick="fact_base('+num+');"> Establecer </button>';
-texto+='<button onclick="borra('+num+');"> Borrar </button>';
-texto+='<button onclick="revertir_factura('+num+');"> Revertir </button>';
-texto+='<button onclick="cancelar()"> Cancelar </button></div>';
-div3.innerHTML=texto;
-div3.style="display: block;";
+ pagos.sort(ordena_pagos3);
+var fecha_previa=pagos[0].fecha;
+var nombre_previo=Obten_nombre(pagos[0].telf);
+var total_parcial=0;
 
-console.log(div3.innerHTML);
-*/
-}
+console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
+texto+='<table width="100%">';
+for (var i=0;i<pagos.length;i++){
+   colb=colorcuenta(pagos[i].tc);
+if (pagos[i].fecha!=fecha_previa) {
+    fecha_previa=pagos[i].fecha;
+    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
+    texto+='</table>';
+    texto+='<p style="text-align:center;font-size:1.5em;">'+'Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $'+'</p>';
 
-function cancelar(){
-var div3 = document.getElementById("auxiliar");
-div3.style="display:none;";
-}
-
-
-function fact_base(num){
-var nomb=listasel[num];
-anula();
-recupera_factura("FAC_"+nomb);
-for (var i=0;i<datfac.length;i++) {
-if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
- data[i][4]=datfac[i].unidad;
- data[i][5]=datfac[i].cajas;
-console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
-}
-} 
-factura2();
-cancelar();
-}
-
-function fact_agrega(num){
-var nomb=listasel[num];
-//anula();
-recupera_factura("FAC_"+nomb);
-for (var i=0;i<datfac.length;i++) {
-if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
- data[i][4]+=datfac[i].unidad;
- data[i][5]+=datfac[i].cajas;
-console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
-}
-} 
-factura2();
-cancelar();
-}
-function revertir_factura(num){
-var nomb=listasel[num];
-recupera_factura("FAC_"+nomb);
- if (cliente.indexOf('Pedido')==-1) {suma_inventario2();}
-cliente=cliente_factura;
-var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
-console.log(indcliente);
-if (indcliente>=0) {Ocliente=AClientes[indcliente];} else {Ocliente=null;}
-fact_base(num);
-borra2(num);
-cancelar();
-Revierte_deuda();
-}
-var MONTOF='';
-function Actualiza_deuda(){
-var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
-//alert(indcliente);
-if (indcliente>=0) {
-AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)+parseFloat(MONTOF)).toFixed(2);
-localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
-}
-}
-function Revierte_deuda(){
-var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
-//alert(indcliente);
-if (indcliente>=0) {
-AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)-parseFloat(MONTOF)).toFixed(2);
-localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
-//alert(AClientes[indcliente].deuda);
-}
+    texto+='<table width="100%">';
+  }
+ texto+='<tr  onclick="muestra('+i+')"; style="background-color:'+colb+';"><td>'+Obten_nombre(pagos[i].telf)+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td>'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
 
 }
-
-function guardar_factura(){
-var div3 = document.getElementById("lista");
-div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
-nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
-texto='';
-texto+='Fecha: <input id="ffac" type="date" value="'+fecha_date(fecha_actual())+'"><br>';
-texto+='<span onclick="limpiaCliente2();">Cliente:</span>';
-texto+='<input style="width:30%;" type="text" id="cli2" value="'+cliente+'" list="listaclientes">';
-texto+='<datalist id="listaclientes"></datalist>';
-texto+='<input style="width:30%;" type="text" id="nfact" value="'+nro_factura+'" list="listaclientes">';
-texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="guarda_factura2();" >Ok </button>';
-div3.innerHTML=texto;
-
-/*
-if (cliente=='') {alert('Falta Cliente en factura');} else
- {nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
-   var resp=prompt("Cliente: "+cliente+" Introduzca el numero de la factura:",nro_factura)
-   if (resp!=null) {nro_factura=parseInt(resp);guarda_factura(); localStorage.setItem('FACT_NRO',(nro_factura+1).toString())}
-   Actualiza_deuda();
+ texto+='</table>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
 }
-*/
 }
 
-function guarda_factura2(){
-fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
-alert(fecha_factura);
-cliente_factura=document.getElementById('cli2').value;
-guarda_factura(); 
-localStorage.setItem('FACT_NRO',(nro_factura+1).toString());
-Actualiza_deuda();
-quitarlista();
+var suma=0;
+var Tipocuenta='';
+var pos=[];
+function permuta(o,ind){
+//alert(ind+' '+pos[ind]);
+pos[ind]=1-pos[ind];
+if (pos[ind]==0) {o.style.color='black'} else {o.style.color='yellow'}
+suma=0;
+for (var i=0;i<pos.length;i++){
+if (pos[i]==1) {suma+=parseFloat(pagos[i].montodolar)}
 }
+document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
+}
+
+function caso_especial(dato){
+ var post;
+ //console.log('Caso especial');
+for (var i=0;i<dat_especial.length;i++) {
+  post=dato.indexOf(dat_especial[i]);
+  //console.log('post '+ post);
+  if (post>0) {return dat_especial[i];}
+ }
+return dato;
+}
+var posi=0;
+var pagos=[];
+var domicilios=[];
+
+var TC;
+function procesa_contenido(){
+
+function cumple1(value) {
+if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 && value.indexOf("DE LA CUENTA NRO. 01910148772100070936")<0) ) {return true;} else {return false;}
+}
+function cumple2(value) {
+if (value.indexOf("Cargo Domiciliacion")>0 || value.indexOf("Cargo por Domiciliacion")>0) {return true;} else {return false;}
+}
+var nsem;
+var sem;
+
+//console.log(contenido);
+var archivos=contenido.split("&&&&");
+
+for (var jj=0;jj<archivos.length;jj++) {
+var lineas=archivos[jj].split("\r\n");
+
+ var post=lineas[0].indexOf('01910027801127274106');
+if (post>=0) {Tipocuenta="Cuenta de Ahorro"; TC='A';}
+ var post=lineas[0].indexOf('01910027822127000477');
+if (post>=0) {Tipocuenta="Cuenta Juridica";TC='J';}
+ var post=lineas[0].indexOf('01910148772100070936');
+if (post>=0) {Tipocuenta="Cuenta Corriente";TC='C';}
+
+var result=lineas.filter(cumple1)
+var result_2=lineas.filter(cumple2)
+//console.log(result_2);
+//console.log(result);
+//Domicilizaciones
+
+for(var ii=posi2;ii<(posi2+result_2.length);ii++){
+ var campos2=result_2[ii-posi2].split('\t');
+domicilios[ii]=new Object();
+domicilios[ii].fecha =campos2[0];
+domicilios[ii].monto =parseFloat(campos2[7].replace(',', '.'));
+domicilios[ii].descripcion =campos2[6];
+var fd=parseFloat(t_d.get(campos2[0]));
+console.log(fd)
+domicilios[ii].montod=(domicilios[ii].monto/fd).toFixed(2);
+var post=campos2[6].indexOf('FACTURA')
+if (post>0) {domicilios[ii].factura=campos2[6].substr(post+9,post+25)} else {domicilios[ii].factura='';}
+}
+
+for (var i=posi;i<(posi+result.length);i++){
+  var campos=result[i-posi].split('\t');
+  pagos[i]=new Object();
+  pagos[i].fecha=campos[0];
+  pagos[i].hora=campos[1];
+  pagos[i].ref=campos[2];
+  pagos[i].motivo=campos[6];
+  pagos[i].tc=TC;
+  var telfn=campos[6];
+ pagos[i].telf=telfn;
+//console.log(pagos[i].telf);
+  var post=telfn.indexOf('CTA');
+  //console.log(post + 'CTA');
+  //console.log('post '+post);
+  if (post>0) {pagos[i].telf=telfn.substring(post+5,post+26);}
+    else {
+     post=telfn.indexOf('TELF'); 
+     if (post>=0) {
+       pagos[i].telf=telfn.substring(post+6,post+18)
+     } else
+      {
+       post=telfn.indexOf('CUENTA NRO'); 
+       if (post>=0) {pagos[i].telf=telfn.substring(post+12,post+32);}
+         else {
+
+          post2=result[i-posi].indexOf('Abono por Creditos Directos');
+
+post=result[i-posi].indexOf('TRANSFERENCIA RECIBIDA');
+
+          if (post>=0 || post2>=0) { pagos[i].telf=caso_especial(telfn); }
+
+         } 
+
+      }
+  }
  
-function guarda_factura(){
-var pu,pb;
-var bcv=parseFloat(document.getElementById("t2").value);
-var texto=(bcv).toFixed(4);
+  pagos[i].montoBs=parseFloat(campos[8].replace(',', '.'));
+//  var clave=(pagos[i].telf).toString().trim();
+ // pagos[i].nombre=t_c.get(clave);
+ // if (pagos[i].nombre==undefined) {pagos[i].nombre=clave;}
+  var clave_fecha=pagos[i].fecha.toString();
+  //console.log('clave_fecha'+clave_fecha+' '+clave_fecha.length);
+  pagos[i].dolar=t_d.get(clave_fecha);
+  if (pagos[i].dolar!=undefined) {
+   pagos[i].montodolar=(pagos[i].montoBs/pagos[i].dolar).toFixed(2);
+  } else {pagos[i].montodolar=0}
+}
+document.getElementById("suma").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
 
-var nomb='FAC'+'_'+cliente_factura+'_'+fecha_factura+'_'+nro_factura;
-nro_factura++;
-localStorage.setItem('FACT_NRO',(nro_factura).toString());
+let set= new Set( pagos.map( JSON.stringify ) )
+pagos = Array.from( set ).map( JSON.parse );
+posi=pagos.length;
+let set2= new Set( domicilios.map( JSON.stringify ) )
+domicilios = Array.from( set2 ).map( JSON.parse );
+posi2=domicilios.length;
 
-for (var i=0;i<data.length;i++) {
-if ((data[i][4]!=0) || (data[i][5]!=0)) { 
- [pu,pb]=precio(i);
-console.log('pu '+pu+'pb '+pb);
- texto+='&'+data[i][9]+'#'+data[i][4]+'#'+(pu).toFixed(2)+'#'+data[i][5]+'#'+(pb).toFixed(2);
+
+for (var j=0;j<pagos.length;j++) {
+ pos[j]=0;
 }
 }
-if (texto.length>2) {localStorage.setItem(nomb,texto); alert(nomb)} 
-if (cliente.indexOf('Pedido')==-1) {alert(cliente);resta_inventario();}
+localStorage.setItem('domicilios_banco',JSON.stringify(domicilios));
 
+localStorage.setItem('pagos_banco',JSON.stringify(pagos));
+console.log(domicilios);
 }
 
-
-function recupera_pedido(archivo){
-var texto;
-cliente=localStorage.getItem('Cliente');
-document.getElementById("cli").value=cliente;
-for (var i=0;i<data.length;i++) {
-data[i][4]=0;
-data[i][5]=0; 
+function borrar_datos(){
+pagos=[];pos=[];domicilios=[];
+localStorage.setItem('pagos_banco',JSON.stringify(pagos_ef));
+localStorage.setItem('domicilios_banco','');
+posi=0;
+posi2=0;
 }
 
-texto=localStorage.getItem(archivo);
-if (texto!='') {
-var ped=texto.split('&');
-//console.log('texto: '+texto.length);
-//console.log(ped.length);
-for (var i=0;i<ped.length;i++) {
-  var items=ped[i].split('#');
-  var ind=clave_ind.get(items[0]);
-  data[ind][4]=parseInt(items[1]);
-  data[ind][5]=parseInt(items[2]);
-}
-}
-
-}
-
-var datfac=[];
-function monto_factura(num){
-var nomb=listasel[num];
-recupera_factura("FAC_"+nomb);
-factura3(num);
-document.getElementById("factura").hidden=true;
-return (total_factura).toFixed(2);
-}
-function recupera_factura(archivo){
-var texto;
-
-//cliente=localStorage.getItem('Cliente');
-//document.getElementById("cli").value=cliente;
-for (var i=0;i<data.length;i++) {
-datfac[i]=new Object();
-datfac[i].unidad=0;
-datfac[i].pu=0;
-datfac[i].cajas=0;
-datfac[i].pb=0;
-
-}
-
-texto=localStorage.getItem(archivo);
-
-if (texto!='') {
-var ped=texto.split('&');
-bcv_factura=ped[0];
-fecha_factura=archivo.split('_')[2];
-cliente_factura=archivo.split('_')[1];
-numero_factura=archivo.split('_')[3];
-//console.log('texto: '+texto.length);
-//console.log(ped.length);
-for (var i=1;i<ped.length;i++) {
-  var items=ped[i].split('#');
-//  var ind=parseInt(items[0]);
- var ind=clave_ind.get(items[0]);
-console.log('ind'+ind);
-  datfac[ind].unidad=parseInt(items[1]);
-  datfac[ind].pu=parseFloat(items[2]);
-  datfac[ind].cajas=parseInt(items[3]);
-  datfac[ind].pb=parseFloat(items[4]);
-}
-}
-
-}
-function salir(){
-guarda_pedido();
-//t1=document.getElementById("t1").value;
-t2=document.getElementById("t2").value;
-//localStorage.setItem('p1',t1);
-localStorage.setItem('p2',t2);
-}
-var lcat=[];
-var Stack_cat=['D_PITA'];
-var Cats;
-var cat_actual='D_PITA';
-var cat_ant='';
-
-function set_cat(){
-Cats = new Tree();
-Cats.add('D_PITA','');
-var categorias=[];
-var ldatos=data.length;
-for (i=0;i<ldatos;i++){
-//console.log(data[i][8]);
- if (data[i][8]==1) {
-  if  (!categorias.includes(data[i][7])) {
-     categorias.push(data[i][7]);   
+function ordena_pagos(a, b) {
+  if (!fecha_mayor_igual(a.fecha,b.fecha)) return 1;
+  if (!fecha_mayor_igual(b.fecha,a.fecha)) return -1;
+  if (a.fecha==b.fecha) {
+     if (a.hora>b.hora) {return -1;} else{return 1;}
   } 
+
+}
+
+function ordena_pagos2(a, b) {
+var  nombra=Obten_nombre(a.telf);
+var  nombrb=Obten_nombre(b.telf);
+
+  if (nombra<nombrb) return -1;
+  if (nombra>nombrb) return 1;
+  if (nombra==nombrb) {
+  if (!fecha_mayor_igual(a.fecha,b.fecha)) return 1;
+  if (!fecha_mayor_igual(b.fecha,a.fecha)) return -1;
+    if (a.fecha==b.fecha) {
+     if (a.hora>b.hora) {return -1;} else {return 1;}
+   }
  }
 }
-var categ;
-var nrocateg;
-var ldatos2=categorias.length;
-//console.log(ldatos2);
-for (i=0;i<ldatos2;i++){
-  categ=categorias[i].split('&');
-  nrocateg=categ.length-2;
-  //console.log(i + ' '+categ[1]+ ' '+ nrocateg);
-  Cats.add(categ[1],'D_PITA');
-  for (var j=2;j<=nrocateg;j++) {
-     //console.log('subc '+ j+ ' '+categ[j]);
-     Cats.add(categ[j],categ[j-1]);
-   }
-}
-
-//console.log(Cats);
-}
-
-
-
-function muestra_cat(){
-var divcat=document.getElementById("cat");
-var divarbol=document.getElementById("arbol");
-cat_actual=Stack_cat[Stack_cat.length-1];
-var text_cat='';
-for (i=0;i<Stack_cat.length;i++)
-    text_cat+=Stack_cat[i]+'/';
-var nodo=Cats.findBFS(cat_actual) ;
-var texto='';
-texto+='<center>'+text_cat+'</center>';
-if (Stack_cat.length>1) {
-//texto+='  '+'<button class="nav" onclick="sube_cat()";>'+'&#9650'+'</button>'
-}
-//texto+='<br>';
-divarbol.innerHTML=texto;
-//cat_ant=cat_actual;
-texto='';
-for (i=0;i<nodo.children.length;i++){
-  var aux=nodo.children[i].value;
-  texto+='  '+'<button class="bot3" onclick="cambia_cat(\''+aux+'\')";>'+aux+'</button>';
-
-}
-divcat.innerHTML=texto;
-divcat.style.visibility="visible";
-
-//divcat.hidden=false;
-
-}
-function sube_cat(){
-if (Stack_cat.length>1) { 
- Stack_cat.pop();
- muestra_cat();
-refresca();
-//console.log('paso sube');
+var orden_tipo=new Array();
+orden_tipo['J']=0;
+orden_tipo['C']=1;
+orden_tipo['A']=2;
+orden_tipo['ED']=3;
+orden_tipo['EB']=4;
+function ordena_pagos3(a, b) {
+var  nombra=Obten_nombre(a.telf);
+var  nombrb=Obten_nombre(b.telf);
+ if (!fecha_mayor_igual(a.fecha,b.fecha)) return 1;
+  if (!fecha_mayor_igual(b.fecha,a.fecha)) return -1;
+    if (a.fecha==b.fecha) {
+      if (orden_tipo[a.tc]>orden_tipo[b.tc]) return 1;
+      if (orden_tipo[a.tc]<orden_tipo[b.tc]) return -1;
+      if (orden_tipo[a.tc]==orden_tipo[b.tc]) {
+//       if (nombra<nombrb) return -1; 
+//       if (nombra>nombrb) return 1;
+//       if (nombra==nombrb) {
+       if (a.hora>b.hora) {return -1;} else {return 1;}
+  //   }
+  }
 }
 }
-
-function cambia_cat(valor){
-Stack_cat.push(valor)
-cat_ant=cat_actual;
-//console.log('cat anterior  '+cat_ant);
-cat_actual=valor.toString();
-muestra_cat();
-refresca();
-//console.log('paso');
-}
-
-function  set_clave_indice(){
-clave_ind=new Map();
-for (var i=0;i<data.length;i++) {
-console.log(i);
-console.log(data[i][9]);
-
-clave_ind.set(data[i][9],i.toString());
-}
-}
-
-function ordena(){
-data.sort(function(a, b){
-  if (a.cat<b.cat) {return -1} else {return 0;}
-   });
-}
-
-var dist="Distribuidora Pita-Orozco"
-var hoy=new Date();
-function camb(){
-var va=document.getElementById("t3").checked; 
-//console.log('va '+va);
-localStorage.setItem('p3',va);
-}
-function carga(){
-data=[];
-
-try {
-
-document.getElementById("t2").value = localStorage.getItem('p2');
-document.getElementById("fecha_p").innerText = localStorage.getItem('FECHA_P');
-} catch (error) {  console.error(error); }
-
-divt=document.getElementById("divt");
-fiva=7.25;
-
-var j=0;
-Lee_clientes();
-
-
-data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,120,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV001',120],
-      ["Vacio de cerveza Ret 330 ml x 24 UN",1,120,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV005',120],
-      ["Gavera de cerveza Ret 222 ml x 36 UN",1,19.20,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV009',19.20],
-      ["Gavera de cerveza Ret 333 ml x 24 UN",1,19.20,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV013',19.20],
-      ["Botella de cerveza Ret 222 ml ",1,2.80,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV017',2.80],
-      ["Botella de cerveza Ret 333 ml ",1,4.20,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV021',4.20],
-      ["Barril 30 lt ",1,860,0,0,0,"t1","&Cerveceria&Vacios&",0,'CV025',860],
-      ["Barril 50 lt ",1,970,0,0,0,"t1","&Cerveceria&Vacios&",0,'CV029',890],
-      ["F01001 Polarcita 222 ml x 36 UN",36,14.48,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen Retornable&",1,'F01001',10.38],
-      ["F01002 Tercio 330 ml x 24 UN",24,14.48,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen Retornable&",1,'F01002',10.38],
-      ["F01002 (PROMO) Tercio 330 ml x 24 UN",24,12.41,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen Retornable&",1,'F01002P',8.96],
-      ["F01063 Pilsen NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen NR&",1,'F01063',7.62],
-      ["F01077 Pilsen lata Sleek 355 ml x 12 UN",12,8.27,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen NR&",1,'F01077',8.27],   
-      ["F04005 Light Ret 222 ml x 36 UN",36,14.48,1,0,0,"t3","&Cerveceria&Light&",1,'F04005',14.48],
-      ["F04017 Polar Light Barril 30L x 1 PZ",1,71.01,0,0,0,"t3","&Cerveceria&Light&",0,'F04017',71.01],
-      ["F04018 Polar Light Barril 50L x 1 PZ",1,118.01,0,0,0,"t3","&Cerveceria&Light&",0,'F04018',118.1],
-      ["F04043 Light NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",1,'F04043',9.93],   
-      ["F04052 Light Mix Naranja NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",0,'F04052',9.93],
-      ["F04053 Light Mix Toronja NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",0,'F04053',9.93],
-      ["F04054 Light Mix Parchita NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",0,'F04054',9.93],
-      ["F04056 Light Lata Sleek 355 ml x 12 UN",12,8.27,1,0,0,"t3","&Cerveceria&Light&",1,'F04056',8.27],
-      ["F03030 Solera Verde Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F03030',11.87],
-      ["F03014 Solera Light Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F03014',11.87],
-      ["F06037 Solera IPA Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06037',10.88],
-      ["F06034 Solera Marzen  Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06034',11.87],
-      ["F06046 Solera Kriek Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06046',10.88],
-      ["F06059 Solera Reserva Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06059',11.87],
-      ["F03076 Solera Verde NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F03076',7.025],
-      ["F03077 Solera Light NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F03077',7.025],
-      ["F06057 Solera IPA NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F06057',7.025],
-      ["F05056 Solera Marzen NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F05056',7.025],
-      ["F06058 Solera Kriek NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F06058',7.025],
-      ["F06060 Solera Reserva NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F06060',7.025],
-      ["FR0123 Carorena tinta 6 unid ",6,34.35,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0123',34.35],
-      ["FR0120 Carorena blanca 6 unid ",6,34.35,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0120',34.35],
-      ["FR0123 Carorena rosada 6 unid ",6,34.35,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0124',34.35],
-      ["FR0133 Carorena verano x 36 (VIEJO)",36,28.96,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0133',28.96],
-      ["FR0133 Carorena verano x 36",36,24.82,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0134',24.82],
-      ["F07001 Maltin polar ret 222 ml x 36 U",36,11.18,1,0,0,"t3","&Cerveceria&Malta&Malta Retornable&",1,'F07001',11.18],
-      ["F07003 Maltin NR.250 ml x 24 U",24,0.00,0,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",0,'F07003',0.00],
-      ["F07018 Maltin 1.5 L x 6U",6,11.67,1,0,0,"t3","&Cerveceria&Malta&Litron&",1,'F07018',11.67],
-      ["F07020 Maltin NR/Light.250 ml x 24 U",24,0.00,0,0,0,"t3","&Cerveceria&Malta&Malta Retornable&",0,'F07020',0.00],
-      ["F07073 Maltin light 1.5 L x 6U",6,11.67,1,0,0,"t3","&Cerveceria&Malta&Litron&",1,'F07073',11.67],
-      ["F07086 Maltin polar light ret 222 ml x 36 U",36,11.18,1,0,0,"t3","&Cerveceria&Malta&Malta Retornable&",1,'F07086',11.18],
-      ["F07088 Maltin light NR.250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",1,'F07088',6.327],
-      ["F07089 Maltin NR.250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",1,'F07089',6.327],
-      ["F07090 Malta Caracas NR 250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",0,'F07090',6.327],
-      ["F07101 Maltin polar sleek 355 ml x 24 U",24,15.077,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",1,'F07101',15.077],
-      ["H201 Aceite Mazeite 1 lt x 12",12,4.59,0,0,0,"t2","&Alimentos&Aceites&",1,'H201',4.22],
-      ["M324 Dogourmet Parrilla. 18 Kg x 1U",1,39.89,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M324',36.70],      
-      ["M326 Dogourmet Parrilla. 2 Kg x 6U",6,5.96,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M326',5.48],
-      ["M329 Dogourmet Cachorros 18 Kg x 1",1,44.92,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M329',41.33],
-      ["M330 Dogourmet Cachorros 2 Kg x 6U",6,6.54,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M330',6.02],
-      ["M338 Dogourmet Parrilla. 4 Kg x 5U",5,10.35,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M338',9.52],
-      ["M339 Dogourmet Pollo a la brasa 4 Kg x 5U",5,10.35,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M339',9.52],
-      ["M340 Super Can.carne hueso 4 Kg x 5U",5,7.47,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M340',6.87],
-      ["M033 Super Can.carne hueso 18 Kg x 1",1,28.91,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M033',26.60],
-      ["M034 Super Can. pollo 18 Kg x 1",1,28.91,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M034',26.60],
-      ["M347 Dogourmet Parrilla. 1 Kg x 10U",10,3.14,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M347',2.89],
-      ["M800 Super Can. carne hueso 2 Kg x 6U",6,3.80,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M800',3.50],
-      ["M802 Super Can.carne hueso 10 Kg x 1",1,16.90,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M802',15.55],
-      ["M803 Dogourmet Cachorros 10 Kg x 1U ",1,25.01,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M803',23.01],
-      ["M806 Dogourmet Parrilla. 10 Kg x 1U",1,22.77,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M806',20.95],
-      ["H300 Arroz Clasico. 1 Kg x 24U",24,1.25,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Arroz&",1,'H300',1.16],
-      ["H364 Arroz Corina. 1 Kg x 24U",24,1.02,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Arroz&",1,'H364',0.95],
-      ["D361 Margarita Atun natural 140g x 35U",35,1.77,0,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D361',1.63],
-      ["D362 Margarita Atun en aceite 140g x 35U",35,1.69,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D362',1.55],
-      ["D398 California Atun desmenuzado aceite 140g x 35U",35,0.84,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D398',0.77],
-      ["Q001 Avena Quaker Original (Bolsa) 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q001',1.46],
-      ["Q002 Avena Quaker Original (Bolsa) 800g x 12U",12,2.76,0,0,0,"t2","&Alimentos&Avena&",1,'Q002',2.54],
-      ["Q023 Harina Avena Quaker (Bolsa) 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q023',1.46],
-      ["Q064 Avena fortificada 400g x 24U",24,0.00,0,0,0,"t2","&Alimentos&Avena&",0,'Q064',0.00],
-      ["Q134 Avena Vainilla casera 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q134',1.46],
-      ["Q135 Avena Sirop de Maple 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q135',1.46],
-      ["Q136 Avena Orignal (Bolsa) 100g x 48U",48,0.42,0,0,0,"t2","&Alimentos&Avena&",1,'Q136',0.39],
-      ["Q464 Avena fortificada 100g x 48U",48,0.00,0,0,0,"t2","&Alimentos&Avena&",0,'Q464',0.00],     
-      ["Q465 Avena fortificada 200g x 30U",30,0.00,0,0,0,"t2","&Alimentos&Avena&",0,'Q465',0.00],
-      ["Q005 Avena( Don Pancho) 400g x 24U",24,1.25,0,0,0,"t2","&Alimentos&Avena&",1,'Q005',1.15],
-      ["Q006 Avena( Don Pancho) 800g x 12U",12,2.17,0,0,0,"t2","&Alimentos&Avena&",1,'Q006',2.00],
-      ["Q137 Avena Orignal (Bolsa) 200g x 30U",30,0.80,0,0,0,"t2","&Alimentos&Avena&",1,'Q137',0.74],
-      ["Q113 KONGA SABOR LIMON (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q113',4.62],
-      ["Q114 KONGA SABOR NARANJA (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q114',4.62],
-      ["Q115 KONGA SABOR MORA (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q115',4.62],
-      ["Q123 KONGA SABOR PARCHITA (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q123',4.62],
-      ["H172 Pan/Mezcla cachapas 500g x 12",12,1.56,1,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Cachapas&",0,'H172',1.44],
-      ["H330 Primor Crema/Arroz Enriq 450g x 24U Pote",24,1.42,0,0,0,"t2","&Alimentos&Cereales I&",1,'H330',1.31],
-      ["H331 Primor Crema/Arroz Enriq 900g x 12U Pote",12,2.26,0,0,0,"t2","&Alimentos&Cereales I&",1,'H331',2.08],
-      ["H369 Primor Crema/Arroz (Bolsa) 225g x 34U",34,0.63,0,0,0,"t2","&Alimentos&Cereales I&",1,'H369',0.58],
-      ["H370 Crema/Arroz.(Bolsa) Enriq 450g x 24U",24,1.09,0,0,0,"t2","&Alimentos&Cereales I&",1,'H370',1.00],
-      ["H371 Crema/Arroz.(Bolsa) Enrriq( 900g x 12U Bolsa",12,1.73,0,0,0,"t2","&Alimentos&Cereales I&",1,'H371',1.59],
-      ["Q099 Toddy. Chips Galleta (24gx6 sobres)x24U ",24,2.22,1,0,0,"t2","&Alimentos&Varios&Galletas&",0,'Q099',2.04],
-      ["Q138 Toddy. Chips Galleta (24gx4 sobres)x40U ",40,2.22,1,0,0,"t2","&Alimentos&Varios&Galletas&",0,'Q138',2.04],
-      ["Y065 Pudin Toddy. (125gx6)x24U ",24,0.67,1,0,0,"t2","&Alimentos&Varios&Pudin&",0,'Y065',0.62],
-      ["Q101 Gelatina Golden Fresa 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",0,'Q101',13.60],
-      ["Q102 Gelatina Golden Kolita 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",0,'Q102',13.60],
-      ["Q103 Gelatina Golden Uva 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",0,'Q103',13.60],
-      ["Q107 Gelatina Golden Frambuesa 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",1,'Q107',13.60],
-      ["H135 Harina Pan tradicional 1 k x 20",20,1.18,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H135',1.10],
-      ["H136 Harina Pan Amarilla k x 20",20,1.18,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H136',1.10],
-      ["H173 Harina Pan/Arroz 1 k x 20",20,1.08,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H173',1.00],
-      ["H193 Arepitas Pan 500 g x 12",12,1.53,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H193',1.41],
-      ["T060 Salsa/Tomate.198 x 24",24,0.90,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Ketchup&",1,'T060',0.83],
-      ["T061 Salsa/Tomate.397 x 24",24,1.41,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Ketchup&",1,'T061',1.30],
-      ["T449 Salsa/Tomate. 4,2 x 4",4,13.21,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Ketchup&",1,'T449',12.15],
-      ["T076 Chef Margarina 5 K x 1.C/S",1,19.62,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Chef&",1,'T076',18.44],
-      ["T080 Chef Margarina 5 K x 1.S/S",1,19.62,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Chef&",1,'T080',18.44],
-      ["T084 Mantequilla Mavesa 1 K x 6",6,4.14,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",1,'T084',3.89],
-      ["T086 Mantequilla Mavesa 500g x 12",12,2.13,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",1,'T086',2.00],
-      ["T572 Mantequilla Mavesa 250g x 24",24,1.15,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",1,'T572',1.08],
-      ["T578 Mantequilla Nelly CR 400g x 12",12,1.23,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Nelly&",0,'T578',1.23],
-      ["T587 Mantequilla Nelly CR 250g x 24",24,1.01,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Nelly&",1,'T587',0.95],
-      ["T588 Mantequilla Nelly CR 500g x 12",12,1.91,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Nelly&",1,'T588',1.80],
-      ["T018 Mayonesa 910g x 6",6,6.69,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T018',6.29],
-      ["T019 Mayonesa 175g x 18",18,1.74,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T019',1.64],
-      ["T020 Mayonesa 445g x 12",12,3.56,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T020',3.35],
-      ["T393 Mayonesa 445g x 12 ND",12,3.56,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T393',3.35],
-      ["T486 Mayonesa (Aderezo) 3,6 kg x 4",4,24.46,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T486',22.99],
-      ["T409 Mayonesa  Stock 175g x 24 U",24,1.74,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T409',1.64],
-      ["T573 Mayonesa  Stock 175g x 24 U",24,1.74,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T573',1.64],
-      ["T574 Mayonesa limon  445 g x 12",12,0.00,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",0,'T574',0.00],
-      ["T001 Toddy. 1 Kg x 12U Bolsa",12,8.71,1,0,0,"t2","&Alimentos&Toddy&",1,'T001',8.01],
-      ["T002 Toddy. 2 Kg x 8U. Bolsa",8,16.32,1,0,0,"t2","&Alimentos&Toddy&",1,'T002',15.01],
-      ["T003 Toddy. 400g x 24U Bolsa",24,3.95,1,0,0,"t2","&Alimentos&Toddy&",1,'T003',3.63],
-      ["T007 Toddy. 400g x 12U Pote",12,3.95,1,0,0,"t2","&Alimentos&Toddy&",1,'T007',3.63],
-      ["T472 Toddy. 200g x 12U Pote",12,2.09,1,0,0,"t2","&Alimentos&Toddy&",1,'T472',1.92],
-      ["T568 Toddy. 100g x 36U Bolsa",36,1.11,1,0,0,"t2","&Alimentos&Toddy&",1,'T568',1.02],
-      ["T427 Aceite Chef Oleina de Palma.18 Lt x 1U",1,63.96,0,0,0,"t2","&Alimentos&Aceites&",1,'T427',58.84],
-      ["T584 Aceite Super Oleina de Palma.1 Lt x 12U",12,3.08,0,0,0,"t2","&Alimentos&Aceites&",1,'T584',2.83],
-      ["H500 Pasta corta dedales 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H500',1.66],
-      ["H501 Pasta corta tornillo 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H501',1.66],
-      ["H502 Pasta corta macarron 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H502',1.66],
-      ["H506 Pasta corta plumitas 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H506',1.66],
-      ["H509 Pasta corta dedales 500g x 12U",12,0.91,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H509',0.85],
-      ["H516 Pasta larga vermicelli 500g x 12U",12,0.91,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H516',0.85],
-      ["H517 Pasta larga spaguetti 500g x 12U",12,0.91,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H517',0.85],
-      ["H689 Pasta larga vermicelli 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H689',1.66],
-      ["H690 Pasta larga spaguetti 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H690',1.66],
-      ["H1804 Pasta larga Linguini. 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H1804',1.66],
-      ["H892 Primor especial vermicelli 1 K x 12U",12,1.38,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Especial&",0,'H892',1.28],
-      ["H893 Primor especial plumitas 1 K x 12U",12,1.38,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Especial&",0,'H893',1.28],
-      ["H894 Primor especial tornillos 1 K x 12U",12,1.38,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Especial&",0,'H894',1.28],
-      ["H895 Primor especial dedales 1 K x 12U",12,1.38,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Especial&",0,'H895',1.28],
-      ["D366 Pepitonas picantes 140g x 35 ",35,1.35,1,0,0,"t2","&Alimentos&Enlatados&Pepitonas&",1,'D366',1.24],
-      ["D388 Bonito en aceite 140g x 35",35,1.48,1,0,0,"t2","&Alimentos&Enlatados&Bonito&",1,'D388',1.36],
-      ["T499 Rikesa Trad.200 x 18",18,2.38,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T499',2.19],
-      ["T500 Rikesa Trad.300 x 12",12,3.43,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T500',3.16],
-      ["T501 Rikesa Tocineta.300 x 12",12,3.43,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T501',3.16],
-      ["T564 Rikesa Blanco.200g x 18U",18,2.38,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T564',2.19],
-      ["T565 Rikesa Parmesano 200g x 18U",18,2.38,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T565',2.19],
-      ["D384 Sardina Aceite.170 x 20U",20,1.42,0,0,0,"t2","&Alimentos&Enlatados&Sardinas&",1,'D384',1.31],
-      ["D385 Sardina Picante.170x 20U",20,1.42,0,0,0,"t2","&Alimentos&Enlatados&Sardinas&",1,'D385',1.31],
-      ["D386 Sardina Tomate.170x 20U",20,1.42,0,0,0,"t2","&Alimentos&Enlatados&Sardinas&",1,'D386',1.31],
-      ["T297 Mermelada Vienesa Fresa 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T297',1.99],
-      ["T298 Mermelada Vienesa Guayaba 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T298',1.99],
-      ["T583 Mermelada Vienesa Fresamora 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T583',1.99],
-      ["T048 Vinagre. 1 lt x 12",12,1.34,1,0,0,"t2","&Alimentos&Vinagres&",1,'T048',1.23],
-      ["T049 Vinagre. 1/2 lt x 24",24,0.80,1,0,0,"t2","&Alimentos&Vinagres&",1,'T049',0.74],
-      ["T533 Vinagre. 4 lt x 4",4,5.31,1,0,0,"t2","&Alimentos&Vinagres&",0,'T533',4.89],
-      ["D390 Primor Caraotas negras sazonadas 220gx24U",20,0.89,1,0,0,"t2","&Alimentos&Enlatados&Caraotas&",0,'D390',0.82],
-      ["D391 Primor Frijoles sazonados 220gx24U",20,0.89,1,0,0,"t2","&Alimentos&Enlatados&Frijoles&",0,'D391',0.82],
-      ["D392 Primor Caraotas negras sazonadas 420gx12U",12,1.67,1,0,0,"t2","&Alimentos&Enlatados&Caraotas&",0,'D392',1.54],
-      ["D393 Primor Frijoles sazonados 420gx12U",12,1.67,1,0,0,"t2","&Alimentos&Enlatados&Frijoles&",0,'D393',1.54],
-      ["Y001 Yogurt Fruta Fresa Migurt 125gx24",24,1.38,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y001',1.27],
-      ["Y002 Yogurt Fruta Durazno Migurt 125 x 24",24,1.38,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y002',1.27],
-      ["Y004 Yogurt Fruta Fresa Migurt 250 x 24",24,2.51,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y004',2.31],
-      ["Y005 Yogurt Fruta durazno Migurt 250 x 24",24,2.51,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y005',2.31],
-      ["Y007 Yogurt Fruta Fresa Migurt 750 x 12",12,6.21,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y007',5.71],
-      ["Y008 Yogurt Fruta Durazno Migurt 750 x 12",12,6.21,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y008',5.71],
-      ["Y009 Yogurt sabor dulce Migurt 750 x 12",12,6.21,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y009',5.71],
-      ["Y036 Yogurt sabor fresa Migurt 125 x 24",24,1.33,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y036',1.22],
-      ["L260 Las llaves Detergente Bebe 400g x 30",30,1.38,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L260',1.27],
-      ["L073 Las llaves Detergente P. LI 900g x 20",20,3.05,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L073',2.81],
-      ["L081 Las llaves Detergente Floral 400g x 30",20,1.38,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L081',1.27],
-      ["L082 Las llaves Detergente Floral 900g x 20",20,3.05,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L082',2.81],
-      ["L255 Las llaves Detergente Bebe 900g x 20",20,3.05,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L255',2.81],
-      ["L350 Las llaves Detergente liq.Bebe 1L x 12",12,5.75,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",0,'L350',5.29],
-      ["L367 Las llaves Detergente liq.ROPA DELI.510cc x 12",12,3.21,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",0,'L367',2.95],
-      ["L381 Las llaves Detergente liq.ROPA DELI.525cc x 12",12,3.30,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",0,'L367',3.04],
-      ["L382 Multiclean Detergente Frag citrica 900g x 20",20,1.59,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Multiclean&",1,'L382',1.46],
-      ["L383 Multiclean Detergente Frag citrica 400g x 30U",30,0.73,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Multiclean&",1,'L383',0.67],
-      ["L384 Multiclean Detergente Frag citrica 5 Kg x 4U",4,8.79,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Multiclean&",1,'L384',8.09],
-      ["L207 Llaves Panela Trad Floral 250 x 36",36,0.87,1,0,0,"t2","&Alimentos&Limpieza&Jabones&",1,'L207',0.80],
-      ["L275 LLaves Jabon FF.BEBE.160g x 48U",48,0.72,1,0,0,"t2","&Alimentos&Limpieza&Jabones&",1,'L275',0.66],
-      ["L376 Jabon Panela.Floral.200g x 44",44,0.72,1,0,0,"t2","&Alimentos&Limpieza&Jabones&",1,'L376',0.66],
-      ["L389 Multi Clean jabon Frag citrica 200g x 44U",44,0.48,1,0,0,"t2","&Alimentos&Limpieza&Jabones&",1,'L389',0.44],     
-      ["L379 LLaves Lav. Antib liq. 500cc x 18U",18,3.07,1,0,0,"t2","&Alimentos&Limpieza&Lavaplatos&",0,'L379',2.82],
-      ["L387 LLaves Lav. Antib liq. 500cc x 18U",18,3.07,1,0,0,"t2","&Alimentos&Limpieza&Lavaplatos&",0,'L387',2.82],     
-      ["L371 LLaves Limp. Marea Cristalina 1L x 12",12,2.77,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L371',2.55],
-      ["L372 LLaves Limp. Brisa Tropical 1L x 12",12,2.77,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L372',2.55],
-      ["L377 LLaves Limp. Marea Cristalina 500cc  x 24",24,1.57,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L377',1.44],
-      ["L378 LLaves Limp. Brisa Tropical 500cc x 24U",24,1.57,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L378',1.44],
-      ["L385 Llaves Limp. Bosque sereno 500cc x 24U",24,1.57,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L385',1.44],
-      ["L386 Llaves Limp. Bosque sereno 1 L x 12U",12,2.77,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L386',2.55],
-      ["L357 Jabon Crema Multiuso.250g x 36U",36,1.96,1,0,0,"t2","&Alimentos&Limpieza&Multiuso&",1,'L357',1.80],
-      ["L358 Jabon Crema Multiuso.500g x 18U",18,3.56,1,0,0,"t2","&Alimentos&Limpieza&Multiuso&",1,'L358',3.28],
-      ["L373 Jabon pastilla Multiuso 130g x 42U",42,1.00,1,0,0,"t2","&Alimentos&Limpieza&Multiuso&",1,'L373',0.92],
-      ["L374 Las llaves Suavizante Bebe  950cc x 12U",12,4.00,1,0,0,"t2","&Alimentos&Limpieza&Suavizantes&",0,'L374',3.68],
-      ["L380 Las llaves Suavizante Bebe 530cc x 12U",12,2.38,1,0,0,"t2","&Alimentos&Limpieza&Suavizantes&",0,'L380',2.19],
-      ["PepsiCola 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP004',9.17],
-      ["Seven Up 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP005',9.17],
-      ["Golden Kolita 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP006',9.17],
-      ["Golden Naranja 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP007',9.17],
-      ["Golden Uva 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP101',9.17],
-      ["Golden Pina 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP102',9.17],
-      ["Golden Manzana 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP202',9.17],
-      ["PepsiCola lata 355 ml x 24",24,21.23,1,0,0,"t3","&Pepsicola&Refrescos&Lata&",1,'PP008',21.23],
-      [" 1/4 PepsiCola lata 355 ml x 6",6,5.31,1,0,0,"t3","&Pepsicola&Refrescos&Lata&",1,'PP012',5.31],
-      [" PepsiCola lata 320 ml x 24",24,21.23,1,0,0,"t3","&Pepsicola&Refrescos&Lata&",1,'PP016',21.23],
-      [" 1/4 PepsiCola lata 320 ml x 6",6,5.31,1,0,0,"t3","&Pepsicola&Refrescos&Lata&",1,'PP020',5.31],
-      [" PepsiCola PET 600 ml x 12",12,7.54,1,0,0,"t3","&Pepsicola&Refrescos&PET 600 ml&",1,'PP024',7.54],
-      [" PepsiCola PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP028',16.88],
-      [" Seven Up PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP029',16.88],
-      [" Golden Kolita PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP030',16.88],
-      [" Golden Naranja PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP031',16.88],
-      [" Golden Uva PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP132',16.88],
-      [" Golden Pina PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP133',16.88],
-      [" Golden Manzana PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP233',16.88],
-      [" PepsiCola MAX PET 1,5 L ml x 12U",12,10.78,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP032',10.78],
-      [" PepsiCola PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP036',8.44],
-      [" Seven Up PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP037',8.44],
-      [" Golden Kolita PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP038',8.44],
-      [" Golden Naranja PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP039',8.44],
-      [" Golden Uva PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP139',8.44],
-      [" Golden Pina PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP239',8.44],
-      [" Golden Manzana PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP339',8.44],
-      [" PepsiCola MAX PET 1,5 L  x 6U",6,5.39,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP040',5.39],
-      [" PepsiCola PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP042',10.87],
-      [" Seven Up PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP043',10.87],
-      [" Golden Kolita PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP044',10.87],
-      [" Golden Naranja PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP045',10.87],
-      [" Golden Uva PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP145',10.87],
-      [" Golden Pina PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP245',10.87],
-      [" Golden Manzana PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP345',10.87],
-      [" PepsiCola MAX PET 2 L  x 6U",6,7.19,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP046',7.19],
-      [" PepsiCola PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP050',5.60],
-      [" Seven Up PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP051',5.60],
-      [" Golden Kolita PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP052',5.60],
-      [" Golden Naranja PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP053',5.60],
-      [" Golden Uva PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP151',5.60],
-      [" Golden Pina PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP152',5.60],
-      [" Golden Manzana PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP153',5.60],
-      [" PepsiCola 1,25 L x 6U",6,5.09,1,0,0,"t3","&Pepsicola&Refrescos&Botella 1.25 Litros&",1,'PP054',4.35],
-      [" PepsiCola PSH 250 ml x 24U",24,17.63,1,0,0,"t3","&Pepsicola&Refrescos&PSH&",1,'PP058',17.83],
-      [" PepsiCola PSH 250 ml x 12U",12,8.81,1,0,0,"t3","&Pepsicola&Refrescos&PSH&",1,'PP062',8.81],
-      [" Soda PSH 250 ml x 24U",24,17.65,1,0,0,"t3","&Pepsicola&Soda&",1,'PM004',17.65], 
-      [" Soda  Lata 355 ml x 24U",24,20.19,1,0,0,"t3","&Pepsicola&Soda&",1,'PM008',20.19], 
-      [" Soda  1/4 Caja Lata 355 ml x 6U",6,5.05,1,0,0,"t3","&Pepsicola&Soda&",1,'PM012',5.05], 
-      [" Minalba SPARKLING 330 ml x 24U",24,11.45,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM016',11.45], 
-      [" Minalba SPARKLING PET 500 ml x 24U",24,19.02,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM020',19.02], 
-      [" Minalba SPARKLING PET 1/2 500 ml x 12U",12,9.51,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM024',9.51], 
-      [" Minalba SPARKLING 1 L x 6U",6,8.21,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM028',8.21], 
-      [" Minalba PET 355 ml x 24U",24,9.55,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM032',9.55], 
-      [" Minalba PET 600 ml TR x 24U",24,12.17,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM036',12.17], 
-      [" Minalba PET 1.5 L x 12U",12,12.27,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM040',12.27], 
-      [" Minalba PET 5 L x 2U",2,5.94,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM044',5.94], 
-      [" Gatorade Mandarina 250 ml x 24",24,10.61,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 250 ml&",1,'PG004',10.61], 
-      [" Gatorade Mora 250 ml x 24",24,10.61,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 250 ml&",1,'PG005',10.61], 
-      [" Gatorade Frutas tropicales 250 ml x 24",24,10.61,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 250 ml&",1,'PG006',10.61], 
-      [" Gatorade Mandarina 500 ml x 12",12,15.98,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 500 ml&",1,'PG008',15.02], 
-      [" Gatorade Mora 500 ml x 12",12,15.98,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 500 ml&",1,'PG009',15.02], 
-      [" Gatorade Frutas Trop 500 ml x 12",12,15.98,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 500 ml&",1,'PG010',15.02], 
-      [" YUKY-PAK 250 ml x 24",24,16.78,1,0,0,"t3","&Pepsicola&Yukery&Yuky-Pak 250ml&",1,'PY004',16.78],  
-      [" Yukery Durazno Botella 250 ml x 24",24,16.78,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",0,'PY008',16.78],  
-      [" Yukery Naranja Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY012',7.88],  
-      [" Yukery Pera Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY013',7.88],  
-      [" Yukery Manzana Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY014',7.88],  
-      [" Yukery Mango Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY015',7.88],  
-      [" Yukery Durazno Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY016',13.40],  
-      [" Yukery Naranja Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY017',13.40],  
-      [" Yukery Pera Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY018',13.40],  
-      [" Yukery Manzana Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY019',13.40],  
-      [" Yukery Mango Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY119',13.40],  
-      [" Yukery Durazno PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY020',13.55],  
-      [" Yukery Pera PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY021',13.55],  
-      [" Yukery Manzana PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY022',13.55],  
-      [" Yukery Naranja PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY023',13.55],  
-      [" Yukery Mango PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY123',13.55],  
-      [" Yukery Durazno PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY024',33.65],  
-      [" Yukery Pera PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY025',33.65],  
-      [" Yukery Manzana PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY026',33.65],  
-      [" Yukery Naranja PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY027',33.65],  
-      [" Yukery Mango PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY127',33.65],  
-      [" Yukery Durazno PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY028',15.81],  
-      [" Yukery Pera PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY029',15.81],  
-      [" Yukery Manzana PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY030',15.81],  
-      [" Yukery Naranja PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY031',15.81],  
-      [" Yukery Mango PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY131',15.81],  
-      [" Yuky Fresh 1.5 L x 6",6,8.41,1,0,0,"t3","&Pepsicola&Yukery&Yuky Fresh&",1,'PY032',8.41],  
-      [" Yuky Fresh PET 500 ml x 12",12,8.41,1,0,0,"t3","&Pepsicola&Yukery&Yuky Fresh&",1,'PY00436',8.41],  
-      [" Te Lipton Botella 250 ml x 24",24,10.63,1,0,0,"t3","&Pepsicola&Te Lipton&Botella 250 ml&",1,'PT004',10.63],  
-      [" Te Lipton Lata 335 ml x 24",24,14.67,1,0,0,"t3","&Pepsicola&Te Lipton&Lata 335 ml",1,'PT008',14.67],  
-      [" Te Lipton Durazno PET 500 ml x 12",24,13.45,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 500 ml&",1,'PT012',13.45],  
-      [" Te Lipton Limon PET 500 ml x 12",24,13.45,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 500 ml&",1,'PT013',13.45],  
-      [" Te Lipton Te Verde PET 500 ml x 12",24,13.45,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 500 ml&",1,'PT014',13.45],  
-      [" Te Lipton Durazno PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 1.5 Litros&",1,'PT016',15.81],  
-      [" Te Lipton Limon PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 1.5 Litros&",1,'PT017',15.81],  
-      [" Te Lipton Te verde PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 1.5 Litros&",1,'PT018',15.81],  
-      [" Botella 350 ml",1,0.21,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1,'PV004',0.21],  
-      [" Botella 1.25 L",1,0.51,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1,'PV008',0.51], 
-      [" Gavera plastica 350 ml",1,2.11,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1,'PV012',2.11],  
-      [" Gavera plastica 1.25 L",1,4.02,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1,'PV016',4.02]  
-];
-try {
-data=eval(localStorage.getItem('data'));
-} catch (error) {}
-set_cat();
-
-muestra_cat();
-set_clave_indice();
-inicio_inventario();
-refresca();
-recupera_pedido("Pedido");
-
-}
-
-
-function actT(ind){
-var valor=prompt("Introduzca cantidad", "");
-if (valor!=null) {data[ind][5]=parseInt(valor);}
-intro(ind);
-
-//console.log(ind);
-}
-function actU(ind){
-var valor=prompt("Introduzca cantidad", "");
-if (valor!=null) {data[ind][4]=parseInt(valor);}
-intro(ind);
-
-//console.log(ind);
-}
-var factflag=true;
-function factura(){
-if (factflag) {factflag=false; factura2(); } else { factflag=true; quitar()};
-
-}
-var Ftexto;
-
-function fecha_actual(){
-var dia=(hoy.getDate()).toString() ;
-if (dia.length==1) {dia='0'+dia}
-var mes=(hoy.getMonth()+1).toString();
-if (mes.length==1) {mes='0'+mes}
-return dia + '/' +mes + '/' +hoy.getFullYear().toString()
-
-}
-
-function factura3(numf){
-var Tbs;
-var totaldsiva=0;
-var totalbsiva=0;
-var texto='Fecha: '+fecha_factura+'<br>';
-texto+=dist+'<br>';
-texto+='Cliente: '+cliente_factura+'<br>';
-var bcv=parseFloat(bcv_factura);
-var BIMD=0;
-var factor=bcv;
-
-texto+='$ BCV: '+ (bcv).toFixed(4) +'<br>';
-texto+='<center>Factura '+numero_factura+'</center>';
-texto+='<center><span id="contad" ></span></center>';
-var totald=0;
-var totalb=0;
-var indc=AClientes.findIndex(x=>x.nombre==cliente_factura);
-if (indc>=0) {var cesp=AClientes[indc].esp} else {var cesp=false}
-Ftexto='Fecha: '+fecha_factura+'\n';
-Ftexto+=dist+'\n';
-Ftexto+='Cliente: '+cliente_factura+'\n';
-Ftexto+='$ BCV: '+  (bcv).toFixed(4) +'\n';
-Ftexto+="FACTURA "+numero_factura+"\n"
-var contador=0;
-var colorb='black';
-for (var i=0;i<datfac.length;i++){
- if (datfac[i].unidad!=0 || datfac[i].cajas!=0) {
- contador++;
- console.log(i+ " "+contador);
- factor=bcv;
- if (data[i][3]==1) {fm=1.16;colorb='black';} else {fm=1;colorb='blue';}
-
- pu=datfac[i].pu;
- pb=datfac[i].pb;
- var Tdolar=+((datfac[i].unidad*pu + datfac[i].cajas*pb));
- Tbs=Tdolar*factor;
-
-if (Tdolar==Tdolar) { 
-   if (fm!=1) {BIMD+=Tdolar;}
-  Ftexto+='------------\n';
- texto+='<table width="100%">';
- if (tipo2==0) {var mone=' $'; var fc=1 }
- if (tipo2==1) {var mone=' Bs'; var fc=bcv }
-    if (datfac[i].unidad!=0) { 
-      v2=(pu*fc).toFixed(2);
-      v3=(parseFloat(v2)*datfac[i].unidad).toFixed(2);
-      v4=(parseFloat(v3)*fm).toFixed(2);
-      if (tipo2==1) {totalb+=parseFloat(v4); totalbsiva+=parseFloat(v3);} else 
-         {totald+=parseFloat(v4); totaldsiva+=parseFloat(v3);}
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" >'+ datfac[i].unidad +' U '+ data[i][0]+'</td></tr>';
-         texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+datfac[i].unidad+'</td><td style="width:30%;">'+v2+mone+'</td><td style="width:30%;">'+v3+mone+'</td><td style="width:30%;">'+ v4 +mone+'&nbsp'+'</tr>';
-         Ftexto+=datfac[i].unidad +' U '+ data[i][0]+'\n';
-         Ftexto+=datfac[i].unidad+' U     '+v2+mone+' S/IVA: '+v3+mone+"   C/IVA: "+ v4 + mone +'    \n'
-    }
-   if (datfac[i].cajas!=0) {
-      v2=(pb*fc).toFixed(2);
-      v3=(parseFloat(v2)*datfac[i].cajas).toFixed(2);
-      v4=(parseFloat(v3)*fm).toFixed(2);
-      if (tipo2==1) {totalb+=parseFloat(v4); totalbsiva+=parseFloat(v3);} else 
-         {totald+=parseFloat(v4); totaldsiva+=parseFloat(v3);}
-      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" >'+ datfac[i].cajas +' C  ' + data[i][0]+' </td></tr>';
-      texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+datfac[i].cajas+'</td><td style="width:30%;">'+v2+mone+'</td><td style="width:30%;">'+v3+mone+'</td><td style="width:30%;">'+ v4 +mone+'&nbsp'+'</tr>';
-      Ftexto+=datfac[i].cajas +' C '+ data[i][0]+'\n';;
-      Ftexto+=datfac[i].cajas +' C     '+v2+mone+' S/IVA: '+v3+"   C/IVA: "+v4 + mone+'    \n'
-    }
-}
-}
-}
+function pagos_alim(){
+var divaux=document.getElementById("divdata");
+var texto='<table width="100%"';
+ for (var i=0;i<domicilios.length;i++){
+  if (domicilios[i].descripcion.indexOf('ALIMENTOS')>0) {
+   texto+='<tr><td>'+'&nbsp&nbsp'+domicilios[i].fecha+'</td><td>'+'&nbsp&nbsp'+domicilios[i].monto+'</td><td>'+domicilios[i].montod+'</td></tr>';
+  }
+ }
 texto+='</table>';
-
-
-texto+='<HR>';
-Ftexto+='============================================\n';
-//texto+='<span style="color:yellow; font-size:1em;">Total</span><br>';
-
-var IVAD=(totald-totaldsiva).toFixed(2);
-
-BIMD=(BIMD).toFixed(2);
-var BIMB=(parseFloat(BIMD)*factor).toFixed(2);
-var descd=(parseFloat(IVAD)*0.75).toFixed(2);
-var IVAB=(totalb-totalbsiva).toFixed(2);
-var descb=(parseFloat(IVAB)*0.75).toFixed(2);
-
-
-if (tipo2==0){
-texto+='<table width="60%">';
-texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total S/IVA </td><td style="width:50%;">'+(totaldsiva).toFixed(2)+' '+mone+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMD+' '+mone+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAD+' '+mone+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totald).toFixed(2)+' '+mone+' </td></tr>';
-if (cesp) {
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descd)).toFixed(2)+' '+mone+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totald-parseFloat(descd)).toFixed(2)+' '+mone+' </td></tr>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
 }
+
+function pagos_cerv(){
+var divaux=document.getElementById("divdata");
+var texto='<table width="100%"';
+ for (var i=0;i<domicilios.length;i++){
+  if (domicilios[i].descripcion.indexOf('Cerveceria Polar')>0) {
+   texto+='<tr><td width="20%">'+domicilios[i].fecha+'</td>';
+   texto+='<td width="20%">'+'&nbsp&nbsp'+domicilios[i].factura+'</td>';
+   texto+='<td width="15%">'+'&nbsp&nbsp'+domicilios[i].monto+'</td>';
+   texto+='<td width="10%">'+'&nbsp&nbsp'+domicilios[i].montod+'</td></tr>';
+  }
+ }
 texto+='</table>';
-Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+' '+mone+'  C/IVA: '+(totald).toFixed(2)+' '+mone+ ' \n'
-Ftexto+='IVA: '+IVAD+' '+mone+' \n';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
+
+}
+
+var textoreconocido;
+function obtenerTexto(indice) {
+if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
+// Obtenemos el objeto de reconocimento de texto de forma compatible a diferentes navegadores
+reconocimientoTexto = new ( window.SpeechRecognition || window.webkitSpeechRecognition ) ()
+reconocimientoTexto.lang='es-Ve'; 
+reconocimientoTexto.onerror = function(event) {
+ alert("error "+event.error);
+ textoreconocido="";
+procesar2(indice);
+}
+reconocimientoTexto.onresult = function(event) {
+// Mostramos el texto obtenido
+textoreconocido=event.results[0][0].transcript;
+console.log(textoreconocido);
+procesar2(indice);
+}
+// Empezamos a reconocer texto
+reconocimientoTexto.start();
+} else {
+alert ('El navegador no soporta reconocimiento de voz' );
+}
+}
+
+function procesar2(ind){
+var num=textoreconocido.split(" ");
+var lt=num.length;
+var cant='';
+for (var i=0;i<lt;i++) {
+ cant+=num[i];
+}
+console.log(cant);
+if (ind==1) {divs_datos.getElementsByTagName("input")[1].value=cant;return;}
+if (ind==2) {
+ divs_datos.getElementsByTagName("input")[2].value=cant.substring(0,2);
+ divs_datos.getElementsByTagName("input")[3].value=cant.substring(2);
+return;}
+ if (ind==3) {divs_datos.getElementsByTagName("input")[4].value=cant;return;}
+if (ind==4) {divs_datos.getElementsByTagName("input")[5].value=cant;return;}
+if (ind==5) {
+ document.getElementById("nret").value=cant;
+ set_n_ret();
+return;}
+
+}
+function openNav() {
+var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
+  texto+='<a href="javascript:void(0)">About</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();Configurar();">Configuracion</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();Crea_datos();">Datos de retencion</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();hacerRetencion();">Hacer PDF</a>';
+ document.getElementById("mySidenav").innerHTML=texto;
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+//localStorage.setItem('p3',va);
+
 
 /*
-texto+='<table width="100%"><tr align="right"><td style="width:15%;"> </td><td style="width:15%;"></td><td style="width:35%;">'+'S/IVA'+'</td><td style="width:35%;">'+'C/IVA'+'</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> Total </td><td style="width:15%;"></td><td style="width:35%;">'+(totaldsiva).toFixed(2)+' $ </td><td style="width:35%;">'+(totald).toFixed(2)+' $&nbsp</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> IVA </td><td style="width:15%;"></td><td style="width:35%;">'+(totald-totaldsiva).toFixed(2)+' $ </td><td style="width:35%;">'+''+'</td></tr></table>';
-Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+'$  C/IVA: '+(totald).toFixed(2)+' $ \n'
-Ftexto+='IVA: '+(totald-totaldsiva).toFixed(2)+'$\n';
 */
-}
+//var divs_datos;
+var contador;
+const max_valor=200;
+var Clientes=[];
+function inicio(){
+Activalector_archivos();
+descarga_historico();
+//contenido=localStorage.getItem('Arch_datos_banco');
+var texto4=localStorage.getItem('Clientes_Pita');
+var texto=localStorage.getItem('pagos_banco');
+var texto2=localStorage.getItem('domicilios_banco');
+var texto3=localStorage.getItem('pagos_hechos_banco');
 
-total_factura=totald;
-if (cesp) {
-total_factura=totald-parseFloat(descd);
-}
-if (tipo2==1) {
-texto+='<table width="60%">';
-texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </td><td style="width:50%;">'+(totalbsiva).toFixed(2)+' '+mone+ '</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMB+' '+mone+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAB+' '+mone+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totalb).toFixed(2)+' '+mone+'</td></tr>';
-if (cesp) {
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+mone+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+mone+'</td></tr>';
+if (texto4!='' && texto4!=null) {Clientes=JSON.parse(texto4);} else {Clientes=[];}
 
-}
-texto+='</table>';
-Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+mone+' C/IVA: '+(totalb).toFixed(2)+' '+mone+' \n'
-Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+mone+ ' \n';
-
-
-}
-
-
-console.log(Ftexto);
-
-var TM2="";
-if (tipo2==0) {TM2="$";} else {TM2="Bs";}
-
-var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
-textoT+='<table width="100%"';
-textoT+='<tr>';
-textoT+='<td width="15%"><button class="btop" onclick="borra('+numf+');">Borrar</button></td>';
-textoT+='<td width="15%"><button class="btop" onclick="revertir_factura('+numf+');">Revertir</button></td>';
-textoT+='<td width="15%"><button class="btop" onclick="fact_base('+numf+');">Estab</button></td>';
-textoT+='<td width="15%"><button class="btop" onclick="fact_agrega('+numf+');">Agrega</button></td>';
-textoT+='<td width="10%"></td>';
-textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda2('+numf+');">' + TM2 +'</button></td>';
-textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
-textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
-textoT+='</tr></table></div><br>';
-divfactura=document.getElementById("factura")
-divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 100% ; height: 80%; background-color: lightgray;color:white; border: 3px solid #73AD21;";
-textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
-divfactura.innerHTML=textoT;
-divfactura.hidden=false;
-console.log("contador: "+contador);
-document.getElementById("contad").innerText=contador+ " Productos";
-}
-var Ptexto;
-function pedido(){
-const resp = confirm("Esta seguro de hacer el pedido ");
-if (resp) {
-Ptexto='Pedido de alimentos de Distribuidora Pita Orozco\n';
-Ptexto+='Codigo: 2240066\n'
-Ptexto+='-----------\n';
-for (var i=0;i<data.length;i++){
-if (data[i][4]!=0 ) {Ptexto+= data[i][4]+' U '+data[i][0]+'\n';}
-  if (data[i][5]!=0) {Ptexto+= data[i][5]+' '+data[i][0]+'\n';}
-
-}
-console.log(Ptexto);
-
-const shareData = {
-  title: 'Pedido',
-  text: Ptexto
-}
-comparte(shareData);
+if ( texto3!='' && texto3!=null) {pagos_hechos=JSON.parse(texto3);} else {pagos_hechos=[];}
+if ( texto2!='' && texto2!=null) {domicilios=JSON.parse(texto2);} else {domicilios=[];}
+if ( texto!='' && texto!=null) {pagos=JSON.parse(texto);} else {pagos=[];}
+var texto5=localStorage.getItem('pagos_efectivo');
+if (texto5!='' && texto5!=null) {pagos_ef=JSON.parse(texto5);} else {pagos_ef=[];}
+console.log('pagos_ef');
+console.log(pagos_ef);
+//pagos=pagos.concat(pagos_ef);
+posi=pagos.length;
+posi2=domicilios.length;
+//console.log(pagos);
+for (var j=0;j<pagos.length;j++) {
+ pos[j]=0;
 }
 }
 
-function factura2(){
-var Tbs;
-var totaldsiva=0;
-var totalbsiva=0;
-var BIMD=0;
-var bcv=parseFloat(document.getElementById("t2").value);
-var factor=parseFloat(bcv);
-var texto='<table width="100%" ><tr><td>Fecha: '+fecha_actual()+'</td><td>  $ BCV: '+ (bcv).toFixed(4) +'</td></tr></table>';
-texto+=dist+'<br>';
-texto+='Cliente: '+cliente+'<br>';
-texto+='Direcci&oacute;n: '+Ocliente.dir+'<br>';
-texto+='Rif: '+Ocliente.rif;
-if (Ocliente.esp) {texto+=' AR';}
-texto+='<br>'
-//texto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'<br>';
-//texto+='$ BCV: '+ (bcv).toFixed(4) +'<br>';
-texto+="<center>Factura</center>";
-texto+='<center><span id="contad" ></span></center>';
-var totald=0;
-var totalb=0;
-Ftexto='Fecha: '+fecha_actual()+'\n';
-Ftexto+=dist+'\n';
-Ftexto+='Cliente: '+cliente+'\n';
-Ftexto+='$ BCV: '+  (bcv).toFixed(4) +'\n';
-Ftexto+="FACTURA\n"
-var contador=0;
-var colorb='black';
-var Tdolar=0;
-var Gdolar=0;
-for (var i=0;i<data.length;i++){
-if (data[i][4]!=0 || data[i][5]!=0) {
-contador++;
-//console.log(i+ " "+contador);
-factor=parseFloat(document.getElementById("t2").value);
-if (data[i][3]==1) {fm=1.16;colorb='black'} else {fm=1;colorb='blue'}
-[pu,pb]=precio(i);
-[pcu,pcb]=precio_costo(i);
-
-Tdolar=+((data[i][4]*pu + data[i][5]*pb));
-Gdolar+=fm*((data[i][4]*(pu-pcu) + data[i][5]*(pb-pcb)));
-   if (data[i][6]=="t1") {
-   Tbs= data[i][4]*(data[i][2]) + data[i][5]*data[i][2]*data[i][1];
-   } else 
-        {
-    Tbs=parseFloat((Tdolar*factor).toFixed(2));
-   }
-
-if (Tdolar==Tdolar) { 
-  if (fm!=1) {BIMD+=Tdolar;}
-  totald+=parseFloat((Tdolar*fm).toFixed(2));
-  totaldsiva+=parseFloat((Tdolar).toFixed(2));
-  Ftexto+='------------\n';
- // if (tipo==0) {texto+='<table width="100%">';} else  {texto+='<table style="font-size:1em;" width="100%">';}
- texto+='<table width="100%">';
- if (tipo==0) {
-    if (data[i][4]!=0) { 
-     v2=(pu).toFixed(2);
-     v3=(parseFloat(v2)*data[i][4]).toFixed(2);
-     v4=(parseFloat(v3)*fm).toFixed(2);
-
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
-         texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+ v4 +' $&nbsp'+'</tr>';
-         Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
-         Ftexto+=data[i][4]+' U     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
-    }
-   if (data[i][5]!=0) {
-     v2=(pb).toFixed(2);
-     v3=(parseFloat(v2)*data[i][5]).toFixed(2);
-     v4=(parseFloat(v3)*fm).toFixed(2);
-      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
-      texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+v4 +' $&nbsp'+'</tr>';
-      Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
-      Ftexto+=data[i][5]+' C     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
-    }
+function quitar(nombdiv){
+var div=document.getElementById(nombdiv);
+div.hidden=true;
 }
 
- if (tipo==1) {
-    if (data[i][4]!=0) { 
-  v2=(pu*factor).toFixed(2);
-  v3=(parseFloat(v2)*data[i][4]).toFixed(2);
-  v4=(parseFloat(v3)*fm).toFixed(2);
-  totalb+=parseFloat(v4);
-  totalbsiva+=parseFloat(v3);
-
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
-         texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
-         Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
-         Ftexto+=data[i][4]+' U     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
-    }
-   if (data[i][5]!=0) {
-  v2=(pb*factor).toFixed(2);
-  v3=(parseFloat(v2)*data[i][5]).toFixed(2);
-  v4=(parseFloat(v3)*fm).toFixed(2);
-  totalb+=parseFloat(v4);
-  totalbsiva+=parseFloat(v3);
-      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
-      texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
-      Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
-      Ftexto+=data[i][5]+' C     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
-    }
+function enviar_whatsapp(phone,text){
+var url ='https://api.whatsapp.com/send?phone='+phone+'&text='+text;
+console.log(url);
+window.open(url);
 }
 
 
-
-}
-texto+='</table>';
-}
-}
-
-
-texto+='<HR>';
-Ftexto+='============================================\n';
-//texto+='<span style="color:yellow; font-size:1em;">Total</span><br>';
-
-var TM="";
-if (tipo==0) {TM="$";} else {TM="Bs";}
-
-var IVAD=(totald-totaldsiva).toFixed(2);
-BIMD=(BIMD).toFixed(2);
-var BIMB=(parseFloat(BIMD)*factor).toFixed(2);
-var descd=(parseFloat(IVAD)*0.75).toFixed(2);
-var IVAB=(parseFloat(IVAD)*factor).toFixed(2);
-var descb=(parseFloat(IVAB)*0.75).toFixed(2);
-
-
-if (tipo==0) {
-
-texto+='<table width="60%">';
-texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total S/IVA </td><td style="width:50%;">'+(totaldsiva).toFixed(2)+' '+TM+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMD+' '+TM+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAD+' '+TM+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totald).toFixed(2)+' '+TM+' </td></tr>';
-if (Ocliente.esp) {
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dscto AR </td><td style="width:50%;">'+(parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totald-parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
-}
-texto+='</table>';
-Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+' '+TM+'  C/IVA: '+(totald).toFixed(2)+' '+TM+ ' \n'
-Ftexto+='IVA: '+IVAD+' '+TM+' \n';
-
+function enviar_mail(){
+var url ='mailto:brauliodeabreu@gmail.com?subject=Retenciones';
+window.open(url);
 }
 
-if (Ocliente.esp) {
- MONTOF=(totald-parseFloat(descd)).toFixed(2);
-} else {MONTOF=(totald).toFixed(2)}
-
-
-if (tipo==1) {
-texto+='<table width="60%">';
-texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </td><td style="width:50%;">'+(totalbsiva).toFixed(2)+' '+TM+ '</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMB+' '+TM+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAB+' '+TM+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totalb).toFixed(2)+' '+TM+'</td></tr>';
-
-if (Ocliente.esp) {
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
-
-}
-texto+='</table>';
-
-Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+TM+' C/IVA: '+(totalb).toFixed(2)+' '+TM+' \n'
-Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+TM+ ' \n';
-}
-console.log(Ftexto);
-
-
-
-
-
-
-var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
-textoT+='<table width="100%"';
-textoT+='<tr>';
-textoT+='<td width="15%"><button class="btop" onclick="anula();">Borrar</button></td>';
-textoT+='<td width="15%"><button class="btop" onclick="guardar_factura();">Guardar</button></td>';
-textoT+='<td width="15%"><button class="btop" onclick="lee_facturas();">Ver</button></td>';
-textoT+='<td width="5%"></td>';
-textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda();">' + TM +'</button></td>';
-textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
-textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="suma_inventario();"> +I </button></td>';
-textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="resta_inventario();"> -I </button></td>';
-textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Pedido" id="btnc" onclick="pedido();"> P </button></td>';
-textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
-textoT+='</tr></table></div><br>';
-divfactura=document.getElementById("factura")
-divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 100% ; height: 80%; background-color: lightgray;color:white; border: 3px solid #73AD21;";
-textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
-divfactura.innerHTML=textoT;
-divfactura.hidden=false;
-//console.log("contador: "+contador);
-document.getElementById("contad").innerText=contador+ " Productos";
-console.log(Gdolar.toFixed(2));
-}
-
-var tipo=0;
-var tipo2=0;
-
-function cambia_moneda(){
-tipo=1-tipo;
-factura2();
-}
-
-function cambia_moneda2(num){
-tipo2=1-tipo2;
-//alert();
-factura3(num);
-}
-
-function compartir(){
-const shareData = {
-  title: 'Factura',
-  text: Ftexto
-}
-//console.log(shareData);
-comparte(shareData);
-}
-
-async function comparte(shareData){
-  try {
-    await navigator.share(shareData)
-    console.log('MDN shared successfully');
-  } catch(err) {
-    console.log( 'Error: ' + err);
-  }
-}
-
-
-function anula(){
-
-for (var i=0;i<data.length;i++){
-data[i][4]=0;
-data[i][5]=0;
-}
-if (document.getElementById("factura").hidden==false) {factura2();}
-}
-
-function quitar(){
-var div5 = document.getElementById("factura");
-div5.hidden=true;
-factflag=true;
-}
-function precio_costo(ind){
-var factor=parseFloat(document.getElementById("t2").value);
-if (data[ind][6]=="t1") {
- var pcu=+(data[ind][10]*(1/factor)).toFixed(2);
- var pcb=+(pcu*data[ind][1]);
-} 
-if (data[ind][6]=="t2") {
-   var pcu=+(data[ind][10]).toFixed(2);
-   var pcb=+(pcu*data[ind][1]);
-    } 
-if (data[ind][6]=="t3") {
-   var pcb=+(data[ind][10].toFixed(2));
-   var pcu=+((pcb/data[ind][1]).toFixed(2));
-    }
-
-pcu=parseFloat(pcu.toFixed(2));
-pcb=parseFloat(pcb.toFixed(2));
-//alert('pu'+pu+' pb '+pb);
-return [pcu,pcb];
-}
-
-function precio(ind){
-var factor=parseFloat(document.getElementById("t2").value);
-if (data[ind][6]=="t1") {
- var pu=+(data[ind][2]*(1/factor)).toFixed(8);
- var pb=+(pu*data[ind][1]);
-} 
-if (data[ind][6]=="t2") {
-   var pu=+(data[ind][2]).toFixed(2);
-   var pb=+(pu*data[ind][1]);
-    } 
-if (data[ind][6]=="t3") {
-   var pb=+(data[ind][2].toFixed(2));
-   var pu=+((pb/data[ind][1]).toFixed(2));
-    }
-
-pu=parseFloat(pu.toFixed(8));
-pb=parseFloat(pb.toFixed(8));
-//alert('pu'+pu+' pb '+pb);
-return [pu,pb];
-}
-
-
-function refresca2(){
-var patron=document.getElementById("search").value.toUpperCase();
-var pb;
-var pu;
-//t1=document.getElementById("t1").value;
-t2=document.getElementById("t2").value;
-//localStorage.setItem('p1',t1);
-localStorage.setItem('p2',t2);
-texto="";
-var factor;
-var fm;
-var pu,pb;
-for (var i=0;i<data.length;i++){
-if (data[i][0].toUpperCase().indexOf(patron) !=-1)   {
-if (data[i][6]=="t1") {factor=t2;}
-if (data[i][6]=="t2") {factor=t2;}
-//console.log(i+" "+data[i][0]);
-texto+='<p  >'+ data[i][0]+'</p>';
-console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
-if (data[i][4]==0) {var vcor='black';} else {var vcor='blue';}
-if (data[i][5]==0) {var vcor1='black';} else {var vcor1='blue';}
-if (data[i][3]==1) {fm=1.16} else {fm=1}
-//var pu=+(fm*data[i][2]/data[i][1]).toFixed(2);
-//var pb=+(fm*data[i][2]).toFixed(2);
-/*if (data[i][6]=="t1") {
-  var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
-  var pb=+(pu*data[i][1]).toFixed(2);
-} 
-if (data[i][6]=="t2") {
-  var pu=+(fm*data[i][2]).toFixed(2);
-  var pb=+(pu*data[i][1]).toFixed(2);
-}
-
-if (data[i][6]=="t3") {
-  var pb=+(fm*data[i][2]).toFixed(2);
-  var pu=+(pb/data[i][1]).toFixed(2);
-}
-*/
-[pu,pb]=precio(i);
-if (data[i][6]=="t1") 
-{
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (fm*data[i][2]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]*data[i][1]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
-} 
-if (data[i][6]=="t2") 
-{
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
-}
-  
-if (data[i][6]=="t3") 
-{
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
-}
-
-
- if (data[i][3]==1) {
-    texto+="<span style='font-size:0.6em;'>Retenci&oacute;n T: "+(fm*data[i][2]/fiva).toFixed(2)+ " $ "+(fm*data[i][2]*factor/fiva).toFixed(2)+" Bs          </span>";
-   }
-}
-}
-texto+='<br><br>'
-divt.innerHTML=texto;
-}
-function preciou(i){
-var fm
-if (data[i][3]==1) {fm=1.16} else {fm=1}
-if (data[i][6]=="t1") {
-  var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
-  var pb=+(pu*data[i][1]).toFixed(2);
-} 
-if (data[i][6]=="t2") {
-  var pu=+(fm*data[i][2]).toFixed(2);
-  var pb=+(pu*data[i][1]).toFixed(2);
-}
-
-if (data[i][6]=="t3") {
-  var pb=+(fm*data[i][2]).toFixed(2);
-  var pu=+(pb/data[i][1]).toFixed(2);
-}
-return pu;
-}
-
-function preciob(i){
-var fm
-if (data[i][3]==1) {fm=1.16} else {fm=1}
-
-if (data[i][6]=="t1") {
-  var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
-  var pb=+(pu*data[i][1]).toFixed(2);
-} 
-if (data[i][6]=="t2") {
-  var pu=+(fm*data[i][2]).toFixed(2);
-  var pb=+(pu*data[i][1]).toFixed(2);
-}
-
-if (data[i][6]=="t3") {
-  var pb=+(fm*data[i][2]).toFixed(2);
-  var pu=+(pb/data[i][1]).toFixed(2);
-}
-return pb;
-}
-function quitar_intro(){
-document.getElementById("introd").style.visibility="hidden";
-}
-
-function cambiaU(num){
-data[num][4]=document.getElementById("entradaU").value;
-intro(num);
-salir();
-}
-function cambiaB(num){
-data[num][5]=document.getElementById("entradaB").value;
-intro(num);
-salir();
-}
-function cintro(num){
-document.getElementById("factura").hidden=true;
-factflag=true;
-intro(num);
-}
-
-function intro(i){
-var totalsivabs;
-var totalsivad;
-var fm;
-var factor=parseFloat(document.getElementById("t2").value);
-var BanderaIva;
-var colb="black";
-if (data[i][3]==1) {fm=1.16;BanderaIva="C/IVA";colb="black";} else {fm=1;BanderaIva="S/IVA";colb="blue";}
-var divintro=document.getElementById("introd");
-if (data[i][4]==0) {var vcor='red';} else {var vcor='blue';}
-if (data[i][5]==0) {var vcor1='red';} else {var vcor1='blue';}
-//var pu=preciou(i);
-//var pb=preciob(i);
-[pu,pb]=precio(i);
-var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+data[i][0]+' '+BanderaIva+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
-
-var pc=parseFloat(data[i][10]);
-
-var ga;
-if (data[i][6]=='t3')   {ga=(((pb-pc)/pb)*100).toFixed(2);}
-if (data[i][6]=='t2')   {ga=(((pu-pc)/pu)*100).toFixed(2);}
-var puiva=(pu*fm).toFixed(2)
-var pbiva=(pb*fm).toFixed(2)
-tex1='U '+puiva+' $';
-tex2=(puiva*factor).toFixed(2)+ ' Bs';
-tex3='C '+pbiva +' $';
-tex4=(pbiva*factor).toFixed(2)+ ' Bs';
-
-if (data[i][4]==0) {var valoru="";} else {var valoru=data[i][4];}
-if (data[i][5]==0) {var valorb="";} else {var valorb=data[i][5];}
-
-texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td><td>'+ga+ '</td></tr>';
-texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor1+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td><td></td></tr></table>';
-
-
-totalsivad=((pu)*data[i][4]+(pb)*data[i][5]);
-totalsivabs=totalsivad*factor;
-
- texto+='<table width="100%"><tr><td>Total S/IVA</td><td style="text-align:right;">'+(totalsivad).toFixed(2)+'</td><td style="color:blue:">$</td><td style="text-align:right;">'+(totalsivabs).toFixed(2)+'</td><td>Bs</td></tr>';
- texto+='<tr><td>Total C/IVA</td><td style="text-align:right;">'+(totalsivad*fm).toFixed(2)+'</td><td>$</td><td style="text-align:right;">'+(totalsivabs*fm).toFixed(2)+'</td><td>Bs</td></tr>';
- texto+='<tr><td>Diferencia IVA</td><td style="text-align:right;">'+(totalsivad*(fm-1)).toFixed(2)+'</td><td>$</td><td style="text-align:right;">'+(totalsivabs*(fm-1)).toFixed(2)+'</td><td>Bs</td></tr>';
  
-texto+='</table>';
-
-divintro.innerHTML=texto;
-divintro.style.visibility = "visible";
-console.log('num '+i);
-console.log(divintro);
-}
-
-function refresca(){
-//var patron=document.getElementById("search").value.toUpperCase();
-var pb;
-var pu;
-//t1=document.getElementById("t1").value;
-t2=document.getElementById("t2").value;
-//localStorage.setItem('p1',t1);
-localStorage.setItem('p2',t2);
-texto="";
-var factor;
-var fm;
-var cat_comp='&';
-for (var i=1;i<Stack_cat.length;i++) {
- cat_comp+=Stack_cat[i]+'&';
-}
-var hay=false;
-for (var i=0;i<data.length;i++){
-if ((data[i][7]==cat_comp) && (data[i][8]==1))  
-{
- console.log(data[i][8]);
- hay=true;
- if (data[i][6]=="t1") {factor=t2;}
- if (data[i][6]=="t2") {factor=t2;}
-console.log(i+" "+data[i][0]);
-texto+='<button class="bot4" onclick="intro('+i+');">'+ data[i][0]+'</button><br>';
-console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
-
-}
-
-}
-texto+='<br><br>'
-divt.innerHTML=texto;
-if (!hay) {
-   document.getElementById("introd").style.visibility = "hidden";}
-   else {
-   document.getElementById("cat").style.visibility = "hidden";
-}
-}
-
-function impri(A){
-var At=A.toString();
-var p=At.indexOf('.');
-var num=At.substring(0,p);
-var dec=At.substring(p+1,At.length);
-//console.log(p+" "+num+" "+dec);
-var B="";
-var j=0;
-var indfin=num.length
-var porc=[];
-while (indfin>0) {
-porc[j]=num.substring(indfin-3,indfin);
-indfin=indfin-3;
-j=j+1;
-}
-
-for(var j=porc.length-1;j>0;j--)
-{
-B=B+porc[j]+".";
-}
-B=B+porc[0]+","+dec
-//console.log(B);
-return B;
-}
-impri(12356.3478);
-
-</script>
-<script>
-
-// Registra el service worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').then(function(registration) {
-      // Si es exitoso
-      console.log('SW registrado correctamente');
-    }, function(err) {
-      // Si falla
-      console.log('SW fallo', err);
-    });
-  });
-}
-Act_data();
-
-function Act_data(){
-var myHeaders = new Headers();
-
-var myInit = { mode: 'cors' };
-
-//var nombrepag="https://monitordolarvenezuela.com/monitor-dolar-hoy";
-var nombrepag="https://bdeabreu66.github.io/factura/precios.txt";
 
 
-fetch(nombrepag,myInit)
-        .then(ajaxPositive)
-        .catch(showError);
 
-function ajaxPositive(response) {
-      console.log('response.ok: ', response.ok);
-      if(response.ok) {
-        response.text().then(showResult);
-      } else {
-        showError('status code: ' + response.status);
-      }
-    }
- function showResult(txt) {
-        //console.log('muestro respuesta: ', txt);
-        localStorage.setItem('data',txt);
-        data=eval(txt);
-        set_clave_indice();
-        set_cat();
-        muestra_cat();
-        inicio_inventario();
-        refresca();
-        recupera_pedido("Pedido");
-  }
 
-function showError(err) { 
-      console.log('muestor error', err);
-    }
-}
-
-function Actualiza_dolar(){
-var nomb="https://s3.amazonaws.com/dolartoday/data.json"
-//var myHeaders = new Headers();
-var myInit = { mode: 'cors' };
-
-fetch(nomb,myInit)
-        .then(ajaxPositiveD)
-        .catch(showErrorD);
-
-function ajaxPositiveD(response) {
-      console.log('response.ok: ', response.ok);
-      if(response.ok) {
-        response.json().then(showResultD);
-      } else {
-        showErrorD('status code: ' + response.status);
-      }
-    }
- function showResultD(txt) {
-       console.log('muestro respuesta: ', txt.USD.sicad2);
-       //document.getElementById("t1").value = txt.USD.promedio;
-       document.getElementById("t2").value = txt.USD.sicad2;
-       refresca();
-  }
-
-function showErrorD(err) { 
-      console.log('muestor error', err);
-    }
-}
-
-Fecha_precios();
-
-//descarga_historico();
 function descarga_historico(){
 var nomb="https://bdeabreu66.github.io/historico/historico.txt";
 //var myHeaders = new Headers();
@@ -2334,54 +1384,82 @@ function ajaxPositiveD(response) {
  function showResultD(txt) {
        console.log('muestro respuesta: ', txt);
         Historico=txt;
- console.log(fecha_actual());
-        var ind=Historico.findIndex(elemento => elemento.fecha==fecha_actual());
-        if (ind>=0) { document.getElementById("t2").value =Historico[ind].bcv};
-    }
-function showErrorD(err) {
- console.log('muestor error', err); 
+   for (var i=0;i<Historico.length;i++) {
+   t_d.set(Historico[i]["fecha"],(Historico[i]["bcv"]));
   }
- 
-  
+  localStorage.setItem('HDOLAR',JSON.stringify(Historico));
+  // procesa_contenido();
+    }
+function showErrorD(err) { console.log('muestor error', err); 
+   Historico=JSON.parse(localStorage.getItem('HDOLAR'));
+   for (var i=0;i<Historico.length;i++) {
+   t_d.set(Historico[i]["fecha"],(Historico[i]["bcv"]));
+  }
+ procesa_contenido();
+   }
 
 }
 
-function Fecha_precios(){
-var nomb="https://bdeabreu66.github.io/factura/fecha.txt";
 
-
-//var myHeaders = new Headers();
-var myInit = { mode: 'cors' };
-
-fetch(nomb,myInit)
-        .then(ajaxPositiveD)
-        .catch(showErrorD);
-
-function ajaxPositiveD(response) {
-      console.log('response.ok: ', response.ok);
-      if(response.ok) {
-        response.json().then(showResultD);
-      } else {
-        showErrorD('status code: ' + response.status);
-      }
-    }
- function showResultD(txt) {
-       console.log('fecha: '+ txt.dia+txt.mes+txt.ano);
-      // document.getElementById("t1").value = txt.USD.promedio;
-     //    document.getElementById("t2").value = txt.USD.sicad2;
-      var fecha='('+txt.dia+'/'+txt.mes+'/'+txt.ano+')';
-      document.getElementById("fecha_p").innerText=fecha;
-      localStorage.setItem('FECHA_P',fecha);
-  //  refresca();
-  }
-
-function showErrorD(err) { 
-      console.log('muestor error', err);
-    }
-
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
 }
-
 
 </script>
-</BODY>
+
+<BODY onload="inicio();">
+<!-- <div id="encabezado" style="text-align: left; border: 1px solid #999999; position: fixed;" >  -->
+<!--<span style="font-size:30px;cursor:pointer; margin-left: 0px;text-align: left;" onclick="openNav()">&#9776; Menu </span>  -->
+<!--</div>  -->
+<div id="mySidenav" class="sidenav" ></div>
+
+<div id="divdata"></div>
+<div id="menu">
+<span style="display:block;font-size:2em;color:red;" id="suma">Prueba</span>
+<table width="100%" ><tr>
+<td  style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida1();">Fecha</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida2();">Cliente</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida3();">Fecha-Cli</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="pagos_alim();">P-Alim</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="pagos_cerv();">P-Cerv</button></td>
+
+</tr></table>
+</div>
+<div id="header"> 
+<table width="100%"><tr>
+<td style="font-size:0.5em;width:25;">
+<button class="btop" onclick="Activalector_archivos();">Cargar V4</button>  
+</td><td style="font-size:0.5em;width:25;">
+<button class="btop" onclick="borrar_datos();">Borrar</button>
+</td><td style="font-size:0.5em;width:25;">
+<button class="btop" onclick="exportar_datos();">Ex</button>
+</td><td style="font-size:0.5em;width:25;">
+<button class="btop" onclick="Activalector_importar();">Im</button>
+</td><tr></table>
+</div>
+
+<div>
+<label hidden id=selected>Nothing selected</label><br>
+<input hidden type=file id="choose2" accept="*.txt" multiple>
+</div>
+
+<div>
+<label hidden id=selected2>Nothing selected</label><br>
+<input hidden type=file id="choose3" accept="*.txt" >
+</div>
+
+<div id="div3">
+</div>
+<div id="div4">
+</div>
+</body>
 </html>
