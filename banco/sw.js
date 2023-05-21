@@ -1,11 +1,12 @@
-// 18-05-2023
-const currentCache = 'BNC_banco_cache_v2.4';
+// 21-05-2023
+currentCache = 'FACPOLAR_cache_v4.5';
 const files =
 [
     'index.html',
     'icondef.png',
-    'selectFile.js',
-    'FileSaver.js'
+    'arbol.js',
+    'filesaver.js',
+    'selectfile.js'
  ];
 
 self.addEventListener('install', event => {
@@ -17,6 +18,7 @@ self.addEventListener('install', event => {
 });
 
 // Borra las cache anteriores
+
 
 self.addEventListener('activate', function(event) {
     event.waitUntil(caches.keys().then(function(names) {
@@ -31,7 +33,6 @@ self.addEventListener('activate', function(event) {
         return self.clients.claim();
     }));
 });
-
 
 // carga de los cache si existen
 self.addEventListener('fetch', function(e){
