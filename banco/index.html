@@ -626,7 +626,7 @@ function exportar_datos(){
  var data;
  data=JSON.stringify(pagos)+"^^"+JSON.stringify(pagos_ef)+"^^"+JSON.stringify(pagos_hechos)+"^^"+JSON.stringify(domicilios);
  var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
- saveAs(blob,"datosBNC.txt");
+ saveAs(blob,"_datosBNC.txt");
 
 
 }
