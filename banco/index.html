@@ -322,8 +322,8 @@ set_clave_indice();
 
 
 t_c.set('584144202172','Alejandro Naranjo');
-t_c.set('01340067960673057959','Alexis Pool personal');
-t_c.set('584121308516','Alexis Pool personal');
+t_c.set('01340067960673057959','Mc Center Pool');
+t_c.set('584121308516','Mc Center Pool');
 t_c.set('01020406290000103046','Alianza cafe');
 t_c.set('01910027851127292097','Alvaro Jardim');
 t_c.set('584124067144','Ana Beatriz');
@@ -732,7 +732,7 @@ console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
     dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
 
 texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
-texto+='<span class="pagoscli" pos="0" name="subtotal" onclick="permuta(this)"></span>';
+texto+='<span class="pagocli" pos="0" name="subtotal" onclick="permuta(this)"></span>';
 texto+='<table width="100%">';
 var m=0;
 for (var i=0;i<pagos.length;i++){
@@ -751,7 +751,7 @@ colb=colorcuenta(pagos[i].tc);
     texto+='</table>';
     dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
     texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $'+'</p>';
-    texto+='<span class="pagoscli" pos="0" name="subtotal" onclick="permuta(this)"></span>';
+    texto+='<span class="pagocli" pos="0" name="subtotal" onclick="permuta(this)"></span>';
     texto+='<table width="100%">';
   }
 texto+='<tr  style="background-color:'+colb+';"><td onclick="muestra('+i+')";>'+Obten_nombre(pagos[i].telf)+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
@@ -895,7 +895,7 @@ function muestra_deuda(j){
 //alert(j);
 var divaux=document.getElementById("div4");
 var texto='';
-texto+='<div style="border: 5px solid red;background-color:lightblue">';
+texto+='<div style="border: 5px solid red;background-color:lightblue";height:50%;>';
 var cl=Obten_nombre(pagos[j].telf)
 texto+='<p>'+cl+'</p>';
 Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
@@ -917,7 +917,7 @@ if (ind>=0) {
  texto+='</table>'; 
  texto+='<button onclick=quitar_div("div4")>Salir</button>';
  texto+='</div>';
- texto+='<div style="height:10%;overflow-y: auto;">';
+ texto+='<div style="overflow-y: auto;">';
  listasel=[];
  for(var i=0;i<localStorage.length;i++) {
    var nomb=localStorage.key(i); 
@@ -930,11 +930,13 @@ if (ind>=0) {
     }
  }
  listasel=listasel.sort(ord_fecha);
+ texto+='<table style="width:100%;">';
  for (var k=0;k<listasel.length;k++) {
   //  console.log(k+' '+nomb);
    var tot=Monto_factura(listasel[k]);
-   texto+='<p> '+listasel[k].split('_')[2]+'  '+tot+' $</p>';
+   texto+='<tr><td> '+listasel[k].split('_')[2]+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+tot+' $</td></tr>';
  }
+ texto+='</table>';
  texto+='</div>';
 } 
 else {texto+='<button onclick=quitar_div("div4")>Salir</button>';
@@ -1086,7 +1088,7 @@ if (pagos[i].fecha!=fecha_previa) {
 
     texto+='<table width="100%">';
   }
- texto+='<tr style="background-color:'+colb+';"><td onclick="muestra('+i+');">'+Obten_nombre(pagos[i].telf)+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos=0 onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
+ texto+='<tr style="background-color:'+colb+';"><td onclick="muestra('+i+');">'+Obten_nombre(pagos[i].telf)+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
 
 }
  texto+='</table>';
