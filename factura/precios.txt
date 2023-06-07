@@ -186,7 +186,7 @@
       ["L081 Las llaves Detergente Floral 400g x 30",20,1.38,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L081',1.27],
       ["L082 Las llaves Detergente Floral 900g x 20",20,3.05,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L082',2.81],
       ["L255 Las llaves Detergente Bebe 900g x 20",20,3.05,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L255',2.81],
-      ["L350 Las llaves Detergente liq.Bebe 1L x 12",12,5.75,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",1,'L350',5.29],
+      ["L350 Las llaves Detergente liq.Bebe 1L x 12",12,5.75,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L350',5.29],
       ["L367 Las llaves Detergente liq.ROPA DELI.510cc x 12",12,3.21,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",0,'L367',2.95],
       ["L381 Las llaves Detergente liq.ROPA DELI.525cc x 12",12,3.30,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",0,'L367',3.04],
       ["L382 Multiclean Detergente Frag citrica 900g x 20",20,1.59,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Multiclean&",1,'L382',1.46],
