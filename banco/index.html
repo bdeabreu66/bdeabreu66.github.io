@@ -702,9 +702,9 @@ if (pagos[num].tc=='EB' || pagos[num].tc=='ED') {
 function muestra(num){
 var texto='';
 var div3=document.getElementById("div3");
-div3.style="position: fixed;top :50%; left: 0%; width: 80%;height:30%;background-color:Coral;color:white; text-align: left; border: 3px solid #73AD21;";
-texto+='<p>'+pagos[num].motivo+'</p>';
-texto+='<p> Referencia: '+pagos[num].ref+'</p>';
+div3.style="position: fixed;top :30%; left: 0%; width: 90%;height:60%;background-color:Coral;color:white; text-align: left; border: 3px solid #73AD21;";
+texto+='<p style="font-size:1.5rem;">'+pagos[num].motivo+'</p>';
+texto+='<p style="font-size:1.5rem;"> Referencia: '+pagos[num].ref+'</p>';
 texto+='<button onclick=quitar_div("div3")> Ok </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 texto+='<button onclick=borrar_pago('+num+') >Borrar</button>';
 div3.innerHTML=texto;
@@ -733,7 +733,7 @@ console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
 
 texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
 texto+='<span class="pagocli" pos="0" name="subtotal" onclick="permuta(this)"></span>';
-texto+='<table style="width:100%;font-size:1.2rem;">';
+texto+='<table style="width:100%;font-size:1.0rem;">';
 var m=0;
 for (var i=0;i<pagos.length;i++){
 colb=colorcuenta(pagos[i].tc);
@@ -752,7 +752,7 @@ colb=colorcuenta(pagos[i].tc);
     dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
     texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $'+'</p>';
     texto+='<span class="pagocli" pos="0" name="subtotal" onclick="permuta(this)"></span>';
-    texto+='<table style="width:100%;font-size:1.2rem;">';
+    texto+='<table style="width:100%;font-size:1.0rem;">';
   }
 texto+='<tr  style="background-color:'+colb+';"><td onclick="muestra('+i+')";>'+Obten_nombre(pagos[i].telf)+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
 suma_parcial+=parseFloat(pagos[i].montodolar);
