@@ -703,10 +703,15 @@ function muestra(num){
 var texto='';
 var div3=document.getElementById("div3");
 div3.style="position: fixed;top :30%; left: 0%; width: 90%;height:60%;background-color:Coral;color:white; text-align: left; border: 3px solid #73AD21;";
-texto+='<p style="font-size:1.5rem;">'+pagos[num].motivo+'</p>';
-texto+='<p style="font-size:1.5rem;"> Referencia: '+pagos[num].ref+'</p>';
-texto+='<button onclick=quitar_div("div3")> Ok </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-texto+='<button onclick=borrar_pago('+num+') >Borrar</button>';
+texto+='<p style="font-size:1.4rem;">'+pagos[num].motivo+'</p>';
+texto+='<p style="font-size:1.4rem;">'+Obten_nombre(pagos[num].telf)+'</p>';
+texto+='<p style="font-size:1.4rem;"> Referencia: '+pagos[num].ref+'</p>';
+texto+='<p style="font-size:1.4rem;"> Bs: '+pagos[num].montoBs+'</p>';
+texto+='<p style="font-size:1.4rem;"> $: '+pagos[num].montodolar+'</p>';
+
+texto+='<button onclick=quitar_div("div3") style="font-size:1.4rem;"> Ok </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+
+texto+='<button onclick=borrar_pago('+num+') style="font-size:1.4rem;">Borrar</button>';
 div3.innerHTML=texto;
 }
 function Obten_nombre(tel){
