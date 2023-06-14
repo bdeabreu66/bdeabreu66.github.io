@@ -1,5 +1,5 @@
-// 12-06-2023
-const currentCache = 'BNC_banco_cache_v3.11';
+// 14-06-2023
+const currentCache = 'BNC_banco_cache_v3.12';
 const files =
 [
     'index.html',
