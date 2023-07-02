@@ -69,11 +69,11 @@
 ['584146784460','Licoreria El Chivato'],
 ['584140430489','El sabor de Lili'],
 ['584124613036','El sazon de la abuela'],
-['01020857280000164412','El sazon de la abuela')
-['584149487610','igual que en casa')
-['01080923150100080735','Rincon Italiano')
-['584143419930','Panaderia hogar pan')
-['584244988456','Cesar Perrero Paveca')
+['01020857280000164412','El sazon de la abuela'],
+['584149487610','igual que en casa'],
+['01080923150100080735','Rincon Italiano'],
+['584143419930','Panaderia hogar pan'],
+['584244988456','Cesar Perrero Paveca'],
 ['584144791429','Esposa de Ludi'],
 ['01380008190080143008','Euro Licores'],
 ['01680052095101387169','Euro Licores'],
