@@ -288,7 +288,7 @@ if('speechSynthesis' in window){
 }
 const synth = window.speechSynthesis
 synth.voice = voice[10];
-console.log('voz '+voice[7]);
+//console.log('voz '+voice[7]);
 let ourText = Texto;
 const utterThis = new SpeechSynthesisUtterance(ourText)
 
@@ -305,22 +305,27 @@ speech.lang = "es";
   speech.rate = 0.1;
   window.speechSynthesis.speak(speech);
 */
-  console.log('prueba de voz');
+  //console.log('prueba de voz');
 }
 const t_c=new Map();
 Fecha_hora='';
 
 var data=eval(localStorage.getItem('data'));
+var databanco=eval(localStorage.getItem('databanco'));
 function set_clave_indice(){
 clave_ind=new Map();
 for (var i=0;i<data.length;i++) {
-console.log(i);
-console.log(data[i][9]);
+//console.log(i);
+//console.log(data[i][9]);
 clave_ind.set(data[i][9],i.toString());
 }}
 set_clave_indice();
 
-
+function asigna_databanco(){
+var ld=databanco.length;
+for (var i=0;i<ld;i++) t_c.set(databanco[i][0],databanco[i][1]);
+}
+/*
 t_c.set('584144202172','Alejandro Naranjo');
 t_c.set('01340067960673057959','Mc Center Pool');
 t_c.set('584121308516','Mc Center Pool');
@@ -336,7 +341,6 @@ t_c.set('01740124621244237572','AREPA EL PAISITA');
 t_c.set('01910027801127274106','Armando Pita');
 t_c.set('584125012908','Bodega Felix');
 t_c.set('584144973532','Bodega Marcos');
-//t_c.set('584244541829','Bodega Moya');
 t_c.set('584244469305','Bodega Moya');
 t_c.set('584244285516','Bodega Moya');
 t_c.set('584144290265','Mall telefonos');
@@ -477,6 +481,7 @@ t_c.set('584144353156','Repuestos Mundo CA');
 t_c.set('584128999549','Mini Market PM03');
 t_c.set('584244912883','Evento Malave');
 t_c.set('584127820477','Negro Primero');
+t_c.set('584143594661','Nam Cafe');
 t_c.set('584140389048','Negro Primero');
 t_c.set('584244069799','Negro Primero');
 t_c.set('584145961360','Negro Primero');
@@ -553,15 +558,10 @@ t_c.set('584128890498','Mi viejo Araguaney');
 t_c.set('584145555555','Papa Leon');
 t_c.set('584125325826','Papa Leon');
 t_c.set('ISO HOME','Iso Home');
+*/
 dat_especial=["AREPA EL PAISITA","IGRIVAL","HOTEL GOLD","TRIGOPAN","PEPSI COLA","CREACIONES PITA","ISO HOME","J501880239"];
 const t_d=new Map();
-/*t_d.set('27/12/2022',16.57);
-t_d.set('26/12/2022',16.57);
-t_d.set('25/12/2022',16.45);
-t_d.set('24/12/2022',16.45);
-t_d.set('23/12/2022',16.45);
-t_d.set('22/12/2022',16.18);
-*/
+
 var productos=[];
 function fecha_date(f){
 var comp=f.split('/');
@@ -700,7 +700,7 @@ if (pagos[num].tc=='EB' || pagos[num].tc=='ED') {
     localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
     localStorage.setItem('pagos_banco',JSON.stringify(pagos));
     }
-   console.log(ind);
+   //console.log(ind);
   }
 }
 }
@@ -729,7 +729,7 @@ return tmp;
 
 function genera_salida1(){
 allVoicesObtained.then(voices => voice=voices);
-console.log(voice);
+//console.log(voice);
 if (pagos.length>0) {
 var divaux=document.getElementById("divdata");
 var texto='';
@@ -739,7 +739,7 @@ var nombre_previo=Obten_nombre(pagos[0].telf);
 //var total_parcial=parseFloat(pagos[0].montodolar);
 var sumap=[];
 var suma_parcial=0;
-console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+//console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
     dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
 
 texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
@@ -750,7 +750,7 @@ for (var i=0;i<pagos.length;i++){
 colb=colorcuenta(pagos[i].tc);
 // console.log('i: '+i);
  if (pagos[i].fecha!=fecha_previa) {
-    console.log(m);
+    //console.log(m);
     sumap[m]=suma_parcial;
     suma_parcial=0
     //console.log(document.getElementsByName("subtotal")[m]);
@@ -758,7 +758,7 @@ colb=colorcuenta(pagos[i].tc);
     m++;
     
     fecha_previa=pagos[i].fecha;
-    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
+    //console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
     texto+='</table>';
     dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
     texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $'+'</p>';
@@ -797,11 +797,11 @@ if (valor!=0) {
  document.getElementById('intro').value='';
  var today = new Date();
  var fecha_a = today.toLocaleDateString('es-ES',{year:"numeric",month:"2-digit",day:"2-digit"});
- console.log(fecha_a);
+ //console.log(fecha_a);
  var hora_a = today.toLocaleTimeString('es-ES',{hour12:false,hour:"2-digit",minute:"2-digit",second:"numeric"});
- console.log(hora_a);
+ //console.log(hora_a);
  dolarhoy=t_d.get(fecha_a);
- console.log(dolarhoy);
+ //console.log(dolarhoy);
 
  if (pad) {te='ED'; mDs=parseFloat(valor).toFixed(2); mBs=parseFloat(mDs*dolarhoy).toFixed(2)}
    else
@@ -850,7 +850,7 @@ document.getElementById("bmon").innerText=tmon;
 
 function Monto_factura(nomb){
 var fact=localStorage.getItem(nomb);
-console.log(nomb);
+//console.log(nomb);
 var ped=fact.split('&');
 var total=0;
 var iva,unidad,cajas,pu,pb;
@@ -860,21 +860,21 @@ for (var i=1;i<ped.length;i++) {
   var items=ped[i].split('#');
   var ind=clave_ind.get(items[0]);
   if (data[ind][3]==0) {iva=0} else {iva=0.16}
-  console.log(data[ind][0]);
+  //console.log(data[ind][0]);
   unidad=parseInt(items[1]);
   pu=parseFloat(items[2]);
   cajas=parseInt(items[3]);
   pb=parseFloat(items[4]);
   
   totalp=(unidad*pu+cajas*pb);
-  console.log(totalp);
+  //console.log(totalp);
   tiva=totalp*iva
   totaliva+=iva;
- console.log(totaliva);
+ //console.log(totaliva);
   total+=totalp+tiva;
  
 }
- console.log('total '+total);
+ //console.log('total '+total);
 return total.toFixed(2);
 
 }
@@ -912,7 +912,7 @@ texto+='<p>'+cl+'</p>';
 Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
 var ind=Clientes.findIndex(x=>x.nombre==Obten_nombre(pagos[j].telf));
 if (ind>=0) {
- console.log(Clientes[ind].deuda);
+ //console.log(Clientes[ind].deuda);
  texto+='<table width="100%">';
  texto+='<tr><td width="50%">Deuda:<input type="text" id="deu" value="'+Clientes[ind].deuda+'"><button onclick=actualiza_deuda('+j+')>Ok</button></td></tr>';
  texto+='<tr><td width="25%"><span id="abo"> Abono :'+suma.toFixed(2)+'</span>';
@@ -999,7 +999,7 @@ var total_parcial=0;
 var montop='';
 var cont_c=0;
 lista_clientes=[];
- console.log( nombre_previo);
+ //console.log( nombre_previo);
 texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+nombre_previo+'</p>';
 for (var i=0;i<pagos.length;i++){
   
@@ -1009,7 +1009,7 @@ colb=colorcuenta(pagos[i].tc);
   
     nombre_previo=Obten_nombre(pagos[i].telf);lista_clientes[cont_c]=nombre_previo;cont_c++;
     if (i!=0) {
-      console.log(total_parcial.toFixed(2));
+      //console.log(total_parcial.toFixed(2));
      //texto+='<p style="color:blue;">Fecha:'+fecha_previa+'Total parcial: '+montop.toFixed(2)+'</p>';
       fecha_previa=pagos[i].fecha;texto 
       //texto+='<p>Total: '+total_parcial.toFixed(2)+'</p>';
@@ -1028,7 +1028,7 @@ colb=colorcuenta(pagos[i].tc);
         montop+=parseFloat(pagos[i].montodolar);
         }
   }
-console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
+//console.log(pagos[i].fecha+' '+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ ');
 //texto+='<p>'+pagos[i].fecha+'&nbsp&nbsp'+pagos[i].hora.substring(0,5)+'&nbsp&nbsp'+pagos[i].telf+' '+pagos[i].montoBs+' Bs '+pagos[i].montodolar+' $ '+'</p>';
 //texto+='<p style="background-color:'+colb+';" onclick=permuta(this,'+i+');>'+' '+pagos[i].fecha+'     '+pagos[i].montoBs+' Bs '+'     '+pagos[i].montodolar+' $ '+'</p>';
 texto+='<table width="100%">';
@@ -1041,7 +1041,7 @@ texto+='<td width="27%" class="pagocli" pos="0" onclick="permuta(this);">'+'&nbs
 
 } // for i
 
- console.log(total_parcial.toFixed(2));
+ //console.log(total_parcial.toFixed(2));
 // texto+='<p>Fecha:'+fecha_previa;+'Total parcial: '+montop.toFixed(2)+'</p>';
      
 
@@ -1083,7 +1083,7 @@ var fecha_previa=pagos[0].fecha;
 var nombre_previo=Obten_nombre(pagos[0].telf);
 var total_parcial=0;
 
-console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
+//console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
 dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
 texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
 texto+='<table width="100%">';
@@ -1091,7 +1091,7 @@ for (var i=0;i<pagos.length;i++){
    colb=colorcuenta(pagos[i].tc);
 if (pagos[i].fecha!=fecha_previa) {
     fecha_previa=pagos[i].fecha;
-    console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
+    //console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
     texto+='</table>';
     dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
   //alert(dia);
@@ -1172,7 +1172,7 @@ domicilios[ii].fecha =campos2[0];
 domicilios[ii].monto =parseFloat(campos2[7].replace(',', '.'));
 domicilios[ii].descripcion =campos2[6];
 var fd=parseFloat(t_d.get(campos2[0]));
-console.log(fd)
+//console.log(fd)
 domicilios[ii].montod=(domicilios[ii].monto/fd).toFixed(2);
 var post=campos2[6].indexOf('FACTURA')
 if (post>0) {domicilios[ii].factura=campos2[6].substr(post+9,post+25)} else {domicilios[ii].factura='';}
@@ -1242,7 +1242,7 @@ for (var j=0;j<pagos.length;j++) {
 localStorage.setItem('domicilios_banco',JSON.stringify(domicilios));
 
 localStorage.setItem('pagos_banco',JSON.stringify(pagos));
-console.log(domicilios);
+//console.log(domicilios);
 }
 
 function borrar_datos(){
@@ -1345,7 +1345,7 @@ procesar2(indice);
 reconocimientoTexto.onresult = function(event) {
 // Mostramos el texto obtenido
 textoreconocido=event.results[0][0].transcript;
-console.log(textoreconocido);
+//console.log(textoreconocido);
 procesar2(indice);
 }
 // Empezamos a reconocer texto
@@ -1362,7 +1362,7 @@ var cant='';
 for (var i=0;i<lt;i++) {
  cant+=num[i];
 }
-console.log(cant);
+//console.log(cant);
 if (ind==1) {divs_datos.getElementsByTagName("input")[1].value=cant;return;}
 if (ind==2) {
  divs_datos.getElementsByTagName("input")[2].value=cant.substring(0,2);
@@ -1414,8 +1414,8 @@ if ( texto2!='' && texto2!=null) {domicilios=JSON.parse(texto2);} else {domicili
 if ( texto!='' && texto!=null) {pagos=JSON.parse(texto);} else {pagos=[];}
 var texto5=localStorage.getItem('pagos_efectivo');
 if (texto5!='' && texto5!=null) {pagos_ef=JSON.parse(texto5);} else {pagos_ef=[];}
-console.log('pagos_ef');
-console.log(pagos_ef);
+//console.log('pagos_ef');
+//console.log(pagos_ef);
 //pagos=pagos.concat(pagos_ef);
 posi=pagos.length;
 posi2=domicilios.length;
@@ -1423,6 +1423,7 @@ posi2=domicilios.length;
 for (var j=0;j<pagos.length;j++) {
  pos[j]=0;
 }
+Act_data_banco();
 }
 
 function quitar(nombdiv){
@@ -1432,7 +1433,7 @@ div.hidden=true;
 
 function enviar_whatsapp(phone,text){
 var url ='https://api.whatsapp.com/send?phone='+phone+'&text='+text;
-console.log(url);
+//console.log(url);
 window.open(url);
 }
 
@@ -1456,7 +1457,7 @@ fetch(nomb,myInit)
         .catch(showErrorD);
 
 function ajaxPositiveD(response) {
-      console.log('response.ok: ', response.ok);
+      //console.log('response.ok: ', response.ok);
       if(response.ok) {
         response.json().then(showResultD);
       } else {
@@ -1464,7 +1465,7 @@ function ajaxPositiveD(response) {
       }
     }
  function showResultD(txt) {
-       console.log('muestro respuesta: ', txt);
+       //console.log('muestro respuesta: ', txt);
         Historico=txt;
    for (var i=0;i<Historico.length;i++) {
    t_d.set(Historico[i]["fecha"],(Historico[i]["bcv"]));
@@ -1482,6 +1483,34 @@ function showErrorD(err) { console.log('muestor error', err);
 
 }
 
+function Act_data_banco(){
+var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+var nombrepag="https://bdeabreu66.github.io/banco/databanco.txt";
+
+fetch(nombrepag,myInit)
+        .then(ajaxPositive)
+        .catch(showError);
+
+function ajaxPositive(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.text().then(showResult);
+      } else {
+        showError('status code: ' + response.status);
+      }
+    }
+ function showResult(txt) {
+        //console.log('muestro respuesta: ', txt);
+        localStorage.setItem('databanco',txt);
+          databanco=eval(txt);
+        asigna_databanco();
+         }
+
+function showError(err) { 
+      console.log('muestor error', err);
+    }
+}
 
 // Registra el service worker
 if ('serviceWorker' in navigator) {
