@@ -338,4 +338,4 @@
       ["Vacio Refresco 350 ml",1,0,0,0,0,"t1","&Pepsicola&Vacios_2&",1,'CV166',0,""],
       ["Vacio Refresco 1.25 L",1,0,0,0,0,"t1","&Pepsicola&Vacios_2&",1,'CV176',0,""],
       ["Vacio Refresco 350 ml malo",1,0,0,0,0,"t1","&Pepsicola&Vacios_2&",1,'CV186',0,""]
-,""]
+]
