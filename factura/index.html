@@ -144,6 +144,18 @@ overflow-y:scroll;
   text-align: center;
   font-size:0.5em;
 }
+#voz {
+  display: block;
+  position: fixed; 
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+  
+}
 
 #header {
   position: fixed;
@@ -193,7 +205,18 @@ grid-columns: 2/3;
 grid-columns: 3/4;
 }
 
+.micro {
+   background-image:url(microphone.svg);
+   width:30px;
+	height:30px;
+	font-size:16px;
+	padding:0px 0px 0px 0px;
+	background-size:30px 30px;
+	background-position:-2px 0px;
+    fill: green;
 
+border-radius: 8px;
+}
 </style>
 
 </HEAD>
@@ -234,6 +257,11 @@ grid-columns: 3/4;
 
 </div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
+<div id="voz">
+Hola:
+<button class="micro" onclick="obtenerTexto();"></button>
+
+</div> 
  <div id="header">
 <table width="100%">
 <tr align="center">
@@ -258,7 +286,7 @@ Vacios polar:<input style="width:55%;" type="text" id="vaccli" value="" ><br>
 Vacios 350 ml:<input style="width:55%;" type="text" id="vacclir1" value="" ><br>
 Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
 
-</div>
+
 <div>
 <label hidden id=selected>Nothing selected</label><br>
 <input hidden type=file id="choose" accept="*.txt" >
@@ -270,6 +298,72 @@ Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
 <script type="text/javascript" src="FileSaver.js"></script>
 <script type="text/javascript" src="selectFile.js"></script>
 <script type="text/javascript">
+
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+var recognition;
+function set_var_voz(){
+var producto='';
+m=0;
+for(var i=0;i<data.length;i++){
+ if (data[i][11]!='' &&  data[i][8]!=0) 
+  { if (m==0) {producto+=data[i][11];m=1} else {producto+='|'+data[i][11]} }
+ }
+
+var selector='unidades|cajas|bultos|unidad|caja|bulto';
+var cantidad='un|una';
+for(var i=1;i<301;i++){
+ cantidad+='|'+i;
+}
+console.log(cantidad);
+//var grammar = '#JSGF V1.0; grammar statement; <statement>=<cantidad> <selector> de <producto>;public <producto> = ' + producto + ' ;'+'public <selector> = ' + selector + ' ;'+'public <cantidad> = ' + cantidad + ' ;'
+var grammar = '#JSGF V1.0; grammar producto; public <producto> = ' + producto + ';';
+recognition = new SpeechRecognition();
+var speechRecognitionList = new SpeechGrammarList();
+console.log(grammar);
+
+speechRecognitionList.addFromString(grammar, 1);
+recognition.grammars = speechRecognitionList;
+recognition.continuous = false;
+recognition.lang = 'es-US';
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+recognition.onresult = function(event) {
+  var resultado = event.results[0][0].transcript;
+ // diagnostic.textContent = 'Result received: ' + color + '.';
+ // bg.style.backgroundColor = color;
+ console.log('Confidence: ' + event.results[0][0].confidence);
+ console.log(resultado);
+}
+}
+
+
+function obtenerTexto() {
+/*if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
+// Obtenemos el objeto de reconocimento de texto de forma compatible a diferentes navegadores
+reconocimientoTexto = new ( window.SpeechRecognition || window.webkitSpeechRecognition ) ()
+reconocimientoTexto.lang='es-Ve'; 
+reconocimientoTexto.onerror = function(event) {
+ alert("error "+event.error);
+ textoreconocido="";
+//procesar2(indice);
+}
+reconocimientoTexto.onresult = function(event) {
+// Mostramos el texto obtenido
+textoreconocido=event.results[0][0].transcript;
+alert(textoreconocido);
+//procesar2(indice);
+}
+// Empezamos a reconocer texto
+reconocimientoTexto.start();
+} else {
+alert ('El navegador no soporta reconocimiento de voz' );
+}
+*/
+ recognition.start();
+}
+
 function leer_ventas_diarias(fecha){
 //=localStorage,getItem(fecha)
 
@@ -337,7 +431,7 @@ texto+='<div style="overflow:auto;height:90%;">';
 texto+='<table style="width:100%;">';
 for(var i=0;i<nd;i++){
  if (totalcajas[i]!=0 ||totalunid[i]!=0 ) {
-console.log(data[i][0]+" "+totalcajas[i]+ " cajas");
+//console.log(data[i][0]+" "+totalcajas[i]+ " cajas");
 var tot=totalcajas[i]*data[i][1]+totalunid[i];
 var ncaj=Math.floor(tot/data[i][1]);
 var nunid=tot % data[i][1];
@@ -366,7 +460,7 @@ return sal;
 function fecha_date(f){
 var comp=f.split('/');
 var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
-console.log('sal '+sal)
+//console.log('sal '+sal)
 return sal;
 }
 
@@ -419,16 +513,16 @@ var clib=document.getElementById("cli2").value;
 f1=inv_fecha_date(f1);
 f2=inv_fecha_date(f2);
 quitarlista();
-console.log('rango de fechas'+f1+' '+f2);
+//console.log('rango de fechas'+f1+' '+f2);
 
 var nd=data.length;
-console.log(nd);
+//console.log(nd);
 for(var i=0;i<nd;i++){
  totalunid[i]=0;
  totalcajas[i]=0;
 }
 var fecha=fecha_actual();
-console.log(fecha);
+//console.log(fecha);
 for(var i=0;i<localStorage.length;i++){
  var nomb=localStorage.key(i); 
  if (nomb.indexOf("FAC_")==0 )  
@@ -437,15 +531,15 @@ for(var i=0;i<localStorage.length;i++){
   var fech=nomb.split('_')[2];
   var nombcli=nomb.split('_')[1];
 var iva=1;
-  console.log('nc'+nombcli);
+  //console.log('nc'+nombcli);
 
   texto=localStorage.getItem(nomb);
   
-console.log('fech'+fech);
+//console.log('fech'+fech);
 if ( (texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && ( ((nombcli.indexOf(clib)==0) && clib!='' ) || (clib=='' && nombcli.indexOf('Pedido')!=0) ) ) {
 //    alert('nombcli '+nombcli+' clib  '+clib+' ind Pedido '+nombcli.indexOf('Pedido')+' ind clib '+(nombcli.indexOf('clib')==0)+' '+(clib=='' && nombcli.indexOf('Pedido')!=0));
     var ped=texto.split('&');
-    console.log(texto+" "+texto.length);
+    //console.log(texto+" "+texto.length);
     //console.log(ped.length);
     for (var j=1;j<ped.length;j++) {
       var items=ped[j].split('#');
@@ -474,13 +568,13 @@ var invent=localStorage.getItem('Inventario_PO');
 if (invent!=null) {
  var items=invent.split('&');
   for (var i=0;i<items.length;i++){
-   console.log(items[i]);
+   //console.log(items[i]);
    var partes=items[i].split('#');
     ind=inventario.findIndex(element => element.CLAVE==partes[0])
    inventario[ind]={"CLAVE":partes[0],"UNID":partes[1],"CAJAS":partes[2]};
   }
 }
-console.log(inventario);
+//console.log(inventario);
 }
 function desp_inventario(){
 texto='';
@@ -494,9 +588,9 @@ texto+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </bu
 texto+='<div style="overflow:auto;height:90%;">';
 texto+='<table style="width:100%;">';
 for(var i=0;i<inventario.length;i++){
-console.log('clave '+inventario[i]["CLAVE"]);
+//console.log('clave '+inventario[i]["CLAVE"]);
  var ind=clave_ind.get(inventario[i]["CLAVE"]);
- console.log('indice '+ind);
+ //console.log('indice '+ind);
  if (inventario[i]["UNID"]!=0 || inventario[i]["CAJAS"]!=0 ) {
   var nuc=parseInt(data[ind][1]);
   var tu=parseInt(inventario[i]["CAJAS"])*nuc+parseInt(inventario[i]["UNID"]);
@@ -532,6 +626,8 @@ if (resp) {
 }
 }
 function resta_inventario(){
+const resp = confirm("Esta seguro de quitar del Inventario");
+if (resp) {
   for (var i=0;i<data.length;i++){
    if (data[i][4]!=0 || data[i][5]!=0) {
        ind=inventario.findIndex(element => element.CLAVE==data[i][9])
@@ -546,15 +642,16 @@ function resta_inventario(){
  }
 guarda_inventario();
 }
+}
 
 function inicio_inventario(){
  for (var i=0;i<data.length;i++){
     inventario[i]={"CLAVE":data[i][9],"UNID":"0","CAJAS":"0"}
 }
-console.log(inventario);
+//console.log(inventario);
 carga_inventario();
 
-console.log(inventario);
+//console.log(inventario);
 }
 
 function suma_inventario(){
@@ -572,7 +669,7 @@ if (resp) {
        inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])+parseInt(data[i][5])).toString();
       }
  }
-console.log(inventario);
+//console.log(inventario);
 guarda_inventario();
 }
 }
@@ -590,7 +687,7 @@ function suma_inventario2(){
        inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])+parseInt(datfac[i].cajas)).toString();
       }
  }
-console.log(inventario);
+//console.log(inventario);
 guarda_inventario();
 }
 function ventas_periodo(fecha1,fecha2){
@@ -613,7 +710,7 @@ var ecliente;
 document.getElementById("cliente").hidden=true;
 ecliente=document.getElementById("cli").value;
 var pos=AClientes.findIndex(x=>x.nombre===ecliente);
-console.log(pos);
+//console.log(pos);
 const resp = confirm("Esta seguro de eliminar el cliente");
 if (pos>=0 && resp) {AClientes.splice(pos,1);guarda_clientes();
    limpiaCliente();
@@ -718,11 +815,13 @@ var indcliente=AClientes.findIndex(x=>x.name===cliente);
 }
 
 function guarda_pedido(){
+alert('guarda');
 var texto='';
 for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
  texto+='&'+data[i][9]+'#'+data[i][4]+'#'+data[i][5];
 }
+
 if (texto.length>2) {localStorage.setItem('Pedido',texto.substr(1));} else {localStorage.setItem('Pedido','');}
 } 
 localStorage.setItem('Cliente',cliente);
@@ -730,7 +829,7 @@ localStorage.setItem('Cliente',cliente);
 
 function crea_lista_facturas(){
 listasel=[];
-console.log("paso");
+//console.log("paso");
 for(var i=0;i<localStorage.length;i++){
 var nomb=localStorage.key(i); 
 if (nomb.indexOf("FAC_")==0) {listasel.unshift(nomb.substr(4));} 
@@ -854,7 +953,7 @@ texto+='<button onclick="cancelar()"> Cancelar </button></div>';
 div3.innerHTML=texto;
 div3.style="display: block;";
 
-console.log(div3.innerHTML);
+//console.log(div3.innerHTML);
 */
 }
 
@@ -872,7 +971,7 @@ for (var i=0;i<datfac.length;i++) {
 if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
  data[i][4]=datfac[i].unidad;
  data[i][5]=datfac[i].cajas;
-console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
+//console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
 }
 } 
 factura2();
@@ -887,7 +986,7 @@ for (var i=0;i<datfac.length;i++) {
 if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
  data[i][4]+=datfac[i].unidad;
  data[i][5]+=datfac[i].cajas;
-console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
+//console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
 }
 } 
 factura2();
@@ -899,8 +998,8 @@ recupera_factura("FAC_"+nomb);
  if (cliente.indexOf('Pedido')==-1) {suma_inventario2();}
 cliente=cliente_factura;
 var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
-console.log(indcliente);
-if (indcliente>=0) {Ocliente=AClientes[indcliente];} else {Ocliente=null;}
+//console.log(indcliente);
+if (indcliente>=0) {Ocliente=AClientes[indcliente];} else {Ocliente=AClientes[0];}
 fact_base(num);
 borra2(num);
 cancelar();
@@ -951,7 +1050,7 @@ if (cliente=='') {alert('Falta Cliente en factura');} else
 
 function guarda_factura2(){
 fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
-alert(fecha_factura);
+//alert(fecha_factura);
 cliente_factura=document.getElementById('cli2').value;
 guarda_factura(); 
 localStorage.setItem('FACT_NRO',(nro_factura+1).toString());
@@ -971,18 +1070,18 @@ localStorage.setItem('FACT_NRO',(nro_factura).toString());
 for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
  [pu,pb]=precio(i);
-console.log('pu '+pu+'pb '+pb);
+//console.log('pu '+pu+'pb '+pb);
  texto+='&'+data[i][9]+'#'+data[i][4]+'#'+(pu).toFixed(2)+'#'+data[i][5]+'#'+(pb).toFixed(2);
 }
 }
-if (texto.length>2) {localStorage.setItem(nomb,texto); alert(nomb)} 
-if (cliente.indexOf('Pedido')==-1) {alert(cliente);resta_inventario();}
+if (texto.length>2) {localStorage.setItem(nomb,texto); } 
+if (cliente.indexOf('Pedido')==-1) {resta_inventario();}
 
 }
 
 
 function recupera_pedido(archivo){
-var texto;
+var texto='';
 cliente=localStorage.getItem('Cliente');
 document.getElementById("cli").value=cliente;
 for (var i=0;i<data.length;i++) {
@@ -991,10 +1090,11 @@ data[i][5]=0;
 }
 
 texto=localStorage.getItem(archivo);
-if (texto!='') {
+
+
+if (texto!='' && texto!=null) {
 var ped=texto.split('&');
-//console.log('texto: '+texto.length);
-//console.log(ped.length);
+
 for (var i=0;i<ped.length;i++) {
   var items=ped[i].split('#');
   var ind=clave_ind.get(items[0]);
@@ -1041,7 +1141,7 @@ for (var i=1;i<ped.length;i++) {
   var items=ped[i].split('#');
 //  var ind=parseInt(items[0]);
  var ind=clave_ind.get(items[0]);
-console.log('ind'+ind);
+//console.log('ind'+ind);
   datfac[ind].unidad=parseInt(items[1]);
   datfac[ind].pu=parseFloat(items[2]);
   datfac[ind].cajas=parseInt(items[3]);
@@ -1051,7 +1151,7 @@ console.log('ind'+ind);
 
 }
 function salir(){
-guarda_pedido();
+//guarda_pedido();
 //t1=document.getElementById("t1").value;
 t2=document.getElementById("t2").value;
 //localStorage.setItem('p1',t1);
@@ -1146,8 +1246,8 @@ refresca();
 function  set_clave_indice(){
 clave_ind=new Map();
 for (var i=0;i<data.length;i++) {
-console.log(i);
-console.log(data[i][9]);
+//console.log(i);
+//console.log(data[i][9]);
 
 clave_ind.set(data[i][9],i.toString());
 }
@@ -1494,7 +1594,6 @@ set_clave_indice();
 inicio_inventario();
 refresca();
 recupera_pedido("Pedido");
-
 }
 
 
@@ -1556,7 +1655,7 @@ var colorb='black';
 for (var i=0;i<datfac.length;i++){
  if (datfac[i].unidad!=0 || datfac[i].cajas!=0) {
  contador++;
- console.log(i+ " "+contador);
+ //console.log(i+ " "+contador);
  factor=bcv;
  if (data[i][3]==1) {fm=1.16;colorb='black';} else {fm=1;colorb='blue';}
 
@@ -1658,7 +1757,7 @@ Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+mone+ ' \n';
 }
 
 
-console.log(Ftexto);
+//console.log(Ftexto);
 
 var TM2="";
 if (tipo2==0) {TM2="$";} else {TM2="Bs";}
@@ -1680,7 +1779,7 @@ divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width:
 textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
 divfactura.innerHTML=textoT;
 divfactura.hidden=false;
-console.log("contador: "+contador);
+//console.log("contador: "+contador);
 document.getElementById("contad").innerText=contador+ " Productos";
 }
 var Ptexto;
@@ -1695,7 +1794,7 @@ if (data[i][4]!=0 ) {Ptexto+= data[i][4]+' U '+data[i][0]+'\n';}
   if (data[i][5]!=0) {Ptexto+= data[i][5]+' '+data[i][0]+'\n';}
 
 }
-console.log(Ptexto);
+//console.log(Ptexto);
 
 const shareData = {
   title: 'Pedido',
@@ -1736,6 +1835,7 @@ var Tdolar=0;
 var Gdolar=0;
 for (var i=0;i<data.length;i++){
 if (data[i][4]!=0 || data[i][5]!=0) {
+//alert(i);
 contador++;
 //console.log(i+ " "+contador);
 factor=parseFloat(document.getElementById("t2").value);
@@ -1869,7 +1969,7 @@ texto+='</table>';
 Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+TM+' C/IVA: '+(totalb).toFixed(2)+' '+TM+' \n'
 Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+TM+ ' \n';
 }
-console.log(Ftexto);
+//console.log(Ftexto);
 
 
 
@@ -1897,7 +1997,7 @@ divfactura.innerHTML=textoT;
 divfactura.hidden=false;
 //console.log("contador: "+contador);
 document.getElementById("contad").innerText=contador+ " Productos";
-console.log(Gdolar.toFixed(2));
+//console.log(Gdolar.toFixed(2));
 }
 
 var tipo=0;
@@ -2008,7 +2108,7 @@ if (data[i][6]=="t1") {factor=t2;}
 if (data[i][6]=="t2") {factor=t2;}
 //console.log(i+" "+data[i][0]);
 texto+='<p  >'+ data[i][0]+'</p>';
-console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
+//console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
 if (data[i][4]==0) {var vcor='black';} else {var vcor='blue';}
 if (data[i][5]==0) {var vcor1='black';} else {var vcor1='blue';}
 if (data[i][3]==1) {fm=1.16} else {fm=1}
@@ -2159,8 +2259,8 @@ texto+='</table>';
 
 divintro.innerHTML=texto;
 divintro.style.visibility = "visible";
-console.log('num '+i);
-console.log(divintro);
+//console.log('num '+i);
+//console.log(divintro);
 }
 
 function refresca(){
@@ -2182,13 +2282,13 @@ var hay=false;
 for (var i=0;i<data.length;i++){
 if ((data[i][7]==cat_comp) && (data[i][8]==1))  
 {
- console.log(data[i][8]);
+ //console.log(data[i][8]);
  hay=true;
  if (data[i][6]=="t1") {factor=t2;}
  if (data[i][6]=="t2") {factor=t2;}
-console.log(i+" "+data[i][0]);
+//console.log(i+" "+data[i][0]);
 texto+='<button class="bot4" onclick="intro('+i+');">'+ data[i][0]+'</button><br>';
-console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
+//console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
 
 }
 
@@ -2276,6 +2376,7 @@ function ajaxPositive(response) {
         inicio_inventario();
         refresca();
         recupera_pedido("Pedido");
+        set_var_voz();
   }
 
 function showError(err) { 
@@ -2334,7 +2435,7 @@ function ajaxPositiveD(response) {
  function showResultD(txt) {
        console.log('muestro respuesta: ', txt);
         Historico=txt;
- console.log(fecha_actual());
+ //console.log(fecha_actual());
         var ind=Historico.findIndex(elemento => elemento.fecha==fecha_actual());
         if (ind>=0) { document.getElementById("t2").value =Historico[ind].bcv};
     }
@@ -2366,7 +2467,7 @@ function ajaxPositiveD(response) {
       }
     }
  function showResultD(txt) {
-       console.log('fecha: '+ txt.dia+txt.mes+txt.ano);
+       //console.log('fecha: '+ txt.dia+txt.mes+txt.ano);
       // document.getElementById("t1").value = txt.USD.promedio;
      //    document.getElementById("t2").value = txt.USD.sicad2;
       var fecha='('+txt.dia+'/'+txt.mes+'/'+txt.ano+')';
