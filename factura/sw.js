@@ -1,5 +1,5 @@
 // 05-07-2023
-currentCache = 'FACPOLAR_cache_v4.6';
+currentCache = 'FACPOLAR_cache_v4.7';
 const files =
 [
     'index.html',

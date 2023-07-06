@@ -133,6 +133,17 @@ width:98%;
 overflow-y:scroll;
 }
 
+#lista {
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
 #footer {
   display: none;
   position: fixed;
@@ -253,16 +264,11 @@ border-radius: 8px;
 <div id="divt" ></div>
 <div id="introd" ></div>
 <div id="content" hidden="false"></div>
-<div id="factura" hidden="true">
-
-</div>
+<div id="factura" hidden="true"></div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
-<div id="voz">
-Hola:
-<button class="micro" onclick="obtenerTexto();"></button>
-
-</div> 
- <div id="header">
+ <div id="voz"> <button class="micro" onclick="obtenerTexto();"></button> </div>
+ 
+<div id="header">
 <table width="100%">
 <tr align="center">
 <td width="12%"> <button class="btop" onclick="Mantenimiento();">Mant</button></td>
@@ -271,9 +277,9 @@ Hola:
 <td width="12%"><button class="btop" onclick="factura();">Fact</button></td> 
 <td width="12%"><button class="btop" onclick="total();">Ventas</button></td>
 <td width="12%"><button class="btop" onclick="desp_inventario();">Inv</button></td>
-
 </tr></table>
 </div>
+
 <div id="cliente" hidden="true">
 <span onclick="limpiaCliente();">Cliente:</span> <input style="width:55%;" type="text" id="cli" value="" list="listaclientes" oninput="datos_cliente();">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>'
 <datalist id="listaclientes"></datalist><br>
@@ -285,7 +291,7 @@ Deuda:<input style="width:55%;" type="text" id="deucli" value="" ><br>
 Vacios polar:<input style="width:55%;" type="text" id="vaccli" value="" ><br>
 Vacios 350 ml:<input style="width:55%;" type="text" id="vacclir1" value="" ><br>
 Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
-
+</div>
 
 <div>
 <label hidden id=selected>Nothing selected</label><br>
@@ -420,6 +426,7 @@ var a1=f1.split('/');
 var totalunid=[];
 var totalcajas=[];
 var modo_inv=false;
+
 function muestra_total_ventas(){
 var nd=data.length;
 var texto='';
@@ -473,7 +480,7 @@ return day+'/'+mes+'/'+year;
 
 function Mantenimiento(){
 var div3 = document.getElementById("lista");
-div3.style="position: fixed;top :30px; left: 0px; width: 100%;height:40%;background-color: blue;color:white; text-align: left; border: 3px solid #73AD21;";
+div3.style="display:block ;position: fixed;top :30px; left: 0px; width: 100%;height:40%;background-color: blue;color:white; text-align: left; border: 3px solid #73AD21;";
 var texto='';
 texto+='<div> <table style="text-align:center;margin:auto;">';
 texto+='<tr><td><button onclick=importar()>Importar Facturas</button></td></tr>';
@@ -481,6 +488,7 @@ texto+='<tr><td><button onclick=exportar()>Exportar Facturas</button></td></tr>'
 texto+='<tr><td><button onclick=quitar_div("lista");>Salir</button></td></tr>';
 texto+='</table></div>';
 div3.innerHTML=texto;
+
 }
 
 
@@ -880,6 +888,7 @@ listasel=listasel.sort(ord_fecha);
 selectlista(1);
 }
 var total_factura=0;
+
 function selectlista(t){
 var textoT="";
 var div3 = document.getElementById("lista");
@@ -1027,7 +1036,7 @@ localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
 
 function guardar_factura(){
 var div3 = document.getElementById("lista");
-div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
+div3.style="display:block; position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
 nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
 texto='';
 texto+='Fecha: <input id="ffac" type="date" value="'+fecha_date(fecha_actual())+'"><br>';
@@ -1037,7 +1046,7 @@ texto+='<datalist id="listaclientes"></datalist>';
 texto+='<input style="width:30%;" type="text" id="nfact" value="'+nro_factura+'" list="listaclientes">';
 texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="guarda_factura2();" >Ok </button>';
 div3.innerHTML=texto;
-
+div3.style.visibilty="visible";
 /*
 if (cliente=='') {alert('Falta Cliente en factura');} else
  {nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
