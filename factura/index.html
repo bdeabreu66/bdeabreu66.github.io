@@ -133,17 +133,7 @@ width:98%;
 overflow-y:scroll;
 }
 
-#lista {
-  display: block;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  background-color: blue;
-  color: white;
-  text-align: center;
-  font-size:0.5em;
-}
+
 #footer {
   display: none;
   position: fixed;
@@ -633,9 +623,14 @@ if (resp) {
   desp_inventario();
 }
 }
+function restar_inventario(){
+ resp=confirm('Desea quitar del inventario');
+if (resp) { resta_inventario();}
+}
+
+
 function resta_inventario(){
-const resp = confirm("Esta seguro de quitar del Inventario");
-if (resp) {
+
   for (var i=0;i<data.length;i++){
    if (data[i][4]!=0 || data[i][5]!=0) {
        ind=inventario.findIndex(element => element.CLAVE==data[i][9])
@@ -649,7 +644,7 @@ if (resp) {
      }
  }
 guarda_inventario();
-}
+
 }
 
 function inicio_inventario(){
@@ -823,7 +818,6 @@ var indcliente=AClientes.findIndex(x=>x.name===cliente);
 }
 
 function guarda_pedido(){
-alert('guarda');
 var texto='';
 for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
@@ -1046,7 +1040,7 @@ texto+='<datalist id="listaclientes"></datalist>';
 texto+='<input style="width:30%;" type="text" id="nfact" value="'+nro_factura+'" list="listaclientes">';
 texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="guarda_factura2();" >Ok </button>';
 div3.innerHTML=texto;
-div3.style.visibilty="visible";
+
 /*
 if (cliente=='') {alert('Falta Cliente en factura');} else
  {nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
@@ -1160,7 +1154,7 @@ for (var i=1;i<ped.length;i++) {
 
 }
 function salir(){
-//guarda_pedido();
+guarda_pedido();
 //t1=document.getElementById("t1").value;
 t2=document.getElementById("t2").value;
 //localStorage.setItem('p1',t1);
@@ -1995,7 +1989,7 @@ textoT+='<td width="5%"></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda();">' + TM +'</button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="suma_inventario();"> +I </button></td>';
-textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="resta_inventario();"> -I </button></td>';
+textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="restar_inventario();"> -I </button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Pedido" id="btnc" onclick="pedido();"> P </button></td>';
 textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
 textoT+='</tr></table></div><br>';
