@@ -104,6 +104,7 @@
       ["Q099 Toddy. Chips Galleta (24gx6 sobres)x24U ",24,2.22,1,0,0,"t2","&Alimentos&Varios&Galletas&",0,'Q099',2.04,"galleta 6"],
       ["Q138 Toddy. Chips Galleta (24gx4 sobres)x40U ",40,2.22,1,0,0,"t2","&Alimentos&Varios&Galletas&",0,'Q138',2.04,"galleta 4"],
       ["Y065 Pudin Toddy. (125gx6)x24U ",24,0.67,1,0,0,"t2","&Alimentos&Varios&Pudin&",1,'Y065',0.62,"pudin"],
+      ["Y065 Pudin Toddy (PROMO). (125gx6)x24U ",24,0.67,1,0,0,"t2","&Alimentos&Varios&Pudin&",1,'Y065P',0.52,"pudin"],
       ["Q101 Gelatina Golden Fresa 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",0,'Q101',13.60,"gelatina fresa"],
       ["Q102 Gelatina Golden Kolita 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",0,'Q102',13.60,"gelatina cola"],
       ["Q103 Gelatina Golden Uva 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",0,'Q103',13.60,"gelatina uva"],
