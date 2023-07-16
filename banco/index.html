@@ -9,6 +9,13 @@
 .pagocli {
   color: black;
 }
+
+*{
+//  font-family: Times, "Times New Roman", Georgia, serif;
+//font-family: Verdana, Arial, Helvetica, sans-serif;
+font-family: Arial, Helvetica, sans-serif;
+}
+
 input[type=number]{
 font-size:2em;
 width: 8em;
@@ -741,7 +748,7 @@ var sumap=[];
 var suma_parcial=0;
 //console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
     dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
-
+    dia=' ';
 texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
 texto+='<span class="pagocli" pos="0" name="subtotal" onclick="permuta(this)"></span>';
 texto+='<table style="width:100%;font-size:1.0rem;">';
@@ -761,6 +768,7 @@ colb=colorcuenta(pagos[i].tc);
     //console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
     texto+='</table>';
     dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
+    dia=' ';
     texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $'+'</p>';
     texto+='<span class="pagocli" pos="0" name="subtotal" onclick="permuta(this)"></span>';
     texto+='<table style="width:100%;font-size:1.0rem;">';
@@ -833,9 +841,10 @@ resp=confirm("rebajar la deuda");
  localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
  document.getElementById('deu').value=Clientes[ind].deuda;
  alert('Deuda modificada');
- suma=0;
- document.getElementById('abo').innerText='Abono : 0';
- document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
+ borrar_suma();
+// suma=0;
+// document.getElementById('abo').innerText='Abono : 0';
+// document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
  }
 }
 }
@@ -1064,8 +1073,8 @@ var elb=b.split('_');
 }
 
 function colorcuenta(C){
-   if (C=='A') {return 'SkyBlue';} 
-   if (C=='J') {return 'DodgerBlue';}
+   if (C=='A') {return 'LightSalmon';} 
+   if (C=='J') {return 'RoyalBlue';}
    if (C=='C') {return 'SteelBlue';}
    if (C=='EB') {return 'Olive';}
    if (C=='ED') {return 'Lime';}
@@ -1084,7 +1093,8 @@ var nombre_previo=Obten_nombre(pagos[0].telf);
 var total_parcial=0;
 
 //console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $');
-dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
+//dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
+dia=' ';
 texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[0].dolar+' $'+'</p>';
 texto+='<table width="100%">';
 for (var i=0;i<pagos.length;i++){
@@ -1093,8 +1103,8 @@ if (pagos[i].fecha!=fecha_previa) {
     fecha_previa=pagos[i].fecha;
     //console.log('Fecha: '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $');
     texto+='</table>';
-    dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
-  //alert(dia);
+    //dia=weekday[new Date(fecha_date(fecha_previa)).getDay()];
+    dia=' ';
     texto+='<p style="text-align:center;font-size:1.2em;">'+'Fecha: '+dia+'  '+fecha_previa+' Dolar BCV: '+pagos[i].dolar+' $'+'</p>';
 
     texto+='<table width="100%">';
@@ -1229,6 +1239,7 @@ document.getElementById("suma").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
 
 let set= new Set( pagos.map( JSON.stringify ) )
 pagos = Array.from( set ).map( JSON.parse );
+
 posi=pagos.length;
 let set2= new Set( domicilios.map( JSON.stringify ) )
 domicilios = Array.from( set2 ).map( JSON.parse );
@@ -1237,7 +1248,16 @@ posi2=domicilios.length;
 
 for (var j=0;j<pagos.length;j++) {
  pos[j]=0;
-}
+// Corrige cuando no tiene la tasa del dolar
+ if (pagos[j].montodolar==0) {
+  //alert();
+   var clave_fecha=pagos[j].fecha.toString();
+   pagos[j].dolar=t_d.get(clave_fecha);
+   if (pagos[j].dolar!=undefined) {
+   pagos[j].montodolar=(pagos[j].montoBs/pagos[j].dolar).toFixed(2);
+   } 
+  }
+ }
 }
 localStorage.setItem('domicilios_banco',JSON.stringify(domicilios));
 
@@ -1535,15 +1555,7 @@ if ('serviceWorker' in navigator) {
 
 <div id="divdata"></div>
 <div id="menu">
-<span style="font-size:2em;color:red;" id="suma">Suma=0</span>&nbsp&nbsp&nbsp&nbsp<button onclick="borrar_suma()">B</button>
-<table width="100%" ><tr>
-<td  style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida1();">Fecha</button></td>
-<td style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida2();">Cliente</button></td>
-<td style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida3();">Fecha-Cli</button></td>
-<td style="font-size:0.5em;width:20;"><button class="btop" onclick="pagos_alim();">P-Alim</button></td>
-<td style="font-size:0.5em;width:20;"><button class="btop" onclick="pagos_cerv();">P-Cerv</button></td>
 
-</tr></table>
 </div>
 <div id="header"> 
 <table width="100%"><tr>
@@ -1556,6 +1568,16 @@ if ('serviceWorker' in navigator) {
 </td><td style="font-size:0.5em;width:25;">
 <button class="btop" onclick="Activalector_importar();">Im</button>
 </td><tr></table>
+<table width="100%" ><tr>
+<td  style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida1();">Fecha</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida2();">Cliente</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida3();">Fecha-Cli</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="pagos_alim();">P-Alim</button></td>
+<td style="font-size:0.5em;width:20;"><button class="btop" onclick="pagos_cerv();">P-Cerv</button></td>
+
+</tr></table>
+<span style="font-size:2em;color:red;" id="suma">Suma=0</span>&nbsp&nbsp&nbsp&nbsp<button onclick="borrar_suma()">B</button>
+
 </div>
 
 <div>
