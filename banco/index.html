@@ -1156,8 +1156,7 @@ if (value.indexOf("Cargo Domiciliacion")>0 || value.indexOf("Cargo por Domicilia
 var nsem;
 var sem;
 
-//console.log(contenido);
-var archivos=contenido.split("&&&&");
+ var archivos=contenido.split("&&&&");
 
 for (var jj=0;jj<archivos.length;jj++) {
 var lineas=archivos[jj].split("\r\n");
@@ -1225,11 +1224,7 @@ post=result[i-posi].indexOf('TRANSFERENCIA RECIBIDA');
   }
  
   pagos[i].montoBs=parseFloat(campos[8].replace(',', '.'));
-//  var clave=(pagos[i].telf).toString().trim();
- // pagos[i].nombre=t_c.get(clave);
- // if (pagos[i].nombre==undefined) {pagos[i].nombre=clave;}
-  var clave_fecha=pagos[i].fecha.toString();
-  //console.log('clave_fecha'+clave_fecha+' '+clave_fecha.length);
+ var clave_fecha=pagos[i].fecha.toString();
   pagos[i].dolar=t_d.get(clave_fecha);
   if (pagos[i].dolar!=undefined) {
    pagos[i].montodolar=(pagos[i].montoBs/pagos[i].dolar).toFixed(2);
@@ -1249,7 +1244,7 @@ posi2=domicilios.length;
 for (var j=0;j<pagos.length;j++) {
  pos[j]=0;
 // Corrige cuando no tiene la tasa del dolar
- if (pagos[j].montodolar==0) {
+ if (true) {
   //alert();
    var clave_fecha=pagos[j].fecha.toString();
    pagos[j].dolar=t_d.get(clave_fecha);
@@ -1260,7 +1255,6 @@ for (var j=0;j<pagos.length;j++) {
  }
 }
 localStorage.setItem('domicilios_banco',JSON.stringify(domicilios));
-
 localStorage.setItem('pagos_banco',JSON.stringify(pagos));
 //console.log(domicilios);
 }
