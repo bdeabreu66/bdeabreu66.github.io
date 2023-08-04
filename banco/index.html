@@ -1519,10 +1519,13 @@ function ajaxPositive(response) {
         localStorage.setItem('databanco',txt);
           databanco=eval(txt);
         asigna_databanco();
+
          }
 
 function showError(err) { 
       console.log('muestor error', err);
+      databanco=eval(localStorage.getItem('databanco'));
+      asigna_databanco();
     }
 }
 
@@ -1553,15 +1556,19 @@ if ('serviceWorker' in navigator) {
 </div>
 <div id="header"> 
 <table width="100%"><tr>
-<td style="font-size:0.5em;width:25;">
-<button class="btop" onclick="Activalector_archivos();">Cargar V4</button>  
-</td><td style="font-size:0.5em;width:25;">
-<button class="btop" onclick="borrar_datos();">Borrar</button>
-</td><td style="font-size:0.5em;width:25;">
-<button class="btop" onclick="exportar_datos();">Ex</button>
-</td><td style="font-size:0.5em;width:25;">
-<button class="btop" onclick="Activalector_importar();">Im</button>
-</td><tr></table>
+<td style="font-size:0.5em;width:33%;">
+<button class="btop" onclick="Activalector_archivos();">Cargar</button>  
+</td>
+<!-- <td style="font-size:0.5em;width:25;"> -->
+<!-- <button class="btop" onclick="borrar_datos();">Borrar</button> -->
+<!-- </td> -->
+<td style="font-size:0.5em;width:33%;">
+<button class="btop" onclick="exportar_datos();">Exportar</button>
+</td>
+<td style="font-size:0.5em;width:33%;">
+<button class="btop" onclick="Activalector_importar();">Importar</button>
+</td><tr>
+</table>
 <table width="100%" ><tr>
 <td  style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida1();">Fecha</button></td>
 <td style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida2();">Cliente</button></td>
