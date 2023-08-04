@@ -1072,6 +1072,7 @@ localStorage.setItem('FACT_NRO',(nro_factura).toString());
 
 for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
+//console.log(data[i][4]+' '+data[i][5]);
  [pu,pb]=precio(i);
 //console.log('pu '+pu+'pb '+pb);
  texto+='&'+data[i][9]+'#'+data[i][4]+'#'+(pu).toFixed(2)+'#'+data[i][5]+'#'+(pb).toFixed(2);
@@ -1144,11 +1145,12 @@ for (var i=1;i<ped.length;i++) {
   var items=ped[i].split('#');
 //  var ind=parseInt(items[0]);
  var ind=clave_ind.get(items[0]);
-//console.log('ind'+ind);
+console.log('ind'+ind);
   datfac[ind].unidad=parseInt(items[1]);
   datfac[ind].pu=parseFloat(items[2]);
   datfac[ind].cajas=parseInt(items[3]);
   datfac[ind].pb=parseFloat(items[4]);
+ // console.log(datfac[ind].cajas+' '+datfac[ind].unidad);
 }
 }
 
@@ -2202,11 +2204,13 @@ document.getElementById("introd").style.visibility="hidden";
 
 function cambiaU(num){
 data[num][4]=document.getElementById("entradaU").value;
+if (data[num][4]=='') {data[num][4]=0}
 intro(num);
 salir();
 }
 function cambiaB(num){
 data[num][5]=document.getElementById("entradaB").value;
+if (data[num][5]=='') {data[num][5]=0}
 intro(num);
 salir();
 }
