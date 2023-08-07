@@ -384,9 +384,10 @@ function Leer_Archivo(e){
     for (var i=0;i<n;i++) {
  // alert(data_sep[2*i]);
  // alert(data_sep[2*i+1]);
-
-  localStorage.setItem(data_sep[2*i],data_sep[2*i+1]);
-    }
+  if (localStorage.getItem(data_sep[2*i])===null) {
+    localStorage.setItem(data_sep[2*i],data_sep[2*i+1]);
+  }
+  }
 //    alert(datos_imp.length);
   });
   lector.readAsText(archivos[0]);
@@ -980,20 +981,41 @@ if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
 factura2();
 cancelar();
 }
-
-function fact_agrega(num){
-var nomb=listasel[num];
-//anula();
-recupera_factura("FAC_"+nomb);
-for (var i=0;i<datfac.length;i++) {
-if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
- data[i][4]+=datfac[i].unidad;
- data[i][5]+=datfac[i].cajas;
-//console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
+function modifica_factura2(num){
+fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
+cliente_factura=document.getElementById('cli2').value;
+var nro_fact_m=document.getElementById('nfact').value;
+nomb_factura="FAC_"+cliente_factura+"_"+fecha_factura+"_"+nro_fact_m;
+console.log('nomb '+nomb_factura);
+console.log('pedido '+pedido_cliente);
+//localStorage.setItem(nomb_factura,pedido_cliente);
+var nomb='FAC_'+listasel[num];
+console.log('nomb '+nomb);
+//localStorage.removeItem(nomb);
+quitarlista();
 }
-} 
-factura2();
-cancelar();
+ 
+
+function fact_modif(num){
+//bcv_factura=ped[0];
+var nomb=listasel[num];
+recupera_factura("FAC_"+nomb);
+var div3 = document.getElementById("lista");
+div3.style="display:block; position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
+//nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
+texto='';
+texto+='Fecha: <input id="ffac" type="date" value="'+fecha_date(fecha_factura)+'"><br>';
+texto+='<span onclick="limpiaCliente2();">Cliente:</span>';
+texto+='<input style="width:30%;" type="text" id="cli2" value="'+cliente_factura+'" list="listaclientes">';
+texto+='<datalist id="listaclientes"></datalist>';
+texto+='<input style="width:30%;" type="text" id="nfact" value="'+numero_factura+'" >';
+texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="modifica_factura2('+num+');" >Ok </button>';
+div3.innerHTML=texto;
+//anula();
+
+
+//factura2();
+//cancelar();
 }
 function revertir_factura(num){
 var nomb=listasel[num];
@@ -1141,6 +1163,7 @@ cliente_factura=archivo.split('_')[1];
 numero_factura=archivo.split('_')[3];
 //console.log('texto: '+texto.length);
 //console.log(ped.length);
+pedido_cliente=ped;
 for (var i=1;i<ped.length;i++) {
   var items=ped[i].split('#');
 //  var ind=parseInt(items[0]);
@@ -1773,7 +1796,7 @@ textoT+='<tr>';
 textoT+='<td width="15%"><button class="btop" onclick="borra('+numf+');">Borrar</button></td>';
 textoT+='<td width="15%"><button class="btop" onclick="revertir_factura('+numf+');">Revertir</button></td>';
 textoT+='<td width="15%"><button class="btop" onclick="fact_base('+numf+');">Estab</button></td>';
-textoT+='<td width="15%"><button class="btop" onclick="fact_agrega('+numf+');">Agrega</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="fact_modif('+numf+');">Modif</button></td>';
 textoT+='<td width="10%"></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda2('+numf+');">' + TM2 +'</button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
@@ -2444,7 +2467,7 @@ function ajaxPositiveD(response) {
         Historico=txt;
  //console.log(fecha_actual());
         var ind=Historico.findIndex(elemento => elemento.fecha==fecha_actual());
-        if (ind>=0) { document.getElementById("t2").value =Historico[ind].bcv};
+        if (ind>=0) { document.getElementById("t2").value =Historico[ind].bcv; localStorage.setItem('p2',Historico[ind].bcv);};
     }
 function showErrorD(err) {
  console.log('muestor error', err); 
