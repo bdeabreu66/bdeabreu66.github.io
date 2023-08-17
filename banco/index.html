@@ -657,7 +657,7 @@ function Leer_Archivo2(e){
     localStorage.setItem('pagos_hechos_banco',textos[2]);
     domicilios=JSON.parse(textos[3]);
     localStorage.setItem('domicilios_banco',textos[3]);
-//    alert(datos_imp.length);
+    alert('importacion completada');
   });
   lector.readAsText(archivos[0]);
 }
