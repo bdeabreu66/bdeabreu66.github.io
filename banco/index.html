@@ -318,7 +318,7 @@ const t_c=new Map();
 Fecha_hora='';
 
 var data=eval(localStorage.getItem('data'));
-var databanco=eval(localStorage.getItem('databanco'));
+//var databanco=eval(localStorage.getItem('databanco'));
 function set_clave_indice(){
 clave_ind=new Map();
 for (var i=0;i<data.length;i++) {
@@ -1515,7 +1515,7 @@ function ajaxPositive(response) {
  function showResult(txt) {
         //console.log('muestro respuesta: ', txt);
         localStorage.setItem('databanco',txt);
-          databanco=eval(txt);
+        databanco=eval(txt);
         asigna_databanco();
 
          }
