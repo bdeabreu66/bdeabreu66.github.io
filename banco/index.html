@@ -640,8 +640,6 @@ function exportar_datos(){
  data=JSON.stringify(pagos)+"^^"+JSON.stringify(pagos_ef)+"^^"+JSON.stringify(pagos_hechos)+"^^"+JSON.stringify(domicilios);
  var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
  saveAs(blob,"_datosBNC.txt");
-
-
 }
  
 function Leer_Archivo2(e){
