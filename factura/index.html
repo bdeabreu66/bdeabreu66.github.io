@@ -452,9 +452,9 @@ function Leer_Archivo2(e){
     var data_sep=datos_imp.split('*#*');
     var n=Math.trunc(data_sep.length/2);
     for (var i=0;i<n;i++) {
-  if (localStorage.getItem(data_sep[2*i])===null) {
+ // if (localStorage.getItem(data_sep[2*i])===null) {
     localStorage.setItem(data_sep[2*i],data_sep[2*i+1]);
-  }
+//  }
   }
   });
   lector.readAsText(archivos[0]);
