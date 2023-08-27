@@ -420,21 +420,18 @@ function Leer_Archivo(e){
   lector.addEventListener("load",(e) => {
     datos_imp = e.target.result;
     var data_sep=datos_imp.split('*#*');
-/*    var n=Math.trunc(data_sep.length/2);
-    for (var i=0;i<n;i++) {
-  if (localStorage.getItem(data_sep[2*i])===null) {
-    localStorage.setItem(data_sep[2*i],data_sep[2*i+1]);
-  }
-  }
-*/
-if (data_sep[2]=='Clientes_Pita') {
-//Clientes.push(JSON.parse(data_sep[3]))
 
-localStorage.setItem(data_sep[2],data_sep[3]);
+if (data_sep[2]=='Clientes_Pita') {
+//AClientes=JSON.parse(data_sep[3]);
+alert(data_sep[3]);
+if (data_sep[3]!=null) {
+localStorage.setItem('Clientes_Pita',data_sep[3]);
+}
 //guarda_clientes_IDB()
 }
 if (data_sep[0]=='FACTURAS') {
 localStorage.setItem(data_sep[0],data_sep[1]);
+facturas=JSON.parse(data_sep[1]);
 //guarda_facturas_IDB()
 }
 
@@ -475,8 +472,8 @@ for(var i=0;i<localStorage.length;i++){
 */
 data="FACTURAS"+sep+JSON.stringify(facturas);
 
-//data+=sep+'Clientes_Pita'+sep+localStorage.getItem('Clientes_Pita');
-data+=sep+'Clientes_Pita'+sep+JSON.stringify(Lclientes);
+data+=sep+'Clientes_Pita'+sep+localStorage.getItem('Clientes_Pita');
+//data+=sep+'Clientes_Pita'+sep+JSON.stringify(Lclientes);
 
  var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
  saveAs(blob,"facturas.txt");
@@ -917,7 +914,7 @@ localStorage.setItem('Clientes_Pita','');
 function Lee_clientes(){
 Lclientes=localStorage.getItem('Clientes_Pita');
 //lee_clientes_IDB();
-if (Lclientes!='') { AClientes=JSON.parse(Lclientes);} else {AClientes=[];}
+if (Lclientes!=null) { AClientes=JSON.parse(Lclientes);} else {AClientes=[];}
 
 //console.log(AClientes);
 if (AClientes.length>0) {
