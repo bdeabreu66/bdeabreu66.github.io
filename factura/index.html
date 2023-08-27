@@ -364,12 +364,52 @@ function leer_ventas_diarias(fecha){
 //=localStorage,getItem(fecha)
 
 }
+
+function guarda_facturas_IDB(){
+let openReq = indexedDB.open('DIST_PITA',1);
+openRequest.onupgradeneeded = function () {
+  // triggers if the client does not have a database
+  // initialization
+};
+openRequest.onerror = function () {
+  console.error("Error", openRequest.error);
+};
+openRequest.onsuccess = function () {
+  let db = openRequest.result;
+  db.createObjectStore("FACTURAS");
+
+  // continue working with the database using the db object
+};
+}
+
+
+
+
+function guarda_clientes_IDB(){
+
+}
+function lee_facturas_IDB(){
+
+}
+function lee_clientes_IDB(){
+
+}
+
 function importar(){
 getFile = new selectFile;
 getFile.targets('choose','selected');
 archivos=document.getElementById('choose');
 archivos.value=null;
 archivos.addEventListener('change', Leer_Archivo, false);
+getFile.simulate();
+}
+
+function importar2(){
+getFile = new selectFile;
+getFile.targets('choose','selected');
+archivos=document.getElementById('choose');
+archivos.value=null;
+archivos.addEventListener('change', Leer_Archivo2, false);
 getFile.simulate();
 }
 
@@ -380,15 +420,42 @@ function Leer_Archivo(e){
   lector.addEventListener("load",(e) => {
     datos_imp = e.target.result;
     var data_sep=datos_imp.split('*#*');
-    var n=Math.trunc(data_sep.length/2);
+/*    var n=Math.trunc(data_sep.length/2);
     for (var i=0;i<n;i++) {
- // alert(data_sep[2*i]);
- // alert(data_sep[2*i+1]);
   if (localStorage.getItem(data_sep[2*i])===null) {
     localStorage.setItem(data_sep[2*i],data_sep[2*i+1]);
   }
   }
+*/
+if (data_sep[2]=='Clientes_Pita') {
+//Clientes.push(JSON.parse(data_sep[3]))
+
+localStorage.setItem(data_sep[2],data_sep[3]);
+//guarda_clientes_IDB()
+}
+if (data_sep[0]=='FACTURAS') {
+localStorage.setItem(data_sep[0],data_sep[1]);
+//guarda_facturas_IDB()
+}
+
 //    alert(datos_imp.length);
+  });
+  lector.readAsText(archivos[0]);
+}
+
+function Leer_Archivo2(e){
+ var archivos=e.currentTarget.files;
+ //alert(archivos);
+  var lector=new FileReader();
+  lector.addEventListener("load",(e) => {
+    datos_imp = e.target.result;
+    var data_sep=datos_imp.split('*#*');
+    var n=Math.trunc(data_sep.length/2);
+    for (var i=0;i<n;i++) {
+  if (localStorage.getItem(data_sep[2*i])===null) {
+    localStorage.setItem(data_sep[2*i],data_sep[2*i+1]);
+  }
+  }
   });
   lector.readAsText(archivos[0]);
 }
@@ -396,6 +463,7 @@ function Leer_Archivo(e){
 function exportar(){
  var data='';
  var sep='*#*';
+/*
 for(var i=0;i<localStorage.length;i++){
  var nomb=localStorage.key(i); 
  if (nomb.indexOf("FAC_")==0 )  
@@ -404,7 +472,11 @@ for(var i=0;i<localStorage.length;i++){
   if (data=='' ) {data+=nomb+sep+texto} else {data+=sep+nomb+sep+texto}
   }
 }
- data+=sep+'Clientes_Pita'+sep+localStorage.getItem('Clientes_Pita');
+*/
+data="FACTURAS"+sep+JSON.stringify(facturas);
+
+//data+=sep+'Clientes_Pita'+sep+localStorage.getItem('Clientes_Pita');
+data+=sep+'Clientes_Pita'+sep+JSON.stringify(Lclientes);
 
  var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
  saveAs(blob,"facturas.txt");
@@ -427,6 +499,7 @@ texto+='<div style="position: fixed; text-align:right;background-color: gray;wid
 texto+='<table width="100%"><tr><td style="width:90%;text-align:center;color:blue;" >Productos vendidos</td><td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td></tr></table></div><br>';
 texto+='<div style="overflow:auto;height:90%;">';
 texto+='<table style="width:100%;">';
+//texto+='<br>';
 for(var i=0;i<nd;i++){
  if (totalcajas[i]!=0 ||totalunid[i]!=0 ) {
 //console.log(data[i][0]+" "+totalcajas[i]+ " cajas");
@@ -438,7 +511,7 @@ texto+='<tr><td style="width:80%;font-size:1em;">'+data[i][0]+'</td><td style="w
 
 }
 texto+='</table></div>';
-texto+='<p>Monto: '+Monto.toFixed(2)+ ' $ Ganancia:'+(Monto-Costo).toFixed(2)+'</p>';
+texto+='<p>Monto: '+Monto.toFixed(2)+ ' $ Ganancia:'+(Ganancia).toFixed(2)+'</p>';
 div3.innerHTML=texto;
 }
 
@@ -475,17 +548,74 @@ div3.style="display:block ;position: fixed;top :30px; left: 0px; width: 100%;hei
 var texto='';
 texto+='<div> <table style="text-align:center;margin:auto;">';
 texto+='<tr><td><button onclick=importar()>Importar Facturas</button></td></tr>';
+texto+='<tr><td><button onclick=importar2()>Importar Facturas (FAC_)</button></td></tr>';
 texto+='<tr><td><button onclick=exportar()>Exportar Facturas</button></td></tr>';
+texto+='<tr><td><button onclick=convertir()>Convertir Facturas</button></td></tr>';
+texto+='<tr><td><button onclick=elim_FAC()>Eliminar FACS</button></td></tr>';
 texto+='<tr><td><button onclick=quitar_div("lista");>Salir</button></td></tr>';
 texto+='</table></div>';
 div3.innerHTML=texto;
 
 }
+function elim_FAC(){
+for(var i=0;i<localStorage.length;i++){
+    var nomb=localStorage.key(i); 
+    var parte=nomb.split("_");
+    if (nomb.indexOf("FAC_")==0) {
+     localStorage.removeItem(nomb);
+ }
+}
+}
 
+function convertir(){
+facturas=[];
+var nf=0;
+var indice=0;
+for(var i=0;i<localStorage.length;i++){
+    var nomb=localStorage.key(i); 
+    var parte=nomb.split("_");
+    if (nomb.indexOf("FAC_")==0) {
+      var nombf=parte[1]+"_"+parte[2]+"_"+parte[3];
+       var info=localStorage.getItem(nomb);
+       facturas[indice]=new Object();
+       facturas[indice].cliente=parte[1];
+       facturas[indice].fecha=parte[2];
+       facturas[indice].nro=parte[3];
+       info_s=info.split("&")
+       facturas[indice].bcv=info_s[0];
+       monto_factura2(nombf);
+       facturas[indice].total=total_factura.toFixed(2);
+       facturas[indice].ganancia=Gdolar.toFixed(2);
+       facturas[indice].total_ret=MONTOF.toFixed(2);
+       facturas[indice].items=[];
+       var total_f=0;
+       
+       for (var j=1;j<info_s.length;j++) {
+         var prod=info_s[j].split('#');
+         var ind=clave_ind.get(prod[0]);
+         facturas[indice].items[j-1]=new Object();
+         facturas[indice].items[j-1].cod=prod[0];
+         facturas[indice].items[j-1].cu=prod[1];
+         facturas[indice].items[j-1].pu=prod[2];
+         facturas[indice].items[j-1].cb=prod[3];
+         facturas[indice].items[j-1].pb=prod[4]; 
+         //total_f+=parseInt(prod[1])*prod[2];
+       }
+   
+    console.log('factura '+indice);
+    console.log(facturas[indice]);
+   indice++;
+   } 
+} 
+
+localStorage.setItem("FACTURAS",JSON.stringify(facturas));
+//guarda_facturas_IDB();
+}
 
 function quitar_div(div_b){
 document.getElementById(div_b).style.visibility='hidden';
 }
+var facturas=[];
 
 function total(){
 var textoT="";
@@ -501,7 +631,7 @@ textoT+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp
 div3.innerHTML=textoT;
 }
 var Monto=0;
-var Costo=0;
+var Ganancia=0;
 
 function total_unidades_vendidas(){
 Monto=0;
@@ -513,7 +643,7 @@ f1=inv_fecha_date(f1);
 f2=inv_fecha_date(f2);
 quitarlista();
 //console.log('rango de fechas'+f1+' '+f2);
-
+Ganancia=0;
 var nd=data.length;
 //console.log(nd);
 for(var i=0;i<nd;i++){
@@ -522,44 +652,22 @@ for(var i=0;i<nd;i++){
 }
 var fecha=fecha_actual();
 //console.log(fecha);
-for(var i=0;i<localStorage.length;i++){
- var nomb=localStorage.key(i); 
- if (nomb.indexOf("FAC_")==0 )  
-{ 
-
-  var fech=nomb.split('_')[2];
-  var nombcli=nomb.split('_')[1];
-var iva=1;
-  //console.log('nc'+nombcli);
-
-  texto=localStorage.getItem(nomb);
-  
-//console.log('fech'+fech);
-if ( (texto!='') && (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && ( ((nombcli.indexOf(clib)==0) && clib!='' ) || (clib=='' && nombcli.indexOf('Pedido')!=0) ) ) {
-//    alert('nombcli '+nombcli+' clib  '+clib+' ind Pedido '+nombcli.indexOf('Pedido')+' ind clib '+(nombcli.indexOf('clib')==0)+' '+(clib=='' && nombcli.indexOf('Pedido')!=0));
-    var ped=texto.split('&');
-    //console.log(texto+" "+texto.length);
-    //console.log(ped.length);
-    for (var j=1;j<ped.length;j++) {
-      var items=ped[j].split('#');
-      var ind=clave_ind.get(items[0]);
-  if (data[ind][3]==0) {iva=1;} else {iva=1.16;}
-      totalunid[ind]+=parseInt(items[1]);
-[pcu,pcb]=precio_costo(ind);
-
- Costo+=parseInt(items[1])*parseFloat(pcu)*iva
- Monto+=parseInt(items[1])*parseFloat(items[2])*iva;
-      totalcajas[ind]+=parseInt(items[3]);
- Monto+=parseInt(items[3])*parseFloat(items[4])*iva;
- Costo+=parseInt(items[3])*parseFloat(pcb)*iva;
-
-    }
- 
-  } 
- } 
-}
+for(var i=0;i<facturas.length;i++){
+  var fech=facturas[i].fecha;
+  var nombcli=facturas[i].cliente;
+  if ( (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && ( ((nombcli.indexOf(clib)==0) && clib!='' ) || (clib=='' && nombcli.indexOf('Pedido')!=0) ) ) {
+    for (var j=0;j<facturas[i].items.length;j++) {
+      var ind=clave_ind.get(facturas[i].items[j].cod);
+      totalunid[ind]+=parseInt(facturas[i].items[j].cu);
+      totalcajas[ind]+=parseInt(facturas[i].items[j].cb);
+    }//for j
+      Ganancia+=parseFloat(facturas[i].ganancia);
+      Monto+=parseFloat(facturas[i].total);
+  } //if
+} // for
  muestra_total_ventas();
-}
+} // fun
+
 inventario=[];
 
 function carga_inventario(){
@@ -794,14 +902,21 @@ if (ind>=0) {
 function guarda_clientes(){
 var Lclientes='';
 
-if (AClientes.length>0) {localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));}
+if (AClientes.length>0) {
+ localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
+// guarda_clientes_IDB();
+}
    else 
-{localStorage.setItem('Clientes_Pita','');}
+{
+localStorage.setItem('Clientes_Pita','');
+// guarda_clientes_IDB();
+}
 
 }
 
 function Lee_clientes(){
 Lclientes=localStorage.getItem('Clientes_Pita');
+//lee_clientes_IDB();
 if (Lclientes!='') { AClientes=JSON.parse(Lclientes);} else {AClientes=[];}
 
 //console.log(AClientes);
@@ -824,27 +939,30 @@ for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
  texto+='&'+data[i][9]+'#'+data[i][4]+'#'+data[i][5];
 }
-
 if (texto.length>2) {localStorage.setItem('Pedido',texto.substr(1));} else {localStorage.setItem('Pedido','');}
 } 
 localStorage.setItem('Cliente',cliente);
+//guarda_clientes_IDB();
 }
 
 function crea_lista_facturas(){
 listasel=[];
-//console.log("paso");
-for(var i=0;i<localStorage.length;i++){
-var nomb=localStorage.key(i); 
-if (nomb.indexOf("FAC_")==0) {listasel.unshift(nomb.substr(4));} 
- } 
-listasel=listasel.sort();
 
+
+var lf=facturas.length;
+
+for(var i=0;i<lf;i++){
+  listasel.unshift(facturas[i].cliente+'_'+facturas[i].fecha+'_'+facturas[i].nro);
+ } 
+listasel.sort();
+console.log(listasel);
 }
 
 function lee_facturas(){
 crea_lista_facturas();
-selectlista(0);
+//selectlista(0);
 }
+
 function ord_nomb(a,b){
 var ela=a.split('_');
 var elb=b.split('_');
@@ -896,13 +1014,25 @@ textoT+='<td width="10%"><button  title="Nombre" onclick="ordena_nombre();" > N 
 textoT+='<td width="10%"><button  title="Fecha" onclick="ordena_fecha();" > F </button></td>';
 textoT+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td>';
 textoT+='</tr></table></div><br>';
-textoT+='<div style="overflow:auto;height:90%;font-size:0.8rem;">';
-textoT+='<table width="100%">';
+textoT+='<div style="overflow:auto;height:90%;font-size:0.6rem;">';
+textoT+='<table style="width:"100%;font-size:0.2rem;">';
+console.log(textoT);
 for (var i=0;i<listasel.length;i++) {
+partes=listasel[i].split('_');
+
 if (t=="0") {
-textoT+='<tr><td style="width:80%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:20%;"></td></tr>'; 
+textoT+='<tr style="cursor:pointer;" onclick="clickp('+i+')";>';
+textoT+='<td style="width:40%;color:white;background:DodgerBlue;" >'+partes[0]+'</td>';
+textoT+='<td style="width:10%;color:white;background:DodgerBlue;" >'+partes[1]+'</td>';
+textoT+='<td style="width:10%;color:white;background:DodgerBlue;" >'+partes[2]+'</td></tr>'; 
+
+console.log('<tr style="cursor:pointer;" onclick="clickp('+i+')";><td style="width:80%;color:white;background:DodgerBlue;" >'+partes[0]+'</td>+ '+partes[1]+'</td><td style="width:20%;"></td></tr>');
 } else {
- textoT+='<tr><td style="width:80%;color:white;background:DodgerBlue; cursor:pointer;" onclick="clickp('+i+')";>'+listasel[i]+'</td><td style="width:20%;">'+monto_factura(i)+' $</td></tr>'; 
+ textoT+='<tr style="cursor:pointer;" onclick="clickp('+i+')";>';
+ textoT+='<td style="width:35%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+partes[0]+'</td>';
+ textoT+='<td style="width:35%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+partes[1]+'</td>';
+ textoT+='<td style="width:30%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+monto_factura(listasel[i])+'</td>';
+ textoT+='</tr>'; 
 }
 }
 textoT+='</table></div>';
@@ -914,51 +1044,47 @@ var div3 = document.getElementById("lista");
 div3.style="display: none;";
 }
 
+function elim_factura(ind){
+   facturas.splice(ind,1);
+   localStorage.setItem("FACTURAS",JSON.stringify(facturas));
+// guarda_facturas_IDB();
+//  console.log('indice '+ind);
+}
 
 function borra(num){
-var nomb="FAC_"+listasel[num];
+var partes=listasel[num].split("_");
 const resp = confirm("Esta seguro de eliminar la factura");
 //var resp=prompt(,'S/N'); 
-if (resp) {localStorage.removeItem(nomb);}
+if (resp) {
+var findice=facturas.findIndex((e)=>e.cliente==partes[0] && e.fecha==partes[1] && e.nro==partes[2]);
+ if (findice>=0) {  
+  elim_factura(findice)
+ }
+}
 cancelar();
 quitarlista();
-lee_facturas();
+selectlista(0);
 }
-function borra2(num){
-var nomb="FAC_"+listasel[num];
-localStorage.removeItem(nomb);
-cancelar();
-//quitarlista();
-//lee_facturas();
-}
-function factura_ver(num){
-var nomb=listasel[num];
-recupera_factura("FAC_"+nomb);
-cancelar();
-factura3(num);
 
+
+function borra2(num){
+var partes=listasel[num].split("_");
+var findice=facturas.findIndex((e)=>e.cliente==partes[0] && e.fecha==partes[1] && e.nro==partes[2]);
+ if (findice>=0) {  
+  elim_factura(findice)
+ }
+cancelar();
 }
+
 
 function clickp(num){
-
+//alert(num);
 var nomb=listasel[num];
-recupera_factura("FAC_"+nomb);
+recupera_factura(nomb);
 factura();
 factura3(num);
 quitarlista();
-/*
-var div3 = document.getElementById("auxiliar");
-var texto='';
-texto+='<div><button onclick="factura_ver('+num+');"> Ver </button>';
-texto+='<div><button onclick="fact_base('+num+');"> Establecer </button>';
-texto+='<button onclick="borra('+num+');"> Borrar </button>';
-texto+='<button onclick="revertir_factura('+num+');"> Revertir </button>';
-texto+='<button onclick="cancelar()"> Cancelar </button></div>';
-div3.innerHTML=texto;
-div3.style="display: block;";
 
-//console.log(div3.innerHTML);
-*/
 }
 
 function cancelar(){
@@ -970,7 +1096,7 @@ div3.style="display:none;";
 function fact_base(num){
 var nomb=listasel[num];
 anula();
-recupera_factura("FAC_"+nomb);
+recupera_factura(nomb);
 for (var i=0;i<datfac.length;i++) {
 if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
  data[i][4]=datfac[i].unidad;
@@ -981,35 +1107,36 @@ if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
 factura2();
 cancelar();
 }
-function modifica_factura2(num){
+function modifica_factura2(indf){
 fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
 cliente_factura=document.getElementById('cli2').value;
 var nro_fact_m=document.getElementById('nfact').value;
-nomb_factura="FAC_"+cliente_factura+"_"+fecha_factura+"_"+nro_fact_m;
-console.log('nomb '+nomb_factura);
-console.log('pedido '+pedido_cliente);
-//localStorage.setItem(nomb_factura,pedido_cliente);
-var nomb='FAC_'+listasel[num];
-console.log('nomb '+nomb);
-//localStorage.removeItem(nomb);
+facturas[indf].cliente=cliente_factura;
+facturas[indf].fecha=fecha_factura;
+facturas[indf].nro=nro_fact_m;
+localStorage.setItem("FACTURAS",JSON.stringify(facturas))
+// guarda_facturas_IDB();
 quitarlista();
+lee_facturas();
+selectlista(0);
 }
  
 
 function fact_modif(num){
 //bcv_factura=ped[0];
 var nomb=listasel[num];
-recupera_factura("FAC_"+nomb);
+partes=nomb.split("_");
+var indf=facturas.findIndex((e)=>e.cliente==partes[0] && e.fecha==partes[1] && e.nro==partes[2])
 var div3 = document.getElementById("lista");
 div3.style="display:block; position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
 //nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
 texto='';
-texto+='Fecha: <input id="ffac" type="date" value="'+fecha_date(fecha_factura)+'"><br>';
+texto+='Fecha: <input id="ffac" type="date" value="'+fecha_date(partes[1])+'"><br>';
 texto+='<span onclick="limpiaCliente2();">Cliente:</span>';
-texto+='<input style="width:30%;" type="text" id="cli2" value="'+cliente_factura+'" list="listaclientes">';
+texto+='<input style="width:30%;" type="text" id="cli2" value="'+partes[0]+'" list="listaclientes">';
 texto+='<datalist id="listaclientes"></datalist>';
-texto+='<input style="width:30%;" type="text" id="nfact" value="'+numero_factura+'" >';
-texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="modifica_factura2('+num+');" >Ok </button>';
+texto+='<input style="width:30%;" type="text" id="nfact" value="'+partes[2]+'" >';
+texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="modifica_factura2('+indf+');" >Ok </button>';
 div3.innerHTML=texto;
 //anula();
 
@@ -1019,7 +1146,7 @@ div3.innerHTML=texto;
 }
 function revertir_factura(num){
 var nomb=listasel[num];
-recupera_factura("FAC_"+nomb);
+recupera_factura(nomb);
  if (cliente.indexOf('Pedido')==-1) {suma_inventario2();}
 cliente=cliente_factura;
 var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
@@ -1037,6 +1164,7 @@ var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
 if (indcliente>=0) {
 AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)+parseFloat(MONTOF)).toFixed(2);
 localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
+// guarda_clientes_IDB();
 }
 }
 function Revierte_deuda(){
@@ -1045,6 +1173,7 @@ var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
 if (indcliente>=0) {
 AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)-parseFloat(MONTOF)).toFixed(2);
 localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
+// guarda_clientes_IDB();
 //alert(AClientes[indcliente].deuda);
 }
 
@@ -1084,25 +1213,47 @@ quitarlista();
 }
  
 function guarda_factura(){
+var indice=facturas.length;
 var pu,pb;
 var bcv=parseFloat(document.getElementById("t2").value);
 var texto=(bcv).toFixed(4);
 
 var nomb='FAC'+'_'+cliente_factura+'_'+fecha_factura+'_'+nro_factura;
 nro_factura++;
-localStorage.setItem('FACT_NRO',(nro_factura).toString());
 
+localStorage.setItem('FACT_NRO',(nro_factura).toString());
+facturas[indice]=new Object();
+facturas[indice].cliente=cliente_factura;
+facturas[indice].fecha=fecha_factura;
+facturas[indice].nro=nro_factura;
+facturas[indice].bcv=(bcv).toFixed(4);
+facturas[indice].total=total_factura.toFixed(2);
+facturas[indice].ganancia=Gdolar.toFixed(2);
+facturas[indice].total_ret=MONTOF;
+facturas[indice].items=new Array;
+var nro_item=0;
 for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
 //console.log(data[i][4]+' '+data[i][5]);
  [pu,pb]=precio(i);
 //console.log('pu '+pu+'pb '+pb);
+ facturas[indice].items[nro_item]=new Object;
+ facturas[indice].items[nro_item].cod=data[i][9];
+ facturas[indice].items[nro_item].cu=data[i][4];
+ facturas[indice].items[nro_item].pu=(pu).toFixed(2);
+ facturas[indice].items[nro_item].cb=data[i][5];
+ facturas[indice].items[nro_item].pb=(pb).toFixed(2);
+ nro_item++;
  texto+='&'+data[i][9]+'#'+data[i][4]+'#'+(pu).toFixed(2)+'#'+data[i][5]+'#'+(pb).toFixed(2);
 }
 }
+var tmp=JSON.stringify(facturas);
+localStorage.setItem("FACTURAS",tmp);
+// guarda_facturas_IDB();
+//alert(tmp);
 if (texto.length>2) {localStorage.setItem(nomb,texto); } 
 if (cliente.indexOf('Pedido')==-1) {resta_inventario();}
-
+//alert(facturas);
 }
 
 
@@ -1132,18 +1283,25 @@ for (var i=0;i<ped.length;i++) {
 }
 
 var datfac=[];
-function monto_factura(num){
-var nomb=listasel[num];
-recupera_factura("FAC_"+nomb);
-factura3(num);
+
+function monto_factura(nomb){
+//alert(nomb);
+var partes=nomb.split("_");
+findice=facturas.findIndex((e)=>e.cliente==partes[0] && e.fecha==partes[1] && e.nro==partes[2]);
+if (findice>=0) {return facturas[findice].total} else {return 0}
+}
+
+function monto_factura2(nomb){
+//alert(nomb);
+recupera_factura2(nomb);
+//alert(nomb);
+factura3(0);
 document.getElementById("factura").hidden=true;
 return (total_factura).toFixed(2);
-}
-function recupera_factura(archivo){
-var texto;
 
-//cliente=localStorage.getItem('Cliente');
-//document.getElementById("cli").value=cliente;
+}
+function recupera_factura(id_factura){
+
 for (var i=0;i<data.length;i++) {
 datfac[i]=new Object();
 datfac[i].unidad=0;
@@ -1152,39 +1310,59 @@ datfac[i].cajas=0;
 datfac[i].pb=0;
 
 }
-
-texto=localStorage.getItem(archivo);
-
-if (texto!='') {
-var ped=texto.split('&');
-bcv_factura=ped[0];
-fecha_factura=archivo.split('_')[2];
-cliente_factura=archivo.split('_')[1];
-numero_factura=archivo.split('_')[3];
-//console.log('texto: '+texto.length);
-//console.log(ped.length);
-pedido_cliente=ped;
-for (var i=1;i<ped.length;i++) {
-  var items=ped[i].split('#');
-//  var ind=parseInt(items[0]);
- var ind=clave_ind.get(items[0]);
-console.log('ind'+ind);
-  datfac[ind].unidad=parseInt(items[1]);
-  datfac[ind].pu=parseFloat(items[2]);
-  datfac[ind].cajas=parseInt(items[3]);
-  datfac[ind].pb=parseFloat(items[4]);
- // console.log(datfac[ind].cajas+' '+datfac[ind].unidad);
+var partes=id_factura.split('_');
+fecha_factura=partes[1];
+cliente_factura=partes[0];
+numero_factura=partes[2];
+var indf=facturas.findIndex((e)=> e.cliente==cliente_factura && e.fecha==fecha_factura && e.nro==numero_factura);
+if (indf>=0) {
+ bcv_factura=facturas[indf].bcv;
+ for (var i=0;i<facturas[indf].items.length;i++) {
+   var ind=clave_ind.get(facturas[indf].items[i].cod);;
+   datfac[ind].unidad=parseInt(facturas[indf].items[i].cu);
+   datfac[ind].pu=parseFloat(facturas[indf].items[i].pu);
+   datfac[ind].cajas=parseInt(facturas[indf].items[i].cb);
+   datfac[ind].pb=parseFloat(facturas[indf].items[i].pb);
+ }
 }
 }
 
+function recupera_factura2(nomb){
+
+for (var i=0;i<data.length;i++) {
+datfac[i]=new Object();
+datfac[i].unidad=0;
+datfac[i].pu=0;
+datfac[i].cajas=0;
+datfac[i].pb=0;
+
 }
+var partes=nomb.split('_');
+fecha_factura=partes[1];
+cliente_factura=partes[0];
+numero_factura=partes[2];
+//alert(nomb);
+var texto=localStorage.getItem('FAC_'+nomb);
+//alert(texto);
+var items=texto.split('&');
+ bcv_factura=items[0];
+ for (var i=1;i<items.length;i++) {
+  var det=items[i].split('#');
+   var ind=clave_ind.get(det[0]);;
+   datfac[ind].unidad=parseInt(det[1]);
+   datfac[ind].pu=parseFloat(det[2]);
+   datfac[ind].cajas=parseInt(det[3]);
+   datfac[ind].pb=parseFloat(det[4]);
+ }
+
+}
+
 function salir(){
 guarda_pedido();
-//t1=document.getElementById("t1").value;
 t2=document.getElementById("t2").value;
-//localStorage.setItem('p1',t1);
 localStorage.setItem('p2',t2);
 }
+
 var lcat=[];
 var Stack_cat=['D_PITA'];
 var Cats;
@@ -1296,7 +1474,11 @@ localStorage.setItem('p3',va);
 }
 function carga(){
 data=[];
-
+var ftemp=localStorage.getItem("FACTURAS")
+//alert(ftemp.length);
+if (ftemp===null) {facturas=[];} else {facturas=JSON.parse(ftemp);}
+//console.log(facturas);
+//lee_facturas_IDB();
 try {
 
 document.getElementById("t2").value = localStorage.getItem('p2');
@@ -1310,308 +1492,9 @@ var j=0;
 Lee_clientes();
 
 
-data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,120,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV001',120],
-      ["Vacio de cerveza Ret 330 ml x 24 UN",1,120,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV005',120],
-      ["Gavera de cerveza Ret 222 ml x 36 UN",1,19.20,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV009',19.20],
-      ["Gavera de cerveza Ret 333 ml x 24 UN",1,19.20,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV013',19.20],
-      ["Botella de cerveza Ret 222 ml ",1,2.80,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV017',2.80],
-      ["Botella de cerveza Ret 333 ml ",1,4.20,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV021',4.20],
-      ["Barril 30 lt ",1,860,0,0,0,"t1","&Cerveceria&Vacios&",0,'CV025',860],
-      ["Barril 50 lt ",1,970,0,0,0,"t1","&Cerveceria&Vacios&",0,'CV029',890],
-      ["F01001 Polarcita 222 ml x 36 UN",36,14.48,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen Retornable&",1,'F01001',10.38],
-      ["F01002 Tercio 330 ml x 24 UN",24,14.48,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen Retornable&",1,'F01002',10.38],
-      ["F01002 (PROMO) Tercio 330 ml x 24 UN",24,12.41,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen Retornable&",1,'F01002P',8.96],
-      ["F01063 Pilsen NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen NR&",1,'F01063',7.62],
-      ["F01077 Pilsen lata Sleek 355 ml x 12 UN",12,8.27,1,0,0,"t3","&Cerveceria&Pilsen&Pilsen NR&",1,'F01077',8.27],   
-      ["F04005 Light Ret 222 ml x 36 UN",36,14.48,1,0,0,"t3","&Cerveceria&Light&",1,'F04005',14.48],
-      ["F04017 Polar Light Barril 30L x 1 PZ",1,71.01,0,0,0,"t3","&Cerveceria&Light&",0,'F04017',71.01],
-      ["F04018 Polar Light Barril 50L x 1 PZ",1,118.01,0,0,0,"t3","&Cerveceria&Light&",0,'F04018',118.1],
-      ["F04043 Light NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",1,'F04043',9.93],   
-      ["F04052 Light Mix Naranja NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",0,'F04052',9.93],
-      ["F04053 Light Mix Toronja NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",0,'F04053',9.93],
-      ["F04054 Light Mix Parchita NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",0,'F04054',9.93],
-      ["F04056 Light Lata Sleek 355 ml x 12 UN",12,8.27,1,0,0,"t3","&Cerveceria&Light&",1,'F04056',8.27],
-      ["F03030 Solera Verde Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F03030',11.87],
-      ["F03014 Solera Light Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F03014',11.87],
-      ["F06037 Solera IPA Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06037',10.88],
-      ["F06034 Solera Marzen  Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06034',11.87],
-      ["F06046 Solera Kriek Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06046',10.88],
-      ["F06059 Solera Reserva Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06059',11.87],
-      ["F03076 Solera Verde NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F03076',7.025],
-      ["F03077 Solera Light NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F03077',7.025],
-      ["F06057 Solera IPA NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F06057',7.025],
-      ["F05056 Solera Marzen NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F05056',7.025],
-      ["F06058 Solera Kriek NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F06058',7.025],
-      ["F06060 Solera Reserva NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F06060',7.025],
-      ["FR0123 Carorena tinta 6 unid ",6,34.35,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0123',34.35],
-      ["FR0120 Carorena blanca 6 unid ",6,34.35,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0120',34.35],
-      ["FR0123 Carorena rosada 6 unid ",6,34.35,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0124',34.35],
-      ["FR0133 Carorena verano x 36 (VIEJO)",36,28.96,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0133',28.96],
-      ["FR0133 Carorena verano x 36",36,24.82,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0134',24.82],
-      ["F07001 Maltin polar ret 222 ml x 36 U",36,11.18,1,0,0,"t3","&Cerveceria&Malta&Malta Retornable&",1,'F07001',11.18],
-      ["F07003 Maltin NR.250 ml x 24 U",24,0.00,0,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",0,'F07003',0.00],
-      ["F07018 Maltin 1.5 L x 6U",6,11.67,1,0,0,"t3","&Cerveceria&Malta&Litron&",1,'F07018',11.67],
-      ["F07020 Maltin NR/Light.250 ml x 24 U",24,0.00,0,0,0,"t3","&Cerveceria&Malta&Malta Retornable&",0,'F07020',0.00],
-      ["F07073 Maltin light 1.5 L x 6U",6,11.67,1,0,0,"t3","&Cerveceria&Malta&Litron&",1,'F07073',11.67],
-      ["F07086 Maltin polar light ret 222 ml x 36 U",36,11.18,1,0,0,"t3","&Cerveceria&Malta&Malta Retornable&",1,'F07086',11.18],
-      ["F07088 Maltin light NR.250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",1,'F07088',6.327],
-      ["F07089 Maltin NR.250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",1,'F07089',6.327],
-      ["F07090 Malta Caracas NR 250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",0,'F07090',6.327],
-      ["F07101 Maltin polar sleek 355 ml x 24 U",24,15.077,1,0,0,"t3","&Cerveceria&Malta&Malta no Retornable&",1,'F07101',15.077],
-      ["H201 Aceite Mazeite 1 lt x 12",12,4.59,0,0,0,"t2","&Alimentos&Aceites&",1,'H201',4.22],
-      ["M324 Dogourmet Parrilla. 18 Kg x 1U",1,39.89,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M324',36.70],      
-      ["M326 Dogourmet Parrilla. 2 Kg x 6U",6,5.96,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M326',5.48],
-      ["M329 Dogourmet Cachorros 18 Kg x 1",1,44.92,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M329',41.33],
-      ["M330 Dogourmet Cachorros 2 Kg x 6U",6,6.54,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M330',6.02],
-      ["M338 Dogourmet Parrilla. 4 Kg x 5U",5,10.35,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M338',9.52],
-      ["M339 Dogourmet Pollo a la brasa 4 Kg x 5U",5,10.35,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M339',9.52],
-      ["M340 Super Can.carne hueso 4 Kg x 5U",5,7.47,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M340',6.87],
-      ["M033 Super Can.carne hueso 18 Kg x 1",1,28.91,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M033',26.60],
-      ["M034 Super Can. pollo 18 Kg x 1",1,28.91,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M034',26.60],
-      ["M347 Dogourmet Parrilla. 1 Kg x 10U",10,3.14,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M347',2.89],
-      ["M800 Super Can. carne hueso 2 Kg x 6U",6,3.80,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M800',3.50],
-      ["M802 Super Can.carne hueso 10 Kg x 1",1,16.90,1,0,0,"t2","&Alimentos&A. Perros&Super Can&",1,'M802',15.55],
-      ["M803 Dogourmet Cachorros 10 Kg x 1U ",1,25.01,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M803',23.01],
-      ["M806 Dogourmet Parrilla. 10 Kg x 1U",1,22.77,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M806',20.95],
-      ["H300 Arroz Clasico. 1 Kg x 24U",24,1.25,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Arroz&",1,'H300',1.16],
-      ["H364 Arroz Corina. 1 Kg x 24U",24,1.02,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Arroz&",1,'H364',0.95],
-      ["D361 Margarita Atun natural 140g x 35U",35,1.77,0,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D361',1.63],
-      ["D362 Margarita Atun en aceite 140g x 35U",35,1.69,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D362',1.55],
-      ["D398 California Atun desmenuzado aceite 140g x 35U",35,0.84,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D398',0.77],
-      ["Q001 Avena Quaker Original (Bolsa) 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q001',1.46],
-      ["Q002 Avena Quaker Original (Bolsa) 800g x 12U",12,2.76,0,0,0,"t2","&Alimentos&Avena&",1,'Q002',2.54],
-      ["Q023 Harina Avena Quaker (Bolsa) 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q023',1.46],
-      ["Q064 Avena fortificada 400g x 24U",24,0.00,0,0,0,"t2","&Alimentos&Avena&",0,'Q064',0.00],
-      ["Q134 Avena Vainilla casera 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q134',1.46],
-      ["Q135 Avena Sirop de Maple 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q135',1.46],
-      ["Q136 Avena Orignal (Bolsa) 100g x 48U",48,0.42,0,0,0,"t2","&Alimentos&Avena&",1,'Q136',0.39],
-      ["Q464 Avena fortificada 100g x 48U",48,0.00,0,0,0,"t2","&Alimentos&Avena&",0,'Q464',0.00],     
-      ["Q465 Avena fortificada 200g x 30U",30,0.00,0,0,0,"t2","&Alimentos&Avena&",0,'Q465',0.00],
-      ["Q005 Avena( Don Pancho) 400g x 24U",24,1.25,0,0,0,"t2","&Alimentos&Avena&",1,'Q005',1.15],
-      ["Q006 Avena( Don Pancho) 800g x 12U",12,2.17,0,0,0,"t2","&Alimentos&Avena&",1,'Q006',2.00],
-      ["Q137 Avena Orignal (Bolsa) 200g x 30U",30,0.80,0,0,0,"t2","&Alimentos&Avena&",1,'Q137',0.74],
-      ["Q113 KONGA SABOR LIMON (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q113',4.62],
-      ["Q114 KONGA SABOR NARANJA (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q114',4.62],
-      ["Q115 KONGA SABOR MORA (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q115',4.62],
-      ["Q123 KONGA SABOR PARCHITA (30gx14 sobres)x 8 U",8,5.04,1,0,0,"t2","&Alimentos&Konga&",1,'Q123',4.62],
-      ["H172 Pan/Mezcla cachapas 500g x 12",12,1.56,1,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Cachapas&",0,'H172',1.44],
-      ["H330 Primor Crema/Arroz Enriq 450g x 24U Pote",24,1.42,0,0,0,"t2","&Alimentos&Cereales I&",1,'H330',1.31],
-      ["H331 Primor Crema/Arroz Enriq 900g x 12U Pote",12,2.26,0,0,0,"t2","&Alimentos&Cereales I&",1,'H331',2.08],
-      ["H369 Primor Crema/Arroz (Bolsa) 225g x 34U",34,0.63,0,0,0,"t2","&Alimentos&Cereales I&",1,'H369',0.58],
-      ["H370 Crema/Arroz.(Bolsa) Enriq 450g x 24U",24,1.09,0,0,0,"t2","&Alimentos&Cereales I&",1,'H370',1.00],
-      ["H371 Crema/Arroz.(Bolsa) Enrriq( 900g x 12U Bolsa",12,1.73,0,0,0,"t2","&Alimentos&Cereales I&",1,'H371',1.59],
-      ["Q099 Toddy. Chips Galleta (24gx6 sobres)x24U ",24,2.22,1,0,0,"t2","&Alimentos&Varios&Galletas&",0,'Q099',2.04],
-      ["Q138 Toddy. Chips Galleta (24gx4 sobres)x40U ",40,2.22,1,0,0,"t2","&Alimentos&Varios&Galletas&",0,'Q138',2.04],
-      ["Y065 Pudin Toddy. (125gx6)x24U ",24,0.67,1,0,0,"t2","&Alimentos&Varios&Pudin&",0,'Y065',0.62],
-      ["Q101 Gelatina Golden Fresa 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",0,'Q101',13.60],
-      ["Q102 Gelatina Golden Kolita 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",0,'Q102',13.60],
-      ["Q103 Gelatina Golden Uva 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",0,'Q103',13.60],
-      ["Q107 Gelatina Golden Frambuesa 96 gr x 10U",10,14.80,1,0,0,"t2","&Alimentos&Varios&Gelatinas&",1,'Q107',13.60],
-      ["H135 Harina Pan tradicional 1 k x 20",20,1.18,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H135',1.10],
-      ["H136 Harina Pan Amarilla k x 20",20,1.18,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H136',1.10],
-      ["H173 Harina Pan/Arroz 1 k x 20",20,1.08,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H173',1.00],
-      ["H193 Arepitas Pan 500 g x 12",12,1.53,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H193',1.41],
-      ["T060 Salsa/Tomate.198 x 24",24,0.90,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Ketchup&",1,'T060',0.83],
-      ["T061 Salsa/Tomate.397 x 24",24,1.41,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Ketchup&",1,'T061',1.30],
-      ["T449 Salsa/Tomate. 4,2 x 4",4,13.21,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Ketchup&",1,'T449',12.15],
-      ["T076 Chef Margarina 5 K x 1.C/S",1,19.62,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Chef&",1,'T076',18.44],
-      ["T080 Chef Margarina 5 K x 1.S/S",1,19.62,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Chef&",1,'T080',18.44],
-      ["T084 Mantequilla Mavesa 1 K x 6",6,4.14,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",1,'T084',3.89],
-      ["T086 Mantequilla Mavesa 500g x 12",12,2.13,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",1,'T086',2.00],
-      ["T572 Mantequilla Mavesa 250g x 24",24,1.15,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",1,'T572',1.08],
-      ["T578 Mantequilla Nelly CR 400g x 12",12,1.23,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Nelly&",0,'T578',1.23],
-      ["T587 Mantequilla Nelly CR 250g x 24",24,1.01,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Nelly&",1,'T587',0.95],
-      ["T588 Mantequilla Nelly CR 500g x 12",12,1.91,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Nelly&",1,'T588',1.80],
-      ["T018 Mayonesa 910g x 6",6,6.69,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T018',6.29],
-      ["T019 Mayonesa 175g x 18",18,1.74,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T019',1.64],
-      ["T020 Mayonesa 445g x 12",12,3.56,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T020',3.35],
-      ["T393 Mayonesa 445g x 12 ND",12,3.56,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T393',3.35],
-      ["T486 Mayonesa (Aderezo) 3,6 kg x 4",4,24.46,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T486',22.99],
-      ["T409 Mayonesa  Stock 175g x 24 U",24,1.74,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T409',1.64],
-      ["T573 Mayonesa  Stock 175g x 24 U",24,1.74,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",1,'T573',1.64],
-      ["T574 Mayonesa limon  445 g x 12",12,0.00,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Mayonesas&",0,'T574',0.00],
-      ["T001 Toddy. 1 Kg x 12U Bolsa",12,8.71,1,0,0,"t2","&Alimentos&Toddy&",1,'T001',8.01],
-      ["T002 Toddy. 2 Kg x 8U. Bolsa",8,16.32,1,0,0,"t2","&Alimentos&Toddy&",1,'T002',15.01],
-      ["T003 Toddy. 400g x 24U Bolsa",24,3.95,1,0,0,"t2","&Alimentos&Toddy&",1,'T003',3.63],
-      ["T007 Toddy. 400g x 12U Pote",12,3.95,1,0,0,"t2","&Alimentos&Toddy&",1,'T007',3.63],
-      ["T472 Toddy. 200g x 12U Pote",12,2.09,1,0,0,"t2","&Alimentos&Toddy&",1,'T472',1.92],
-      ["T568 Toddy. 100g x 36U Bolsa",36,1.11,1,0,0,"t2","&Alimentos&Toddy&",1,'T568',1.02],
-      ["T427 Aceite Chef Oleina de Palma.18 Lt x 1U",1,63.96,0,0,0,"t2","&Alimentos&Aceites&",1,'T427',58.84],
-      ["T584 Aceite Super Oleina de Palma.1 Lt x 12U",12,3.08,0,0,0,"t2","&Alimentos&Aceites&",1,'T584',2.83],
-      ["H500 Pasta corta dedales 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H500',1.66],
-      ["H501 Pasta corta tornillo 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H501',1.66],
-      ["H502 Pasta corta macarron 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H502',1.66],
-      ["H506 Pasta corta plumitas 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H506',1.66],
-      ["H509 Pasta corta dedales 500g x 12U",12,0.91,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Corta&",1,'H509',0.85],
-      ["H516 Pasta larga vermicelli 500g x 12U",12,0.91,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H516',0.85],
-      ["H517 Pasta larga spaguetti 500g x 12U",12,0.91,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H517',0.85],
-      ["H689 Pasta larga vermicelli 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H689',1.66],
-      ["H690 Pasta larga spaguetti 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H690',1.66],
-      ["H1804 Pasta larga Linguini. 1 K x 12U",12,1.79,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Larga&",1,'H1804',1.66],
-      ["H892 Primor especial vermicelli 1 K x 12U",12,1.38,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Especial&",0,'H892',1.28],
-      ["H893 Primor especial plumitas 1 K x 12U",12,1.38,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Especial&",0,'H893',1.28],
-      ["H894 Primor especial tornillos 1 K x 12U",12,1.38,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Especial&",0,'H894',1.28],
-      ["H895 Primor especial dedales 1 K x 12U",12,1.38,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Pasta&Especial&",0,'H895',1.28],
-      ["D366 Pepitonas picantes 140g x 35 ",35,1.35,1,0,0,"t2","&Alimentos&Enlatados&Pepitonas&",1,'D366',1.24],
-      ["D388 Bonito en aceite 140g x 35",35,1.48,1,0,0,"t2","&Alimentos&Enlatados&Bonito&",1,'D388',1.36],
-      ["T499 Rikesa Trad.200 x 18",18,2.38,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T499',2.19],
-      ["T500 Rikesa Trad.300 x 12",12,3.43,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T500',3.16],
-      ["T501 Rikesa Tocineta.300 x 12",12,3.43,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T501',3.16],
-      ["T564 Rikesa Blanco.200g x 18U",18,2.38,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T564',2.19],
-      ["T565 Rikesa Parmesano 200g x 18U",18,2.38,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Rikesa&",1,'T565',2.19],
-      ["D384 Sardina Aceite.170 x 20U",20,1.42,0,0,0,"t2","&Alimentos&Enlatados&Sardinas&",1,'D384',1.31],
-      ["D385 Sardina Picante.170x 20U",20,1.42,0,0,0,"t2","&Alimentos&Enlatados&Sardinas&",1,'D385',1.31],
-      ["D386 Sardina Tomate.170x 20U",20,1.42,0,0,0,"t2","&Alimentos&Enlatados&Sardinas&",1,'D386',1.31],
-      ["T297 Mermelada Vienesa Fresa 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T297',1.99],
-      ["T298 Mermelada Vienesa Guayaba 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T298',1.99],
-      ["T583 Mermelada Vienesa Fresamora 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T583',1.99],
-      ["T048 Vinagre. 1 lt x 12",12,1.34,1,0,0,"t2","&Alimentos&Vinagres&",1,'T048',1.23],
-      ["T049 Vinagre. 1/2 lt x 24",24,0.80,1,0,0,"t2","&Alimentos&Vinagres&",1,'T049',0.74],
-      ["T533 Vinagre. 4 lt x 4",4,5.31,1,0,0,"t2","&Alimentos&Vinagres&",0,'T533',4.89],
-      ["D390 Primor Caraotas negras sazonadas 220gx24U",20,0.89,1,0,0,"t2","&Alimentos&Enlatados&Caraotas&",0,'D390',0.82],
-      ["D391 Primor Frijoles sazonados 220gx24U",20,0.89,1,0,0,"t2","&Alimentos&Enlatados&Frijoles&",0,'D391',0.82],
-      ["D392 Primor Caraotas negras sazonadas 420gx12U",12,1.67,1,0,0,"t2","&Alimentos&Enlatados&Caraotas&",0,'D392',1.54],
-      ["D393 Primor Frijoles sazonados 420gx12U",12,1.67,1,0,0,"t2","&Alimentos&Enlatados&Frijoles&",0,'D393',1.54],
-      ["Y001 Yogurt Fruta Fresa Migurt 125gx24",24,1.38,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y001',1.27],
-      ["Y002 Yogurt Fruta Durazno Migurt 125 x 24",24,1.38,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y002',1.27],
-      ["Y004 Yogurt Fruta Fresa Migurt 250 x 24",24,2.51,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y004',2.31],
-      ["Y005 Yogurt Fruta durazno Migurt 250 x 24",24,2.51,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y005',2.31],
-      ["Y007 Yogurt Fruta Fresa Migurt 750 x 12",12,6.21,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y007',5.71],
-      ["Y008 Yogurt Fruta Durazno Migurt 750 x 12",12,6.21,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y008',5.71],
-      ["Y009 Yogurt sabor dulce Migurt 750 x 12",12,6.21,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y009',5.71],
-      ["Y036 Yogurt sabor fresa Migurt 125 x 24",24,1.33,1,0,0,"t2","&Alimentos&Varios&Yogurt&",0,'Y036',1.22],
-      ["L260 Las llaves Detergente Bebe 400g x 30",30,1.38,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L260',1.27],
-      ["L073 Las llaves Detergente P. LI 900g x 20",20,3.05,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L073',2.81],
-      ["L081 Las llaves Detergente Floral 400g x 30",20,1.38,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L081',1.27],
-      ["L082 Las llaves Detergente Floral 900g x 20",20,3.05,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L082',2.81],
-      ["L255 Las llaves Detergente Bebe 900g x 20",20,3.05,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Las llaves&",1,'L255',2.81],
-      ["L350 Las llaves Detergente liq.Bebe 1L x 12",12,5.75,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",0,'L350',5.29],
-      ["L367 Las llaves Detergente liq.ROPA DELI.510cc x 12",12,3.21,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",0,'L367',2.95],
-      ["L381 Las llaves Detergente liq.ROPA DELI.525cc x 12",12,3.30,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&",0,'L367',3.04],
-      ["L382 Multiclean Detergente Frag citrica 900g x 20",20,1.59,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Multiclean&",1,'L382',1.46],
-      ["L383 Multiclean Detergente Frag citrica 400g x 30U",30,0.73,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Multiclean&",1,'L383',0.67],
-      ["L384 Multiclean Detergente Frag citrica 5 Kg x 4U",4,8.79,1,0,0,"t2","&Alimentos&Limpieza&Detergentes&Multiclean&",1,'L384',8.09],
-      ["L207 Llaves Panela Trad Floral 250 x 36",36,0.87,1,0,0,"t2","&Alimentos&Limpieza&Jabones&",1,'L207',0.80],
-      ["L275 LLaves Jabon FF.BEBE.160g x 48U",48,0.72,1,0,0,"t2","&Alimentos&Limpieza&Jabones&",1,'L275',0.66],
-      ["L376 Jabon Panela.Floral.200g x 44",44,0.72,1,0,0,"t2","&Alimentos&Limpieza&Jabones&",1,'L376',0.66],
-      ["L389 Multi Clean jabon Frag citrica 200g x 44U",44,0.48,1,0,0,"t2","&Alimentos&Limpieza&Jabones&",1,'L389',0.44],     
-      ["L379 LLaves Lav. Antib liq. 500cc x 18U",18,3.07,1,0,0,"t2","&Alimentos&Limpieza&Lavaplatos&",0,'L379',2.82],
-      ["L387 LLaves Lav. Antib liq. 500cc x 18U",18,3.07,1,0,0,"t2","&Alimentos&Limpieza&Lavaplatos&",0,'L387',2.82],     
-      ["L371 LLaves Limp. Marea Cristalina 1L x 12",12,2.77,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L371',2.55],
-      ["L372 LLaves Limp. Brisa Tropical 1L x 12",12,2.77,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L372',2.55],
-      ["L377 LLaves Limp. Marea Cristalina 500cc  x 24",24,1.57,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L377',1.44],
-      ["L378 LLaves Limp. Brisa Tropical 500cc x 24U",24,1.57,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L378',1.44],
-      ["L385 Llaves Limp. Bosque sereno 500cc x 24U",24,1.57,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L385',1.44],
-      ["L386 Llaves Limp. Bosque sereno 1 L x 12U",12,2.77,1,0,0,"t2","&Alimentos&Limpieza&Limpiadores&",0,'L386',2.55],
-      ["L357 Jabon Crema Multiuso.250g x 36U",36,1.96,1,0,0,"t2","&Alimentos&Limpieza&Multiuso&",1,'L357',1.80],
-      ["L358 Jabon Crema Multiuso.500g x 18U",18,3.56,1,0,0,"t2","&Alimentos&Limpieza&Multiuso&",1,'L358',3.28],
-      ["L373 Jabon pastilla Multiuso 130g x 42U",42,1.00,1,0,0,"t2","&Alimentos&Limpieza&Multiuso&",1,'L373',0.92],
-      ["L374 Las llaves Suavizante Bebe  950cc x 12U",12,4.00,1,0,0,"t2","&Alimentos&Limpieza&Suavizantes&",0,'L374',3.68],
-      ["L380 Las llaves Suavizante Bebe 530cc x 12U",12,2.38,1,0,0,"t2","&Alimentos&Limpieza&Suavizantes&",0,'L380',2.19],
-      ["PepsiCola 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP004',9.17],
-      ["Seven Up 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP005',9.17],
-      ["Golden Kolita 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP006',9.17],
-      ["Golden Naranja 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP007',9.17],
-      ["Golden Uva 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP101',9.17],
-      ["Golden Pina 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP102',9.17],
-      ["Golden Manzana 350 ml x 24",24,10.71,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP202',9.17],
-      ["PepsiCola lata 355 ml x 24",24,21.23,1,0,0,"t3","&Pepsicola&Refrescos&Lata&",1,'PP008',21.23],
-      [" 1/4 PepsiCola lata 355 ml x 6",6,5.31,1,0,0,"t3","&Pepsicola&Refrescos&Lata&",1,'PP012',5.31],
-      [" PepsiCola lata 320 ml x 24",24,21.23,1,0,0,"t3","&Pepsicola&Refrescos&Lata&",1,'PP016',21.23],
-      [" 1/4 PepsiCola lata 320 ml x 6",6,5.31,1,0,0,"t3","&Pepsicola&Refrescos&Lata&",1,'PP020',5.31],
-      [" PepsiCola PET 600 ml x 12",12,7.54,1,0,0,"t3","&Pepsicola&Refrescos&PET 600 ml&",1,'PP024',7.54],
-      [" PepsiCola PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP028',16.88],
-      [" Seven Up PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP029',16.88],
-      [" Golden Kolita PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP030',16.88],
-      [" Golden Naranja PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP031',16.88],
-      [" Golden Uva PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP132',16.88],
-      [" Golden Pina PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP133',16.88],
-      [" Golden Manzana PET 1,5 L x 12U",12,16.88,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP233',16.88],
-      [" PepsiCola MAX PET 1,5 L ml x 12U",12,10.78,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&12 U&",1,'PP032',10.78],
-      [" PepsiCola PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP036',8.44],
-      [" Seven Up PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP037',8.44],
-      [" Golden Kolita PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP038',8.44],
-      [" Golden Naranja PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP039',8.44],
-      [" Golden Uva PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP139',8.44],
-      [" Golden Pina PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP239',8.44],
-      [" Golden Manzana PET 1,5 L x 6U",6,8.44,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP339',8.44],
-      [" PepsiCola MAX PET 1,5 L  x 6U",6,5.39,1,0,0,"t3","&Pepsicola&Refrescos&PET 1.5 Litros&6 U&",1,'PP040',5.39],
-      [" PepsiCola PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP042',10.87],
-      [" Seven Up PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP043',10.87],
-      [" Golden Kolita PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP044',10.87],
-      [" Golden Naranja PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP045',10.87],
-      [" Golden Uva PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP145',10.87],
-      [" Golden Pina PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP245',10.87],
-      [" Golden Manzana PET 2 L  x 6U",6,10.87,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP345',10.87],
-      [" PepsiCola MAX PET 2 L  x 6U",6,7.19,1,0,0,"t3","&Pepsicola&Refrescos&PET 2 Litros&",1,'PP046',7.19],
-      [" PepsiCola PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP050',5.60],
-      [" Seven Up PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP051',5.60],
-      [" Golden Kolita PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP052',5.60],
-      [" Golden Naranja PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP053',5.60],
-      [" Golden Uva PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP151',5.60],
-      [" Golden Pina PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP152',5.60],
-      [" Golden Manzana PET 1 L x 6U",6,6.06,1,0,0,"t3","&Pepsicola&Refrescos&PET 1 Litro&",1,'PP153',5.60],
-      [" PepsiCola 1,25 L x 6U",6,5.09,1,0,0,"t3","&Pepsicola&Refrescos&Botella 1.25 Litros&",1,'PP054',4.35],
-      [" PepsiCola PSH 250 ml x 24U",24,17.63,1,0,0,"t3","&Pepsicola&Refrescos&PSH&",1,'PP058',17.83],
-      [" PepsiCola PSH 250 ml x 12U",12,8.81,1,0,0,"t3","&Pepsicola&Refrescos&PSH&",1,'PP062',8.81],
-      [" Soda PSH 250 ml x 24U",24,17.65,1,0,0,"t3","&Pepsicola&Soda&",1,'PM004',17.65], 
-      [" Soda  Lata 355 ml x 24U",24,20.19,1,0,0,"t3","&Pepsicola&Soda&",1,'PM008',20.19], 
-      [" Soda  1/4 Caja Lata 355 ml x 6U",6,5.05,1,0,0,"t3","&Pepsicola&Soda&",1,'PM012',5.05], 
-      [" Minalba SPARKLING 330 ml x 24U",24,11.45,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM016',11.45], 
-      [" Minalba SPARKLING PET 500 ml x 24U",24,19.02,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM020',19.02], 
-      [" Minalba SPARKLING PET 1/2 500 ml x 12U",12,9.51,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM024',9.51], 
-      [" Minalba SPARKLING 1 L x 6U",6,8.21,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM028',8.21], 
-      [" Minalba PET 355 ml x 24U",24,9.55,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM032',9.55], 
-      [" Minalba PET 600 ml TR x 24U",24,12.17,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM036',12.17], 
-      [" Minalba PET 1.5 L x 12U",12,12.27,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM040',12.27], 
-      [" Minalba PET 5 L x 2U",2,5.94,1,0,0,"t3","&Pepsicola&Minalba&",1,'PM044',5.94], 
-      [" Gatorade Mandarina 250 ml x 24",24,10.61,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 250 ml&",1,'PG004',10.61], 
-      [" Gatorade Mora 250 ml x 24",24,10.61,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 250 ml&",1,'PG005',10.61], 
-      [" Gatorade Frutas tropicales 250 ml x 24",24,10.61,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 250 ml&",1,'PG006',10.61], 
-      [" Gatorade Mandarina 500 ml x 12",12,15.98,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 500 ml&",1,'PG008',15.02], 
-      [" Gatorade Mora 500 ml x 12",12,15.98,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 500 ml&",1,'PG009',15.02], 
-      [" Gatorade Frutas Trop 500 ml x 12",12,15.98,1,0,0,"t3","&Pepsicola&Gatorade&Gatorade 500 ml&",1,'PG010',15.02], 
-      [" YUKY-PAK 250 ml x 24",24,16.78,1,0,0,"t3","&Pepsicola&Yukery&Yuky-Pak 250ml&",1,'PY004',16.78],  
-      [" Yukery Durazno Botella 250 ml x 24",24,16.78,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",0,'PY008',16.78],  
-      [" Yukery Naranja Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY012',7.88],  
-      [" Yukery Pera Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY013',7.88],  
-      [" Yukery Manzana Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY014',7.88],  
-      [" Yukery Mango Botella 250 ml x 12",12,8.39,1,0,0,"t3","&Pepsicola&Yukery&Y Botella 250 ml&",1,'PY015',7.88],  
-      [" Yukery Durazno Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY016',13.40],  
-      [" Yukery Naranja Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY017',13.40],  
-      [" Yukery Pera Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY018',13.40],  
-      [" Yukery Manzana Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY019',13.40],  
-      [" Yukery Mango Lata 335 ml x 24",24,13.40,1,0,0,"t3","&Pepsicola&Yukery&Y Lata&",1,'PY119',13.40],  
-      [" Yukery Durazno PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY020',13.55],  
-      [" Yukery Pera PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY021',13.55],  
-      [" Yukery Manzana PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY022',13.55],  
-      [" Yukery Naranja PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY023',13.55],  
-      [" Yukery Mango PET 500 ml x 12",12,13.55,1,0,0,"t3","&Pepsicola&Yukery&Y PET 500 ml&",1,'PY123',13.55],  
-      [" Yukery Durazno PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY024',33.65],  
-      [" Yukery Pera PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY025',33.65],  
-      [" Yukery Manzana PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY026',33.65],  
-      [" Yukery Naranja PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY027',33.65],  
-      [" Yukery Mango PET 1.5 L x 12",12,33.65,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5 x12&",1,'PY127',33.65],  
-      [" Yukery Durazno PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY028',15.81],  
-      [" Yukery Pera PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY029',15.81],  
-      [" Yukery Manzana PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY030',15.81],  
-      [" Yukery Naranja PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY031',15.81],  
-      [" Yukery Mango PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Yukery&Y PET 1.5L x6&",1,'PY131',15.81],  
-      [" Yuky Fresh 1.5 L x 6",6,8.41,1,0,0,"t3","&Pepsicola&Yukery&Yuky Fresh&",1,'PY032',8.41],  
-      [" Yuky Fresh PET 500 ml x 12",12,8.41,1,0,0,"t3","&Pepsicola&Yukery&Yuky Fresh&",1,'PY00436',8.41],  
-      [" Te Lipton Botella 250 ml x 24",24,10.63,1,0,0,"t3","&Pepsicola&Te Lipton&Botella 250 ml&",1,'PT004',10.63],  
-      [" Te Lipton Lata 335 ml x 24",24,14.67,1,0,0,"t3","&Pepsicola&Te Lipton&Lata 335 ml",1,'PT008',14.67],  
-      [" Te Lipton Durazno PET 500 ml x 12",24,13.45,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 500 ml&",1,'PT012',13.45],  
-      [" Te Lipton Limon PET 500 ml x 12",24,13.45,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 500 ml&",1,'PT013',13.45],  
-      [" Te Lipton Te Verde PET 500 ml x 12",24,13.45,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 500 ml&",1,'PT014',13.45],  
-      [" Te Lipton Durazno PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 1.5 Litros&",1,'PT016',15.81],  
-      [" Te Lipton Limon PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 1.5 Litros&",1,'PT017',15.81],  
-      [" Te Lipton Te verde PET 1.5 L x 6",6,16.82,1,0,0,"t3","&Pepsicola&Te Lipton&Lipton PET 1.5 Litros&",1,'PT018',15.81],  
-      [" Botella 350 ml",1,0.21,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1,'PV004',0.21],  
-      [" Botella 1.25 L",1,0.51,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1,'PV008',0.51], 
-      [" Gavera plastica 350 ml",1,2.11,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1,'PV012',2.11],  
-      [" Gavera plastica 1.25 L",1,4.02,0,0,0,"t2","&Pepsicola&Vacios_Pepsi&",1,'PV016',4.02]  
+data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,120,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV001',120]
 ];
+
 try {
 data=eval(localStorage.getItem('data'));
 } catch (error) {}
@@ -1665,7 +1548,7 @@ texto+='Cliente: '+cliente_factura+'<br>';
 var bcv=parseFloat(bcv_factura);
 var BIMD=0;
 var factor=bcv;
-
+Gdolar=0;
 texto+='$ BCV: '+ (bcv).toFixed(4) +'<br>';
 texto+='<center>Factura '+numero_factura+'</center>';
 texto+='<center><span id="contad" ></span></center>';
@@ -1689,7 +1572,9 @@ for (var i=0;i<datfac.length;i++){
 
  pu=datfac[i].pu;
  pb=datfac[i].pb;
+[pcu,pcb]=precio_costo(i);
  var Tdolar=+((datfac[i].unidad*pu + datfac[i].cajas*pb));
+ Gdolar+=fm*((datfac[i].unidad*(pu-pcu) + datfac[i].cajas*(pb-pcb)));
  Tbs=Tdolar*factor;
 
 if (Tdolar==Tdolar) { 
@@ -1753,19 +1638,12 @@ texto+='</table>';
 Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+' '+mone+'  C/IVA: '+(totald).toFixed(2)+' '+mone+ ' \n'
 Ftexto+='IVA: '+IVAD+' '+mone+' \n';
 
-/*
-texto+='<table width="100%"><tr align="right"><td style="width:15%;"> </td><td style="width:15%;"></td><td style="width:35%;">'+'S/IVA'+'</td><td style="width:35%;">'+'C/IVA'+'</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> Total </td><td style="width:15%;"></td><td style="width:35%;">'+(totaldsiva).toFixed(2)+' $ </td><td style="width:35%;">'+(totald).toFixed(2)+' $&nbsp</td></tr></table>';
-texto+='<table width="100%"><tr align="right"><td style="color:#000066; width:15%;"> IVA </td><td style="width:15%;"></td><td style="width:35%;">'+(totald-totaldsiva).toFixed(2)+' $ </td><td style="width:35%;">'+''+'</td></tr></table>';
-Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+'$  C/IVA: '+(totald).toFixed(2)+' $ \n'
-Ftexto+='IVA: '+(totald-totaldsiva).toFixed(2)+'$\n';
-*/
 }
 
 total_factura=totald;
 if (cesp) {
-total_factura=totald-parseFloat(descd);
-}
+MONTOF=totald-parseFloat(descd);
+} else {MONTOF=total_factura};
 if (tipo2==1) {
 texto+='<table width="60%">';
 texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </td><td style="width:50%;">'+(totalbsiva).toFixed(2)+' '+mone+ '</td></tr>';
@@ -1775,22 +1653,16 @@ texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td 
 if (cesp) {
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+mone+'</td></tr>';
 texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+mone+'</td></tr>';
-
 }
 texto+='</table>';
 Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+mone+' C/IVA: '+(totalb).toFixed(2)+' '+mone+' \n'
 Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+mone+ ' \n';
-
-
 }
-
-
 //console.log(Ftexto);
-
 var TM2="";
 if (tipo2==0) {TM2="$";} else {TM2="Bs";}
 
-var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+var textoT='<div style="position: fixed; text-align:right;background-color: lightgreen;width:100%;">';
 textoT+='<table width="100%"';
 textoT+='<tr>';
 textoT+='<td width="15%"><button class="btop" onclick="borra('+numf+');">Borrar</button></td>';
@@ -1810,7 +1682,9 @@ divfactura.hidden=false;
 //console.log("contador: "+contador);
 document.getElementById("contad").innerText=contador+ " Productos";
 }
+
 var Ptexto;
+
 function pedido(){
 const resp = confirm("Esta seguro de hacer el pedido ");
 if (resp) {
@@ -1859,157 +1733,131 @@ Ftexto+='$ BCV: '+  (bcv).toFixed(4) +'\n';
 Ftexto+="FACTURA\n"
 var contador=0;
 var colorb='black';
-var Tdolar=0;
-var Gdolar=0;
+Tdolar=0;
+Gdolar=0;
 for (var i=0;i<data.length;i++){
-if (data[i][4]!=0 || data[i][5]!=0) {
-//alert(i);
-contador++;
-//console.log(i+ " "+contador);
-factor=parseFloat(document.getElementById("t2").value);
-if (data[i][3]==1) {fm=1.16;colorb='black'} else {fm=1;colorb='blue'}
-[pu,pb]=precio(i);
-[pcu,pcb]=precio_costo(i);
-
-Tdolar=+((data[i][4]*pu + data[i][5]*pb));
-Gdolar+=fm*((data[i][4]*(pu-pcu) + data[i][5]*(pb-pcb)));
-   if (data[i][6]=="t1") {
-   Tbs= data[i][4]*(data[i][2]) + data[i][5]*data[i][2]*data[i][1];
-   } else 
+  if (data[i][4]!=0 || data[i][5]!=0) {
+    contador++;
+    factor=parseFloat(document.getElementById("t2").value);
+    if (data[i][3]==1) {fm=1.16;colorb='black'} else {fm=1;colorb='blue'}
+    [pu,pb]=precio(i);
+    [pcu,pcb]=precio_costo(i);
+    Tdolar=+((data[i][4]*pu + data[i][5]*pb));
+    Gdolar+=fm*((data[i][4]*(pu-pcu) + data[i][5]*(pb-pcb)));
+    if (data[i][6]=="t1") {
+     Tbs= data[i][4]*(data[i][2]) + data[i][5]*data[i][2]*data[i][1];
+    } else 
         {
     Tbs=parseFloat((Tdolar*factor).toFixed(2));
-   }
-
-if (Tdolar==Tdolar) { 
-  if (fm!=1) {BIMD+=Tdolar;}
-  totald+=parseFloat((Tdolar*fm).toFixed(2));
-  totaldsiva+=parseFloat((Tdolar).toFixed(2));
-  Ftexto+='------------\n';
- // if (tipo==0) {texto+='<table width="100%">';} else  {texto+='<table style="font-size:1em;" width="100%">';}
- texto+='<table width="100%">';
- if (tipo==0) {
-    if (data[i][4]!=0) { 
-     v2=(pu).toFixed(2);
-     v3=(parseFloat(v2)*data[i][4]).toFixed(2);
-     v4=(parseFloat(v3)*fm).toFixed(2);
-
+    }
+  if (Tdolar==Tdolar) { 
+     if (fm!=1) {BIMD+=Tdolar;}
+     totald+=parseFloat((Tdolar*fm).toFixed(2));
+     totaldsiva+=parseFloat((Tdolar).toFixed(2));
+     Ftexto+='------------\n';
+     texto+='<table width="100%">';
+     if (tipo==0) {
+       if (data[i][4]!=0) { 
+         v2=(pu).toFixed(2);
+         v3=(parseFloat(v2)*data[i][4]).toFixed(2);
+         v4=(parseFloat(v3)*fm).toFixed(2);
          texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+ v4 +' $&nbsp'+'</tr>';
          Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
          Ftexto+=data[i][4]+' U     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
-    }
-   if (data[i][5]!=0) {
-     v2=(pb).toFixed(2);
-     v3=(parseFloat(v2)*data[i][5]).toFixed(2);
-     v4=(parseFloat(v3)*fm).toFixed(2);
-      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
-      texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+v4 +' $&nbsp'+'</tr>';
-      Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
-      Ftexto+=data[i][5]+' C     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
-    }
-}
-
- if (tipo==1) {
-    if (data[i][4]!=0) { 
-  v2=(pu*factor).toFixed(2);
-  v3=(parseFloat(v2)*data[i][4]).toFixed(2);
-  v4=(parseFloat(v3)*fm).toFixed(2);
-  totalb+=parseFloat(v4);
-  totalbsiva+=parseFloat(v3);
-
+       }
+       if (data[i][5]!=0) {
+         v2=(pb).toFixed(2);
+         v3=(parseFloat(v2)*data[i][5]).toFixed(2);
+         v4=(parseFloat(v3)*fm).toFixed(2);
+         texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
+         texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+v4 +' $&nbsp'+'</tr>';
+         Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
+         Ftexto+=data[i][5]+' C     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
+       }
+     }
+     if (tipo==1) {
+       if (data[i][4]!=0) { 
+         v2=(pu*factor).toFixed(2);
+         v3=(parseFloat(v2)*data[i][4]).toFixed(2);
+         v4=(parseFloat(v3)*fm).toFixed(2);
+         totalb+=parseFloat(v4);
+         totalbsiva+=parseFloat(v3);
          texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
          Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
          Ftexto+=data[i][4]+' U     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
+       }
+       if (data[i][5]!=0) {
+         v2=(pb*factor).toFixed(2);
+         v3=(parseFloat(v2)*data[i][5]).toFixed(2);
+         v4=(parseFloat(v3)*fm).toFixed(2);
+         totalb+=parseFloat(v4);
+         totalbsiva+=parseFloat(v3);
+         texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
+         texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
+         Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
+         Ftexto+=data[i][5]+' C     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
+       }
     }
-   if (data[i][5]!=0) {
-  v2=(pb*factor).toFixed(2);
-  v3=(parseFloat(v2)*data[i][5]).toFixed(2);
-  v4=(parseFloat(v3)*fm).toFixed(2);
-  totalb+=parseFloat(v4);
-  totalbsiva+=parseFloat(v3);
-      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
-      texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
-      Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
-      Ftexto+=data[i][5]+' C     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
-    }
-}
-
-
-
-}
-texto+='</table>';
-}
-}
-
+  }
+  texto+='</table>';
+  } // if
+ }// for
 
 texto+='<HR>';
 Ftexto+='============================================\n';
-//texto+='<span style="color:yellow; font-size:1em;">Total</span><br>';
-
 var TM="";
 if (tipo==0) {TM="$";} else {TM="Bs";}
 
-var IVAD=(totald-totaldsiva).toFixed(2);
+//var IVAD=(totald-totaldsiva).toFixed(2);
 BIMD=(BIMD).toFixed(2);
+var IVAD=(BIMD*0.16).toFixed(2);
 var BIMB=(parseFloat(BIMD)*factor).toFixed(2);
 var descd=(parseFloat(IVAD)*0.75).toFixed(2);
 var IVAB=(parseFloat(IVAD)*factor).toFixed(2);
 var descb=(parseFloat(IVAB)*0.75).toFixed(2);
-
+totald=parseFloat(totaldsiva)+parseFloat(IVAD);
 
 if (tipo==0) {
-
-texto+='<table width="60%">';
-texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total S/IVA </td><td style="width:50%;">'+(totaldsiva).toFixed(2)+' '+TM+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMD+' '+TM+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAD+' '+TM+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totald).toFixed(2)+' '+TM+' </td></tr>';
-if (Ocliente.esp) {
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dscto AR </td><td style="width:50%;">'+(parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totald-parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
+  texto+='<table width="60%">';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total S/IVA </td><td style="width:50%;">'+(totaldsiva).toFixed(2)+' '+TM+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMD+' '+TM+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAD+' '+TM+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totald).toFixed(2)+' '+TM+' </td></tr>';
+  if (Ocliente.esp) {
+   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dscto AR </td><td style="width:50%;">'+(parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
+   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totald-parseFloat(descd)).toFixed(2)+' '+TM+' </td></tr>';
+  }
+  texto+='</table>';
+  Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+' '+TM+'  C/IVA: '+(totald).toFixed(2)+' '+TM+ ' \n'
+  Ftexto+='IVA: '+IVAD+' '+TM+' \n';
 }
-texto+='</table>';
-Ftexto+='S/IVA: '+(totaldsiva).toFixed(2)+' '+TM+'  C/IVA: '+(totald).toFixed(2)+' '+TM+ ' \n'
-Ftexto+='IVA: '+IVAD+' '+TM+' \n';
-
-}
-
+total_factura=totald;
 if (Ocliente.esp) {
  MONTOF=(totald-parseFloat(descd)).toFixed(2);
 } else {MONTOF=(totald).toFixed(2)}
-
-
 if (tipo==1) {
-texto+='<table width="60%">';
-texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </td><td style="width:50%;">'+(totalbsiva).toFixed(2)+' '+TM+ '</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMB+' '+TM+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAB+' '+TM+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totalb).toFixed(2)+' '+TM+'</td></tr>';
-
-if (Ocliente.esp) {
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
-
-}
+  texto+='<table width="60%">';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;">Total S/IVA  </td><td style="width:50%;">'+(totalbsiva).toFixed(2)+' '+TM+ '</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+BIMB+' '+TM+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+IVAB+' '+TM+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+(totalb).toFixed(2)+' '+TM+'</td></tr>';
+  if (Ocliente.esp) {
+    texto+='<tr align="right"><td style="color:#000066; width:50%;"> Dcto AR </td><td style="width:50%;">'+(parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
+    texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total AR </td><td style="width:50%;">'+(totalb-parseFloat(descb)).toFixed(2)+' '+TM+'</td></tr>';
+  }
 texto+='</table>';
-
 Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+TM+' C/IVA: '+(totalb).toFixed(2)+' '+TM+' \n'
 Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+TM+ ' \n';
 }
-//console.log(Ftexto);
-
-
-
-
-
 
 var textoT='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
 textoT+='<table width="100%"';
 textoT+='<tr>';
 textoT+='<td width="15%"><button class="btop" onclick="anula();">Borrar</button></td>';
 textoT+='<td width="15%"><button class="btop" onclick="guardar_factura();">Guardar</button></td>';
-textoT+='<td width="15%"><button class="btop" onclick="lee_facturas();">Ver</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="lee_facturas();selectlista(0);">Ver</button></td>';
 textoT+='<td width="5%"></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda();">' + TM +'</button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
@@ -2023,9 +1871,7 @@ divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width:
 textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
 divfactura.innerHTML=textoT;
 divfactura.hidden=false;
-//console.log("contador: "+contador);
 document.getElementById("contad").innerText=contador+ " Productos";
-//console.log(Gdolar.toFixed(2));
 }
 
 var tipo=0;
@@ -2062,11 +1908,10 @@ async function comparte(shareData){
 
 
 function anula(){
-
-for (var i=0;i<data.length;i++){
-data[i][4]=0;
-data[i][5]=0;
-}
+ for (var i=0;i<data.length;i++){
+  data[i][4]=0;
+  data[i][5]=0;
+ }
 if (document.getElementById("factura").hidden==false) {factura2();}
 }
 
