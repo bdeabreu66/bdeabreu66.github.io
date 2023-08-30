@@ -1108,6 +1108,10 @@ function modifica_factura2(indf){
 fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
 cliente_factura=document.getElementById('cli2').value;
 var nro_fact_m=document.getElementById('nfact').value;
+try
+{
+facturas[indf].deuda=document.getElementById('dfact').value;
+}catch{};
 facturas[indf].cliente=cliente_factura;
 facturas[indf].fecha=fecha_factura;
 facturas[indf].nro=nro_fact_m;
@@ -1133,6 +1137,9 @@ texto+='<span onclick="limpiaCliente2();">Cliente:</span>';
 texto+='<input style="width:30%;" type="text" id="cli2" value="'+partes[0]+'" list="listaclientes">';
 texto+='<datalist id="listaclientes"></datalist>';
 texto+='<input style="width:30%;" type="text" id="nfact" value="'+partes[2]+'" >';
+try 
+{texto+='<input style="width:30%;" type="text" id="dfact" value="'+facturas[indf].deuda+'" >';
+}catch{};
 texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="modifica_factura2('+indf+');" >Ok </button>';
 div3.innerHTML=texto;
 //anula();
@@ -1160,6 +1167,7 @@ var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
 //alert(indcliente);
 if (indcliente>=0) {
 AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)+parseFloat(MONTOF)).toFixed(2);
+DEU_TOT=AClientes[indcliente].deuda
 localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
 // guarda_clientes_IDB();
 }
@@ -1203,9 +1211,10 @@ function guarda_factura2(){
 fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
 //alert(fecha_factura);
 cliente_factura=document.getElementById('cli2').value;
+Actualiza_deuda();
 guarda_factura(); 
 localStorage.setItem('FACT_NRO',(nro_factura+1).toString());
-Actualiza_deuda();
+
 quitarlista();
 }
  
@@ -1227,6 +1236,7 @@ facturas[indice].bcv=(bcv).toFixed(4);
 facturas[indice].total=total_factura.toFixed(2);
 facturas[indice].ganancia=Gdolar.toFixed(2);
 facturas[indice].total_ret=MONTOF;
+facturas[indice].deuda=DEU_TOT;
 facturas[indice].items=new Array;
 var nro_item=0;
 for (var i=0;i<data.length;i++) {
@@ -1248,7 +1258,7 @@ var tmp=JSON.stringify(facturas);
 localStorage.setItem("FACTURAS",tmp);
 // guarda_facturas_IDB();
 //alert(tmp);
-if (texto.length>2) {localStorage.setItem(nomb,texto); } 
+//if (texto.length>2) {localStorage.setItem(nomb,texto); } 
 if (cliente.indexOf('Pedido')==-1) {resta_inventario();}
 //alert(facturas);
 }
@@ -1298,7 +1308,7 @@ return (total_factura).toFixed(2);
 
 }
 function recupera_factura(id_factura){
-
+//alert(id_factura);
 for (var i=0;i<data.length;i++) {
 datfac[i]=new Object();
 datfac[i].unidad=0;
@@ -1311,7 +1321,9 @@ var partes=id_factura.split('_');
 fecha_factura=partes[1];
 cliente_factura=partes[0];
 numero_factura=partes[2];
+//alert(numero_factura);
 var indf=facturas.findIndex((e)=> e.cliente==cliente_factura && e.fecha==fecha_factura && e.nro==numero_factura);
+//alert(indf);
 if (indf>=0) {
  bcv_factura=facturas[indf].bcv;
  for (var i=0;i<facturas[indf].items.length;i++) {
@@ -1542,7 +1554,9 @@ var totalbsiva=0;
 var texto='Fecha: '+fecha_factura+'<br>';
 texto+=dist+'<br>';
 texto+='Cliente: '+cliente_factura+'<br>';
+try{
 var bcv=parseFloat(bcv_factura);
+}catch{};
 var BIMD=0;
 var factor=bcv;
 Gdolar=0;
