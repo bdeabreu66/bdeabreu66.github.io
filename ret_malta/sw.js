@@ -2,8 +2,13 @@
 //31-05-2022 . Modificado la entrada base imponible para que acepte ''
 //07-12-2022 Incorporada retencion pepsi
 //12-12-2022 Corregido detalles para pepsi
-//26-04-2012 Agragada agencia
-const currentCache = 'RETEN-cache-v1.7';
+//26-04-2012 Agregada agencia
+//30-08-2012 Se guardan los datos de retenciones.
+// Un solo objeto para los datos del franquiciado
+// Agregado Lisae y envases
+// recuerda ultimo nro de factura
+
+const currentCache = 'RETEN-cache-v1.8';
 const files =
 [
     'index.html',

@@ -246,10 +246,35 @@ hidden:true;
 <script type="text/javascript" src="js/png_support.js"></script>
 <script type="text/javascript" src="js/zlib.js"></script>
 <script type="text/javascript" src="js/selectFile.js"></script>
+<script src="js/smtp.js"></script>  
 
 <script type="text/javascript" src="setlanguage.js"></script>
 <script type="text/javascript" src="pdfs.js"></script>
 <script type="text/javascript">
+// npm i --save mailslurp-client
+// import { MailSlurp } from 'mailslurp-client';
+//const mailslurp = new MailSlurp({ apiKey: "0bc249c55d989efa25116d2a72dbc30b84c3d4dbcf94e1c029e38e1f4d19a9b4" });
+//const inbox = await mailslurp.inboxController.createInboxWithDefaults();
+
+function sendEmail() {
+  Email.send({
+  Host: "smtp.gmail.com",
+  Username : "distribuidorapitaorozcoca@gmail.com",
+  Password : "agustin,1960",
+  To : 'recipient’s email address',
+  From : "distribuidorapitaorozcoca@gmail.com",
+  Subject : "email subject",
+  Body : "email body",
+  Attachments : [
+  	{
+  		name : "smtpjs.png",
+  		path:"https://networkprogramming.files.wordpress.com/2017/11/smtpjs.png"
+  	}]
+  }).then(
+  	message => alert("mail sent successfully")
+  );
+}
+
 var textoreconocido;
 function obtenerTexto(indice) {
 if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
@@ -353,7 +378,7 @@ var DIR_FISCAL='Direccion del Franquiciado Tlf 04XX-XXXXXXX';
 var RIF_FISCAL='J-XXXXXXXX-X';
 var NOMB_DIST='Distribuidora XXXXXXXXX C.A.';
 var AGENCIA='AGENCIA GUACARA ';
-
+var retenciones=[];
 var data=[];
 var datos_ret=[];
 var datos_ret_base;
@@ -410,6 +435,17 @@ console.log((parseFloat(2718)*FACTOR_RET/100));
 var Max_L;
 var Max_F;
 var CODIGO;
+
+function reset_datos(){
+datos_ret[0]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[1]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[2]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[3]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[4]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[5]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[6]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[7]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+}
 function inicio(){
 Max_F=7;
 Max_L=7;
@@ -424,85 +460,128 @@ console.log('fecha_hoy '+fecha_hoy);
 fecha_min=year_estandar(fecha_hoy)+'-01-01';
 
 divs_datos=document.getElementById("divdata");
-datos_ret[0]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
-datos_ret[1]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
-datos_ret[2]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
-datos_ret[3]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
-datos_ret[4]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
-datos_ret[5]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
-datos_ret[6]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
-datos_ret[7]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
+reset_datos();
 
-try {
+fbase=localStorage.getItem('FBASE');
+if (fbase!=null) {fbase=JSON.parse(fbase)} else
+{
+fbase=new Array;
+for (var i=0;i<3;i++) {
+fbase[i]=new Object;
+fbase[i].nfac='453678';
+fbase[i].ncont='';
+}
+ }
+var retp=localStorage.getItem('RETENCIONES');
+//alert(retp.length);
+if (retp!=null) {retenciones=JSON.parse(retp)} else {retenciones=[];}
+var sumr=0;
+for (var i=0;i<retenciones.length;i++) {
+sumr+=parseFloat(retenciones[i].total);
+}
+console.log('deuda '+sumr.toFixed(2));
 var datos_T=localStorage.getItem('dat_ret');
 if (datos_T!=null) {datos_ret=JSON.parse(datos_T)};
-} catch {console.log('error')};
 
-try {
 var NRO_RET_T=localStorage.getItem('nro_ret');
 if (NRO_RET_T!=null) {NRO_RET=NRO_RET_T};
 
-} catch {console.log('error')};
-
-try {
 var TIPO_RET_T=localStorage.getItem('tipo_ret');
 if (TIPO_RET_T!=null) {TIPO_RET=TIPO_RET_T};
-} catch {console.log('error')};
 
-try {
-var LISTA_A_T=localStorage.getItem('lista_a');
-if (LISTA_A_T!=null) {LISTA_A=LISTA_A_T};
-} catch {console.log('error')};
-
-try {
-var LISTA_C_T=localStorage.getItem('lista_c');
-if (LISTA_C_T!=null) {LISTA_C=LISTA_C_T};
-} catch {console.log('error')};
-
-try {
-var LISTA_P_T=localStorage.getItem('lista_p');
-if (LISTA_P_T!=null) {LISTA_P=LISTA_P_T};
-} catch {console.log('error')};
-try {
+var tmp3=localStorage.getItem('DATOS_FR');
+if (tmp3!=null) {
+DATOS_FR=JSON.parse(tmp3);
+LISTA_A=DATOS_FR.lista_a;
+LISTA_P=DATOS_FR.lista_p;
+LISTA_C=DATOS_FR.lista_c;
+DIR_FISCAL=DATOS_FR.dir;
+RIF_FISCAL=DATOS_FR.rif;
+NOMB_DIST=DATOS_FR.nombre_C;
+CODIGO=DATOS_FR.codigo;
+}
 var Max_F_T=localStorage.getItem('max_f');
 if (Max_F_T!=null) {Max_F=parseInt(Max_F_T)};
-} catch {console.log('error')};
 
-try {
-var CODIGO_T=localStorage.getItem('codigo');
-if (CODIGO_T!=null) {CODIGO=CODIGO_T};
-} catch {console.log('error')};
-
-
-try {
 var FECHA_PAGO_T=localStorage.getItem('fechapago');
-} catch {console.log('error')};
 if (FECHA_PAGO_T!=null) {FECHA_PAGO=FECHA_PAGO_T};
-try {
-var DIR_FISCAL_T= localStorage.getItem('dir_fiscal');
-if (DIR_FISCAL_T!=null) {DIR_FISCAL=DIR_FISCAL_T};
 
-var RIF_FISCAL_T= localStorage.getItem('rif_fiscal');
-if (RIF_FISCAL_T!=null) {RIF_FISCAL=RIF_FISCAL_T};
-
-var NOMB_DIST_T= localStorage.getItem('nombre_dist');
-if (NOMB_DIST_T!=null) {NOMB_DIST=NOMB_DIST_T};
-
-} catch {console.log('error')}
-
-try {
 TASA_IVA= localStorage.getItem('tasa_iva');
  if (TASA_IVA==null) {TASA_IVA=16;} 
 FACTOR_RET= parseFloat(localStorage.getItem('factor_ret'));
  if (FACTOR_RET==null) {FACTOR_RET=0.75;} 
-
-} catch {console.log('error')}
 console.log(TASA_IVA);
 
 document.getElementById("seleccion").hidden=true;
 document.getElementById("configuracion").hidden=true;
 console.table(FECHA_PAGO);
+
 Seleccion();
+}
+
+function exportar_datos(){
+ var data='';
+lr=retenciones.length;
+ for (var i=0;i<lr;i++){
+ data+=retenciones[i].nro+';'+retenciones[i].total.replace('.',',')+'\n';
+}
+ var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,"retenciones.csv");
+}
+
+function armaFacturas(indi){
+const lr=retenciones[indi].datos.length
+let tmp=localStorage.getItem("FACTURAS_POLAR");
+if (tmp==null){facturasPolar=[]} else facturasPolar=JSON.parse(tmp);
+ for (var j=0;j<lr;j++){
+  ind=facturasPolar.findIndex(e=>e.nfac==retenciones[indi].datos[j].nro_factura)
+  if (ind>=0) { lin=ind} else {lin=facturasPolar.length;facturasPolar[lin]=new Object;}
+   facturasPolar[lin].nfac=retenciones[indi].datos[j].nro_factura;
+   facturasPolar[lin].ncont=retenciones[indi].datos[j].nro_control;
+   facturasPolar[lin].fecha=retenciones[indi].datos[j].fecha;
+   facturasPolar[lin].tipo=retenciones[indi].tipo;
+   facturasPolar[lin].envases=retenciones[indi].datos[j].VACIOS;
+   facturasPolar[lin].lisaea=retenciones[indi].datos[j].LISAEA;
+   facturasPolar[lin].bimp=retenciones[indi].datos[j].C_IVA;
+  if (ind<0) {facturasPolar[lin].pagada="0"}
+}
+
+localStorage.setItem("FACTURAS_POLAR",JSON.stringify(facturasPolar));
+}
+
+
+function hacerRetencion(){
+hacerRetencion2();
+var indi=-1;
+indi=retenciones.findIndex((e)=>e.nro==NRO_RET);
+if (indi<0) {indi=retenciones.length;}
+ retenciones[indi]=new Object;
+ retenciones[indi].nro=NRO_RET;
+ retenciones[indi].fecha=FECHA_PAGO;
+ retenciones[indi].tipo=TIPO_RET;
+ retenciones[indi].datos=[];
+ var ult=0;
+ for (var i=0;i<7;i++){
+  if (datos_ret[i].nro_factura!=''){
+     retenciones[indi].datos[i]=new Object;
+     Object.assign(retenciones[indi].datos[i],datos_ret[i]);
+     ult=i;
+  } else {break};
+ }
+ retenciones[indi].total=sumaRET.toFixed(2);
+
+ localStorage.setItem("RETENCIONES",JSON.stringify(retenciones));
+ console.log(retenciones)
+fbase[parseInt(TIPO_RET)].nfac=datos_ret[ult]["nro_factura"];
+fbase[parseInt(TIPO_RET)].ncont=datos_ret[ult]["nro_control"];
+localStorage.setItem("FBASE",JSON.stringify(fbase));
+console.log(datos_ret[ult]["nro_factura"]);
+
+console.log(datos_ret[ult]["nro_control"]);
+console.log(fbase);
+//genera_fact_polar();
+armaFacturas(indi);
+//exportar_datos();
 }
 function retencion(){
 var ok1=false;
@@ -524,9 +603,9 @@ if (ok) {hacerRetencion();} else {alert("\u2639\uFE0F"+mensaje);}
 }
 function copia(j){
 divs_datos.getElementsByTagName("input")[0].value=fecha_date(datos_ret[j-1]["fecha"]);
-divs_datos.getElementsByTagName("input")[1].value=datos_ret[j-1]["nro_factura"];
+divs_datos.getElementsByTagName("input")[1].value=parseInt(datos_ret[j-1]["nro_factura"])+1;
 divs_datos.getElementsByTagName("input")[2].value=datos_ret[j-1]["nro_control"].substring(0,2);
-divs_datos.getElementsByTagName("input")[3].value=datos_ret[j-1]["nro_control"].substring(3);
+divs_datos.getElementsByTagName("input")[3].value=parseInt(datos_ret[j-1]["nro_control"].substring(3))+1;
 divs_datos.getElementsByTagName("input")[4].value=datos_ret[j-1]["nro_debito"];
 }
 
@@ -558,10 +637,18 @@ texto+='&nbsp; <button class="micro" onclick="obtenerTexto(2);">&nbsp;</button><
 texto+='<span class="titulo">Nota de debito:</span><br> <input type="number" value="'+datos_ret[m]["nro_debito"]+'"> ';
 texto+='&nbsp; <button class="micro" onclick="obtenerTexto(3);">&nbsp;</button><br> ';
 
-texto+='<span class="titulo">Monto Base imponible a IVA:</span><br> <input type="number" value="'+datos_ret[m]["C_IVA"]+'"> ';
+texto+='<span class="titulo">Monto Base imponible a IVA(Bs):</span><br> <input type="number" value="'+datos_ret[m]["C_IVA"]+'"> ';
 texto+='&nbsp; <button class="micro" onclick="obtenerTexto(4);">&nbsp;</button><br> ';
+
+texto+='--------------<br>';
+
+texto+='<span class="titulo">Vacios (Bs):</span><br> <input type="number" value="'+datos_ret[m]["VACIOS"]+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(5);">&nbsp;</button><br> ';
+
+texto+='<span class="titulo">Lisaea ($):</span><br> <input type="number" value="'+datos_ret[m]["LISAEA"]+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(6);">&nbsp;</button><br> ';
+
 texto+='</div>';
-//texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
 texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button>';
 texto+=' <button class="botonf" onclick="canceladatos();">Cancelar</button>';
 texto+=' <button class="botonf" onclick="anular('+m+');">Anular</button><br>'
@@ -570,6 +657,29 @@ divpart.innerHTML=texto;
 divpart.hidden=false;
 //divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
 document.getElementById("seleccion").hidden=true;
+}
+function genera_fact_polar(){
+var fact_polar=[];
+var cont_f=0;
+var tr=retenciones.length;
+for(var i=0;i<tr;i++){
+ var td=retenciones[i].datos.length;
+ for (var j=0;j<td;j++){
+   fact_polar[cont_f]=new Object;
+   fact_polar[cont_f].nfac=retenciones[i].datos[j].nro_factura;
+   fact_polar[cont_f].fecha=retenciones[i].datos[j].fecha;
+   fact_polar[cont_f].bimp=retenciones[i].datos[j].C_IVA;
+   fact_polar[cont_f].ncont=retenciones[i].datos[j].nro_control;
+   fact_polar[cont_f].vac=retenciones[i].datos[j].VACIOS;
+   fact_polar[cont_f].lisaea=retenciones[i].datos[j].LISAEA;
+   fact_polar[cont_f].tipo=retenciones[i].tipo;
+   
+  var difn=parseInt(retenciones[i].datos[j].nro_factura)-parseInt(retenciones[i].datos[j].nro_control.substring(2));
+ console.log(retenciones[i].tipo+' '+difn);
+cont_f++;
+ }
+}
+localStorage.setItem("FACT_POLAR",JSON.stringify(fact_polar))
 }
 
 function carga_data(){
@@ -635,8 +745,29 @@ divs_datos.getElementsByTagName("input")[2].value='';
 divs_datos.getElementsByTagName("input")[3].value='';
 divs_datos.getElementsByTagName("input")[4].value='';
 divs_datos.getElementsByTagName("input")[5].value='';
+divs_datos.getElementsByTagName("input")[6].value='';
+divs_datos.getElementsByTagName("input")[7].value='';
 }
-
+function cargar_retencion(){
+var nro=(document.getElementById('nret').value).toString();
+console.log('nro '+nro);
+var indf=retenciones.findIndex((e)=>e.nro==nro)
+console.log(indf);
+console.log(retenciones);
+if (indf>=0) {
+  NRO_RET=retenciones[indf].nro;
+  TIPO_RET=retenciones[indf].tipo;
+  FECHA_PAGO=retenciones[indf].fecha;
+  reset_datos();
+  var max=retenciones[indf].datos.length
+  for (var i=0;i<max;i++){
+    Object.assign(datos_ret[i],retenciones[indf].datos[i]);
+  }
+}
+console.log(indf);
+console.log(retenciones[indf]);
+Seleccion();
+}
 function Seleccion(){
 var divsel=document.getElementById("seleccion");
 var texto='';
@@ -660,6 +791,7 @@ texto+='<div class="divfondo">';
 texto+='<span class="titulo"> N&deg;de la retenci&oacute;n </span><br><input id="nret" type="number" onchange="set_n_ret();" value="'+NRO_RET+'"> ';
 texto+='&nbsp; <button class="micro" onclick="obtenerTexto(5);">&nbsp;</button><br> ';
 texto+='<span class="titulo">Fecha de la retenci&oacute;n </span><br><input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> ';
+texto+='<button class="botonf" onclick="cargar_retencion()"> Cargar </button>';
 texto+='</div>';
 texto+='<br><span class="titulo" > Datos de las facturas:</span><br>';
 for (var i=0;i<Max_F;i++) {
@@ -690,7 +822,14 @@ datos_ret[i]["nro_factura"]='';
 datos_ret[i]["nro_control"]='-';
 datos_ret[i]["nro_debito"]='';
 datos_ret[i]["C_IVA"]='';
+datos_ret[i]["VACIOS"]='0';
+datos_ret[i]["LISAEA"]='0';
+
 }
+datos_ret[0]["nro_factura"]=fbase[parseInt(TIPO_RET)].nfac;
+datos_ret[0]["nro_control"]=fbase[parseInt(TIPO_RET)].ncont;
+console.log(fbase[parseInt(TIPO_RET)].nfac);
+
 NRO_RET=(parseInt(NRO_RET)+1).toString();
 FECHA_PAGO=fecha_hoy;
 localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
@@ -707,16 +846,12 @@ console.log(Max_F);
 if (Max_F>Max_L) {Max_F=Max_L;}
 if (Max_F<1) {Max_F=1;}
 
+localStorage.setItem('DATOS_FR',JSON.stringify(DATOS_FR));
 localStorage.setItem('tasa_iva',TASA_IVA);
 localStorage.setItem('factor_ret',FACTOR_RET);
-localStorage.setItem('dir_fiscal',DIR_FISCAL);
-localStorage.setItem('rif_fiscal',RIF_FISCAL);
-localStorage.setItem('nombre_dist',NOMB_DIST);
-localStorage.setItem('lista_a',LISTA_A);
-localStorage.setItem('lista_c',LISTA_C);
-localStorage.setItem('lista_p',LISTA_P);
+
 localStorage.setItem('max_f',Max_F.toString());
-localStorage.setItem('codigo',CODIGO);
+
 
 document.getElementById("configuracion").hidden=true;
 Seleccion();
@@ -732,11 +867,15 @@ function guarda_datos(m){
  datos_ret[m]["fecha"]=inv_fecha_date(fi);
  datos_ret[m]["nro_factura"]=divs_datos.getElementsByTagName("input")[1].value;
  datos_ret[m]["nro_control"]=divs_datos.getElementsByTagName("input")[2].value+"-"+divs_datos.getElementsByTagName("input")[3].value;
+/*
+fbase[parseInt(TIPO_RET)].nfac=datos_ret[m]["nro_factura"];
+fbase[parseInt(TIPO_RET)].ncont=datos_ret[m]["nro_control"];
+*/
  datos_ret[m]["nro_debito"]=divs_datos.getElementsByTagName("input")[4].value;
  datos_ret[m]["C_IVA"]=(divs_datos.getElementsByTagName("input")[5].value).replace(',','.');
-//if (isNaN(parseFloat(datos_ret[m]["C_IVA"]))) {datos_ret[m]["C_IVA"]="0"}
-//datos_ret[m]["C_SIVA"]=(divs_datos.getElementsByTagName("input")[4].value).replace(',','.');
-//console.log(parseFloat(datos_ret[m]["C_IVA"]));
+ datos_ret[m]["VACIOS"]=(divs_datos.getElementsByTagName("input")[6].value).replace(',','.');
+ datos_ret[m]["LISAEA"]=(divs_datos.getElementsByTagName("input")[7].value).replace(',','.');
+
 divs_datos.hidden=true;
 console.log(m);
 console.table(datos_ret);
@@ -753,6 +892,13 @@ console.table(datos_ret);
 Seleccion();
 //console.table(
 localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
+}
+function listar_retenciones(){
+
+for (var i=0;i<retenciones.length;i++){
+console.log(retenciones[i].nro+ '  '+ retenciones[i].total)
+
+}
 }
 
 function lineas(t){
@@ -777,6 +923,7 @@ function ajaxPositiveD(response) {
     }
  function showResultD(txt) {
        console.log('muestro respuesta: ', txt);
+        DATOS_FR=txt;
         DIR_FISCAL=txt.dir;
         RIF_FISCAL=txt.rif;
         NOMB_DIST=txt.nombre_C;
