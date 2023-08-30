@@ -901,6 +901,7 @@ tds[i].setAttribute("pos", "0");
 tds[i].style.color='black';
 }
 }
+
 function actualiza_deuda(j){
  nueva=document.getElementById("deu").value;
  var nombcli=Obten_nombre(pagos[j].telf)
@@ -935,24 +936,25 @@ if (ind>=0) {
  texto+='</table>'; 
  texto+='<button onclick=quitar_div("div4")>Salir</button>';
  texto+='</div>';
- texto+='<div style="overflow-y: auto;">';
- listasel=[];
- for(var i=0;i<localStorage.length;i++) {
-   var nomb=localStorage.key(i); 
-   if (nomb.indexOf('FAC_'+cl)==0 )  
+  listasel=[];
+facturas=JSON.parse(localStorage.getItem("FACTURAS"));
+
+ for(var i=0;i<facturas.length;i++) {
+   
+   if (facturas[i].cliente==cl )  
     {  
-      var fec=nomb.substr(4).split('_')[1];
-     listasel.unshift(nomb); 
-     
-     
+      listasel.unshift(cl+"_"+facturas[i].fecha+"_"+facturas[i].total+"_"+facturas[i].deuda); 
+  
     }
  }
  listasel=listasel.sort(ord_fecha);
+ texto+='<div style="overflow-y: scroll;height:300px;background-color:lightgreen">';
  texto+='<table style="width:100%;">';
  for (var k=0;k<listasel.length;k++) {
   //  console.log(k+' '+nomb);
-   var tot=Monto_factura(listasel[k]);
-   texto+='<tr><td> '+listasel[k].split('_')[2]+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+tot+' $</td></tr>';
+  // var tot=Monto_factura(listasel[k]);
+   var tot=listasel[k].split('_')[2];
+   texto+='<tr><td> '+listasel[k].split('_')[1]+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+tot+' $</td><td> '+listasel[k].split('_')[3]+'</td></tr>';
  }
  texto+='</table>';
  texto+='</div>';
@@ -1063,8 +1065,8 @@ clickp_cliente(pos_ini);
 function ord_fecha(a,b){
 var ela=a.split('_');
 var elb=b.split('_');
-  if (!fecha_mayor_igual(ela[2],elb[2])) return 1;
-  if (!fecha_mayor_igual(elb[2],ela[2])) return -1;
+  if (!fecha_mayor_igual(ela[1],elb[1])) return 1;
+  if (!fecha_mayor_igual(elb[1],ela[1])) return -1;
 //  if (ela[0]<elb[0]) return -1;
 //  if (ela[0]>elb[0]) return 1;
   return 0;
@@ -1415,10 +1417,13 @@ Activalector_archivos();
 descarga_historico();
 //contenido=localStorage.getItem('Arch_datos_banco');
 var texto4=localStorage.getItem('Clientes_Pita');
+//alert(texto4.length);
 var texto=localStorage.getItem('pagos_banco');
+//alert(texto.length);
 var texto2=localStorage.getItem('domicilios_banco');
+//alert(texto2.length);
 var texto3=localStorage.getItem('pagos_hechos_banco');
-
+//alert(texto3.length);
 if (texto4!='' && texto4!=null) {Clientes=JSON.parse(texto4);} else {Clientes=[];}
 
 if ( texto3!='' && texto3!=null) {pagos_hechos=JSON.parse(texto3);} else {pagos_hechos=[];}
