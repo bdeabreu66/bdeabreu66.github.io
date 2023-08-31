@@ -8,7 +8,7 @@
 // Agregado Lisae y envases
 // recuerda ultimo nro de factura
 
-const currentCache = 'RETEN-cache-v1.8';
+const currentCache = 'RETEN-cache-v1.9';
 const files =
 [
     'index.html',
