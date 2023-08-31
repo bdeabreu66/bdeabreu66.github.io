@@ -1,4 +1,5 @@
-function hacerRetencion(){
+var sumaRET=0;
+function hacerRetencion2(){
 function lineHeight(){
 return doc.getLineHeight("Text") / doc.internal.scaleFactor;
 //return 1.15;
@@ -185,7 +186,6 @@ Ybase_tabla=esqy;
   var COMPRA_SIN_IVA;
   var baseimp;
   var RET;
-  var sumaRET=0;
   var nid=0;
  // for (var k=0;k<datos_ret.length;k++){
   for (var k=0;k<Max_F;k++){
