@@ -576,11 +576,69 @@ var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
 //console.log('sal '+sal)
 return sal;
 }
+function lis_fecha(a,b)
+{
+  if (!fecha_mayor_igual(a.fecha,b.fecha)) return 1;
+  if (!fecha_mayor_igual(b.fecha,a.fecha)) return -1;
+    if (a.fecha==b.fecha) {
+     if (a.hora>b.hora) {return -1;} else {return 1;}
+   }
+}
+
 function clickp_cliente(pos){
 //alert(pos);
+
+const lp=pagos.length
+lis_cli=[];
+let cc=0; 
+for (var i=0;i<lp;i++){
+if (Obten_nombre(pagos[i].telf)==lista_clientes[pos]) {
+ lis_cli[cc]=new Object;
+ lis_cli[cc].fecha=pagos[i].fecha;
+ lis_cli[cc].montodolar=pagos[i].montodolar;
+ lis_cli[cc].montoBs=pagos[i].montoBs;
+ lis_cli[cc].hora=pagos[i].hora;
+ lis_cli[cc].tc=pagos[i].tc;
+ cc++; 
+}
+lis_cli.sort(lis_fecha)
+}
+console.log(lista_clientes[pos]+' '+cc);
+var divaux=document.getElementById("divdata");
+divaux.style="position: fixed;top :20%; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;overflow-y: scroll;";
+var texto='';
+texto+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+texto+='<table width="100%"><tr>';
+texto+='<td style="width:70%;text-align:center;color:blue;" >Clientes</td>';
+texto+='<td width="10%"><button  title="Nombre" onclick="Selecciona_cliente();" > Sel </button></td>';
+texto+='<td width="10%"><button  title="Salir" onclick=quitar_div("divdata"); <button> x </button></td>';
+texto+='</tr></table></div><br><br>';
+texto+='<div id="lclientes" style="overflow:auto;height:90%;font-size:0.8rem;">';
+texto+='<table width="100%">';
+texto+='<p onclick="muestra_deuda(\''+lista_clientes[pos]+'\');" style="color:red;font-size:1.5em;text-align:center;">'+lista_clientes[pos] +'</p>';
+ 
+for (var i=0;i<lis_cli.length;i++)
+{
+
+colb=colorcuenta(lis_cli[i].tc);
+var indip=pagos_hechos.findIndex(x=>x.fecha==lis_cli[i].fecha && x.hora==lis_cli[i].hora);
+if (indip>=0) {texto+='<tr style="color:white; background-color:'+colb+';" ><td width="5%"> <input type="checkbox" checked onclick=chequeado(this,'+i+');>'+'</td>';}
+  else {texto+='<tr style="color:black;background-color:'+colb+';" ><td width="5%"> <input type="checkbox" onclick=chequeado(this,'+i+');>'+'</td>';}
+texto+='<td width="31%">'+'&nbsp&nbsp'+lis_cli[i].fecha+'</td>';
+texto+='<td width="27%">'+'&nbsp&nbsp'+lis_cli[i].montoBs+' Bs '+'</td>';
+texto+='<td width="27%" class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+lis_cli[i].montodolar+' $ '+'</td>';
+texto+='</tr>';
+
+}
+texto+='</table></div>';
+divaux.innerHTML=texto;
+divaux.style.visibility="visible";
+
+console.log(lis_cli);
 document.getElementById("div3").style.visibility='hidden';
-const posic=document.getElementsByName("pcliente")[pos].offsetTop;
-document.getElementById("lclientes").scrollTop=posic-30;
+//const posic=document.getElementsByName("pcliente")[pos].offsetTop;
+//document.getElementById("lclientes").scrollTop=posic-30;
+
 }
 
 var lista_clientes=[];
@@ -705,9 +763,23 @@ if (pagos[num].tc=='EB' || pagos[num].tc=='ED') {
     localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
     localStorage.setItem('pagos_banco',JSON.stringify(pagos));
     }
-   //console.log(ind);
-  }
+   //console.log(ind); 
+ }
+} else {
+
+  var resp=confirm('Esta seguro de borrar el pago');
+  if (resp) {
+   var ind=pagos.findIndex(x=>x.telf===pagos[num].telf && x.hora===pagos[num].hora);
+   if (ind>=0) {pagos.splice(num,1);
+    localStorage.setItem('pagos_banco',JSON.stringify(pagos));
+    }
+   //console.log(ind); 
+ }
+
 }
+
+
+
 }
 
 function muestra(num){
@@ -790,12 +862,13 @@ function borrar_pagos_hechos(){
 localStorage.setItem('pagos_hechos_banco','');
 
 }
-function agrega_deuda(j){
+function agrega_deuda(ncli){
 var valor=parseFloat(document.getElementById('intro').value);
 var pad=document.getElementById("bmon1").checked;
 
 if (valor!=0) {
- var nombcli=Obten_nombre(pagos[j].telf);
+// var nombcli=Obten_nombre(pagos[j].telf);
+var nombcli=ncli;
   var ind=Clientes.findIndex(x=>x.nombre==nombcli);
  //Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-valor).toFixed(2);
  //localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
@@ -827,13 +900,14 @@ genera_salida2(ind2);
 }
 }
 
-function agrega_pago(j){
+function agrega_pago(ncli){
 
 if (suma!=0) {
 resp=confirm("rebajar la deuda");
  if (resp) {
  suma=parseFloat(parseFloat(suma).toFixed(2));
- var nombcli=Obten_nombre(pagos[j].telf)
+ //var nombcli=Obten_nombre(pagos[j].telf)
+var nombcli=ncli;
  var ind=Clientes.findIndex(x=>x.nombre==nombcli);
  Clientes[ind].deuda=(parseFloat(Clientes[ind].deuda)-suma).toFixed(2);
  localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
@@ -902,32 +976,34 @@ tds[i].style.color='black';
 }
 }
 
-function actualiza_deuda(j){
+function actualiza_deuda(ncli){
  nueva=document.getElementById("deu").value;
- var nombcli=Obten_nombre(pagos[j].telf)
+ //var nombcli=Obten_nombre(pagos[j].telf);
+var nombcli=ncli;
  var ind=Clientes.findIndex(x=>x.nombre==nombcli);
  Clientes[ind].deuda=nueva;
  localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
 }
 
-function muestra_deuda(j){
+function muestra_deuda(ncli){
 //alert(j);
 var divaux=document.getElementById("div4");
 var texto='';
 texto+='<div style="border: 5px solid red;background-color:lightblue";height:50%;>';
-var cl=Obten_nombre(pagos[j].telf)
+//var cl=Obten_nombre(pagos[j].telf)
+cl=ncli;
 texto+='<p>'+cl+'</p>';
 Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
-var ind=Clientes.findIndex(x=>x.nombre==Obten_nombre(pagos[j].telf));
+var ind=Clientes.findIndex(x=>x.nombre==cl);
 if (ind>=0) {
  //console.log(Clientes[ind].deuda);
  texto+='<table width="100%">';
- texto+='<tr><td width="50%">Deuda:<input type="text" id="deu" value="'+Clientes[ind].deuda+'"><button onclick=actualiza_deuda('+j+')>Ok</button></td></tr>';
+ texto+='<tr><td width="50%">Deuda:<input type="text" id="deu" value="'+Clientes[ind].deuda+'"><button onclick=actualiza_deuda("'+cl+'")>Ok</button></td></tr>';
  texto+='<tr><td width="25%"><span id="abo"> Abono :'+suma.toFixed(2)+'</span>';
- texto+='<button onclick=agrega_pago('+j+')>+</button></td></tr>';
+ texto+='<button onclick=agrega_pago("'+cl+'")>+</button></td></tr>';
  texto+='<tr><td>Efectivo';
  texto+='<input id="intro" type="text" value="0">';
- texto+='<button onclick=agrega_deuda('+j+')>Ok</button>';
+ texto+='<button onclick=agrega_deuda("'+cl+'")>Ok</button>';
  texto+='<input type="radio" id="bmon1" name="bmon" value="$" checked>';
  texto+=' <label for="bmon1">$</label>';
  texto+='<input type="radio" id="bmon2" name="bmon" value="Bs" >';
@@ -984,10 +1060,22 @@ var ind=pagos_hechos.findIndex(x=>x.fecha==pagos[pos].fecha && x.hora==pagos[pos
 }
 
 }
+function ord_clientes(a,b){
+if (a<b) return -1;
+if (b<a) return 1;
+return 0;
+}
 function genera_salida2(pos_ini){
+var cont_c=0;
+lista_clientes=[];
 for (var j=0;j<pagos.length;j++) {
+lista_clientes[cont_c]=Obten_nombre(pagos[j].telf);cont_c++;
  pos[j]=0;
 }
+lista_clientes=new Set(lista_clientes);
+lista_clientes=Array.from(lista_clientes);
+lista_clientes.sort(ord_clientes);
+console.log(lista_clientes);
 suma=0;
 document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
 if (pagos.length>0) {
@@ -1001,13 +1089,13 @@ texto+='<td width="10%"><button  title="Nombre" onclick="Selecciona_cliente();" 
 texto+='<td width="10%"><button  title="Salir" onclick=quitar_div("divdata"); <button> x </button></td>';
 texto+='</tr></table></div><br>';
 texto+='<div id="lclientes" style="overflow:auto;height:90%;font-size:0.8rem;">';
-pagos.sort(ordena_pagos2);
+/*pagos.sort(ordena_pagos2);
 var nombre_previo='';
 var fecha_previa=pagos[0].fecha;
 var total_parcial=0;
 var montop='';
 var cont_c=0;
-lista_clientes=[];
+//lista_clientes=[];
  //console.log( nombre_previo);
 texto+='<p style="color:red;font-size:1.5em;text-align:center;">'+nombre_previo+'</p>';
 for (var i=0;i<pagos.length;i++){
@@ -1016,7 +1104,8 @@ colb=colorcuenta(pagos[i].tc);
 
  if (Obten_nombre(pagos[i].telf)!=nombre_previo) {
   
-    nombre_previo=Obten_nombre(pagos[i].telf);lista_clientes[cont_c]=nombre_previo;cont_c++;
+    nombre_previo=Obten_nombre(pagos[i].telf);
+//lista_clientes[cont_c]=nombre_previo;cont_c++;
     if (i!=0) {
       //console.log(total_parcial.toFixed(2));
      //texto+='<p style="color:blue;">Fecha:'+fecha_previa+'Total parcial: '+montop.toFixed(2)+'</p>';
@@ -1049,7 +1138,7 @@ texto+='<td width="27%">'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td>';
 texto+='<td width="27%" class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr></table>';
 
 } // for i
-
+*/
  //console.log(total_parcial.toFixed(2));
 // texto+='<p>Fecha:'+fecha_previa;+'Total parcial: '+montop.toFixed(2)+'</p>';
      
@@ -1060,8 +1149,10 @@ divaux.innerHTML=texto;
 divaux.style.visibility="visible";
 
 }
-clickp_cliente(pos_ini);
+//clickp_cliente(pos_ini);
 }
+
+
 function ord_fecha(a,b){
 var ela=a.split('_');
 var elb=b.split('_');
