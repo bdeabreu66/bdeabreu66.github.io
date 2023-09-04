@@ -1046,14 +1046,12 @@ function chequeado(o,pos){
 
 
 if (o.checked) {
- var ind=pagos_hechos.findIndex(x=>x.fecha==pagos[pos].fecha && x.hora==pagos[pos].hora);
- if (ind<0) { pagos_hechos.push({"fecha":pagos[pos].fecha,"hora":pagos[pos].hora});
+ var ind=pagos_hechos.findIndex(x=>x.fecha==lis_cli[pos].fecha && x.hora==lis_cli[pos].hora);
+ if (ind<0) { pagos_hechos.push({"fecha":lis_cli[pos].fecha,"hora":lis_cli[pos].hora});
  localStorage.setItem('pagos_hechos_banco',JSON.stringify(pagos_hechos));}
- //Clientes[ind1].deuda=(parseFloat(Clientes[ind1].deuda)-parseFloat(pagos[pos].montodolar)).toFixed(2);
- //localStorage.setItem('Clientes_Pita',JSON.stringify(Clientes));
-  o.parentElement.parentElement.style.color="white";} 
+ o.parentElement.parentElement.style.color="white";} 
  else {
-var ind=pagos_hechos.findIndex(x=>x.fecha==pagos[pos].fecha && x.hora==pagos[pos].hora);
+var ind=pagos_hechos.findIndex(x=>x.fecha==lis_cli[pos].fecha && x.hora==lis_cli[pos].hora);
   if (ind>=0) { pagos_hechos.splice(ind,1);
   localStorage.setItem('pagos_hechos_banco',JSON.stringify(pagos_hechos));}
   o.parentElement.parentElement.style.color="black";
