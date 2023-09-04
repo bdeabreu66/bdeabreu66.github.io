@@ -652,7 +652,7 @@ var fecha=fecha_actual();
 for(var i=0;i<facturas.length;i++){
   var fech=facturas[i].fecha;
   var nombcli=facturas[i].cliente;
-  if ( (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && ( ((nombcli.indexOf(clib)==0) && clib!='' ) || (clib=='' && nombcli.indexOf('Pedido')!=0) ) ) {
+  if ( (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && ( ((nombcli.indexOf(clib)==0) && clib!='' ) || (clib=='' && nombcli.indexOf('Pedido')!=0 && nombcli.indexOf('Obsequio')!=0 && nombcli.indexOf('Pita')!=0   ) ) ) {
     for (var j=0;j<facturas[i].items.length;j++) {
       var ind=clave_ind.get(facturas[i].items[j].cod);
       totalunid[ind]+=parseInt(facturas[i].items[j].cu);
@@ -1166,8 +1166,8 @@ function Actualiza_deuda(){
 var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
 //alert(indcliente);
 if (indcliente>=0) {
+DEU_ANT=AClientes[indcliente].deuda;
 AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)+parseFloat(MONTOF)).toFixed(2);
-DEU_TOT=AClientes[indcliente].deuda
 localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
 // guarda_clientes_IDB();
 }
@@ -1214,7 +1214,6 @@ cliente_factura=document.getElementById('cli2').value;
 Actualiza_deuda();
 guarda_factura(); 
 localStorage.setItem('FACT_NRO',(nro_factura+1).toString());
-
 quitarlista();
 }
  
@@ -1236,7 +1235,7 @@ facturas[indice].bcv=(bcv).toFixed(4);
 facturas[indice].total=total_factura.toFixed(2);
 facturas[indice].ganancia=Gdolar.toFixed(2);
 facturas[indice].total_ret=MONTOF;
-facturas[indice].deuda=DEU_TOT;
+facturas[indice].deuda=DEU_ANT;
 facturas[indice].items=new Array;
 var nro_item=0;
 for (var i=0;i<data.length;i++) {
@@ -2323,8 +2322,9 @@ function ajaxPositiveD(response) {
         Historico=txt;
  //console.log(fecha_actual());
         var ind=Historico.findIndex(elemento => elemento.fecha==fecha_actual());
-        if (ind>=0) { document.getElementById("t2").value =Historico[ind].bcv; localStorage.setItem('p2',Historico[ind].bcv);};
-    }
+        if (ind>=0) { document.getElementById("t2").value =Historico[ind].bcv; localStorage.setItem('p2',Historico[ind].bcv);}
+          else {alert('Dolar no actualizado')}
+ }
 function showErrorD(err) {
  console.log('muestor error', err); 
   }
