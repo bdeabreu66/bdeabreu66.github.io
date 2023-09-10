@@ -585,20 +585,27 @@ function lis_fecha(a,b)
    }
 }
 
-function clickp_cliente(pos){
+var lis_cli=[];
+function clickp_cliente(ncli){
 //alert(pos);
 
 const lp=pagos.length
-lis_cli=[];
+
 let cc=0; 
+lis_cli=[];
 for (var i=0;i<lp;i++){
-if (Obten_nombre(pagos[i].telf)==lista_clientes[pos]) {
+if (Obten_nombre(pagos[i].telf)==ncli) {
  lis_cli[cc]=new Object;
  lis_cli[cc].fecha=pagos[i].fecha;
  lis_cli[cc].montodolar=pagos[i].montodolar;
  lis_cli[cc].montoBs=pagos[i].montoBs;
  lis_cli[cc].hora=pagos[i].hora;
  lis_cli[cc].tc=pagos[i].tc;
+ lis_cli[cc].motivo=pagos[i].motivo;
+ lis_cli[cc].tel=pagos[i].telf;
+ lis_cli[cc].ref=pagos[i].ref;
+
+
  cc++; 
 }
 lis_cli.sort(lis_fecha)
@@ -615,16 +622,17 @@ texto+='<td width="10%"><button  title="Salir" onclick=quitar_div("divdata"); <b
 texto+='</tr></table></div><br><br>';
 texto+='<div id="lclientes" style="overflow:auto;height:90%;font-size:0.8rem;">';
 texto+='<table width="100%">';
-texto+='<p onclick="muestra_deuda(\''+lista_clientes[pos]+'\');" style="color:red;font-size:1.5em;text-align:center;">'+lista_clientes[pos] +'</p>';
+texto+='<p onclick="muestra_deuda(\''+ncli+'\');" style="color:red;font-size:1.5em;text-align:center;">'+ncli +'</p>';
  
 for (var i=0;i<lis_cli.length;i++)
 {
-
 colb=colorcuenta(lis_cli[i].tc);
 var indip=pagos_hechos.findIndex(x=>x.fecha==lis_cli[i].fecha && x.hora==lis_cli[i].hora);
 if (indip>=0) {texto+='<tr style="color:white; background-color:'+colb+';" ><td width="5%"> <input type="checkbox" checked onclick=chequeado(this,'+i+');>'+'</td>';}
   else {texto+='<tr style="color:black;background-color:'+colb+';" ><td width="5%"> <input type="checkbox" onclick=chequeado(this,'+i+');>'+'</td>';}
-texto+='<td width="31%">'+'&nbsp&nbsp'+lis_cli[i].fecha+'</td>';
+textop='<td width="31%" onclick="muestra('+i+')">'+'&nbsp&nbsp'+lis_cli[i].fecha+'</td>';
+texto+=textop;
+
 texto+='<td width="27%">'+'&nbsp&nbsp'+lis_cli[i].montoBs+' Bs '+'</td>';
 texto+='<td width="27%" class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+lis_cli[i].montodolar+' $ '+'</td>';
 texto+='</tr>';
@@ -634,7 +642,7 @@ texto+='</table></div>';
 divaux.innerHTML=texto;
 divaux.style.visibility="visible";
 
-console.log(lis_cli);
+//console.log(lis_cli);
 document.getElementById("div3").style.visibility='hidden';
 //const posic=document.getElementsByName("pcliente")[pos].offsetTop;
 //document.getElementById("lclientes").scrollTop=posic-30;
@@ -654,7 +662,7 @@ textoT+='</tr></table></div><br>';
 textoT+='<div style="overflow:auto;height:90%;font-size:0.8rem;">';
 textoT+='<table width="100%">';
 for (var i=0;i<lista_clientes.length;i++) {
-textoT+='<tr style="font-size:1.2em;"><td style="color:black;background-color:SkyBlue;cursor:pointer;text-align:center;" onclick="clickp_cliente('+i+')";>'+lista_clientes[i]+'</td></tr>'; 
+textoT+='<tr style="font-size:1.2em;"><td style="color:black;background-color:SkyBlue;cursor:pointer;text-align:center;" onclick=\'clickp_cliente(\"'+lista_clientes[i]+'\")\'";>'+lista_clientes[i]+'</td></tr>'; 
 }
 textoT+='</table></div>';
 div3.innerHTML=textoT;
@@ -755,42 +763,44 @@ var a1=f1.split('/');
 }
 function borrar_pago(num){
 quitar_div("div3");
-if (pagos[num].tc=='EB' || pagos[num].tc=='ED') {
-  var resp=confirm('Esta seguro de borrar el pago');
-  if (resp) {
-   var ind=pagos_ef.findIndex(x=>x.telf===pagos[num].telf && x.hora===pagos[num].hora);
-   if (ind>=0) {pagos_ef.splice(ind,1);pagos.splice(num,1);
+var resp=confirm('Esta seguro de borrar el pago');
+if (resp) {
+if (lis_cli[num].tc=='EB' || lis_cli[num].tc=='ED') {
+   var ind=pagos_ef.findIndex(x=>x.telf==lis_cli[num].tel && x.hora==lis_cli[num].hora);
+   var ind2=pagos.findIndex(x=>x.telf==lis_cli[num].tel && x.hora==lis_cli[num].hora);
+   if (ind>=0) {
+    pagos_ef.splice(ind,1);pagos.splice(ind2,1);
     localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
     localStorage.setItem('pagos_banco',JSON.stringify(pagos));
     }
-   //console.log(ind); 
+  
  }
-} else {
-
-  var resp=confirm('Esta seguro de borrar el pago');
-  if (resp) {
-   var ind=pagos.findIndex(x=>x.telf===pagos[num].telf && x.hora===pagos[num].hora);
-   if (ind>=0) {pagos.splice(num,1);
+ else {
+  var ind=pagos.findIndex(x=>x.telf===lis_cli[num].tel && x.hora===lis_cli[num].hora);
+  console.log(ind);
+  if (ind>=0) {
+    console.log(pagos[ind].fecha);
+    console.log(pagos[ind].montoBs);
+    pagos.splice(ind,1);
     localStorage.setItem('pagos_banco',JSON.stringify(pagos));
     }
-   //console.log(ind); 
- }
-
+  }
 }
 
-
+clickp_cliente(Obten_nombre(lis_cli[num].tel));
 
 }
 
 function muestra(num){
+
 var texto='';
 var div3=document.getElementById("div3");
 div3.style="position: fixed;top :30%; left: 0%; width: 90%;height:60%;background-color:Coral;color:white; text-align: left; border: 3px solid #73AD21;";
-texto+='<p style="font-size:1.4rem;">'+pagos[num].motivo+'</p>';
-texto+='<p style="font-size:1.4rem;">'+Obten_nombre(pagos[num].telf)+'</p>';
-texto+='<p style="font-size:1.4rem;"> Referencia: '+pagos[num].ref+'</p>';
-texto+='<p style="font-size:1.4rem;"> Bs: '+pagos[num].montoBs+'</p>';
-texto+='<p style="font-size:1.4rem;"> $: '+pagos[num].montodolar+'</p>';
+texto+='<p style="font-size:1.4rem;">'+lis_cli[num].motivo+'</p>';
+texto+='<p style="font-size:1.4rem;">'+Obten_nombre(lis_cli[num].tel)+'</p>';
+texto+='<p style="font-size:1.4rem;"> Referencia: '+lis_cli[num].ref+'</p>';
+texto+='<p style="font-size:1.4rem;"> Bs: '+lis_cli[num].montoBs+'</p>';
+texto+='<p style="font-size:1.4rem;"> $: '+lis_cli[num].montodolar+'</p>';
 
 texto+='<button onclick=quitar_div("div3") style="font-size:1.4rem;"> Ok </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 
@@ -798,6 +808,7 @@ texto+='<button onclick=borrar_pago('+num+') style="font-size:1.4rem;">Borrar</b
 div3.innerHTML=texto;
 }
 function Obten_nombre(tel){
+
 var clave=(tel).toString().trim();
 var tmp=t_c.get(clave);
 if (tmp==undefined) {tmp=clave;}
@@ -843,7 +854,8 @@ colb=colorcuenta(pagos[i].tc);
     texto+='<span class="pagocli" pos="0" name="subtotal" onclick="permuta(this)"></span>';
     texto+='<table style="width:100%;font-size:1.0rem;">';
   }
-texto+='<tr  style="background-color:'+colb+';"><td onclick="muestra('+i+')";>'+Obten_nombre(pagos[i].telf)+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
+ncli=Obten_nombre(pagos[i].telf);
+texto+='<tr  style="background-color:'+colb+';"><td onclick="clickp_cliente(\''+ncli+'\')";>'+ncli+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
 suma_parcial+=parseFloat(pagos[i].montodolar);
 }
  texto+='</table>';
@@ -861,6 +873,13 @@ document.getElementById(div_b).style.visibility='hidden';
 function borrar_pagos_hechos(){
 localStorage.setItem('pagos_hechos_banco','');
 
+}
+function contacto(ncli){
+let ld=databanco.length;
+for (var i=0;i<ld;i++) {
+ if (databanco[i][1]==ncli) {return databanco[i][0]}
+}
+return 0;
 }
 function agrega_deuda(ncli){
 var valor=parseFloat(document.getElementById('intro').value);
@@ -885,8 +904,8 @@ var nombcli=ncli;
  if (pad) {te='ED'; mDs=parseFloat(valor).toFixed(2); mBs=parseFloat(mDs*dolarhoy).toFixed(2)}
    else
  {te='EB'; mBs=parseFloat(valor).toFixed(2); mDs=parseFloat(mBs/dolarhoy).toFixed(2)}
-
-var record={"fecha":fecha_a,"hora":hora_a,"ref":"","dolar":dolarhoy,"montoBs":mBs,"montodolar":mDs,"motivo":"","tc":te,"telf":pagos[j].telf};
+telefono=contacto(nombcli);
+var record={"fecha":fecha_a,"hora":hora_a,"ref":"","dolar":dolarhoy,"montoBs":mBs,"montodolar":mDs,"motivo":"","tc":te,"telf":telefono};
 pagos_ef.push(record);
 pagos.push(record);
 localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
@@ -895,7 +914,7 @@ quitar_div("div4");
 //alert('ind '+ind);
 var ind2=lista_clientes.findIndex(x=>x==nombcli);
  //alert('ind '+ind2);
-genera_salida2(ind2);
+clickp_cliente(nombcli);
 
 }
 }
@@ -998,12 +1017,14 @@ var ind=Clientes.findIndex(x=>x.nombre==cl);
 if (ind>=0) {
  //console.log(Clientes[ind].deuda);
  texto+='<table width="100%">';
- texto+='<tr><td width="50%">Deuda:<input type="text" id="deu" value="'+Clientes[ind].deuda+'"><button onclick=actualiza_deuda("'+cl+'")>Ok</button></td></tr>';
+ texto+='<tr><td width="50%">Deuda:<input type="text" id="deu" value="'+Clientes[ind].deuda+'"><button onclick="actualiza_deuda(\''+cl+'\')">Ok</button></td></tr>';
  texto+='<tr><td width="25%"><span id="abo"> Abono :'+suma.toFixed(2)+'</span>';
- texto+='<button onclick=agrega_pago("'+cl+'")>+</button></td></tr>';
+ texto+='<button onclick="agrega_pago(\''+cl+'\')">+</button></td></tr>';
  texto+='<tr><td>Efectivo';
  texto+='<input id="intro" type="text" value="0">';
- texto+='<button onclick=agrega_deuda("'+cl+'")>Ok</button>';
+ textop='<button onclick=\'agrega_deuda(\"'+cl+'\")\'>Ok</button>';
+ console.log(textop);
+texto+=textop;
  texto+='<input type="radio" id="bmon1" name="bmon" value="$" checked>';
  texto+=' <label for="bmon1">$</label>';
  texto+='<input type="radio" id="bmon2" name="bmon" value="Bs" >';
@@ -1147,7 +1168,7 @@ divaux.innerHTML=texto;
 divaux.style.visibility="visible";
 
 }
-//clickp_cliente(pos_ini);
+
 }
 
 
@@ -1198,7 +1219,8 @@ if (pagos[i].fecha!=fecha_previa) {
 
     texto+='<table width="100%">';
   }
- texto+='<tr style="background-color:'+colb+';"><td onclick="muestra('+i+');">'+Obten_nombre(pagos[i].telf)+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
+ ncli=Obten_nombre(pagos[i].telf);
+ texto+='<tr style="background-color:'+colb+';"><td onclick="clickp_cliente(\''+ncli+'\');">'+ncli+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
 
 }
  texto+='</table>';
@@ -1212,7 +1234,7 @@ var Tipocuenta='';
 var pos=[];
 function permuta(o){
 var propi=o.getAttribute('pos')
-if (propi=="0") {o.setAttribute("pos", "1");o.style.color='red';suma+=parseFloat(o.innerText)} 
+if (propi=="0") {o.setAttribute("pos", "1");o.style.color='white';suma+=parseFloat(o.innerText)} 
  else 
 {o.setAttribute("pos", "0");o.style.color='black';suma-=parseFloat(o.innerText)}
 
