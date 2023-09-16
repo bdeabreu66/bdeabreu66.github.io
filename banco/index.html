@@ -570,6 +570,12 @@ dat_especial=["AREPA EL PAISITA","IGRIVAL","HOTEL GOLD","TRIGOPAN","PEPSI COLA",
 const t_d=new Map();
 
 var productos=[];
+function inv_fecha_date(f){
+var comp=f.split('-');
+var sal=comp[2]+'/'+comp[1]+'/'+comp[0];
+//console.log('sal2 '+sal);
+return sal;
+}
 function fecha_date(f){
 var comp=f.split('/');
 var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
@@ -667,6 +673,7 @@ textoT+='<tr style="font-size:1.2em;"><td style="color:black;background-color:Sk
 textoT+='</table></div>';
 div3.innerHTML=textoT;
 }
+
 function Activalector_archivos(){
 getFile2 = new selectFile;
 getFile2.targets('choose2','selected');
@@ -879,7 +886,7 @@ let ld=databanco.length;
 for (var i=0;i<ld;i++) {
  if (databanco[i][1]==ncli) {return databanco[i][0]}
 }
-return 0;
+return ncli;
 }
 function agrega_deuda(ncli){
 var valor=parseFloat(document.getElementById('intro').value);
@@ -894,22 +901,27 @@ var nombcli=ncli;
  document.getElementById('deu').innerText='Deuda :'+Clientes[ind].deuda;
  document.getElementById('intro').value='';
  var today = new Date();
- var fecha_a = today.toLocaleDateString('es-ES',{year:"numeric",month:"2-digit",day:"2-digit"});
- //console.log(fecha_a);
+// var fecha_a = today.toLocaleDateString('es-ES',{year:"numeric",month:"2-digit",day:"2-digit"});
+var fecha_a=document.getElementById("fecha_pago").value; 
+//alert(fecha_a);
+ var fecha_m = inv_fecha_date(fecha_a)
+//alert(fecha_m);
  var hora_a = today.toLocaleTimeString('es-ES',{hour12:false,hour:"2-digit",minute:"2-digit",second:"numeric"});
  //console.log(hora_a);
- dolarhoy=t_d.get(fecha_a);
+ dolarhoy=t_d.get(fecha_m);
  //console.log(dolarhoy);
 
  if (pad) {te='ED'; mDs=parseFloat(valor).toFixed(2); mBs=parseFloat(mDs*dolarhoy).toFixed(2)}
    else
  {te='EB'; mBs=parseFloat(valor).toFixed(2); mDs=parseFloat(mBs/dolarhoy).toFixed(2)}
 telefono=contacto(nombcli);
-var record={"fecha":fecha_a,"hora":hora_a,"ref":"","dolar":dolarhoy,"montoBs":mBs,"montodolar":mDs,"motivo":"","tc":te,"telf":telefono};
+var record={"fecha":fecha_m,"hora":hora_a,"ref":"","dolar":dolarhoy,"montoBs":mBs,"montodolar":mDs,"motivo":"","tc":te,"telf":telefono};
 pagos_ef.push(record);
 pagos.push(record);
+
 localStorage.setItem('pagos_efectivo',JSON.stringify(pagos_ef));
 localStorage.setItem('pagos_banco',JSON.stringify(pagos));
+
 quitar_div("div4");
 //alert('ind '+ind);
 var ind2=lista_clientes.findIndex(x=>x==nombcli);
@@ -994,7 +1006,21 @@ tds[i].setAttribute("pos", "0");
 tds[i].style.color='black';
 }
 }
+function fecha_actual(){
+let hoy=new Date();
+var dia=(hoy.getDate()).toString() ;
+if (dia.length==1) {dia='0'+dia}
+var mes=(hoy.getMonth()+1).toString();
+if (mes.length==1) {mes='0'+mes}
+return dia + '/' +mes + '/' +hoy.getFullYear().toString()
 
+function fecha_date(f){
+var comp=f.split('/');
+var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
+//console.log('sal '+sal)
+return sal;
+}
+}
 function actualiza_deuda(ncli){
  nueva=document.getElementById("deu").value;
  //var nombcli=Obten_nombre(pagos[j].telf);
@@ -1031,6 +1057,8 @@ texto+=textop;
  texto+=' <label for="bmon2">Bs</label>';
 //texto+='<button id="bmon"onclick=cambia_mon()>'+tmon+'</button></td></tr>';
  texto+='</table>'; 
+ texto+='<input type="date" id="fecha_pago"  value='+fecha_date(fecha_actual())+'>';
+
  texto+='<button onclick=quitar_div("div4")>Salir</button>';
  texto+='</div>';
   listasel=[];
@@ -1091,6 +1119,13 @@ for (var j=0;j<pagos.length;j++) {
 lista_clientes[cont_c]=Obten_nombre(pagos[j].telf);cont_c++;
  pos[j]=0;
 }
+
+var texto4=localStorage.getItem('Clientes_Pita');
+if (texto4!='' && texto4!=null) {Clientes=JSON.parse(texto4);} else {Clientes=[];}
+for (var j=0;j<Clientes.length;j++) {
+  lista_clientes[cont_c]=Clientes[j].nombre;cont_c++;
+}
+
 lista_clientes=new Set(lista_clientes);
 lista_clientes=Array.from(lista_clientes);
 lista_clientes.sort(ord_clientes);
