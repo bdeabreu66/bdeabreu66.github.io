@@ -1418,7 +1418,13 @@ for (i=0;i<ldatos2;i++){
 //console.log(Cats);
 }
 
-
+function check_inv(cod){
+let cajas=0;
+let unid=0;
+let ind=inventario.findIndex(e=>e.CLAVE==cod);
+if (ind!=-1) {cajas=inventario[ind].CAJAS;unid=inventario[ind].UNID;}
+return [cajas,unid];
+}
 
 function muestra_cat(){
 var divcat=document.getElementById("cat");
@@ -2109,6 +2115,7 @@ intro(num);
 }
 
 function intro(i){
+[dpc,dpu]=check_inv(data[i][9]);
 var totalsivabs;
 var totalsivad;
 var fm;
@@ -2122,7 +2129,7 @@ if (data[i][5]==0) {var vcor1='red';} else {var vcor1='blue';}
 //var pu=preciou(i);
 //var pb=preciob(i);
 [pu,pb]=precio(i);
-var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+data[i][0]+' '+BanderaIva+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
+var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+data[i][0]+' '+BanderaIva+' '+'<span style="color:yellow;">'+dpc+ ' C '+dpu+' U'+'</span>'+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
 
 var pc=parseFloat(data[i][10]);
 
