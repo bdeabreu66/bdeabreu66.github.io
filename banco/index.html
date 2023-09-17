@@ -639,7 +639,7 @@ if (indip>=0) {texto+='<tr style="color:white; background-color:'+colb+';" ><td 
 textop='<td width="31%" onclick="muestra('+i+')">'+'&nbsp&nbsp'+lis_cli[i].fecha+'</td>';
 texto+=textop;
 
-texto+='<td width="27%">'+'&nbsp&nbsp'+lis_cli[i].montoBs+' Bs '+'</td>';
+texto+='<td width="27%" class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+lis_cli[i].montoBs+' Bs '+'</td>';
 texto+='<td width="27%" class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+lis_cli[i].montodolar+' $ '+'</td>';
 texto+='</tr>';
 
