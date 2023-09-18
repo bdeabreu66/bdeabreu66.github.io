@@ -369,9 +369,15 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
     //var FACTOR_RET=0.75;
     var paragraph='(Ley IVA-Art 11: "Ser\u00E1n responsables del pago del impuesto en calidad de agentes de retenci\u00F3n. los compradores o adquirientes de determinados bienes muebles y los receptores de ciertos servicios, a quienes la administraci\u00F3n tributaria designe como tal"';
     var ylinea=40;
-if (TIPO_RET=="0") {nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+".pdf";}
-if (TIPO_RET=="1") {nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+"_Alimentos.pdf";}
-if (TIPO_RET=="2") {nombrepdf="Retencion "+NRO_RET+" "+NOMB_DIST+"_Pepsicola.pdf";}
+var textf='_';
+for (var k=0;k<Max_F;k++) {
+ textfp=datos_ret[k]["nro_factura"];
+if (textfp!='') textf+=textfp.substring(textfp.length-4)+'_'
+}
+textf="F"+textf;
+if (TIPO_RET=="0") {nombrepdf="Ret_"+NRO_RET+"_"+FECHA_PAGO+textf+"Cerv.pdf";}
+if (TIPO_RET=="1") {nombrepdf="Ret_"+NRO_RET+"_"+FECHA_PAGO+textf+"Alim.pdf";}
+if (TIPO_RET=="2") {nombrepdf="Ret_"+NRO_RET+"_"+FECHA_PAGO+textf+"Pepsi.pdf";}
 
 
    console.log(nombrepdf); 
