@@ -2,6 +2,8 @@
 ['584144202172','Alejandro Naranjo'],
 ['584144373690','Licoreria los loros'],
 ['584123419182','Club la florida'],
+['584124819380','Club la florida'],
+['584123498254','Club la florida'],
 ['01340067960673057959','Mc Center Pool'],
 ['584121308516','Mc Center Pool'],
 ['01020406290000103046','Alianza cafe'],
