@@ -27,7 +27,7 @@
       ["F04052 Light Mix Naranja NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",0,'F04052',9.93,""],
       ["F04053 Light Mix Toronja NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",0,'F04053',9.93,""],
       ["F04054 Light Mix Parchita NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",0,'F04054',9.93,""],
-      ["F04056 Light Lata Sleek 355 ml x 24 UN",24,16.56,1,0,0,"t3","&Cerveceria&Light&",1,'F04056X',7.31,"lata light"],
+      ["F04056 Light Lata Sleek 355 ml x 24 UN",24,16.56,1,0,0,"t3","&Cerveceria&Light&",1,'F04056X',14.62,"lata light"],
       ["F04056 Light Lata Sleek 355 ml x 12 UN",12,8.28,1,0,0,"t3","&Cerveceria&Light&",1,'F04056',7.31,"lata light"],
       ["F04043 Light NR 355 ml x 12 UN",12,9.93,1,0,0,"t3","&Cerveceria&Light&",1,'F04043',8.99,"light no retornable"],   
       ["F01078 Solera Lata verde l x 12 UN",12,7.58,1,0,0,"t3","&Cerveceria&Solera&Latas&",1,'X01078',7.58,"lata solera verde"],   
