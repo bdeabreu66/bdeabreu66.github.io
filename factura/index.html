@@ -415,15 +415,13 @@ getFile.simulate();
 
 function Leer_Archivo(e){
  var archivos=e.currentTarget.files;
- //alert(archivos);
+
   var lector=new FileReader();
   lector.addEventListener("load",(e) => {
     datos_imp = e.target.result;
     var data_sep=datos_imp.split('*#*');
 
 if (data_sep[2]=='Clientes_Pita') {
-//AClientes=JSON.parse(data_sep[3]);
-//alert(data_sep[3]);
 if (data_sep[3]!=null) {
 localStorage.setItem('Clientes_Pita',data_sep[3]);
 }
