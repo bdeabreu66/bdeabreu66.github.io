@@ -423,12 +423,17 @@ function Leer_Archivo(e){
 
 if (data_sep[2]=='Clientes_Pita') {
 //AClientes=JSON.parse(data_sep[3]);
-alert(data_sep[3]);
+//alert(data_sep[3]);
 if (data_sep[3]!=null) {
 localStorage.setItem('Clientes_Pita',data_sep[3]);
 }
 //guarda_clientes_IDB()
 }
+
+if (data_sep[4]=='Inventario_PO') {
+localStorage.setItem(data_sep[4],data_sep[5]);
+}
+
 if (data_sep[0]=='FACTURAS') {
 localStorage.setItem(data_sep[0],data_sep[1]);
 facturas=JSON.parse(data_sep[1]);
@@ -477,6 +482,8 @@ data="FACTURAS"+sep+JSON.stringify(facturas);
 
 data+=sep+'Clientes_Pita'+sep+localStorage.getItem('Clientes_Pita');
 //data+=sep+'Clientes_Pita'+sep+JSON.stringify(Lclientes);
+data+=sep+'Inventario_PO'+sep+localStorage.getItem('Inventario_PO');
+
 let hoy=new Date();
 let narch='facturas '+hoy.toLocaleString()+'.txt'
  var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
