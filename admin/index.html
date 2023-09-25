@@ -1,1 +1,877 @@
+<HTML>
+<HEAD>
+<TITLE>  Administracion de Facturas y retenciones </TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<link rel="manifest" href="manifest.json">
+<!-- <meta charset="iso-8859-1">  -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
 
+input[type=number]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+
+}
+
+input[type=text]{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: white;
+  color: black;
+}
+
+input[type=email]{
+font-size:1em;
+width: 8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+}
+
+input[type=date]{
+font-size:1em;
+width: 12em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+   background-color: #3CBC8D;
+  
+  color: black;
+}
+
+select{
+font-size:1em;
+width: 10em;
+border: 2px solid red;
+border-radius: 8px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: red;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+
+</style>
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  text-align:left;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+
+  transition: 0.8s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.pagocli {
+  color: blue;
+}
+.micro {
+   background-image:url(microphone.svg);
+   width:30px;
+	height:30px;
+	font-size:16px;
+	padding:0px 0px 0px 0px;
+	background-size:30px 30px;
+	background-position:-2px 0px;
+    fill: green;
+
+border-radius: 8px;
+}
+.divfondo {
+   width:90%;
+   background-color:#FFFDD0;
+   border-radius: 8px;
+padding: 6px 6px;
+margin-left: 5px;
+margin-right: 5px;
+}
+.micro:active {
+background-color: lightgreen;
+}
+.btop{
+font-size:2em;
+border: 2px solid red;
+border-radius: 8px;
+padding: 4px 4px ;
+  margin: 4px 0px ;
+  box-sizing: border-box;
+  background-color: orange;
+  color: black;
+}
+.btop:active {background-color: lightgreen;}
+.titulo{
+color:blue;
+}
+.botonf{
+font-size:0.8em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 8px 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: oldlace;
+  color: black;
+}
+.tablefact {
+padding: 0px 0px;
+margin: 0px 0px;
+font-size: 1em;
+}
+.botonfact{
+width:20em;
+font-size:0.8em;
+text-align:left;
+border: 2px solid red;
+border-radius: 12px;
+padding: 8px 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color: #FFFDD0;
+  color: black;
+}
+.botonf:active {background-color: lightgreen;}
+.botonfact:active {background-color: lightgreen;}
+
+#divdata {
+position:fixed;
+top:20px;
+height: 90%;
+width:95%;
+}
+
+#seleccion {
+position:fixed;
+top:50px;
+height: 90%;
+width:100%;
+hidden:true;
+overflow-y: scroll;
+}
+
+#retenciones {
+top:50px;
+position:fixed;
+height: 90%;
+width:100%;
+overflow-y: auto;
+hidden:true;
+}
+#footer {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  color: blue;
+  text-align: center;
+  font-size:0.5em;
+}
+</style>
+</HEAD>
+
+<script type="text/javascript" src="js/jspdfv153.js"></script>
+<script type="text/javascript" src="js/FileSaver.js"></script>
+<script type="text/javascript" src="js/addimagev153.js"></script>
+<script type="text/javascript" src="js/split_text_to_sizev153.js"></script>
+<script type="text/javascript" src="js/standard_fonts_metricsv153.js"></script>
+<script type="text/javascript" src="js/cell153.js"></script>
+<script type="text/javascript" src="js/png.js"></script>
+<script type="text/javascript" src="js/png_support.js"></script>
+<script type="text/javascript" src="js/zlib.js"></script>
+<script type="text/javascript" src="js/selectFile.js"></script>
+
+<script type="text/javascript" src="setlanguage.js"></script>
+<script type="text/javascript" src="pdfs.js"></script>
+<script type="text/javascript">
+var textoreconocido;
+function obtenerTexto(indice) {
+if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
+// Obtenemos el objeto de reconocimento de texto de forma compatible a diferentes navegadores
+reconocimientoTexto = new ( window.SpeechRecognition || window.webkitSpeechRecognition ) ()
+reconocimientoTexto.lang='es-Ve'; 
+reconocimientoTexto.onerror = function(event) {
+ alert("error "+event.error);
+ textoreconocido="";
+procesar2(indice);
+}
+reconocimientoTexto.onresult = function(event) {
+// Mostramos el texto obtenido
+textoreconocido=event.results[0][0].transcript;
+console.log(textoreconocido);
+procesar2(indice);
+}
+// Empezamos a reconocer texto
+reconocimientoTexto.start();
+} else {
+alert ('El navegador no soporta reconocimiento de voz' );
+}
+}
+
+function procesar2(ind){
+var num=textoreconocido.split(" ");
+var lt=num.length;
+var cant='';
+for (var i=0;i<lt;i++) {
+ cant+=num[i];
+}
+console.log(cant);
+if (ind==1) {divs_datos.getElementsByTagName("input")[1].value=cant;return;}
+if (ind==2) {
+ divs_datos.getElementsByTagName("input")[2].value=cant.substring(0,2);
+ divs_datos.getElementsByTagName("input")[3].value=cant.substring(2);
+return;}
+ if (ind==3) {divs_datos.getElementsByTagName("input")[4].value=cant;return;}
+if (ind==4) {divs_datos.getElementsByTagName("input")[5].value=cant;return;}
+if (ind==5) {
+ document.getElementById("nret").value=cant;
+ set_n_ret();
+return;}
+
+}
+function openNav() {
+var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
+  texto+='<a href="javascript:void(0)">About</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();Configurar();">Configuracion</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();Crea_datos();">Datos de retencion</a>';
+  texto+='<a  href="javascript:void(0)" onclick="closeNav();hacerRetencion();">Hacer PDF</a>';
+ document.getElementById("mySidenav").innerHTML=texto;
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+//localStorage.setItem('p3',va);
+
+
+/*
+*/
+
+function quitar(nombdiv){
+var div=document.getElementById(nombdiv);
+div.hidden=true;
+}
+
+function enviar_whatsapp(phone,text){
+var url ='https://api.whatsapp.com/send?phone='+phone+'&text='+text;
+console.log(url);
+window.open(url);
+}
+
+
+function enviar_mail(){
+var url ='mailto:brauliodeabreu@gmail.com?subject=Retenciones';
+window.open(url);
+}
+
+function enviarRetencion(){
+var txt;
+var aux;
+if (TIPO_RET=="0") {txt=LISTA_C;aux=" Cerveceria";} ;
+if (TIPO_RET=="1") {txt=LISTA_A;aux=" Alimentos";} 
+if (TIPO_RET=="2") {txt=LISTA_P;aux=" Pepsicola";} 
+var asunto="?subject=Retencion "+NRO_RET+" "+NOMB_DIST+' '+AGENCIA+aux+"_"+CODIGO;
+var adjunto='&attachment=';
+console.log(asunto);
+var url ='mailto:'+txt+asunto+adjunto;
+window.open(url);
+}
+var TASA_IVA=16;
+var FACTOR_RET=0.75;
+var divs_datos;
+var FECHA_PAGO;
+//var NRO_COMPROBANTE;
+var PERIODO_FISCAL;
+var DIR_FISCAL='Direccion del Franquiciado Tlf 04XX-XXXXXXX';
+var RIF_FISCAL='J-XXXXXXXX-X';
+var NOMB_DIST='Distribuidora XXXXXXXXX C.A.';
+var AGENCIA='AGENCIA GUACARA ';
+var retenciones=[];
+var data=[];
+var datos_ret=[];
+var datos_ret_base;
+var NRO_RET="982";
+var TIPO_RET="0";
+var LISTA_A="";
+var LISTA_C="";
+var NRO_COMPROB;
+function fecha_date(f){
+var comp=f.split('/');
+var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
+console.log('sal '+sal)
+return sal;
+}
+
+function inv_fecha_date(f){
+var comp=f.split('-');
+var sal=comp[2]+'/'+comp[1]+'/'+comp[0];
+console.log('sal2 '+sal);
+return sal;
+}
+
+function fecha_estandar(f){
+  var year=f.getFullYear();
+  var mes=f.getMonth();mes++;if (mes<10) {mes='0'+mes}
+  var day=f.getDate();if (day<10) {day='0'+day}
+return day+'/'+mes+'/'+year;
+}
+
+function crea_fecha(fe){
+  var comp=fe.split('/');
+  var dia=comp[0];
+  var mes=comp[1]-1;
+  var year=comp[2];
+return new Date(year,mes,dia);
+}
+
+function year_estandar(f){
+  var year=f.split('/')[2];
+return year;
+}
+function mes_estandar(f){
+  var mes=f.split('/')[1]; 
+//if (mes<10) {mes='0'+mes}
+return mes;
+}
+function fecha_mayor(f1,f2){
+var a2=f2.split('/');
+var a1=f1.split('/');
+ if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>=a1[0]) {return false; } else {return true;}
+}
+console.log((parseFloat(2718)*FACTOR_RET/100));
+ console.log(((2718)*75).toFixed(2));
+var Max_L;
+var Max_F;
+var CODIGO;
+
+function reset_datos(){
+datos_ret[0]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
+datos_ret[1]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
+datos_ret[2]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
+datos_ret[3]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
+datos_ret[4]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
+datos_ret[5]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
+datos_ret[6]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
+datos_ret[7]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0"};
+}
+function inicio(){
+Max_F=7;
+Max_L=7;
+CODIGO="XXXXXXXXX";
+FECHA_PAGO=new Date();
+FECHA_PAGO=fecha_estandar(FECHA_PAGO);
+fecha_hoy= new Date();
+console.log('fecha_hoy '+fecha_hoy);
+
+fecha_hoy=fecha_estandar(fecha_hoy);
+console.log('fecha_hoy '+fecha_hoy);
+fecha_min=year_estandar(fecha_hoy)+'-01-01';
+
+divs_datos=document.getElementById("divdata");
+reset_datos();
+
+fbase=localStorage.getItem('FBASE');
+if (fbase!=null) {fbase=JSON.parse(fbase)} else
+{
+fbase=new Array;
+for (var i=0;i<3;i++) {
+fbase[i]=new Object;
+fbase[i].nfac='453678';
+fbase[i].ncont='';
+}
+ }
+var retp=localStorage.getItem('RETENCIONES');
+if (retp!=null) {retenciones=JSON.parse(retp)} else {retenciones=[];}
+
+var retp=localStorage.getItem('FACTURAS_POLAR');
+if (retp!=null) {facturasPolar=JSON.parse(retp)} else {facturasPolar=[];}
+
+
+
+document.getElementById("seleccion").hidden=true;
+document.getElementById("retenciones").hidden=true;
+console.table(FECHA_PAGO);
+//Seleccion();
+}
+
+function hacerRetencion(){
+//hacerRetencion2();
+var indi=-1;
+indi=retenciones.findIndex((e)=>e.nro==NRO_RET);
+if (indi<0) {indi=retenciones.length;}
+ retenciones[indi]=new Object;
+ retenciones[indi].nro=NRO_RET;
+ retenciones[indi].fecha=FECHA_PAGO;
+ retenciones[indi].tipo=TIPO_RET;
+ retenciones[indi].datos=[];
+ var ult=0;
+ for (var i=0;i<7;i++){
+  if (datos_ret[i].nro_factura!=''){
+     retenciones[indi].datos[i]=new Object;
+     Object.assign(retenciones[indi].datos[i],datos_ret[i]);
+     ult=i;
+  } else {break};
+ }
+ retenciones[indi].total=sumaRET.toFixed(2);
+ localStorage.setItem("RETENCIONES",JSON.stringify(retenciones));
+ console.log(retenciones)
+fbase[parseInt(TIPO_RET)].nfac=datos_ret[ult]["nro_factura"];
+fbase[parseInt(TIPO_RET)].ncont=datos_ret[ult]["nro_control"];
+localStorage.setItem("FBASE",JSON.stringify(fbase));
+console.log(datos_ret[ult]["nro_factura"]);
+
+console.log(datos_ret[ult]["nro_control"]);
+console.log(fbase);
+}
+
+function muestraFacturas(){
+var textoT="";
+var div3 = document.getElementById("divdata");
+div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
+textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+textoT+='<table width="100%"><tr>';
+textoT+='<td style="width:60%;text-align:center;color:blue;" >Facturas anteriores</td>';
+textoT+='<td width="10%"><button  title="Nombre" onclick="ordena_cliente();" > C </button></td>';
+textoT+='<td width="10%"><button  title="Nombre" onclick="ordena_nombre();" > N </button></td>';
+textoT+='<td width="10%"><button  title="Fecha" onclick="ordena_fecha();" > F </button></td>';
+textoT+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td>';
+textoT+='</tr></table></div><br>';
+textoT+='<div style="overflow:auto;height:90%;font-size:0.6rem;">';
+textoT+='<table style="width:"100%;font-size:0.2rem;">';
+console.log(textoT);
+for (var i=0;i<facturasPolar.length;i++) {
+ textoT+='<tr style="cursor:pointer;" onclick="clickp('+i+')";>';
+ textoT+='<td style="width:40%;color:white;background:DodgerBlue;" >'+facturasPolar[i].nfac+'</td>';
+// textoT+='<td style="width:10%;color:white;background:DodgerBlue;" >'+partes[1]+'</td>';
+// textoT+='<td style="width:10%;color:white;background:DodgerBlue;" >'+partes[2]+'</td></tr>'; 
+}
+textoT+='</table></div>';
+div3.innerHTML=textoT;
+}
+
+
+function copia(j){
+divs_datos.getElementsByTagName("input")[0].value=fecha_date(datos_ret[j-1]["fecha"]);
+divs_datos.getElementsByTagName("input")[1].value=parseInt(datos_ret[j-1]["nro_factura"])+1;
+divs_datos.getElementsByTagName("input")[2].value=datos_ret[j-1]["nro_control"].substring(0,2);
+divs_datos.getElementsByTagName("input")[3].value=parseInt(datos_ret[j-1]["nro_control"].substring(3))+1;
+divs_datos.getElementsByTagName("input")[4].value=datos_ret[j-1]["nro_debito"];
+}
+
+
+function Agregar_datos(m){
+fecha_max=fecha_date(FECHA_PAGO);
+console.log('fmax '+fecha_max);
+var divpart=divs_datos;
+var texto='';
+var ta='';
+texto+='<h4 align="center"> Factura '+(m+1).toString()+'</h4>';
+texto+='<div class="divfondo">';
+texto+='<span class="titulo">Fecha de la Factura:</span><br> <input type="date" min="'+fecha_min+'" max="'+fecha_max+'" value="'+fecha_date(datos_ret[m]["fecha"])+'">';
+if (m>0) {texto+='&nbsp;&nbsp;&nbsp;<button title="copiar de factura anterior" onclick="copia('+m+');"> Copiar anterior </button><br>';} else {texto+='<br>';}
+//texto+='Nro de factura (afectada <input type="checkbox">):<br> <input type="number" value="'+datos_ret[m]["nro_factura"]+'"><br> ';
+texto+='<span class="titulo">N&deg; de factura:</span><br> <input type="number" value="'+datos_ret[m]["nro_factura"]+'">';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(1);">&nbsp;</button><br> ';
+var tmp=datos_ret[m]["nro_control"].split('-');
+
+var pa=tmp[0];
+var pb;
+console.log('long '+tmp.length);
+if (tmp.length==2) { pb=tmp[1];} else pb='';
+
+//texto+='<span class="titulo">N&deg; de Control:</span><br> <input type="number" style="width:2em;" value="'+datos_ret[m]["nro_control"]+'"><br> ';
+texto+='<span class="titulo">N&deg;de Control:</span><br> <input type="number" style="width:3em;" value="'+pa+'">-<input type="number" value="'+pb+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(2);">&nbsp;</button><br> ';
+
+texto+='<span class="titulo">Nota de debito:</span><br> <input type="number" value="'+datos_ret[m]["nro_debito"]+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(3);">&nbsp;</button><br> ';
+
+texto+='<span class="titulo">Monto Base imponible a IVA:</span><br> <input type="number" value="'+datos_ret[m]["C_IVA"]+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(4);">&nbsp;</button><br> ';
+texto+='</div>';
+//texto+='Monto no sujeto a IVA:<br> <input type="text" value="'+datos_ret[m]["C_SIVA"]+'"><br> ';
+texto+='<button class="botonf" onclick="guarda_datos('+m+')";>Guardar</button>';
+texto+=' <button class="botonf" onclick="canceladatos();">Cancelar</button>';
+texto+=' <button class="botonf" onclick="anular('+m+');">Anular</button><br>'
+console.log(texto);
+divpart.innerHTML=texto;
+divpart.hidden=false;
+//divpart.style='position:fixed;top:50px;height: 60%;width:95%;';
+document.getElementById("seleccion").hidden=true;
+}
+
+function carga_data(){
+var narch=document.getElementById("nombarch").value;
+if (narch.length>0) {
+ descarga_configuracion(narch) ;
+}
+}
+
+function permuta(o){
+//console.log('permuta');
+var propi=o.getAttribute('pos')
+if (propi=="0") {o.setAttribute("pos", "1");o.style.color='red';suma+=parseFloat(o.innerText)} 
+ else 
+{o.setAttribute("pos", "0");o.style.color='blue';suma-=parseFloat(o.innerText)}
+document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
+}
+
+function sortbynro(a,b){
+if (parseInt(a.nro)<parseInt(b.nro)) {return -1}
+if (parseInt(a.nro)>parseInt(b.nro)) {return 1} else {return 0}
+
+}
+suma=0;
+function borrarSuma(){
+suma=0;
+document.getElementById("suma").innerText="Suma=0";
+
+var tds=document.getElementsByClassName("pagocli");
+for (var i=0;i<tds.length;i++){
+tds[i].setAttribute("pos", "0");
+tds[i].style.color='blue';
+}
+}
+function muestraRetenciones(){
+var divret=document.getElementById("retenciones");
+var texto='';
+texto+='&nbsp;&nbsp;<div> <h3 style="color:blue;">Retenciones</h3></div>';
+texto+='<div class="divfondo" style="heigth:50%;overflow-y: auto;">';
+retenciones.sort(sortbynro);
+var lr=retenciones.length;
+texto+='<table  style="width:40%;font-size:1.0rem;">';
+for(var i=0;i<lr;i++){
+texto+='<tr>';
+texto+='<td style="width:10%;">'+retenciones[i].nro+'</td>';
+texto+='<td style="width:15%;">'+retenciones[i].fecha+'</td>';
+texto+='<td style="width:15%;" class="pagocli" pos="0" onclick="permuta(this);">'+retenciones[i].total+'</td>';
+texto+='</tr>';
+}
+texto+='</table>';
+texto+='</div>';
+divret.innerHTML=texto;
+divret.hidden=false;
+}
+
+function set_n_ret(){
+NRO_RET=document.getElementById("nret").value;
+localStorage.setItem('nro_ret',NRO_RET);
+}
+function set_t_ret(){
+if (document.getElementById("t1").checked==true) {TIPO_RET="0";} 
+if (document.getElementById("t2").checked==true) {TIPO_RET="1";}
+if (document.getElementById("t3").checked==true) {TIPO_RET="2";}
+localStorage.setItem('tipo_ret',TIPO_RET);
+}
+function set_fecha_pago(){
+FECHA_PAGO=inv_fecha_date(document.getElementById("fechapago").value);
+localStorage.setItem('fechapago',FECHA_PAGO);
+}
+
+function anular(m){
+divs_datos.getElementsByTagName("input")[0].value=fecha_date(fecha_hoy);
+divs_datos.getElementsByTagName("input")[1].value='';
+divs_datos.getElementsByTagName("input")[2].value='';
+divs_datos.getElementsByTagName("input")[3].value='';
+divs_datos.getElementsByTagName("input")[4].value='';
+divs_datos.getElementsByTagName("input")[5].value='';
+}
+function cargar_retencion(){
+var nro=(document.getElementById('nret').value).toString();
+console.log('nro '+nro);
+var indf=retenciones.findIndex((e)=>e.nro==nro)
+console.log(indf);
+console.log(retenciones);
+if (indf>=0) {
+  NRO_RET=retenciones[indf].nro;
+  TIPO_RET=retenciones[indf].tipo;
+  FECHA_PAGO=retenciones[indf].fecha;
+  reset_datos();
+  var max=retenciones[indf].datos.length
+  for (var i=0;i<max;i++){
+    Object.assign(datos_ret[i],retenciones[indf].datos[i]);
+  }
+}
+console.log(indf);
+console.log(retenciones[indf]);
+Seleccion();
+}
+function Seleccion(){
+var divsel=document.getElementById("seleccion");
+var texto='';
+texto+='<center>';
+texto+='<h4>Retenciones para Franquiciados de Empresas Polar</h4>';
+if (TIPO_RET=="0") {texto+='Cervecer&iacute;a <input type="radio" id="t1" name="tipo" onchange="set_t_ret();" checked>&nbsp;&nbsp;&nbsp;';
+ texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();">&nbsp;&nbsp;&nbsp; ';
+ texto+=' Pepsicola <input type="radio" id="t3" name="tipo" onchange="set_t_ret();"> <br>';
+}
+if (TIPO_RET=="1") {texto+='Cervecer&iacute;a <input type="radio" id="t1" name="tipo" onchange="set_t_ret();">&nbsp;&nbsp;&nbsp;';
+ texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" checked>&nbsp;&nbsp;&nbsp; ';
+ texto+=' Pepsicola <input type="radio" id="t3" name="tipo" onchange="set_t_ret();"> <br>';
+}
+if (TIPO_RET=="2") {texto+='Cervecer&iacute;a <input type="radio" id="t1" name="tipo" onchange="set_t_ret();">&nbsp;&nbsp;&nbsp;';
+ texto+=' Alimentos <input type="radio" id="t2" name="tipo" onchange="set_t_ret();" > &nbsp;&nbsp;&nbsp;';
+ texto+=' Pepsicola <input type="radio" id="t3" name="tipo" onchange="set_t_ret();" checked> <br>';
+}
+
+texto+='</center><br>';
+texto+='<div class="divfondo">';
+texto+='<span class="titulo"> N&deg;de la retenci&oacute;n </span><br><input id="nret" type="number" onchange="set_n_ret();" value="'+NRO_RET+'"> ';
+texto+='&nbsp; <button class="micro" onclick="obtenerTexto(5);">&nbsp;</button><br> ';
+texto+='<span class="titulo">Fecha de la retenci&oacute;n </span><br><input id="fechapago" type="date" min="'+fecha_min+'"onchange="set_fecha_pago();" value="'+fecha_date(FECHA_PAGO)+'"> ';
+texto+='<button class="botonf" onclick="cargar_retencion()"> Cargar </button>';
+texto+='</div>';
+texto+='<br><span class="titulo" > Datos de las facturas:</span><br>';
+for (var i=0;i<Max_F;i++) {
+texto+='<button class="botonfact" onclick="Agregar_datos('+i+');">';
+texto+='<table class="tablefact">';
+texto+='<tr><td> Fecha: '+ datos_ret[i]["fecha"]+'</td><td>N&deg; '+datos_ret[i]["nro_factura"]+'</td>';
+texto+='</tr>';
+texto+='<tr><td> N&deg; C: '+datos_ret[i]["nro_control"]+'</td><td> N&deg; D:' +datos_ret[i]["nro_debito"]+'</td>';
+texto+='</tr>';
+texto+='<tr><td colspan="2" > Monto: '+datos_ret[i]["C_IVA"]+'</td>';
+texto+='</tr>';
+
+texto+='</table>';
+texto+='</button>';
+
+texto+='&nbsp;<button  style="font-size:1.5em; border-radius: 6px;" onclick="Agregar_datos('+i+');">'+' F'+(i+1).toString()+'</button>'
+}
+texto+='<br><button class="botonf" onclick="reinicio()";>Reiniciar</button>';
+
+divsel.innerHTML=texto;
+divsel.hidden=false;
+}
+function balance(){
+Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
+let sum=0;
+Clientes.forEach( x => {
+ if (x.nombre.indexOf('Obsequio')==-1 && x.nombre.indexOf('Pedido')==-1 && x.nombre.indexOf('Pita')==-1)
+  sum += parseFloat(x.deuda);});
+alert(sum);
+}
+function reinicio(){
+var i;
+for (i=0;i<7;i++){
+datos_ret[i]["fecha"]=fecha_hoy;
+datos_ret[i]["nro_factura"]='';
+datos_ret[i]["nro_control"]='-';
+datos_ret[i]["nro_debito"]='';
+datos_ret[i]["C_IVA"]='';
+}
+datos_ret[0]["nro_factura"]=fbase[parseInt(TIPO_RET)].nfac;
+datos_ret[0]["nro_control"]=fbase[parseInt(TIPO_RET)].ncont;
+console.log(fbase[parseInt(TIPO_RET)].nfac);
+
+NRO_RET=(parseInt(NRO_RET)+1).toString();
+FECHA_PAGO=fecha_hoy;
+localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
+localStorage.setItem('fechapago',FECHA_PAGO);
+localStorage.setItem('nro_ret',NRO_RET);
+Seleccion();
+}
+function guardaconfig(){
+var div_config=document.getElementById("configuracion");
+TASA_IVA=div_config.getElementsByTagName("input")[0].value;
+FACTOR_RET=div_config.getElementsByTagName("input")[1].value;
+Max_F=parseInt(div_config.getElementsByTagName("input")[2].value);
+console.log(Max_F);
+if (Max_F>Max_L) {Max_F=Max_L;}
+if (Max_F<1) {Max_F=1;}
+
+localStorage.setItem('tasa_iva',TASA_IVA);
+localStorage.setItem('factor_ret',FACTOR_RET);
+localStorage.setItem('dir_fiscal',DIR_FISCAL);
+localStorage.setItem('rif_fiscal',RIF_FISCAL);
+localStorage.setItem('nombre_dist',NOMB_DIST);
+localStorage.setItem('lista_a',LISTA_A);
+localStorage.setItem('lista_c',LISTA_C);
+localStorage.setItem('lista_p',LISTA_P);
+localStorage.setItem('max_f',Max_F.toString());
+localStorage.setItem('codigo',CODIGO);
+
+document.getElementById("configuracion").hidden=true;
+Seleccion();
+}
+
+function cancelaconfig(){
+document.getElementById("configuracion").hidden=true;
+document.getElementById("seleccion").hidden=false;
+}
+function guarda_datos(m){
+ var fi=divs_datos.getElementsByTagName("input")[0].value;
+ console.log(fi);
+ datos_ret[m]["fecha"]=inv_fecha_date(fi);
+ datos_ret[m]["nro_factura"]=divs_datos.getElementsByTagName("input")[1].value;
+ datos_ret[m]["nro_control"]=divs_datos.getElementsByTagName("input")[2].value+"-"+divs_datos.getElementsByTagName("input")[3].value;
+/*
+fbase[parseInt(TIPO_RET)].nfac=datos_ret[m]["nro_factura"];
+fbase[parseInt(TIPO_RET)].ncont=datos_ret[m]["nro_control"];
+*/
+ datos_ret[m]["nro_debito"]=divs_datos.getElementsByTagName("input")[4].value;
+ datos_ret[m]["C_IVA"]=(divs_datos.getElementsByTagName("input")[5].value).replace(',','.');
+//if (isNaN(parseFloat(datos_ret[m]["C_IVA"]))) {datos_ret[m]["C_IVA"]="0"}
+//datos_ret[m]["C_SIVA"]=(divs_datos.getElementsByTagName("input")[4].value).replace(',','.');
+//console.log(parseFloat(datos_ret[m]["C_IVA"]));
+divs_datos.hidden=true;
+console.log(m);
+console.table(datos_ret);
+localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
+
+Seleccion();
+//console.table(
+}
+
+function canceladatos(m){
+ divs_datos.hidden=true;
+console.log(m);
+console.table(datos_ret);
+Seleccion();
+//console.table(
+localStorage.setItem("dat_ret",JSON.stringify(datos_ret));
+}
+
+function lineas(t){
+var l=t.split(";");
+return l.join("\n");
+}
+function descarga_configuracion(name){
+var nomb="https://bdeabreu66.github.io/ret_malta/"+name+".txt";
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+ function showResultD(txt) {
+       console.log('muestro respuesta: ', txt);
+        DIR_FISCAL=txt.dir;
+        RIF_FISCAL=txt.rif;
+        NOMB_DIST=txt.nombre_C;
+        LISTA_A=txt.lista_a;
+        LISTA_C=txt.lista_c;
+        LISTA_P=txt.lista_p;
+        CODIGO=txt.codigo;
+        document.getElementById("sal1").innerText=RIF_FISCAL;
+        document.getElementById("sal2").innerText=NOMB_DIST;
+        document.getElementById("sal3").innerText=DIR_FISCAL;
+        document.getElementById("lista_a").innerText=lineas(LISTA_A);
+        document.getElementById("lista_c").innerText=lineas(LISTA_C);
+        document.getElementById("lista_p").innerText=lineas(LISTA_P);
+        document.getElementById("codigo").innerText=CODIGO; 
+
+ }
+function showErrorD(err) { console.log('muestor error', err); }
+
+}
+
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+
+</script>
+
+<BODY onload="inicio();">
+<!-- <div id="encabezado" style="text-align: left; border: 1px solid #999999; position: fixed;" >  -->
+<!--<span style="font-size:30px;cursor:pointer; margin-left: 0px;text-align: left;" onclick="openNav()">&#9776; Menu </span>  -->
+<!--</div>  -->
+<div id="mySidenav" class="sidenav" ></div>
+
+<div id="divdata"></div>
+<div id="seleccion">
+
+</div>
+<div id="retenciones">
+ 
+</div>
+<div id="header"> <button class="btop" onclick="muestraRetenciones();">Retenciones</button>&nbsp&nbsp<button class="btop" onclick="muestraFacturas();">Facturas </button>&nbsp&nbsp<button class="btop" onclick="balance();">Balance</button><br>
+<span id="suma" style="color:blue;font-size:1.2rem;"> Total=0 </span>&nbsp&nbsp<button onclick="borrarSuma();">B</button>';
+</div>
+</body>
+</html>
