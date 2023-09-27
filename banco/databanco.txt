@@ -7,6 +7,7 @@
 ['584123498254','Club la florida'],
 ['01340067960673057959','Mc Center Pool'],
 ['584121308516','Mc Center Pool'],
+['584129698832','Bodega Yoliber'],
 ['01020406290000103046','Alianza cafe'],
 ['01020152790000430955','Alianza cafe'],
 ['01910027851127292097','Alvaro Jardim'],
