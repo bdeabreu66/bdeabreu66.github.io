@@ -359,11 +359,17 @@
       ["Ariel Deterg. Reg. 850 g x 10 u",10,27.80,1,0,0,"t3","&P-G&Cuidado de Ropa&Ariel&",1,'80701241',27.80,""],
       ["Ariel Det. Liq. Reg. 800 cc x 9 u",9,45.54,1,0,0,"t3","&P-G&Cuidado de Ropa&Ariel&",1,'80679160',45.54,""],
       ["Ariel Det. Liq. Reg. 1800 cc x 6 u",6,52.50,1,0,0,"t3","&P-G&Cuidado de Ropa&Ariel&",1,'80682213',52.50,""],
-      ["Downy Suav. suave gentil 800 cc x 9 u",9,20.33,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80690782',23.33,""],
-      ["Downy Suav. brisa fresca 800 cc x 9 u",9,20.33,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80701451',23.33,""],
-      ["Downy Suav. floral 800 cc x 9 u",9,20.33,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80701455',23.33,""],
+      ["Downy Suav. suave gentil 800 cc x 9 u",9,20.33,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80690782',20.33,""],
+      ["Downy Suav. brisa fresca 800 cc x 9 u",9,20.33,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80701451',20.33,""],
+      ["Downy Suav. floral 800 cc x 9 u",9,20.33,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80701455',20.33,""],
       ["Allways toallas ultra seca dia 37g x 24 u",24,38.16,1,0,0,"t3","&P-G&Cuidado personal&Always&",1,'80679257',38.16,""],
       ["Allways toallas ultra seca noche 45g x 24 u",24,44.63,1,0,0,"t3","&P-G&Cuidado personal&Always&",1,'80679273',44.63,""],
       ["Gillette Antit roll on  rush 60g x 12 u",12,18.48,1,0,0,"t3","&P-G&Cuidado personal&Anti-transpirantes&",1,'80311972',18.48,""],
-      ["Secret Antit roll on protect 60g x 12 u",12,20.04,1,0,0,"t3","&P-G&Cuidado personal&Anti-transpirantes&",1,'80321737',20.04,""]
+      ["Secret Antit roll on protect 60g x 12 u",12,20.04,1,0,0,"t3","&P-G&Cuidado personal&Anti-transpirantes&",1,'80321737',20.04,""],
+      ["HS Acond anticaida 300 cc x 12 u",12,50.16,1,0,0,"t3","&P-G&Cuidado del cabello&Head-Shoulders&",1,'80350319',50.16,""],
+      ["HS Shampoo 2 en 1 limp renov 375 cc x 12 u",12,55.31,1,0,0,"t3","&P-G&Cuidado del cabello&Head-Shoulders&",1,'80680615',55.31,""],
+      ["HS Shampoo anti caida 375 cc x 12 u",12,55.31,1,0,0,"t3","&P-G&Cuidado del cabello&Head-Shoulders&",1,'80680655',55.31,""],
+      ["HS Shampoo anti caida 180 cc x 12 u",12,33.24,1,0,0,"t3","&P-G&Cuidado del cabello&Head-Shoulders&",1,'80680703',33.24,""],
+      ["HS Shampoo limp renov 180 cc x 12 u",12,33.24,1,0,0,"t3","&P-G&Cuidado del cabello&Head-Shoulders&",1,'80680716',33.24,""],
+      ["HS Shampoo limp renov 375 cc x 12 u",12,55.31,1,0,0,"t3","&P-G&Cuidado del cabello&Head-Shoulders&",1,'80680717',55.31,""]
 ]
