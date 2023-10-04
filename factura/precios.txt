@@ -389,7 +389,7 @@
       ["Gillette blister Masc PB3x2  x 72",72,153.36,1,0,0,"t3","&P-G&Afeitadoras&Gillette&",1,'80685924',153.36,""],
       ["Gillette blister Masc PB3x4  x 36",36,145.44,1,0,0,"t3","&P-G&Afeitadoras&Gillette&",1,'80685905',145.44,""],
       ["Gillette blister sensecare PB3x2  x 72",72,176.40,1,0,0,"t3","&P-G&Afeitadoras&Gillette&",1,'80685930',176.40,""],
-      ["Gillette blister sensecare PB3x4  x 36",72,167.40,1,0,0,"t3","&P-G&Afeitadoras&Gillette&",1,'80315781',167.40,""],
+      ["Gillette blister sensecare PB3x4  x 36",36,167.40,1,0,0,"t3","&P-G&Afeitadoras&Gillette&",1,'80315781',167.40,""],
       ["Venus ristra simplyx8 fem x 10u",10,106.20,1,0,0,"t3","&P-G&Afeitadoras&Venus&",1,'80351959',106.20,""],
       ["Venus blister simplyx2 fem x 12u",12,25.56,1,0,0,"t3","&P-G&Afeitadoras&Venus&",1,'80351964',25.56,""],
       ["Venus blister simplyx4 fem x 6u",6,24.24,1,0,0,"t3","&P-G&Afeitadoras&Venus&",1,'80351962',24.24,""]
