@@ -1297,7 +1297,7 @@ function cumple1(value) {
 if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 && value.indexOf("DE LA CUENTA NRO. 01910148772100070936")<0) ) {return true;} else {return false;}
 }
 function cumple2(value) {
-if (value.indexOf("Cargo Domiciliacion")>0 || value.indexOf("Cargo por Domiciliacion")>0) {return true;} else {return false;}
+if (value.indexOf("Cargo Domiciliacion")>0 || value.indexOf("Cargo por Domiciliacion")>0 || value.indexOf("DOMIC.")>0) {return true;} else {return false;}
 }
 var nsem;
 var sem;
