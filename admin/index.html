@@ -714,10 +714,16 @@ divsel.hidden=false;
 function balance(){
 Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
 let sum=0;
+let sum2=0
 Clientes.forEach( x => {
  if (x.nombre.indexOf('Obsequio')==-1 && x.nombre.indexOf('Pedido')==-1 && x.nombre.indexOf('Pita')==-1)
-  sum += parseFloat(x.deuda);});
-alert(sum);
+  {sum += parseFloat(x.deuda);
+  if (x.ultfac!=undefined) {sum2+=parseFloat(x.ultfac)}
+  }
+ });
+let suma=sum.toFixed(2);
+alert(suma+' '+sum2+' '+(suma-sum2));
+//alert(sum2);
 }
 function reinicio(){
 var i;
