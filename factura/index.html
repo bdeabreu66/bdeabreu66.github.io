@@ -174,7 +174,7 @@ overflow-y:scroll;
   position: fixed;
   left: 0;
   top: 5%;
-  height:70%;
+  height:80%;
    width: 100%;
   background-color: Turquoise;
   color: red;
@@ -278,6 +278,7 @@ Rif:<input style="width:55%;" type="text" id="rifcli" value="" ><br>
 Tlf:<input style="width:55%;" type="text" id="tlfcli" value="" ><br>
 AR:<input style="width:55%;" type="checkbox" id="espcli" value="" ><br>
 Deuda:<input style="width:55%;" type="text" id="deucli" value="" ><br>
+Monto ult. Fac:<input style="width:55%;" type="text" id="ultfac" value="" ><br>
 Vacios polar:<input style="width:55%;" type="text" id="vaccli" value="" ><br>
 Vacios 350 ml:<input style="width:55%;" type="text" id="vacclir1" value="" ><br>
 Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
@@ -861,6 +862,7 @@ if (cliente!='') {
   rifcliente=document.getElementById("rifcli").value;
   cliente_especial=document.getElementById("espcli").checked;
   deuda_cliente=document.getElementById("deucli").value;
+  ult_cliente=document.getElementById("ultfac").value;
   vacio_cliente=document.getElementById("vaccli").value;
   vacio_cliente1=document.getElementById("vacclir1").value;
   vacio_cliente2=document.getElementById("vacclir2").value;
@@ -874,6 +876,7 @@ if (cliente!='') {
   Ocliente.rif=rifcliente;
   Ocliente.esp=cliente_especial;
   Ocliente.deuda=deuda_cliente;
+  Ocliente.ultfac=ult_cliente;
   Ocliente.vacio=vacio_cliente;
   Ocliente.vacio1=vacio_cliente1;
   Ocliente.vacio2=vacio_cliente2;
@@ -907,6 +910,7 @@ if (ind>=0) {
  document.getElementById("espcli").checked=AClientes[ind].esp;
  document.getElementById("dircli").value=AClientes[ind].dir;
  document.getElementById("deucli").value=AClientes[ind].deuda;
+ document.getElementById("ultfac").value=AClientes[ind].ultfac;
  document.getElementById("vaccli").value=AClientes[ind].vacio;
  document.getElementById("vacclir1").value=AClientes[ind].vacio1;
  document.getElementById("vacclir2").value=AClientes[ind].vacio2;
@@ -1192,6 +1196,7 @@ var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
 if (indcliente>=0) {
 DEU_ANT=AClientes[indcliente].deuda;
 AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)+parseFloat(MONTOF)).toFixed(2);
+AClientes[indcliente].ultfac=parseFloat(MONTOF).toFixed(2);
 localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
 // guarda_clientes_IDB();
 }
