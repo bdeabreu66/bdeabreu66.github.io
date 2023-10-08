@@ -718,12 +718,13 @@ let sum2=0
 Clientes.forEach( x => {
  if (x.nombre.indexOf('Obsequio')==-1 && x.nombre.indexOf('Pedido')==-1 && x.nombre.indexOf('Pita')==-1)
   {sum += parseFloat(x.deuda);
-  if (x.ultfac!=undefined) {sum2+=parseFloat(x.ultfac)}
+  if (x.deuda>x.ultfac) {sum2+=parseFloat(x.ultfac);}
   }
  });
 let suma=sum.toFixed(2);
-alert(suma+' '+sum2+' '+(suma-sum2));
-//alert(sum2);
+let suma2=sum2.toFixed(2);
+alert(suma+' '+suma2+' '+(sum-sum2).toFixed(2));
+
 }
 function reinicio(){
 var i;
