@@ -271,7 +271,7 @@ border-radius: 8px;
 </div>
 
 <div id="cliente" hidden="true">
-<span onclick="limpiaCliente();">Cliente:</span> <input style="width:55%;" type="text" id="cli" value="" list="listaclientes" oninput="datos_cliente();">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>'
+<span onclick="limpiaCliente();">Cliente:</span> <input style="width:45%;" type="text" id="cli" value="" list="listaclientes" oninput="datos_cliente();">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>&nbsp&nbsp<button onclick="salir_cliente();">X</button>'
 <datalist id="listaclientes"></datalist><br>
 Direcci&oacute;n:<textarea style="width:55%;" type="text" id="dircli" value="" ></textarea><br>
 Rif:<input style="width:55%;" type="text" id="rifcli" value="" ><br>
@@ -851,7 +851,10 @@ if (pos>=0 && resp) {AClientes.splice(pos,1);guarda_clientes();
  }
 //console.log('LC: '+Lclientes);
 }
+function salir_cliente(){
+document.getElementById("cliente").hidden=true;
 
+}
 
 function setcliente(){
 var indic;
