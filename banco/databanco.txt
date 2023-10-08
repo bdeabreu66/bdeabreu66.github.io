@@ -151,6 +151,7 @@
 ['584144145440','Licoreria Malave'],
 ['584124072605','Bodega Claudia'],
 ['01340946380001370991','Bodega Claudia'],
+['584123417742','Bodega Claudia'],
 ['584244970680','Minerva'],
 ['584243659721','Euromax'],
 ['01910027821127272510','Martinez B. Antonio'],
