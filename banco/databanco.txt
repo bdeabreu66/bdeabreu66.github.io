@@ -241,6 +241,7 @@
 ['584128732612','Sosa Almacen'],
 ['584144397087','Tequenack'],
 ['01340153541531021352','Santa Fe market'],
+['584143427229','Santa Fe market'],
 ['01340419444191042090','Venvidrio'],
 ['J501880239','Venvidrio'],
 ['584144159903','Venvidrio'],
