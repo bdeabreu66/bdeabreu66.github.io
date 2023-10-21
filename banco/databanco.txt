@@ -84,6 +84,7 @@
 ['01340419414193020946','Club la emboscada'],
 ['584124304844','Colegio los pinos'],
 ['584125100639','Colegio Teresiano'],
+['584126777421','Colegio Teresiano'],
 ['584149479895','Darley De Abreu'],
 ['01050060527060011757','Darley De Abreu'],
 ['584148737746','Denis Supervisor'],
