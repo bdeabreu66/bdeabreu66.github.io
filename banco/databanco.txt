@@ -1,4 +1,5 @@
 [
+['584124607857','Alvaro De Abreu'],
 ['584140414927','Compra de dolares'],
 ['584244190326','Bodega Freddy Medina'],
 ['584244347998','Compra de dolares'],
@@ -242,6 +243,7 @@
 ['584124504426','Licoreria Mariomar CA'],
 ['584124821427','Jimmy Reyes'],
 ['01750062720073634371','Rosa De Abreu'],
+['584262252003','Rosa De Abreu'],
 ['584124566786','El sazon de la abuela'],
 ['584244203234','Sosa Almacen'],
 ['584128732612','Sosa Almacen'],
