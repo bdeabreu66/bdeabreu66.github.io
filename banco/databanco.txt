@@ -266,6 +266,7 @@
 ['01050137711137023074','Maxi Carnes'],
 ['01050137711137063955','Maxi Carnes'],
 ['01020857270000023087','Licoreria Brisas del Lago'],
+['01340946320001458931','Licoreria Brisas del Lago'],
 ['584244158516','Licoreria Brisas del Lago'],
 ['584146443242','Farmasurca'],
 ['584144127966','Panaderia Kakau II'],
