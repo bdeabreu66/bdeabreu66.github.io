@@ -1,1 +1,504 @@
-tesis
+
+<HTML>
+<HEAD>
+<TITLE>  Tesis de Grado de Alvaro De Abreu</TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<!-- <link rel="manifest" href="manifest.json">   -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
+
+input[type=number]{
+width: 3em;
+}
+
+input[type=text]{
+font-size:1.5em;
+width: 18em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+textarea{
+font-size:1.5em;
+width: 22em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+H1{
+text-align:center;
+}
+input[type=text]:focus {
+  background-color: lightblue;
+}
+.enlace {
+text-align:center;
+font-size:2em;
+background-color:blue;
+margin:4px;
+}
+
+</style>
+
+</HEAD>
+
+
+<BODY>
+<div id encabezado>
+<H1>Tesis</H1>
+<div class="enlace" onclick="Cap1()">Correcci&oacute;n del Factor de Potencia</div>
+<div class="enlace" onclick="Cap2()">Circuitos magn&eacute;ticos</div>
+<div class="enlace" onclick="Cap3()">Sistemas trif&aacute;sicos</div>
+
+</div>
+
+
+<div id="datos">
+
+</div>
+
+<div id="salida" style="font-size:20px;">
+</div>
+<div id="lista" > </div>
+<!--   -->
+<script src="math.js" type="text/javascript"></script>
+<script type="text/javascript">
+var data=new Object;
+
+function grabar(){
+console.log("grabar");
+var nomb_problema=document.getElementById("dpro").value;
+var nombre_archivo="PROB"+nomb_problema;
+data.variables=document.getElementById("_var").value;
+data.expresion=[];
+expr=document.getElementsByName("_for");
+var nform=expr.length;
+for (var i=0;i<nform;i++) {
+  data.expresion[i]=expr[i].value;
+}
+localStorage.setItem(nombre_archivo,JSON.stringify(data)); 
+}
+
+function cargadatos(nomb) {
+buffer=localStorage.getItem(nomb);
+data=JSON.parse(buffer);
+document.getElementById("dpro").value=nomb.substring(4);
+
+document.getElementById("_var").value=data.variables;
+var l=data.expresion.length;
+console.log("l "+l);
+for (var i=0;i<l;i++) {
+  document.getElementsByName("_for")[i].value=data.expresion[i];
+}
+}
+
+function cargar(){
+listasel=[];
+console.log("paso");
+for(var i=0;i<localStorage.length;i++){
+var nomb=localStorage.key(i); 
+if (nomb.indexOf("PROB")==0) {listasel.unshift(nomb);} 
+ } 
+selectlista();
+}
+
+function selectlista(){
+var textoT="";
+var div3 = document.getElementById("lista");
+div3.style="position: fixed;top :0px; left: 0px; width: 100%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
+for (var i=0;i<listasel.length;i++) {
+textoT+="<p style='color:white;background:black;border:2px solid #FFFFFF; cursor:pointer;' onclick='clickp("+i+")'> "+listasel[i]+"</p>"; 
+}
+textoT+='<br> <button onclick="quitarlista();" >Cancelar </button>';
+div3.innerHTML=textoT;
+}
+function quitarlista(){
+var div3 = document.getElementById("lista");
+div3.style="display: none;";
+}
+function clickp(num){
+var nomb=listasel[num];
+cargadatos(nomb);
+quitarlista();
+}
+
+
+
+
+var pi=Math.PI;
+var mu0=4*pi*1e-7;
+var nd;
+function procesar(){
+nd=document.getElementById("pres").value;
+window.document.title = document.getElementById("dpro").value;
+const parser=math.parser();
+var _variables=document.getElementById("_var").value;
+_variables=_variables.replace(/(\r\n|\n|\r)/gm, "");
+var _variables=_variables.split(";");
+var expr=document.getElementsByName("_for");
+var vsal=document.getElementsByName("_res");
+var nform=expr.length;
+var sc2='navo=6.02e23,K=9e9,e0=8.8542e-12,mu0='+eval(mu0)+',';
+sc2+='qe=-1.6021017e-19,qp=1.6021017e-19,me=9.1095e-31,mp=1.67492e-27,g=9.8';
+console.log(sc2);
+console.log('lsc'+lsc);
+var variableinicial=sc2.split(",");
+var lsc=variableinicial.length;
+// Preprocesamiento
+
+for (j=0;j<lsc;j++){
+var ind=variableinicial[j].indexOf('=');
+nvm=variableinicial[j].substring(0,ind);
+valor=variableinicial[j].substring(ind+1);
+parser.set(nvm,math.complex(parser.evaluate(valor)));
+console.log(parser.get(nvm)) ; 
+}
+
+parser.evaluate('quadsolve1(a,b,c) = (1/(2*a))*(-b+sqrt(b^2-4*a*c))');
+parser.evaluate('quadsolve2(a,b,c) = (1/(2*a))*(-b-sqrt(b^2-4*a*c))');
+
+
+parser.set('nulo', function (A) {
+var A2=math.clone(A);
+var t=math.size(A2);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m= '+m+' n= '+n);
+console.log('tama;o'+math.size(A))
+var filap=0;
+var colpiv=[];
+for (cin=0;cin<n;cin++){
+   var im=cin;
+   var ik=filap+1;
+   console.log('im= '+im+' cin= '+cin+'ik= '+ik+'filap= '+filap);
+   if (filap<(m)) {
+   while  ((math.subset(A2, math.index(filap,cin))==0) && (ik<m)) {if ((math.subset(A2, math.index(ik,cin))!=0)) {A2=permuta(A2,filap,ik);};ik++;}
+     if (math.subset(A2,math.index(filap,cin))!=0) {
+         colpiv.push(cin);
+         piv=parseFloat(math.subset(A2,math.index(filap,cin)));
+         for (var ic2=cin;ic2<n;ic2++){
+            console.log('piv= '+piv+'ic2= '+ic2);
+            A2.subset(math.index(filap,ic2),math.subset(A2,math.index(filap,ic2))/piv);
+            console.log('nvp'+math.subset(A2, math.index(filap,ic2)));
+         }
+      for (im=0;im<m;im++){
+       if (im!=filap){
+       var fp=parseFloat(-math.subset(A2, math.index(im,cin))/math.subset(A2, math.index(filap,cin)));
+       console.log('fp= '+fp);
+        for (var ic=cin;ic<n;ic++){
+        va=parseFloat(math.subset(A2, math.index(im,ic)));
+        ta=parseFloat(math.subset(A2, math.index(filap,ic)));
+        console.log('va= '+va);
+        console.log('ta= '+ta);
+        A2.subset(math.index(im,ic),va+fp*ta);
+        console.log('nv'+math.subset(A2, math.index(im,ic)));
+       }
+       }
+      }
+    filap++;
+   } 
+  }
+}
+function busca(v,B){
+var n=B.length;
+for (var k=0;k<n;k++) {if (v==B[k]) {return true;}}
+return false;
+}
+
+console.log('colpiv= '+colpiv);
+var colnpiv=[];
+for (var k=0;k<n;k++) {if (!busca(k,colpiv)) {colnpiv.push(k)}}
+console.log('colnpiv= '+colnpiv);
+var nvl=colnpiv.length;
+var nvnl=colpiv.length;
+var R=math.zeros(n, nvl);
+var fila1=0;
+var pos1=0;
+for (var k=0;k<n;k++){
+   if (busca(k,colpiv)) {
+   for (var j=0;j<nvl;j++) {
+     console.log('fila1='+fila1+'col='+colnpiv[j]);
+     R.subset(math.index(k,j),-math.subset(A2,math.index(fila1,colnpiv[j])));}
+     fila1++;
+   } else 
+     { R.subset(math.index(k,pos1),1);pos1++}
+}
+console.log('R='+R);
+console.log('A2='+A2);
+return R;
+//return A2;
+
+})
+
+
+parser.set('span', function (A) {
+var A2=math.transpose(A);
+var t=math.size(A2);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m= '+m+' n= '+n);
+console.log('tama;o'+math.size(A))
+var filap=0;
+var colpiv=[];
+for (cin=0;cin<n;cin++){
+   var im=cin;
+   var ik=filap+1;
+   console.log('im= '+im+' cin= '+cin+'ik= '+ik+'filap= '+filap);
+   if (filap<(m)) {
+   while  ((math.subset(A2, math.index(filap,cin))==0) && (ik<m)) {if ((math.subset(A2, math.index(ik,cin))!=0)) {A2=permuta(A2,filap,ik);};ik++;}
+     if (math.subset(A2,math.index(filap,cin))!=0) {
+         colpiv.push(cin);
+         piv=parseFloat(math.subset(A2,math.index(filap,cin)));
+         for (var ic2=cin;ic2<n;ic2++){
+            console.log('piv= '+piv+'ic2= '+ic2);
+            A2.subset(math.index(filap,ic2),math.subset(A2,math.index(filap,ic2))/piv);
+            console.log('nvp'+math.subset(A2, math.index(filap,ic2)));
+         }
+      for (im=0;im<m;im++){
+       if (im!=filap){
+       var fp=parseFloat(-math.subset(A2, math.index(im,cin))/math.subset(A2, math.index(filap,cin)));
+       console.log('fp= '+fp);
+        for (var ic=cin;ic<n;ic++){
+        va=parseFloat(math.subset(A2, math.index(im,ic)));
+        ta=parseFloat(math.subset(A2, math.index(filap,ic)));
+        console.log('va= '+va);
+        console.log('ta= '+ta);
+        A2.subset(math.index(im,ic),va+fp*ta);
+        console.log('nv'+math.subset(A2, math.index(im,ic)));
+       }
+       }
+      }
+    filap++;
+   } 
+  }
+}
+return A2;
+})
+
+
+parser.set('gram_G', function (A) {
+//obtiene base ortogonal
+var V=math.clone(A);
+var t=math.size(V);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m= '+m+' n= '+n);
+var w1=[];
+var w2=[];
+
+for (k=1;k<m;k++) {
+    for (j=0;j<n;j++) { w2[j]=math.subset(V,math.index(k,j));}
+    console.log('k= '+k+' w2= '+w2);
+    for (l=0;l<k;l++) {
+      var S=0;Mo=0;
+      for (j=0;j<n;j++) {
+          w1[j]=math.subset(V,math.index(l,j)); S+=w1[j]*w2[j];Mo+=w1[j]*w1[j];
+          console.log('Mo= '+Mo+' S= '+S);
+          }
+      for (j=0;j<n;j++) { 
+        va=V.subset(math.index(k,j));vn=va-(parseFloat(S)/parseFloat(Mo))*w1[j];V.subset(math.index(k,j),vn); 
+        console.log('l= '+l+' w1= '+w1);
+       }                 	
+     }
+}
+return V;
+})
+
+parser.set('gram', function (A) {
+// obtiene base ortonormal
+var V=math.clone(A);
+var t=math.size(V);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m= '+m+' n= '+n);
+var w1=[];
+var w2=[];
+
+for (k=1;k<m;k++) {
+    for (j=0;j<n;j++) { w2[j]=math.subset(V,math.index(k,j));}
+    console.log('k= '+k+' w2= '+w2);
+    for (l=0;l<k;l++) {
+      var S=0;Mo=0;
+      for (j=0;j<n;j++) {
+          w1[j]=math.subset(V,math.index(l,j)); S+=w1[j]*w2[j];Mo+=w1[j]*w1[j];
+          console.log('Mo= '+Mo+' S= '+S);
+          }
+      for (j=0;j<n;j++) { 
+        va=V.subset(math.index(k,j));vn=va-(parseFloat(S)/parseFloat(Mo))*w1[j];V.subset(math.index(k,j),vn); 
+        console.log('l= '+l+' w1= '+w1);
+       }                 	
+     }
+}
+
+for (k=0;k<m;k++) {
+    Mo=0;
+    for (j=0;j<n;j++) { va=math.subset(V,math.index(k,j));Mo+=va*va;}
+    Mo=Math.sqrt(Mo);
+     console.log('Mo= '+Mo);
+     if (Mo!=0) {
+        for (j=0;j<n;j++) { V.subset(math.index(k,j),(1/Mo)*math.subset(V,math.index(k,j)));}
+     }
+}
+return V;
+})
+
+parser.set('proy', function (V,A) {
+var V1=math.clone(V);
+var A1=math.clone(A);
+var t=math.size(A1);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+var P=math.multiply(A1,V1);
+console.log('P= '+P);
+console.log('m= '+m+' n= '+n);
+S=math.zeros(n);
+console.log('S= '+S);
+for (k=0;k<m;k++) {
+     var T=math.row(A1,k);
+     console.log('T= '+T);
+      T=math.squeeze(T);
+     console.log('T= '+T); 
+      var a=P.get([k]);
+      console.log('a= '+a);
+      var S1=math.multiply(a,T);
+      console.log('S1= '+S1); 
+     S=math.add(S,S1);
+}
+
+return S;
+})
+
+
+function permuta(C,i,j){
+// permuta fila i con fila j
+var t=math.size(C);
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('permuta'+' m= '+m+' n= '+n);
+
+for (k=0;k<n;k++){
+  var tmp=math.subset(C, math.index(i,k));
+   C.subset(math.index(i,k),math.subset(C, math.index(j,k)));
+   C.subset(math.index(j, k),tmp);
+}
+return C;
+}
+
+parser.set('PARA', function () {
+// calcula el equivalente paralelo de dos impedancias
+var C=math.complex('0');
+ for (var k=0; k < arguments.length; k++) {
+  C=math.add(C,math.divide(1,arguments[k]));
+console.log('C='+C);
+}
+return math.divide(1,C);
+})
+
+
+parser.evaluate('j=i');
+parser.evaluate('tor(x) = x*(pi/180)');
+parser.evaluate('tod(x) = x*(180/pi)');
+parser.evaluate('arg_d(x) = arg(x)*(180/pi)');
+parser.evaluate('polar(r,w) = r*(cos(w)+i*sin(w))');
+parser.evaluate('fasor(r,w) = r*(cos(w*(pi/180))+i*sin(w*(pi/180)))');
+parser.evaluate('ifasor(x) =[abs(x),arg_d(x)]')  
+var jmax=_variables.length;
+//Agregamos las variables nuevas
+for (j=0;j<jmax;j++){
+var ind=_variables[j].indexOf('=');
+var nva=_variables[j].substring(0,ind);
+console.log(nva);
+valor=_variables[j].substring(ind+1);
+console.log(valor);
+//parser.set(nva,math.complex(valor));
+parser.set(nva,math.complex(parser.evaluate(valor)));
+console.log(parser.get(nva)) ; 
+}
+
+//Formulas
+
+console.log(nform);
+for (var i=0;i<nform;i++){
+     var formi=expr[i].value;
+     var pos=formi.split("=");
+if (formi!='') {
+     if (pos.length==2 )
+      {var nvari=pos[0]; var nexpr=pos[1];
+        var _Res=parser.evaluate(nexpr);
+        console.log(_Res);
+       parser.set(nvari,math.complex(_Res));
+      // var salida=_Res;
+          var salida=parser.get(nvari);
+       //try{
+        //var r1=salida.re;
+        //var r2=salida.im;
+        console.log(parser.get(nvari));
+  console.log('nd= '+nd);
+         vsal[i].innerText=print_m(math.format(salida,{notation: 'auto', precision: nd}));
+//+r2.toExponential(nd)+'(i)';}
+//        if (r2>0) { vsal[i].innerText+= ' + '+r2.toExponential(nd)+'(i)';}
+//            else
+//               { if (r2<0)  {vsal[i].innerText+= ' - '+Math.abs(r2).toExponential(nd)+'(i)';}}
+
+       console.table(salida);
+       // }
+       // catch {} 
+       }
+   else {
+    var _Res=parser.evaluate(formi);
+    }
+  }
+
+}
+//console.log('ans=' + math.format(r1,{notation: 'engineering'}) + 'i*'+math.format(r2,{notation: 'engineering'}));
+
+
+//var K=9e9;
+//var e0=8.8542e-12;
+//var qe=-1.6021017e-19;
+//var qp=1.6021017e-19;
+//var me=9.1095e-31;
+//var mp=1.67492e-27;
+
+}
+
+function print_m(A){
+var t=math.size(A);
+
+console.log(math.typeOf(t));
+var texto='';
+
+try {
+var m=t.subset(math.index(0));
+var n=t.subset(math.index(1));
+console.log('m='+m+' n='+n);
+for (i=0;i<m;i++) {
+    texto+='['
+ for (j=0;j<n;j++){
+   texto+=A.subset(math.index(i, j));
+   if (j<(n-1)) {texto+=',';}
+}
+   texto+=']'
+   if (i<(m-1)) {texto+=',';}
+
+}
+
+}
+catch{texto=A, console.log('paso')}
+return texto;
+}
+
+</script>
+
+</BODY>
+</html>
