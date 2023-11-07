@@ -1348,13 +1348,16 @@ numero_factura=partes[2];
 var indf=facturas.findIndex((e)=> e.cliente==cliente_factura && e.fecha==fecha_factura && e.nro==numero_factura);
 //alert(indf);
 if (indf>=0) {
+ //alert(indf);
  bcv_factura=facturas[indf].bcv;
  for (var i=0;i<facturas[indf].items.length;i++) {
-   var ind=clave_ind.get(facturas[indf].items[i].cod);;
+   var ind=clave_ind.get(facturas[indf].items[i].cod);
+if (ind!=undefined){
    datfac[ind].unidad=parseInt(facturas[indf].items[i].cu);
    datfac[ind].pu=parseFloat(facturas[indf].items[i].pu);
    datfac[ind].cajas=parseInt(facturas[indf].items[i].cb);
    datfac[ind].pb=parseFloat(facturas[indf].items[i].pb);
+}
  }
 }
 }
@@ -1955,10 +1958,14 @@ async function comparte(shareData){
 
 
 function anula(){
+
+const resp = confirm("Esta seguro de borrar la factura ");
+if (resp) {
  for (var i=0;i<data.length;i++){
   data[i][4]=0;
   data[i][5]=0;
  }
+}
 if (document.getElementById("factura").hidden==false) {factura2();}
 }
 
