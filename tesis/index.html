@@ -59,12 +59,21 @@ margin:4px;
 <div class="enlace" onclick="Cap1()">Correcci&oacute;n del Factor de Potencia</div>
 <div class="enlace" onclick="Cap2()">Circuitos magn&eacute;ticos</div>
 <div class="enlace" onclick="Cap3()">Sistemas trif&aacute;sicos</div>
-
 </div>
 
 
-<div id="datos">
+<div id="cap1" style="visible:false;">
+<canvas id="triangulo" style="width:200px;height:200px" ></canvas>
+<table><tr>
+<td><button onclick="mup();"> &uarr;</button></td>
+<td><button onclick="mdw();">&darr;</button></td>
+<td><button onclick="mlf();">&larr;</button></td>
+<td><button onclick="mrh();">&rarr; </button></td>
+<td><button onclick="aum();">+</button></td>
+<td><button onclick="dis();">-</button></td>
 
+</tr>
+</table>
 </div>
 
 <div id="salida" style="font-size:20px;">
@@ -74,6 +83,81 @@ margin:4px;
 <script src="math.js" type="text/javascript"></script>
 <script type="text/javascript">
 var data=new Object;
+var x0=100;
+var y0=100;
+var zoom=1;
+var P=50;
+var Q=100;
+const canvas = document.getElementById("triangulo");
+const ctx = canvas.getContext("2d");
+const ancho = canvas.width;
+const alto = canvas.height;
+const Mzoom = 10;
+const mzoom = 0.1;
+
+function aum(){
+zoom*=1.1;
+if (zoom>Mzoom) {zoom=Mzoom}
+triangulo_potencia(P,Q);
+}
+
+function dis(){
+zoom/=1.1;
+if (zoom<mzoom) {zoom=mzoom}
+triangulo_potencia(P,Q);
+}
+
+function mup(){
+y0-=0.1*alto;
+if (y0<0) {y0=0}
+triangulo_potencia(P,Q);
+}
+function mdw(){
+y0+=0.1*alto;
+if (y0>alto) {y0=alto}
+triangulo_potencia(P,Q);
+}
+function mlf(){
+x0-=0.1*ancho;
+if (x0<0) {x0=0}
+triangulo_potencia(P,Q);
+}
+function mrh(){
+x0+=0.1*ancho;
+if (x0>0.9*ancho) {x0=0.9*ancho}
+triangulo_potencia(P,Q);
+}
+function triangulo_potencia(P,Q){
+const S=Math.sqrt(P*P+Q*Q);
+const Sz=S*zoom;
+const Pz=P*zoom;
+const Qz=Q*zoom;
+//const x0=0.9*ancho;
+//const y0=1.9*alto;
+ctx.clearRect(0, 0, ancho, alto);
+ctx.fillStyle = "rgb(200, 0, 0)";
+    ctx.strokeRect(0, 0, ancho,alto);
+ ctx.beginPath();
+ ctx.moveTo(x0, y0);
+          ctx.lineTo(x0+Pz, y0);
+          ctx.lineTo(x0, y0-Qz);
+ ctx.lineTo(x0, y0);
+ ctx.stroke();
+  var tam=16*zoom;
+  ctx.font = tam.toString()+"px serif";
+  ctx.textAlign = "right";
+  ctx.fillText("P="+P.toFixed(2), x0-Pz/2, y0-Pz/2);
+ ctx.textAlign = "center";
+  ctx.fillText("Q="+Q.toFixed(2), x0+Qz/4, y0+20);
+  ctx.textAlign = "left";
+  ctx.fillText("S="+S.toFixed(2), x0+Qz/2, y0-Pz/2);
+}
+function Cap1(){
+const divcap1= document.getElementById("cap1");
+
+triangulo_potencia(50,100);
+divcap1.display="visible";
+}
 
 function grabar(){
 console.log("grabar");
