@@ -1203,6 +1203,9 @@ Revierte_deuda();
 }
 var MONTOF='';
 function Actualiza_deuda(){
+Lclientes=localStorage.getItem('Clientes_Pita');
+if (Lclientes!=null) { AClientes=JSON.parse(Lclientes);} else {AClientes=[];}
+
 var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
 //alert(indcliente);
 if (indcliente>=0) {
