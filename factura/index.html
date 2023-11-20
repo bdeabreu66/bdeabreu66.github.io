@@ -564,10 +564,10 @@ div3.style="display:block ;position: fixed;top :30px; left: 0px; width: 100%;hei
 var texto='';
 texto+='<div> <table style="text-align:center;margin:auto;">';
 texto+='<tr><td><button onclick=importar()>Importar Facturas</button></td></tr>';
-texto+='<tr><td><button onclick=importar2()>Importar Facturas (FAC_)</button></td></tr>';
+//texto+='<tr><td><button onclick=importar2()>Importar Facturas (FAC_)</button></td></tr>';
 texto+='<tr><td><button onclick=exportar()>Exportar Facturas</button></td></tr>';
-texto+='<tr><td><button onclick=convertir()>Convertir Facturas</button></td></tr>';
-texto+='<tr><td><button onclick=elim_FAC()>Eliminar FACS</button></td></tr>';
+//texto+='<tr><td><button onclick=convertir()>Convertir Facturas</button></td></tr>';
+//texto+='<tr><td><button onclick=elim_FAC()>Eliminar FACS</button></td></tr>';
 texto+='<tr><td><button onclick=quitar_div("lista");>Salir</button></td></tr>';
 texto+='</table></div>';
 div3.innerHTML=texto;
@@ -712,7 +712,7 @@ div3.style="position: fixed;top :7%; left: 0%; width: 100%;height:80%;background
 texto+='<div style="position: fixed;top :7%; text-align:right;background-color: gray;width:100%;">';
 texto+='<table width="100%"><tr><td style="width:70%;text-align:center;color:blue;" >Inventario</td>';
 texto+='<td width="10%"><button  title="Respalda" onclick="Respalda_inventario();" > R </button></td>';
-texto+='<td width="10%"><button  title="Borra" onclick="anula_inventario();" > B </button></td>';
+//texto+='<td width="10%"><button  title="Borra" onclick="anula_inventario();" > B </button></td>';
 texto+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td></tr></table></div><br>';
 texto+='<div style="overflow:auto;height:90%;">';
 texto+='<table style="width:100%;">';
@@ -1362,6 +1362,8 @@ var indf=facturas.findIndex((e)=> e.cliente==cliente_factura && e.fecha==fecha_f
 if (indf>=0) {
  //alert(indf);
  bcv_factura=facturas[indf].bcv;
+try {
+
  for (var i=0;i<facturas[indf].items.length;i++) {
    var ind=clave_ind.get(facturas[indf].items[i].cod);
 if (ind!=undefined){
@@ -1371,6 +1373,8 @@ if (ind!=undefined){
    datfac[ind].pb=parseFloat(facturas[indf].items[i].pb);
 }
  }
+
+} catch(error) {console.log(error)};
 }
 }
 
