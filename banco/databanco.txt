@@ -57,6 +57,7 @@
 ['584244063691','Bull Pen'],
 ['584125028337','Gimnasio Body Pump'],
 ['584145822722','Licoreria Canapiales'],
+['584244565984','Licoreria Canapiales'],
 ['584141863212','Licoreria Canapiales'],
 ['584125062019','Licoreria Canapiales'],
 ['584128529762','Carlos Hernandez'],
