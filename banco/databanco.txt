@@ -1,5 +1,7 @@
 [
 ['584124607857','Alvaro De Abreu'],
+['584243089896','Vigilante 2'],
+['584128554744','Vigilante 1],
 ['584140414927','Compra de dolares'],
 ['584244190326','Bodega Freddy Medina'],
 ['584244347998','Compra de dolares'],
@@ -10,6 +12,7 @@
 ['584144373690','Licoreria los loros'],
 ['584147221809','Licoreria los loros'],
 ['584123408842','Carniceria Wylca'],
+['01720204942044114789','Carniceria Wylca'],
 ['584123419182','Club la florida'],
 ['584124819380','Club la florida'],
 ['584123498254','Club la florida'],
@@ -20,6 +23,7 @@
 ['01020152790000430955','Alianza cafe'],
 ['01910027851127292097','Alvaro Jardim'],
 ['584124067144','Ana Beatriz'],
+['584145934259','Ana Beatriz'],
 ['584124668961','El gordo y la flaca'],
 ['584244244676','Ana Luisa Caldera'],
 ['584143711677','Ana Luisa Caldera'],
