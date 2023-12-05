@@ -1,7 +1,7 @@
 [
 ['584124607857','Alvaro De Abreu'],
 ['584243089896','Vigilante 2'],
-['584128554744','Vigilante 1],
+['584128554744','Vigilante 1'],
 ['584140414927','Compra de dolares'],
 ['584244190326','Bodega Freddy Medina'],
 ['584244347998','Compra de dolares'],
