@@ -467,7 +467,7 @@ if (propi=="0") {o.setAttribute("pos", "1");o.style.color='white';suma+=parseFlo
  else 
 {o.setAttribute("pos", "0");o.style.color='black';suma-=parseFloat(o.innerText)}
 
-document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
+document.getElementById('suma').innerText=suma.toFixed(2);
 }
 
 function Respalda_inventario(){
@@ -508,8 +508,8 @@ var modo_inv=false;
 
 function borra_suma(){
 suma=0;
- document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
-document.getElementById("suma").innerText="Suma=0";
+ document.getElementById('suma').innerText=suma.toFixed(2);
+document.getElementById("suma").innerText="0";
 var tds=document.getElementsByClassName("pagocli");
 for (var i=0;i<tds.length;i++){
 tds[i].setAttribute("pos", "0");
@@ -1202,6 +1202,7 @@ div3.innerHTML=texto;
 function revertir_factura(num){
 var nomb=listasel[num];
 recupera_factura(nomb);
+//alert(cliente_factura.indexOf('Pedido'));
  if (cliente_factura.indexOf('Pedido')==-1) {suma_inventario2();}
 cliente=cliente_factura;
 var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
