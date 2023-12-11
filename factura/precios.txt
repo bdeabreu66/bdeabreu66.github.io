@@ -55,7 +55,7 @@
       ["F07001 Maltin polar ret 222 ml x 36 U",36,11.19,1,0,0,"t3","&Cerveceria&Malta&",1,'F07001',9.95,"malta retornable"],
       ["F07089 Maltin NR.250 ml x 12 U",12,6.327,1,0,0,"t3","&Cerveceria&Malta&",1,'F07089',5.89,"malta no retornable"],
       ["F07101 Maltin polar sleek 355 ml x 24 U",24,15.077,1,0,0,"t3","&Cerveceria&Malta&",1,'F07101',14.02,"malta lata"],
-      ["F07018 (PROMO) Maltin 1.5 L x 6U",6,9.34,1,0,0,"t3","&Cerveceria&Malta&",1,'F07018P',8.52,"malta litron promo"],
+      ["F07018 (PROMO) Maltin 1.5 L x 6U",6,8.48,1,0,0,"t3","&Cerveceria&Malta&",1,'F07018P',8.52,"malta litron promo"],
       ["F07018 Maltin 1.5 L x 6U",6,11.67,1,0,0,"t3","&Cerveceria&Malta&",1,'F07018',10.85,"malta litron"],
       ["F07020 Maltin NR/Light.250 ml x 24 U",24,0.00,0,0,0,"t3","&Cerveceria&Malta Light&",0,'F07020',0.00,"malta light no retornable por 24"],
       ["F07073 Maltin light 1.5 L x 6U",6,11.67,1,0,0,"t3","&Cerveceria&Malta Light&",1,'F07073',11.67,"malta litron light"],
