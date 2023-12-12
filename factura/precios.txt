@@ -131,7 +131,7 @@
       ["T080 Chef Margarina 5 K x 1.S/S",1,19.62,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Chef&",0,'T080',18.44,"chef sin sal"],
       ["T572 Mantequilla Mavesa 250g x 24",24,1.15,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",1,'T572',1.08,"mavesa 250"],
       ["T086 Mantequilla Mavesa 500g x 12",12,2.13,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",1,'T086',2.00,"mavesa 500"],
-      ["T084 Mantequilla Mavesa 1 K x 6",6,4.14,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",0,'T084',3.89,"mavesa 1 kilo"],
+      ["T084 Mantequilla Mavesa 1 K x 6",6,4.14,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Mavesa&",1,'T084',3.89,"mavesa 1 kilo"],
       ["T578 Mantequilla Nelly CR 227g x 12",12,1.01,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Nelly&",0,'T578',0.95,""],
       ["T587 Mantequilla Nelly CR 250g x 24",24,1.01,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Nelly&",1,'T587',0.95,"neli 250"],
       ["T588 Mantequilla Nelly CR 500g x 12",12,1.91,0,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Margarinas&Nelly&",1,'T588',1.80,"neli 500"],
