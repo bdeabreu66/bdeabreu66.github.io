@@ -704,7 +704,9 @@ texto+='<span style="color:blue;">C&oacute;digo:</span><br> <span id="codigo"></
 texto+='<span style="color:blue;">Correos para Cervecer&iacute;a: </span><br> <span id="lista_c"></span><br> ';
 texto+='<span style="color:blue;">Correos para Alimentos: </span><br> <span id="lista_a"></span><br> ';
 texto+='<span style="color:blue;">Correos para PepsiCola: </span><br> <span id="lista_p"></span><br> ';
-texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <button class="botonf" onclick="cancelaconfig();">Cancelar</button> ';
+texto+='<button class="botonf" onclick="guardaconfig();">Guardar</button> <button class="botonf" onclick="cancelaconfig();">Cancelar</button> <br>';
+texto+='<button class="botonf" onclick="importar();">Importar</button>';
+texto+='<button class="botonf" onclick="exportar();">Exportar</button> ';
 texto+='<div> <center><h5> Para informaci&oacute;n adicicional y configuraci&oacute;n, escribe al whatsapp <br>';
 var numero='584144728631';
 var tex='\'\'';
@@ -839,7 +841,7 @@ Seleccion();
 function guardaconfig(){
 var div_config=document.getElementById("configuracion");
 TASA_IVA=div_config.getElementsByTagName("input")[0].value;
-FACTOR_RET=div_config.getElementsByTagName("input")[1].value;
+FACTOR_RET=parseFloat(div_config.getElementsByTagName("input")[1].value);
 Max_F=parseInt(div_config.getElementsByTagName("input")[2].value);
 console.log(Max_F);
 if (Max_F>Max_L) {Max_F=Max_L;}

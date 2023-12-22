@@ -253,8 +253,8 @@ Ybase_tabla=esqy;
 
       // Columna 13
      
-      console.log(IMP_IVA);
-      RET=(IMP_IVA*FACTOR_RET);
+      
+      RET=(parseFloat(IMP_IVA)*FACTOR_RET);
       //RET=parseFloat(RET);
       console.log('RET ' +RET);
       sumaRET+=parseFloat(RET.toFixed(2));
@@ -300,6 +300,7 @@ xbase+=Anchos[11];
 // c13
 doc.rect(xbase,posy,Anchos[12],Alto_fila,'S');
 sumaRET=suma_IMPIVA*FACTOR_RET;
+
 doc.text(xbase+Anchos[12]-2,posy+lineHeight(),pd(sumaRET.toFixed(2)),{ align: "right" });
 
 // Firmas
