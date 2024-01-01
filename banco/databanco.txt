@@ -191,6 +191,7 @@
 ['584128999549','Mini Market PM03'],
 ['584244912883','Evento Malave'],
 ['584127820477','Negro Primero'],
+['584144558698','Negro Primero'],
 ['584143594661','Nam Cafe'],
 ['584127552024','Carlos Barbeito'],
 ['584140389048','Negro Primero'],

@@ -710,9 +710,11 @@ function readFileAsText(file){
 
 function exportar_datos(){
  var data;
+let hoy=new Date();
+let narch='BNC'+hoy.toLocaleString()+'.txt'
  data=JSON.stringify(pagos)+"^^"+JSON.stringify(pagos_ef)+"^^"+JSON.stringify(pagos_hechos)+"^^"+JSON.stringify(domicilios);
  var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
- saveAs(blob,"_datosBNC.txt");
+ saveAs(blob,narch);
 }
  
 function Leer_Archivo2(e){
@@ -1295,7 +1297,7 @@ var TC;
 function procesa_contenido(){
 
 function cumple1(value) {
-if (value.indexOf("Abono Pago Movil")>0||value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 && value.indexOf("DE LA CUENTA NRO. 01910148772100070936")<0) ) {return true;} else {return false;}
+if (value.indexOf("Abono Pago Movil")>0 || value.indexOf("Cobro Aut.ITF")>0 || value.indexOf("P2CBNC")>0 || value.indexOf("Credito Inmediato Recibido")>0 || (value.indexOf("TRANSFERENCIA RECIBIDA")>0 && value.indexOf("DE LA CUENTA NRO. 01910027801127274106")<0 && value.indexOf("DE LA CUENTA NRO. 01910148772100070936")<0) ) {return true;} else {return false;}
 }
 function cumple2(value) {
 if (value.indexOf("Cargo Domiciliacion")>0 || value.indexOf("Cargo por Domiciliacion")>0 || value.indexOf("DOMIC.")>0) {return true;} else {return false;}
@@ -1354,23 +1356,25 @@ for (var i=posi;i<(posi+result.length);i++){
      if (post>=0) {
        pagos[i].telf=telfn.substring(post+6,post+18)
      } else
+      
       {
        post=telfn.indexOf('CUENTA NRO'); 
        if (post>=0) {pagos[i].telf=telfn.substring(post+12,post+32);}
          else {
-
           post2=result[i-posi].indexOf('Abono por Creditos Directos');
-
-post=result[i-posi].indexOf('TRANSFERENCIA RECIBIDA');
-
+          post=result[i-posi].indexOf('TRANSFERENCIA RECIBIDA');
           if (post>=0 || post2>=0) { pagos[i].telf=caso_especial(telfn); }
-
+          else {
+        
+           if (campos[4]=="COBITF") {pagos[i].telf="COBITF"}
+          }
          } 
 
       }
   }
- 
-  pagos[i].montoBs=parseFloat(campos[8].replace(',', '.'));
+  if (campos[4]=="P2CBNC") {pagos[i].telf="P2CBNC"}
+  if (pagos[i].telf=="COBITF" || pagos[i].telf=="P2CBNC") {pagos[i].montoBs=parseFloat(campos[7].replace(',', '.'));}
+  else {pagos[i].montoBs=parseFloat(campos[8].replace(',', '.'));}
  var clave_fecha=pagos[i].fecha.toString();
   pagos[i].dolar=t_d.get(clave_fecha);
   if (pagos[i].dolar!=undefined) {
