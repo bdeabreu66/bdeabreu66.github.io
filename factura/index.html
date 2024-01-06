@@ -1131,7 +1131,8 @@ var nomb=listasel[num];
 recupera_factura(nomb);
 factura();
 factura3(num);
-quitarlista();
+document.getElementById("lista").style.visibility = "hidden";
+//quitarlista();
 
 }
 
@@ -2001,6 +2002,8 @@ function quitar(){
 var div5 = document.getElementById("factura");
 div5.hidden=true;
 factflag=true;
+document.getElementById("lista").style.visibility = "visible";
+
 }
 function precio_costo(ind){
 var factor=parseFloat(document.getElementById("t2").value);
