@@ -257,6 +257,17 @@ overflow-y: scroll;
   text-align: center;
   font-size:1em;
 }
+#div5 {
+  visibility: hidden;
+  position: fixed;
+  left: 0;
+  top: 30%;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-size:1em;
+}
 </style>
 </HEAD>
 
@@ -1379,7 +1390,7 @@ for (var i=posi;i<(posi+result.length);i++){
   pagos[i].dolar=t_d.get(clave_fecha);
   if (pagos[i].dolar!=undefined) {
    pagos[i].montodolar=(pagos[i].montoBs/pagos[i].dolar).toFixed(2);
-  } else {pagos[i].montodolar=0}
+  } else {pagos[i].montodolar=dolarbcv}
 }
 document.getElementById("suma").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
 
@@ -1566,6 +1577,7 @@ var Clientes=[];
 function inicio(){
 Activalector_archivos();
 descarga_historico();
+document.getElementById("bdol").innerText=dolarbcv.toFixed(4);
 //contenido=localStorage.getItem('Arch_datos_banco');
 var texto4=localStorage.getItem('Clientes_Pita');
 //alert(texto4.length);
@@ -1596,7 +1608,7 @@ Act_data_banco();
 
 function quitar(nombdiv){
 var div=document.getElementById(nombdiv);
-div.hidden=true;
+div.style.visibility="hidden";
 }
 
 function enviar_whatsapp(phone,text){
@@ -1605,16 +1617,22 @@ var url ='https://api.whatsapp.com/send?phone='+phone+'&text='+text;
 window.open(url);
 }
 
+function ajustaDolar(){
+document.getElementById("div5").style.visibility="visible";
 
+}
+var dolarbcv=parseFloat(localStorage.getItem("p2"));
+
+function procesaDolar(){
+dolarbcv=parseFloat(document.getElementById("dd").value);
+localStorage.setItem('p2',dolarbcv);
+document.getElementById("bdol").innerText=dolarbcv.toFixed(4);
+quitar("div5");
+}
 function enviar_mail(){
 var url ='mailto:brauliodeabreu@gmail.com?subject=Retenciones';
 window.open(url);
 }
-
- 
-
-
-
 
 function descarga_historico(){
 var nomb="https://bdeabreu66.github.io/historico/historico.txt";
@@ -1710,18 +1728,21 @@ if ('serviceWorker' in navigator) {
 </div>
 <div id="header"> 
 <table width="100%"><tr>
-<td style="font-size:0.5em;width:33%;">
+<td style="font-size:0.5em;width:25%;">
 <button class="btop" onclick="Activalector_archivos();">Cargar</button>  
 </td>
-<!-- <td style="font-size:0.5em;width:25;"> -->
-<!-- <button class="btop" onclick="borrar_datos();">Borrar</button> -->
-<!-- </td> -->
-<td style="font-size:0.5em;width:33%;">
+<td style="font-size:0.5em;width:25%;">
 <button class="btop" onclick="exportar_datos();">Exportar</button>
 </td>
-<td style="font-size:0.5em;width:33%;">
+<td style="font-size:0.5em;width:25%;">
 <button class="btop" onclick="Activalector_importar();">Importar</button>
-</td><tr>
+</td>
+<td style="font-size:0.5em;width:25%;">
+<button id="bdol" class="btop" onclick="ajustaDolar();">Dolar</button>
+</td>
+
+
+<tr>
 </table>
 <table width="100%" ><tr>
 <td  style="font-size:0.5em;width:20;"><button class="btop" onclick="genera_salida1();">Fecha</button></td>
@@ -1748,6 +1769,9 @@ if ('serviceWorker' in navigator) {
 <div id="div3">
 </div>
 <div id="div4">
+</div>
+<div id="div5">
+<input id="dd" type=number><button onclick="procesaDolar()">Ok</button>
 </div>
 </body>
 </html>
