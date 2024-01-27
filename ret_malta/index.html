@@ -548,7 +548,7 @@ if (tmp==null){facturasPolar=[]} else facturasPolar=JSON.parse(tmp);
 localStorage.setItem("FACTURAS_POLAR",JSON.stringify(facturasPolar));
 }
 
-
+var NMAXRETEN=100;
 function hacerRetencion(){
 hacerRetencion2();
 var indi=-1;
@@ -568,7 +568,8 @@ if (indi<0) {indi=retenciones.length;}
   } else {break};
  }
  retenciones[indi].total=sumaRET.toFixed(2);
-
+ let nro_reten=retenciones.length;
+ if (nro_reten>NMAXRETEN) {retenciones.shift;}
  localStorage.setItem("RETENCIONES",JSON.stringify(retenciones));
  console.log(retenciones)
 fbase[parseInt(TIPO_RET)].nfac=datos_ret[ult]["nro_factura"];
@@ -579,7 +580,7 @@ console.log(datos_ret[ult]["nro_factura"]);
 console.log(datos_ret[ult]["nro_control"]);
 console.log(fbase);
 //genera_fact_polar();
-armaFacturas(indi);
+//armaFacturas(indi);
 //exportar_datos();
 }
 function retencion(){
@@ -636,7 +637,7 @@ texto+='&nbsp; <button class="micro" onclick="obtenerTexto(2);">&nbsp;</button><
 texto+='<span class="titulo">Nota de debito:</span><br> <input type="number" value="'+datos_ret[m]["nro_debito"]+'"> ';
 texto+='&nbsp; <button class="micro" onclick="obtenerTexto(3);">&nbsp;</button><br> ';
 
-texto+='<span class="titulo">Monto Base imponible a IVA(Bs):</span><br> <input type="text" value="'+datos_ret[m]["C_IVA"]+'"> ';
+texto+='<span class="titulo">Monto Base imponible a IVA(Bs):</span><br> <input type="number" value="'+datos_ret[m]["C_IVA"]+'"> ';
 texto+='&nbsp; <button class="micro" onclick="obtenerTexto(4);">&nbsp;</button><br> ';
 
 texto+='--------------<br>';
