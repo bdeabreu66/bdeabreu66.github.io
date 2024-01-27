@@ -659,7 +659,7 @@ div3.innerHTML=textoT;
 }
 var Monto=0;
 var Ganancia=0;
-
+var ITF=1.02;
 function total_unidades_vendidas(){
 Monto=0;
 Costo=0;
@@ -1653,7 +1653,7 @@ for (var i=0;i<datfac.length;i++){
  pb=datfac[i].pb;
 [pcu,pcb]=precio_costo(i);
  var Tdolar=+((datfac[i].unidad*pu + datfac[i].cajas*pb));
- Gdolar+=fm*((datfac[i].unidad*(pu-pcu) + datfac[i].cajas*(pb-pcb)));
+ Gdolar+=fm*((datfac[i].unidad*(pu-ITF*pcu) + datfac[i].cajas*(pb-ITF*pcb)));
  Tbs=Tdolar*factor;
 
 if (Tdolar==Tdolar) { 
@@ -1822,7 +1822,7 @@ for (var i=0;i<data.length;i++){
     [pu,pb]=precio(i);
     [pcu,pcb]=precio_costo(i);
     Tdolar=+((data[i][4]*pu + data[i][5]*pb));
-    Gdolar+=fm*((data[i][4]*(pu-pcu) + data[i][5]*(pb-pcb)));
+    Gdolar+=fm*((data[i][4]*(pu-ITF*pcu) + data[i][5]*(pb-ITF*pcb)));
     if (data[i][6]=="t1") {
      Tbs= data[i][4]*(data[i][2]) + data[i][5]*data[i][2]*data[i][1];
     } else 
@@ -1936,7 +1936,7 @@ textoT+='<table width="100%"';
 textoT+='<tr>';
 textoT+='<td width="15%"><button class="btop" onclick="anula();">Borrar</button></td>';
 textoT+='<td width="15%"><button class="btop" onclick="guardar_factura();">Guardar</button></td>';
-textoT+='<td width="15%"><button class="btop" onclick="lee_facturas();selectlista(0);">Ver</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="lee_facturas();ordena_fecha();selectlista(0);">Ver</button></td>';
 textoT+='<td width="5%"></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Cambia moneda" id="tipo_factura" onclick="cambia_moneda();">' + TM +'</button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
