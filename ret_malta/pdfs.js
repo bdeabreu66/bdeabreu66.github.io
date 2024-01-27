@@ -373,12 +373,12 @@ doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
 var textf='_';
 for (var k=0;k<Max_F;k++) {
  textfp=datos_ret[k]["nro_factura"];
-if (textfp!='') textf+=textfp.substring(textfp.length-4)+'_'
+if (textfp!='') textf+=textfp.substring(textfp.length-2)+'_'
 }
-textf="F"+textf;
-if (TIPO_RET=="0") {nombrepdf="Ret_"+NRO_RET+"_"+FECHA_PAGO+textf+"Cerv.pdf";}
-if (TIPO_RET=="1") {nombrepdf="Ret_"+NRO_RET+"_"+FECHA_PAGO+textf+"Alim.pdf";}
-if (TIPO_RET=="2") {nombrepdf="Ret_"+NRO_RET+"_"+FECHA_PAGO+textf+"Pepsi.pdf";}
+textf="_F"+textf;
+if (TIPO_RET=="0") {nombrepdf="R_"+NRO_RET+"_"+FECHA_PAGO.substring(0,5)+textf+"Cerv.pdf";}
+if (TIPO_RET=="1") {nombrepdf="R_"+NRO_RET+"_"+FECHA_PAGO.substring(0,5)+textf+"Alim.pdf";}
+if (TIPO_RET=="2") {nombrepdf="R_"+NRO_RET+"_"+FECHA_PAGO.substring(0,5)+textf+"Pepsi.pdf";}
 
 
    console.log(nombrepdf); 
