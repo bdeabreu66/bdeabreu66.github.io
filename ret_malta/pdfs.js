@@ -306,11 +306,11 @@ doc.text(xbase+Anchos[12]-2,posy+lineHeight(),pd(sumaRET.toFixed(2)),{ align: "r
 // Firmas
 doc.setFontStyle('normal');
 doc.setFontSize(sFont3);
-doc.text(pageLeft+40,posy+8*lineHeight(),"Agente de Retenci\u00F3n",{ align: "center" });
-doc.text(pageLeft+150,posy+8*lineHeight(),"Sujeto Retenido",{ align: "center" });
+doc.text(pageLeft+40,posy+5*lineHeight(),"Agente de Retenci\u00F3n",{ align: "center" });
+doc.text(pageLeft+150,posy+5*lineHeight(),"Sujeto Retenido",{ align: "center" });
 
-doc.line(pageLeft+15,posy+7*lineHeight(),pageLeft+70,posy+7*lineHeight());
-doc.line(pageLeft+120,posy+7*lineHeight(),pageLeft+180,posy+7*lineHeight());
+doc.line(pageLeft+15,posy+4*lineHeight(),pageLeft+70,posy+4*lineHeight());
+doc.line(pageLeft+120,posy+4*lineHeight(),pageLeft+180,posy+4*lineHeight());
 
 
 }

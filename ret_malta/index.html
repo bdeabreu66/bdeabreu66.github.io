@@ -444,10 +444,16 @@ datos_ret[4]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":
 datos_ret[5]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
 datos_ret[6]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
 datos_ret[7]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[8]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[9]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[10]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+
+datos_ret[11]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+console.log(datos_ret);
 }
 function inicio(){
 Max_F=7;
-Max_L=7;
+Max_L=10;
 CODIGO="XXXXXXXXX";
 FECHA_PAGO=new Date();
 FECHA_PAGO=fecha_estandar(FECHA_PAGO);
@@ -481,7 +487,12 @@ sumr+=parseFloat(retenciones[i].total);
 console.log('deuda '+sumr.toFixed(2));
 var datos_T=localStorage.getItem('dat_ret');
 if (datos_T!=null) {datos_ret=JSON.parse(datos_T)};
-
+let vinic=datos_ret.length;
+console.log('vinic'+vinic+Max_L);
+for (i=vinic;i<Max_L;i++){
+datos_ret[i]={"fecha":fecha_hoy,"nro_factura":"","nro_control":"-","nro_debito":"","tt":"Compra","nfa":"","C_IVA":"0","C_SIVA":"0","LISAEA":"0","VACIOS":"0"};
+datos_ret[i]["fecha"]=datos_ret[0]["fecha"];
+}
 var NRO_RET_T=localStorage.getItem('nro_ret');
 if (NRO_RET_T!=null) {NRO_RET=NRO_RET_T};
 
@@ -501,7 +512,7 @@ CODIGO=DATOS_FR.codigo;
 }
 var Max_F_T=localStorage.getItem('max_f');
 if (Max_F_T!=null) {Max_F=parseInt(Max_F_T)};
-
+if (Max_F>Max_L) {Max_F=Max_L;};
 var FECHA_PAGO_T=localStorage.getItem('fechapago');
 if (FECHA_PAGO_T!=null) {FECHA_PAGO=FECHA_PAGO_T};
 
@@ -514,7 +525,7 @@ console.log(TASA_IVA);
 document.getElementById("seleccion").hidden=true;
 document.getElementById("configuracion").hidden=true;
 console.table(FECHA_PAGO);
-
+console.log(datos_ret);
 Seleccion();
 }
 
@@ -560,7 +571,7 @@ if (indi<0) {indi=retenciones.length;}
  retenciones[indi].tipo=TIPO_RET;
  retenciones[indi].datos=[];
  var ult=0;
- for (var i=0;i<7;i++){
+ for (var i=0;i<Max_L;i++){
   if (datos_ret[i].nro_factura!=''){
      retenciones[indi].datos[i]=new Object;
      Object.assign(retenciones[indi].datos[i],datos_ret[i]);
@@ -695,7 +706,7 @@ var texto='';
 texto+='<div class="divfondo">';
 texto+='<span class="titulo">Tasa del IVA(%):</span><br> <input type="number" value="'+TASA_IVA+'"><br>';
 texto+='<span class="titulo">Fracci&oacute;n de retenci&oacute;n:</span> <br><input type="number" value="'+FACTOR_RET+'"><br>';
-texto+='<span class="titulo">M&aacute;ximo de facturas (1-7):</span> <br><input type="number" value="'+Max_F+'"><br>';
+texto+='<span class="titulo">M&aacute;ximo de facturas (1-'+Max_L+'):</span> <br><input type="number" value="'+Max_F+'"><br>';
 texto+='</div>';
 texto+='<span class="titulo">Archivo de datos: </span><br> <input id="nombarch" type="text" > <button class="botonf" onclick="carga_data()"> Descargar </button><br>';
 texto+='<span class="titulo">Rif:</span><br> <span id="sal1"></span><br>';
@@ -771,6 +782,7 @@ console.log(retenciones[indf]);
 Seleccion();
 }
 function Seleccion(){
+console.log(datos_ret);
 var divsel=document.getElementById("seleccion");
 var texto='';
 texto+='<center>';
@@ -796,7 +808,9 @@ texto+='<span class="titulo">Fecha de la retenci&oacute;n </span><br><input id="
 texto+='<button class="botonf" onclick="cargar_retencion()"> Cargar </button>';
 texto+='</div>';
 texto+='<br><span class="titulo" > Datos de las facturas:</span><br>';
+console.log('MaxF'+Max_F);
 for (var i=0;i<Max_F;i++) {
+console.log('i'+i);
 texto+='<button class="botonfact" onclick="Agregar_datos('+i+');">';
 texto+='<table class="tablefact">';
 texto+='<tr><td> Fecha: '+ datos_ret[i]["fecha"]+'</td><td>N&deg; '+datos_ret[i]["nro_factura"]+'</td>';
