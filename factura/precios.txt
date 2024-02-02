@@ -178,7 +178,7 @@
       ["D387 Sardina Ahumada.170x 20U",20,1.03,0,0,0,"t2","&Alimentos&Enlatados&Sardinas&",1,'D387',0.95,"sardinas tomate"],
       ["D401 Sardina California Tomate 170x 20U",20,0.67,0,0,0,"t2","&Alimentos&Enlatados&Sardinas&",1,'D401',0.67,"sardinas california"],
       ["D402 Sardina California Aceite 170x 20U",20,0.67,0,0,0,"t2","&Alimentos&Enlatados&Sardinas&",1,'D402',0.67,"sardinas california"],
-`     ["T297 Mermelada Vienesa Fresa 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T297',1.99,"mermelada fresa"],
+      ["T297 Mermelada Vienesa Fresa 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T297',1.99,"mermelada fresa"],
       ["T298 Mermelada Vienesa Guayaba 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T298',1.99,"mermelada guayaba"],
       ["T583 Mermelada Vienesa Fresamora 240g x 18U",18,2.16,1,0,0,"t2","&Alimentos&Varios&Mermeladas&",0,'T583',1.99,"mermelada fresamora"],
       ["T048 Vinagre. 1 lt x 12",12,1.22,1,0,0,"t2","&Alimentos&Vinagres&",1,'T048',1.23,"vinagre un litro"],
