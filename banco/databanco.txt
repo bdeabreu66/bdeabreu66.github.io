@@ -267,6 +267,7 @@
 ['584144125422','Inversiones Vilmar'],
 ['01080927480100022435','Vikingo'],
 ['01340419444191031283','Vikingo'],
+['584128930351','Vikingo'],
 ['584129546298','Kiosko Hospital'],
 ['584244384225','Kiosko Hospital'],
 ['584144857159','Kiosko Hospital'],
