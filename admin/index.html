@@ -723,7 +723,7 @@ Clientes.forEach( x => {
  if (x.nombre.indexOf('Obsequio')==-1 && x.nombre.indexOf('Pedido')==-1 && x.nombre.indexOf('Pita')==-1)
   {sum += parseFloat(x.deuda )  ;
 //alert(x.deuda+' '+x.nombre+' '+sum);
-  texto+='<tr><td>'+x.nombre+'</td><td>'+x.deuda+'</td><td>'+parseFloat(x.ultfac)+'</td><td>'+x.vacio+'</td><td>'+x.vacio1+'</td></tr>';
+  texto+='<tr><td>'+x.nombre+'</td><td>'+x.deuda+'</td><td>'+parseFloat(x.ultfac)+'</td><td>'+x.vacio+'</td><td>'+x.vacio1+'</td><td>'+x.vacio2+'</td></tr>';
   ;
   if (Number(x.deuda)>=Number(x.ultfac)) {
    sum2+=parseFloat(x.ultfac);
