@@ -195,6 +195,7 @@ position:fixed;
 top:20px;
 height: 90%;
 width:95%;
+overflow-y: auto;
 }
 
 #seleccion {
@@ -203,7 +204,7 @@ top:50px;
 height: 90%;
 width:100%;
 hidden:true;
-overflow-y: scroll;
+overflow-y: auto;
 }
 
 #retenciones {
@@ -712,12 +713,18 @@ divsel.innerHTML=texto;
 divsel.hidden=false;
 }
 function balance(){
+let divp=document.getElementById("divdata");
+let texto='';
 Clientes=JSON.parse(localStorage.getItem('Clientes_Pita'));
 let sum=0;
 let sum2=0
+texto='<table>';
 Clientes.forEach( x => {
  if (x.nombre.indexOf('Obsequio')==-1 && x.nombre.indexOf('Pedido')==-1 && x.nombre.indexOf('Pita')==-1)
-  {sum += parseFloat(x.deuda);
+  {sum += parseFloat(x.deuda )  ;
+//alert(x.deuda+' '+x.nombre+' '+sum);
+  texto+='<tr><td>'+x.nombre+'</td><td>'+x.deuda+'</td><td>'+parseFloat(x.ultfac)+'</td><td>'+x.vacio+'</td><td>'+x.vacio1+'</td></tr>';
+  ;
   if (Number(x.deuda)>=Number(x.ultfac)) {
    sum2+=parseFloat(x.ultfac);
   } else {sum2+=parseFloat(x.deuda);}
@@ -725,7 +732,11 @@ Clientes.forEach( x => {
   }
  });
 let suma=sum.toFixed(2);
+
 let suma2=sum2.toFixed(2);
+texto+='</table>';
+divp.innerHTML=texto;
+divp.style.visibility="visible";
 alert(suma+' '+suma2+' '+(sum-sum2).toFixed(2));
 
 }
