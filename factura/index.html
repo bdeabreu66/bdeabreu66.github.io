@@ -1326,7 +1326,7 @@ texto=localStorage.getItem(archivo);
 
 if (texto!='' && texto!=null) {
 var ped=texto.split('&');
-
+console.log(ped);
 for (var i=0;i<ped.length;i++) {
   var items=ped[i].split('#');
   var ind=clave_ind.get(items[0]);
@@ -1550,7 +1550,7 @@ var va=document.getElementById("t3").checked;
 localStorage.setItem('p3',va);
 }
 function carga(){
-data=[];
+
 var ftemp=localStorage.getItem("FACTURAS")
 //alert(ftemp.length);
 if (ftemp===null) {facturas=[];} else {facturas=JSON.parse(ftemp);}
@@ -1768,7 +1768,7 @@ function pedido(){
 const resp = confirm("Esta seguro de hacer el pedido ");
 if (resp) {
 Ptexto='Pedido de alimentos de Distribuidora Pita Orozco\n';
-Ptexto+='Codigo: 2240066\n'
+Ptexto+='Codigo: 224000666\n'
 Ptexto+='-----------\n';
 for (var i=0;i<data.length;i++){
 if (data[i][4]!=0 ) {Ptexto+= data[i][4]+' U '+data[i][0]+'\n';}
