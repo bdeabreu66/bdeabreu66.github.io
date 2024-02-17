@@ -98,6 +98,7 @@
 ['584148737746','Denis Supervisor'],
 ['584146784460','Licoreria El Chivato'],
 ['584140430489','El sabor de Lili'],
+['584244634703','El sabor de Lili'],
 ['584124613036','El sazon de la abuela'],
 ['01020857280000164412','El sazon de la abuela'],
 ['584149487610','igual que en casa'],
