@@ -1653,7 +1653,7 @@ for (var i=0;i<datfac.length;i++){
  pb=datfac[i].pb;
 [pcu,pcb]=precio_costo(i);
  var Tdolar=+((datfac[i].unidad*pu + datfac[i].cajas*pb));
- Gdolar+=fm*((datfac[i].unidad*(pu-ITF*pcu) + datfac[i].cajas*(pb-ITF*pcb)));
+ Gdolar+=fm*((datfac[i].unidad*(pu-(ITF*1.04+0.12)*pcu/fm) + datfac[i].cajas*(pb-(ITF*1.04+0.12)*pcb/fm)));
  Tbs=Tdolar*factor;
 
 if (Tdolar==Tdolar) { 
