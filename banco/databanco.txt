@@ -65,6 +65,7 @@
 ['584244565984','Licoreria Canapiales'],
 ['584141863212','Licoreria Canapiales'],
 ['584125062019','Licoreria Canapiales'],
+['01340419414193023572','Licoreria Canapiales'],
 ['584128529762','Carlos Hernandez'],
 ['584124346526','Carlos Hernandez'],
 ['584144978575','Carlos Hernandez'],
