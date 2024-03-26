@@ -1790,6 +1790,7 @@ var Tbs;
 var totaldsiva=0;
 var totalbsiva=0;
 var BIMD=0;
+var BIMB=0;
 var bcv=parseFloat(document.getElementById("t2").value);
 var factor=parseFloat(bcv);
 var texto='<table width="100%" ><tr><td>Fecha: '+fecha_actual()+'</td><td>  $ BCV: '+ (bcv).toFixed(4) +'</td></tr></table>';
@@ -1860,8 +1861,9 @@ for (var i=0;i<data.length;i++){
          v2=(pu*factor).toFixed(2);
          v3=(parseFloat(v2)*data[i][4]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
-         totalb+=parseFloat(v4);
+         //totalb+=parseFloat(v4);
          totalbsiva+=parseFloat(v3);
+       
          texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
          Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
@@ -1873,11 +1875,13 @@ for (var i=0;i<data.length;i++){
          v4=(parseFloat(v3)*fm).toFixed(2);
          totalb+=parseFloat(v4);
          totalbsiva+=parseFloat(v3);
+
          texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
          texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
          Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
          Ftexto+=data[i][5]+' C     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
        }
+       if (fm!=1) {BIMB+=parseFloat(v3);}
     }
   }
   texto+='</table>';
@@ -1892,11 +1896,13 @@ if (tipo==0) {TM="$";} else {TM="Bs";}
 //var IVAD=(totald-totaldsiva).toFixed(2);
 BIMD=(BIMD).toFixed(2);
 var IVAD=(BIMD*0.16).toFixed(2);
-var BIMB=(parseFloat(BIMD)*factor).toFixed(2);
+//var BIMB=(parseFloat(BIMD)*factor).toFixed(2);
 var descd=(parseFloat(IVAD)*0.75).toFixed(2);
 var IVAB=(parseFloat(IVAD)*factor).toFixed(2);
 var descb=(parseFloat(IVAB)*0.75).toFixed(2);
 totald=parseFloat(totaldsiva)+parseFloat(IVAD);
+totalb=parseFloat(totalbsiva)+parseFloat(IVAB);
+
 
 if (tipo==0) {
   texto+='<table width="60%">';
