@@ -46,6 +46,7 @@
       ["F06060 Solera Reserva NR 222 ml x 12 UN",12,7.025,1,0,0,"t3","&Cerveceria&Solera&NR&",1,'F06060',7.025,"solera reserva no retornable"],
       ["FR0133 Carorena verano x 36",36,24.82,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0133',21.13,"carorena verano botella"],
       ["FR0134 Carorena verano LATA x 12",12,10.33,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0134',9.00,"carorena verano lata"],
+      ["FR0134X Carorena verano LATA Blancax 12",12,10.33,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0134X',9.00,"carorena verano lata"],
       ["FR0123 Carorena tinta 6 unid ",6,27.90,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0123',29.29,"carorena tinta"],
       ["FR0123 Carorena rosada 6 unid ",6,27.90,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0124',29.29,"carorena rosada"],
       ["FR0120 Carorena blanca 6 unid ",6,27.90,1,0,0,"t3","&Cerveceria&Sangria&",1,'FR0120',29.29,"carorena blanca"],
