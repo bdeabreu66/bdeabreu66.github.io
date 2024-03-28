@@ -87,6 +87,7 @@
 ['584128314388','Carniceria la emboscada'],
 ['01910243272100053204','Carniceria la emboscada'],
 ['01910148722100070365','Carniceria la emboscada'],
+['01910243212100048945','Carniceria la emboscada'],
 ['584244392499','Star market place CA'],
 ['584121396715','Casa Mayor'],
 ['01910148722100041321','Centeno Wilmer'],
