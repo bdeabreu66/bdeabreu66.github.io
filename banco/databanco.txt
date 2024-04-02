@@ -139,6 +139,7 @@
 ['01910027822127000477','Juridica Pita'],
 ['01050041981041334605','Keny Pita'],
 ['584122739761','Mini market Kapf'],
+['01340592135923005894','Mini market Kapf'],
 ['584122853554','Bodegon La cuna'],
 ['584128311132','Bodegon La cuna'],
 ['584144202063','Bodegon La cuna'],
