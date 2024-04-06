@@ -1202,7 +1202,7 @@ var indip=pagos_hechos.findIndex(x=>x.fecha==pagos[i].fecha && x.hora==pagos[i].
 if (indip>=0) {texto+='<tr style="color:white; background-color:'+colb+';" ><td width="5%"> <input type="checkbox" checked onclick=chequeado(this,'+i+');>'+'</td>';}
   else {texto+='<tr style="color:black;background-color:'+colb+';" ><td width="5%"> <input type="checkbox" onclick=chequeado(this,'+i+');>'+'</td>';}
 texto+='<td width="31%">'+'&nbsp&nbsp'+pagos[i].fecha+'</td>';
-texto+='<td width="27%">'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td>';
+texto+='<td width="27%" class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td>';
 texto+='<td width="27%" class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr></table>';
 
 } // for i
@@ -1390,7 +1390,7 @@ for (var i=posi;i<(posi+result.length);i++){
   pagos[i].dolar=t_d.get(clave_fecha);
   if (pagos[i].dolar!=undefined) {
    pagos[i].montodolar=(pagos[i].montoBs/pagos[i].dolar).toFixed(2);
-  } else {pagos[i].montodolar=dolarbcv}
+  } else {pagos[i].montodolar=(pagos[i].montoBs/dolarbcv).toFixed(2)}
 }
 document.getElementById("suma").innerHTML=Tipocuenta+'<br>'+Fecha_hora;;
 
@@ -1691,10 +1691,12 @@ function ajaxPositive(response) {
         localStorage.setItem('databanco',txt);
         databanco=eval(txt);
         asigna_databanco();
+ 
 
          }
 
 function showError(err) { 
+
       console.log('muestor error', err);
       databanco=eval(localStorage.getItem('databanco'));
       asigna_databanco();
