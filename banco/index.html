@@ -876,7 +876,7 @@ colb=colorcuenta(pagos[i].tc);
     texto+='<table style="width:100%;font-size:1.0rem;">';
   }
 ncli=Obten_nombre(pagos[i].telf);
-texto+='<tr  style="background-color:'+colb+';"><td onclick="clickp_cliente(\''+ncli+'\')";>'+ncli+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
+texto+='<tr  style="background-color:'+colb+';"><td onclick="clickp_cliente(\''+ncli+'\')";>'+ncli+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this);">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
 suma_parcial+=parseFloat(pagos[i].montodolar);
 }
  texto+='</table>';
@@ -1269,7 +1269,7 @@ if (pagos[i].fecha!=fecha_previa) {
     texto+='<table width="100%">';
   }
  ncli=Obten_nombre(pagos[i].telf);
- texto+='<tr style="background-color:'+colb+';"><td onclick="clickp_cliente(\''+ncli+'\');">'+ncli+'</td><td>'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
+ texto+='<tr style="background-color:'+colb+';"><td onclick="clickp_cliente(\''+ncli+'\');">'+ncli+'</td><td class="pagocli" pos="0"  onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].montoBs+' Bs '+'</td><td class="pagocli" pos="0" onclick="permuta(this,'+i+');">'+'&nbsp&nbsp'+pagos[i].montodolar+' $ '+'</td></tr>';
 
 }
  texto+='</table>';
