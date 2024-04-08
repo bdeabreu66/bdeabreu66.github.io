@@ -2207,8 +2207,8 @@ var texto='<table width="100%" style="background-color:'+colb+';color:white;"><t
 var pc=parseFloat(data[i][10]);
 
 var ga;
-if (data[i][6]=='t3')   {ga=(((pb-pc)/pb)*100).toFixed(2);}
-if (data[i][6]=='t2')   {ga=(((pu-pc)/pu)*100).toFixed(2);}
+if (data[i][6]=='t3')   {ga=(((pb-1.02*pc)/pb)*100).toFixed(2);}
+if (data[i][6]=='t2')   {ga=(((pu-1.02*pc)/pu)*100).toFixed(2);}
 var puiva=(pu*fm).toFixed(2)
 var pbiva=(pb*fm).toFixed(2)
 tex1='U '+puiva+' $';
