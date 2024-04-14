@@ -528,6 +528,14 @@ divs_datos.getElementsByTagName("input")[3].value=parseInt(datos_ret[j-1]["nro_c
 divs_datos.getElementsByTagName("input")[4].value=datos_ret[j-1]["nro_debito"];
 }
 
+function permuta(o){
+var propi=o.getAttribute('pos')
+if (propi=="0") {o.setAttribute("pos", "1");o.style.color='white';suma+=parseFloat(o.innerText)} 
+ else 
+{o.setAttribute("pos", "0");o.style.color='black';suma-=parseFloat(o.innerText)}
+
+document.getElementById('suma').innerText=suma.toFixed(2);
+}
 
 function Agregar_datos(m){
 fecha_max=fecha_date(FECHA_PAGO);
@@ -577,14 +585,6 @@ if (narch.length>0) {
 }
 }
 
-function permuta(o){
-//console.log('permuta');
-var propi=o.getAttribute('pos')
-if (propi=="0") {o.setAttribute("pos", "1");o.style.color='red';suma+=parseFloat(o.innerText)} 
- else 
-{o.setAttribute("pos", "0");o.style.color='blue';suma-=parseFloat(o.innerText)}
-document.getElementById('suma').innerText='Suma: '+suma.toFixed(2);
-}
 
 function sortbynro(a,b){
 if (parseInt(a.nro)<parseInt(b.nro)) {return -1}
@@ -723,7 +723,7 @@ Clientes.forEach( x => {
  if (x.nombre.indexOf('Obsequio')==-1 && x.nombre.indexOf('Pedido')==-1 && x.nombre.indexOf('Pita')==-1)
   {sum += parseFloat(x.deuda )  ;
 //alert(x.deuda+' '+x.nombre+' '+sum);
-  texto+='<tr><td>'+x.nombre+'</td><td>'+x.deuda+'</td><td>'+parseFloat(x.ultfac)+'</td><td>'+x.vacio+'</td><td>'+x.vacio1+'</td><td>'+x.vacio2+'</td></tr>';
+  texto+='<tr><td>'+x.nombre+'</td><td class="pagocli" pos="0" onclick="permuta(this)">'+x.deuda+'</td><td>'+parseFloat(x.ultfac)+'</td><td>'+x.vacio+'</td><td>'+x.vacio1+'</td><td>'+x.vacio2+'</td></tr>';
   ;
   if (Number(x.deuda)>=Number(x.ultfac)) {
    sum2+=parseFloat(x.ultfac);
