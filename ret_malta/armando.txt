@@ -1,5 +1,5 @@
 {"rif":"J-07590071-5","dir":"Calle ppal. Manzana #9 casa #3, Urb Valle Verde. San Diego. Edo Carabobo. Tlf 0414-4405044","nombre_C":"Distribuidora Pita Orozco, C.A.",
-"lista_a":"pagos.centrofq@empresaspolar.com;greivys.gutierrez@empresas-polar.com;joseheulacioc@gmail.com;distribuidorapitaorozcoca@gmail.com;leongerardomartinezbolivar671@gmail.com;brauliodeabreu@gmail.com",
-"lista_c":"pagos.centrofq@empresaspolar.com;jose.sosa@empresas-polar.com;marelis.salazar@empresas-polar.com;emili.castro@empresas-polar.com;joseheulacioc@gmail.com;distribuidorapitaorozcoca@gmail.com;leongerardomartinezbolivar671@gmail.com;brauliodeabreu@gmail.com",
-"lista_p":"pagos.centrofq@empresaspolar.com;genesis.reforgiato@empresas-polar.com;emili.castro@empresas-polar.com;jhon.villegas@empresas-polar.com;francys.tabares@empresas-polar.com;dayanna.franco@empresas-polar.com;joseheulacioc@gmail.com;distribuidorapitaorozcoca@gmail.com;leongerardomartinezbolivar671@gmail.com;brauliodeabreu@gmail.com",
+"lista_a":"pagos.centrofq@empresaspolar.com;joseheulacioc@gmail.com;distribuidorapitaorozcoca@gmail.com;brauliodeabreu@gmail.com",
+"lista_c":"pagos.centrofq@empresaspolar.com;joseheulacioc@gmail.com;distribuidorapitaorozcoca@gmail.com;brauliodeabreu@gmail.com",
+"lista_p":"pagos.centrofq@empresaspolar.com;joseheulacioc@gmail.com;distribuidorapitaorozcoca@gmail.com;brauliodeabreu@gmail.com",
 "codigo":"22400666"}
