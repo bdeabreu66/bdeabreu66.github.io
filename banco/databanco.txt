@@ -122,6 +122,8 @@
 ['584124593210','fotocopiadora los pinos'],
 ['01910148792100048675','Garcia T. Antonio J.'],
 ['584142487797','Guaicamari'],
+['584121864695','Guaicamari 2'],
+['01340419414191042125','Wilson'],
 ['584244078576','Guaicamari'],
 ['01340791657911005013','Guaicamari'],
 ['584144390582','Haydee Martinez'],
