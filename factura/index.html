@@ -527,10 +527,16 @@ texto+='<table width="100%"><tr><td style="width:55%;text-align:center;color:blu
 texto+='<div style="overflow:auto;height:90%;">';
 texto+='<table style="width:100%;">';
 //texto+='<br>';
+var totvol=0;
 for(var i=0;i<nd;i++){
  if (totalcajas[i]!=0 ||totalunid[i]!=0 ) {
 //console.log(data[i][0]+" "+totalcajas[i]+ " cajas");
 var tot=totalcajas[i]*data[i][1]+totalunid[i];
+if (data[i][6]=="t3") 
+   {totvol+=parseFloat(((totalcajas[i]+totalunid[i]/data[i][1])*data[i][12]).toFixed(2));}
+if (data[i][6]=="t2") 
+   {totvol+=parseFloat(((totalcajas[i]*data[i][1]+totalunid[i])*data[i][12]).toFixed(2));}
+
 var ncaj=Math.floor(tot/data[i][1]);
 var nunid=tot % data[i][1];
 texto+='<tr><td style="width:80%;font-size:1em;"  >'+data[i][0]+'</td><td style="width:10%;font-size:1em;" class="pagocli" pos="0" onclick="permuta(this)">'+ncaj+' C</td><td style="width:10%;font-size:1em;">'+nunid+' U</td>'+'</tr>';
@@ -539,6 +545,7 @@ texto+='<tr><td style="width:80%;font-size:1em;"  >'+data[i][0]+'</td><td style=
 }
 texto+='</table></div>';
 texto+='<p>Monto: '+Monto.toFixed(2)+ ' $ Ganancia:'+(Ganancia).toFixed(2)+'</p>';
+texto+='<p>Volumen: '+totvol.toFixed(2)+'</p>';
 div3.innerHTML=texto;
 }
 
