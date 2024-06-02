@@ -399,6 +399,8 @@
       ["80690782 Downy Suav. suave gentil 800 cc x 9 u",9,22.14,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80690782',20.33,""],
       ["80701451 Downy Suav. brisa fresca 800 cc x 9 u",9,22.05,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80701451',20.33,""],
       ["80701455 Downy Suav. floral 800 cc x 9 u",9,22.05,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80701455',20.33,""],
+      ["80737864 Downy Suav. Amanecer 700 cc x 12 u",12,27.72,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80737864',24.95,""],
+      ["80737865 Downy Suav. Floral 700 cc x 12 u",12,27.72,1,0,0,"t3","&P-G&Cuidado de Ropa&Downy&",1,'80737865',24.95,""],
       ["80679257 Allways toallas ultra seca dia 37g x 24 u",24,38.16,1,0,0,"t3","&P-G&Cuidado personal&Always&",1,'80679257',34.32,""],
       ["80679273 Allways toallas ultra seca noche 45g x 24 u",24,39.60,1,0,0,"t3","&P-G&Cuidado personal&Always&",1,'80679273',40.08,""],
       ["80311972 Gillette Antit roll on  rush 60g x 12 u",12,20.76,1,0,0,"t3","&P-G&Cuidado personal&Anti-transpirantes&",1,'80311972',18.68,""],
