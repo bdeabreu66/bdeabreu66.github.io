@@ -1867,7 +1867,7 @@ for (var i=0;i<data.length;i++){
          v2=(pb).toFixed(2);
          v3=(parseFloat(v2)*data[i][5]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
-         v5=(parseFloat(v2)*fm).toFixed(2);
+         v5=(parseFloat(v2/data[i][1])*fm).toFixed(2);
          texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
          texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+v4 +' $&nbsp'+'</tr>';
          Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
@@ -1897,7 +1897,7 @@ for (var i=0;i<data.length;i++){
          v2=(pb*factor).toFixed(2);
          v3=(parseFloat(v2)*data[i][5]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
-         v5=(parseFloat(v2)*fm).toFixed(2);
+         v5=(parseFloat(v2/data[i][1])*fm).toFixed(2);
 
          totalb+=parseFloat(v4);
          totalbsiva+=parseFloat(v3);
