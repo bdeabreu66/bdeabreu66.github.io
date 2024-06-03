@@ -1855,19 +1855,25 @@ for (var i=0;i<data.length;i++){
          v2=(pu).toFixed(2);
          v3=(parseFloat(v2)*data[i][4]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
+         v5=(parseFloat(v2)*fm).toFixed(2);
          texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+ v4 +' $&nbsp'+'</tr>';
          Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
-         Ftexto+=data[i][4]+' U     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
+ //        Ftexto+=data[i][4]+' U     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
+        Ftexto+=data[i][4]+' U     '+v5+' $'+"   C/IVA: "+v4 + ' $    \n'
+   
        }
        if (data[i][5]!=0) {
          v2=(pb).toFixed(2);
          v3=(parseFloat(v2)*data[i][5]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
+         v5=(parseFloat(v2)*fm).toFixed(2);
          texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
          texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+v4 +' $&nbsp'+'</tr>';
          Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
-         Ftexto+=data[i][5]+' C     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
+ //      Ftexto+=data[i][5]+' C     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
+         Ftexto+=data[i][5]+' C     '+v5+' $'+'   C/IVA: '+v4 + ' $    \n'
+
        }
      }
      if (tipo==1) {
@@ -1875,25 +1881,33 @@ for (var i=0;i<data.length;i++){
          v2=(pu*factor).toFixed(2);
          v3=(parseFloat(v2)*data[i][4]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
+         v5=(parseFloat(v2)*fm).toFixed(2);
          //totalb+=parseFloat(v4);
          totalbsiva+=parseFloat(v3);
        
          texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
          Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
-         Ftexto+=data[i][4]+' U     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
+//       Ftexto+=data[i][4]+' U     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
+         Ftexto+=data[i][4]+' U     '+v5+' Bs'+"   C/IVA: "+v4 + ' Bs    \n'
+
+
        }
        if (data[i][5]!=0) {
          v2=(pb*factor).toFixed(2);
          v3=(parseFloat(v2)*data[i][5]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
+         v5=(parseFloat(v2)*fm).toFixed(2);
+
          totalb+=parseFloat(v4);
          totalbsiva+=parseFloat(v3);
 
          texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
          texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
          Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
-         Ftexto+=data[i][5]+' C     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
+ //        Ftexto+=data[i][5]+' C     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
+        Ftexto+=data[i][5]+' C     '+v5+' Bs'+"   C/IVA: "+v4 + ' Bs    \n'
+   
        }
        if (fm!=1) {BIMB+=parseFloat(v3);}
     }
