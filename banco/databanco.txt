@@ -4,6 +4,7 @@
 ['584128554744','Vigilante 1'],
 ['584140414927','Compra de dolares'],
 ['584244190326','Bodega Freddy Medina'],
+['01340419484191045777','Bodega Freddy Medina'],
 ['584244347998','Compra de dolares'],
 ['01340890478903017322','Compra de dolares'],
 ['01910364181100027771','Compra de dolares'],
