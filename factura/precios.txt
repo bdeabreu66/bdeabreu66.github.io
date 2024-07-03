@@ -85,7 +85,7 @@
       ["M351 Dogourmet Asado negro 18 Kg x 1U",1,39.89,1,0,0,"t2","&Alimentos&A. Perros&Dogourmet&",1,'M351',36.70,"dogourmet asado 18 kilos",18.0],
       ["H300 Arroz Clasico. 1 Kg x 24U",24,1.25,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Arroz&",1,'H300',1.16,"arroz primor",1.0],
       ["H374 Arroz Blanco trad. 1 Kg x 24U",24,1.17,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Arroz&",1,'H374',1.09,"arroz corina",1.0],
-      ["D361 Margarita Atun natural 140g x 35U",35,1.77,0,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D361',1.63,"atun natural",0.140],
+      ["D361 Margarita Atun natural 140g x 35U",35,1.42,0,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D361',1.63,"atun natural",0.140],
       ["D362 Margarita Atun en aceite 140g x 35U",35,1.36,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D362',1.25,"atun",0.140],
       ["D398 California Atun desmenuzado aceite 140g x 35U",35,0.68,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D398',0.77,"atun california",0.140],
       ["Q001 Avena Quaker Original (Bolsa) 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q001',1.46,"avena bolsa 400",0.4],
