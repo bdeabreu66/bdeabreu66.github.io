@@ -258,9 +258,13 @@ alert('paso1');
 var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
 alert(tmp+" "+listaQR);
+var idx=listaQR.findIndex((e)=>{
+if (e[0]==datos2[0]) && (e[1]==datos2[1]) && (e[2]==datos2[2]) && (e[3]==datos2[3]) && (e[4]==datos2[4]))
+  {return true} else {return(false)}
 
-alert(listaQR.indexOf(datos2));
-if (listaQR.indexOf(datos2)==-1) {listaQR.push(datos2);}
+})
+alert(idx);
+if (idx==-1) {listaQR.push(datos2);}
 alert(listaQR+'  '+datos2);
 localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 }
