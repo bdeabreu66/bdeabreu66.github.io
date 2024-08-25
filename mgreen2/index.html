@@ -237,7 +237,7 @@ localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 quitaQR();
 function quitaQR(){
 const Hoy=new Date();
-
+alert('quitaQR');
 var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
 listaQR = listaQR.filter(item => { 
@@ -259,7 +259,7 @@ var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
 alert(tmp);
 alert(listaQR.indexOf(datos2));
-if (listaQR.indexOf(datos2)==-1) {listaQR=listaQR.push(datos2));}
+if (listaQR.indexOf(datos2)==-1) {listaQR.push(datos2));}
 alert(listaQR);
 localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 }
