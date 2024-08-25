@@ -233,11 +233,11 @@ var listaQR=[
 [2024,08,23,09,15,"Jonny Seeds",7,"Cilantro",10,"W-W-W-BO",15,16,230,15],
 [2024,08,24,09,45,"Jonny Seeds",7,"Zanahoria",10,"W-W-W-BO",15,16,230,15]
 ]
-localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
+//localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 quitaQR();
 function quitaQR(){
 const Hoy=new Date();
-alert('quitaQR');
+//alert('quitaQR');
 var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
 listaQR = listaQR.filter(item => { 
@@ -245,7 +245,7 @@ listaQR = listaQR.filter(item => {
  var diasdif=Hoy.getTime()-fechainicio.getTime();
  var diastotales=diasdif/(1000*60*60*24);
  var contdias=Math.trunc(diastotales);
- alert(contdias+" "+item[10]);
+ //alert(contdias+" "+item[10]);
  if (contdias>item[10]) {return false} else {return true} 
  }
 )
@@ -254,24 +254,24 @@ localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 }
 
 function agregaQR(datos2){
-alert('paso1');
+//alert('paso1');
 var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
 alert(tmp+" "+listaQR);
 var idx=listaQR.findIndex((e)=>{
-alert(e[0]+" "+datos2[0]);
+/*alert(e[0]+" "+datos2[0]);
 alert(e[1]+" "+datos2[1]);
 alert(e[2]+" "+datos2[2]);
 alert(e[3]+" "+datos2[3]);
 alert(e[4]+" "+datos2[4]);
-
+*/
 if ((e[0]==datos2[0]) && (e[1]==datos2[1]) && (e[2]==datos2[2]) && (e[3]==datos2[3]) && (e[4]==datos2[4]))
   {return true} else {return(false)}
 
 })
 alert(idx);
 if (idx==-1) {listaQR.push(datos2);}
-alert(listaQR+'  '+datos2);
+//alert(listaQR+'  '+datos2);
 localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 }
 
