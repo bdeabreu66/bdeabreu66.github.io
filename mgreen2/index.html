@@ -258,8 +258,8 @@ alert('paso1');
 var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
 alert(tmp);
-alert(listaQR.IndexOf(datos2));
-if (listaQR.IndexOf(datos2)==-1) {listaQR=datos2.push;}
+alert(listaQR.indexOf(datos2));
+if (listaQR.indexOf(datos2)==-1) {listaQR=datos2.push;}
 alert(listaQR);
 localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 }
