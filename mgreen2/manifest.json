@@ -1,0 +1,16 @@
+{
+  "name": "Micro Green Follower",
+  "description": "Seguimiento de siembra",
+  "short_name": "QR Micro Green",
+  "icons": [{
+    "src": "icondef.png",
+    "sizes": "512x512"
+  }],
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "aliceblue",
+  "background_color": "green",
+  "categories": ["books", "education", "medical"],
+  "prefer_related_applications": false 
+  }

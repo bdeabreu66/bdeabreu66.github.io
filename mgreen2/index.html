@@ -1,0 +1,447 @@
+<HTML>
+<HEAD>
+<TITLE>  Lector QR </TITLE>
+<link rel="stylesheet" href="styles.css" >
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+</HEAD>
+<style>
+
+#divt {
+position:fixed;
+top:40%;
+left:0%;
+height: 100%;
+width:95%;
+visibility:hidden;
+overflow-y:scroll;
+color:green;
+background-color:yellow;
+}
+
+
+
+
+</style>
+<BODY>
+
+
+<div id="container">
+    <h1> <button id="sel-camara"> C </button> Seguimiento de cultivos microgreen</h1>
+<div id="sourceSelectPanel" 
+style="position: fixed;top :200px; left: 50px; width:80% ; text-align: left;display:none;background-color:gray">
+<label style="font-size: 2em;" >Cambiar camara: <br></label>
+<select id="sourceSelect" >
+</select> <button id="confirm" onclick="sourceSelectPanel.style.display='none';">Ok</button>
+</div>
+
+<div>
+    <table><tr>
+     <td style="width:25%;text-align:center;"> <button  onclick="Despliega_Mod()"> M</button></td>
+     <td style="width:50%;text-align:center;">> <button id="btn-scan-qr"> Scanear QR</button></td>
+     <td style="width:25%;text-align:center;">> <button onclick="Despliega_acc()"> S</button></td>
+    </table></tr>
+    
+</div>
+     <div>
+        <center><video id="video" width="300" height="300" style="border: 1px solid gray;display:none"></video></center>
+      </div>
+    <div id="qr-result" hidden="true">
+        <b>Data:</b> <span id="outputResult"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Bandeja numero:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Variedad:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Proveedor:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Fecha de siembra:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Periodo transcurrido:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Accion:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Prox. Accion:</b> <span name="outputData"></span>
+    </div>
+
+    <div name="divdata" hidden="true">
+        <b>Tiempo de crecimiento:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Peso de las semillas:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Peso de la cosecha:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Posible dia de corte:</b> <span name="outputData"></span>
+    </div>
+    <div name="divdata" hidden="true">
+        <b>Hoja verdadera en dia:</b> <span name="outputData"></span>
+    </div>
+</div>
+<div id="divt">
+</div>
+
+ <script type="text/javascript" src="libreria.js"></script>
+<!--  <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script> -->
+
+ <script type="text/javascript">
+const qrResult = document.getElementById("qr-result");
+const ouputResult = document.getElementById("outputResult");
+divData = document.getElementsByName("divdata");
+const outputData = document.getElementsByName("outputData");
+const btnScanQR = document.getElementById("btn-scan-qr");
+    function decodeOnce(codeReader, selectedDeviceId) {
+      codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
+        console.log(result)
+        display_data(result)
+      }).catch((err) => {
+        console.log(err)
+        })
+    }
+
+
+
+    function decodeContinuously(codeReader, selectedDeviceId) {
+      codeReader.decodeFromInputVideoDeviceContinuously(selectedDeviceId, 'video', (result, err) => {
+        if (result) {
+          // properly decoded qr code
+          //console.log('Found QR code!', result)
+          //document.getElementById('result').textContent = result.text
+        }
+
+        if (err) {
+          // As long as this error belongs into one of the following categories
+          // the code reader is going to continue as excepted. Any other error
+          // will stop the decoding loop.
+          //
+          // Excepted Exceptions:
+          //
+          //  - NotFoundException
+          //  - ChecksumException
+          //  - FormatException
+
+          if (err instanceof ZXing.NotFoundException) {
+            console.log('No QR code found.')
+          }
+
+          if (err instanceof ZXing.ChecksumException) {
+            console.log('A code was found, but it\'s read value was not valid.')
+          }
+
+          if (err instanceof ZXing.FormatException) {
+            console.log('A code was found, but it was in a invalid format.')
+          }
+        }
+      })
+    }
+
+    window.addEventListener('load', function () {
+      let selectedDeviceId=0;
+      codeReader = new ZXing.BrowserQRCodeReader()
+      console.log('ZXing code reader initialized')
+
+         codeReader.getVideoInputDevices().then((videoInputDevices) => {
+          const sourceSelect = document.getElementById('sourceSelect')
+        try {selectedDevice=window.localStorage.getItem('idcam')}
+         catch(e){ console.log("paso");  selectedDeviceId = videoInputDevices[0].deviceId
+          }
+          if (videoInputDevices.length >= 1) {
+            videoInputDevices.forEach((element) => {
+              const sourceOption = document.createElement('option')
+              sourceOption.text = element.label
+              sourceOption.value = element.deviceId
+              sourceSelect.appendChild(sourceOption)
+            })
+
+
+            sourceSelect.onchange = () => {
+              selectedDeviceId = sourceSelect.value;
+              window.localStorage.setItem('idcam',selectedDeviceId);
+            };
+
+            const sourceSelectPanel = document.getElementById('sourceSelectPanel')
+            //sourceSelectPanel.style.display = 'block'
+          }
+
+          document.getElementById('btn-scan-qr').addEventListener('click', () => {
+              quitar();
+              qrResult.hidden = true;
+              for (var i=0;i<divData.length;i++){
+                divData[i].hidden=true;
+               }
+          // btnScanQR.hidden = true;
+           document.getElementById('sel-camara').hidden=true;
+            // const decodingStyle = document.getElementById('decoding-style').value;
+          //  if (decodingStyle == "once") {
+              document.getElementById("video").style.display="block";
+              //selectedDeviceId=0;
+              decodeOnce(codeReader, selectedDeviceId);
+
+          //  } else {
+          //   decodeContinuously(codeReader, selectedDeviceId);}
+            console.log(`Started decode from camera with id ${selectedDeviceId}`)
+          })
+
+       //   document.getElementById('btn-cancel-qr').addEventListener('click', () => {
+       //     codeReader.reset()
+       //     document.getElementById('result').textContent = '';
+       //     console.log('Reset.')
+       //   })
+           document.getElementById('sel-camara').addEventListener('click', () => {
+              sourceSelectPanel.style.display = 'block';
+            window.localStorage.setItem('idcam',0);
+                          
+           })
+
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    })
+
+function accion(comando,ind,ind2){
+ function Nombre(nom){
+   if (nom=="ET") return "Empty Try"
+   if (nom=="BO") return "Black Out"
+   if (nom=="W") return "Weight"
+   return nom
+}
+var corte=parseInt(ind2);
+console.log(corte);
+var resp_parcial;
+var acciones=comando.split("-");
+console.log(acciones.length)
+console.log(ind);
+if ((ind>=0) && (ind<acciones.length)) {resp_parcial=Nombre(acciones[ind]);} else {resp_parcial="Luz";}
+
+if (ind>=corte) {var resp=resp_parcial+" + "+"<strong>Posible Corte</strong>"; return resp;} else {return resp_parcial;}
+}
+
+var listaQR=[
+[2024,08,24,09,44,"Jonny Seeds",4,"Kohirabi_purpura",10,"W-W-W-BO",15,16,230,15],
+[2024,08,20,09,10,"Jonny Seeds",5,"Cilantro",10,"W-W-W-BO",15,16,230,15],
+[2024,08,07,09,10,"Jonny Seeds",6,"Cilantro",10,"W-W-W-BO",15,16,230,15],
+[2024,08,23,09,10,"Jonny Seeds",7,"Cilantro",10,"W-W-W-BO",15,16,230,15]
+
+]
+localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
+quitaQR();
+function quitaQR(){
+const Hoy=new Date();
+
+var tmp=localStorage.getItem("LISTAQRS");
+if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
+listaQR = listaQR.filter(item => { 
+ var fechainicio=new Date(item[0],parseInt(item[1])-1,item[2],item[3],item[4]) 
+ var diasdif=Hoy.getTime()-fechainicio.getTime();
+ var diastotales=diasdif/(1000*60*60*24);
+ var contdias=Math.trunc(diastotales);
+ alert(contdias+" "+item[10]);
+ if (contdias>item[10]) {return false} else {return true} 
+ }
+)
+console.log('set item');
+localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
+}
+
+function agregaQR(datos2){
+var tmp=localStorage.getItem("LISTAQRS");
+if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
+if (listaQR.IndexOf(datos2)==-1) {listaQR=datos2.push;}
+
+localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
+}
+
+function Despliega_acc(){
+//alert(listaQR);
+
+ const Hoy=new Date();
+      var res=[];
+ var lng=listaQR.length;
+ var kk=0;
+      for (k=0;k<lng;k++) {
+        var dx=listaQR[k];
+        //alert(dx);
+      var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],dx[3],dx[4]) 
+      var diasdif=Hoy.getTime()-fechainicio.getTime();
+      var diastotales=diasdif/(1000*60*60*24);
+      var contdias=Math.trunc(diastotales);
+      console.log('cd:'+contdias);
+      console.log('dd:'+diastotales);
+      var accdef1=accion(dx[9],contdias,dx[13]);
+      var accdef2=accion(dx[9],contdias-1,dx[13]);
+      if (accdef1!=accdef2) {
+        console.log('dif:'+accdef1);
+        kk++
+        res[kk]=new Array(6);
+        res[kk][0]=dx[0];res[kk][1]=dx[1];res[kk][2]=dx[2];res[kk][3]=dx[6];res[kk][4]=dx[7];res[kk][5]=accdef1;
+      }    
+}
+
+    res=res.sort(function(a, b) {
+      if (a[5]<b[5]) {return -1} else {return 0};
+    });
+var divt=document.getElementById("divt");
+var texto='<table>';
+texto+='<tr style="color:blue;"><td span=3 style="width:30%;">Fecha</td><td style="width:30%;">Semilla</td><td style="width:20%;">Bandeja</td><td style="width:20%;">Acci&oacute;n</td></tr>';
+for (j=0;j<kk;j++){
+
+//var text1=res[j][0]+" "+res[j][1]+" "+res[j][2]+" "+res[j][3]+" "+res[j][4]+" "+res[j][5]+'<BR>';
+ texto+='<tr><td>'+res[j][0]+" "+res[j][1]+" "+res[j][2]+'</td><td>'+res[j][4]+'</td>';
+texto+='<td>'+res[j][3]+'</td><td>'+res[j][5]+'</tr>'
+
+//texto+=text1;
+//alert(text1);
+}
+texto+='</tr></table>';
+var textoT='';
+textoT+='<div style="position: fixed; text-align:center;background-color: gray;width:95%;">';
+textoT+='<table><tr><td style="width:95%;text-align:center;">Cambio de acci&oacute;n</td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
+divt.innerHTML=textoT;
+divt.innerHTML+=texto;
+divt.style.visibility="visible";
+
+}
+
+
+
+function Despliega_Mod(){
+//alert(listaQR);
+
+ const Hoy=new Date();
+      var res=[];
+ var lng=listaQR.length;
+      for (k=0;k<lng;k++) {
+  var dx=listaQR[k];
+//alert(dx);
+      var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],dx[3],dx[4]) 
+      var diasdif=Hoy.getTime()-fechainicio.getTime();
+      var diastotales=diasdif/(1000*60*60*24);
+      var contdias=Math.trunc(diastotales);
+      console.log('cd:'+contdias);
+      console.log('dd:'+diastotales);
+      var accdef=accion(dx[9],contdias,dx[13]);
+      console.log('dif:'+accdef);
+      res[k]=new Array(6);
+      res[k][0]=dx[0];res[k][1]=dx[1];res[k][2]=dx[2];res[k][3]=dx[6];res[k][4]=dx[7];res[k][5]=accdef;
+    }
+
+    res=res.sort(function(a, b) {
+      if (a[5]<b[5]) {return -1} else {return 0};
+    });
+var divt=document.getElementById("divt");
+var texto='<table>';
+texto+='<tr style="color:blue;"><td span=3 style="width:30%;">Fecha</td><td style="width:30%;">Semilla</td><td style="width:20%;">Bandeja</td><td style="width:20%;">Acci&oacute;n</td></tr>';
+
+
+for (j=0;j<lng;j++){
+
+//var text1=res[j][0]+" "+res[j][1]+" "+res[j][2]+" "+res[j][3]+" "+res[j][4]+" "+res[j][5]+'<BR>';
+
+//alert(text1);
+ texto+='<tr><td>'+res[j][0]+" "+res[j][1]+" "+res[j][2]+'</td><td>'+res[j][4]+'</td>';
+texto+='<td>'+res[j][3]+'</td><td>'+res[j][5]+'</tr>'
+
+}
+texto+='</tr></table>';
+var textoT='';
+textoT+='<div style="position: fixed; text-align:center;background-color: gray;width:95%;">';
+textoT+='<table><tr><td style="width:95%;text-align:center;">Estado al dia </td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
+divt.innerHTML=textoT;
+divt.innerHTML+=texto;
+divt.style.visibility="visible";
+
+}
+
+function quitar(){
+//alert("paso");
+document.getElementById("divt").style.visibility="hidden";
+}
+function display_data(res){
+    quitar();
+    var datos=res.text.split("%");
+    //var datos=prueba.split("%");
+    console.log(datos.length);
+    if (datos.length==14) {
+      var fechainicio=new Date(datos[0],parseInt(datos[1])-1,datos[2],datos[3],datos[4])
+      console.log(fechainicio);
+      const Hoy=new Date();  
+      console.log(Hoy);
+      var diasdif=Hoy.getTime()-fechainicio.getTime();
+      // Dias transcurridos
+      var diastotales=diasdif/(1000*60*60*24);
+      var contdias=Math.trunc(diastotales);
+      var horastotales=(diastotales-contdias)*24; 
+      var conthoras=Math.trunc(horastotales);
+      var mintotales=(horastotales-conthoras)*60;
+      var contmin=Math.trunc(mintotales);
+      var htotfalt=24-horastotales;
+      var hfaltan=Math.trunc(htotfalt);
+      var minfalt=Math.trunc((htotfalt-hfaltan)*60);
+      console.log(contdias); 
+      // Variedad
+      outputData[1].innerText=datos[7];
+      // Bandeja
+      outputData[0].innerText=datos[6];
+      // Proveedor
+      outputData[2].innerText=datos[5];
+      // Fecha de siembra
+      outputData[3].innerText=datos[2]+"/"+datos[1]+"/"+datos[0]+" "+datos[3]+":"+datos[4];
+      // Dia
+      outputData[4].innerText=contdias.toString()+" dias "+conthoras.toString()+" horas "+contmin.toString()+" minutos";
+      // Peso Inicial
+      outputData[8].innerText=datos[8]+ " gramos";
+      // Accion
+      outputData[5].innerHTML=accion(datos[9],contdias,datos[13]);
+      // Prox Accion
+      outputData[6].innerHTML=hfaltan.toString()+" h "+minfalt.toString()+" m para "+accion(datos[9],contdias+1,datos[13]);
+      // Dias de crecimiento
+      outputData[7].innerText=datos[10]+ " dias";
+      // Peso cosecha
+      outputData[9].innerText=datos[12]+ " gramos";
+      // Posible corte
+      outputData[10].innerText=datos[13];
+      // Hoja verdadera
+      outputData[11].innerText=datos[11];
+      for (var i=0;i<divData.length;i++){
+         divData[i].hidden=false;}         
+      qrResult.hidden = true;
+      agregaQR(datos);
+      }  else { qrResult.hidden = false;
+               outputResult.innerText ="Codigo QR invalido: "+res.text;
+            }  
+     scanning = false     
+     document.getElementById("video").style.display="none";
+     btnScanQR.hidden = false;
+     document.getElementById('sel-camara').hidden=false;
+     codeReader.reset();
+     //btnCancelQR.hidden = true;
+     //canvasElement.hidden = true;
+}
+</script>
+
+<script>
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+</script>
+</BODY>
+</html>
