@@ -414,10 +414,12 @@ function display_data(res){
       outputData[10].innerText=datos[13];
       // Hoja verdadera
       outputData[11].innerText=datos[11];
+ alert('casi');
+      agregaQR(datos);
       for (var i=0;i<divData.length;i++){
          divData[i].hidden=false;}         
       qrResult.hidden = true;
-      agregaQR(datos);
+      
       }  else { qrResult.hidden = false;
                outputResult.innerText ="Codigo QR invalido: "+res.text;
             }  
