@@ -259,8 +259,8 @@ var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
 alert(tmp+" "+JSON.stringify(datos2));
 
-alert(listaQR.indexOf(datos2));
-if (listaQR.indexOf(JSON.stringify(datos2))==-1) {listaQR.push(datos2);}
+alert(listaQR.indexOf(JSON.stringify(datos2));
+if (listaQR.indexOf(JSON.stringify(datos2))==-1) {listaQR.push(JSON.stringify(datos2));}
 alert(listaQR);
 localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 }
