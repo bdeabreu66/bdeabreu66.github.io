@@ -257,19 +257,14 @@ function agregaQR(datos2){
 //alert('paso1');
 var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
-alert(tmp+" "+listaQR);
+//alert(tmp+" "+listaQR);
 var idx=listaQR.findIndex((e)=>{
-/*alert(e[0]+" "+datos2[0]);
-alert(e[1]+" "+datos2[1]);
-alert(e[2]+" "+datos2[2]);
-alert(e[3]+" "+datos2[3]);
-alert(e[4]+" "+datos2[4]);
-*/
+
 if ((e[0]==datos2[0]) && (e[1]==datos2[1]) && (e[2]==datos2[2]) && (e[3]==datos2[3]) && (e[4]==datos2[4]) && (e[6]==datos2[6]))
   {return true} else {return(false)}
 
 })
-alert(idx);
+//alert(idx);
 if (idx==-1) {listaQR.push(datos2);}
 //alert(listaQR+'  '+datos2);
 localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
@@ -317,9 +312,10 @@ texto+='<td>'+res[j][3]+'</td><td>'+res[j][5]+'</tr>'
 //alert(text1);
 }
 texto+='</tr></table>';
+const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 var textoT='';
 textoT+='<div style="position: fixed; text-align:center;background-color: gray;width:95%;">';
-textoT+='<table><tr><td style="width:95%;text-align:center;">Cambio de acci&oacute;n'+Hoy+'</td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
+textoT+='<table><tr><td style="width:95%;text-align:center;">Cambio de acci&oacute;n'+Hoy.toLocaleDateString('en-us', options)+'</td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
 divt.innerHTML=textoT;
 divt.innerHTML+=texto;
 divt.style.visibility="visible";
@@ -426,7 +422,7 @@ function display_data(res){
       outputData[10].innerText=datos[13];
       // Hoja verdadera
       outputData[11].innerText=datos[11];
- alert('casi');
+ 
       agregaQR(datos);
       for (var i=0;i<divData.length;i++){
          divData[i].hidden=false;}         
