@@ -241,6 +241,7 @@ const Hoy=new Date();
 //alert('quitaQR');
 var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
+alert(listaQR);
 listaQR = listaQR.filter(item => { 
  var fechainicio=new Date(item[0],parseInt(item[1])-1,item[2],item[3],item[4]) 
  var diasdif=Hoy.getTime()-fechainicio.getTime();
