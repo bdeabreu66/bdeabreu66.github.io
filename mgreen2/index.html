@@ -210,10 +210,11 @@ const btnScanQR = document.getElementById("btn-scan-qr");
 
 function accion(comando,ind,ind2){
  function Nombre(nom){
-   if (nom=="ET") return "Empty Try"
-   if (nom=="BO") return "Black Out"
-   if (nom=="W") return "Weight"
-   return nom
+ var nom2=nom.toUpperCase()..trim();
+   if (nom2=="ET") return "Empty Try"
+   if (nom2=="BO") return "Black Out"
+   if (nom2=="W") return "Weight"
+   return nom2
 }
 var corte=parseInt(ind2);
 console.log(corte);
@@ -315,7 +316,7 @@ texto+='</tr></table>';
 const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
 var textoT='';
 textoT+='<div style="position: fixed; text-align:center;background-color: gray;width:95%;">';
-textoT+='<table><tr><td style="width:95%;text-align:center;">Cambio de acci&oacute;n'+Hoy.toLocaleDateString('es-VE', options)+'</td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
+textoT+='<table><tr><td style="width:95%;text-align:center;">Cambio de acci&oacute;n ('+Hoy.toLocaleDateString('es-VE', options)+')</td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
 divt.innerHTML=textoT;
 divt.innerHTML+=texto;
 divt.style.visibility="visible";
@@ -363,9 +364,10 @@ texto+='<td>'+res[j][3]+'</td><td>'+res[j][5]+'</tr>'
 
 }
 texto+='</tr></table>';
+const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
 var textoT='';
 textoT+='<div style="position: fixed; text-align:center;background-color: gray;width:95%;">';
-textoT+='<table><tr><td style="width:95%;text-align:center;">Estado al dia '+Hoy+'</td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
+textoT+='<table><tr><td style="width:95%;text-align:center;">Estado al dia ('+Hoy.toLocaleDateString('es-VE', options)+')</td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
 divt.innerHTML=textoT;
 divt.innerHTML+=texto;
 divt.style.visibility="visible";
