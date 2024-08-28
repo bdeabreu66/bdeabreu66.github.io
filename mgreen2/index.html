@@ -241,7 +241,7 @@ const Hoy=new Date();
 //alert('quitaQR');
 var tmp=localStorage.getItem("LISTAQRS");
 if (tmp==null) {listaQR=[]} else {listaQR=JSON.parse(tmp);}
-alert(listaQR);
+//alert(listaQR);
 listaQR = listaQR.filter(item => { 
  var fechainicio=new Date(item[0],parseInt(item[1])-1,item[2],item[3],item[4]) 
  var diasdif=Hoy.getTime()-fechainicio.getTime();
@@ -330,7 +330,7 @@ function eliminaQR(j){
 let sign = prompt("Desea eliminar el registro?","S");
 if (sign=='S') {
 listaQR=listaQR.filter(e=>{
-alert(e[7]+' '+copia_res[j][4]);
+//alert(e[7]+' '+copia_res[j][4]);
 
 /*
 alert(e[1]+' '+copia_res[j,1]);
