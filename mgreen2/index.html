@@ -324,8 +324,8 @@ divt.style.visibility="visible";
 
 }
 
-function eliminaQR(){
-alert('paso');
+function eliminaQR(res,j){
+alert('paso '+ j);
 }
 
 function Despliega_Mod(){
@@ -362,7 +362,7 @@ for (j=0;j<lng;j++){
 //var text1=res[j][0]+" "+res[j][1]+" "+res[j][2]+" "+res[j][3]+" "+res[j][4]+" "+res[j][5]+'<BR>';
 
 //alert(text1);
- texto+='<tr onclick="eliminaQR()"><td>'+res[j][0]+" "+res[j][1]+" "+res[j][2]+'</td><td>'+res[j][4]+'</td>';
+ texto+='<tr onclick="eliminaQR('+res+','+j+')"><td>'+res[j][0]+" "+res[j][1]+" "+res[j][2]+'</td><td>'+res[j][4]+'</td>';
 texto+='<td>'+res[j][3]+'</td><td>'+res[j][5]+'</tr>'
 
 }
