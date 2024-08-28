@@ -324,7 +324,9 @@ divt.style.visibility="visible";
 
 }
 
-
+function eliminaQR(res,j){
+alert(j);
+}
 
 function Despliega_Mod(){
 //alert(listaQR);
@@ -360,7 +362,7 @@ for (j=0;j<lng;j++){
 //var text1=res[j][0]+" "+res[j][1]+" "+res[j][2]+" "+res[j][3]+" "+res[j][4]+" "+res[j][5]+'<BR>';
 
 //alert(text1);
- texto+='<tr><td>'+res[j][0]+" "+res[j][1]+" "+res[j][2]+'</td><td>'+res[j][4]+'</td>';
+ texto+='<tr onclick="eliminaQR(res,j)"><td>'+res[j][0]+" "+res[j][1]+" "+res[j][2]+'</td><td>'+res[j][4]+'</td>';
 texto+='<td>'+res[j][3]+'</td><td>'+res[j][5]+'</tr>'
 
 }
@@ -368,7 +370,7 @@ texto+='</tr></table>';
 const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
 var textoT='';
 textoT+='<div style="position: fixed; text-align:center;background-color: gray;width:95%;">';
-textoT+='<table><tr><td style="width:95%;text-align:center;">Estado al dia ('+Hoy.toLocaleDateString('es-VE', options)+')</td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
+textoT+='<table><tr ><td style="width:95%;text-align:center;">Estado al dia ('+Hoy.toLocaleDateString('es-VE', options)+')</td> <td style="width:5%;"><button  title="Salir" onclick="quitar();" > X </button></td></tr></table></div> <br> <br>';
 divt.innerHTML=textoT;
 divt.innerHTML+=texto;
 divt.style.visibility="visible";
