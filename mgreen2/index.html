@@ -47,7 +47,7 @@ style="position: fixed;top :200px; left: 50px; width:80% ; text-align: left;disp
         <center><video id="video" width="300" height="300" style="border: 1px solid gray;display:none"></video></center>
       </div>
     <div id="qr-result" hidden="true">
-        <b>Data: <button >X</button></b> <span id="outputResult"></span>
+        <b>Data: <button onclick="quitaData()">X</button></b> <span id="outputResult"></span>
     </div>
 <!--     div id="borradata" hidden="true">  -->
 <!--         <center><b><button><Cerrar</button></b> </center>-->
@@ -239,6 +239,12 @@ var listaQR=[
 ]
 //localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 quitaQR();
+function quitaData(){
+for (var i=0;i<divData.length;i++){
+         divData[i].hidden=true;} 
+       qrResult.hidden = true;
+
+}
 function quitaQR(){
 const Hoy=new Date();
 //alert('quitaQR');
