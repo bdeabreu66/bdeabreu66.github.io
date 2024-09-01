@@ -23,7 +23,7 @@
       ["F01078 Lata Pilsen Sleek 355 ml x 24 UN",24,17.93,1,0,0,"t3","&Cerveceria&Pilsen&",1,'F01078',15.65,"lata pilsen 24",8.52],   
       ["F01078X Lata Pilsen 250 ml x 24 UN",24,15.18,1,0,0,"t3","&Cerveceria&Pilsen&",1,'F01078X',13.79,"lata pilsen 250 ml 24",6.0],   
       ["F01002 Tercio 330 ml x 24 UN",24,14.48,1,0,0,"t3","&Cerveceria&Pilsen&",1,'F01002',10.92,"tercio",7.92],
-      ["F01063 Pilsen NR 355 ml x 12 UN",12,13.31,1,0,0,"t3","&Cerveceria&Pilsen&",1,'F01063',8.99,"tercio no retornable",4.26],
+      ["F01063 Pilsen NR 355 ml x 12 UN",12,11.31,1,0,0,"t3","&Cerveceria&Pilsen&",1,'F01063',8.99,"tercio no retornable",4.26],
       ["F01077 Lata Pilsen Sleek 355 ml x 12 UN",12,8.28,1,0,0,"t3","&Cerveceria&Pilsen&",0,'F01077',7.94,"lata pilsen 12",4.26],   
       ["F04005 Light Ret 222 ml x 36 UN",36,15.86,1,0,0,"t3","&Cerveceria&Light&",1,'F04005',12.92,"light",7.992],
       ["F04056 Light Lata Sleek 355 ml x 24 UN",24,17.93,1,0,0,"t3","&Cerveceria&Light&",1,'F04056X',15.65,"lata light",8.52],
