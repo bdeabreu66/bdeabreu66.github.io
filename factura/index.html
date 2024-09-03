@@ -497,6 +497,30 @@ let narch='facturas '+hoy.toLocaleString()+'.txt'
  var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
  saveAs(blob,narch);
 }
+function generar_lista_facturas(){
+ var data='';
+ var sep='*#*';
+
+//data="FACTURAS"+sep+JSON.stringify(facturas);
+
+var nf=facturas.length;
+alert(nf);
+alert (facturas[0].cliente);
+for (j=0;j<nf;j++){
+if (facturas[j].cliente.indexOf('Obsequio')==-1 && facturas[j].cliente.indexOf('Pedido')==-1) {
+     data+=facturas[j].cliente+';'+facturas[j].fecha+';'+facturas[j].total.replace(".", ",")+'\r';
+}
+}
+
+
+let hoy=new Date();
+let narch='lista facturas '+hoy.toLocaleString()+'.csv'
+ var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,narch);
+
+}
+
+
 function fecha_mayor_igual(f1,f2){
 var a2=f2.split('/');
 var a1=f1.split('/');
@@ -584,7 +608,7 @@ texto+='<div> <table style="text-align:center;margin:auto;">';
 texto+='<tr style="height:30%;"><td><button class="btn2" onclick=importar()>Importar Facturas</button></td></tr>';
 //texto+='<tr><td><button onclick=importar2()>Importar Facturas (FAC_)</button></td></tr>';
 texto+='<tr style="height:30%;"><td><button class="btn2" onclick=exportar()>Exportar Facturas</button></td></tr>';
-//texto+='<tr><td><button onclick=convertir()>Convertir Facturas</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=generar_lista_facturas()>Generar Facturas</button></td></tr>';
 //texto+='<tr><td><button onclick=elim_FAC()>Eliminar FACS</button></td></tr>';
 texto+='<tr style="height:30%;"><td><button class="btn2" onclick=quitar_div("lista");>Salir</button></td></tr>';
 texto+='</table></div>';
@@ -2411,7 +2435,7 @@ function showErrorD(err) {
 
 Fecha_precios();
 
-//descarga_historico();
+descarga_historico();
 function descarga_historico(){
 var nomb="https://bdeabreu66.github.io/historico/historico.txt";
 //var myHeaders = new Headers();
