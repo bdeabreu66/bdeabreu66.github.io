@@ -229,7 +229,7 @@
       ["L358 Jabon Crema Multiuso.500g x 18U",18,3.01,1,0,0,"t2","&Alimentos&Limpieza&Multiuso&",1,'L358',3.28,"crema 500",0.5],
       ["L373 Jabon pastilla Multiuso 130g x 42U",42,0.67,1,0,0,"t2","&Alimentos&Limpieza&Multiuso&",1,'L373',0.92,"pastillas",0.13],
       ["L374 Las llaves Suavizante Bebe  950cc x 12U",12,4.64,1,0,0,"t2","&Alimentos&Limpieza&Suavizantes&",1,'L374',3.68,"",0.95],
-      ["L380 Las llaves Suavizante Bebe 530cc x 12U",12,2.38,1,0,0,"t2","&Alimentos&Limpieza&Suavizantes&",0,'L380',2.19,"",0.53],
+      ["L380 Las llaves Suavizante Bebe 530cc x 12U",12,2.38,1,0,0,"t2","&Alimentos&Limpieza&Suavizantes&",1,'L380',2.19,"",0.53],
       ["(PROMO) Pepsicola 350 ml x 24",24,8.62,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP004X',7.77,"promo 350",8.4],
       ["(PROMO) Seven Up 350 ml x 24",24,8.62,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP005X',7.77,"promo 350",8.4],
       ["(PROMO) Kolita 350 ml x 24",24,8.62,1,0,0,"t3","&Pepsicola&Refrescos&Botella 350 ml&",1,'PP006X',7.77,"promo 350",8.4],
