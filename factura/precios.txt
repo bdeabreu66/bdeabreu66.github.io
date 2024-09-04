@@ -35,7 +35,7 @@
       ["F03030 Solera Verde Ret 222 ml x 36 UN",36,17.93,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F03030',14.66,"solera verde",7.992],
       ["F03014 Solera Light Ret 222 ml x 36 UN",36,17.93,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F03014',14.66,"solera azul",7.992],
       ["F03014X PROMO Solera Light Ret 222 ml x 36 UN",36,17.93,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F03014X',14.66,"solera azul",7.992],
-      ["F06037 Solera IPA Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06037',12.84,"solera ipa",7.992],
+      ["F06037 Solera IPA Ret 222 ml x 36 UN",36,15.86,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06037',12.84,"solera ipa",7.992],
       ["F06034 Solera Marzen  Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06034',12.84,"solera marzen",7.992],
       ["F06046 Solera Kriek Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06046',12.84,"solera kriek",7.992],
       ["F06059 Solera Reserva Ret 222 ml x 36 UN",36,16.55,1,0,0,"t3","&Cerveceria&Solera&Retornable&",1,'F06059',12.84,"solera reserva",7.992],
