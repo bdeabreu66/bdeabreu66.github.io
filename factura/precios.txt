@@ -125,7 +125,7 @@
       ["H135 Harina Pan tradicional 1 k x 20",20,0.95,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H135',0.91,"harina pan",1.0],
       ["H135X PROMO Harina Pan tradicional 1 k x 20 ",20,0.90,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H135X',0.91,"harina pan",1.0],
       ["H136 Harina Pan Amarilla k x 20",20,0.95,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H136',0.91,"harina pan amarilla",1.0],
-      ["H173 Harina Pan/Arroz 1 k x 20",20,0.90,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H173',0.83,"harina pan arroz",1,0],
+      ["H173 Harina Pan/Arroz 1 k x 20",20,0.73,0,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H173',0.65,"harina pan arroz",1,0],
       ["H193 Arepitas Pan 500 g x 12",12,1.56,1,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H193',1.44,"harina pan arepitas",0.5],
       ["H192 Pan Semillas 500 g x 12",12,1.56,1,0,0,"t2","&Alimentos&Arroz-Pasta-Harina&Harinas de Maiz&",1,'H192',1.44,"harina pan semillas",0.5],
       ["T060 Salsa/Tomate.198 x 24",24,0.93,1,0,0,"t2","&Alimentos&Margarinas Mayonesa Rikesa Ketchup&Ketchup&",1,'T060',0.86,"salsa 198",0.198],
