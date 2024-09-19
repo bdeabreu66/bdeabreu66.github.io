@@ -296,7 +296,7 @@ alert('fecha actual '+ Hoy);
         //alert(dx);
      // var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],dx[3],dx[4]) 
       var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],0,0)
- alert('fecha inic "+fechainicio);
+ alert('fecha inic '+fechainicio);
       var diasdif=Hoy.getTime()-fechainicio.getTime();
       var diastotales=diasdif/(1000*60*60*24);
       var contdias=Math.trunc(diastotales);
