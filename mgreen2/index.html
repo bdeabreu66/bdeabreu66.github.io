@@ -17,7 +17,7 @@ visibility:hidden;
 overflow-y:scroll;
 color:white;
 background-color:black;
-font-size: 2rem;
+font-size: 1rem;
 }
 
 
@@ -285,17 +285,22 @@ localStorage.setItem("LISTAQRS",JSON.stringify(listaQR));
 function Despliega_acc(){
 //alert(listaQR);
 
- const Hoy=new Date();
+ const HoyA=new Date();
+    var Hoy=new Date(HoyA.getFullYear(),HoyA.getMonth(),HoyA.getDate()); 
+alert(Hoy);
       var res=[];
  var lng=listaQR.length;
  var kk=0;
       for (k=0;k<lng;k++) {
         var dx=listaQR[k];
         //alert(dx);
-      var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],dx[3],dx[4]) 
+     // var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],dx[3],dx[4]) 
+      var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],0,0)
+ alert(fechainicio);
       var diasdif=Hoy.getTime()-fechainicio.getTime();
       var diastotales=diasdif/(1000*60*60*24);
       var contdias=Math.trunc(diastotales);
+      //var contdias=Hoy.diff(fechainicio, 'days');
       console.log('cd:'+contdias);
       console.log('dd:'+diastotales);
       var accdef1=accion(dx[9],contdias,dx[13]);
