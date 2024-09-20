@@ -89,6 +89,8 @@
       ["D361 Margarita Atun natural 140g x 35U",35,1.42,0,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D361',1.63,"atun natural",0.140],
       ["D362 Margarita Atun en aceite 140g x 35U",35,1.36,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D362',1.25,"atun",0.140],
       ["D398 California Atun desmenuzado aceite 140g x 35U",35,0.68,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D398',0.77,"atun california",0.140],
+      ["D399 Margarita Atun en aceite 170g x 24U",24,0.68,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D399',1.77,"atun grande",0.140],
+      ["D403 Margarita Atun en aceite 170g x 24U",24,0.68,1,0,0,"t2","&Alimentos&Enlatados&Atun&",1,'D403',1.77,"atun grande",0.140],
       ["Q001 Avena Quaker Original (Bolsa) 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q001',1.46,"avena bolsa 400",0.4],
       ["Q002 Avena Quaker Original (Bolsa) 800g x 12U",12,2.76,0,0,0,"t2","&Alimentos&Avena&",0,'Q002',2.54,"avena bolsa 800",0,8],
       ["Q023 Harina Avena Quaker (Bolsa) 400g x 24U",24,1.59,0,0,0,"t2","&Alimentos&Avena&",1,'Q023',1.46,"avena harina 400",0.4],
