@@ -368,13 +368,18 @@ Despliega_Mod();
 function Despliega_Mod(){
 //alert(listaQR);
 
- const Hoy=new Date();
+ const HoyA=new Date();
+    var Hoy=new Date(HoyA.getFullYear(),HoyA.getMonth(),HoyA.getDate()); 
+alert('fecha actual '+ Hoy);
       var res=[];
  var lng=listaQR.length;
       for (k=0;k<lng;k++) {
   var dx=listaQR[k];
 //alert(dx);
-      var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],dx[3],dx[4]) 
+      //var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],dx[3],dx[4]) 
+      var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],0,0)
+ alert('fecha inic '+fechainicio);
+
       var diasdif=Hoy.getTime()-fechainicio.getTime();
       var diastotales=diasdif/(1000*60*60*24);
       var contdias=Math.trunc(diastotales);
@@ -424,9 +429,15 @@ function display_data(res){
     //var datos=prueba.split("%");
     console.log(datos.length);
     if (datos.length==14) {
-      var fechainicio=new Date(datos[0],parseInt(datos[1])-1,datos[2],datos[3],datos[4])
+ //     var fechainicio=new Date(datos[0],parseInt(datos[1])-1,datos[2],datos[3],datos[4])
+      var fechainicio=new Date(datos[0],parseInt(datos[1])-1,datos[2],0,0)
+ alert('fecha inic '+fechainicio);
+
       console.log(fechainicio);
-      const Hoy=new Date();  
+      const HoyA=new Date();
+    var Hoy=new Date(HoyA.getFullYear(),HoyA.getMonth(),HoyA.getDate()); 
+alert('fecha actual '+ Hoy);
+
       console.log(Hoy);
       var diasdif=Hoy.getTime()-fechainicio.getTime();
       // Dias transcurridos
