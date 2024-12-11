@@ -1,3 +1,4 @@
+//
 const currentCache = 'cache-v6.1';
 const files =
 [
