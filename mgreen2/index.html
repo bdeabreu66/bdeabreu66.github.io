@@ -368,11 +368,9 @@ function Despliega_Mod(){
  var lng=listaQR.length;
       for (k=0;k<lng;k++) {
   var dx=listaQR[k];
-//alert(dx);
+
       //var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],dx[3],dx[4]) 
       var fechainicio=new Date(dx[0],parseInt(dx[1])-1,dx[2],0,0)
-// alert('fecha inic '+fechainicio);
-
       var diasdif=Hoy.getTime()-fechainicio.getTime();
       var diastotales=diasdif/(1000*60*60*24);
       var contdias=Math.trunc(diastotales);
@@ -393,14 +391,11 @@ var texto='';
 copia_res=res;
 
 for (j=0;j<lng;j++){
-
-//var text1=res[j][0]+" "+res[j][1]+" "+res[j][2]+" "+res[j][3]+" "+res[j][4]+" "+res[j][5]+'<BR>';
-
-//alert(text1);
- texto+='<tr style="color:white;" onclick="eliminaQR('+j+')"><td style="width:30%;">'+res[j][2]+"-"+res[j][1]+"-"+res[j][0]+'</td><td style="width:30%;">'+res[j][4]+'</td>';
-
-texto+='<td style="width:20%;">'+res[j][3]+'</td><td style="width:20%;">'+res[j][5].substring(0,1)+'</td></tr>\n'
-
+  texto+='<tr style="color:white;" onclick="eliminaQR('+j+')">';
+  texto+='<td style="width:30%;">'+res[j][2]+"-"+res[j][1]+"-"+res[j][0]+'</td>';
+  texto+='<td style="width:30%;">'+res[j][4]+'</td>';
+  texto+='<td style="width:20%;">'+res[j][3]+'</td>';
+  texto+='<td style="width:20%;">'+res[j][5].substring(0,4)+'</td></tr>\n\r'
 }
 texto+='</table></div>';
 
@@ -411,8 +406,7 @@ textoT+='<table><tr ><td style="width:95%;text-align:center;">Estado al dia ('+H
 textoT+='<div><table style="width:100%;"><tr style="color:gray;"><td style="width:30%;">Fecha</td><td style="width:30%;">Semilla</td><td style="width:20%;">Bandeja</td><td style="width:20%;">Acci&oacute;n</td></tr>';
 alert(textoT);
 alert(texto);
-divt.innerHTML=textoT;
-divt.innerHTML+=texto;
+divt.innerHTML=textoT+texto;
 divt.style.visibility="visible";
 
 }
