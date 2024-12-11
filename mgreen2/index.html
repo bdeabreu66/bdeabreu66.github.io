@@ -257,8 +257,8 @@ listaQR = listaQR.filter(item => {
  var diasdif=Hoy.getTime()-fechainicio.getTime();
  var diastotales=diasdif/(1000*60*60*24);
  var contdias=Math.trunc(diastotales);
- alert(contdias+" "+item[13]);
- if (contdias>item[10]) {return false} else {return true} 
+ alert(contdias+" "+(item[13]+12));
+ if (contdias>(item[13]+12)) {return false} else {return true} 
  }
 )
 console.log('set item');
