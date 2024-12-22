@@ -1,1 +1,352 @@
+<HTML>
+<HEAD>
 
+
+</HEAD>
+<STYLE>
+
+#cuerpo{
+font-size:1.3em;
+background-color:blue;
+}
+
+select{
+font-size:0.8em;
+background-color:blue;
+
+}
+
+
+input[type=number]{
+width: 3em;
+font-size:0.8em;
+background-color:blue;
+}
+input[type=date]{
+width: 10em;
+}
+
+input[type=text]{
+width: 5em;
+}
+</STYLE>
+<SCRIPT LANGUAGE="JavaScript">
+
+function xround(num,ndec){
+var fact=1;
+for(i=1;i<=ndec;i++){
+fact*=10;
+}
+return Math.round(num*fact)/fact;
+}
+function guardadatos() {
+sep="&@!";
+buffer=""; 
+buffer+=document.getElementById("IPESO").value+sep;
+buffer+=document.getElementById("ICALCIO").value+sep;
+buffer+=document.getElementById("ICCALCIO").value+sep;
+buffer+=document.getElementById("IMAGNESIO").value+sep;
+buffer+=document.getElementById("ICMAGNESIO").value+sep;
+buffer+=document.getElementById("IGLUCOSA").value+sep;
+buffer+=document.getElementById("IPOTASIO").value+sep;
+buffer+=document.getElementById("ICPOTASIO").value+sep;
+buffer+=document.getElementById("ISODIO").value+sep;
+buffer+=document.getElementById("ICSODIO").value+sep;
+buffer+=document.getElementById("LIQEXTRA").value+sep;
+buffer+=document.getElementById("ILIQUIDOS").value+sep;
+buffer+=document.getElementById("TSODIO").selectedIndex+sep;
+buffer+=document.getElementById("TPOTASIO").selectedIndex+sep;
+buffer+=document.getElementById("TCALCIO").selectedIndex+sep;
+buffer+=document.getElementById("TMAGNESIO").selectedIndex+sep;
+buffer+=document.getElementById("TLIQUIDOS").selectedIndex+sep;
+buffer+=document.getElementById("IC1").value+sep;
+buffer+=document.getElementById("IC2").value+sep;
+//alert(buffer);
+localStorage.setItem("HIDRATACION",buffer);
+}
+
+function cargadatos() {
+sep="&@!";
+buffer=localStorage.getItem("HIDRATACION"); 
+//alert(buffer);
+buf2=buffer.split(sep);
+//alert(buf2.length);
+document.getElementById("IPESO").value=buf2[0];
+document.getElementById("ICALCIO").value=buf2[1];
+document.getElementById("ICCALCIO").value=buf2[2];
+document.getElementById("IMAGNESIO").value=buf2[3];
+document.getElementById("ICMAGNESIO").value=buf2[4];
+document.getElementById("IGLUCOSA").value=buf2[5];
+document.getElementById("IPOTASIO").value=buf2[6];
+document.getElementById("ICPOTASIO").value=buf2[7];
+document.getElementById("ISODIO").value=buf2[8];
+document.getElementById("ICSODIO").value=buf2[9];
+document.getElementById("LIQEXTRA").value=buf2[10];
+document.getElementById("ILIQUIDOS").value=buf2[11];
+document.getElementById("TSODIO").selectedIndex=parseInt(buf2[12]);
+document.getElementById("TPOTASIO").selectedIndex=parseInt(buf2[13]);
+document.getElementById("TCALCIO").selectedIndex=parseInt(buf2[14]);
+document.getElementById("TMAGNESIO").selectedIndex=parseInt(buf2[15]);
+document.getElementById("TLIQUIDOS").selectedIndex=parseInt(buf2[16]);
+document.getElementById("IC1").value=buf2[17];
+document.getElementById("IC2").value=buf2[18];
+
+}
+
+function resetear(){
+document.getElementById("IPESO").value="3";
+document.getElementById("ICALCIO").value="2";
+document.getElementById("ICCALCIO").value="10";
+document.getElementById("IMAGNESIO").value="30";
+document.getElementById("ICMAGNESIO").value="50";
+document.getElementById("IGLUCOSA").value="5";
+document.getElementById("IPOTASIO").value="2";
+document.getElementById("ISODIO").value="2";
+document.getElementById("ICSODIO").value="20";
+document.getElementById("ICPOTASIO").value="7.5";
+document.getElementById("LIQEXTRA").value="0";
+document.getElementById("ILIQUIDOS").value="100";
+document.getElementById("IC1").value="5";
+document.getElementById("IC2").value="50";
+
+}
+
+function supcorp(P){
+var pf=parseFloat(P);
+var sc;
+if (pf<10){
+sc=(4*pf+9)/100;
+}
+else {
+sc=(4*pf+7)/(pf+90);
+}
+return sc;
+}
+
+function validar(){
+
+var bien=true;
+var unidsodio=parseInt(document.getElementById("TSODIO").selectedIndex);
+var unidpotasio=parseInt(document.getElementById("TPOTASIO").selectedIndex);
+var unidcalcio=parseInt(document.getElementById("TCALCIO").selectedIndex);
+var unidmagnesio=parseInt(document.getElementById("TMAGNESIO").selectedIndex);
+var unidliquidos=parseInt(document.getElementById("TLIQUIDOS").selectedIndex);
+
+var vpeso=parseFloat(document.getElementById("IPESO").value);
+var vcalcio=parseFloat(document.getElementById("ICALCIO").value);
+var vccalcio=parseFloat(document.getElementById("ICCALCIO").value);
+    if (vccalcio>100 || vccalcio<0) {bien=false;alert("La concentracion del Gluconato no es valida");}
+var vmagnesio=parseFloat(document.getElementById("IMAGNESIO").value);
+var vcmagnesio=parseFloat(document.getElementById("ICMAGNESIO").value);
+    if (vcmagnesio>100 || vcmagnesio<0) {bien=false;alert("La concentracion del Sulfato de magnesio no es valida");}
+var vglucosa=parseFloat(document.getElementById("IGLUCOSA").value);
+var vpotasio=parseFloat(document.getElementById("IPOTASIO").value);
+var vcpotasio=parseFloat(document.getElementById("ICPOTASIO").value);
+if (vcpotasio>100 || vcpotasio<0) {bien=false;alert("La concentracion del Cloruro de potasio no es valida");}
+var vsodio=parseFloat(document.getElementById("ISODIO").value);
+var vcsodio=parseFloat(document.getElementById("ICSODIO").value);
+    if (vcsodio>100 || vcsodio<0) {bien=false;alert("La concentracion del Cloruro de sodio no es valida");}
+var vliqextra=parseFloat(document.getElementById("LIQEXTRA").value);
+    if (vliqextra<0) {bien=false;alert("La cantidad de liquidos extra no es valida");}
+var vliquidos=parseFloat(document.getElementById("ILIQUIDOS").value);
+    if (vliquidos<0) {bien=false;alert("El requirimiento de liquidos no es valido");}
+var vC1=parseFloat(document.getElementById("IC1").value);
+if (vC1>100 || vC1<0) {bien=false;alert("La concentracion de la solucion glucosada 1 no es valida");}
+var vC2=parseFloat(document.getElementById("IC2").value);
+if (vC2>100 || vC2<0) {bien=false;alert("La concentracion de la solucion glucosada 2 no es valida");}
+if (vC1==vC2) {bien=false;alert("Las concentraciones de las soluciones glucosadas deben ser distintas");}
+return bien;
+}
+
+function procesar(){
+if (validar()) {procesar2();}
+}
+function procesar2(){
+//var tcalcio=document.getElementById("TOTCALCIO");
+var unidsodio=parseInt(document.getElementById("TSODIO").selectedIndex);
+var unidpotasio=parseInt(document.getElementById("TPOTASIO").selectedIndex);
+var unidcalcio=parseInt(document.getElementById("TCALCIO").selectedIndex);
+var unidmagnesio=parseInt(document.getElementById("TMAGNESIO").selectedIndex);
+var unidliquidos=parseInt(document.getElementById("TLIQUIDOS").selectedIndex);
+
+//alert(unidsodio);
+var vpeso=parseFloat(document.getElementById("IPESO").value);
+var vcalcio=parseFloat(document.getElementById("ICALCIO").value);
+var vccalcio=parseFloat(document.getElementById("ICCALCIO").value);
+var vmagnesio=parseFloat(document.getElementById("IMAGNESIO").value);
+var vcmagnesio=parseFloat(document.getElementById("ICMAGNESIO").value);
+
+var vglucosa=parseFloat(document.getElementById("IGLUCOSA").value);
+var vpotasio=parseFloat(document.getElementById("IPOTASIO").value);
+var vcpotasio=parseFloat(document.getElementById("ICPOTASIO").value);
+var vsodio=parseFloat(document.getElementById("ISODIO").value);
+var vcsodio=parseFloat(document.getElementById("ICSODIO").value);
+var vliqextra=parseFloat(document.getElementById("LIQEXTRA").value);
+var vliquidos=parseFloat(document.getElementById("ILIQUIDOS").value);
+
+var vC1=parseFloat(document.getElementById("IC1").value);
+var vC2=parseFloat(document.getElementById("IC2").value);
+var F1=100/(vC2-vC1);
+var F2=vC1/(vC2-vC1);
+//document.writeln("prueba");
+
+//calculo de los cc de calcio
+var vtcalcio=(vcalcio*vpeso*10)/(0.465*vccalcio);
+if (unidcalcio==1) {vtcalcio=vtcalcio/20.04;}
+vtcalcio=xround(vtcalcio,2);
+document.getElementById("r5").innerHTML=vtcalcio+" cc de Gluconato de Ca al "+document.getElementById("ICCALCIO").value+"%";
+
+//calculo de los cc de Magnesio
+var vtmagnesio=(vmagnesio*vpeso*5)/(40*vcmagnesio);
+if (unidmagnesio==1) {vtmagnesio=vtmagnesio*12.15;}
+if (unidmagnesio==2) {vtmagnesio=vmagnesio*vpeso;}
+
+vtmagnesio=xround(vtmagnesio,2);
+
+//document.getElementById("OMAGNESIO").value=vtmagnesio;
+document.getElementById("r6").innerHTML=vtmagnesio+" cc de MgSO<sub>4</sub> al "+document.getElementById("ICMAGNESIO").value+"%";
+
+// Calculo de los cc de sodio 
+var vtsodio=(vsodio*vpeso*20)/(3.42*vcsodio);
+if (unidsodio==1) {vtsodio=vtsodio/23;}
+
+vtsodio=xround(vtsodio,2);
+//alert(vtsodio);
+document.getElementById("r3").innerText=vtsodio+" cc de NaCl al "+document.getElementById("ICSODIO").value+"%";
+// Calculo de los cc de potasio 
+
+var vtpotasio=(vpotasio*vpeso*7.5)/vcpotasio;
+if (unidpotasio==1) {vtpotasio=vtpotasio/35.46;}
+
+
+vtpotasio=xround(vtpotasio,1);
+//document.getElementById("OPOTASIO").value=vtpotasio;
+document.getElementById("r4").innerHTML=vtpotasio+" cc de KCl al "+document.getElementById("ICPOTASIO").value+"%";
+
+var pliquidos=vliquidos*vpeso;
+if (unidliquidos==1) {pliquidos=vliquidos*supcorp(vpeso);}
+
+
+var tliquidos=pliquidos-vliqextra-vtpotasio-vtsodio-vtcalcio-vtmagnesio; 
+if (tliquidos<=0 ) {alert("Total de liquidos supera el maximo")}
+var vinf=(pliquidos-vliqextra)/24;
+vinf=xround(vinf,1);
+document.getElementById("vinf").innerHTML="Velocidad de infusion:"+ vinf +" cc/hora ";
+
+var vtglucosa=vglucosa*vpeso*1.44;
+var concglucosa=(100*vtglucosa)/tliquidos;
+if ((concglucosa>=vC1 && concglucosa<=vC2) || (concglucosa>=vC2 && concglucosa<=vC1)) {
+var v2=(10*vtglucosa-tliquidos)/4;
+var v2=F1*vtglucosa-F2*tliquidos;
+var v1=tliquidos-v2;
+v2=xround(v2,1);
+v1=xround(v1,1);
+document.getElementById("r1").innerHTML=v1+" cc de Glucosa al "+vC1+" %";
+document.getElementById("r2").innerHTML=v2+" cc de Glucosa al "+vC2 + " %";
+} else {
+alert("Error: La concentracion requerida "+xround(concglucosa,2) +"% esta fuera del rango "+ vC1 +"% - "+vC2+ "%");
+
+//var v2=(20*vtglucosa-tliquidos);
+//var v1=tliquidos-v2;
+//v2=xround(v2,1);
+//v1=xround(v1,1);
+//document.getElementById("r1").innerHTML=v1+" cc de Glucosa al 5%";
+//document.getElementById("r2").innerHTML=v2+" cc de Glucosa al 10%";
+//var v2=(20*vtglucosa-tliquidos)/9;
+//var v1=tliquidos-v2;
+//v2=xround(v2,1);
+//v1=xround(v1,1);
+//document.getElementById("r7").innerHTML=v1+" cc de Glucosa al 5%";
+//document.getElementById("r8").innerHTML=v2+" cc de Glucosa al 50%";
+}
+
+}
+
+function iniciar(){
+try {cargadatos();} catch(err) {}
+//sep="&@!";
+//app=document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1 && window.location.protocol.indexOf( 'file' ) === -1;
+//alert(app);
+//var isMobileBrowser = (window.location.protocol == "http:") ;
+//alert(window.location.protocol);
+//anchopantalla = parseInt((window.screen.width)*0.5);
+//largopantalla = window.screen.heigh;
+//anchopantallacanvas=parseInt(anchopantalla*0.98);
+//document.getElementById("cuerpo").style="font-size: 25px";
+//document.getElementById("tabla1").style="font-size: 1em";
+}
+
+function resultado(){
+var TextoT="";
+var divresult = document.getElementById("result");
+divresult.style="font-size:0.8em;position: fixed;top :2px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: blue;color:white; border: 3px solid #73AD21;";
+TextoT+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
+TextoT+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
+TextoT+='<H3 style="text-align:center;"> Hidrataci&oacute;n parenteral </H3> ';
+TextoT+='<div> <span id="r1"> cc de Glucosa al </span> </div> ';
+TextoT+='<div> <span id="r2"> cc de Glucosa al </span> </div> ';
+TextoT+='<div> <span id="r3"> cc de NaCl al </span> </div> ';
+TextoT+='<div> <span id="r4"> cc de KCl al </span> </div> ';
+TextoT+='<div> <span id="r5"> cc de gluconato de Ca al </span> </div> ';  
+TextoT+='<div> <span id="r6"> cc de MgSO4 al </span> </div>  ';
+TextoT+='<div> <span id="vinf"> Velocidad de infusion: &nbsp;</span> </div>  ';
+divresult.innerHTML=TextoT;
+divresult.style.display="block";
+return false;
+}
+function quitar(){
+var div5 = document.getElementById("result");
+div5.style.display="none";
+}
+
+
+
+
+</SCRIPT>
+<BODY id="cuerpo" onload="iniciar();">
+<CENTER> <H2> Hidrataci&oacute;n para neonatos </H2></CENTER>
+<div >
+<div> Peso: <INPUT id="IPESO" TYPE="number" SIZE="4" MAXLENGTH="5" value="3"> Kg   </div>
+<div> Glucosa:<INPUT  NAME="GLUCOSA" ID="IGLUCOSA" TYPE="number" SIZE="4" MAXLENGTH="5" value="5"> mg/Kg/min   </div>
+<div> Liquidos: <INPUT  NAME="LIQUIDOS" ID="ILIQUIDOS" TYPE="number" SIZE="4" MAXLENGTH="5" value="100">
+<SELECT ID="TLIQUIDOS" > 
+<option selected> cc/Kg/Dia </option>';
+<option> cc/m<sub>2</sub>/Dia </option>
+</SELECT> </div>
+<div> Sodio:<INPUT  NAME="SODIO" ID="ISODIO" TYPE="number" SIZE="4" MAXLENGTH="5" value="2"> 
+<SELECT ID="TSODIO" > 
+<option selected> mEq/Kg/Dia </option>';
+<option> mg/Kg/Dia </option>
+</SELECT>   </div>
+<div> Potasio:<INPUT  ID="IPOTASIO"  TYPE="number" SIZE="4" MAXLENGTH="5" value="2" placeholder="2-4">
+<SELECT ID="TPOTASIO" > 
+<option selected> mEq/Kg/Dia </option>';
+<option> mg/Kg/Dia </option>
+</SELECT> </div>
+<div> Calcio:<INPUT  ID="ICALCIO" TYPE="number" SIZE="4" MAXLENGTH="5" value="2">
+<SELECT ID="TCALCIO" > 
+<option selected> mEq/Kg/Dia </option>';
+<option> mg/Kg/Dia </option>
+</SELECT>   </div>
+<div> Magnesio:<INPUT  NAME="MAGNESIO" ID="IMAGNESIO" TYPE="number" SIZE="4" MAXLENGTH="5" value="30">
+<SELECT ID="TMAGNESIO" > 
+<option selected> mg/Kg/Dia </option>';
+<option> mEq/Kg/Dia </option>
+<option> cc/Kg/Dia </option>
+</SELECT>   </div>
+
+<div> Liquidos Extra: <INPUT NAME="LIQUIDOSEXTRA" ID="LIQEXTRA" TYPE="number" SIZE="4" MAXLENGTH="5" value="0"> cc   </div>
+<div> NaCl al : <INPUT  ID="ICSODIO" TYPE="number" SIZE="3" MAXLENGTH="5" value="20"> %   </div>
+<div> KCl al: <INPUT  ID="ICPOTASIO" TYPE="number" SIZE="4" MAXLENGTH="5" value="7.5"> %   </div>
+<div> Gluconato de Ca al: <INPUT  ID="ICCALCIO" TYPE="number" SIZE="4" MAXLENGTH="5" value="10"> %   </div>
+<div> MgSO<sub>4</sub> al: <INPUT  NAME="CMAGNESIO" ID="ICMAGNESIO" TYPE="number" SIZE="4" MAXLENGTH="5" value="50"> %  </div>
+<div> Sol glucosada 1:<INPUT ID="IC1" TYPE="number" SIZE="4" MAXLENGTH="3" value="5">%   </div>
+<div> Sol glucosada 2:<INPUT ID="IC2" TYPE="number" SIZE="4" MAXLENGTH="3" value="50">%   </div>
+<div> <INPUT  TYPE="RESET" value="RESET"   onclick="resetear();guardadatos();">
+      <INPUT  TYPE="SUBMIT" value="CALCULAR" onclick="guardadatos();resultado();procesar();">
+</div>
+</div>
+<div id="result" display="none"></div>
+
+</BODY>
+</html>
