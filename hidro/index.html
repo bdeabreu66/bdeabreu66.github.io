@@ -142,6 +142,8 @@ var unidliquidos=parseInt(document.getElementById("TLIQUIDOS").selectedIndex);
 var vpeso=parseFloat(document.getElementById("IPESO").value);
 var vpesog=parseFloat(document.getElementById("IPESOg").value);
 
+    if (isNaN(vpesog)) {vpesog=0;document.getElementById("IPESOg").value=0}
+//alert(vpesog);
 var vcalcio=parseFloat(document.getElementById("ICALCIO").value);
 var vccalcio=parseFloat(document.getElementById("ICCALCIO").value);
     if (vccalcio>100 || vccalcio<0) {bien=false;alert("La concentracion del Gluconato no es valida");}
