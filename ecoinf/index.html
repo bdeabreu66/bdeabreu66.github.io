@@ -161,6 +161,7 @@ divp.innerHTML=texto;
 
 }
 var divA;
+
 function showAbdominal(){
 divp.style.visibility="hidden";
 divA=document.getElementById('Abdominal');
@@ -170,9 +171,23 @@ texto+=' <p onclick="showHigado()">Higado</p>';
 texto+=' <p><span onclick="showRd()">RD</span> <span onclick="showRi()">RI</span></p>';
 texto+=' <p onclick="showBazo()">Bazo</p>';
 texto+=' <p onclick="showPrincipal();divA.style.visibility=\'hidden\'">Retornar</p>';
+divA.innerHTML=texto;
+divA.style.visibility='visible';
+//alert(divA.innerHTML);
+}
 
+function showHigado(){
+divA.style.visibility="hidden";
+divH=document.getElementById('Abdominal');
+divH.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
+var texto=' <p>Bordes</p>';
+texto+=' <p>Ecogenicidad</p>';
+texto+=' <p>Homogenicidad</p>';
+texto+=' <p>Tama&nacute;o</p>';
+texto+=' <p onclick="showAbdominal();divH.style.visibility=\'hidden\'">Retornar</p>';
 divA.innerHTML=texto;
 }
+
 function Changeback(e){
 var colorbase='hotpink';
 var colornew='green';
