@@ -44,6 +44,11 @@ color:white;
  font-size:1.5em;
  text-align:center;
 }
+.menuc{
+ padding: 5px 0px 0px 40px;
+ font-size:1.5em;
+ text-align:left;
+}
 
 .doc{
 border-collapse:separate;
@@ -84,7 +89,7 @@ width: 10em;
 width: 5em;
 }
 </style>
-<BODY >
+<BODY onload="inicio();">
 <div id="container">
 <div id="titulo" style="position:fixed;top:0%;left:0%;width:100%;"> 
    <h3>Informe de ex&aacute;men ecogr&aacute;fico</h3> 
@@ -96,18 +101,13 @@ Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name=
 <label for="SexoM">M</label><input onchange="setSexo();" type="radio" name="Sexo" id="SexoM" value='M'>
 </div>
 <div id="menuPrincipal" style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;">
-<p class="menup" onclick="Changeback(this);showAbdominal()"> Abdominal </p>
-<p class="menup" onclick="Changeback(this);"> P&eacute;lvico </p>
-<p class="menup" onclick="Changeback(this);"> Abdomino-P&eacute;lvico </p>
-<p class="menup" onclick="Changeback(this);"> Tiroideo </p>
-<p class="menup" onclick="Changeback(this);"> Testicular </p>
-<p class="menup" onclick="Changeback(this);"> Mamario</p>
-<p class="menup" onclick="Changeback(this);"> Cardiaco </p>
-<p class="menup" onclick="Changeback(this);"> Vascular Abdominal </p>
-<p class="menup" onclick="Changeback(this);"> Vascular Carotideo </p>
-
-
 </div>
+<div id="Higado" > 
+ </div>
+ <div id="HigTam" > 
+ </div>
+<div id="Pancreas" > 
+ </div>
 <div id="Abdominal" > 
  
 </div>
@@ -137,6 +137,10 @@ Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name=
 </div>
 <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
 <script>
+
+function inicio(){
+showPrincipal();
+}  
 function setSexo(){
 if (document.getElementById('SexoF').checked) {sexoPac="F";} else {sexoPac="M";}
 showPrincipal();
@@ -161,16 +165,16 @@ divp.innerHTML=texto;
 
 }
 var divA;
-
+var sexoPac;
 function showAbdominal(){
 divp.style.visibility="hidden";
 divA=document.getElementById('Abdominal');
 divA.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
-var texto=' <p onclick="showPancreas()">Pancreas</p>';
-texto+=' <p onclick="showHigado()">Higado</p>';
-texto+=' <p><span onclick="showRd()">RD</span> <span onclick="showRi()">RI</span></p>';
-texto+=' <p onclick="showBazo()">Bazo</p>';
-texto+=' <p onclick="showPrincipal();divA.style.visibility=\'hidden\'">Retornar</p>';
+var texto=' <p class="menuc" onclick="showPancreas()">Pancreas</p>';
+texto+=' <p class="menuc"onclick="showHigado()">Higado</p>';
+texto+=' <p class="menuc"><span onclick="showRd()">RD</span> <span onclick="showRi()">RI</span></p>';
+texto+=' <p class="menuc" onclick="showBazo()">Bazo</p>';
+texto+=' <p class="menuc" onclick="showPrincipal();divA.style.visibility=\'hidden\'">Retornar</p>';
 divA.innerHTML=texto;
 divA.style.visibility='visible';
 //alert(divA.innerHTML);
@@ -178,14 +182,44 @@ divA.style.visibility='visible';
 
 function showHigado(){
 divA.style.visibility="hidden";
-divH=document.getElementById('Abdominal');
-divH.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
-var texto=' <p>Bordes</p>';
-texto+=' <p>Ecogenicidad</p>';
-texto+=' <p>Homogenicidad</p>';
-texto+=' <p>Tama&nacute;o</p>';
-texto+=' <p onclick="showAbdominal();divH.style.visibility=\'hidden\'">Retornar</p>';
-divA.innerHTML=texto;
+divH=document.getElementById('Higado');
+divH.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto='<h4 style="text-align:center;color:yellow;"> Higado </h4>';
+texto+=' <p class="menuc">Bordes</p>';
+texto+=' <p class="menuc">Ecogenicidad</p>';
+texto+=' <p class="menuc">Homogenicidad</p>';
+texto+=' <p class="menuc" onclick="showHigTam();">Tama&nacute;o</p>';
+texto+=' <p class="menuc" onclick="showAbdominal();divH.style.visibility=\'hidden\'">Retornar</p>';
+divH.innerHTML=texto;
+divH.style.visibility="visible";
+}
+var divPan;
+function showPancreas(){
+divA.style.visibility="hidden";
+divPan=document.getElementById('Pancreas');
+divPan.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto='<h4 style="text-align:center;color:yellow;"> Pancreas </h4>';
+texto+=' <p class="menuc">Bordes</p>';
+texto+=' <p class="menuc">Ecogenicidad</p>';
+texto+=' <p class="menuc">Homogenicidad</p>';
+texto+=' <p class="menuc" onclick="showPanTam();">Tama&nacute;o</p>';
+texto+=' <p class="menuc" onclick="showAbdominal();divPan.style.visibility=\'hidden\'">Retornar</p>';
+divPan.innerHTML=texto;
+divPan.style.visibility="visible";
+}
+
+var divH;
+var divHT;
+function showHigTam(){
+divH.style.visibility="hidden";
+divHT=document.getElementById('HigTam');
+divHT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=' <label for="HigTama1">LD (mm):</label><input type="number" id="HigTam1"><br>';
+texto+=' <label for="HigTama2">LI (mm):</label><input type="number" id="HigTam2"><br>';
+texto+=' <label for="HigTama3">LC (mm):</label><input type="number" id="HigTam3"><br>';
+texto+=' <p onclick="showHigado();divHT.style.visibility=\'hidden\'">Retornar</p>';
+divHT.innerHTML=texto;
+divHT.style.visibility="visible";
 }
 
 function Changeback(e){
