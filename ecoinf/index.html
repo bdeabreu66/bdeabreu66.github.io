@@ -82,6 +82,9 @@ color:red;
 input[type=radio]{
 transform: scale(1.5);
 }
+input[type=number]{
+width: 1 em;
+}
 #NombP{
 width: 10em;
 }
@@ -89,26 +92,35 @@ width: 10em;
 width: 5em;
 }
 </style>
-<BODY onload="inicio();">
+<BODY onload="inicio();" onunload="salida()">
 <div id="container">
 <div id="titulo" style="position:fixed;top:0%;left:0%;width:100%;"> 
    <h3>Informe de ex&aacute;men ecogr&aacute;fico</h3> 
 </div>
 <div style="position:fixed;top:15%;left:0%;">
-<label for="NombP"> Nombre Paciente:</label> <input id="NombP"><br>
-<label for="EdadP"> Edad:</label> <input type="number" id="EdadP">
+<label for="NombP"> Nombre Paciente:</label> <input onchange="setNombre()" id="NombP"><br>
+<label for="EdadP"> Edad:</label> <input onchange="setEdad()" type="number" id="EdadP">
 Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name="Sexo" id="SexoF" value='F'>
 <label for="SexoM">M</label><input onchange="setSexo();" type="radio" name="Sexo" id="SexoM" value='M'>
 </div>
 <div id="menuPrincipal" style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;">
 </div>
-<div id="Higado" > 
- </div>
- <div id="HigTam" > 
- </div>
-<div id="Pancreas" > 
- </div>
+<div id="Higado" > </div>
+   <div id="HigTam" > </div>
+<div id="VesBil" >  </div>
+ <div id="VesBilTam" >  </div>
+<div id="Pancreas" > </div>
+   <div id="PanTam" >  </div>
+   <div id="PanDet" >  </div>
+
+<div id="Bazo" >  </div>
+ <div id="BazTam" >  </div>
+div id="RD" > </div>
+   <div id="RDTam" > </div>
+div id="RI" > </div>
+   <div id="RITam" > </div>
 <div id="Abdominal" > 
+
  
 </div>
 
@@ -137,13 +149,41 @@ Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name=
 </div>
 <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
 <script>
+var Examen;
 
 function inicio(){
 showPrincipal();
-}  
+var aux=localStorage.getItem('EXAMEN');
+if (aux)  {Examen=JSON.parse(aux);} else {Examen=new Object(); }
+
+//Examen=new Object();
+} 
+
+function salida(){
+localStorage.setItem('EXAMEN',JSON.stringify(Examen));
+} 
+
+function setNombre(){
+Examen.nombre=document.getElementById("NombP").value
+alert(Examen.nombre);
+}
+
+function setEdad(){
+Examen.edad=document.getElementById("EdadP").value
+alert(Examen.edad);
+}
+
 function setSexo(){
 if (document.getElementById('SexoF').checked) {sexoPac="F";} else {sexoPac="M";}
+Examen.sexo=sexoPac;
 showPrincipal();
+}
+
+function Titulo(t1,t2,t3){
+var resp;
+resp='<h4 style="text-align:center;color:yellow;">'+t1;
+resp+='<span style="color:blue;" onclick="'+t2+'();'+t3+'.style.visibility=\'hidden\'">&nbsp;&#9650;</span> </h4>';
+return resp;
 }
 var divp;
 function showPrincipal(){
@@ -170,57 +210,296 @@ function showAbdominal(){
 divp.style.visibility="hidden";
 divA=document.getElementById('Abdominal');
 divA.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
-var texto=' <p class="menuc" onclick="showPancreas()">Pancreas</p>';
+var texto='<h4 style="text-align:center;color:yellow;"> Abdomen </h4>';
+
+texto+=' <p class="menuc" onclick="showPancreas()">Pancreas</p>';
 texto+=' <p class="menuc"onclick="showHigado()">Higado</p>';
+texto+=' <p class="menuc"onclick="showVesBil()">Vesicula Biliar</p>';
 texto+=' <p class="menuc"><span onclick="showRd()">RD</span> <span onclick="showRi()">RI</span></p>';
 texto+=' <p class="menuc" onclick="showBazo()">Bazo</p>';
 texto+=' <p class="menuc" onclick="showPrincipal();divA.style.visibility=\'hidden\'">Retornar</p>';
 divA.innerHTML=texto;
 divA.style.visibility='visible';
-//alert(divA.innerHTML);
 }
 
 function showHigado(){
 divA.style.visibility="hidden";
 divH=document.getElementById('Higado');
 divH.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto='<h4 style="text-align:center;color:yellow;"> Higado </h4>';
+var texto=Titulo('Higado','showAbdominal','divH');
 texto+=' <p class="menuc">Bordes</p>';
 texto+=' <p class="menuc">Ecogenicidad</p>';
 texto+=' <p class="menuc">Homogenicidad</p>';
-texto+=' <p class="menuc" onclick="showHigTam();">Tama&nacute;o</p>';
-texto+=' <p class="menuc" onclick="showAbdominal();divH.style.visibility=\'hidden\'">Retornar</p>';
+texto+=' <p class="menuc" onclick="showHigTam();">Medidas</p>';
+//Examen.higado=true;
 divH.innerHTML=texto;
 divH.style.visibility="visible";
-}
-var divPan;
-function showPancreas(){
-divA.style.visibility="hidden";
-divPan=document.getElementById('Pancreas');
-divPan.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto='<h4 style="text-align:center;color:yellow;"> Pancreas </h4>';
-texto+=' <p class="menuc">Bordes</p>';
-texto+=' <p class="menuc">Ecogenicidad</p>';
-texto+=' <p class="menuc">Homogenicidad</p>';
-texto+=' <p class="menuc" onclick="showPanTam();">Tama&nacute;o</p>';
-texto+=' <p class="menuc" onclick="showAbdominal();divPan.style.visibility=\'hidden\'">Retornar</p>';
-divPan.innerHTML=texto;
-divPan.style.visibility="visible";
-}
+if (typeof(Examen.higado)==='undefined')  {Examen.higado=new Object();}
 
-var divH;
-var divHT;
+}
 function showHigTam(){
 divH.style.visibility="hidden";
 divHT=document.getElementById('HigTam');
 divHT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=' <label for="HigTama1">LD (mm):</label><input type="number" id="HigTam1"><br>';
-texto+=' <label for="HigTama2">LI (mm):</label><input type="number" id="HigTam2"><br>';
-texto+=' <label for="HigTama3">LC (mm):</label><input type="number" id="HigTam3"><br>';
-texto+=' <p onclick="showHigado();divHT.style.visibility=\'hidden\'">Retornar</p>';
+var texto=Titulo('Higado','showHigado','divHT');
+if (typeof(Examen.higado.HigTam1)==='undefined') 
+ {Examen.higado.HigTam1=0;v1=0} else {v1=Examen.higado.HigTam1}
+if (typeof(Examen.higado.HigTam2)==='undefined') 
+ {Examen.higado.HigTam2=0;v2=0} else {v2=Examen.higado.HigTam2}
+if (typeof(Examen.higado.HigTam3)==='undefined') 
+ {Examen.higado.HigTam3=0;v3=0} else {v3=Examen.higado.HigTam3}
+if (typeof(Examen.higado.HigTam4)==='undefined') 
+ {Examen.higado.HigTam4=0;v4=0} else {v4=Examen.higado.HigTam4}
+
+texto+=' <label for="HigTam1">L&oacute;bulo derecho (cm):</label><input onchange="setHigado()" type="number" id="HigTam1" value='+v1+'><br>';
+texto+=' <label for="HigTam2">L&oacute;bulo izquierdo (cm):</label><input onchange="setHigado()" type="number" id="HigTam2" value='+v2+'><br>';
+texto+=' <label for="HigTam3">L&oacute;bulo caudado (cm):</label><input onchange="setHigado()" type="number" id="HigTam3" value='+v3+'><br>';
+texto+=' <label for="HigTam4">Di&aacute;metro Vena Porta (cm):</label><input onchange="setHigado()" type="number" id="HigTam4" value='+v4+'><br>';
+
 divHT.innerHTML=texto;
 divHT.style.visibility="visible";
 }
+var divPan;
+
+function showPancreas(){
+divA.style.visibility="hidden";
+divPan=document.getElementById('Pancreas');
+divPan.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+//var texto='<h4 style="text-align:center;color:yellow;"> Pancreas ';
+var texto=Titulo('Pancreas','showAbdominal','divPan');
+texto+=' <p class="menuc" onclick="showPanDet();">General</p>';
+texto+=' <p class="menuc">Nodulos</p>';
+texto+=' <p class="menuc" onclick="showPanTam();">Medidas</p>';
+divPan.innerHTML=texto;
+divPan.style.visibility="visible";
+if (typeof(Examen.pancreas)==='undefined')  {Examen.pancreas=new Object();}
+
+}
+
+function setPancreas(){
+try {
+Examen.pancreas.PanTam1=document.getElementById('PanTam1').value;
+} catch {console.log('Error')}
+try {
+Examen.pancreas.PanTam2=document.getElementById('PanTam2').value;
+} catch {console.log('Error')}
+try {
+Examen.pancreas.PanTam3=document.getElementById('PanTam3').value;
+} catch {console.log('Error')}
+try {
+Examen.pancreas.PanTam4=document.getElementById('PanTam4').value;
+} catch {console.log('Error')}
+alert(document.getElementById("PanVis").value)
+
+if (document.getElementById("PanVis").checked)
+ {Examen.pancreas.PanVis='checked'} else {Examen.pancreas.PanVis=''}
+if (document.getElementById("PanHom").checked)
+ {Examen.pancreas.PanHom='checked'} else {Examen.pancreas.PanHom=''}
+
+if (document.getElementById("PanEco1").checked)
+ {Examen.pancreas.PanEco='hipo'} 
+if (document.getElementById("PanEco2").checked)
+ {Examen.pancreas.PanEco='hiper'} 
+if (document.getElementById("PanEco3").checked)
+ {Examen.pancreas.PanEco='normal'} 
+
+}
+
+function showPanTam(){
+divPan.style.visibility="hidden";
+divPT=document.getElementById('PanTam');
+divPT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Pancreas','showPancreas','divPT');
+if (typeof(Examen.pancreas.PanTam1)==='undefined') 
+ {Examen.pancreas.PanTam1=0;v1=0} else {v1=Examen.pancreas.PanTam1}
+if (typeof(Examen.pancreas.PanTam2)==='undefined') 
+ {Examen.pancreas.PanTam2=0;v2=0} else {v2=Examen.pancreas.PanTam2}
+if (typeof(Examen.pancreas.PanTam3)==='undefined') 
+ {Examen.pancreas.PanTam3=0;v3=0} else {v3=Examen.pancreas.PanTam3}
+if (typeof(Examen.pancreas.PanTam4)==='undefined') 
+ {Examen.pancreas.PanTam4=0;v4=0} else {v4=Examen.pancreas.PanTam4}
+
+texto+=' <label for="PanTam1">Cabeza (cm):</label><input onchange="setPancreas()" type="number" id="PanTam1" value="'+v1+'"><br>';
+texto+=' <label for="PanTam2">Cuerpo (cm):</label><input onchange="setPancreas()" type="number" id="PanTam2" value="'+v2+'"><br>';
+texto+=' <label for="PanTam3">Cola (cm):</label><input onchange="setPancreas()" type="number" id="PanTam3" value="'+v3+'"><br>';
+texto+=' <label for="PanTam4">Espesor conducto pancreatico (mm): </label><input onchange="setPancreas()" type="number" id="PanTam4" value="'+v4+'"><br>';
+divPT.innerHTML=texto;
+divPT.style.visibility="visible";
+}
+
+function showPanDet(){
+divPan.style.visibility="hidden";
+divPD=document.getElementById('PanDet');
+divPD.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Pancreas','showPancreas','divPD');
+if (typeof(Examen.pancreas.PanVis)==='undefined') 
+ {Examen.pancreas.PanVis="checked";v1="checked"} else {v1=Examen.pancreas.PanHom}
+if (typeof(Examen.pancreas.PanHom)==='undefined') 
+ {Examen.pancreas.PanHom="checked";v2="checked"} else {v2=Examen.pancreas.PanHom}
+v3='';v4='';v5='';
+if (typeof(Examen.pancreas.PanHom)==='undefined') 
+ {Examen.pancreas.PanEco="normal";v5="checked"} 
+
+ else {
+if (Examen.pancreas.PanEco=="normal") v5='checked';
+if (Examen.pancreas.PanEco=="hipo") v3='checked';
+if (Examen.pancreas.PanEco=="hiper") v4='checked';
+
+}
+texto+='<label for="PanVis">Visible</label><input type="checkbox" id="PanVis" '+ v1 +' onchange="setPancreas()"><br>';
+texto+='<label for="PanHom">Parenquima homogeneo</label><input type="checkbox" id="PanHom" '+ v2 +' onchange="setPancreas()"><br>';
+texto+='Ecogenicidad: <br><label for="PanEco1"> Hipoecoico </label><input type="radio" id="PanEco1" name="PanEco"'+ v3 +' onchange="setPancreas()"><br>';
+texto+='<label for="PanEco2"> HiperEcoico</label><input type="radio" id="PanEco2" name="PanEco"'+ v4 +' onchange="setPancreas()"><br>';
+texto+='<label for="PanEco3"> Propia </label><input type="radio" id="PanEco3" name="PanEco"'+ v5 +' onchange="setPancreas()"><br>';
+
+divPD.innerHTML=texto;
+divPD.style.visibility="visible";
+}
+
+
+
+
+function showVesBil(){
+divA.style.visibility="hidden";
+divVB=document.getElementById('VesBil');
+divVB.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Ves&iacute;cula Biliar','showAbdominal','divVB');
+texto+=' <p class="menuc">Bordes</p>';
+texto+=' <p class="menuc">Ecogenicidad</p>';
+texto+=' <p class="menuc">Homogenicidad</p>';
+texto+=' <p class="menuc" onclick="showVesBilTam();">Medidas</p>';
+divVB.innerHTML=texto;
+divVB.style.visibility="visible";
+if (typeof(Examen.VB)==='undefined')  {Examen.VB=new Object();}
+
+}
+function setVB(){
+Examen.VB.VBTam1=document.getElementById('VBTam1').value;
+Examen.VB.VBTam2=document.getElementById('VBTam2').value;
+Examen.VB.VBTam3=document.getElementById('VBTam3').value;
+Examen.VB.VBTam4=document.getElementById('VBTam4').value;
+}
+
+function showVesBilTam(){
+divVB.style.visibility="hidden";
+divVBT=document.getElementById('VesBilTam');
+divVBT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Ves&iacute;cula Biliar','showVesBil','divVBT');
+if (typeof(Examen.VB.VBTam1)==='undefined') 
+ {Examen.VB.VBTam1=0;v1=0} else {v1=Examen.VB.VBTam1}
+if (typeof(Examen.VB.VBTam2)==='undefined') 
+ {Examen.VB.VBTam2=0;v2=0} else {v2=Examen.VB.VBTam2}
+if (typeof(Examen.VB.VBTam3)==='undefined') 
+ {Examen.VB.VBTam3=0;v3=0} else {v3=Examen.VB.VBTam3}
+if (typeof(Examen.VB.VBTam4)==='undefined') 
+ {Examen.VB.VBTam4=0;v4=0} else {v4=Examen.VB.VBTam4}
+texto+=' <label for="VBTam1">A-P (cm):</label><input onchange="setVB()" type="number" id="VBTam1" value="'+v1+'" ><br>';
+texto+=' <label for="VBTam2">Transverso (cm):</label><input onchange="setVB()" type="number" id="VBTam2" value="'+v2+'"><br>';
+texto+=' <label for="VBTam3">Longitudinal (cm):</label><input onchange="setVB()" type="number" id="VBTam3" value="'+v3+'"><br>';
+texto+=' <label for="VBTam4">Espesor de pared (mm):</label><input onchange="setVB()" type="number" id="VBTam4" value="'+v4+'"><br>';
+divVBT.innerHTML=texto;
+divVBT.style.visibility="visible";
+
+}
+
+function showBazo(){
+divA.style.visibility="hidden";
+divB=document.getElementById('Bazo');
+divB.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Bazo','showAbdominal','divB');
+texto+=' <p class="menuc">Bordes</p>';
+texto+=' <p class="menuc">Ecogenicidad</p>';
+texto+=' <p class="menuc">Homogenicidad</p>';
+texto+=' <p class="menuc" onclick="showBazTam();">Tama&nacute;o</p>';
+divB.innerHTML=texto;
+divB.style.visibility="visible";
+if (typeof(Examen.bazo)==='undefined')  {Examen.bazo=new Object();}
+
+}
+
+function setBazo(){
+Examen.bazo.BazoTam1=document.getElementById('BazoTam1').value;
+Examen.bazo.BazoTam2=document.getElementById('BazoTam2').value;
+Examen.bazo.BazoTam3=document.getElementById('BazoTam3').value;
+}
+
+function showBazTam(){
+divB.style.visibility="hidden";
+divBT=document.getElementById('BazTam');
+divBT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Bazo','showBazo','divBT');
+if (typeof(Examen.bazo.BazoTam1)==='undefined') 
+ {Examen.bazo.BazoTam1=0;v1=0} else {v1=Examen.bazo.BazoTam1}
+if (typeof(Examen.bazo.BazoTam2)==='undefined') 
+ {Examen.bazo.BazoTam2=0;v2=0} else {v2=Examen.bazo.BazoTam2}
+if (typeof(Examen.bazo.BazoTam3)==='undefined') 
+ {Examen.bazo.BazoTam3=0;v3=0} else {v3=Examen.bazo.BazoTam3}
+if (typeof(Examen.bazo.BazoTam4)==='undefined') 
+ {Examen.bazo.BazoTam4=0;v4=0} else {v4=Examen.bazo.BazoTam4}
+
+texto+=' <label for="BazoTam1">A-P (cm):</label><input type="number" id="BazoTam1" onchange="setBazo()" value="'+v1+'" ><br>';
+texto+=' <label for="BazoTam2">Transverso (cm):</label><input type="number" id="BazoTam2" onchange="setBazo()" value="'+v2+'" ><br>';
+texto+=' <label for="BazoTam3">Longitudinal (cm):</label><input type="number" id="BazoTam3" onchange="setBazo()" value="'+v3+'"><br>';
+divBT.innerHTML=texto;
+divBT.style.visibility="visible";
+}
+
+function showRd(){
+divA.style.visibility="hidden";
+divRd=document.getElementById('Bazo');
+divRd.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Ri&nacute;on derecho','showAbdominal','divRd');
+texto+=' <p class="menuc">Bordes</p>';
+texto+=' <p class="menuc">Ecogenicidad</p>';
+texto+=' <p class="menuc">Homogenicidad</p>';
+texto+=' <p class="menuc" onclick="showRdTam();">Tama&nacute;o</p>';
+divRd.innerHTML=texto;
+divRd.style.visibility="visible";
+if (typeof(Examen.rd)==='undefined')  {Examen.rd=new Object();}
+
+}
+
+function setRD(){
+Examen.rd.RDTam1=document.getElementById('RDTam1').value;
+Examen.rd.RDTam2=document.getElementById('RDTam2').value;
+Examen.rd.RDTam3=document.getElementById('RDTam3').value;
+}
+function showRdTam(){
+divRd.style.visibility="hidden";
+divRdT=document.getElementById('RDTam');
+divRdT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Ri&nacute;on derecho','showRd','divRdT');
+
+if (typeof(Examen.rd.RDTam1)==='undefined') 
+ {Examen.rd.RDTam1=0;v1=0} else {v1=Examen.rd.RDTam1}
+if (typeof(Examen.rd.RDTam2)==='undefined') 
+ {Examen.rd.RDTam2=0;v2=0} else {v2=Examen.rd.RDTam2}
+if (typeof(Examen.rd.RDTam3)==='undefined') 
+ {Examen.rd.RDTam3=0;v3=0} else {v3=Examen.rd.RDTam3}
+
+
+texto+=' <label for="RDTam1">Eje transversal (cm):</label><input type="number" onchange="setRD()" id="RDTam1" value="'+v1+'"><br>';
+texto+=' <label for="RDTam2">Eje vertical(cm):</label><input type="number" onchange="setRD()" id="RDTam2" value="'+v2+'"><br>';
+texto+=' <label for="RDTam3">Eje Longitudinal (cm):</label><input type="number" onchange="setRD()" id="RDTam3" value="'+v3+'"><br>';
+divRdT.innerHTML=texto;
+divRdT.style.visibility="visible";
+}
+var divH;
+var divHT;
+
+
+function setHigado(){
+Examen.higado.HigTam1=document.getElementById('HigTam1').value;
+Examen.higado.HigTam2=document.getElementById('HigTam2').value;
+Examen.higado.HigTam3=document.getElementById('HigTam3').value;
+Examen.higado.HigTam4=document.getElementById('HigTam4').value;
+
+
+//alert(Examen.higado.HigTam1);
+}
+
+var divPT,divB,divBT;
+
 
 function Changeback(e){
 var colorbase='hotpink';
@@ -328,474 +607,6 @@ estadiar3();
 
 //estadiar();
 //estadiar3();
-
-function estadiar(){
-var resultado="ND";
-if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
-// 0
-//alert(T+" "+N+" "+M);
-// no
-if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado = " "}
-// 0
-if ((M=="M0") && (N=="N0") && (T=="Tis")) {resultado = "0"}
-// Ia
-if ( (M=="M0") && (N=="N0") && (T=="T1")) {resultado = "Ia"}
-// Ib
-if ((M=="M0") && (N=="N1mi") && ((T=="T1") || (T=="T0"))) {resultado = "Ib"}
-
-// IIa
-if ((M=="M0") && (N=="N1") && (T=="T0")) {resultado = "IIa"}
-if ((M=="M0") && (N=="N0") && (T=="T2")) {resultado = "IIa"}
-if ((M=="M0") && (N=="N1") && (T=="T1")) {resultado = "IIa"}
-
-// IIb
-if ((M=="M0") && ((N=="N1")||(N=="N1mi")) && (T=="T2")) {resultado = "IIb"}
-if ((M=="M0") && (N=="N0") && (T=="T3")) {resultado = "IIb"}
-
-// IIIa
-if ((M=="M0") && ((N=="N1")||(N=="N1mi")) && (T=="T3")) {resultado = "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2") || (T=="T3"))) {resultado = "IIIa"}
-
-// IIIb
-if ((M=="M0") && ((N=="N0") || ((N=="N1")||(N=="N1mi")) || (N=="N2")) && (T=="T4")) {resultado = "IIIb"}
-
-// IIIc
-if ((M=="M0") && (N=="N3")) {resultado = "IIIc"}
-
-// IV
-if (M=="M1") {resultado = "IV"} 
-
-//document.getElementById("res-estad").innerHTML="&nbsp &nbsp <font color='darkblue'>Estadio anat&oacute;mico: " +resultado+"</font>";
-}
-
-
-function estadiar2(){
-var resultado="";
-if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
-// 0
-//alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
-// no
-if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado= " "}
-// 0
-if ((M=="M0") && (N=="N0") && (T=="Tis")) {resultado= "0"}
-
-// Ia
-if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G1") && (H=="P")) {resultado= "Ia  "}
-// agregados para G1
-//if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G1") && (H=="N") && (E=="P")   ) {resultado= "Ia  "}
-//if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G1") && (H=="N") && (E=="N") && (P=="P")  ) {resultado= "Ia  "}
-// fin agregados para G1
-if ( (M=="M0") && (N=="N0") && (T=="T1") && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-if ( (M=="M0") && (N=="N0") && (T=="T1") && (G=="G3") && (H=="P") && (E=="P") ) {resultado= "Ia  "}
-if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G1") && (H=="P")) {resultado= "Ia  "}
-// agregados para G1
-//if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G1") && (H=="N") && (E=="P")   ) {resultado= "Ia  "}
-//if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G1") && (H=="N") && (E=="N") && (P=="P")  ) {resultado= "Ia  "}
-// fin agregados para G1
-
-
-if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-if ( (M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) && (G=="G3") && (H=="P") && (E=="P") ) {resultado= "Ia  "}
-
-//if ( (M=="M0") && (N=="N0") && ((T=="T1")||(T=="T2")) && ((G=="G1")||(G=="G2")||(G=="G3")) && (H=="N") && (E=="P") ) {resultado= "Ia  "}
-
-// Ib
-if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G2") && (H=="P") && (E=="N") ) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G3") && (H=="P") && (E=="N") ) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N0") && (T=="T1")) && (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-
-if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G2") && (H=="P") && (E=="N") ) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G3") && (H=="P") && (E=="N") ) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N1mi") && ((T=="T0")||(T=="T1"))) && (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-
-
-if ((M=="M0") && ((N=="N0") && (T=="T2")) && ((G=="G1")||(G=="G2")||(G=="G3")) && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N0") && (T=="T2")) && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-
-if ((M=="M0") && ((N=="N1") && (T=="T1")) && ((G=="G1")||(G=="G2")||(G=="G3")) && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-if ((M=="M0") && ((N=="N1") && (T=="T1")) && ((G=="G1")||(G=="G2")) && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-
-
-if ( (M=="M0") && (N=="N1") && (T=="T2") && (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-if ( (M=="M0") && (N=="N1") && (T=="T2") && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-
-if ( (M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2")) && ((G=="G1")||(G=="G2")) && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-
-if ( (M=="M0") && ((N=="N1")||(N=="N2")) && (T=="T3") && (G=="G1") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-if ( (M=="M0") && ((N=="N1")||(N=="N2")) && (T=="T3") && (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-
-// IIa
-if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
-if ((M=="M0") && ((N=="N0")&&(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
-
-if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N1mi") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
-
-
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  ((G=="G1")||(G=="G2")) && (H=="P") && (E=="N") ) {resultado= "IIa "}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
-
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  ((G=="G1")||(G=="G2")) && (H=="P") && (E=="N") ) {resultado= "IIa "}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
-
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
-
-if ((M=="M0") && ((N=="N1")||(N=="N2")) && (T=="T3") && (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
-
-// IIb
-
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIb "}
-
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIb "}
-
-
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G1") && (H=="P") ) {resultado= "IIb "}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
-
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIb "}
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIb "}
-
-if ((M=="M0") && (T=="T3") && ((N=="N1")||(N=="N2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIb "}
-if ((M=="M0") && (T=="T3") && ((N=="N1")||(N=="N2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIb "}
-
-// IIIa
-
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N1") && ((T=="T0")||(T=="T1")) &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIa"}
-
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T2") &&  (G=="G3") && (H=="N") && (E=="N")) {resultado= "IIIa"}
-
-
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G2") && (H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N1") && (T=="T2") &&  (G=="G3") && (H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
-
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G2") && (H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N0") && (T=="T3") &&  (G=="G3") && (H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
-
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="P") && (E=="N") ) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado= "IIIa"}
-
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="P") && (E=="N") ) {resultado= "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G1") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2") ) &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado= "IIIa"}
-
-if ((M=="M0") &&  (N=="N3") &&  (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIa"}
-
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G1") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIa"}
-
-// IIIb
-
-if ((M=="M0") && (T=="T2") && (N=="N1") &&  ((G=="G1")||(G=="G2")) && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
-if ((M=="M0") && (T=="T2") && (N=="N1") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-
-if ((M=="M0") && (T=="T3") && (N=="N0") &&  ((G=="G1")||(G=="G2")) && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
-if ((M=="M0") && (T=="T3") && (N=="N0") &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIIb"}
-if ((M=="M0") && (N=="N2") && ((T=="T0") || (T=="T1") || (T=="T2")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIIb"}
-if ((M=="M0") && (T=="T3") && ((N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G1") && (H=="P") ) {resultado= "IIIb"}
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-if ((M=="M0") && (T=="T4") && ((N=="N0") || (N=="N1") || (N=="N2")) &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-
-if ((M=="M0") && (N=="N3") &&  (G=="G1") && (H=="P") ) {resultado= "IIIb"}
-if ((M=="M0") && (N=="N3") &&  (G=="G2") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-if ((M=="M0") && (N=="N3") &&  (G=="G2") && (H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-if ((M=="M0") && (N=="N3") &&  (G=="G3") && (H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-
-// IIIc
-
-if ((M=="M0") && (T=="T2") && (N=="N1")  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T3") && (N=="N0")  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
-
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N2") && ((T=="T0")||(T=="T1")||(T=="T2"))  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
-
-if ((M=="M0") && (T=="T3") && ( (N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T3") && ( (N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T3") && ( (N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
-
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G1") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G2") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (T=="T4") && ( (N=="N0")||(N=="N1")||(N=="N2") )  &&  (G=="G3") && (H=="N")  ) {resultado= "IIIc"}
-
-if ((M=="M0") && (N=="N3")  &&  (G=="G1") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G1") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="P") && (E=="P") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="P") && (E=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G2") && (H=="N") && (E=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="P") && (E=="P") && (P=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="P") && (E=="N") ) {resultado= "IIIc"}
-if ((M=="M0") && (N=="N3")  &&  (G=="G3") && (H=="N") ) {resultado= "IIIc"}
-
-
-// IV
-if ( (M=="M1") && ((G=="Gx")||(G=="G1") || (G=="G2") || (G=="G3"))  ){resultado= "IV"} 
-//alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
-if (resultado==""){resultado="ND"}
-//document.getElementById("res-estad2").innerHTML="&nbsp &nbsp Estadio pron&oacute;stico cl&iacute;nico:  " +resultado;
-return resultado;
-}
-
-function estadiar3(){
-var resultado="";
-if ((T=="T1a")||(T=="T1b")||(T=="T1c")) {T="T1"}
-// 0
-//alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
-// no
-if ((M=="M0") && (N=="N0") && (T=="T0")) {resultado= " "}
-// 0
-if ((M=="M0") && (N=="N0") && (T=="Tis")) {resultado= "0"}
-
-if ((M=="M0") && ( ((N=="N0") && (T=="T1")) || ( (N=="N1mi")&&( (T=="T0")||(T=="T1") ) ) ) ){ 
-
-if (G=="G1") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "Ia  "}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "Ib  "}
-}
-
-if (G=="G2") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "Ia  "}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "Ib  "}
-}
-if (G=="G3") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "Ia  "}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ia  "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "Ib  "}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "Ib  "}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "Ib  "}
-}
-}
-
-if ((M=="M0") && ( ((N=="N1") && (T=="T0")) || ((N=="N1") && (T=="T1")) || ((N=="N0") && (T=="T2")) ) ){ 
-
-if (G=="G1") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIa "}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIa "}
-}
-
-if (G=="G2") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIa "}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIa "}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIa "}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
-}
-if (G=="G3") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIa "}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
-}
-}
-
-if ((M=="M0") && ( (((N=="N1")||(N=="N1mi")) && (T=="T2")) || ((N=="N0") && (T=="T3"))) ){ 
-
-if (G=="G1") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIb "}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIb "}
-}
-
-if (G=="G2") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIa "}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIb "}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIb "}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIb "}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
-}
-if (G=="G3") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "Ib  "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIb "}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIb "}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIb "}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIb "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
-}
-}
-
-if ((M=="M0") && ( ((N=="N2") && (T=="T0")) || ((N=="N2") && (T=="T1")) || ((N=="N2") && (T=="T2")) || (((N=="N1")||(N=="N1mi")) && (T=="T3")) || ((N=="N2") && (T=="T3")) ) ){ 
-
-if (G=="G1") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIa "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIa"}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
-}
-
-if (G=="G2") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIa "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIa"}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIa "}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIb"}
-}
-if (G=="G3") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIb "}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIa"}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIa"}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIIa"}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
-}
-}
-
-if ( (M=="M0") && ( ((N=="N0") && (T=="T4")) || (((N=="N1")||(N=="N1mi")) && (T=="T4")) || ((N=="N2") && (T=="T4")) || (N=="N3") ) ){ 
-
-if (G=="G1") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIIa"}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
-}
-
-if (G=="G2") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIIa"}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
-}
-if (G=="G3") {
-   if ((H=="P") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="P") && (E=="P") && (P=="N")) {resultado= "IIIb"}
-   if ((H=="P") && (E=="N") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="P") && (E=="N") && (P=="N")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="P") && (P=="P")) {resultado= "IIIb"}
-   if ((H=="N") && (E=="P") && (P=="N")) {resultado= "IIIc"}
-   if ((H=="N") && (E=="N") && (P=="P")) {resultado= "IIIc"}
-   if ((H=="N") && (E=="N") && (P=="N")) {resultado= "IIIc"}
-}
-}
-
-// IV
-if ( (M=="M1") && ((G=="Gx")||(G=="G1") || (G=="G2") || (G=="G3"))  ){resultado= "IV"} 
-//alert(T+" "+N+" "+M+" "+G+" "+H+" "+E+" "+P);
-if (resultado==""){resultado="ND"}
-//document.getElementById("res-estad2").innerHTML="&nbsp &nbsp <font color='black'>Estadio pron&oacute;stico cl&iacute;nico: " +resultado+"</font>";
-return resultado;
-}
-
 
 
 function Ayuda(num){
