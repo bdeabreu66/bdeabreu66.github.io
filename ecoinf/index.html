@@ -1,12 +1,10 @@
 <html>
 <HEAD>
-<TITLE>  Estadificacion mama </TITLE>
+<TITLE>  Informe ecogr&aacute;fico </TITLE>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 </HEAD>
 <style>
-#spT,#spN,#spM,#spG,#spH,#spE,#spP{
-color: black;
-} 
+
 #footer {
   position: fixed;
   left: 0;
@@ -89,7 +87,10 @@ width: 1 em;
 width: 10em;
 }
 #EdadP{
-width: 5em;
+width: 3em;
+}
+#IdP{
+width: 6em;
 }
 </style>
 <BODY onload="inicio();" onunload="salida()">
@@ -98,81 +99,189 @@ width: 5em;
    <h3>Informe de ex&aacute;men ecogr&aacute;fico</h3> 
 </div>
 <div style="position:fixed;top:15%;left:0%;">
-<label for="NombP"> Nombre Paciente:</label> <input onchange="setNombre()" id="NombP"><br>
+<label for="NombP"> Nombre Paciente:</label> <input onchange="setNombre()" id="NombP">
+<label for="IdP"> ID:</label> <input onchange="setId()" id="IdP"><br>
 <label for="EdadP"> Edad:</label> <input onchange="setEdad()" type="number" id="EdadP">
 Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name="Sexo" id="SexoF" value='F'>
 <label for="SexoM">M</label><input onchange="setSexo();" type="radio" name="Sexo" id="SexoM" value='M'>
 </div>
 <div id="menuPrincipal" style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;">
 </div>
+<div id="Focal" > </div>
+
 <div id="Higado" > </div>
    <div id="HigTam" > </div>
+   <div id="HigDet" >  </div>
 <div id="VesBil" >  </div>
  <div id="VesBilTam" >  </div>
+ <div id="VesBilDet" >  </div>
+
 <div id="Pancreas" > </div>
    <div id="PanTam" >  </div>
    <div id="PanDet" >  </div>
 
 <div id="Bazo" >  </div>
  <div id="BazTam" >  </div>
-div id="RD" > </div>
+ <div id="BazDet" >  </div>
+
+<div id="RD" > </div>
    <div id="RDTam" > </div>
-div id="RI" > </div>
+   <div id="RDDet" > </div>
+
+<div id="RI" > </div>
    <div id="RITam" > </div>
-<div id="Abdominal" > 
+   <div id="RIDet" > </div>
 
- 
-</div>
+<div id="Abdominal" > </div>
 
-<div id="Utero" style="visibility:hidden;" onclick="showUtero()"> 
- <p>Utero</p>
-</div>
+<div id="Pelvico" > </div>
+<div id="Vejiga" > </div>
+  <div id="VejTam" >  </div>
+  <div id="VejDet" >  </div>
 
-<div id="Ovarios"  style="visibility:hidden;"> 
- <p><span onclick="showOvaD()">OvD</span> <span onclick="showOvaI()">OvI</span></p>
-</div>
+<div id="Prostata"> </div>
+  <div id="ProstTam"> </div>
+  <div id="ProstDet"> </div>
 
-<div id="Prostata" style="visibility:hidden;" onclick="showProstata()"> 
- <p>Prostata</p>
-</div>
 
-<div id="Tiroides" style="visibility:hidden;" onclick="showTiroides()"> 
- <p>Tiroides</p>
-</div>
+<div id="Utero" >  </div>
+  <div id="UtTam" >  </div>
+  <div id="UtDet" >  </div>
 
-<div id="Mamas" style="visibility:hidden;"> 
- <p><span onclick="showMd()">MamaD</span> <span onclick="showMamaI()">MamaI</span></p>
-</div>
+<div id="OvD"  ></div>
+  <div id="OvDTam" >  </div>
+  <div id="OvDDet" >  </div>
+
+<div id="OvI"  ></div>
+  <div id="OvITam" >  </div>
+  <div id="OvIDet" >  </div>
+
+<div id="Tes"  ></div>
+
+<div id="TesD"  ></div>
+  <div id="TesDTam" >  </div>
+  <div id="TesDDet" >  </div>
+
+<div id="TesI"  ></div>
+  <div id="TesITam" >  </div>
+  <div id="TesIDet" >  </div>
+
+<div id="Tiroides"> </div>
+<div id="Istmo"> </div>
+
+<div id="TirD"> </div>
+  <div id="TirDTam"> </div>
+  <div id="TirDDet"> </div>
+
+<div id="TirI"> </div>
+  <div id="TirITam"> </div>
+  <div id="TirIDet"> </div>
+
+<div id="MamaD"> </div>
+  <div id="MamaDTam"> </div>
+  <div id="MamaDDet"> </div>
+
+<div id="MamaI"> </div>
+  <div id="MamaITam"> </div>
+  <div id="MamaIDet"> </div>
 
 <div id="ayuda" hidden="true"></div>
 <div> <br></div>
 </div>
 <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
+<script type="text/javascript" src="higado.js"> </script>
+<script type="text/javascript" src="rinon.js"> </script>
+<script type="text/javascript" src="bazo.js"> </script>
+<script type="text/javascript" src="vesicula.js"> </script>
+<script type="text/javascript" src="pancreas.js"> </script>
+<script type="text/javascript" src="vejiga.js"> </script>
+<script type="text/javascript" src="prostata.js"> </script>
+<script type="text/javascript" src="utero.js"> </script>
+<script type="text/javascript" src="ovarios.js"> </script>
+<script type="text/javascript" src="testiculos.js"> </script>
+<script type="text/javascript" src="tiroides.js"> </script>
+
 <script>
 var Examen;
 
 function inicio(){
-showPrincipal();
+
 var aux=localStorage.getItem('EXAMEN');
 if (aux)  {Examen=JSON.parse(aux);} else {Examen=new Object(); }
 
 //Examen=new Object();
+if (typeof(Examen.nombre)==='undefined') 
+ {Examen.nombre=''} else {document.getElementById("NombP").value=Examen.nombre}
+if (typeof(Examen.edad)==='undefined') 
+ {Examen.edad=''} else {document.getElementById("EdadP").value=Examen.edad}
+if (typeof(Examen.id)==='undefined') 
+ {Examen.id=''} else {document.getElementById("IdP").value=Examen.id}
+
+if (typeof(Examen.sexo)==='undefined') {Examen.sexo='F'}
+if (Examen.sexo=='F') 
+  {document.getElementById("SexoF").checked=true}  else {document.getElementById("SexoM").checked=true}
+sexoPac=Examen.sexo;
+showPrincipal();
+setLimites()
 } 
 
 function salida(){
+//Examen.nombre=document.getElementById("NombP").value;
+//Examen.edad=document.getElementById("EdadP").value;
 localStorage.setItem('EXAMEN',JSON.stringify(Examen));
 } 
+function setLimites(){
 
+//Vesicula Biliar
+vesBilEspPreMax=0.4;
+vesBilEspPostMax=0.4;
+vesBilLongMax=0.4;
+vesBilTransMax=0.4;
+
+//vegija urinaria
+vegijaEspLMax=0.8;
+vegijaEspVMax=0.8;
+
+//bazo
+bazotransMax=4;
+bazoLongMax=11;
+//rinon
+RenLongMax=12;
+RenLongMin=10;
+RenTransMax=6;
+RenTransMin=4;
+RenParMax=2.5;
+RenParMin=1.3;
+if (EdadPac<30) {RenIndMin=1.6;} 
+  else {if (EdadPac>60) {RenIndMin=1.6;} else {RenIndMin=1.2; RenIndMax=1.6;}}
+
+//pancreas
+panCabMax=3;
+panCuerpoMax=2;
+panColaMax=2.5;
+panCondMax=0.2;
+
+//prostata
+prostTransMax=5;
+prostLongMax=3;
+prostAPMax=3;
+
+
+}
 function setNombre(){
 Examen.nombre=document.getElementById("NombP").value
-alert(Examen.nombre);
+
 }
 
 function setEdad(){
-Examen.edad=document.getElementById("EdadP").value
-alert(Examen.edad);
+Examen.edad=document.getElementById("EdadP").value;
+edadPac=Examen.edad;
+setLimites();
 }
 
+function setId(){
+Examen.id=document.getElementById("IdP").value
+}
 function setSexo(){
 if (document.getElementById('SexoF').checked) {sexoPac="F";} else {sexoPac="M";}
 Examen.sexo=sexoPac;
@@ -186,17 +295,27 @@ resp+='<span style="color:blue;" onclick="'+t2+'();'+t3+'.style.visibility=\'hid
 return resp;
 }
 var divp;
+
+function showFocal(d1,d2,d3){
+d3.style.visibility="hidden";
+divfocal=document.getElementById('Focal');
+divfocal.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;";
+var texto=Titulo(d1,d2,'divfocal');
+divfocal.innerHTML=texto;
+}
+
+
 function showPrincipal(){
 divp=document.getElementById('menuPrincipal');
 divp.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;";
 var texto='<p class="menup" onclick="Changeback(this);showAbdominal()"> Abdominal </p>';
-texto+='<p class="menup" onclick="Changeback(this);"> P&eacute;lvico </p>';
-texto+='<p class="menup" onclick="Changeback(this);"> Abdomino-P&eacute;lvico </p>';
-texto+='<p class="menup" onclick="Changeback(this);"> Tiroideo </p>';
+texto+='<p class="menup" onclick="Changeback(this);showPelvico()"> P&eacute;lvico </p>';
+//texto+='<p class="menup" onclick="Changeback(this);"> Abdomino-P&eacute;lvico </p>';
+texto+='<p class="menup" onclick="Changeback(this);showTiroides()"> Tiroideo </p>';
 if (sexoPac=='M') 
- {texto+='<p class="menup" onclick="Changeback(this);"> Testicular </p>';}
+ {texto+='<p class="menup" onclick="Changeback(this);showTesticular()"> Testicular </p>';}
 if (sexoPac=='F')
- {texto+='<p class="menup" onclick="Changeback(this);"> Mamario</p>';}
+ {texto+='<p class="menup" onclick="Changeback(this);showMamas()"> Mamario</p>';}
 
 texto+='<p class="menup" onclick="Changeback(this);"> Cardiaco </p>';
 texto+='<p class="menup" onclick="Changeback(this);"> Vascular Abdominal </p>';
@@ -206,301 +325,72 @@ divp.innerHTML=texto;
 }
 var divA;
 var sexoPac;
+var EdadPac;
+
 function showAbdominal(){
 divp.style.visibility="hidden";
 divA=document.getElementById('Abdominal');
 divA.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
-var texto='<h4 style="text-align:center;color:yellow;"> Abdomen </h4>';
-
+var texto=Titulo('Abdomen','showPrincipal','divA');
 texto+=' <p class="menuc" onclick="showPancreas()">Pancreas</p>';
 texto+=' <p class="menuc"onclick="showHigado()">Higado</p>';
 texto+=' <p class="menuc"onclick="showVesBil()">Vesicula Biliar</p>';
 texto+=' <p class="menuc"><span onclick="showRd()">RD</span> <span onclick="showRi()">RI</span></p>';
-texto+=' <p class="menuc" onclick="showBazo()">Bazo</p>';
-texto+=' <p class="menuc" onclick="showPrincipal();divA.style.visibility=\'hidden\'">Retornar</p>';
+texto+=' <p class="menuc" onclick="showBazo();">Bazo</p>';
+texto+=' <p class="menuc" onclick="showAorta();">Aorta</p>';
 divA.innerHTML=texto;
 divA.style.visibility='visible';
 }
 
-function showHigado(){
-divA.style.visibility="hidden";
-divH=document.getElementById('Higado');
-divH.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Higado','showAbdominal','divH');
-texto+=' <p class="menuc">Bordes</p>';
-texto+=' <p class="menuc">Ecogenicidad</p>';
-texto+=' <p class="menuc">Homogenicidad</p>';
-texto+=' <p class="menuc" onclick="showHigTam();">Medidas</p>';
-//Examen.higado=true;
-divH.innerHTML=texto;
-divH.style.visibility="visible";
-if (typeof(Examen.higado)==='undefined')  {Examen.higado=new Object();}
+function showTiroides(){
+divp.style.visibility="hidden";
+divTir=document.getElementById('Tiroides');
+divTir.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
+var texto=Titulo('Tiroides','showPrincipal','divTir');
+texto+=' <p class="menuc"onclick="showTirD()">Tiroides Derecha </p>';
+texto+=' <p class="menuc"onclick="showTirI()">Tiroides Izquierda </p>';
+texto+=' <p class="menuc"onclick="showIstmo()">Istmo </p>';
 
+divTir.innerHTML=texto;
+divTir.style.visibility='visible';
 }
-function showHigTam(){
-divH.style.visibility="hidden";
-divHT=document.getElementById('HigTam');
-divHT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Higado','showHigado','divHT');
-if (typeof(Examen.higado.HigTam1)==='undefined') 
- {Examen.higado.HigTam1=0;v1=0} else {v1=Examen.higado.HigTam1}
-if (typeof(Examen.higado.HigTam2)==='undefined') 
- {Examen.higado.HigTam2=0;v2=0} else {v2=Examen.higado.HigTam2}
-if (typeof(Examen.higado.HigTam3)==='undefined') 
- {Examen.higado.HigTam3=0;v3=0} else {v3=Examen.higado.HigTam3}
-if (typeof(Examen.higado.HigTam4)==='undefined') 
- {Examen.higado.HigTam4=0;v4=0} else {v4=Examen.higado.HigTam4}
-
-texto+=' <label for="HigTam1">L&oacute;bulo derecho (cm):</label><input onchange="setHigado()" type="number" id="HigTam1" value='+v1+'><br>';
-texto+=' <label for="HigTam2">L&oacute;bulo izquierdo (cm):</label><input onchange="setHigado()" type="number" id="HigTam2" value='+v2+'><br>';
-texto+=' <label for="HigTam3">L&oacute;bulo caudado (cm):</label><input onchange="setHigado()" type="number" id="HigTam3" value='+v3+'><br>';
-texto+=' <label for="HigTam4">Di&aacute;metro Vena Porta (cm):</label><input onchange="setHigado()" type="number" id="HigTam4" value='+v4+'><br>';
-
-divHT.innerHTML=texto;
-divHT.style.visibility="visible";
+function showTesticular(){
+divp.style.visibility="hidden";
+divTes=document.getElementById('Tes');
+divTes.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
+var texto=Titulo('Test&iacute;culos','showPrincipal','divTes');
+texto+=' <p class="menuc"onclick="showTesD()">Test&iacute;culo Derecho </p>';
+texto+=' <p class="menuc"onclick="showTesI()">Test&iacute;culo Izquierdo </p>';
+divTes.innerHTML=texto;
+divTes.style.visibility='visible';
 }
-var divPan;
-
-function showPancreas(){
-divA.style.visibility="hidden";
-divPan=document.getElementById('Pancreas');
-divPan.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-//var texto='<h4 style="text-align:center;color:yellow;"> Pancreas ';
-var texto=Titulo('Pancreas','showAbdominal','divPan');
-texto+=' <p class="menuc" onclick="showPanDet();">General</p>';
-texto+=' <p class="menuc">Nodulos</p>';
-texto+=' <p class="menuc" onclick="showPanTam();">Medidas</p>';
-divPan.innerHTML=texto;
-divPan.style.visibility="visible";
-if (typeof(Examen.pancreas)==='undefined')  {Examen.pancreas=new Object();}
-
+function showPelvico(){
+divp.style.visibility="hidden";
+divPelvis=document.getElementById('Pelvico');
+divPelvis.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
+var texto=Titulo('Pelvis','showPrincipal','divPelvis');
+texto+=' <p class="menuc" onclick="showVejiga()">Vejiga</p>';
+if (sexoPac=="M") 
+   {texto+=' <p class="menuc"onclick="showProstata()">Prostata</p>';}
+if (sexoPac=="F") 
+{texto+=' <p class="menuc"onclick="showUtero()">Utero</p>';
+texto+=' <p class="menuc"><span onclick="showOvD()">OVD</span> <span onclick="showOvI()">OVI</span></p>';
 }
-
-function setPancreas(){
-try {
-Examen.pancreas.PanTam1=document.getElementById('PanTam1').value;
-} catch {console.log('Error')}
-try {
-Examen.pancreas.PanTam2=document.getElementById('PanTam2').value;
-} catch {console.log('Error')}
-try {
-Examen.pancreas.PanTam3=document.getElementById('PanTam3').value;
-} catch {console.log('Error')}
-try {
-Examen.pancreas.PanTam4=document.getElementById('PanTam4').value;
-} catch {console.log('Error')}
-alert(document.getElementById("PanVis").value)
-
-if (document.getElementById("PanVis").checked)
- {Examen.pancreas.PanVis='checked'} else {Examen.pancreas.PanVis=''}
-if (document.getElementById("PanHom").checked)
- {Examen.pancreas.PanHom='checked'} else {Examen.pancreas.PanHom=''}
-
-if (document.getElementById("PanEco1").checked)
- {Examen.pancreas.PanEco='hipo'} 
-if (document.getElementById("PanEco2").checked)
- {Examen.pancreas.PanEco='hiper'} 
-if (document.getElementById("PanEco3").checked)
- {Examen.pancreas.PanEco='normal'} 
-
+divPelvis.innerHTML=texto;
+divPelvis.style.visibility='visible';
 }
-
-function showPanTam(){
-divPan.style.visibility="hidden";
-divPT=document.getElementById('PanTam');
-divPT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Pancreas','showPancreas','divPT');
-if (typeof(Examen.pancreas.PanTam1)==='undefined') 
- {Examen.pancreas.PanTam1=0;v1=0} else {v1=Examen.pancreas.PanTam1}
-if (typeof(Examen.pancreas.PanTam2)==='undefined') 
- {Examen.pancreas.PanTam2=0;v2=0} else {v2=Examen.pancreas.PanTam2}
-if (typeof(Examen.pancreas.PanTam3)==='undefined') 
- {Examen.pancreas.PanTam3=0;v3=0} else {v3=Examen.pancreas.PanTam3}
-if (typeof(Examen.pancreas.PanTam4)==='undefined') 
- {Examen.pancreas.PanTam4=0;v4=0} else {v4=Examen.pancreas.PanTam4}
-
-texto+=' <label for="PanTam1">Cabeza (cm):</label><input onchange="setPancreas()" type="number" id="PanTam1" value="'+v1+'"><br>';
-texto+=' <label for="PanTam2">Cuerpo (cm):</label><input onchange="setPancreas()" type="number" id="PanTam2" value="'+v2+'"><br>';
-texto+=' <label for="PanTam3">Cola (cm):</label><input onchange="setPancreas()" type="number" id="PanTam3" value="'+v3+'"><br>';
-texto+=' <label for="PanTam4">Espesor conducto pancreatico (mm): </label><input onchange="setPancreas()" type="number" id="PanTam4" value="'+v4+'"><br>';
-divPT.innerHTML=texto;
-divPT.style.visibility="visible";
-}
-
-function showPanDet(){
-divPan.style.visibility="hidden";
-divPD=document.getElementById('PanDet');
-divPD.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Pancreas','showPancreas','divPD');
-if (typeof(Examen.pancreas.PanVis)==='undefined') 
- {Examen.pancreas.PanVis="checked";v1="checked"} else {v1=Examen.pancreas.PanHom}
-if (typeof(Examen.pancreas.PanHom)==='undefined') 
- {Examen.pancreas.PanHom="checked";v2="checked"} else {v2=Examen.pancreas.PanHom}
-v3='';v4='';v5='';
-if (typeof(Examen.pancreas.PanHom)==='undefined') 
- {Examen.pancreas.PanEco="normal";v5="checked"} 
-
- else {
-if (Examen.pancreas.PanEco=="normal") v5='checked';
-if (Examen.pancreas.PanEco=="hipo") v3='checked';
-if (Examen.pancreas.PanEco=="hiper") v4='checked';
-
-}
-texto+='<label for="PanVis">Visible</label><input type="checkbox" id="PanVis" '+ v1 +' onchange="setPancreas()"><br>';
-texto+='<label for="PanHom">Parenquima homogeneo</label><input type="checkbox" id="PanHom" '+ v2 +' onchange="setPancreas()"><br>';
-texto+='Ecogenicidad: <br><label for="PanEco1"> Hipoecoico </label><input type="radio" id="PanEco1" name="PanEco"'+ v3 +' onchange="setPancreas()"><br>';
-texto+='<label for="PanEco2"> HiperEcoico</label><input type="radio" id="PanEco2" name="PanEco"'+ v4 +' onchange="setPancreas()"><br>';
-texto+='<label for="PanEco3"> Propia </label><input type="radio" id="PanEco3" name="PanEco"'+ v5 +' onchange="setPancreas()"><br>';
-
-divPD.innerHTML=texto;
-divPD.style.visibility="visible";
-}
-
-
-
-
-function showVesBil(){
-divA.style.visibility="hidden";
-divVB=document.getElementById('VesBil');
-divVB.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Ves&iacute;cula Biliar','showAbdominal','divVB');
-texto+=' <p class="menuc">Bordes</p>';
-texto+=' <p class="menuc">Ecogenicidad</p>';
-texto+=' <p class="menuc">Homogenicidad</p>';
-texto+=' <p class="menuc" onclick="showVesBilTam();">Medidas</p>';
-divVB.innerHTML=texto;
-divVB.style.visibility="visible";
-if (typeof(Examen.VB)==='undefined')  {Examen.VB=new Object();}
-
-}
-function setVB(){
-Examen.VB.VBTam1=document.getElementById('VBTam1').value;
-Examen.VB.VBTam2=document.getElementById('VBTam2').value;
-Examen.VB.VBTam3=document.getElementById('VBTam3').value;
-Examen.VB.VBTam4=document.getElementById('VBTam4').value;
-}
-
-function showVesBilTam(){
-divVB.style.visibility="hidden";
-divVBT=document.getElementById('VesBilTam');
-divVBT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Ves&iacute;cula Biliar','showVesBil','divVBT');
-if (typeof(Examen.VB.VBTam1)==='undefined') 
- {Examen.VB.VBTam1=0;v1=0} else {v1=Examen.VB.VBTam1}
-if (typeof(Examen.VB.VBTam2)==='undefined') 
- {Examen.VB.VBTam2=0;v2=0} else {v2=Examen.VB.VBTam2}
-if (typeof(Examen.VB.VBTam3)==='undefined') 
- {Examen.VB.VBTam3=0;v3=0} else {v3=Examen.VB.VBTam3}
-if (typeof(Examen.VB.VBTam4)==='undefined') 
- {Examen.VB.VBTam4=0;v4=0} else {v4=Examen.VB.VBTam4}
-texto+=' <label for="VBTam1">A-P (cm):</label><input onchange="setVB()" type="number" id="VBTam1" value="'+v1+'" ><br>';
-texto+=' <label for="VBTam2">Transverso (cm):</label><input onchange="setVB()" type="number" id="VBTam2" value="'+v2+'"><br>';
-texto+=' <label for="VBTam3">Longitudinal (cm):</label><input onchange="setVB()" type="number" id="VBTam3" value="'+v3+'"><br>';
-texto+=' <label for="VBTam4">Espesor de pared (mm):</label><input onchange="setVB()" type="number" id="VBTam4" value="'+v4+'"><br>';
-divVBT.innerHTML=texto;
-divVBT.style.visibility="visible";
-
-}
-
-function showBazo(){
-divA.style.visibility="hidden";
-divB=document.getElementById('Bazo');
-divB.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Bazo','showAbdominal','divB');
-texto+=' <p class="menuc">Bordes</p>';
-texto+=' <p class="menuc">Ecogenicidad</p>';
-texto+=' <p class="menuc">Homogenicidad</p>';
-texto+=' <p class="menuc" onclick="showBazTam();">Tama&nacute;o</p>';
-divB.innerHTML=texto;
-divB.style.visibility="visible";
-if (typeof(Examen.bazo)==='undefined')  {Examen.bazo=new Object();}
-
-}
-
-function setBazo(){
-Examen.bazo.BazoTam1=document.getElementById('BazoTam1').value;
-Examen.bazo.BazoTam2=document.getElementById('BazoTam2').value;
-Examen.bazo.BazoTam3=document.getElementById('BazoTam3').value;
-}
-
-function showBazTam(){
-divB.style.visibility="hidden";
-divBT=document.getElementById('BazTam');
-divBT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Bazo','showBazo','divBT');
-if (typeof(Examen.bazo.BazoTam1)==='undefined') 
- {Examen.bazo.BazoTam1=0;v1=0} else {v1=Examen.bazo.BazoTam1}
-if (typeof(Examen.bazo.BazoTam2)==='undefined') 
- {Examen.bazo.BazoTam2=0;v2=0} else {v2=Examen.bazo.BazoTam2}
-if (typeof(Examen.bazo.BazoTam3)==='undefined') 
- {Examen.bazo.BazoTam3=0;v3=0} else {v3=Examen.bazo.BazoTam3}
-if (typeof(Examen.bazo.BazoTam4)==='undefined') 
- {Examen.bazo.BazoTam4=0;v4=0} else {v4=Examen.bazo.BazoTam4}
-
-texto+=' <label for="BazoTam1">A-P (cm):</label><input type="number" id="BazoTam1" onchange="setBazo()" value="'+v1+'" ><br>';
-texto+=' <label for="BazoTam2">Transverso (cm):</label><input type="number" id="BazoTam2" onchange="setBazo()" value="'+v2+'" ><br>';
-texto+=' <label for="BazoTam3">Longitudinal (cm):</label><input type="number" id="BazoTam3" onchange="setBazo()" value="'+v3+'"><br>';
-divBT.innerHTML=texto;
-divBT.style.visibility="visible";
-}
-
-function showRd(){
-divA.style.visibility="hidden";
-divRd=document.getElementById('Bazo');
-divRd.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Ri&nacute;on derecho','showAbdominal','divRd');
-texto+=' <p class="menuc">Bordes</p>';
-texto+=' <p class="menuc">Ecogenicidad</p>';
-texto+=' <p class="menuc">Homogenicidad</p>';
-texto+=' <p class="menuc" onclick="showRdTam();">Tama&nacute;o</p>';
-divRd.innerHTML=texto;
-divRd.style.visibility="visible";
-if (typeof(Examen.rd)==='undefined')  {Examen.rd=new Object();}
-
-}
-
-function setRD(){
-Examen.rd.RDTam1=document.getElementById('RDTam1').value;
-Examen.rd.RDTam2=document.getElementById('RDTam2').value;
-Examen.rd.RDTam3=document.getElementById('RDTam3').value;
-}
-function showRdTam(){
-divRd.style.visibility="hidden";
-divRdT=document.getElementById('RDTam');
-divRdT.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
-var texto=Titulo('Ri&nacute;on derecho','showRd','divRdT');
-
-if (typeof(Examen.rd.RDTam1)==='undefined') 
- {Examen.rd.RDTam1=0;v1=0} else {v1=Examen.rd.RDTam1}
-if (typeof(Examen.rd.RDTam2)==='undefined') 
- {Examen.rd.RDTam2=0;v2=0} else {v2=Examen.rd.RDTam2}
-if (typeof(Examen.rd.RDTam3)==='undefined') 
- {Examen.rd.RDTam3=0;v3=0} else {v3=Examen.rd.RDTam3}
-
-
-texto+=' <label for="RDTam1">Eje transversal (cm):</label><input type="number" onchange="setRD()" id="RDTam1" value="'+v1+'"><br>';
-texto+=' <label for="RDTam2">Eje vertical(cm):</label><input type="number" onchange="setRD()" id="RDTam2" value="'+v2+'"><br>';
-texto+=' <label for="RDTam3">Eje Longitudinal (cm):</label><input type="number" onchange="setRD()" id="RDTam3" value="'+v3+'"><br>';
-divRdT.innerHTML=texto;
-divRdT.style.visibility="visible";
-}
-var divH;
-var divHT;
-
-
-function setHigado(){
-Examen.higado.HigTam1=document.getElementById('HigTam1').value;
-Examen.higado.HigTam2=document.getElementById('HigTam2').value;
-Examen.higado.HigTam3=document.getElementById('HigTam3').value;
-Examen.higado.HigTam4=document.getElementById('HigTam4').value;
-
-
-//alert(Examen.higado.HigTam1);
-}
-
-var divPT,divB,divBT;
-
-
+// divs
+var divB,divBT;//Bazo
+var divPan,divPT;//Pancreas
+var divUt,divUtT,divUtD;//utero
+var divOvD,divOvDT,divOvDD,divOvI,divOvIT,divOvID;//Ovarios
+var divTesD,divTesDT,divTesDD,divTesI,divTesIT,divTesID,divTes;//Testiculos
+var divRi,divPelvis;
+var divProst,divProsT,divProsD;//Prostata
+var divH,divHT,divHD;//Higado
+var divTirD,divTirDT,divTirDD,divTirI,divTirIT,divTirID,divTir,divIstmo;//Tiroides
+var divMamaD,divMamaDT,divMamaDD,divMamaI,divMamaIT,divMamaID;//Mamas
+var divfocal;
 function Changeback(e){
 var colorbase='hotpink';
 var colornew='green';
@@ -510,169 +400,10 @@ for (var i=0;i<x.length;i++){
 x[i].style.backgroundColor=colorbase;
 }
 e.style.backgroundColor=colornew;
-
 }
 
-var T,N,M,G,H,E,P;
-T="T0";
-N="N0";
-M="M0";
-G="G1"
-H="N";
-E="N";
-P="N"
-var valT=["T0","Tx","Tis","T1a","T1b","T1c","T2","T3","T4"];
-var valN=["N0","N1mi","N1","N2","N3"];
-var valM=["M0","M1"];
-var valG=["Gx","G1","G2","G3"];
-var valH=["N","P"];
-var valE=["N","P"];
-var valP=["N","P"];
-
-/*document.getElementById("spT").innerHTML="<strong>"+valT[0]+"</strong>";
-document.getElementById("spN").innerHTML="<strong>"+valN[0]+"</strong>";
-document.getElementById("spM").innerHTML="<strong>"+valM[0]+"</strong>";
-document.getElementById("spG").innerHTML="<strong>"+valG[1]+"</strong>";
-document.getElementById("spH").innerHTML="<strong>"+valH[0]+"</strong>";
-document.getElementById("spE").innerHTML="<strong>"+valE[0]+"</strong>";
-document.getElementById("spP").innerHTML="<strong>"+valP[0]+"</strong>";
 
 
-document.getElementsByName("selT")[0].checked=true;
-document.getElementsByName("selN")[0].checked=true;
-document.getElementsByName("selM")[0].checked=true;
-document.getElementsByName("selG")[1].checked=true;
-document.getElementsByName("selH")[0].checked=true;
-document.getElementsByName("selE")[0].checked=true;
-document.getElementsByName("selP")[0].checked=true;
-*/
-function cambia(nomb){
-var handler=document.getElementById(nomb);
-if (handler.hidden==true) {handler.hidden=false;handler.parentElement.children[0].innerHTML="&#x25B2;"} else {handler.hidden=true;handler.parentElement.children[0].innerHTML="&#x25BC;"} 
-}
-
-//document.getElementsByName("selT").addEventListener=("click",changeT,false)
-//document.getElementsByName("selT").addEventListener=("click",changeT,false)
-
-function changeT(pos){
-document.getElementById("spT").innerHTML="<strong>"+valT[pos]+"</strong>";
-T=valT[pos];
-//cambia("muestraT");
-estadiar();
-estadiar3();
-}
-function changeN(pos){
-document.getElementById("spN").innerHTML="<strong>"+valN[pos]+"</strong>";
-//alert(valT[pos]);
-N=valN[pos];
-//cambia("muestraN");
-estadiar();
-estadiar3();
-}
-
-function changeM(pos){
-document.getElementById("spM").innerHTML="<strong>"+valM[pos]+"</strong>";
-M=valM[pos];
-//cambia("muestraM");
-estadiar();
-estadiar3();
-}
-
-function changeG(pos){
-document.getElementById("spG").innerHTML="<strong>"+valG[pos]+"</strong>";
-G=valG[pos];
-//cambia("muestraG");
-estadiar3();
-}
-
-function changeH(pos){
-document.getElementById("spH").innerHTML="<strong>"+valH[pos]+"</strong>";
-H=valH[pos];
-//cambia("muestraH");
-estadiar3();
-}
-
-function changeE(pos){
-document.getElementById("spE").innerHTML="<strong>"+valE[pos]+"</strong>";
-E=valE[pos];
-//cambia("muestraE");
-estadiar3();
-}
-function changeP(pos){
-document.getElementById("spP").innerHTML="<strong>"+valP[pos]+"</strong>";
-P=valP[pos];
-//cambia("muestraP");
-estadiar3();
-}
-
-//estadiar();
-//estadiar3();
-
-
-function Ayuda(num){
-//alert(descr[num]);
-var textoT="";
-var div5 = document.getElementById("ayuda");
-div5.style="position: fixed;top :2px; left: 2px; overflow-y: auto; width: 95% ; height: 80%; background-color: green;color:white; border: 3px solid #73AD21;";
-textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:95%;">';
-textoT+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
-textoT+='<div style="color:black; font-size:1em;">'+descr[num]+'</div>';
-div5.innerHTML=textoT;
-div5.hidden=false;
-return false;
-}
-function quitar(){
-var div5 = document.getElementById("ayuda");
-div5.hidden=true;
-}
-var descr=[];
-descr[0]=" <center style='font-size:1.5em;'>Definici&oacute;n de Tumores</center>";
-descr[0]+="<table class='doc'>";
-descr[0]+="<tr><td>To</td> <td><p>No hay evidencia del tumor primario</p></td></tr>";
-descr[0]+="<tr><td>Tx</td> <td><p>El tumor primario no puede ser evaluado</p></td></tr>"
-descr[0]+="<tr><td>Tis</td> <td><p>Carcinoma ductal in situ</p></td></tr>"
-descr[0]+="<tr><td>T1</td> <td><p>Tumor <= 20mm de diametro</p></td></tr>"
-descr[0]+="<tr><td>T1mi</td> <td><p>Tumor  <=1mm de diametro</p></td></tr>"
-descr[0]+="<tr><td>T1a</td> <td><p>Tumor >1mm y <= 5mm de diametro</p></td></tr>"
-descr[0]+="<tr><td>T1b</td> <td><p>Tumor >5mm y <= 10mm de diametro</p></td></tr>"
-descr[0]+="<tr><td>T1c</td> <td><p>Tumor >10mm y <= 20mm de diametro</p></td></tr>"
-descr[0]+="<tr><td>T2</td> <td><p>Tumor >20mm y <=50mm de diametro</p></td></tr>"
-descr[0]+="<tr><td>T3</td> <td><p>Tumor >=50mm de diametro</p></td></tr>"
-descr[0]+="<tr><td>T4</td> <td><p>Tumor de cualquier tama&ntilde;o con extensi&oacute;n a pared tor&aacute;cica y/o piel (ulceraci&oacute;n o n&oacute;dulos macrosc&oacute;picos); la invasi&oacute;n de la dermis por si sola no califica como T4 </p></td></tr>"
-descr[0]+="</table>"
-
-descr[1]=" <center style='font-size:1.5em;'>Definici&oacute;n de Ganglios</center>";
-descr[1]+="<table class='doc' >";
-descr[1]+="<tr><td>.cN0</td> <td><p>No hay evidencia de met&aacute;stasis en los ganglios linf&aacute;ticos regionales (por imagen o exploraci&oacute;n cl&iacute;nica).</p></td></tr>"
-descr[1]+="<tr><td>.cN1</td> <td><p>Met&aacute;stasis m&oacute;viles en niveles I-II en ganglios linf&aacute;ticos axilares ipsilaterales.</p></td></tr>"
-descr[1]+="<tr><td>cN1mi</td> <td><p>Micromet&aacute;stasis (aproximadamente 200 c&eacute;lulas, mayor de 0,2 mm, pero no mayorde 2 mm).</p></td></tr>"
-descr[1]+="<tr><td>.cN2</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos ipsilaterales en niveles I-II fijos entre s&iacute; o conglomerado;<br>- o en ganglios mamarios internos ipsilaterales en ausencia de met&aacute;stasis en ganglios linf&aacute;ticos axilares. </p></td></tr>"
-descr[1]+="<tr><td>.cN3</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos infraclaviculares (nivel II axilar) con o sin afectaci&oacute;n de los ganglios linf&aacute;ticos axilares de niveles I-II;<br>- o en ganglios linf&aacute;ticos mamarios internos con met&aacute;stasis en ganglios linf&aacute;ticos axilares de niveles I-II;<br>- o met&aacute;stasis en ganglios linf&aacute;ticos supraclaviculares ipsilaterales con o sin afectaci&oacute;n de los ganglios axilares o mamarios internos. </p></td></tr>"
-descr[1]+="<tr><td>cN3a</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos infraclaviculares.</p></td></tr>"
-descr[1]+="<tr><td>cN3b</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos mamarios internos ipsilaterales y axilares. </p></td></tr>"
-descr[1]+="<tr><td>cN3c</td> <td><p>Met&aacute;stasis en ganglios linf&aacute;ticos supraclaviculares ipsilaterales.</p></td></tr>"
-
-descr[1]+="</table>"
-
-
-descr[2]=" <center style='font-size:1.5em;'>Definici&oacute;n de Met&aacute;stasis</center>";
-descr[2]+="<table class='doc' >";
-descr[2]+="<tr><td>.M0</td> <td><p>No hay evidencia cl&iacute;nica o radiol&oacute:gica de met&aacute;stasis a distancia.</p></td></tr>"
-descr[2]+="<tr><td>.M1</td> <td><p>Met&aacute;stasis a distancia detectadas por cl&iacute;nica o por medios radiol&oacute;gicos (cM) y/o met&aacute;stasis con estudio histol&oacute;gico mayores de 0,2mm (pM).</p></td></tr>"
-descr[2]+="</table>"
-
-descr[3]=" <center style='font-size:1.5em;'>Definici&oacute;n de grado histol&oacute;gico</center>";
-descr[3]+="<table class='doc' >"
-descr[3]+="<tr><td>.Gx</td> <td><p>El grado histol&oacute;gico no puede ser evaluado.</p></td></tr>"
-descr[3]+="<tr><td>.G1</td> <td><p>Bajo grado histol&oacute;gico.<br> Score SBR de 3-5 puntos.</p></td></tr>"
-descr[3]+="<tr><td>.G2</td> <td><p>Grado histol&oacute;gico intermedio (moderadamente favorable).<br> Score SBR de 6-7 puntos.</p></td></tr>"
-descr[3]+="<tr><td>.G3</td> <td><p>Alto grado histol&oacute;gico (desfavorable).<br> Score SBR de 8-9 puntos.</p></td></tr>"
-descr[3]+="</table>"
-
-
-descr[4]=" <center style='font-size:1.5em;'> Definici&oacute;n de Her2 </center>";
-descr[5]=" <center style='font-size:1.5em;'> Definici&oacute;n de receptor de estr&oacute;geno </center>";
-descr[6]=" <center style='font-size:1.5em;'> Definici&oacute;n de receptor de prost&aacute;geno </center>";
 
 // esto va en el script de la pagina
 /*if ('serviceWorker' in navigator) {
@@ -687,39 +418,6 @@ descr[6]=" <center style='font-size:1.5em;'> Definici&oacute;n de receptor de pr
   });
 }
 */
-//verif();
-function verif(){
-var count=0;
-var vT=["T0","T1","T2","T3","T4"];
-var vN=["N0","N1mi","N1","N2","N3"];
-var vG=["G1","G2","G3"];
-var vH=["N","P"];
-var vE=["N","P"];
-var vP=["N","P"];
-
-for (var i=0;i<vT.length;i++){
-   for (var j=0;j<vN.length;j++){
-     for (var k=0;k<vG.length;k++){
-       for (var m=0;m<vH.length;m++){
-           for (var n=0;n<vE.length;n++){
-             for (var l=0;l<vP.length;l++){
-               M="M0"; T=vT[i]; N=vN[j]; G=vG[k]; H=vH[m]; E=vE[n]; P=vP[l];
-               texto=estadiar3();
-               //count=count+1;
-               if (texto=="IIIc" ) {count=count+1;
-                console.log("T="+T+" "+"N="+N+" "+"G="+G+" "+"H="+H+" "+"E="+E+" "+"P="+P);
-
-                 }
-             }
-           }
-       }
-     }
-   }
-}
-
-alert(count);
-}
-
 
 </script>
 
