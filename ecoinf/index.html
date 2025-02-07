@@ -295,15 +295,65 @@ resp+='<span style="color:blue;" onclick="'+t2+'();'+t3+'.style.visibility=\'hid
 return resp;
 }
 var divp;
+var masas=[];
+var textotit="";
+function textomasa(){
+var texto='';
+for (var j=0;j<masas.length;j++){
+texto+='<div> ';
 
-function showFocal(d1,d2,d3){
+texto+='Masa '+(j+1)+':<br>';
+v1=masas[j].eco.ana;
+v2=masas[j].eco.hipo;
+v3=masas[j].eco.hiper;
+texto+='Ecogenicidad: <br><label for="Eco1'+j+'"> &nbsp&nbsp Hipoecoico </label><input type="radio" id="Eco1'+j+'" name="Eco'+j+'"'+ v1 +' onchange="setMasa()"><br>';
+texto+='<label for="Eco2'+j+'"> &nbsp&nbsp HiperEcoico</label><input type="radio" id="Eco2'+j+'" name="Eco'+j+'"'+ v2 +' onchange="setMasa()"><br>';
+texto+='<label for="Eco3'+j+'"> &nbsp&nbsp Propia </label><input type="radio" id="Eco3'+j+'" name="Eco'+j+'"'+ v3 +' onchange="setMasa()"><br>';
+texto+='</div> ';
+}
+texto+=' Agregar masa: <button onclick="putmasa()"> A </button>'
+return texto;
+}
+function showFocal(d1,d2,d3,omasa){
+//masas=structuredClone(omasa);
+//alert(masas.length);
+var texto='';
 d3.style.visibility="hidden";
 divfocal=document.getElementById('Focal');
 divfocal.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;";
-var texto=Titulo(d1,d2,'divfocal');
+textotit=Titulo(d1,d2,'divfocal');
+texto=textotit;
+for (j=0;j<masas.length;j++){
+texto+='<div> ';
+
+texto+='Masa '+(j+1)+':<br>';
+v1=masas[j].eco.ana;
+v2=masas[j].eco.hipo;
+v3=masas[j].eco.hiper;
+texto+='Ecogenicidad: <br><label for="Eco1'+j+'"> &nbsp&nbsp Hipoecoico </label><input type="radio" id="Eco1'+j+'" name="Eco'+j+'"'+ v1 +' onchange="setMasa()"><br>';
+texto+='<label for="Eco2'+j+'"> &nbsp&nbsp HiperEcoico</label><input type="radio" id="Eco2'+j+'" name="Eco'+j+'"'+ v2 +' onchange="setMasa()"><br>';
+texto+='<label for="Eco3'+j+'"> &nbsp&nbsp Propia </label><input type="radio" id="Eco3'+j+'" name="Eco'+j+'"'+ v3 +' onchange="setMasa()"><br>';
+texto+='</div> ';
+}
+texto+=' Agregar masa: <button onclick="putmasa()"> A </button>'
+omasa=structuredClone(masas);
 divfocal.innerHTML=texto;
 }
 
+function putmasa(){
+var l=masas.length;
+//alert(l);
+masas[l]=new masa();
+divfocal.innerHTML=textotit+textomasa();
+}
+function masa(){
+this.eco=new ecos();
+}
+function ecos(){
+this.ana='';
+this.hipo='';
+this.hiper='';
+}
 
 function showPrincipal(){
 divp=document.getElementById('menuPrincipal');
