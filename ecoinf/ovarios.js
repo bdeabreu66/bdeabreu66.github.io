@@ -4,7 +4,13 @@ divOvD=document.getElementById('OvD');
 divOvD.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
 var texto=Titulo('Ovario Derecho','showPelvico','divOvD');
 texto+=' <p class="menuc" onclick="showOvDDet();">General</p>';
-texto+=' <p class="menuc">Focal</p>';
+if (typeof(Examen.ovd.masas)==='undefined')  {Examen.ovd.masas=new Object;
+Examen.ovd.masas.dmasa=[]}
+//Examen.prostata.masas=new Object;
+//Examen.prostata.masas.dmasa=[];
+omasa=Examen.ovd.masas;
+
+texto+=' <p class="menuc" onclick="showFocal(\'Ovario derecho\',\'showOvD\',divOvD);">Focal</p>';
 texto+=' <p class="menuc" onclick="showOvDTam();">Medidas</p>';
 divOvD.innerHTML=texto;
 divOvD.style.visibility="visible";

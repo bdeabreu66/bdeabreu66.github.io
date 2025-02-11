@@ -1,12 +1,18 @@
+
 function showProstata(){
 divPelvis.style.visibility="hidden";
 divProst=document.getElementById('Prostata');
 divProst.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
 var texto=Titulo('Prostata','showPelvico','divProst');
 texto+=' <p class="menuc" onclick="showProstDet();">General</p>';
-if (typeof(Examen.prostata.masas)==='undefined')  {Examen.prostata.masas=new Array();}
-Om=Examen.prostata.masas;
-texto+=' <p class="menuc" onclick="showFocal(\'Prostata\',\'showProstata\',divProst,Om);">Focal</p>';
+if (typeof(Examen.prostata.masas)==='undefined')  {Examen.prostata.masas=new Object;
+Examen.prostata.masas.dmasa=[]}
+//Examen.prostata.masas=new Object;
+//Examen.prostata.masas.dmasa=[];
+omasa=Examen.prostata.masas;
+
+//alert(Object.keys(omasa));
+texto+=' <p class="menuc" onclick="showFocal(\'Prostata\',\'showProstata\',divProst);">Focal</p>';
 texto+=' <p class="menuc" onclick="showProstTam();">Medidas</p>';
 divProst.innerHTML=texto;
 divProst.style.visibility="visible";

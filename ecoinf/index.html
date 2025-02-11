@@ -297,24 +297,79 @@ return resp;
 var divp;
 var masas=[];
 var textotit="";
+
+function eliminamasa(j){
+alert('j '+j)
+omasa.dmasa.splice(j,1);
+divfocal.innerHTML=textotit+textomasa();
+}
+
 function textomasa(){
 var texto='';
-for (var j=0;j<masas.length;j++){
+for (var j=0;j<omasa.dmasa.length;j++){
 texto+='<div> ';
-
 texto+='Masa '+(j+1)+':<br>';
-v1=masas[j].eco.ana;
-v2=masas[j].eco.hipo;
-v3=masas[j].eco.hiper;
-texto+='Ecogenicidad: <br><label for="Eco1'+j+'"> &nbsp&nbsp Hipoecoico </label><input type="radio" id="Eco1'+j+'" name="Eco'+j+'"'+ v1 +' onchange="setMasa()"><br>';
-texto+='<label for="Eco2'+j+'"> &nbsp&nbsp HiperEcoico</label><input type="radio" id="Eco2'+j+'" name="Eco'+j+'"'+ v2 +' onchange="setMasa()"><br>';
-texto+='<label for="Eco3'+j+'"> &nbsp&nbsp Propia </label><input type="radio" id="Eco3'+j+'" name="Eco'+j+'"'+ v3 +' onchange="setMasa()"><br>';
+v1=omasa.dmasa[j].eco.ana;
+v2=omasa.dmasa[j].eco.hipo;
+v3=omasa.dmasa[j].eco.hiper;
+v4=omasa.dmasa[j].homo;
+v5=omasa.dmasa[j].hetero;
+v6=omasa.dmasa[j].Ftam1;
+v7=omasa.dmasa[j].Ftam2;
+v8=omasa.dmasa[j].Ftam3;
+
+//alert('v1 '+v1 +'v2 '+v2+'v3 '+v3);
+texto+='Ecogenicidad: <br><label for="Eco1'+j+'"> &nbsp&nbsp Anecoico </label><input type="radio" id="Eco1'+j+'" name="Eco'+j+'" '+ v1 +' onchange="setMasa()"><br>';
+texto+='<label for="Eco2'+j+'"> &nbsp&nbsp Hipoecoico</label><input type="radio" id="Eco2'+j+'" name="Eco'+j+'"'+ v2 +' onchange="setMasa()"><br>';
+texto+='<label for="Eco3'+j+'"> &nbsp&nbsp hiperecoico </label><input type="radio" id="Eco3'+j+'" name="Eco'+j+'" '+ v3 +' onchange="setMasa()"><br>';
+texto+='Homogenicidad: <br> <label for="Homo1'+j+'"> &nbsp&nbsp homogeneo </label><input type="radio" id="Homo1'+j+'" name="homo'+j+'" '+ v4 +' onchange="setMasa()"><br>';
+texto+='<label for="Homo2'+j+'"> &nbsp&nbsp heterogeneo </label><input type="radio" id="Homo2'+j+'" name="homo'+j+'" '+ v5 +' onchange="setMasa()"><br>';
+texto+=' Eliminar: <button onclick="eliminamasa('+j+')"> E </button><br>'
+texto+=' Tama&nacute;o: <br>';
+texto+=' <label for="Ftam1'+j+'">A-P(cm):</label><input onchange="setMasa()" type="number" id="Ftam1'+j+'" value="'+v6+'"><br>';
+texto+=' <label for="Ftam2'+j+'">Transverso(cm):</label><input onchange="setMasa()" type="number" id="Ftam2'+j+'" value="'+v7+'"><br>';
+texto+=' <label for="Ftam3'+j+'">Long(cm):</label><input onchange="setMasa()" type="number" id="Ftam3'+j+'" value="'+v8+'"><br>';
+//alert(texto);
+
 texto+='</div> ';
+
 }
 texto+=' Agregar masa: <button onclick="putmasa()"> A </button>'
+//alert(texto);
 return texto;
 }
-function showFocal(d1,d2,d3,omasa){
+
+function setMasa(){
+for (j=0;j<omasa.dmasa.length;j++){
+var ne='Eco1'+j;
+if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.ana="checked";}
+ else {omasa.dmasa[j].eco.ana="";}
+var ne='Eco2'+j;
+if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.hipo="checked";}
+ else {omasa.dmasa[j].eco.hipo="";}
+var ne='Eco3'+j;
+if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.hiper="checked";}
+ else {omasa.dmasa[j].eco.hiper="";}
+var ne='Homo1'+j;
+if (document.getElementById(ne).checked) {omasa.dmasa[j].homo="checked";}
+ else {omasa.dmasa[j].homo="";}
+
+var ne='Homo2'+j;
+if (document.getElementById(ne).checked) {omasa.dmasa[j].hetero="checked";}
+ else {omasa.dmasa[j].hetero="";}
+var ne='Ftam1'+j;
+omasa.dmasa[j].Ftam1=document.getElementById(ne).value;
+var ne='Ftam2'+j;
+omasa.dmasa[j].Ftam2=document.getElementById(ne).value;
+var ne='Ftam3'+j;
+omasa.dmasa[j].Ftam3=document.getElementById(ne).value;
+
+
+}
+
+}
+
+function showFocal(d1,d2,d3){
 //masas=structuredClone(omasa);
 //alert(masas.length);
 var texto='';
@@ -323,36 +378,30 @@ divfocal=document.getElementById('Focal');
 divfocal.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;";
 textotit=Titulo(d1,d2,'divfocal');
 texto=textotit;
-for (j=0;j<masas.length;j++){
-texto+='<div> ';
 
-texto+='Masa '+(j+1)+':<br>';
-v1=masas[j].eco.ana;
-v2=masas[j].eco.hipo;
-v3=masas[j].eco.hiper;
-texto+='Ecogenicidad: <br><label for="Eco1'+j+'"> &nbsp&nbsp Hipoecoico </label><input type="radio" id="Eco1'+j+'" name="Eco'+j+'"'+ v1 +' onchange="setMasa()"><br>';
-texto+='<label for="Eco2'+j+'"> &nbsp&nbsp HiperEcoico</label><input type="radio" id="Eco2'+j+'" name="Eco'+j+'"'+ v2 +' onchange="setMasa()"><br>';
-texto+='<label for="Eco3'+j+'"> &nbsp&nbsp Propia </label><input type="radio" id="Eco3'+j+'" name="Eco'+j+'"'+ v3 +' onchange="setMasa()"><br>';
-texto+='</div> ';
+divfocal.innerHTML=textotit+textomasa();
 }
-texto+=' Agregar masa: <button onclick="putmasa()"> A </button>'
-omasa=structuredClone(masas);
-divfocal.innerHTML=texto;
-}
+var omasa;
 
 function putmasa(){
-var l=masas.length;
+var l=omasa.dmasa.length;
 //alert(l);
-masas[l]=new masa();
+omasa.dmasa[l]=new masa();
+//alert(Object.keys(omasa.dmasa[l]));
 divfocal.innerHTML=textotit+textomasa();
 }
 function masa(){
 this.eco=new ecos();
+this.homo="";
+this.hetero="";
+this.Ftam1=0;
+this.Ftam2=0;
+this.Ftam3=0;
 }
 function ecos(){
-this.ana='';
-this.hipo='';
-this.hiper='';
+this.ana="";
+this.hipo="";
+this.hiper="";
 }
 
 function showPrincipal(){
