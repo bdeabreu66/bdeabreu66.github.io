@@ -2,6 +2,7 @@ function showOvD(){
 divPelvis.style.visibility="hidden";
 divOvD=document.getElementById('OvD');
 divOvD.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+if (typeof(Examen.ovd)==='undefined')  {Examen.ovd=new Object();}
 var texto=Titulo('Ovario Derecho','showPelvico','divOvD');
 texto+=' <p class="menuc" onclick="showOvDDet();">General</p>';
 if (typeof(Examen.ovd.masas)==='undefined')  {Examen.ovd.masas=new Object;
@@ -14,7 +15,6 @@ texto+=' <p class="menuc" onclick="showFocal(\'Ovario derecho\',\'showOvD\',divO
 texto+=' <p class="menuc" onclick="showOvDTam();">Medidas</p>';
 divOvD.innerHTML=texto;
 divOvD.style.visibility="visible";
-if (typeof(Examen.ovd)==='undefined')  {Examen.ovd=new Object();}
 
 }
 
