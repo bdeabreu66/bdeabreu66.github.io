@@ -329,8 +329,12 @@ texto+=' Tama&nacute;o: <br>';
 texto+=' <label for="Ftam1'+j+'">A-P(cm):</label><input onchange="setMasa()" type="number" id="Ftam1'+j+'" value="'+v6+'"><br>';
 texto+=' <label for="Ftam2'+j+'">Transverso(cm):</label><input onchange="setMasa()" type="number" id="Ftam2'+j+'" value="'+v7+'"><br>';
 texto+=' <label for="Ftam3'+j+'">Long(cm):</label><input onchange="setMasa()" type="number" id="Ftam3'+j+'" value="'+v8+'"><br>';
-//alert(texto);
-
+texto+=' Ubicaci&oacute;n: <br>';
+alert(JSON.stringify(ubicaciones));
+for (var k=0;k<ubicaciones.length;k++) {
+ texto+=ubicaciones[k]+' <input type="checkbox"'+omasa.dmasa[j].ubic[k]+' id="ubic'+j+k+'" onchange="setMasa()" </input><br>';
+}
+alert(texto);
 texto+='</div> ';
 
 }
@@ -363,7 +367,11 @@ var ne='Ftam2'+j;
 omasa.dmasa[j].Ftam2=document.getElementById(ne).value;
 var ne='Ftam3'+j;
 omasa.dmasa[j].Ftam3=document.getElementById(ne).value;
-
+for (var k=0;k<ubicaciones.length;k++) {
+var ne="ubic"+j+k;
+alert(ne);
+if (document.getElementById(ne).checked) {omasa.dmasa[j].ubic[k]="checked"} else {omasa.dmasa[j].ubic[k]=""}
+}
 
 }
 
@@ -382,6 +390,7 @@ texto=textotit;
 divfocal.innerHTML=textotit+textomasa();
 }
 var omasa;
+var ubicaciones;
 
 function putmasa(){
 var l=omasa.dmasa.length;
@@ -397,6 +406,8 @@ this.hetero="";
 this.Ftam1=0;
 this.Ftam2=0;
 this.Ftam3=0;
+this.ubic=new Array();
+for (var k=0;k<ubicaciones.length;k++) {this.ubic[k]=""}
 }
 function ecos(){
 this.ana="";

@@ -7,6 +7,20 @@ if (typeof(Examen.prostata)==='undefined')  {Examen.prostata=new Object();}
 
 var texto=Titulo('Prostata','showPelvico','divProst');
 texto+=' <p class="menuc" onclick="showProstDet();">General</p>';
+if (typeof(Examen.prostata.ubic)==='undefined')  {Examen.prostata.ubic=new Object;
+Examen.prostata.ubic=[];
+Examen.prostata.ubic[0]="Polo superior"
+Examen.prostata.ubic[1]="Polo inferior";
+Examen.prostata.ubic[2]="Hemisferio derecho";
+Examen.prostata.ubic[3]="Hemisferio iquierdo";
+}
+Examen.prostata.ubic=[];
+Examen.prostata.ubic[0]="Polo superior"
+Examen.prostata.ubic[1]="Polo inferior";
+Examen.prostata.ubic[2]="Hemisferio derecho";
+Examen.prostata.ubic[3]="Hemisferio iquierdo";
+
+ubicaciones=Examen.prostata.ubic;
 if (typeof(Examen.prostata.masas)==='undefined')  {Examen.prostata.masas=new Object;
 Examen.prostata.masas.dmasa=[]}
 //Examen.prostata.masas=new Object;
