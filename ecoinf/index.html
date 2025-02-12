@@ -331,10 +331,12 @@ texto+=' <label for="Ftam2'+j+'">Transverso(cm):</label><input onchange="setMasa
 texto+=' <label for="Ftam3'+j+'">Long(cm):</label><input onchange="setMasa()" type="number" id="Ftam3'+j+'" value="'+v8+'"><br>';
 texto+=' Ubicaci&oacute;n: <br>';
 alert(JSON.stringify(ubicaciones));
-for (var k=0;k<ubicaciones.length;k++) {
+/*for (var k=0;k<ubicaciones.length;k++) {
  texto+=ubicaciones[k]+' <input type="checkbox"'+omasa.dmasa[j].ubic[k]+' id="ubic'+j+k+'" onchange="setMasa()" </input><br>';
 }
+*/
 alert(texto);
+
 texto+='</div> ';
 
 }
