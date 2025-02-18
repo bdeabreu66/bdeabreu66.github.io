@@ -140,7 +140,7 @@ var b=document.getElementsByName("r1");
 for (var i=0;i<b.length;i++){
 if (e===b[i]) {var num=i;break}
 }
-alert(K+' '+num+' '+datos_menus[K].enlaces[num]);
+//alert(K+' '+num+' '+datos_menus[K].enlaces[num]);
 eval(datos_menus[K].enlaces[num]);
 }
 
