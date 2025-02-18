@@ -133,7 +133,7 @@ Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name=
    <div id="RIDet" > </div>
 
 <div id="Abdominal" > </div>
-
+<div id="Vascular" > </div>
 <div id="Pelvico" > </div>
 <div id="Vejiga" > </div>
   <div id="VejTam" >  </div>
@@ -185,6 +185,15 @@ Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name=
   <div id="MamaITam"> </div>
   <div id="MamaIDet"> </div>
 
+<div id="Carotidas"> </div>
+<div id="CarotCder"> </div>
+<div id="CarotIder"> </div>
+<div id="CarotEder"> </div>
+<div id="Vertebralder"> </div>
+<div id="CarotCizq"> </div>
+<div id="CarotIizq"> </div>
+<div id="CarotEizq"> </div>
+<div id="Vertebralizq"> </div>
 <div id="ayuda" hidden="true"></div>
 <div> <br></div>
 </div>
@@ -200,6 +209,8 @@ Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name=
 <script type="text/javascript" src="ovarios.js"> </script>
 <script type="text/javascript" src="testiculos.js"> </script>
 <script type="text/javascript" src="tiroides.js"> </script>
+<script type="text/javascript" src="carotidas.js"> </script>
+<script type="text/javascript" src="menusGraficos.js"> </script>
 
 <script>
 var Examen;
@@ -448,8 +459,7 @@ if (sexoPac=='F')
  {texto+='<p class="menup" onclick="Changeback(this);showMamas()"> Mamario</p>';}
 
 texto+='<p class="menup" onclick="Changeback(this);"> Cardiaco </p>';
-texto+='<p class="menup" onclick="Changeback(this);"> Vascular Abdominal </p>';
-texto+='<p class="menup" onclick="Changeback(this);"> Vascular Carotideo </p>';
+texto+='<p class="menup" onclick="Changeback(this);showVascular()"> Vascular </p>';
 divp.innerHTML=texto;
 
 }
@@ -509,6 +519,20 @@ texto+=' <p class="menuc"><span onclick="showOvD()">OVD</span> <span onclick="sh
 divPelvis.innerHTML=texto;
 divPelvis.style.visibility='visible';
 }
+
+function showVascular(){
+divp.style.visibility="hidden";
+divVasc=document.getElementById('Pelvico');
+divVasc.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
+var texto=Titulo('Vascular','showPrincipal','divVasc');
+texto+=' <p class="menuc" onclick="showCarotida()">Carotidas</p>';
+texto+=' <p class="menuc"><span onclick="showMSD()">MSD</span> <span onclick="showMSI()">MSI</span></p>';
+texto+=' <p class="menuc"><span onclick="showMSD()">MID</span> <span onclick="showMII()">MII</span></p>';
+texto+=' <p class="menuc"onclick="showAbdoDoppler()">Abdomen</p>';
+divVasc.innerHTML=texto;
+divVasc.style.visibility='visible';
+}
+
 // divs
 var divB,divBT;//Bazo
 var divPan,divPT;//Pancreas
@@ -521,6 +545,7 @@ var divH,divHT,divHD;//Higado
 var divTirD,divTirDT,divTirDD,divTirI,divTirIT,divTirID,divTir,divIstmo;//Tiroides
 var divMamaD,divMamaDT,divMamaDD,divMamaI,divMamaIT,divMamaID;//Mamas
 var divfocal;
+var divVasc;
 function Changeback(e){
 var colorbase='hotpink';
 var colornew='green';
