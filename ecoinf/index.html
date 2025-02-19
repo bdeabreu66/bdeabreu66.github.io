@@ -365,10 +365,11 @@ texto+='<canvas id="canvas"> </canvas>';
 texto+='<div class="output">';
 texto+='  <img id="photo" alt="The screen capture will appear in this box." />';
 texto+='</div>';
-texto+=' Eliminar: <button onclick="eliminamasa('+indmasa+')"> E </button><br>'
 */
+texto+=' <br> Eliminar: <button onclick="eliminamasa('+indmasa+')"> E </button><br>';
+
 texto+='<div id="divlienzo"> ';
-texto+='<canvas id="lienzo" STYLE="BORDER:1PX SOLID #000000;background-color: white" width="300" height="100"></canvas>';  
+texto+='<canvas onchange="setMasa()" id="lienzo" STYLE="BORDER:1PX SOLID #000000;background-color: white" width="300" height="100"></canvas>';  
 texto+='<label hidden id=selected>Nothing selected</label>';
 texto+='<button onclick="loadImagen()">Agregar</button><input hidden type=file id=choose accept="image/*" >';
 texto+='</div>';
@@ -428,7 +429,7 @@ for (var k=0;k<ubicaciones.length;k++) {
 var ne="ubic"+j+k;
 if (document.getElementById(ne).checked) {omasa.dmasa[j].ubic[k]="checked"} else {omasa.dmasa[j].ubic[k]=""}
 }
-
+omasa.dmasa[j].imagen=dataurlimagen;
 //}
 
 }
@@ -444,9 +445,33 @@ textotit=Titulo(d1,d2,'divfocal');
 texto=textotit;
 if (omasa.dmasa.length>0){indmasa=0;} else {indmasa=-1;}
 divfocal.innerHTML=textotit+textomasa();
+actualizaimagen();
+ 
 }
 var omasa;
 var ubicaciones;
+
+function actualizaimagen(){
+//alert(Object.keys(omasa.dmasa[indmasa]));
+//if (!typeof(omasa.dmasa[indmasa].imagen)==='undefined') 
+
+{
+
+elemento=document.getElementById("lienzo");
+lienzo=elemento.getContext('2d');
+dataurlimagen=omasa.dmasa[indmasa].imagen;
+//alert(dataurlimagen);
+    imagenextra=new Image();   
+    imagenextra.addEventListener("load",function() {
+              aspecto=imagenextra.width/imagenextra.height;
+              elemento.height=elemento.width/aspecto;
+              anchoimagen=imagenextra.width;
+              altoimagen=imagenextra.height;
+              lienzo.drawImage(imagenextra,0,0, imagenextra.width,imagenextra.height,0, 0, elemento.width, elemento.height);
+          }, false);
+     imagenextra.src=dataurlimagen;
+}
+}
 
 function putmasa(){
 var l=omasa.dmasa.length;
@@ -465,7 +490,9 @@ this.Ftam3=0;
 this.ubic=new Array();
 for (var k=0;k<ubicaciones.length;k++) {this.ubic[k]=""}
 this.dop="";
+this.imagen=""
 }
+
 function ecos(){
 this.ana="";
 this.anadif="";
