@@ -195,6 +195,7 @@ Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name=
 <div id="CarotEizq"> </div>
 <div id="Vertebralizq"> </div>
 <div id="ayuda" hidden="true"></div>
+
 <div> <br></div>
 </div>
 <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
@@ -211,6 +212,9 @@ Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name=
 <script type="text/javascript" src="tiroides.js"> </script>
 <script type="text/javascript" src="carotidas.js"> </script>
 <script type="text/javascript" src="menusGraficos.js"> </script>
+<script type="text/javascript" src="SelectFile.js"> </script>
+<script type="text/javascript" src="cargaImagen.js"> </script>
+
 
 <script>
 var Examen;
@@ -352,7 +356,22 @@ texto+=' Ubicaci&oacute;n: <br>';
 for (var k=0;k<ubicaciones.length;k++) {
  texto+=ubicaciones[k]+' <input type="checkbox"'+omasa.dmasa[indmasa].ubic[k]+' id="ubic'+indmasa+k+'" onchange="setMasa()" </input><br>';
 }
+/*
+texto+='<div class="camera">';
+texto+='  <video id="video">Video stream not available.</video>';
+texto+='  <button id="start-button">Take photo</button>';
+texto+='</div>';
+texto+='<canvas id="canvas"> </canvas>';
+texto+='<div class="output">';
+texto+='  <img id="photo" alt="The screen capture will appear in this box." />';
+texto+='</div>';
 texto+=' Eliminar: <button onclick="eliminamasa('+indmasa+')"> E </button><br>'
+*/
+texto+='<div id="divlienzo"> ';
+texto+='<canvas id="lienzo" STYLE="BORDER:1PX SOLID #000000;background-color: white" width="300" height="100"></canvas>';  
+texto+='<label hidden id=selected>Nothing selected</label>';
+texto+='<button onclick="loadImagen()">Agregar</button><input hidden type=file id=choose accept="image/*" >';
+texto+='</div>';
 
 //alert(texto);
 
@@ -363,7 +382,15 @@ texto+=' Agregar masa: <button onclick="putmasa()"> A </button>'
 
 return texto;
 }
-
+function loadImagen(){
+elemento=document.getElementById("lienzo");
+lienzo=elemento.getContext('2d');
+getFile = new selectFile;
+getFile.targets('choose','selected');
+archivos1=document.getElementById('choose');
+archivos1.addEventListener('change', function(e){procesar(e)}, false);
+getFile.simulate();
+}
 function setMasa(){
 //for (j=0;j<omasa.dmasa.length;j++){
 var j=indmasa;
