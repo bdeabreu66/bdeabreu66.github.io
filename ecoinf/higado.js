@@ -4,12 +4,27 @@ divH=document.getElementById('Higado');
 divH.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
 var texto=Titulo('Higado','showAbdominal','divH');
 texto+=' <p class="menuc" onclick="showHigDet();">General</p>';
+if (typeof(Examen.higado)==='undefined')  {Examen.higado=new Object();}
+if (typeof(Examen.higado.ubic)==='undefined')  {Examen.higado.ubic=new Object;
+Examen.higado.ubic=[];
+Examen.higado.ubic[0]="Zona I"
+Examen.higado.ubic[1]="Zona II";
+Examen.higado.ubic[2]="Zona III";
+Examen.higado.ubic[3]="Zona IV";
+}
+
+ubicaciones=Examen.higado.ubic;
+if (typeof(Examen.higado.masas)==='undefined')  {Examen.higado.masas=new Object;
+Examen.higado.masas.dmasa=[]}
+
+omasa=Examen.higado.masas;
+
 texto+=' <p class="menuc" onclick="showFocal(\'Higado\',\'showHigado\',divH);">Focal</p>';
+
 texto+=' <p class="menuc">Dopler</p>';
 texto+=' <p class="menuc" onclick="showHigTam();">Medidas</p>';
 divH.innerHTML=texto;
 divH.style.visibility="visible";
-if (typeof(Examen.higado)==='undefined')  {Examen.higado=new Object();}
 }
 // Actualiza Higado
 function setHigado(){
