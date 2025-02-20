@@ -98,13 +98,10 @@ width: 6em;
 <div id="titulo" style="position:fixed;top:0%;left:0%;width:100%;"> 
    <h3>Informe de ex&aacute;men ecogr&aacute;fico</h3> 
 </div>
-<div style="position:fixed;top:15%;left:0%;">
-<label for="NombP"> Nombre Paciente:</label> <input onchange="setNombre()" id="NombP">
-<label for="IdP"> ID:</label> <input onchange="setId()" id="IdP"><br>
-<label for="EdadP"> Edad:</label> <input onchange="setEdad()" type="number" id="EdadP">
-Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name="Sexo" id="SexoF" value='F'>
-<label for="SexoM">M</label><input onchange="setSexo();" type="radio" name="Sexo" id="SexoM" value='M'>
+<div id="menu" style="position:fixed;top:10%;left:0%;width:100%;"> 
+<button onclick="Showpaciente()">P</button>
 </div>
+<div id="paciente"></div>
 <div id="menuPrincipal" style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;">
 </div>
 <div id="Focal" > </div>
@@ -219,22 +216,33 @@ Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name=
 <script>
 var Examen;
 
+function Showpaciente(){
+var ch1,ch2;
+divpaciente=document.getElementById('paciente');
+divpaciente.style="position:fixed;top:15%;left:0%;"
+texto='';
+if (Examen.sexo=='F') {ch1="checked"; ch2=""} else {ch1=""; ch2="checked"}
+texto+='<label for="NombP"> Nombre Paciente:</label> <input onchange="setNombre()" id="NombP" value="'+Examen.nombre+'">';
+texto+='<label for="IdP"> ID:</label> <input onchange="setId()" id="IdP" value="'+Examen.id+'"><br>';
+texto+='<label for="EdadP"> Edad:</label> <input onchange="setEdad()" type="number" id="EdadP" value="'+Examen.edad+'">';
+texto+='Sexo:<label for="SexoF">F</label><input onchange="setSexo();" type="radio" name="Sexo" id="SexoF" '+ch1+ ' value="F">';
+texto+='<label for="SexoM">M</label><input onchange="setSexo();" type="radio" name="Sexo" id="SexoM" '+ch2+' value="M"<br>';
+texto+='<button onclick="divpaciente.style.visibility=\'hidden\'">Ok</button>';
+
+divpaciente.innerHTML=texto;
+divpaciente.style.visibility="visible";
+}
+
 function inicio(){
 
 var aux=localStorage.getItem('EXAMEN');
 if (aux)  {Examen=JSON.parse(aux);} else {Examen=new Object(); }
 
-//Examen=new Object();
-if (typeof(Examen.nombre)==='undefined') 
- {Examen.nombre=''} else {document.getElementById("NombP").value=Examen.nombre}
-if (typeof(Examen.edad)==='undefined') 
- {Examen.edad=''} else {document.getElementById("EdadP").value=Examen.edad}
-if (typeof(Examen.id)==='undefined') 
- {Examen.id=''} else {document.getElementById("IdP").value=Examen.id}
+if (typeof(Examen.nombre)==='undefined') {Examen.nombre=''} 
+if (typeof(Examen.edad)==='undefined')  {Examen.edad=''}
+if (typeof(Examen.id)==='undefined')  {Examen.id=''} 
 
 if (typeof(Examen.sexo)==='undefined') {Examen.sexo='F'}
-if (Examen.sexo=='F') 
-  {document.getElementById("SexoF").checked=true}  else {document.getElementById("SexoM").checked=true}
 sexoPac=Examen.sexo;
 showPrincipal();
 setLimites()
@@ -323,13 +331,13 @@ function incrMasa(){
 if (indmasa<omasa.dmasa.length-1) {indmasa++}
 
 divfocal.innerHTML=textotit+textomasa();
-
+actualizaimagen();
 }
 
 function decrMasa(){
 if (indmasa>0) {indmasa--}
 divfocal.innerHTML=textotit+textomasa();
-
+actualizaimagen();
 }
 function textomasa(){
 var texto='';
