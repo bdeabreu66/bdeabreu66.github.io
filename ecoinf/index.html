@@ -105,10 +105,13 @@ width: 6em;
 <div id="menuPrincipal" style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;">
 </div>
 <div id="Focal" > </div>
-
+<div id="VascGen" > </div>
+<div id="ecanvas" > </div>
 <div id="Higado" > </div>
    <div id="HigTam" > </div>
    <div id="HigDet" >  </div>
+   <div id="HigVasc" >  </div>
+   <div id="HigVascPorta" >  </div>
 <div id="VesBil" >  </div>
  <div id="VesBilTam" >  </div>
  <div id="VesBilDet" >  </div>
@@ -331,13 +334,37 @@ function incrMasa(){
 if (indmasa<omasa.dmasa.length-1) {indmasa++}
 
 divfocal.innerHTML=textotit+textomasa();
-actualizaimagen();
+dataurlimagen=omasa.dmasa[indmasa].imagen;
+actualizaimagen(1);
+
 }
 
 function decrMasa(){
 if (indmasa>0) {indmasa--}
 divfocal.innerHTML=textotit+textomasa();
-actualizaimagen();
+dataurlimagen=omasa.dmasa[indmasa].imagen;
+actualizaimagen2(1);
+
+}
+
+function quitardivcanvas(){
+divedit.style.visibility='hidden';
+}
+function modifica_canvas(){
+var texto='';
+divedit=document.getElementById('ecanvas');
+divedit.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;background-color:white;";
+texto+='<table><tr>';
+texto+='<td><button>Z+</button></td>';
+texto+='<td><button>Z-</button></td>';
+texto+='<td><button>S</button></td>';
+texto+='<td><button onclick="quitardivcanvas();" >x</button></td>';
+texto+='</tr></table>';
+texto+='<canvas  id="lienzo2" style="border:2px solid #000000;background-color: white" width="1000" height="500%"></canvas>';  
+divedit.innerHTML=texto;
+actualizaimagen2(0.5);
+
+
 }
 function textomasa(){
 var texto='';
@@ -364,20 +391,11 @@ texto+=' Ubicaci&oacute;n: <br>';
 for (var k=0;k<ubicaciones.length;k++) {
  texto+=ubicaciones[k]+' <input type="checkbox"'+omasa.dmasa[indmasa].ubic[k]+' id="ubic'+indmasa+k+'" onchange="setMasa()" </input><br>';
 }
-/*
-texto+='<div class="camera">';
-texto+='  <video id="video">Video stream not available.</video>';
-texto+='  <button id="start-button">Take photo</button>';
-texto+='</div>';
-texto+='<canvas id="canvas"> </canvas>';
-texto+='<div class="output">';
-texto+='  <img id="photo" alt="The screen capture will appear in this box." />';
-texto+='</div>';
-*/
+
 texto+=' <br> Eliminar: <button onclick="eliminamasa('+indmasa+')"> E </button><br>';
 
 texto+='<div id="divlienzo"> ';
-texto+='<canvas onchange="setMasa()" id="lienzo" STYLE="BORDER:1PX SOLID #000000;background-color: white" width="300" height="100"></canvas>';  
+texto+='<canvas onchange="setMasa()" onclick="modifica_canvas();" id="lienzo" STYLE="BORDER:1PX SOLID #000000;background-color: white" width="300" height="100"></canvas>';  
 texto+='<label hidden id=selected>Nothing selected</label>';
 texto+='<button onclick="loadImagen()">Agregar</button><input hidden type=file id=choose accept="image/*" >';
 texto+='</div>';
@@ -391,7 +409,9 @@ texto+=' Agregar masa: <button onclick="putmasa()"> A </button>'
 
 return texto;
 }
+
 function loadImagen(){
+divlienzo=document.getElementById("divlienzo");
 elemento=document.getElementById("lienzo");
 lienzo=elemento.getContext('2d');
 getFile = new selectFile;
@@ -400,6 +420,41 @@ archivos1=document.getElementById('choose');
 archivos1.addEventListener('change', function(e){procesar(e)}, false);
 getFile.simulate();
 }
+function setVaso(){
+ovaso.vps=document.getElementById('Vps').value;
+ovaso.vtd=document.getElementById('Vtd').value;
+ovaso.imagen=dataurlimagen;
+}
+
+function textovascgen(){
+var texto='';
+if (typeof(ovaso.vps)==='undefined')  {ovaso.vps=0;}
+if (typeof(ovaso.vtd)==='undefined')  {ovaso.vtd=0;}
+texto+='Velocidad  pico sist&oacute;lica (cm/s)<br>';
+texto+='<input onchange="setVaso()" type="number" id="Vps" value="'+ovaso.vps+'"><br>';
+texto+='Velocidad  telediast&oacute;lica (cm/s)<br>';
+texto+='<input onchange="setVaso()" type="number" id="Vtd" value="'+ovaso.vtd+'"><br>';
+texto+='<div id="divlienzo"> ';
+texto+='<canvas onchange="setVaso()" onclick="modifica_canvas();" id="lienzo" STYLE="BORDER:1PX SOLID #000000;background-color: white" width="300" height="100"></canvas>';  
+texto+='<label hidden id=selected>Nothing selected</label>';
+texto+='<button onclick="loadImagen()">Agregar</button><input hidden type=file id=choose accept="image/*" >';
+texto+='</div>';
+return  texto;
+}
+ 
+function showVascGen(d1,d2,d3){
+var texto='';
+d3.style.visibility="hidden";
+divVascGen=document.getElementById('VascGen');
+divVascGen.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;";
+textotit=Titulo(d1,d2,'divVascGen');
+texto=textotit;
+divVascGen.innerHTML=textotit+textovascgen();
+dataurlimagen=ovaso.imagen;
+actualizaimagen(1);
+}
+
+
 function setMasa(){
 //for (j=0;j<omasa.dmasa.length;j++){
 var j=indmasa;
@@ -453,33 +508,50 @@ textotit=Titulo(d1,d2,'divfocal');
 texto=textotit;
 if (omasa.dmasa.length>0){indmasa=0;} else {indmasa=-1;}
 divfocal.innerHTML=textotit+textomasa();
-actualizaimagen();
+dataurlimagen=omasa.dmasa[indmasa].imagen;
+actualizaimagen(1);
  
 }
 var omasa;
 var ubicaciones;
 
-function actualizaimagen(){
-//alert(Object.keys(omasa.dmasa[indmasa]));
-//if (!typeof(omasa.dmasa[indmasa].imagen)==='undefined') 
+function actualizaimagen(z){
 
 {
 
 elemento=document.getElementById("lienzo");
 lienzo=elemento.getContext('2d');
-dataurlimagen=omasa.dmasa[indmasa].imagen;
-//alert(dataurlimagen);
     imagenextra=new Image();   
     imagenextra.addEventListener("load",function() {
               aspecto=imagenextra.width/imagenextra.height;
               elemento.height=elemento.width/aspecto;
               anchoimagen=imagenextra.width;
               altoimagen=imagenextra.height;
+ lienzo.scale(z,z);
               lienzo.drawImage(imagenextra,0,0, imagenextra.width,imagenextra.height,0, 0, elemento.width, elemento.height);
           }, false);
      imagenextra.src=dataurlimagen;
 }
 }
+
+function actualizaimagen2(z){
+{
+
+elemento=document.getElementById("lienzo2");
+lienzo2=elemento.getContext('2d');
+    imagenextra=new Image();   
+    imagenextra.addEventListener("load",function() {
+              aspecto=imagenextra.width/imagenextra.height;
+              elemento.height=elemento.width/aspecto;
+              anchoimagen=imagenextra.width;
+              altoimagen=imagenextra.height;
+ lienzo.scale(z,z);
+              lienzo2.drawImage(imagenextra,0,0, imagenextra.width,imagenextra.height,0, 0, elemento.width, elemento.height);
+          }, false);
+     imagenextra.src=dataurlimagen;
+}
+}
+
 
 function putmasa(){
 var l=omasa.dmasa.length;
@@ -603,11 +675,12 @@ var divOvD,divOvDT,divOvDD,divOvI,divOvIT,divOvID;//Ovarios
 var divTesD,divTesDT,divTesDD,divTesI,divTesIT,divTesID,divTes;//Testiculos
 var divRi,divPelvis;
 var divProst,divProsT,divProsD;//Prostata
-var divH,divHT,divHD;//Higado
+var divH,divHT,divHD,divHV,divHVP;//Higado
 var divTirD,divTirDT,divTirDD,divTirI,divTirIT,divTirID,divTir,divIstmo;//Tiroides
 var divMamaD,divMamaDT,divMamaDD,divMamaI,divMamaIT,divMamaID;//Mamas
 var divfocal;
 var divVasc;
+var divedit;
 function Changeback(e){
 var colorbase='hotpink';
 var colornew='green';
