@@ -12,7 +12,7 @@ texto+=' <p class="menuc" onclick="showCarotIizq();">Carotida interna izquierda<
 texto+=' <p class="menuc" onclick="showCarotEizq();">Carotida externa izquierda</p>';
 texto+=' <p class="menuc" onclick="showVertebralizq();">Vertebral izquierda</p>';
 */
-texto+='<div id="slide" ><input onchange="redibuja(0);" type="range" min="1" max="100" value="50" class="slider" id="myRange"></div>';
+texto+='<div id="svg_content" ><input onchange="redibuja(0);" type="range" min="1" max="100" value="50" step="25" class="slider" id="myRange"></div>';
 texto+='<div id="svg"></div>'
 divCarot.innerHTML=texto;
 divCarot.style.visibility="visible";

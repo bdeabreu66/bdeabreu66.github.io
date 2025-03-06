@@ -4,6 +4,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 </HEAD>
 <style>
+.slider1 {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 98%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
 
 #footer {
   position: fixed;
@@ -217,6 +228,17 @@ width: 6em;
 
 
 <script>
+
+var ubicg= [
+{ nomba:"Segmentos-hepaticos.jpg",
+  area:[
+   {tipo: "rect", coords: "34,44,270,350"},
+   {tipo: "rect", coords: "290,172,333,250"},
+   {tipo: "circle", coords: "337,300,44"},
+  ],
+},
+];
+
 var Examen;
 
 function Showpaciente(){
@@ -350,19 +372,32 @@ actualizaimagen2(1);
 function quitardivcanvas(){
 divedit.style.visibility='hidden';
 }
+var ZoomA=[1,1.5,2,2.5,3,3.5,4,4.5]
+function ZoomP(){
+
+if (indzoom<7) {indzoom++;actualizaimagen2(ZoomA[indzoom]);}
+}
+function ZoomM(){
+if (indzoom>0) {indzoom--;actualizaimagen2(ZoomA[indzoom]);}
+}
+
 function modifica_canvas(){
 var texto='';
+indzoom=0;
 divedit=document.getElementById('ecanvas');
-divedit.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;background-color:white;";
-texto+='<table><tr>';
-texto+='<td><button>Z+</button></td>';
-texto+='<td><button>Z-</button></td>';
+divedit.style="position:fixed;top:25%;left:0%;height:60%;width:100%;background-color:white;";
+texto+='<table style="background-color:blue;width:100%;"><tr>';
+texto+='<td><button onclick="ZoomP();">Z+</button></td>';
+texto+='<td><button onclick="ZoomM();">Z-</button></td>';
 texto+='<td><button>S</button></td>';
 texto+='<td><button onclick="quitardivcanvas();" >x</button></td>';
 texto+='</tr></table>';
-texto+='<canvas  id="lienzo2" style="border:2px solid #000000;background-color: white" width="1000" height="500%"></canvas>';  
+texto+='<div style="overflow: auto; width:100%;height:60%;">';
+texto+='<canvas  id="lienzo2" style="border:2px solid #000000;background-color: white" width="1000" height="500"></canvas><br>';  
+texto+='<input type="range" min="1" max="10" value="5" class="slider1" id="myRange">';
+texto+='</div>';
 divedit.innerHTML=texto;
-actualizaimagen2(0.5);
+actualizaimagen2(1);
 
 
 }
@@ -382,12 +417,21 @@ texto+='Homogenicidad: <br> <label for="Homo1'+indmasa+'"> &nbsp&nbsp homogeneo 
 texto+='<label for="Homo2'+indmasa+'"> &nbsp&nbsp heterogeneo </label><input type="radio" id="Homo2'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].hetero +' onchange="setMasa()"><br>';
 texto+='Doppler: <br> <label for="Dop1'+indmasa+'"> &nbsp&nbsp positivo </label><input type="radio" id="Dop1'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dop +' onchange="setMasa()"><br>';
 texto+='<label for="Dop2'+indmasa+'"> &nbsp&nbsp negativo </label><input type="radio" id="Dop2'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dop +' onchange="setMasa()"><br>';
-
+indic=0;
 texto+=' Tama&nacute;o: <br>';
 texto+=' <label for="Ftam1'+indmasa+'">A-P(cm):</label><input onchange="setMasa()" type="number" id="Ftam1'+indmasa+'" value="'+omasa.dmasa[indmasa].Ftam1+'"><br>';
 texto+=' <label for="Ftam2'+indmasa+'">Transverso(cm):</label><input onchange="setMasa()" type="number" id="Ftam2'+indmasa+'" value="'+omasa.dmasa[indmasa].Ftam2+'"><br>';
 texto+=' <label for="Ftam3'+indmasa+'">Long(cm):</label><input onchange="setMasa()" type="number" id="Ftam3'+indmasa+'" value="'+omasa.dmasa[indmasa].Ftam3+'"><br>';
 texto+=' Ubicaci&oacute;n: <br>';
+texto+='<div id="svg_content" ><input onchange="redibuja(1);" type="range" min="1" max="101" value="0" step="25" class="slider" id="myRange"></div>';
+texto+='<div id="svg"></div>'
+/*texto+='<img src="'+ubicg[indic].nomba+'" alt="Workplace" usemap="#workmap">';
+texto+='<map name="workmap">';
+for (var k=0;k<ubicg[indic].area.length;k++){
+texto+='<area shape="'+ubicg[indic].area[k].tipo+'" coords="'+ubicg[indic].area[k].coords+'" alt="Computer" onclick="setubic(1)">';
+}
+texto+='</map>';
+*/
 for (var k=0;k<ubicaciones.length;k++) {
  texto+=ubicaciones[k]+' <input type="checkbox"'+omasa.dmasa[indmasa].ubic[k]+' id="ubic'+indmasa+k+'" onchange="setMasa()" </input><br>';
 }
@@ -454,7 +498,13 @@ dataurlimagen=ovaso.imagen;
 actualizaimagen(1);
 }
 
-
+function setUbic(k){
+var svge=document.getElementById(datos_menus[omasa.pos].datos[k].id)
+if (omasa.dmasa[indmasa].ubic[k]=="checked") 
+  {omasa.dmasa[indmasa].ubic[k]="";svge.style.fill="black"}
+  else
+ {omasa.dmasa[indmasa].ubic[k]="checked";svge.style.fill="yellow"}
+}
 function setMasa(){
 //for (j=0;j<omasa.dmasa.length;j++){
 var j=indmasa;
@@ -510,7 +560,7 @@ if (omasa.dmasa.length>0){indmasa=0;} else {indmasa=-1;}
 divfocal.innerHTML=textotit+textomasa();
 dataurlimagen=omasa.dmasa[indmasa].imagen;
 actualizaimagen(1);
- 
+ redibuja(1);
 }
 var omasa;
 var ubicaciones;
@@ -527,7 +577,7 @@ lienzo=elemento.getContext('2d');
               elemento.height=elemento.width/aspecto;
               anchoimagen=imagenextra.width;
               altoimagen=imagenextra.height;
- lienzo.scale(z,z);
+  	      lienzo.scale(z,z);
               lienzo.drawImage(imagenextra,0,0, imagenextra.width,imagenextra.height,0, 0, elemento.width, elemento.height);
           }, false);
      imagenextra.src=dataurlimagen;
@@ -537,18 +587,24 @@ lienzo=elemento.getContext('2d');
 function actualizaimagen2(z){
 {
 
-elemento=document.getElementById("lienzo2");
-lienzo2=elemento.getContext('2d');
-    imagenextra=new Image();   
-    imagenextra.addEventListener("load",function() {
-              aspecto=imagenextra.width/imagenextra.height;
-              elemento.height=elemento.width/aspecto;
-              anchoimagen=imagenextra.width;
-              altoimagen=imagenextra.height;
- lienzo.scale(z,z);
-              lienzo2.drawImage(imagenextra,0,0, imagenextra.width,imagenextra.height,0, 0, elemento.width, elemento.height);
+elemento2=document.getElementById("lienzo2");
+elemento2.style.width='98%';
+elemento2.style.height='80%';
+
+lienzo2=elemento2.getContext('2d');
+    imagenextra2=new Image();   
+    imagenextra2.addEventListener("load",function() {
+              aspecto=imagenextra2.width/imagenextra.height;
+              elemento2.height=elemento2.width/aspecto;
+              anchoimagen2=imagenextra2.width;
+              altoimagen2=imagenextra2.height;
+	     // elemento2.width = elemento2.width
+lienzo2.clearRect(0,0,1000,500);
+	      lienzo2.restore();
+ 	      lienzo2.scale(z,z);
+              lienzo2.drawImage(imagenextra2,0,0, imagenextra2.width,imagenextra2.height,0, 0, elemento2.width, elemento2.height);
           }, false);
-     imagenextra.src=dataurlimagen;
+     imagenextra2.src=dataurlimagen;
 }
 }
 

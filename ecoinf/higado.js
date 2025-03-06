@@ -16,16 +16,17 @@ Examen.higado.ubic[3]="Zona IV";
 ubicaciones=Examen.higado.ubic;
 if (typeof(Examen.higado.masas)==='undefined')  {Examen.higado.masas=new Object;
 Examen.higado.masas.dmasa=[]}
-
+Examen.higado.masas.pos=1;
 omasa=Examen.higado.masas;
 
 texto+=' <p class="menuc" onclick="showFocal(\'Higado\',\'showHigado\',divH);">Focal</p>';
-
-texto+=' <p class="menuc">Dopler</p>';
+texto+=' <p class="menuc" onclick="showHigVasc();">Vascular</p>';
 texto+=' <p class="menuc" onclick="showHigTam();">Medidas</p>';
 divH.innerHTML=texto;
 divH.style.visibility="visible";
 }
+
+
 // Actualiza Higado
 function setHigado(){
  try {Examen.higado.HigTam1=document.getElementById('HigTam1').value;} catch {console.log("error")};
@@ -90,4 +91,29 @@ texto+='<label for="HigDia">Linea diafragm&aacute;tica: </label><input type="che
 
 divHD.innerHTML=texto;
 divHD.style.visibility="visible";
+}
+function showHigVasc(){
+divH.style.visibility="hidden";
+divHV=document.getElementById('HigVasc');
+divHV.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Vascular Higado','showHigado','divHV');
+texto+=' <p class="menuc" onclick="showHigPorta();">Vena Porta</p>';
+texto+=' <p class="menuc" onclick="showHigArtHep();">Arteria Hep&aacute;tica</p>';
+
+divHV.innerHTML=texto;
+divHV.style.visibility="visible";
+}
+
+function showHigPorta(){
+divHV.style.visibility="hidden";
+divHVP=document.getElementById('HigVascPorta');
+divHVP.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
+var texto=Titulo('Vena Porta','showHigVasc','divHVP');
+if (typeof(Examen.higado.porta)==='undefined')  {Examen.higado.porta=new Object();}
+ovaso=Examen.higado.porta;
+texto+=' <p class="menuc" onclick="showVascGen(\'Vena Porta\',\'showHigPorta\',divHVP);">General</p>';
+texto+=' <p class="menuc" onclick=";">Placas</p>';
+texto+=' <p class="menuc" onclick="">Trombos</p>';
+divHVP.innerHTML=texto;
+divHVP.style.visibility="visible";
 }
