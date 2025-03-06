@@ -1,12 +1,12 @@
-datos_menus=[{"datos":[{"id":"P_1",forma:'circle r="10" cx="425" cy="600"'},
-                      {"id":"P_2",forma:'circle r="10" cx="511" cy="490"'},
-                      {"id":"P_3",forma:'circle r="10" cx="450" cy="430"'},
-                      {"id":"P_4",forma:'circle r="10" cx="325" cy="600"'},
-                      {"id":"P_5",forma:'circle r="10" cx="555" cy="600"'},
-                      {"id":"P_6",forma:'circle r="10" cx="540" cy="430"'},
-                      {"id":"P_7",forma:'circle r="10" cx="640" cy="470"'},
-//                      {"id":"P_8",forma:'circle r="10" cx="680" cy="600"'}
-                     {"id":"P_8",forma:'polygon points="511,490 450,430 325,600"'}
+datos_menus=[{"datos":[{"id":"P_1",forma:'circle r="10" cx="425" cy="600"',act:"0"},
+                      {"id":"P_2",forma:'circle r="10" cx="511" cy="490"',act:"0"},
+                      {"id":"P_3",forma:'circle r="10" cx="450" cy="430"',act:"0"},
+                      {"id":"P_4",forma:'circle r="10" cx="325" cy="600"',act:"0"},
+                      {"id":"P_5",forma:'circle r="10" cx="555" cy="600"',act:"0"},
+                      {"id":"P_6",forma:'circle r="10" cx="540" cy="430"',act:"0"},
+                      {"id":"P_7",forma:'circle r="10" cx="640" cy="470"',act:"0"},
+//                      {"id":"P_8",forma:'circle r="10" cx="680" cy="600"',act:"0"}
+                     {"id":"P_8",forma:'polygon points="511,490 450,430 325,600"',act:"0"}
                                       ],
              "anchor":"999",
 	     "nomba":"menu0.jpg",
@@ -21,15 +21,15 @@ datos_menus=[{"datos":[{"id":"P_1",forma:'circle r="10" cx="425" cy="600"'},
 			 "showVertebralizq()"
                         ],
             },
-{"datos":[{"id":"P_1",forma:'circle r="10" cx="425" cy="600"'},
-                      {"id":"P_2",forma:'polygon points="251,20 355,49 295,80"'},
-                      {"id":"P_3",forma:'circle r="10" cx="450" cy="430"'},
-                      {"id":"P_4",forma:'circle r="10" cx="325" cy="600"'},
-                      {"id":"P_5",forma:'circle r="10" cx="555" cy="600"'},
-                      {"id":"P_6",forma:'circle r="10" cx="540" cy="430"'},
-                      {"id":"P_7",forma:'circle r="10" cx="640" cy="470"'},
-//                      {"id":"P_8",forma:'circle r="10" cx="680" cy="600"'}
-                     {"id":"P_8",forma:'polygon points="511,490 450,430 325,600"'}
+{"datos":[{"id":"P_1",forma:'circle r="10" cx="425" cy="600"',act:"0"},
+                      {"id":"P_2",forma:'polygon points="251,20 355,49 295,80"',act:"0"},
+                      {"id":"P_3",forma:'circle r="10" cx="450" cy="430"',act:"0"},
+                      {"id":"P_4",forma:'circle r="10" cx="325" cy="600"',act:"0"},
+                      {"id":"P_5",forma:'circle r="10" cx="555" cy="600"',act:"0"},
+                      {"id":"P_6",forma:'circle r="10" cx="540" cy="430"',act:"0"},
+                      {"id":"P_7",forma:'circle r="10" cx="640" cy="470"',act:"0"},
+//                      {"id":"P_8",forma:'circle r="10" cx="680" cy="600"',act:"0"}
+                     {"id":"P_8",forma:'polygon points="511,490 450,430 325,600"',act:"0"}
                                       ],
              "anchor":"400",
 	     "nomba":"Segmentos-hepaticos.jpg",
@@ -127,7 +127,9 @@ var resu=escala(o.datos[i].forma,fx,fy);
 //console.log(centx+" "+centy+" "+radio);
 //textoT+='<circle name="r1"  onclick="cambiacolor(this);" cx="30" cy="30" r="10" />';
 //textoT+='<'+o.datos[i].forma+' id="'+o.datos[i].id+'" name="r1" onclick="cambiacolor('+K+','+i+');" stroke="black" stroke-width="3" opacity= "1"/>'; 
-textoT+='<'+resu+' id="'+o.datos[i].id+'" name="r1" onclick="cambiacolor('+K+','+i+');" stroke="black" stroke-width="3" opacity= "0.5"/>'; 
+if (o.datos[i].act=="0") {relleno='fill="black"'} else {relleno='fill="yellow"'}
+
+textoT+='<'+resu+' id="'+o.datos[i].id+'" name="r1" onclick="cambiacolor('+K+','+i+');" stroke="black" stroke-width="3" opacity= "0.5" '+relleno+'/>'; 
 
 //console.log(textoT);
 }

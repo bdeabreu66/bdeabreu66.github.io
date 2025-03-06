@@ -500,10 +500,15 @@ actualizaimagen(1);
 
 function setUbic(k){
 var svge=document.getElementById(datos_menus[omasa.pos].datos[k].id)
+if (datos_menus[omasa.pos].datos[k].act=="0") 
+{datos_menus[omasa.pos].datos[k].act="1";svge.style.fill="yellow"} 
+else
+{datos_menus[omasa.pos].datos[k].act="0";svge.style.fill="black"}
+
 if (omasa.dmasa[indmasa].ubic[k]=="checked") 
-  {omasa.dmasa[indmasa].ubic[k]="";svge.style.fill="black"}
+  {omasa.dmasa[indmasa].ubic[k]="";}
   else
- {omasa.dmasa[indmasa].ubic[k]="checked";svge.style.fill="yellow"}
+ {omasa.dmasa[indmasa].ubic[k]="checked";}
 }
 function setMasa(){
 //for (j=0;j<omasa.dmasa.length;j++){

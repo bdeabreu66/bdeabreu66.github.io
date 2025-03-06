@@ -7,10 +7,10 @@ texto+=' <p class="menuc" onclick="showHigDet();">General</p>';
 if (typeof(Examen.higado)==='undefined')  {Examen.higado=new Object();}
 if (typeof(Examen.higado.ubic)==='undefined')  {Examen.higado.ubic=new Object;
 Examen.higado.ubic=[];
-Examen.higado.ubic[0]="Zona I"
-Examen.higado.ubic[1]="Zona II";
-Examen.higado.ubic[2]="Zona III";
-Examen.higado.ubic[3]="Zona IV";
+Examen.higado.ubic[0]="Segmento I"
+Examen.higado.ubic[1]="Segmento II";
+Examen.higado.ubic[2]="Segmento III";
+Examen.higado.ubic[3]="Segmento IV";
 }
 
 ubicaciones=Examen.higado.ubic;
