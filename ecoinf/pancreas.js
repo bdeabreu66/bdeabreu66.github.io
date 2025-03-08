@@ -4,8 +4,22 @@ divPan=document.getElementById('Pancreas');
 divPan.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:auto;"
 //var texto='<h4 style="text-align:center;color:yellow;"> Pancreas ';
 var texto=Titulo('Pancreas','showAbdominal','divPan');
+
+if (typeof(Examen.pancreas)==='undefined')  {Examen.pancreas=new Object();}
+if (typeof(Examen.pancreas.ubic)==='undefined')  {Examen.pancreas.ubic=new Object;
+Examen.pancreas.ubic=[];
+Examen.pancreas.ubic[0]="Cabeza"
+Examen.pancreas.ubic[1]="Cuerpo";
+Examen.pancreas.ubic[2]="Cola";
+}
+
+ubicaciones=Examen.pancreas.ubic;
+if (typeof(Examen.pancreas.masas)==='undefined')  {Examen.pancreas.masas=new Object;
+Examen.pancreas.masas.dmasa=[]}
+Examen.pancreas.masas.pos=2;
+omasa=Examen.pancreas.masas;
 texto+=' <p class="menuc" onclick="showPanDet();">General</p>';
-texto+=' <p class="menuc">Focal</p>';
+texto+=' <p class="menuc" onclick="showFocal(\'Pancreas\',\'showPancreas\',divPan);">Focal</p>';
 texto+=' <p class="menuc" onclick="showPanTam();">Medidas</p>';
 divPan.innerHTML=texto;
 divPan.style.visibility="visible";

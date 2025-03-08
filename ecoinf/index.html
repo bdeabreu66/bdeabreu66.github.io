@@ -412,28 +412,16 @@ texto+='Masa '+(indmasa+1)+':<br>';
 //alert('v1 '+v1 +'v2 '+v2+'v3 '+v3);
 
 texto+='Ecogenicidad: <button id="butEco" onclick="ChEco()">'+SEco()+'</button><br>';
-/*texto+='<label for="Eco1'+indmasa+'"> &nbsp&nbsp anecoico </label><input type="radio" id="Eco1'+indmasa+'" name="Eco'+indmasa+'" '+ omasa.dmasa[indmasa].eco.ana +' onchange="setMasa()" ><br>';
-texto+='<label for="Eco4'+indmasa+'"> &nbsp&nbsp anecoico difuminado </label><input type="radio" id="Eco4'+indmasa+'" name="Eco'+indmasa+'"'+ omasa.dmasa[indmasa].eco.anadif +' onchange="setMasa()"><br>';
-texto+='<label for="Eco2'+indmasa+'"> &nbsp&nbsp hipoecoico</label><input type="radio" id="Eco2'+indmasa+'" name="Eco'+indmasa+'"'+ omasa.dmasa[indmasa].eco.hipo +' onchange="setMasa()"><br>';
-texto+='<label for="Eco3'+indmasa+'"> &nbsp&nbsp hiperecoico </label><input type="radio" id="Eco3'+indmasa+'" name="Eco'+indmasa+'" '+ omasa.dmasa[indmasa].eco.hiper  +' onchange="setMasa()"><br>';
-*/
 texto+='Homogenicidad: <button id="butHom" onclick="ChHom()">'+SHom()+'</button><br>';
 texto+='Doppler: <button id="butDop" onclick="ChDop()">'+SDop()+'</button><br>';
 texto+='Movilidad: <button id="butMov" onclick="ChMov()">'+SMov()+'</button><br>';
-
-/*texto+='<label for="Homo1'+indmasa+'"> &nbsp&nbsp homogeneo </label><input type="radio" id="Homo1'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].homo +' onchange="setMasa()"><br>';
-texto+='<label for="Homo2'+indmasa+'"> &nbsp&nbsp heterogeneo </label><input type="radio" id="Homo2'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].hetero +' onchange="setMasa()"><br>';
-if (omasa.dmasa[indmasa].dop) {che1='checked';che2=''} else {che2='checked';che1=''}
-texto+='Doppler: <br> <label for="Dop1'+indmasa+'"> &nbsp&nbsp positivo </label><input type="radio" id="Dop1'+indmasa+'" name="Dop'+indmasa+'" '+ che1 +' onchange="setMasa()"><br>';
-texto+='<label for="Dop2'+indmasa+'"> &nbsp&nbsp negativo </label><input type="radio" id="Dop2'+indmasa+'" name="Dop'+indmasa+'" '+ che2 +' onchange="setMasa()"><br>';
-*/
 indic=0;
 texto+=' Tama&nacute;o: <br>';
 texto+=' <label for="Ftam1'+indmasa+'">A-P(cm):</label><input onchange="setMasa()" type="number" id="Ftam1'+indmasa+'" value="'+omasa.dmasa[indmasa].Ftam1+'"><br>';
 texto+=' <label for="Ftam2'+indmasa+'">Transverso(cm):</label><input onchange="setMasa()" type="number" id="Ftam2'+indmasa+'" value="'+omasa.dmasa[indmasa].Ftam2+'"><br>';
 texto+=' <label for="Ftam3'+indmasa+'">Long(cm):</label><input onchange="setMasa()" type="number" id="Ftam3'+indmasa+'" value="'+omasa.dmasa[indmasa].Ftam3+'"><br>';
 texto+=' Ubicaci&oacute;n: <br>';
-texto+='<div id="svg_content" ><input onchange="redibuja(1);" type="range" min="1" max="101" value="0" step="25" class="slider" id="myRange"></div>';
+texto+='<div id="svg_content" ><input onchange="redibuja(omasa.pos);" type="range" min="1" max="101" value="0" step="25" class="slider" id="myRange"></div>';
 texto+='<div id="svg"></div>'
 /*texto+='<img src="'+ubicg[indic].nomba+'" alt="Workplace" usemap="#workmap">';
 texto+='<map name="workmap">';
@@ -579,7 +567,7 @@ if (omasa.dmasa.length>0){indmasa=0;} else {indmasa=-1;}
 divfocal.innerHTML=textotit+textomasa();
 dataurlimagen=omasa.dmasa[indmasa].imagen;
 actualizaimagen(1);
- redibuja(1);
+ redibuja(omasa.pos);
 }
 var omasa;
 var ubicaciones;
