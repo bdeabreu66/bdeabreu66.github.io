@@ -44,6 +44,21 @@ datos_menus=[{"datos":[{"id":"P_1",forma:'circle r="10" cx="425" cy="600"',act:"
 			 "showVertebralizq()"
                         ],
             },        
+{"datos":[{"id":"P_1",forma:'circle r="10" cx="425" cy="600"',act:"0"},
+                      {"id":"P_2",forma:'circle r="10" cx="450" cy="430"',act:"0"},
+                      {"id":"P_3",forma:'polygon points="200,65 295,65 295,110 200,150"',act:"0"},
+                      {"id":"P_4",forma:'polygon points="300,60 340,60 300,110"',act:"0"},
+                                      ],
+             "anchor":"400",
+	     "nomba":"pancreas.png",
+             "altor":"250",
+ 	     "enlaces": ["setUbic(0)",
+ 			 "setUbic(1)", 
+			 "setUbic(2)",
+			 "setUbic(3)"
+ 			 
+                        ],
+            },        
 
 
       
@@ -127,9 +142,10 @@ var resu=escala(o.datos[i].forma,fx,fy);
 //console.log(centx+" "+centy+" "+radio);
 //textoT+='<circle name="r1"  onclick="cambiacolor(this);" cx="30" cy="30" r="10" />';
 //textoT+='<'+o.datos[i].forma+' id="'+o.datos[i].id+'" name="r1" onclick="cambiacolor('+K+','+i+');" stroke="black" stroke-width="3" opacity= "1"/>'; 
-if (o.datos[i].act=="0") {relleno='fill="black"'} else {relleno='fill="yellow"'}
+//if (o.datos[i].act=="0") {relleno='fill="black"'} else {relleno='fill="yellow"'}
+if (o.datos[i].act=="0") {relleno='opacity= "0.2"'} else {relleno='fill="yellow" opacity= "0.4"'}
 
-textoT+='<'+resu+' id="'+o.datos[i].id+'" name="r1" onclick="cambiacolor('+K+','+i+');" stroke="black" stroke-width="3" opacity= "0.5" '+relleno+'/>'; 
+textoT+='<'+resu+' id="'+o.datos[i].id+'" name="r1" onclick="cambiacolor('+K+','+i+');" stroke="black" stroke-width="3"'+relleno+'/>'; 
 
 //console.log(textoT);
 }
