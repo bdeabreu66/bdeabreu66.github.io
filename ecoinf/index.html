@@ -206,7 +206,7 @@ width: 6em;
 <div id="CarotEizq"> </div>
 <div id="Vertebralizq"> </div>
 <div id="ayuda" hidden="true"></div>
-
+<div id="divSel"></div>
 <div> <br></div>
 </div>
 <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
@@ -225,6 +225,7 @@ width: 6em;
 <script type="text/javascript" src="menusGraficos.js"> </script>
 <script type="text/javascript" src="selectFile.js"> </script>
 <script type="text/javascript" src="cargaimagen.js"> </script>
+<script type="text/javascript" src="focal.js"> </script>
 
 
 <script>
@@ -398,9 +399,9 @@ texto+='<input type="range" min="1" max="10" value="5" class="slider1" id="myRan
 texto+='</div>';
 divedit.innerHTML=texto;
 actualizaimagen2(1);
-
-
 }
+
+
 function textomasa(){
 var texto='';
 if (indmasa>=0) {
@@ -409,14 +410,23 @@ texto+= '<button onclick="decrMasa()">&#129044;</button><button onclick="incrMas
 texto+='<div> ';
 texto+='Masa '+(indmasa+1)+':<br>';
 //alert('v1 '+v1 +'v2 '+v2+'v3 '+v3);
-texto+='Ecogenicidad: <br><label for="Eco1'+indmasa+'"> &nbsp&nbsp anecoico </label><input type="radio" id="Eco1'+indmasa+'" name="Eco'+indmasa+'" '+ omasa.dmasa[indmasa].eco.ana +' onchange="setMasa()"><br>';
+
+texto+='Ecogenicidad: <button id="butEco" onclick="ChEco()">'+SEco()+'</button><br>';
+/*texto+='<label for="Eco1'+indmasa+'"> &nbsp&nbsp anecoico </label><input type="radio" id="Eco1'+indmasa+'" name="Eco'+indmasa+'" '+ omasa.dmasa[indmasa].eco.ana +' onchange="setMasa()" ><br>';
 texto+='<label for="Eco4'+indmasa+'"> &nbsp&nbsp anecoico difuminado </label><input type="radio" id="Eco4'+indmasa+'" name="Eco'+indmasa+'"'+ omasa.dmasa[indmasa].eco.anadif +' onchange="setMasa()"><br>';
 texto+='<label for="Eco2'+indmasa+'"> &nbsp&nbsp hipoecoico</label><input type="radio" id="Eco2'+indmasa+'" name="Eco'+indmasa+'"'+ omasa.dmasa[indmasa].eco.hipo +' onchange="setMasa()"><br>';
 texto+='<label for="Eco3'+indmasa+'"> &nbsp&nbsp hiperecoico </label><input type="radio" id="Eco3'+indmasa+'" name="Eco'+indmasa+'" '+ omasa.dmasa[indmasa].eco.hiper  +' onchange="setMasa()"><br>';
-texto+='Homogenicidad: <br> <label for="Homo1'+indmasa+'"> &nbsp&nbsp homogeneo </label><input type="radio" id="Homo1'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].homo +' onchange="setMasa()"><br>';
+*/
+texto+='Homogenicidad: <button id="butHom" onclick="ChHom()">'+SHom()+'</button><br>';
+texto+='Doppler: <button id="butDop" onclick="ChDop()">'+SDop()+'</button><br>';
+texto+='Movilidad: <button id="butMov" onclick="ChMov()">'+SMov()+'</button><br>';
+
+/*texto+='<label for="Homo1'+indmasa+'"> &nbsp&nbsp homogeneo </label><input type="radio" id="Homo1'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].homo +' onchange="setMasa()"><br>';
 texto+='<label for="Homo2'+indmasa+'"> &nbsp&nbsp heterogeneo </label><input type="radio" id="Homo2'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].hetero +' onchange="setMasa()"><br>';
-texto+='Doppler: <br> <label for="Dop1'+indmasa+'"> &nbsp&nbsp positivo </label><input type="radio" id="Dop1'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dop +' onchange="setMasa()"><br>';
-texto+='<label for="Dop2'+indmasa+'"> &nbsp&nbsp negativo </label><input type="radio" id="Dop2'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dop +' onchange="setMasa()"><br>';
+if (omasa.dmasa[indmasa].dop) {che1='checked';che2=''} else {che2='checked';che1=''}
+texto+='Doppler: <br> <label for="Dop1'+indmasa+'"> &nbsp&nbsp positivo </label><input type="radio" id="Dop1'+indmasa+'" name="Dop'+indmasa+'" '+ che1 +' onchange="setMasa()"><br>';
+texto+='<label for="Dop2'+indmasa+'"> &nbsp&nbsp negativo </label><input type="radio" id="Dop2'+indmasa+'" name="Dop'+indmasa+'" '+ che2 +' onchange="setMasa()"><br>';
+*/
 indic=0;
 texto+=' Tama&nacute;o: <br>';
 texto+=' <label for="Ftam1'+indmasa+'">A-P(cm):</label><input onchange="setMasa()" type="number" id="Ftam1'+indmasa+'" value="'+omasa.dmasa[indmasa].Ftam1+'"><br>';
@@ -510,9 +520,12 @@ if (omasa.dmasa[indmasa].ubic[k]=="checked")
   else
  {omasa.dmasa[indmasa].ubic[k]="checked";}
 }
+
 function setMasa(){
+
 //for (j=0;j<omasa.dmasa.length;j++){
 var j=indmasa;
+/*
 var ne='Eco1'+j;
 if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.ana="checked";}
  else {omasa.dmasa[j].eco.ana="";}
@@ -525,6 +538,7 @@ if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.hipo="checked";}
 var ne='Eco3'+j;
 if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.hiper="checked";}
  else {omasa.dmasa[j].eco.hiper="";}
+
 var ne='Homo1'+j;
 if (document.getElementById(ne).checked) {omasa.dmasa[j].homo="checked";}
  else {omasa.dmasa[j].homo="";}
@@ -532,7 +546,7 @@ if (document.getElementById(ne).checked) {omasa.dmasa[j].homo="checked";}
 var ne='Homo2'+j;
 if (document.getElementById(ne).checked) {omasa.dmasa[j].hetero="checked";}
  else {omasa.dmasa[j].hetero="";}
-
+*/
 var ne='Dop1'+j;
 if (document.getElementById(ne).checked) {omasa.dmasa[j].dop="checked";}
  else {omasa.dmasa[j].dop="";}
@@ -739,7 +753,7 @@ var divProst,divProsT,divProsD;//Prostata
 var divH,divHT,divHD,divHV,divHVP;//Higado
 var divTirD,divTirDT,divTirDD,divTirI,divTirIT,divTirID,divTir,divIstmo;//Tiroides
 var divMamaD,divMamaDT,divMamaDD,divMamaI,divMamaIT,divMamaID;//Mamas
-var divfocal;
+var divfocal,divsel;
 var divVasc;
 var divedit;
 function Changeback(e){
