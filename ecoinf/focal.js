@@ -12,10 +12,10 @@ function ChEco(){
 var texto='';
 divsel=document.getElementById("divSel");
 divsel.style="position:fixed;top:25%;left:0%;height:60%;width:100%;background-color:gray;";
-texto+='<label for="Eco1'+indmasa+'"> &nbsp&nbsp anecoico </label><input type="radio" id="Eco1'+indmasa+'" name="Eco'+indmasa+'" '+ omasa.dmasa[indmasa].eco.ana +' onchange="setEco();quitaEco()" ><br>';
-texto+='<label for="Eco4'+indmasa+'"> &nbsp&nbsp anecoico difuminado </label><input type="radio" id="Eco4'+indmasa+'" name="Eco'+indmasa+'"'+ omasa.dmasa[indmasa].eco.anadif +' onchange="setEco();quitaEco()"><br>';
-texto+='<label for="Eco2'+indmasa+'"> &nbsp&nbsp hipoecoico</label><input type="radio" id="Eco2'+indmasa+'" name="Eco'+indmasa+'"'+ omasa.dmasa[indmasa].eco.hipo +' onchange="setEco();quitaEco()"><br>';
-texto+='<label for="Eco3'+indmasa+'"> &nbsp&nbsp hiperecoico </label><input type="radio" id="Eco3'+indmasa+'" name="Eco'+indmasa+'" '+ omasa.dmasa[indmasa].eco.hiper  +' onchange="setEco();quitaEco()"><br>';
+texto+='<label for="Eco1'+indmasa+'"> &nbsp&nbsp anecoico </label><input type="radio" id="Eco1'+indmasa+'" name="Eco'+indmasa+'" '+ omasa.dmasa[indmasa].eco.ana +' onclick="setEco();quitaEco()" ><br>';
+texto+='<label for="Eco4'+indmasa+'"> &nbsp&nbsp anecoico difuminado </label><input type="radio" id="Eco4'+indmasa+'" name="Eco'+indmasa+'"'+ omasa.dmasa[indmasa].eco.anadif +' onclick="setEco();quitaEco()"><br>';
+texto+='<label for="Eco2'+indmasa+'"> &nbsp&nbsp hipoecoico</label><input type="radio" id="Eco2'+indmasa+'" name="Eco'+indmasa+'"'+ omasa.dmasa[indmasa].eco.hipo +' onclick="setEco();quitaEco()"><br>';
+texto+='<label for="Eco3'+indmasa+'"> &nbsp&nbsp hiperecoico </label><input type="radio" id="Eco3'+indmasa+'" name="Eco'+indmasa+'" '+ omasa.dmasa[indmasa].eco.hiper  +' onclick="setEco();quitaEco()"><br>';
 //texto+='<button onclick="quitaEco()">Ok</button>';
 divsel.innerHTML=texto;
 divsel.style.visibility='visible';
@@ -43,8 +43,8 @@ function ChHom(){
 var texto='';
 divsel=document.getElementById("divSel");
 divsel.style="position:fixed;top:25%;left:0%;height:60%;width:100%;background-color:gray;";
-texto+='<label for="Homo1'+indmasa+'"> &nbsp&nbsp homogeneo </label><input type="radio" id="Homo1'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].homo +' onchange="setHom();quitaHom()"><br>';
-texto+='<label for="Homo2'+indmasa+'"> &nbsp&nbsp heterogeneo </label><input type="radio" id="Homo2'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].hetero +' onchange="setHom();quitaHom()"><br>';
+texto+='<label for="Homo1'+indmasa+'"> &nbsp&nbsp homogeneo </label><input type="radio" id="Homo1'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].homo +' onclick="setHom();quitaHom()"><br>';
+texto+='<label for="Homo2'+indmasa+'"> &nbsp&nbsp heterogeneo </label><input type="radio" id="Homo2'+indmasa+'" name="homo'+indmasa+'" '+ omasa.dmasa[indmasa].hetero +' onclick="setHom();quitaHom()"><br>';
 divsel.innerHTML=texto;
 divsel.style.visibility='visible';
 }
@@ -70,9 +70,9 @@ function ChDop(){
 var texto='';
 divsel=document.getElementById("divSel");
 divsel.style="position:fixed;top:25%;left:0%;height:60%;width:100%;background-color:gray;";
-texto+='<label for="Dop1'+indmasa+'"> &nbsp&nbsp Positivo </label><input type="radio" id="Dop1'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dopp +' onchange="setDop();quitaDop();"><br>';
-texto+='<label for="Dop2'+indmasa+'"> &nbsp&nbsp Negativo </label><input type="radio" id="Dop2'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dopn +' onchange="setDop();quitaDop();"><br>';
-texto+='<label for="Dop3'+indmasa+'"> &nbsp&nbsp No utilizado </label><input type="radio" id="Dop3'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dops +' onchange="setDop();quitaDop();"><br>';
+texto+='<label for="Dop1'+indmasa+'"> &nbsp&nbsp Positivo </label><input type="radio" id="Dop1'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dopp +' onclick="setDop();quitaDop();"><br>';
+texto+='<label for="Dop2'+indmasa+'"> &nbsp&nbsp Negativo </label><input type="radio" id="Dop2'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dopn +' onclick="setDop();quitaDop();"><br>';
+texto+='<label for="Dop3'+indmasa+'"> &nbsp&nbsp No utilizado </label><input type="radio" id="Dop3'+indmasa+'" name="Dop'+indmasa+'" '+ omasa.dmasa[indmasa].dops +' onclick="setDop();quitaDop();"><br>';
 divsel.innerHTML=texto;
 divsel.style.visibility='visible';
 }

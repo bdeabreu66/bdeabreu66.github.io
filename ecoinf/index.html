@@ -239,8 +239,24 @@ var ubicg= [
   ],
 },
 ];
-
+var indcl=0;
+var xClick=[];
+var yClick=[];
 var Examen;
+let handleMousemove = (e) => {
+//const xClick = e.clientX - e.currentTarget.offsetLeft;
+//const yClick = 48+e.clientY - e.currentTarget.offsetTop;
+var texto='';
+xClick[indcl] = e.clientX ;
+yClick[indcl++] = e.offsetY ;
+console.log(indcl);
+for (var i=0;i<indcl;i++) 
+ texto+=xClick[i]+','+yClick[i]+' ';
+console.log(texto);
+//    console.log(`x: ${xClick}`);
+//    console.log(`y: ${yClick}`);
+//  console.log(`mouse position: ${event.x}:${event.y}`);
+};
 
 function Showpaciente(){
 var ch1,ch2;
@@ -429,11 +445,11 @@ for (var k=0;k<ubicg[indic].area.length;k++){
 texto+='<area shape="'+ubicg[indic].area[k].tipo+'" coords="'+ubicg[indic].area[k].coords+'" alt="Computer" onclick="setubic(1)">';
 }
 texto+='</map>';
-*/
+
 for (var k=0;k<ubicaciones.length;k++) {
  texto+=ubicaciones[k]+' <input type="checkbox"'+omasa.dmasa[indmasa].ubic[k]+' id="ubic'+indmasa+k+'" onchange="setMasa()" </input><br>';
 }
-
+*/
 texto+=' <br> Eliminar: <button onclick="eliminamasa('+indmasa+')"> E </button><br>';
 
 texto+='<div id="divlienzo"> ';
@@ -534,11 +550,11 @@ if (document.getElementById(ne).checked) {omasa.dmasa[j].homo="checked";}
 var ne='Homo2'+j;
 if (document.getElementById(ne).checked) {omasa.dmasa[j].hetero="checked";}
  else {omasa.dmasa[j].hetero="";}
-*/
+
 var ne='Dop1'+j;
 if (document.getElementById(ne).checked) {omasa.dmasa[j].dop="checked";}
  else {omasa.dmasa[j].dop="";}
-
+*/
 var ne='Ftam1'+j;
 omasa.dmasa[j].Ftam1=document.getElementById(ne).value;
 var ne='Ftam2'+j;
@@ -568,6 +584,8 @@ divfocal.innerHTML=textotit+textomasa();
 dataurlimagen=omasa.dmasa[indmasa].imagen;
 actualizaimagen(1);
  redibuja(omasa.pos);
+document.getElementById('svg').addEventListener('mouseup', handleMousemove);
+
 }
 var omasa;
 var ubicaciones;
@@ -678,7 +696,7 @@ texto+=' <p class="menuc" onclick="showAorta();">Aorta</p>';
 divA.innerHTML=texto;
 divA.style.visibility='visible';
 }
-
+/*
 function showTiroides(){
 divp.style.visibility="hidden";
 divTir=document.getElementById('Tiroides');
@@ -687,7 +705,33 @@ var texto=Titulo('Tiroides','showPrincipal','divTir');
 texto+=' <p class="menuc"onclick="showTirD()">Tiroides Derecha </p>';
 texto+=' <p class="menuc"onclick="showTirI()">Tiroides Izquierda </p>';
 texto+=' <p class="menuc"onclick="showIstmo()">Istmo </p>';
+divTir.innerHTML=texto;
+divTir.style.visibility='visible';
+}
+*/
+function showTiroides(){
+divp.style.visibility="hidden";
+divTir=document.getElementById('Tiroides');
+divTir.style="position:fixed;top:25%;left:0%;height:60%;width:100%;overflow-y:scroll;"
+var texto=Titulo('Tiroides','showPrincipal','divTir');
 
+if (typeof(Examen.tird)==='undefined')  {Examen.tird=new Object();}
+if (typeof(Examen.tird.ubic)==='undefined')  {Examen.tird.ubic=new Object;}
+Examen.tird.ubic=[];
+Examen.tird.ubic[0]="Lobulo derecho";
+Examen.tird.ubic[1]="Lobulo izquierdo";
+Examen.tird.ubic[2]="Itsmo";
+ubicaciones=Examen.tird.ubic;
+
+if (typeof(Examen.tird.masas)==='undefined')  {Examen.tird.masas=new Object;
+Examen.tird.masas.dmasa=[]}
+Examen.tird.masas.pos=3;
+omasa=Examen.tird.masas;
+texto+=' <p class="menuc"onclick="showTirDDet()">General </p>';
+
+
+texto+=' <p class="menuc" onclick="showFocal(\'Tiroides\',\'showTiroides\',divTir);">Masas focales</p>';
+texto+=' <p class="menuc"onclick=" showTirDTam()">Medidas </p>';
 divTir.innerHTML=texto;
 divTir.style.visibility='visible';
 }

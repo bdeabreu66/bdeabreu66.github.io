@@ -6,13 +6,17 @@ var texto=Titulo('Higado','showAbdominal','divH');
 texto+=' <p class="menuc" onclick="showHigDet();">General</p>';
 if (typeof(Examen.higado)==='undefined')  {Examen.higado=new Object();}
 if (typeof(Examen.higado.ubic)==='undefined')  {Examen.higado.ubic=new Object;
+}
 Examen.higado.ubic=[];
 Examen.higado.ubic[0]="Segmento I"
 Examen.higado.ubic[1]="Segmento II";
 Examen.higado.ubic[2]="Segmento III";
-Examen.higado.ubic[3]="Segmento IV";
-}
-
+Examen.higado.ubic[3]="Segmento IVa";
+Examen.higado.ubic[4]="Segmento IVb"
+Examen.higado.ubic[5]="Segmento V";
+Examen.higado.ubic[6]="Segmento VI";
+Examen.higado.ubic[7]="Segmento VII";
+Examen.higado.ubic[8]="Segmento VIII";
 ubicaciones=Examen.higado.ubic;
 if (typeof(Examen.higado.masas)==='undefined')  {Examen.higado.masas=new Object;
 Examen.higado.masas.dmasa=[]}
