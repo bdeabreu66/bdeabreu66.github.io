@@ -370,20 +370,24 @@ divfocal.innerHTML=textotit+textomasa();
 var indmasa;
 
 function incrMasa(){
-if (indmasa<omasa.dmasa.length-1) {indmasa++}
+if (indmasa<omasa.dmasa.length-1) {indmasa++;
 
 divfocal.innerHTML=textotit+textomasa();
 dataurlimagen=omasa.dmasa[indmasa].imagen;
+asigna_ubicacion();
+redibuja(omasa.pos);
 actualizaimagen(1);
-
 }
-
+}
+var dataurlimagen;
 function decrMasa(){
-if (indmasa>0) {indmasa--}
+if (indmasa>0) {indmasa--;
 divfocal.innerHTML=textotit+textomasa();
 dataurlimagen=omasa.dmasa[indmasa].imagen;
-actualizaimagen2(1);
-
+asigna_ubicacion();
+redibuja(omasa.pos);
+actualizaimagen(1);
+}
 }
 
 function quitardivcanvas(){
@@ -420,11 +424,12 @@ actualizaimagen2(1);
 
 function textomasa(){
 var texto='';
+//alert(indmasa);
 if (indmasa>=0) {
-texto+= '<button onclick="decrMasa()">&#129044;</button><button onclick="incrMasa()">&#10140;</button><br>';
+texto+= '<center><button onclick="decrMasa()">&#129044;</button><button onclick="incrMasa()">&#10140;</button></center><br>';
 //for (var j=0;j<omasa.dmasa.length;j++){
 texto+='<div> ';
-texto+='Masa '+(indmasa+1)+':<br>';
+texto+='<center>Masa '+(indmasa+1)+'</center><br>';
 //alert('v1 '+v1 +'v2 '+v2+'v3 '+v3);
 
 texto+='Ecogenicidad: <button id="butEco" onclick="ChEco()">'+SEco()+'</button><br>';
@@ -439,13 +444,7 @@ texto+=' <label for="Ftam3'+indmasa+'">Long(cm):</label><input onchange="setMasa
 texto+=' Ubicaci&oacute;n: <br>';
 texto+='<div id="svg_content" ><input onchange="redibuja(omasa.pos);" type="range" min="1" max="101" value="0" step="25" class="slider" id="myRange"></div>';
 texto+='<div id="svg"></div>'
-/*texto+='<img src="'+ubicg[indic].nomba+'" alt="Workplace" usemap="#workmap">';
-texto+='<map name="workmap">';
-for (var k=0;k<ubicg[indic].area.length;k++){
-texto+='<area shape="'+ubicg[indic].area[k].tipo+'" coords="'+ubicg[indic].area[k].coords+'" alt="Computer" onclick="setubic(1)">';
-}
-texto+='</map>';
-
+/*
 for (var k=0;k<ubicaciones.length;k++) {
  texto+=ubicaciones[k]+' <input type="checkbox"'+omasa.dmasa[indmasa].ubic[k]+' id="ubic'+indmasa+k+'" onchange="setMasa()" </input><br>';
 }
@@ -527,52 +526,28 @@ if (omasa.dmasa[indmasa].ubic[k]=="checked")
 
 function setMasa(){
 
-//for (j=0;j<omasa.dmasa.length;j++){
+
 var j=indmasa;
-/*
-var ne='Eco1'+j;
-if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.ana="checked";}
- else {omasa.dmasa[j].eco.ana="";}
-var ne='Eco4'+j;
-if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.anadif="checked";}
- else {omasa.dmasa[j].eco.anadif="";}
-var ne='Eco2'+j;
-if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.hipo="checked";}
- else {omasa.dmasa[j].eco.hipo="";}
-var ne='Eco3'+j;
-if (document.getElementById(ne).checked) {omasa.dmasa[j].eco.hiper="checked";}
- else {omasa.dmasa[j].eco.hiper="";}
-
-var ne='Homo1'+j;
-if (document.getElementById(ne).checked) {omasa.dmasa[j].homo="checked";}
- else {omasa.dmasa[j].homo="";}
-
-var ne='Homo2'+j;
-if (document.getElementById(ne).checked) {omasa.dmasa[j].hetero="checked";}
- else {omasa.dmasa[j].hetero="";}
-
-var ne='Dop1'+j;
-if (document.getElementById(ne).checked) {omasa.dmasa[j].dop="checked";}
- else {omasa.dmasa[j].dop="";}
-*/
 var ne='Ftam1'+j;
 omasa.dmasa[j].Ftam1=document.getElementById(ne).value;
 var ne='Ftam2'+j;
 omasa.dmasa[j].Ftam2=document.getElementById(ne).value;
 var ne='Ftam3'+j;
 omasa.dmasa[j].Ftam3=document.getElementById(ne).value;
+/*
 for (var k=0;k<ubicaciones.length;k++) {
 var ne="ubic"+j+k;
 if (document.getElementById(ne).checked) {omasa.dmasa[j].ubic[k]="checked"} else {omasa.dmasa[j].ubic[k]=""}
 }
+*/
+alert('paso');
 omasa.dmasa[j].imagen=dataurlimagen;
-//}
+
 
 }
 
 function showFocal(d1,d2,d3){
-//masas=structuredClone(omasa);
-//alert(masas.length);
+
 var texto='';
 d3.style.visibility="hidden";
 divfocal=document.getElementById('Focal');
@@ -581,14 +556,24 @@ textotit=Titulo(d1,d2,'divfocal');
 texto=textotit;
 if (omasa.dmasa.length>0){indmasa=0;} else {indmasa=-1;}
 divfocal.innerHTML=textotit+textomasa();
+try {
 dataurlimagen=omasa.dmasa[indmasa].imagen;
 actualizaimagen(1);
+asigna_ubicacion();
  redibuja(omasa.pos);
-document.getElementById('svg').addEventListener('mouseup', handleMousemove);
+} catch{console.log('error')}
+//document.getElementById('svg').addEventListener('mouseup', handleMousemove);
 
 }
 var omasa;
 var ubicaciones;
+function asigna_ubicacion(){
+for (var k=0;k<ubicaciones.length;k++) {
+if (omasa.dmasa[indmasa].ubic[k]=="") 
+{datos_menus[omasa.pos].datos[k].act="0"}
+ else {datos_menus[omasa.pos].datos[k].act="1"} 
+}
+}
 
 function actualizaimagen(z){
 
@@ -798,8 +783,6 @@ x[i].style.backgroundColor=colorbase;
 }
 e.style.backgroundColor=colornew;
 }
-
-
 
 
 // esto va en el script de la pagina

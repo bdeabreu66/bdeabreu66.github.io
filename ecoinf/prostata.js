@@ -25,6 +25,7 @@ if (typeof(Examen.prostata.masas)==='undefined')  {Examen.prostata.masas=new Obj
 Examen.prostata.masas.dmasa=[]}
 //Examen.prostata.masas=new Object;
 //Examen.prostata.masas.dmasa=[];
+Examen.prostata.masas.pos=1;
 omasa=Examen.prostata.masas;
 
 //alert(Object.keys(omasa));

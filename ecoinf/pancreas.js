@@ -7,12 +7,11 @@ var texto=Titulo('Pancreas','showAbdominal','divPan');
 
 if (typeof(Examen.pancreas)==='undefined')  {Examen.pancreas=new Object();}
 if (typeof(Examen.pancreas.ubic)==='undefined')  {Examen.pancreas.ubic=new Object;
+}
 Examen.pancreas.ubic=[];
 Examen.pancreas.ubic[0]="Cabeza"
 Examen.pancreas.ubic[1]="Cuerpo";
 Examen.pancreas.ubic[2]="Cola";
-}
-
 ubicaciones=Examen.pancreas.ubic;
 if (typeof(Examen.pancreas.masas)==='undefined')  {Examen.pancreas.masas=new Object;
 Examen.pancreas.masas.dmasa=[]}
