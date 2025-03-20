@@ -49,7 +49,9 @@ input[type=text]:focus {
 <BODY>
 <div id respuestas>
 <button onclick="procesar();">P</button>
-
+<button onclick="grabar();">G</button>
+<button onclick="cargar();">L</button>
+Precision:<input id="pres" type="number" value="16">
 </div>
 
 
@@ -81,23 +83,123 @@ input[type=text]:focus {
 <tr><td></td><td><span name="_res" ></span></td></tr>
 <tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
 <tr><td></td><td><span name="_res" ></span></td></tr>
-
-
-
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
+<tr><td>Formula :</td><td><input name="_for" type="text" value=""></td></tr>
+<tr><td></td><td><span name="_res" ></span></td></tr>
 </table>
 </div>
 
 <div id="salida" style="font-size:20px;">
 </div>
- 
+<div id="lista" > </div>
 <!--   -->
 <script src="math.js" type="text/javascript"></script>
 <script type="text/javascript">
+var data=new Object;
+
+function grabar(){
+console.log("grabar");
+var nomb_problema=document.getElementById("dpro").value;
+var nombre_archivo="PROB"+nomb_problema;
+data.variables=document.getElementById("_var").value;
+data.expresion=[];
+expr=document.getElementsByName("_for");
+var nform=expr.length;
+for (var i=0;i<nform;i++) {
+  data.expresion[i]=expr[i].value;
+}
+localStorage.setItem(nombre_archivo,JSON.stringify(data)); 
+}
+
+function cargadatos(nomb) {
+buffer=localStorage.getItem(nomb);
+data=JSON.parse(buffer);
+document.getElementById("dpro").value=nomb.substring(4);
+
+document.getElementById("_var").value=data.variables;
+var l=data.expresion.length;
+console.log("l "+l);
+for (var i=0;i<l;i++) {
+  document.getElementsByName("_for")[i].value=data.expresion[i];
+}
+}
+
+function cargar(){
+listasel=[];
+console.log("paso");
+for(var i=0;i<localStorage.length;i++){
+var nomb=localStorage.key(i); 
+if (nomb.indexOf("PROB")==0) {listasel.unshift(nomb);} 
+ } 
+selectlista();
+}
+
+function selectlista(){
+var textoT="";
+var div3 = document.getElementById("lista");
+div3.style="position: fixed;top :0px; left: 0px; width: 100%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
+for (var i=0;i<listasel.length;i++) {
+textoT+="<p style='color:white;background:black;border:2px solid #FFFFFF; cursor:pointer;' onclick='clickp("+i+")'> "+listasel[i]+"</p>"; 
+}
+textoT+='<br> <button onclick="quitarlista();" >Cancelar </button>';
+div3.innerHTML=textoT;
+}
+function quitarlista(){
+var div3 = document.getElementById("lista");
+div3.style="display: none;";
+}
+function clickp(num){
+var nomb=listasel[num];
+cargadatos(nomb);
+quitarlista();
+}
+
+
+
+
 var pi=Math.PI;
 var mu0=4*pi*1e-7;
+var nd;
 function procesar(){
+nd=document.getElementById("pres").value;
 window.document.title = document.getElementById("dpro").value;
-var nd=4;
 const parser=math.parser();
 var _variables=document.getElementById("_var").value;
 _variables=_variables.replace(/(\r\n|\n|\r)/gm, "");
@@ -120,6 +222,10 @@ valor=variableinicial[j].substring(ind+1);
 parser.set(nvm,math.complex(parser.evaluate(valor)));
 console.log(parser.get(nvm)) ; 
 }
+
+parser.evaluate('quadsolve1(a,b,c) = (1/(2*a))*(-b+sqrt(b^2-4*a*c))');
+parser.evaluate('quadsolve2(a,b,c) = (1/(2*a))*(-b-sqrt(b^2-4*a*c))');
+
 
 parser.set('nulo', function (A) {
 var A2=math.clone(A);
@@ -240,6 +346,7 @@ return A2;
 
 
 parser.set('gram_G', function (A) {
+//obtiene base ortogonal
 var V=math.clone(A);
 var t=math.size(V);
 var m=t.subset(math.index(0));
@@ -267,6 +374,7 @@ return V;
 })
 
 parser.set('gram', function (A) {
+// obtiene base ortonormal
 var V=math.clone(A);
 var t=math.size(V);
 var m=t.subset(math.index(0));
@@ -331,6 +439,7 @@ return S;
 
 
 function permuta(C,i,j){
+// permuta fila i con fila j
 var t=math.size(C);
 var m=t.subset(math.index(0));
 var n=t.subset(math.index(1));
@@ -345,6 +454,7 @@ return C;
 }
 
 parser.set('PARA', function () {
+// calcula el equivalente paralelo de dos impedancias
 var C=math.complex('0');
  for (var k=0; k < arguments.length; k++) {
   C=math.add(C,math.divide(1,arguments[k]));
@@ -392,7 +502,8 @@ if (formi!='') {
         //var r1=salida.re;
         //var r2=salida.im;
         console.log(parser.get(nvari));
-         vsal[i].innerText=print_m(math.format(salida,{notation: 'auto', precision: 5}));
+  console.log('nd= '+nd);
+         vsal[i].innerText=print_m(math.format(salida,{notation: 'auto', precision: nd}));
 //+r2.toExponential(nd)+'(i)';}
 //        if (r2>0) { vsal[i].innerText+= ' + '+r2.toExponential(nd)+'(i)';}
 //            else
