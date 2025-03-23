@@ -463,6 +463,25 @@ console.log('C='+C);
 return math.divide(1,C);
 })
 
+parser.set('Interp', function (T,x,y) {
+// calcula el equivalente paralelo de dos impedancias
+var pos;
+var n=math.size(T).subset(math.index(1));
+var m=math.size(T).subset(math.index(0));
+//var n=T.length;
+alert(m+' '+n);
+if (n>=2) {
+ for (var k=0; k < n-1; k++) {
+alert(y+ ' '+k+' '+math.subset(T, math.index(y, k)));
+  if ((x>math.subset(T, math.index(y, k))) && (x<math.subset(T, math.index(y, k+1)))) {pos=k+1;break}
+}
+if (x<math.subset(T, math.index(y, 0))) {pos=0}
+if (x>math.subset(T, math.index(y, n-1))) {pos=n}
+
+return pos;
+} else return -2;
+
+})
 
 parser.evaluate('j=i');
 parser.evaluate('tor(x) = x*(pi/180)');
