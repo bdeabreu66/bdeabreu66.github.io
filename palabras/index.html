@@ -71,7 +71,8 @@ var resp=true;
 for (var j=0;j<NLETRAS;j++){
 if (clave[j]=='b' && E[j]!=palabra[j]) return false;
 if (clave[j]=='m' && E.indexOf(palabra[j])!=-1) return false;
-if (clave[j]=='c' && E[j]==palabra[j]) return false;
+//console.log(E+' '+palabra[j]+' '+E.indexOf(palabra[j]));
+if ( (clave[j]=='c') && ( (E[j]==palabra[j]) || (E.indexOf(palabra[j])==-1))) return false;
 }
 return resp;
 }
