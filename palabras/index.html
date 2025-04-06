@@ -1,6 +1,18 @@
 <html>
+<style>
+
+
+input[type=text]{
+width: 5em;
+}
+
+
+#bt2{
+visibility: hidden;
+}
+</style>
 <body onload="inicio();">
-<div style="text-align:left">
+<div style="text-align:left;background-color:lightgray;">
 <label for="nl" >Nro de letras: </label> 
 <label for="nl2" >&nbsp 2 </label> <input value=2 name="nl" id="nl2" type="radio">
 <label for="nl3" >&nbsp 3 </label> <input value=3 name="nl" id="nl3" type="radio">
@@ -12,8 +24,36 @@
 <label for="idio" >Idioma: </label> 
 <label for="idio" >Espa&nacute;ol </label> <input name="idio" id="idio1" type="radio" checked>
 <label for="idio" >Portugues </label> <input name="idio" id="idio2" type="radio">
+<br><br>
+<button onclick="Ok()">Aceptar </button> 
 </div>
-<button onclick="Ok()">Ok</button>
+
+
+<button id="bt2" onclick="Ok2()">Iniciar </button>
+<br><br>
+<div name="DIVP" hidden> 
+Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
+<button onclick=avanza(0)>Ok</button>
+</div > 
+<div name="DIVP" hidden> 
+Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
+<button onclick=avanza(1)>Ok</button>
+</div > 
+<div name="DIVP" hidden> 
+Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
+<button onclick=avanza(2)>Ok</button>
+</div > 
+<div name="DIVP" hidden> 
+Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
+<button onclick=avanza(3)>Ok</button>
+<div name="DIVP" hidden> 
+Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
+<button onclick=avanza(4)>Ok</button>
+</div > 
+<div name="DIVP" hidden> 
+Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
+
+</div > 
 </body>
  
 <script>
@@ -24,8 +64,35 @@ for (var i=0;i<X.length;i++)
   if (X[i].checked) {return X[i].value}
 }
 
+function filtrado(E){
+var resp=true;
+for (var j=0;j<NLETRAS;j++){
+if (clave[j]=='B' && E[j]!=palabra[j]) return false;
+if (clave[j]=='M' && E.indexOf(palabra[j])!=-1) return false;
+}
+return resp;
+}
+
+function avanza(k){
+document.getElementsByName("DIVP")[k+1].style.display="block";
+palabra=document.getElementsByName("PALAB")[k].value;
+clave=document.getElementsByName("CLAV")[k].value;
+console.log(palabra);
+console.log(clave);
+data=data.filter(filtrado);
+document.getElementsByName("PALAB")[k+1].value=data[0];
+console.log(data);
+}
 function Ok(){
-alert(NL());
+NLETRAS=(NL());
+diccionario(0);
+
+}
+
+function Ok2(){
+
+console.log(NLETRAS);
+document.getElementsByName("DIVP")[0].style.display="block";
 }
 
 var idioma=['spanish.txt','portugues.txt'];
@@ -33,7 +100,7 @@ function diccionario(p){
 var myHeaders = new Headers();
 
 var myInit = { mode: 'cors' };
-var nombrepag="https://bdeabreu66.github.io/factura/"+idioma[p];
+var nombrepag="https://bdeabreu66.github.io/palabras/"+idioma[p];
 
 
 fetch(nombrepag,myInit)
@@ -49,10 +116,11 @@ function ajaxPositive(response) {
       }
     }
  function showResult(txt) {
-        //console.log('muestro respuesta: ', txt);
-        localStorage.setItem('data',txt);
-        data=eval(txt);
-
+    
+        
+        data=txt.split('\n').filter((a)=>a.length==NLETRAS);
+ console.log('muestro respuesta: ', data);
+ document.getElementById("bt2").style.visibility="visible";
   }
 }
 </script>
