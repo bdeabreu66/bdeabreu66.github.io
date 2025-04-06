@@ -71,13 +71,32 @@ var X=document.getElementsByName("idio");
 for (var i=0;i<X.length;i++)
   if (X[i].checked) {return i}
 }
+
+function contar2(A,b,p){
+
+var c=0;
+for (var i=0;i<A.length;i++) if (A[i]==b && (clave[i]=='b' || clave[i]=='c')) {c++;}
+return c
+}
+function contar(A,b){
+var c=0;
+for (var i=0;i<A.length;i++) if (A[i]==b) {c++;}
+return c
+}
+
 function filtrado(E){
 var resp=true;
 for (var j=0;j<NLETRAS;j++){
 if (clave[j]=='b' && E[j]!=palabra[j]) return false;
-if (clave[j]=='m' && E.indexOf(palabra[j])!=-1) return false;
-//console.log(E+' '+palabra[j]+' '+E.indexOf(palabra[j]));
 if ( (clave[j]=='c') && ( (E[j]==palabra[j]) || (E.indexOf(palabra[j])==-1))) return false;
+
+//if ((clave[j]=='m') && (E.indexOf(palabra[j])!=-1 ) ) return false;
+//if ((clave[j]=='m') && (E[j]==palabra[j])) return false;
+//
+
+if ((clave[j]=='m') && (contar(E,palabra[j])>contar2(palabra,palabra[j],j))) {
+//console.log(j+' '+E+' '+palabra[j]+' '+contar(E,palabra[j])+' '+contar2(palabra,palabra[j],j));
+return false;}
 }
 return resp;
 }
