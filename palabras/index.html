@@ -1,1 +1,59 @@
+<html>
+<body onload="inicio();">
+<div style="text-align:left">
+<label for="nl" >Nro de letras: </label> 
+<label for="nl2" >&nbsp 2 </label> <input value=2 name="nl" id="nl2" type="radio">
+<label for="nl3" >&nbsp 3 </label> <input value=3 name="nl" id="nl3" type="radio">
+<label for="nl4" >&nbsp 4 </label> <input value=4 name="nl" id="nl4" type="radio">
+<label for="nl5" >&nbsp 5 </label> <input value=5 name="nl" id="nl5" type="radio" checked>
+<label for="nl6" >&nbsp 6 </label> <input value=6 name="nl" id="nl6" type="radio">
+<label for="nl7" >&nbsp 7 </label> <input value=7 name="nl" id="nl7" type="radio">
+<br><br>
+<label for="idio" >Idioma: </label> 
+<label for="idio" >Espa&nacute;ol </label> <input name="idio" id="idio1" type="radio" checked>
+<label for="idio" >Portugues </label> <input name="idio" id="idio2" type="radio">
+</div>
+<button onclick="Ok()">Ok</button>
+</body>
+ 
+<script>
+function inicio(){}
+function NL(){
+var X=document.getElementsByName("nl");
+for (var i=0;i<X.length;i++)
+  if (X[i].checked) {return X[i].value}
+}
 
+function Ok(){
+alert(NL());
+}
+
+var idioma=['spanish.txt','portugues.txt'];
+function diccionario(p){
+var myHeaders = new Headers();
+
+var myInit = { mode: 'cors' };
+var nombrepag="https://bdeabreu66.github.io/factura/"+idioma[p];
+
+
+fetch(nombrepag,myInit)
+        .then(ajaxPositive)
+        .catch(showError);
+
+function ajaxPositive(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.text().then(showResult);
+      } else {
+        showError('status code: ' + response.status);
+      }
+    }
+ function showResult(txt) {
+        //console.log('muestro respuesta: ', txt);
+        localStorage.setItem('data',txt);
+        data=eval(txt);
+
+  }
+}
+</script>
+</html>                     
