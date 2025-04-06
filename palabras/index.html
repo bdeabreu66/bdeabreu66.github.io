@@ -33,27 +33,27 @@ visibility: hidden;
 
 <button id="bt2" onclick="Ok2()">Iniciar </button>
 <br><br>
-<div name="DIVP" hidden width="100%"> 
+<div name="DIVP" hidden width="100%" > 
 Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
-<button onclick=avanza(0)>Ok</button>
+&nbsp&nbsp<button onclick=avanza(0)>Ok</button>
 </div > 
 <div name="DIVP" hidden width="100%"> 
-Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
-<button onclick=avanza(1)>Ok</button>
+Palabra:<input name="PALAB" type="text">  Resp:<input name="CLAV" type="text"> 
+&nbsp&nbsp<button onclick=avanza(1)>Ok</button>
 </div > 
 <div name="DIVP" hidden width="100%"> 
-Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
-<button onclick=avanza(2)>Ok</button>
+Palabra:<input name="PALAB" type="text">  Resp:<input name="CLAV" type="text"> 
+&nbsp&nbsp<button onclick=avanza(2)>Ok</button>
 </div > 
 <div name="DIVP" hidden width="100%"> 
-Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
-<button onclick=avanza(3)>Ok</button>
+Palabra:<input name="PALAB" type="text">  Resp:<input name="CLAV" type="text"> 
+&nbsp&nbsp<button onclick=avanza(3)>Ok</button>
 <div name="DIVP" hidden width="100%"> 
-Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
-<button onclick=avanza(4)>Ok</button>
+Palabra:<input name="PALAB" type="text">  Resp:<input name="CLAV" type="text"> 
+&nbsp&nbsp<button onclick=avanza(4)>Ok</button>
 </div > 
 <div name="DIVP" hidden width="100%"> 
-Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
+Palabra:<input name="PALAB" type="text">  Resp:<input name="CLAV" type="text"> 
 
 </div > 
 </body>
@@ -71,6 +71,7 @@ var resp=true;
 for (var j=0;j<NLETRAS;j++){
 if (clave[j]=='b' && E[j]!=palabra[j]) return false;
 if (clave[j]=='m' && E.indexOf(palabra[j])!=-1) return false;
+if (clave[j]=='c' && E[j]==palabra[j]) return false;
 }
 return resp;
 }
