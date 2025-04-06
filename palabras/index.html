@@ -1,4 +1,6 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
 <style>
 
 
@@ -25,7 +27,7 @@ visibility: hidden;
 <label for="idio" >Espa&nacute;ol </label> <input name="idio" id="idio1" type="radio" checked>
 <label for="idio" >Portugues </label> <input name="idio" id="idio2" type="radio">
 <br><br>
-<button onclick="Ok()">Aceptar </button> 
+<button onclick="Ok()">Aceptar </button> &nbsp &nbsp<span id="sp"></span>
 </div>
 
 
@@ -67,31 +69,34 @@ for (var i=0;i<X.length;i++)
 function filtrado(E){
 var resp=true;
 for (var j=0;j<NLETRAS;j++){
-if (clave[j]=='B' && E[j]!=palabra[j]) return false;
-if (clave[j]=='M' && E.indexOf(palabra[j])!=-1) return false;
+if (clave[j]=='b' && E[j]!=palabra[j]) return false;
+if (clave[j]=='m' && E.indexOf(palabra[j])!=-1) return false;
 }
 return resp;
 }
 
 function avanza(k){
 document.getElementsByName("DIVP")[k+1].style.display="block";
-palabra=document.getElementsByName("PALAB")[k].value;
-clave=document.getElementsByName("CLAV")[k].value;
+palabra=document.getElementsByName("PALAB")[k].value.toLowerCase();
+clave=document.getElementsByName("CLAV")[k].value.toLowerCase();
 console.log(palabra);
 console.log(clave);
 data=data.filter(filtrado);
 document.getElementsByName("PALAB")[k+1].value=data[0];
-console.log(data);
+ nropalab();
+//console.log(data);
 }
 function Ok(){
 NLETRAS=(NL());
 diccionario(0);
 
 }
-
+function nropalab(){
+document.getElementById("sp").innerText=data.length;
+}
 function Ok2(){
 
-console.log(NLETRAS);
+//console.log(NLETRAS);
 document.getElementsByName("DIVP")[0].style.display="block";
 }
 
@@ -117,11 +122,16 @@ function ajaxPositive(response) {
     }
  function showResult(txt) {
     
-        
+       
         data=txt.split('\n').filter((a)=>a.length==NLETRAS);
- console.log('muestro respuesta: ', data);
+// console.log('muestro respuesta: ', data);
  document.getElementById("bt2").style.visibility="visible";
+ nropalab();
   }
+
+function showError(err) { 
+      console.log('muestor error', err);
+    }
 }
 </script>
 </html>                     
