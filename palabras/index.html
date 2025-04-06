@@ -66,6 +66,11 @@ for (var i=0;i<X.length;i++)
   if (X[i].checked) {return X[i].value}
 }
 
+function IndIdioma(){
+var X=document.getElementsByName("idio");
+for (var i=0;i<X.length;i++)
+  if (X[i].checked) {return i}
+}
 function filtrado(E){
 var resp=true;
 for (var j=0;j<NLETRAS;j++){
@@ -89,8 +94,9 @@ document.getElementsByName("PALAB")[k+1].value=data[0];
 //console.log(data);
 }
 function Ok(){
-NLETRAS=(NL());
-diccionario(0);
+NLETRAS=NL();
+IND=IndIdioma();
+diccionario(IND);
 
 }
 function nropalab(){
