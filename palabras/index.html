@@ -125,6 +125,7 @@ function ajaxPositive(response) {
     
        
         data=txt.split('\n').filter((a)=>a.length==NLETRAS);
+  for (var i=0;i<data.length;i++) data[i]=data[i].toLowerCase();
 // console.log('muestro respuesta: ', data);
  document.getElementById("bt2").style.visibility="visible";
  nropalab();
