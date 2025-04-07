@@ -1,13 +1,11 @@
-a1
-a2
-a-1
-a-2
+a
 aba
 abaá
 ababol
 abacá
 abacal
-abacalero, ra
+abacalero
+abacalera
 abacería
 abacero, ra
 abacial
@@ -1432,18 +1430,22 @@ acristalamiento
 acristalar
 acristianado, da
 acristianar
-acrítico, ca
+acrítico
+acrítica
 acritud
 acro-
-acroamático, ca
+acroamático
+acroamática
 acrobacia
 acróbata
 acrobático, ca
 acrobatismo
 acrofobia
 acroleína
-acromado, da
-acromático, ca
+acromado
+acromada
+acromático
+acromática
 acromatismo
 acromatizar
 acromatopsia
@@ -1452,13 +1454,14 @@ acromegálico, ca
 acromial
 acromiano, na
 acromion
-acrónico1, ca
-acrónico2, ca
+acrónico
+acrónica
 acronimia
 acrónimo
 ácrono
 acrópolis
-acróstico, ca
+acróstico
+acróstica
 acrostolio
 acrotera
 acroteria
@@ -1468,7 +1471,8 @@ actancial
 actante
 actina
 actinia
-actínico, ca
+actínico
+actínica
 actínido
 actinio
 actinismo
@@ -1476,93 +1480,111 @@ actinometría
 actinómetro
 actinomices
 actinomicosis
-actinomorfo, fa
+actinomorfo
+actinomorfa
 actitud
 actitudinal
 activa
 activación
-activador, ra
+activador
+activadora
 activamente
 activar
 actividad
 activismo
 activista
-activo, va
+activo
+activa
 acto
-actor1, triz
-actor2, ra
-actor3
+actor
 actriz
+actora
 actuación
-actuado, da
+actuado
+actuada
 actual
 actualidad
 actualización
-actualizador, ra
+actualizador
+actualizadora
 actualizar
 actualmente
 actuante
 actuar
 actuaria
 actuarial
-actuario, ria
-actuoso, sa
+actuario
+actuaria
+actuoso
+actuosa
 acuache
 acuacultura
 acuadrillar
 acuaeducto
 acuantiar
 acuarela
-acuarelado, da
+acuarelado
+acuarelada
 acuarelista
-acuarelístico, ca
-acuario1
-acuario2
+acuarelístico
+acuarelística
+acuario
 acuárium
 acuartar
 acuartelado
 acuartelamiento
 acuartelar
 acuartillar
-acuático, ca
+acuático
+acuática
 acuátil
 acuatizaje
 acuatizar
-acubado, da
+acubado
+acubada
 acubilar
-acucharado, da
+acucharado
+acucharada
 acuchilladizo
-acuchillado, da
-acuchillador, ra
+acuchillado
+acuchillada
+acuchillador
+acuchilladora
 acuchillamiento
 acuchillar
 acucia
-acuciador, ra
+acuciador
+acuciadora
 acuciamiento
 acuciante
 acuciar
 acuciosamente
 acuciosidad
-acucioso, sa
+acucioso
+acuciosa
 acuclillarse
 acudiciar
 acudiente
 acudimiento
 acudir
-ácueo, a
+ácueo
+ácuea
 acuerdo
 acuerpar
 acuesto
 acúfeno
-acui-
+acui
 acuícola
-acuicultor, ra
+acuicultor
+acuicultora
 acuicultura
 acuidad
-acuífero, ra
+acuífero
+acuífera
 acuitamiento
 acuitar
-aculado, da
+aculado
+aculada
 acular
 aculatar
 acúleo
@@ -1574,8 +1596,10 @@ aculturación
 acultural
 aculturar
 acumen
-acuminado, da
-acuminoso, sa
+acuminado
+acuminada
+acuminoso
+acuminosa
 acumulación
 acumulado
 acumulamiento
@@ -1585,69 +1609,84 @@ acunar
 acundangarse
 acuntir
 acunulable
-acunulador, ra
+acunulador
+acunuladora
 acuñación
-acuñador, ra
-acuñar1
-acuñar2
+acuñador
+acuñadora
+acuñar
 acuosidad
-acuoso, sa
-acupuntor, ra
+acuoso
+acuosa
+acupuntor
+acupuntora
 acupuntura
 acupunturista
-acurado, da
+acurado
+acurada
 acure
 acurrucarse
 acurrullar
 acusable
 acusación
-acusado, da
-acusador, ra
+acusado
+acusada
+acusador
+acusadora
 acusar
 acusativo
-acusatorio, ria
+acusatorio
+acusatoria
 acuse
 acusetas
 acusete
 acusica
 acusique
-acusón, na
-acústico, ca
+acusón
+acusona
+acústico
+acústica
 acutángulo
 acutí
-acuto, ta
+acuto
+acuta
 acuyo
 ad
-ad-
--ada
+ada
 adafina
 adagial
-adagio1
-adagio2
+adagio
 adaguar
 adahala
 adalid
-adamado, da
+adamado
+adamada
 adamadura
 adamante
-adamantino, na
+adamantino
+adamantina
 adamar
 adamarse
-adamascado, da
+adamascado
+adamascada
 adamascar
-adámico, ca
+adámico
+adámica
 adamismo
 adamita
 adán
-adánico, ca
+adánico
+adánica
 adanida
 adanismo
 adaptabilidad
 adaptable
 adaptación
-adaptador, ra
+adaptador
+adaptadora
 adaptar
-adaptativo, va
+adaptativo
+adaptativa
 adaraja
 adárame
 adarce
@@ -1656,8 +1695,7 @@ adarga
 adárgama
 adargar
 adarme
-adarvar1
-adarvar2
+adarvar
 adarve
 ad calendas grecas
 ad cautelam
@@ -1666,7 +1704,8 @@ adecenar
 adecentamiento
 adecentar
 adecuación
-adecuado, da
+adecuado
+adecuada
 adecuar
 adefera
 adefesio
@@ -1677,8 +1716,10 @@ adehala
 adehesamiento
 adehesar
 adelantadamente
-adelantado, da
-adelantador, ra
+adelantado
+adelantada
+adelantador
+adelantadora
 adelantamiento
 adelantar
 adelante
@@ -1686,10 +1727,12 @@ adelanto
 adelfa
 adelfal
 adelfar
-adélfico, ca
+adélfico
+adélfica
 adelfilla
 adelfo
-adelgazador, ra
+adelgazador
+adelgazadora
 adelgazamiento
 adelgazante
 adelgazar
@@ -1703,37 +1746,44 @@ ademar
 además
 ademe
 ademprio
-aden-
+aden
 adenda
 adenia
 adenina
 adenitis
-adeno-
+adeno
 adenocarcinoma
 adenohipófisis
 adenoide
-adenoideo, a
+adenoideo
+adenoidea
 adenología
 adenoma
 adenopatía
-adenopático, ca
-adenoso, sa
+adenopático
+adenopática
+adenoso
+adenosa
 adenovirus
 adensar
 adentellar
 adentramiento
 adentrarse
 adentro
-adepto, ta
-aderezado, da
+adepto
+adepta
+aderezado
+aderezada
 aderezar
 aderezo
--adero, ra
-adestrado, da
-adestrador, ra
+adero
+adera
+adestrado
+adestrada
+adestrador
+adestradora
 adestrar
-adeudar1
-adeudar2
+adeudar
 adeudo
 adherecer
 adherencia
@@ -1745,31 +1795,40 @@ ad hoc
 ad hominem
 ad honorem
 adhortar
-adiabático, ca
+adiabático
+adiabática
 adiado
 adiafa
 adiáfora
 adiaforesis
-adiamantado, da
+adiamantado
+adiamantada
 adiamiento
-adiano, na
+adiano
+adiana
 adiar
-adición1
-adición2
-adicionador, ra
+adición
+adicionador
+adicionadora
 adicional
 adicionar
-adictivo, va
-adicto, ta
-adiestrado, da
-adiestrador, ra
+adictivo
+adictiva
+adicto
+adicta
+adiestrado
+adiestrada
+adiestrador
+adiestradora
 adiestramiento
 adiestrar
 adietar
 adimensional
 adinamia
-adinámico, ca
-adinerado, da
+adinámico
+adinámica
+adinerado
+adinerada
 ad infinitum
 adintelado
 ad interim
@@ -1777,48 +1836,61 @@ adiós
 adipocira
 adiposidad
 adiposis
-adiposo, sa
+adiposo
+adiposa
 adipsia
 adir
 aditamento
-aditicio, cia
-aditivo, va
+aditicio
+aditicia
+aditivo
+aditiva
 adiva
 adivas
 adive
 adivinable
 adivinación
-adivinador, ra
+adivinador
+adivinadora
 adivinaja
 adivinamiento
 adivinanza
 adivinar
-adivinatorio, ria
+adivinatorio
+adivinatoria
 a divinis
-adivino, na
+adivino
+adivina
 adjesividad
 adjetiva
 adjetivación
-adjetivador, ra
+adjetivador
+adjetivadora
 adjetival
 adjetivar
-adjetivo, va
+adjetivo
+adjetiva
 adjudicación
-adjudicador, ra
+adjudicador
+adjudicadora
 adjudicar
-adjudicatario, ria
+adjudicatario
+adjudicataria
 adjunción
 adjunta
 adjuntar
 adjuntía
-adjunto, ta
+adjunto
+adjunta
 adjurable
 adjuración
-adjurado, da
+adjurado
+adjurada
 adjurador
 adjurar
 adjutorio
-adjutor, ra
+adjutor
+adjutora
 adlátere
 ad libitum
 ad limina
@@ -1826,18 +1898,24 @@ ad litteram
 adminicular
 adminículo
 administración
-administrado, da
-administrador, ra
+administrado
+administrada
+administrador
+administradora
 administrar
 administrativamente
 administrativista
-administrativo, va
-administratorio, ria
+administrativo
+administrativa
+administratorio
+administratoria
 admirable
 admiración
-admirador, ra
+admirador
+admiradora
 admirar
-admirativo, va
+admirativo
+admirativa
 admisibilidad
 admisible
 admisión
@@ -1845,17 +1923,22 @@ admitancia
 admitir
 admixtión
 admonición
-admonitorio, ria
-admonitor, ra
+admonitorio
+admonitoria
+admonitor
+admonitora
 ADN
-adnado, da
-adnato, ta
+adnado
+adnada
+adnato
+adnata
 ad nauseam
 adnominal
 ad nutum
 adoba
 adobado
-adobador, ra
+adobador
+adobadora
 adobar
 adobasillas
 adobe
@@ -1864,23 +1947,29 @@ adobería
 adobío
 adobo
 adobón
-adocenado, da
+adocenado
+adocenada
 adocenamiento
 adocenar
-adoctrinador, ra
+adoctrinador
+adoctrinadora
 adoctrinamiento
 adoctrinar
 adoctrinar
--ado, da
+ado
+ada
 adolecer
 adoleciente
 adolescencia
 adolescente
 adollero
-adolorado, da
+adolorado
+adolorada
 adolorar
-adolorido, da
-adonado, da
+adolorido
+adolorida
+adonado
+adonada
 adonarse
 adonde
 adónde
@@ -1894,11 +1983,14 @@ adopción
 adopcionismo
 adopcionista
 adoptación
-adoptador, ra
-adoptando, da
+adoptador
+adoptadora
+adoptando
+adoptanda
 adoptante
 adoptar
-adoptivo, va
+adoptivo
+adoptiva
 adoquier
 adoquiera
 adoquín
@@ -1909,7 +2001,8 @@ adoquinar
 ador
 adorable
 adoración
-adorador, ra
+adorador
+adoradora
 adorante
 adorar
 adoratorio
@@ -1922,32 +2015,40 @@ adormidera
 adormilamiento
 adormilarse
 adormitarse
-adornador, ra
+adornador
+adornadora
 adornamiento
 adornar
 adornista
 adorno
 adoro
--ador, ra
+ador
+adora
 adosado, da
 adosamiento
 adosar
-adovelado, da
+adovelado
+adovelada
 ad pedem litterae
 ad perpetuam
 ad personam
 ad quem
 adquirente
 adquirible
-adquirido, da
-adquiridor, ra
+adquirido
+adquirida
+adquiridor
+adquiridoa
 adquiriente
 adquirir
 adquisición
-adquisidor, ra
-adquisitivo, va
+adquisidor
+adquisidora
+adquisitivo
+adquisitiva
 adra
-adrado, da
+adrado
+adrada
 adragante
 adraganto
 adral
@@ -1957,18 +2058,23 @@ adredemente
 ad referendum
 adrenal
 adrenalina
-adrenalínico, ca
-adrenérgico, ca
+adrenalínico
+adrenalínica
+adrenérgico
+adrenérgica
 adrezar
 adrián
-adriático, ca
+adriático
+adriática
 adrizamiento
 adrolla
 adscribible
 adscribir
 adscripción
-adscripto, ta
-adscrito, ta
+adscripto
+adscripta
+adscrito
+adscrita
 ADSL
 adsorbente
 adsorber
@@ -1981,66 +2087,84 @@ ad tempus
 aduana
 aduanal
 aduanar
-aduanero, ra
+aduanero
+aduanera
 aduar
 adúcar
 aducción
 aducir
-aductor, ra
-aduendado, da
+aductor
+aductora
+aduendado
+aduendada
 adueñarse
 adufe
-adufero, ra
+adufero
+adufera
 adufre
 aduja
 adujar
 adul
 adula
 adulación
-adulador, ra
+adulador
+aduladora
 adular
 adularia
-adulatorio, ria
+adulatorio
+adulatoria
 adulciguar
 adulcir
 adulete
 adulonería
-adulón, na
+adulón
+adulona
 adulteración
-adulterador, ra
+adulterador
+adulteradora
 adulterante
 adulterar
-adulterino, na
+adulterino
+adulterina
 adulterio
-adúltero, ra
+adúltero
+adúltera
 adultez
-adulto, ta
+adulto
+adulta
 adulzar
 adulzorar
 adumbración
 adumbrar
 adunación
 adunar
-adunco, ca
-adundado, da
+adunco
+adunca
+adundado
+adundada
 adundarse
 adunia
--adura
+adura
 adurir
 aduro
 adustez
 adustible
 adustión
-adustivo, va
-adusto, ta
+adustivo
+adustiva
+adusto
+adusta
 adutaque
 ad valorem
 advección
-advenedizo, za
-advenidero, ra
+advenedizo
+advenediza
+advenidero
+advenidera
 advenimiento
 advenir
-adventicio, cia
+adventicio
+adventicia
 adventismo
 adventista
 adveración
@@ -2052,20 +2176,25 @@ adverbializar
 adverbio
 adversador
 adversar
-adversario, ria
-adversativo, va
+adversario
+adversaria
+adversativo
+adversativa
 adversidad
 adversión
-adverso, sa
+adverso
+adversa
 advertencia
 advertidamente
-advertido, da
+advertido
+advertida
 advertimiento
 advertir
 Adviento
 advocación
 advocar
-advocatorio, ria
+advocatorio
+advocatoria
 adyacencia
 adyacente
 adyuvante
@@ -2073,71 +2202,90 @@ aeda
 aedo
 aentuadamente
 aeración
-aerbaiyano, na
-aéreo, a
+aerbaiyano
+aerbaiyana
+aéreo
+aérea
 aerífero
 aeriforme
-aero-
+aero
 aeróbic
-aeróbico, ca
-aerobio, bia
+aeróbico
+aeróbica
+aerobio
+aerobia
 aerobiosis
 aerobismo
 aerobús
 aeroclub
 aerocriptografía
-aerocriptográfico, ca
+aerocriptográfico
+aerocriptográfica
 aerodeslizador
 aerodeslizante
-aerodinámico, ca
+aerodinámico
+aerodinámica
 aerodinamismo
 aerodino
 aeródromo
 aeroespcial
 aerofagia
-aerofágico, ca
+aerofágico
+aerofágica
 aerofaro
 aerofobia
-aerófobo, ba
-aerófono, na
+aerófobo
+aerófoba
+aerófono
+aerófona
 aerofotografía
 aerogenerador
 aerografía
-aerográfico, ca
+aerográfico
+aerográfica
 aerógrafo
 aerograma
 aerolínea
-aerolítico, ca
+aerolítico
+aerolítica
 aerolito
 aerología
 aeromancia
-aeromántico, ca
+aeromántico
+aeromántica
 aerómetro
 aeromodelismo
 aeromodelista
 aeromodelo
 aeromotor
-aeromozo, za
-aeronato, ta
+aeromozo
+aeromoza
+aeronato
+aeronata
 aeronauta
-aeronáutico, ca
+aeronáutico
+aeronáutica
 aeronaval
 aeronave
 aeronavegabilidad
 aeronavegación
 aeroparque
 aeroplano
-aeroportuario, ria
+aeroportuario
+aeroportuaria
 aeropostal
 aeropuerto
 aerosol
 aerostación
-aerostático, ca
+aerostático
+aerostática
 aerostato
-aerostero, ra
+aerostero
+aerostera
 aerotaxi
 aerotecnia
-aerotécnico, ca
+aerotécnico
+aerotécnica
 aeroterapia
 aeroterrestre
 aerotransportar
@@ -2149,42 +2297,53 @@ afable
 afablemente
 afabulación
 áfaca
-afaccionado, da
+afaccionado
+afaccionada
 afacer
 afacimiento
 afalagar
-afamado1, da
-afamado2, da
+afamado
+afamada
 afamar
 afán
-afanado, da
-afanador, ra
+afanado
+afanada
+afanador
+afanadora
 afanar
 afaníptero
 afanita
 afano
 afanosamente
-afanoso, sa
+afanoso
+afanosa
 afantasmar
-afarallonado, da
-afarolado, da
+afarallonado
+afarallonada
+afarolado
+afarolada
 afascalar
 afasia
-afásico, ca
+afasico
+afasica
 afatar
 afate
-afeador, ra
+afeador
+afeadora
 afeamiento
 afear
 afeblecerse
 afebril
 afección
 afeccionar
-afecho, cha
+afecho
+afecha
 afectable
 afectación
-afectado, da
-afectador, ra
+afectado
+afectada
+afectador
+afectadora
 afectar
 afectividad
 afectivo, va
