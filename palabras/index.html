@@ -88,7 +88,8 @@ function filtrado(E){
 var resp=true;
 for (var j=0;j<NLETRAS;j++){
 if (clave[j]=='b' && E[j]!=palabra[j]) return false;
-if ( (clave[j]=='c') && ( (E[j]==palabra[j]) || (E.indexOf(palabra[j])==-1))) return false;
+//if ( (clave[j]=='c') && ( (E[j]==palabra[j]) || (E.indexOf(palabra[j])==-1))) return false;
+if ( (clave[j]=='c') && ( (E[j]==palabra[j]) || (contar(E,palabra[j])< contar2(palabra,palabra[j],j)))) return false;
 
 //if ((clave[j]=='m') && (E.indexOf(palabra[j])!=-1 ) ) return false;
 //if ((clave[j]=='m') && (E[j]==palabra[j])) return false;
