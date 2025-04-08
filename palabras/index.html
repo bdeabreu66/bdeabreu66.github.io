@@ -29,10 +29,11 @@ visibility: hidden;
 <br><br>
 <button onclick="Ok()">Aceptar </button> &nbsp &nbsp<span id="sp"></span>
 </div>
-
+<div id="OPC"  width="100%">
+</div>
 
 <button id="bt2" onclick="Ok2()">Iniciar </button>
-<br><br>
+<br><br><br>
 <div name="DIVP" hidden width="100%" > 
 Palabra:<input name="PALAB" type="text">  Respuesta:<input name="CLAV" type="text"> 
 &nbsp&nbsp<button onclick=avanza(0)>Ok</button>
@@ -54,8 +55,10 @@ Palabra:<input name="PALAB" type="text">  Resp:<input name="CLAV" type="text">
 </div > 
 <div name="DIVP" hidden width="100%"> 
 Palabra:<input name="PALAB" type="text">  Resp:<input name="CLAV" type="text"> 
-
 </div > 
+
+
+
 </body>
  
 <script>
@@ -72,7 +75,7 @@ for (var i=0;i<X.length;i++)
   if (X[i].checked) {return i}
 }
 
-function contar2(A,b,p){
+function contar2(A,b){
 
 var c=0;
 for (var i=0;i<A.length;i++) if (A[i]==b && (clave[i]=='b' || clave[i]=='c')) {c++;}
@@ -106,14 +109,32 @@ function avanza(k){
 document.getElementsByName("DIVP")[k+1].style.display="block";
 palabra=document.getElementsByName("PALAB")[k].value.toLowerCase();
 clave=document.getElementsByName("CLAV")[k].value.toLowerCase();
-console.log(palabra);
-console.log(clave);
+//console.log(palabra);
+//console.log(clave);
 data=data.filter(filtrado);
 document.getElementsByName("PALAB")[k+1].value=data[0];
- nropalab();
-//console.log(data);
+nropalab();
+var texto='';
+for (var i=0;i<data.length;i++) {texto+='<p><button onclick=cambia('+k+','+i+')>'+data[i]+'</button></p>';}
+//console.log(texto);
+var divL=document.getElementById('OPC');
+divL.style='text-align:center;position:fixed;top:50%;left:0%;height:30%;width:100%;background-color:lightpink;overflow-y:scroll';
+divL.innerHTML=texto;
+divL.style.display='block';
 }
+function cambia(k,i){
+document.getElementsByName("PALAB")[k+1].value=data[i];
+}
+
 function Ok(){
+var l=document.getElementsByName("DIVP").length;
+for (var k=0;k<l;k++) {
+document.getElementsByName("DIVP")[k].style.display="none";
+document.getElementsByName("PALAB")[k].value='';
+try {document.getElementsByName("CLAV")[k].value='';} catch {console.log('error')}
+}
+
+document.getElementById('OPC').style.display='none';
 NLETRAS=NL();
 IND=IndIdioma();
 diccionario(IND);
@@ -150,8 +171,9 @@ function ajaxPositive(response) {
     }
  function showResult(txt) {
     
-       
-        data=txt.split('\n').filter((a)=>a.length==NLETRAS);
+  //NLETRAS=24;   
+  data=txt.split('\n').filter((a)=>a.length==NLETRAS);
+//console.log(data.filter(x => x.indexOf(',')!=-1).length);  
   for (var i=0;i<data.length;i++) data[i]=data[i].toLowerCase();
 // console.log('muestro respuesta: ', data);
  document.getElementById("bt2").style.visibility="visible";
@@ -159,7 +181,7 @@ function ajaxPositive(response) {
   }
 
 function showError(err) { 
-      console.log('muestor error', err);
+      console.log('muestro error', err);
     }
 }
 </script>
