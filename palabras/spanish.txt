@@ -6435,7 +6435,8 @@ aniversario, ria
 anjeo
 anjova
 anlicalmente
-an, na
+an
+anna
 annamita
 annobones, sa
 ano
@@ -12451,7 +12452,7 @@ bejuquero
 bejuquilla
 bejuquillo
 bel
-bel, la
+bella
 belcantismo
 belcantista
 bel canto
@@ -34007,7 +34008,7 @@ elitista
 elitro
 elixir
 ella
-el, la
+el
 elle
 ello
 ellos, llas
@@ -37221,8 +37222,7 @@ eña
 eñe
 eño, ña
 eo
-eo, a
-eo, a
+ea
 eocenico, ca
 eoceno, na
 eolico, ca
@@ -41545,7 +41545,8 @@ fenomenologico, ca
 fenomenologo, ga
 fenotipico, ca
 fenotipo
-feo, a
+feo
+fea
 fer
 feral
 feraz
@@ -50910,7 +50911,8 @@ inmutable
 inmutacion
 inmutar
 inmutativo, va
-in, na
+in
+ina
 innacible
 innatismo
 innato, ta
@@ -51854,10 +51856,10 @@ inyectivo, va
 inyector, ra
 inyungir
 iñiguista
-io, a
 iodo
 ioduro
-io, ia
+io
+ia
 ion
 iondo, da
 ionico, ca
@@ -59540,8 +59542,7 @@ miñon
 miñona
 miñosa
 mio
-mio
-mio, a
+mia
 miocardico, ca
 miocardio
 miocarditis
@@ -61886,13 +61887,12 @@ nen
 nenaza
 nene
 neneco, ca
-nene, na
+nena
 neneque
 nenia
 nenufar
 neo
-neo
-neo, a
+nea
 neocatolicismo
 neocatolico, ca
 Neoclasicismo
@@ -63458,7 +63458,6 @@ omniscio, cia
 omnivoro, ra
 omoplato
 omoto
-on, na
 on
 ona
 onagra
@@ -63665,7 +63664,6 @@ oquedad
 oquedal
 oqueruela
 or
-or, ra
 ora
 oracion
 oracional
@@ -84143,9 +84141,11 @@ tintura
 tinturar
 tiña
 tiñeria
-tiñoso, sa
+tiñoso
+tiñosa
 tiñuela
-tio, a
+tio
+tia
 tioneo
 tiorba
 tiovivo
@@ -84154,7 +84154,8 @@ tipache
 tiparraco, ca
 tipazo
 tipear
-tipejo, ja
+tipejo
+tipeja
 tipeo
 tiperia
 tipex
