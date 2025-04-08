@@ -878,7 +878,8 @@ acentuamiento
 acentuar
 aceña
 aceñero, ra
-aceo, a
+aceo
+acea
 acepar
 acepcion
 acepilladura
@@ -1163,8 +1164,8 @@ acme
 acmpanado, da
 acmulatuvo, va
 acne
-aco, ca
-aco, ca
+aco
+aca
 acobambino, na
 acobardado, da
 acobardamiento
@@ -1877,7 +1878,8 @@ adoctrinador, ra
 adoctrinamiento
 adoctrinar
 adoctrinar
-ado, da
+ado
+ada
 adolecer
 adoleciente
 adolescencia
@@ -3259,7 +3261,7 @@ ajoblanco
 ajobo
 ajochar
 ajofaina
-ajo, ja
+aja
 ajolin
 ajolio
 ajolotado, da
@@ -5646,7 +5648,8 @@ amollecer
 amollentar
 amollentativo, va
 amolletado, da
-amo, ma
+amo
+ama
 amomo
 Amon
 amonal
@@ -6171,7 +6174,8 @@ anemometro
 anemona
 anemone
 anemoscopio
-aneo, a
+aneo
+anea
 aneota
 anepigrafico, ca
 aneroide
@@ -6439,8 +6443,6 @@ an
 anna
 annamita
 annobones, sa
-ano
-ano, na
 ano
 anoa
 anobio
@@ -7162,11 +7164,10 @@ añinero
 añino, na
 añir
 año
-año
+aña
 añojada
 añojal
 añojo, ja
-año, ña
 añorante
 añoranza
 añorar
@@ -9921,7 +9922,8 @@ atenuacion
 atenuador, ra
 atenuante
 atenuar
-ateo, a
+ateo
+atea
 ateperetado, da
 atepocate
 atercianado, da
@@ -10037,8 +10039,8 @@ atletico, ca
 atletismo
 atmosfera
 atmosferico, ca
-ato, ta
-ato, ta
+ato
+ata
 atoar
 atoba
 atobar
@@ -10827,7 +10829,7 @@ avolvimiento
 avorazamiento
 avorazarse
 avorrador, ra
-avo, va
+ava
 avucasta
 avucastro
 avugo
@@ -11045,7 +11047,8 @@ azote
 azotea
 azotina
 azoton
-azo, za
+azo
+aza
 azteca
 aztequismo
 aztor
@@ -13735,7 +13738,7 @@ bonito, ta
 bonitura
 bonizal
 bonizo
-bon, na
+bona
 bonobus
 bonoloto
 bono, na
@@ -33134,7 +33137,8 @@ dorna
 dornajo
 dornilero
 dornillo
-dor, ra
+dora
+dor
 dorsal
 dorso
 dorsoventral
@@ -33515,9 +33519,7 @@ eclogico, ca
 eclosion
 eclosionar
 eco
-eco
-eco
-eco, ca
+eca
 ecocardiografia
 ecografia
 ecografico, ca
@@ -33637,8 +33639,10 @@ editorialista
 editorializar
 editorialmente
 editor, ra
-edo, da
-edor, ra
+edo
+eda
+edor
+edora
 edrar
 edredon
 edrisi
@@ -33749,7 +33753,8 @@ ego
 egocentrico, ca
 egocentrismo
 egofonia
-ego, ga
+ego
+ega
 egoismo
 egoista
 egolatra
@@ -33811,7 +33816,8 @@ ejidal
 ejidatario, ria
 ejido
 ejion
-ejo, ja
+ejo
+eja
 ejon
 ejote
 ekuk
@@ -34023,7 +34029,8 @@ elogiador, ra
 elogiar
 elogio
 elogioso, sa
-elo, la
+elo
+ela
 elongacion
 elongar
 eloquio
@@ -35703,7 +35710,8 @@ enemigar
 enemigo, ga
 enemistad
 enemistar
-eneo, a
+eneo
+enea
 eneolitico, ca
 energetico, ca
 energia
@@ -36367,7 +36375,8 @@ enojoso, sa
 enologia
 enologico, ca
 enologo, ga
-eno, na
+eno
+ena
 enorfanecido, da
 enorgullecedor, ra
 enorgullecimiento
@@ -37220,7 +37229,7 @@ enzurronar
 enzurronarse
 eña
 eñe
-eño, ña
+eño
 eo
 ea
 eocenico, ca
@@ -37504,7 +37513,7 @@ erigir
 erina
 eringe
 erio
-erio, a
+eria
 eriotecnia
 erisipela
 erisipelar
@@ -37537,7 +37546,7 @@ erogacion
 erogar
 erogatorio
 erogeno, na
-ero, ra
+era
 eros
 erosion
 erosionable
@@ -38354,7 +38363,6 @@ esdrujulismo
 esdrujulizar
 esdrujulo, la
 ese
-ese
 esecilla
 esencia
 esencial
@@ -38367,7 +38375,8 @@ esenciero
 esenio, nia
 eser
 eserina
-es, esa
+es
+esa
 eseyente
 esfacelarse
 esfacelo
@@ -39882,7 +39891,8 @@ eternizar
 eterno, na
 eteromania
 etesio
-ete, ta
+ete
+eta
 ethos
 etica
 eticidad
@@ -43258,7 +43268,8 @@ frimario
 fringalente
 fringilago
 fringilido
-frio, a
+frio
+fria
 friolero, ra
 friollego, ga
 frior
@@ -48903,9 +48914,6 @@ huy
 huyuyo
 huyuyo, ya
 i
-i
-i
-ia
 ia
 iano, na
 iatria
@@ -48945,10 +48953,10 @@ icnita
 icnografia
 icnografico, ca
 icnologia
-ico, ca
-ico, ca
+ico
 iconico, ca
-icon, na
+icon
+icona
 icono
 iconoclasia
 iconoclasta
@@ -49013,7 +49021,8 @@ identificar
 identificativo, va
 identificatorio, ria
 identikit
-ideo, a
+ideo
+idea
 ideografia
 ideografico, ca
 ideograma
@@ -49042,10 +49051,8 @@ idiotipo
 idiotismo
 idiotizar
 idish
-ido, da
-ido, da
-ido, da
-ido, da
+ido
+ida
 idolatra
 idolatrar
 idolatria
@@ -50355,7 +50362,8 @@ inembargabilidad
 inembargable
 inenarrable
 inencontrable
-ineo, a
+ineo
+inea
 ineptamente
 ineptitud
 inepto, ta
@@ -50962,7 +50970,8 @@ inofensivo, va
 inofenso, sa
 inoficioso, sa
 inolvidable
-ino, na
+ino
+ina
 inonosfera
 inope
 inoperable
@@ -52182,10 +52191,9 @@ itzaj
 iuris et de iure
 iusnaturalista
 iva
-IVA
 ivernar
 ivierno
-ivo, va
+ivo
 ixil
 iyo
 iza
@@ -52199,7 +52207,8 @@ izco, ca
 izgonce
 izgonzar
 izote
-izo, za
+izo
+iza
 izquierda
 izquierdazo
 izquierdear
@@ -62267,7 +62276,8 @@ nivel
 nivelacion
 nivelador, ra
 nivelar
-niveo,a
+niveo
+nivea
 nivoso, sa
 nixquear
 nixtamal
@@ -64016,8 +64026,8 @@ oscurecimiento
 oscuridad
 oscuro, ra
 osear
-osear
-oseo, a
+oseo
+osea
 osera
 oseria
 osero
@@ -64037,10 +64047,9 @@ osmometro
 osmosis
 osmotico, ca
 oso
-oso, sa
+osa
 osobuco
 osornino
-oso, sa
 ososo, sa
 osta
 ostaga
@@ -64118,7 +64127,8 @@ otavaleño, ña
 oteador, ra
 otear
 otero
-ote, ta
+ote
+ota
 otico, ca
 otilar
 otitis
@@ -72571,7 +72581,8 @@ quiñazo
 quiño
 quiñon
 quiñonero
-quio, a
+quio
+quia
 quiosco
 quiosquero, ra
 quiote
@@ -78489,7 +78500,8 @@ sazonadamente
 sazonado, da
 sazonador, ra
 sazonar
-sco, ca
+sco
+sca
 scooter
 scopia
 scopio
@@ -84861,7 +84873,8 @@ torpeza
 torpido, da
 torpor
 torques
-tor, ra
+tor
+tora
 torrado
 torrances, sa
 torrar
@@ -86907,13 +86920,15 @@ ucencia
 ucho, cha
 uchu
 uci
-uco, ca
+uco
+uca
 ucraniano, na
 ucranio, nia
 ucronia
 ucronico, ca
 ucubitano, na
-udo, da
+udo
+uda
 udometro
 uebos
 uelo, la
@@ -87134,8 +87149,8 @@ univocarse
 univocidad
 univoco, ca
 unju
-uno, na
-uno, na
+uno
+una
 untable
 untada
 untador, ra
