@@ -3393,13 +3393,11 @@ alajor
 alaju
 alajuelense
 alala
-alala
 alalau
 alalay
 alalia
 alalimon
-alalo, la
-alama
+alalo
 alama
 alaman, na
 alamar
@@ -3436,7 +3434,8 @@ alancear
 alandrearse
 alangiaceo, a
 alangieo, a
-alano, na
+alano
+alana
 alantoideo, a
 alantoides
 alantoina
@@ -5103,7 +5102,7 @@ aluda
 aludel
 aludido, da
 aludir
-aludo, da
+aludo
 alueñarse
 alufrar
 alugar
@@ -12407,8 +12406,7 @@ beatilla
 beatisimo
 beatitud
 beatnik
-beato, ta
-beata
+beato
 bebe
 bebe, ba
 bebedero, ra
@@ -18891,7 +18889,6 @@ cebil
 cebipero
 cebique
 cebo
-cebo
 cebolla
 cebollada
 cebollana
@@ -18902,7 +18899,7 @@ cebolleta
 cebollino
 cebollon
 cebolludo, da
-cebon, na
+cebon
 cebona
 ceborricha
 cebra
@@ -26246,7 +26243,7 @@ crash
 crasicie
 crasiento, ta
 crasitud
-craso, sa
+craso
 crasa
 crasulaceo, a
 crata
@@ -41021,7 +41018,8 @@ faical
 fainada
 fainera
 faineria
-faino, na
+faino
+faina
 faique
 faisan, na
 faisan
@@ -41177,8 +41175,7 @@ falsificador, ra
 falsificar
 falsilla
 falsopeto
-falso, sa
-falsa
+falso
 falta
 faltante
 faltar
@@ -41440,7 +41437,6 @@ fastidio
 fastidiosamente
 fastidioso, sa
 fastigio
-fasto, ta
 fasto
 fastoso, sa
 fastuosamente
@@ -41601,7 +41597,8 @@ felipe
 feliz
 felizmente
 felonia
-felon, na
+felon
+felona
 felpa
 felpar
 felpeada
@@ -41822,7 +41819,8 @@ feto
 fetor
 fetua
 feucho, cha
-feuco, ca
+feuco
+feuca
 feudal
 feudalidad
 feudalismo
@@ -41832,13 +41830,14 @@ feudo
 feura
 fez
 fi
-fi
 fia
 fiabilidad
 fiable
 fiaca
-fiado, da
-fiador, ra
+fiado
+fiada
+fiador
+fiadora
 fiadura
 fiaduria
 fiambrar
@@ -41871,7 +41870,6 @@ fibrosis
 fibroso, sa
 fibula
 ficar
-ficar
 ficcion
 ficcional
 fice
@@ -41879,11 +41877,13 @@ ficha
 fichaje
 fichar
 fichero
-fico, ca
+fico
+fica
 ficoideo, a
 ficticio, cia
 fictivo, va
-ficto, ta
+ficto
+ficta
 ficus
 fidalgo, ga
 fidecomiso
@@ -41905,7 +41905,6 @@ fiduciante
 fiduciario, ria
 fiebre
 fiel
-fiel
 fielato
 fielazgo
 fieldad
@@ -41918,7 +41917,7 @@ fiera
 fierabras
 fieramente
 fiereza
-fiero, ra
+fier
 fierra
 fierrada
 fierrazo
@@ -41962,8 +41961,10 @@ figuron
 fija
 fijacion
 fijadalgo
-fijado, da
-fijador, ra
+fijado
+fijada
+fijador
+fijadora
 fijamente
 fijante
 fijapelo
@@ -41971,10 +41972,11 @@ fijar
 fijativo
 fijeza
 fijismo
-fijo, ja
-fijo, ja
+fijo
+fija
 fijodalgo
-fijon, na
+fijon
+fijona
 fil
 fila
 filacteria
@@ -42151,7 +42153,8 @@ fincable
 fincar
 finchado, da
 finchar
-fines, sa
+fines
+finea
 fineta
 fineza
 finger
@@ -42270,10 +42273,10 @@ fisotigmina
 fistol
 fistola
 fistolar
-fisto, ta
+fisto
+fista
 fistula
 fistulacion
-fistular
 fistular
 fistuloso, sa
 fisura
@@ -42376,7 +42379,8 @@ flautillo
 flautin
 flautista
 flautos
-flavo, va
+flavo
+flava
 flebil
 flebitico, ca
 flebitis
@@ -42610,8 +42614,8 @@ foguerear
 foguero, ra
 foguista
 foiegras
-foiso, sa
-foja
+foiso
+foisa
 foja
 folclor
 folclore
@@ -42927,9 +42931,9 @@ fosado
 fosadura
 fosal
 fosar
-fosar
 fosario
-fosco, ca
+fosco
+fosca
 fosfatado, da
 fosfatico, ca
 fosfatina
@@ -43697,7 +43701,7 @@ fundidor, ra
 fundillo
 fundillon, na
 fundir
-fundo, da
+fundo
 funebre
 funebremente
 funebridad
@@ -43768,7 +43772,7 @@ fusa
 fusado, da
 fusca
 fuscar
-fusco, ca
+fusco
 fuselado, da
 fuselaje
 fusibilidad
@@ -44010,13 +44014,13 @@ galerna
 galerno
 galero
 galeron
-gales, sa
+gales
+galesa
 galfarro
-galga
 galga
 galgeño, ña
 galgeria
-galgo, ga
+galgo
 galguear
 galguero
 galguero, ra
@@ -45071,7 +45075,6 @@ gigote
 gijonense
 gijones, sa
 gil
-gil
 gilada
 gilbert
 gile
@@ -45081,7 +45084,8 @@ gilipollas
 gilipollez
 gilipuertas
 gillette
-gilvo, va
+gilvo
+gilva
 gimiente
 gimnasia
 gimnasiada
@@ -45552,9 +45556,12 @@ gotero
 goteron
 goticismo
 goticista
-gotico, ca
-goton, na
-gotoso, sa
+gotico
+gotica
+goton
+gotona
+gotoso
+gotosa
 gouache
 goulash
 gourmet
@@ -45645,8 +45652,7 @@ grafiti
 grafito
 grafito
 grafo
-grafo
-grafo, fa
+grafa
 grafologia
 grafologico, ca
 grafologo, ga
@@ -45659,7 +45665,8 @@ gragear
 grajero, ra
 grajiento, ta
 grajilla
-grajo, ja
+grajo
+graja
 grajuno, na
 gram
 grama
@@ -45806,15 +45813,15 @@ grapadora
 grapar
 grapo
 grasa
-grasa
 grasera
 graseria
 graseza
 grasiento, ta
 grasones
 grasor
-graso, sa
-grasoso, sa
+graso
+grasoso
+grasosa
 graspo
 grasura
 grata
@@ -45879,7 +45886,8 @@ greca
 greciano, na
 grecisco, ca
 grecizar
-greco, ca
+greco
+greca
 grecolatino, na
 grecorromano, na
 greda
@@ -45925,12 +45933,11 @@ grietarse
 grietearse
 grietoso, sa
 grifa
-grifa
 grifalto
 grifar
 grifarse
 griferia
-grifo, fa
+grifo
 grifon
 grigallo
 grija
@@ -46267,8 +46274,10 @@ guapeton, na
 guapeza
 guapinol
 guapomo
-guapo, pa
-guapote, ta
+guapo
+guapa
+guapote
+guapota
 guapura
 guapuru
 guaquear
@@ -46461,9 +46470,10 @@ guashpira
 guasima
 guasimal
 guasimo
-guason, na
+guason
+guasona
 guasontle
-guaso, sa
+guaso
 guaspirolazo
 guastar
 guastatoyano, na
@@ -46476,7 +46486,7 @@ guataquear
 guataqueria
 guatazo
 guate
-guate, ta
+guata
 guateado, da
 guatear
 guatemalense
@@ -46490,7 +46500,6 @@ guatibere
 guatibero
 guatini
 guato
-guato, ta
 guaton, na
 guatusa
 guatusero, ra
@@ -46593,7 +46602,8 @@ guiaje
 guiamiento
 guiar
 güiberno
-guido, da
+guido
+guida
 guienes, sa
 guifa
 güifa
@@ -46773,9 +46783,10 @@ gurbio, bia
 gurbion
 gurbion
 gurbionado, da
-gurdo, da
+gurdo
+gurda
 guripa
-guri, risa
+guri
 gurisa
 guro
 gurriato, ta
@@ -46817,7 +46828,8 @@ gutapercha
 gutifero, ra
 gutural
 guyanes, sa
-guzgo, ga
+guzgo
+guzga
 guzla
 guzman
 guzpataro
@@ -47030,8 +47042,9 @@ hampa
 hampesco, ca
 hampoducto
 hamponil
-hampon, na
-hampo, pa
+hampon
+hampona
+hampo
 hamster
 hamudi
 handicap
@@ -47099,10 +47112,11 @@ harnero
 harneruelo
 haronear
 haronia
-haron, na
+haron
+harona
 harpa
-harpado, da
-harpado, da
+harpado
+harpada
 harpia
 harqueño, ña
 harrado
@@ -47716,9 +47730,11 @@ hibuerense
 hibuero
 hicaco
 hico
-hicso, sa
+hicso
+hicsa
 hidalgamente
-hidalgo, ga
+hidalgo
+hidalga
 hidalguense
 hidalguez
 hidalguia
@@ -48646,7 +48662,8 @@ hortofruticola
 hortolano
 horuelo
 hosanna
-hosco, ca
+hosco
+hosca
 hoscoso, sa
 hospa
 hospedador, ra
@@ -48769,7 +48786,8 @@ huarique
 huarochirano, na
 huarpe
 huasca
-huaso, sa
+huaso
+huasa
 huasquino, na
 huasteco, ca
 huateque
@@ -48800,7 +48818,8 @@ huelguistico, ca
 huella
 huelliga
 huello
-huelo, la
+huelo
+huela
 huelveño, ña
 huemud
 huequear
@@ -48810,8 +48829,7 @@ huerfago
 huerfanidad
 huerfanito
 huerfano, na
-huero, ra
-huero, ra
+huero
 huerta
 huertano, na
 huertavil
@@ -49160,7 +49178,8 @@ ideologizado, da
 ideologizar
 ideologo, ga
 ideoso, sa
-idero, ra
+idero
+idera
 idilico, ca
 idilio
 idiocia
@@ -50820,8 +50839,10 @@ ingletear
 inglosable
 ingobernabilidad
 ingobernable
-ingo, ga
-ingon, na
+ingo
+inga
+ingon
+ingona
 ingratamente
 ingratitud
 ingrato, ta
@@ -50933,7 +50954,8 @@ injustificable
 injustificadamente
 injustificado, da
 injusto, ta
-inles, sa
+inles
+inlesa
 inllevable
 inmaculada
 inmaculadamente
@@ -52000,8 +52022,10 @@ ioduro
 io
 ia
 ion
-iondo, da
+iondo
+ionda
 ionico, ca
+ionica
 ionizacion
 ionizador, ra
 ionizante
@@ -52027,7 +52051,8 @@ ir
 ira
 iracundia
 iracundo, da
-irado, da
+irado
+irada
 irani
 iranio, nia
 iraqui
@@ -52196,12 +52221,14 @@ isaloterma
 isatis
 isba
 ISBN
-isco, ca
+isco
+isca
 isiaco, ca
 isidoriano, na
 isidril
 isidro, dra
-isimo, ma
+isimo
+isima
 isla
 islam
 islamico, ca
@@ -52296,7 +52323,7 @@ italica
 italicense
 italico
 italo
-italo, la
+itala
 italorromance
 italorromanico, ca
 itapuense
@@ -52312,7 +52339,8 @@ itinerancia
 itinerante
 itinerario, ria
 itis
-itivo, va
+itivo
+itiva
 ito
 ita
 itorio, ria
@@ -52501,7 +52529,7 @@ jalda
 jaldado, da
 jalde
 jaldeta
-jaldo, da
+jaldo
 jaldre
 jale
 jalea
@@ -52684,7 +52712,8 @@ jatib
 jatives, sa
 jato, ta
 jau
-jaudo, da
+jaudo
+jauda
 jauja
 jaujino, na
 jaul
@@ -52692,14 +52721,16 @@ jaula
 jaulero, ra
 jaulilla
 jauria
-jauto, ta
+jauto
+jauta
 javanes, sa
 javera
 javiereño, ña
 javo, va
 jayanada
 jayanear
-jayan, na
+jayan
+jayana
 jazaran
 jazarino, na
 jazmin
@@ -52812,10 +52843,10 @@ jet lag
 jeto
 jetonada
 jetonear
-jeton, na
+jeton
+jetona
 jet set
 jetudo, da
-ji
 ji
 jibaro, ra
 jibe
@@ -52956,8 +52987,10 @@ jodedera
 jodedor, ra
 joder 
 jodienda
-jodion, na
-jodon, na
+jodion
+jodiona
+jodon
+jodona
 jofaina
 jofor
 jogging
@@ -52967,7 +53000,7 @@ jojoba
 jojoto, ta
 jolgorio
 jolin
-jolin, na
+jolina
 jolines
 jolino, na
 jolito
@@ -53139,7 +53172,8 @@ juglaria
 juglar, resa
 juglateria
 jugo
-jugon, na
+jugon
+jugona
 jugosidad
 jugoso, sa
 juguera
@@ -53233,7 +53267,8 @@ jupear
 jupiter
 jupiter
 jupiterino, na
-jupon, na
+jupon
+jupona
 juquear
 juquearse
 juquencia
@@ -55235,7 +55270,7 @@ litografia
 litografiar
 litografico, ca
 litografo, fa
-lito, lito
+lito
 litologia
 litologico, ca
 litologo, ga
@@ -63379,7 +63414,8 @@ ofuscamiento
 ofuscante
 ofuscar
 ogaño
-ogro, gresa
+ogro
+ogresa
 oh
 ohm
 ohmico, ca
@@ -63393,7 +63429,8 @@ oides
 oidio
 oido
 oidoria
-oidor, ra
+oidor
+oidora
 oil
 oimiento
 oir
@@ -69355,7 +69392,6 @@ podologia
 podologo, ga
 podometro
 podon
-podo, podo
 podre
 podrecer
 podrecimiento
