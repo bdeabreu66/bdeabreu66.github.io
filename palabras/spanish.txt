@@ -1104,7 +1104,8 @@ acidificar
 acidimetria
 acidimetro
 acidioso, sa
-acido, da
+acido
+acidoa
 acidorresistente
 acidosis
 acidulado, da
@@ -1173,7 +1174,8 @@ acobardar
 acobijar
 acobijo
 acobrado, da
-aco, ca
+aco
+aca
 acocarse
 acoceador, ra
 acoceamiento
@@ -1556,7 +1558,8 @@ acudiciar
 acudiente
 acudimiento
 acudir
-acueo, a
+acueo
+acuea
 acuerdo
 acuerpar
 acuesto
@@ -2082,7 +2085,8 @@ aedo
 aentuadamente
 aeracion
 aerbaiyano, na
-aereo, a
+aereo
+aerea
 aerifero
 aeriforme
 aero
@@ -2918,7 +2922,8 @@ agudeza
 agudizacion
 agudizamiento
 agudizar
-agudo, da
+agudo
+aguda
 aguedas
 agüela
 agüera
@@ -3224,7 +3229,8 @@ ajenar
 ajengibre
 ajenidad
 ajenjo
-ajeno, na
+ajeno
+ajena
 ajenuz
 ajeo
 ajerezado, da
@@ -5177,7 +5183,8 @@ amacion
 amacizar
 amacollar
 amadeo
-amado, da
+amado
+amada
 amador, ra
 amadrigar
 amadrinamiento
@@ -5483,7 +5490,8 @@ amenizacion
 amenizacion
 amenizador, ra
 amenizar
-ameno, na
+ameno
+amena
 amenorar
 amenorgar
 amenorrea
@@ -5555,7 +5563,8 @@ amigar
 amigdala
 amigdalina
 amigdalitis
-amigo, ga
+amigo
+amiga
 amigote
 amigovio, via
 amiguero, ra
@@ -5787,7 +5796,8 @@ ampolla
 ampollar
 ampollar
 ampolleta
-ampon, na
+ampon
+ampona
 amprar
 ampula
 ampulosidad
@@ -6194,7 +6204,8 @@ anexionar
 anexionismo
 anexionista
 anexitis
-anexo, xa
+anexo
+anexa
 anfesibena
 anfeta
 anfetamina
@@ -7651,7 +7662,7 @@ apoderamiento
 apoderar
 apodictico, ca
 apodo
-apodo, da
+apoda
 apodosis
 apofige
 apofisis
@@ -7983,7 +7994,8 @@ aquelos, las
 aquemenica
 aquende
 aquenio
-aqueo, a
+aqueo
+aquea
 aquerarse
 aquerenciado, da
 aquerenciarse
@@ -9211,7 +9223,8 @@ asacar
 asacion
 asacristanado, da
 asadero, ra
-asado, da
+asado
+asada
 asador, ra
 asadura
 asaduria
@@ -9754,7 +9767,8 @@ atacola
 ataderas
 atadero
 atadijo
-atado, da
+atado
+atada
 atador, ra
 atadura
 atafagar
@@ -10350,7 +10364,8 @@ aura
 auranciaceo, a
 aurea mediocritas
 aureliense
-aureo, a
+aureo
+aurea
 aureola
 aureolar
 aureomicina
@@ -10643,7 +10658,8 @@ avariciosamente
 avaricioso, sa
 avariento, ta
 avariosis
-avaro, ra
+avaro
+avara
 avasallador, ra
 avasallamiento
 avasallante
@@ -10886,7 +10902,8 @@ ayoreo, a
 ayotal
 ayote
 ayotera
-ayo, ya
+ayo
+aya
 ayua
 ayuda
 ayudado, da
@@ -11358,7 +11375,8 @@ bajial
 bajin
 bajines
 bajini
-bajio, a
+bajio
+bajia
 bajista
 bajista
 bajoaragones, sa
@@ -12415,7 +12433,8 @@ becqueriano, na
 becuadrado
 becuadro
 bedano
-bedel, a
+bedel
+bedela
 bedelia
 bedelio
 bederre
@@ -13221,7 +13240,8 @@ bizarro, rra
 bizaza
 bizbirindo, da
 bizcar
-bizco, ca
+bizco
+bizca
 bizcochada
 bizcochar
 bizcochera
@@ -13458,7 +13478,8 @@ bocinegro, gra
 bocinero
 bocio
 boconada
-bocon, na
+bocon
+bocona
 bocota
 bocoy
 bocudo, da
@@ -14045,7 +14066,8 @@ botonear
 botoneria
 botonero, ra
 botones
-boton, na
+boton
+botona
 botor
 botoral
 botoso, sa
@@ -14207,7 +14229,8 @@ bravosia
 bravosidad
 bravoso, sa
 bravote
-bravo, va
+bravo
+brava
 bravuconada
 bravuconear
 bravuconeria
@@ -14486,7 +14509,8 @@ brujez
 brujidor
 brujilla
 brujir
-brujo, ja
+brujo
+bruja
 brujul
 brujula
 brujulear
@@ -14503,7 +14527,7 @@ bruneano, na
 brunela
 brunete
 bruno
-bruno, na
+bruna
 bruñido, da
 bruñidor, ra
 bruñidura
@@ -14533,7 +14557,8 @@ brutalmente
 brutesco, ca
 brutez
 bruteza
-bruto, ta
+bruto
+bruta
 bruxismo
 bruza
 bruzador
@@ -14585,9 +14610,8 @@ bucodental
 bucofaringeo, a
 bucolica
 bucolica
-bucolico, ca
+bucolico
 bucolismo
-buda
 buda
 budare
 budico, ca
@@ -14601,7 +14625,6 @@ buega
 bueitre
 buen
 buena
-buena
 buenaboya
 buenamente
 buenamoza
@@ -14610,7 +14633,7 @@ buenaventura
 buenaventuriano, na
 buenazo, za
 buenmozo
-bueno, na
+bueno
 Buenos Aires
 buera
 buetago
@@ -16039,7 +16062,7 @@ calvinismo
 calvinista
 calvitar
 calvorota
-calvo, va
+calvo
 calza
 calzacalzon
 calzada
@@ -18184,16 +18207,21 @@ cascatreguas
 casco
 cascol
 cascolitro
-cascorvo, va
+cascorvo
+cascorva
 cascote
-cascudo, da
+cascudo
+cascuda
 cascue
 caseacion
-caseico, ca
+caseico
+caseica
 caseificar
 caseina
-caseo, a
-caseoso, sa
+caseo
+casea
+caseoso
+caseosa
 casera
 caseramente
 caseria
@@ -18201,7 +18229,8 @@ caserillo
 caserio
 caserna
 caseron
-casero, ra
+casero
+casera
 caseta
 casete
 casetera
@@ -19388,9 +19417,12 @@ cerdada
 cerdamen
 cerdear
 cerdear
-cerdo, da
-cerdon, na
-cerdoso, sa
+cerdo
+cerda
+cerdon
+cerdona
+cerdoso
+cerdosa
 cerdudo
 cereal
 cerealista
@@ -20207,7 +20239,8 @@ chasponazo
 chasque
 chasqueador, ra
 chasquear
-chasquero, ra
+chasquero
+chasquera
 chasqui
 chasquido
 chasquilla
@@ -20216,21 +20249,22 @@ chata
 chatarra
 chatarrear
 chatarreria
-chatarrero, ra
-chatear
+chatarrero
+chatarrera
 chatear
 chatedad
 chatel
 chateo
-chateo
-chatero, ra
+chatea
+chatero
+chatera
 chatino
 chatita
 chaton
-chaton
-chato, ta
+chato
 chatria
-chatungo, ga
+chatungo
+chatunga
 chatura
 chau
 chaucha
@@ -20241,7 +20275,8 @@ chauvinismo
 chauvinista
 chauz
 chavaleria
-chaval, la
+chaval
+chavala
 chavar
 chavari
 chavasca
@@ -20252,10 +20287,10 @@ chavetear
 chavetero
 chaviza
 chavo
-chavo
-chavo, va
+chava
 chavola
-chavon, na
+chavon
+chavona
 chaya
 chayar
 chayota
@@ -20861,11 +20896,12 @@ chivatada
 chivatazo
 chivatear
 chivateo
-chivato, ta
+chivato
+chivata
 chiveada
 chivear
 chivera
-chivero, ra
+chivero
 chiveta
 chivetero
 chiviar
@@ -20877,9 +20913,11 @@ chivital
 chivitero
 chivitil
 chivo
-chivo, va
-chivon, na
-chivudo, da
+chiva
+chivon
+chivona
+chivudo
+chivuda
 chiza
 cho
 cho
@@ -21001,15 +21039,15 @@ chordon
 chorear
 choreo
 choreta
-choreto, ta
+choreto
 choreza
 chori
 choricear
 choriceo
 choricera
 choriceria
-choricero, ra
-choricero, ra
+choricero
+choricera
 choripan
 chorizada
 chorizar
@@ -21020,7 +21058,7 @@ chorlitejo
 chorlito
 chorlo
 choro
-choro, ra
+chora
 chorompo, pa
 chorote
 chorotega
@@ -21445,7 +21483,8 @@ cidronela
 cieca
 ciegamente
 ciegayernos
-ciego, ga
+ciego
+ciega
 cielito
 cielo
 ciemo
@@ -22016,7 +22055,8 @@ clarisa
 clarividencia
 clarividente
 claror
-claro, ra
+claro
+clara
 claroscuro
 clarucho, cha
 clase
@@ -22981,14 +23021,11 @@ colombofilo, la
 colombroño
 colomin, na
 colon
-colon
-colon
 colonato
 colonche
 colonda
 colonense
 coloneño, ña
-colonia
 colonia
 coloniaje
 colonial
@@ -22998,7 +23035,8 @@ coloniense
 colonizacion
 colonizador, ra
 colonizar
-colono, na
+colono
+colona
 colonoscopia
 colonoscopio
 coloño
@@ -23134,9 +23172,10 @@ combinar
 combinatorio, ria
 comblezo, za
 combluezo, za
-combo, ba
+comba
 combo
-comboso, sa
+comboso
+combosa
 combretaceo, a
 comburente
 combustibilidad
@@ -25813,7 +25852,7 @@ cortinilla
 cortinon
 cortisona
 cortisquear
-corto, ta
+corta
 corto
 cortocircuitar
 cortocircuito
@@ -25842,23 +25881,29 @@ corvaza
 corvejon
 corvejon
 corvejos
-corveño, ña
+corveño
+corveña
 corveta
 corvetas
 corvetear
-corvido, da
+corvido
+corvida
 corvillo
 corvina
 corvinera
-corvino, na
-corvo, a
+corvino
+corvina
 corvo
-corzo, za
+corva
+corzo
+corza
 corzuelo
 cosa
-cosaco, ca
+cosaco
+cosaca
 cosante
-cosario, ria
+cosario
+cosaria
 coscachear
 coscacho
 coscarron
@@ -25867,7 +25912,8 @@ coscas
 coscoja
 coscojal
 coscojar
-coscojero, ra
+coscojero
+coscojera
 coscojita
 coscojo
 coscolino, na
@@ -26550,8 +26596,10 @@ crudamente
 crudelisimo, ma
 crudeza
 crudillo
-crudio, a
-crudo, da
+crudio
+crudia
+crudo
+cruda
 cruel
 crueldad
 cruelmente
@@ -27176,8 +27224,8 @@ culminante
 culminar
 culo
 culombio
-culon, na
-culote
+culon
+culona
 culote
 culotte
 culpa
@@ -27210,9 +27258,10 @@ cultivador, ra
 cultivar
 cultivo
 cultor
-cultor, ra
+cultora
 cultoso, sa
-culto, ta
+culto
+culta
 cultrun
 cultual
 cultura
@@ -28476,7 +28525,8 @@ densimetria
 densimetro
 densitometria
 densitometro
-denso, sa
+denso
+densa
 dentado, da
 dentadura
 dental
@@ -31731,8 +31781,9 @@ detumescencia
 deturpacion
 deturpar
 deuda
-deudo, da
-deudor, ra
+deudo
+deudor
+deudora
 deudoso, sa
 deus ex machina
 deuteragonista
@@ -32182,7 +32233,8 @@ dignificacion
 dignificador, ra
 dignificante
 dignificar
-digno, na
+digno
+digna
 digrafo
 digresion
 digresivo, va
@@ -32909,8 +32961,10 @@ doctoral
 doctoramiento
 doctorando, da
 doctorar
-doctor, ra
-docto, ta
+doctor
+doctora
+docto
+docta
 doctrina
 doctrinable
 doctrinador, ra
@@ -34924,8 +34978,8 @@ enanchar
 enanez
 enangostar
 enanismo
-enano, na
-enante
+enano
+enana
 enante
 enantes
 enanzar
@@ -37269,7 +37323,7 @@ epiceyo
 epiciclico, ca
 epiciclo
 epicicloide
-epico, ca
+epico
 epicontinental
 epicrisis
 epicureismo
@@ -37528,24 +37582,28 @@ eritropoyesis
 eritropoyetina
 eritroxilaceo, a
 eritroxileo, a
-erizado, da
+erizado
+erizada
 erizamiento
 erizar
 erizon
-erizo, za
+erizo
+eriza
 ermador, ra
 ermadura
 ermamiento
 ermar
 ermita
-ermitaño, ña
+ermitaño
+ermitaña
 ermitorio
 ermunio
 ero
 erogacion
 erogar
 erogatorio
-erogeno, na
+erogeno
+erogena
 era
 eros
 erosion
@@ -39896,7 +39954,7 @@ eta
 ethos
 etica
 eticidad
-etico, ca
+etico
 etileno
 etilico, ca
 etilismo
@@ -39925,7 +39983,8 @@ etiquez
 etites
 etmoidal
 etmoides
-etneo, a
+etneo
+etnea
 etnia
 etnicidad
 etnico, ca
@@ -39950,7 +40009,8 @@ eton
 etopeua
 etrusco, ca
 etusa
-eubeo, a
+eubeo
+eubea
 euboico, ca
 eubolia
 eucaliptal
@@ -41063,6 +41123,7 @@ falsificar
 falsilla
 falsopeto
 falso, sa
+falsa
 falta
 faltante
 faltar
@@ -41070,7 +41131,7 @@ falte
 faltista
 falton, na
 faltoso, sa
-falto, ta
+falto
 faltrero, ra
 faltriquera
 falua
@@ -41394,7 +41455,6 @@ favorito, ta
 fax
 faxear
 faya
-faya
 fayado
 fayanca
 fayenza
@@ -41407,10 +41467,10 @@ fazaña
 fazferir
 fazoleto
 fe
-fe
 fealdad
 feamente
-febeo, a
+febeo
+febea
 feblaje
 feble
 febledad
@@ -42194,8 +42254,10 @@ flacamente
 flaccidez
 flaccido, da
 flacidez
-flacido, da
-flaco, ca
+flacido
+flacida
+flaco
+flaca
 flacon, na
 flacuchento, ta
 flacucho, cha
@@ -42347,7 +42409,8 @@ flojamente
 flojedad
 flojel
 flojera
-flojo, ja
+flojo
+floja
 flojuelo
 flojura
 floqueado, da
@@ -42561,7 +42624,6 @@ fonatorio, ria
 fonazo
 foncarralero, ra
 fonda
-fonda
 fondable
 fondac
 fondeadero
@@ -42575,7 +42637,6 @@ fondismo
 fondista
 fondista
 fondo
-fondo, da
 fondon
 fondon
 fondongo, ga
@@ -43298,7 +43359,7 @@ fritanguero, ra
 fritar
 fritero, ra
 fritillas
-frito, ta
+frito
 fritura
 friulano, na
 friura
@@ -44191,17 +44252,19 @@ ganguero, ra
 ganguil
 ganoideo, a
 ganosamente
-ganoso, sa
+ganoso
+ganosa
 gansa
 gansada
 gansaron
 gansear
-ganso, sa
+ganso
 ganster
 gansterismo
 ganta
 gante
-gantes, sa
+gantes
+gantesa
 ganzua
 ganzuar
 gañafon
@@ -44463,7 +44526,7 @@ garzon
 garzonear
 garzonia
 garzota
-garzo, za
+garzo
 gas
 gasajado
 gasajar
@@ -45335,7 +45398,8 @@ goniometro
 gonococia
 gonococico, ca
 gonococo
-gono, na
+gono
+gona
 gonorrea
 goño
 gorbion
@@ -45346,13 +45410,14 @@ gorda
 gordal
 gordana
 gordeza
-gordezuelo, la
+gordezuelo
+gordezuela
 gordiano
-gordiflon, na
+gordiflon
 gordinflas
-gordinflon, na
+gordinflona
 gordito
-gordo, da
+gordo
 gordolobo
 gordor
 gordura
@@ -45447,7 +45512,8 @@ gozamiento
 gozar
 gozne
 gozo
-gozon, na
+gozon
+gozona
 gozosamente
 gozoso, sa
 gozque
@@ -45716,7 +45782,7 @@ gratisdato, ta
 gratis et amore
 gratitud
 gratonada
-grato, ta
+grato
 gratuidad
 gratuitamente
 gratuito, ta
@@ -47000,7 +47066,8 @@ hartazgo
 hartazon
 hartera
 harton, na
-harto, ta
+harto
+harta
 hartura
 hasani
 hassio
@@ -47008,7 +47075,8 @@ hasta
 hastial
 hastiar
 hastio
-hastioso, sa
+hastioso
+hastiosa
 hataca
 hatada
 hatajo
@@ -47512,7 +47580,8 @@ hesperido, da
 hespero, ra
 hespirse
 hetaira
-heteo, a
+heteo
+hetea
 hetera
 hetero
 hetero
@@ -48327,7 +48396,7 @@ hondear
 hondero
 hondijo
 hondillos
-hondo, da
+hondo
 hondon
 hondonada
 hondonal
@@ -48660,7 +48729,7 @@ hucia
 huebra
 huebrero
 hueca
-hueco, ca
+hueco
 huecograbado
 huego
 huehuenche
@@ -48724,14 +48793,18 @@ hugonote, ta
 huicho
 huiclacoche
 huida
-huidero, ra
-huidizo, za
-huido, da
-huidor, ra
+huidero
+huidera
+huidizo
+huidiza
+huido
+huidor
+huidora
 huifa
 huilense
 huillin
-huilo, la
+huilo
+huila
 huilota
 huilte
 huiltota
@@ -48740,7 +48813,6 @@ huingan
 huipil
 huir
 huira
-huiro
 huiro
 huisache
 huisachear
@@ -48874,8 +48946,8 @@ hurguetear
 hurguillas
 huri
 hurmiento
-huron, na
-huron, na
+huron
+hurona
 huronear
 huroneo
 huronero, ra
@@ -48926,7 +48998,7 @@ iberio, ria
 iberismo
 ibero
 iberoamericano, na
-ibero, ra
+ibera
 iberorromance
 iberorromanico, ca
 ibice
@@ -49061,16 +49133,20 @@ idolo
 idologia
 idolopeya
 idoneidad
-idoneo, a
-idor, ra
+idoneo
+idonea
+idor
+idora
 idos
 idumeo
 idura
 idus
-iego, ga
+iego
+iega
 iense
 iente
-iento, ta
+iento
+ienta
 iglesia
 iglesiero, ra
 iglu
@@ -49080,7 +49156,8 @@ Ignacio
 ignaro, ra
 ignavia
 ignavo, va
-igneo, a
+igneo
+ignea
 ignicion
 ignifero, ra
 ignifugo, ga
@@ -49162,18 +49239,15 @@ ilegitimo, ma
 ileo
 ileocecal
 ileon
-ileon
 ilercaon, na
 ilercavon, na
 ilerdense
 ilergete
-ileso, sa
+ileso
+ilesa
 iletrado, da
-iliaco, ca
-iliaco, ca
-iliaco, ca
-iliaco, ca
-iliaco, ca
+iliaco
+iliaca
 iliberal
 iliberitano, na
 iliberritano, na
@@ -49222,7 +49296,8 @@ ilusionismo
 ilusionista
 ilusivo, va
 ilusorio, ria
-iluso, sa
+iluso
+ilusa
 ilustracion
 ilustrado, da
 ilustrador, ra
@@ -49407,7 +49482,7 @@ impiamente
 impiedad
 impiedoso, sa
 impingar
-impio, a
+impio
 impireo, a
 impla
 implacabilidad
@@ -52980,7 +53055,8 @@ judiciario, ria
 judicio
 judicioso, sa
 judiego, ga
-judio, a
+judio
+judia
 judion
 judo
 jueceo
@@ -53091,7 +53167,8 @@ juntera
 junterilla
 juntero, ra
 juntorio
-junto, ta
+junto
+junta
 juntucha
 juntura
 junza
@@ -53177,7 +53254,8 @@ justinianeo, a
 justipreciacion
 justipreciar
 justiprecio
-justo, ta
+justo
+justa
 justralpo
 juta
 jutia
@@ -53248,7 +53326,6 @@ kili
 kiliarea
 kilim
 kilo
-kilo
 kilobyte
 kilocaloria
 kilociclo
@@ -53309,7 +53386,8 @@ kris
 kufiya
 kungfu
 kurchatovio
-kurdo, da
+kurdo
+kurda
 kuwaiti
 l
 la
@@ -53735,7 +53813,8 @@ lanifero, ra
 lanificacion
 lanificio
 lanilla
-lanio, a
+lanio
+lania
 lanolina
 lanosidad
 lanoso, sa
@@ -53799,8 +53878,9 @@ lapita
 lapiz
 lapizar
 lapo
-lapon, na
-lapso, sa
+lapon
+lapona
+lapsa
 lapso
 lapsus
 lapsus calami
@@ -53828,7 +53908,7 @@ largar
 largaria
 largavista
 largicion
-largo, ga
+largo
 largometraje
 largomira
 largona
@@ -54335,7 +54415,8 @@ lentiscina
 lentisco
 lentitud
 lentor
-lento, ta
+lento
+lenta
 lentura
 lenzal
 lenzuelo
@@ -54391,7 +54472,7 @@ lerdamente
 lerdear
 lerdera
 lerdez
-lerdo, da
+lerdo
 lerdon
 lerense
 leridano, na
@@ -54426,7 +54507,8 @@ letargia
 letargico, ca
 letargo
 letargoso, sa
-leteo, a
+leteo
+letea
 leticia
 leticiano, na
 letificante
@@ -54905,8 +54987,9 @@ linear
 linear
 linense
 lineo
-lineo, a
-linero, ra
+linea
+linero
+linera
 linf
 linfa
 linfangitis
@@ -55046,7 +55129,7 @@ listonado
 listonar
 listoneria
 listonero, ra
-listo, ta
+listo
 lisura
 lita
 litacion
@@ -55221,7 +55304,7 @@ lleneramente
 llenero, ra
 llenez
 lleneza
-lleno, na
+lleno
 llenura
 llera
 llesco, ca
@@ -55798,7 +55881,7 @@ lutado, da
 lutea
 lutecio
 luteo
-luteo, a
+lutea
 luteranismo
 luterano
 luteria
@@ -56223,10 +56306,11 @@ magnitud
 magnolia
 magnoliaceo, a
 magnolio
-magno, na
+magno
+magna
 magnum
-mago, ga
-mago, ga
+mago
+maga
 magolla
 magosta
 magostar
@@ -57089,7 +57173,7 @@ manseza
 mansion
 mansionario
 manso
-manso, sa
+mansa
 mansuefacto, ta
 mansueto, ta
 mansuetud
@@ -57897,7 +57981,8 @@ matematica
 matematicamente
 matematico, ca
 matematismo
-mateo, a
+mateo
+matea
 materia
 material
 materialidad
@@ -58633,7 +58718,8 @@ mensaje
 mensajeria
 mensajero, ra
 mensil
-menso, sa
+menso
+mensa
 menstruacion
 menstrual
 menstrualmente
@@ -59619,7 +59705,8 @@ mirmecologico, ca
 mirmecologo, ga
 mirobalano
 mirobrigense
-miron, na
+miron
+mirona
 mirra
 mirrado, da
 mirrauste
@@ -59681,7 +59768,8 @@ misis
 misivo, va
 mismamente
 mismidad
-mismo, ma
+mismo
+misma
 miso
 misoginia
 misogino, na
@@ -59779,7 +59867,7 @@ mixtifori
 mixti fori
 mixtilineo, a
 mixtion
-mixto, ta
+mixto
 mixtura
 mixturar
 mixturero, ra
@@ -60235,7 +60323,8 @@ monitorio, ria
 monitorizacion
 monitorizar
 monitos
-monje, ja
+monje
+monja
 monjerio
 monjia
 monjil
@@ -60573,7 +60662,8 @@ morenillo
 morenito
 moreno, na
 morenura
-moreo, a
+moreo
+morea
 morera
 moreral
 moreria
@@ -60838,7 +60928,8 @@ motociclista
 motociclistico, ca
 motocross
 motolita
-motolito, ta
+motolito
+motolita
 moton
 motonave
 motoneria
@@ -60851,15 +60942,16 @@ motorista
 motorizacion
 motorizado, da
 motorizar
-motor, ra
+motor
+motora
 motosierra
-motoso, sa
-motoso, sa
+motoso
+motosa
 mototaxi
 motovelero
 motril
 motriz
-motudo, da
+motudo
 motu proprio
 mousse
 movedizo, za
@@ -61276,7 +61368,7 @@ muscaria
 muscarina
 muscicapa
 musco
-musco, ca
+musca
 musculacion
 muscular
 muscular
@@ -61297,7 +61389,7 @@ musequi
 muserola
 musgaño
 musgo
-musgo, ga
+musga
 musgoso, sa
 musica
 musicable
@@ -61529,7 +61621,8 @@ napar
 napea
 napelo
 napeño, ña
-napeo, a
+napeo
+napea
 napia
 napoleon
 napoleonico, ca
@@ -61632,11 +61725,14 @@ natatil
 natatorio, ria
 nateron
 natilla
-natio, a
+natio
+natia
 natividad
 nativismo
-nativo, va
+nativo
+nativa
 nato, ta
+nata
 natral
 natri
 natron
@@ -61874,7 +61970,8 @@ neisico, ca
 neivano, na
 neja
 nejayote
-nejo, ja
+nejo
+neja
 neldo
 neles
 nelumbio
@@ -61885,7 +61982,8 @@ nematocero
 nematodo
 nembrar
 neme
-nemeo, a
+nemeo
+nemea
 nemine discrepante
 nemon
 nemonico, ca
@@ -66414,11 +66512,10 @@ pediluvio
 pedimento
 pedimiento
 pedinche
-pedio, a
+pedio
+pedia
 pedir
-pedir
-pedo
-pedo, da
+peda
 pedofilia
 pedofilo, la
 pedologia
@@ -67841,8 +67938,7 @@ picazon
 picazuroba
 piccolo
 picea
-piceo, a
-picha
+piceo
 picha
 pichacha
 pichagua
@@ -73016,7 +73112,8 @@ rambutan
 rameado, da
 rameal
 ramear
-rameo, a
+rameo
+ramea
 ramera
 rameria
 ramero
@@ -76747,7 +76844,7 @@ romanistica
 romanizacion
 romanizar
 romano
-romano, na
+romana
 romanticismo
 romantico, ca
 romanza
@@ -76755,14 +76852,17 @@ romanzador, ra
 romanzar
 romaza
 rombal
-rombico, ca
+rombico
+rombica
 rombo
 romboedrico, ca
 romboedro
 romboidal
 romboide
-romboideo, a
-romeo, a
+romboideo
+romboidea
+romeo
+romea
 romera
 romeraje
 romeral
@@ -76924,7 +77024,8 @@ roscon
 rosear
 rosedal
 rosellones, sa
-roseo, a
+roseo
+rosea
 roseola
 rosero, ra
 roseta
@@ -77028,7 +77129,8 @@ rozon
 rr
 rragia
 rrea
-rro, rra
+rro
+rra
 rua
 ruan
 ruan
@@ -77042,7 +77144,8 @@ ruar
 rubefaccion
 rubefaciente
 rubeniano, na
-rubeo, a
+rubeo
+rubea
 rubeola
 rubescente
 rubeta
@@ -77310,8 +77413,8 @@ sabeliano, na
 sabelico, ca
 sabelotodo
 sabencia
-sabeo, a
-saber
+sabeo
+sabea
 saber
 sabiamente
 sabicu
@@ -78470,7 +78573,8 @@ savia
 sawali
 saxafrax
 saxatil
-saxeo, a
+saxeo
+saxea
 saxifragaceo, a
 saxifragia
 saxigraga
@@ -82925,7 +83029,7 @@ teatrologo, ga
 tebaico, ca
 tebano
 tebenque
-tebeo, a
+tebea
 tebeo
 teca
 teca
@@ -82989,8 +83093,8 @@ tediarse
 tedio
 tedioso, sa
 teflon
-tegeo, a
-tegua
+tegeo
+tegea
 tegua
 tegual
 tegucigalpense
@@ -83383,7 +83487,8 @@ tensionar
 tensoactivo, va
 tensorial
 tensor, ra
-tenso, sa
+tenso
+tensa
 tentabuey
 tentacion
 tentacular
@@ -83570,7 +83675,6 @@ terigüela
 teristro
 terliz
 terma
-terma
 termal
 termas
 termes
@@ -83597,12 +83701,9 @@ terminote
 termionico, ca
 termistor
 termita
-termita
 termite
 termitera
 termitero
-termo
-termo
 termo
 termocauterio
 termocefalo, la
@@ -83617,7 +83718,6 @@ termogravimetria
 termoionico, ca
 termolabil
 termologia
-termo, ma
 termometria
 termometrico, ca
 termometro
@@ -84148,7 +84248,7 @@ tintorera
 tintoreria
 tintorero, ra
 tintorro
-tinto, ta
+tinto
 tintura
 tinturar
 tiña
@@ -87432,7 +87532,8 @@ vacilante
 vacilar
 vacile
 vacilon, na
-vacio, a
+vacio
+vacia
 vaco
 vaco, ca
 vacuidad
@@ -88700,7 +88801,7 @@ viejales
 viejarron, na
 viejera
 viejita
-viejo, ja
+viejo
 viejurgo, ga
 vienense
 vienes, sa
