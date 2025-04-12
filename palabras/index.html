@@ -118,6 +118,7 @@ clave=document.getElementsByName("CLAV")[k].value.toLowerCase();
 //console.log(clave);
 data=data.filter(filtrado);
 document.getElementsByName("PALAB")[k+1].value=data[0];
+navigator.clipboard.writeText(data[0]);
 nropalab();
 var texto='';
 for (var i=0;i<data.length;i++) {texto+='<p><button onclick=cambia('+k+','+i+')>'+data[i]+'</button></p>';}
@@ -129,6 +130,7 @@ divL.style.display='block';
 }
 function cambia(k,i){
 document.getElementsByName("PALAB")[k+1].value=data[i];
+navigator.clipboard.writeText(data[i]);
 }
 
 function Ok(){
