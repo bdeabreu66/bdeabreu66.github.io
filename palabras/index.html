@@ -23,6 +23,9 @@ visibility: hidden;
 <label for="nl6" >&nbsp 6 </label> <input value=6 name="nl" id="nl6" type="radio">
 <label for="nl7" >&nbsp 7 </label> <input value=7 name="nl" id="nl7" type="radio">
 <label for="nl8" >&nbsp 8 </label> <input value=8 name="nl" id="nl8" type="radio">
+<label for="nl9" >&nbsp 9 </label> <input value=9 name="nl" id="nl9" type="radio">
+<label for="n20" >&nbsp 10 </label> <input value=10 name="nl" id="n20" type="radio">
+<label for="n21" >&nbsp 11 </label> <input value=11 name="nl" id="n21" type="radio">
 
 <br><br>
 <label for="idio" >Idioma: </label> 
@@ -176,7 +179,7 @@ function ajaxPositive(response) {
   //NLETRAS=24; 
    
   data=txt.split('\n').filter((a)=>a.length==NLETRAS);
- //console.log(data.filter(x => x.indexOf(',')!=-1));  
+ console.log(data.filter(x => x.indexOf(',')==5));  
   for (var i=0;i<data.length;i++) data[i]=data[i].toLowerCase();
 // console.log('muestro respuesta: ', data);
  document.getElementById("bt2").style.visibility="visible";
