@@ -8,12 +8,12 @@
 <style>
 
 input[type=number]{
-width: 3em;
+width: 5em;
 }
 
 input[type=text]{
 font-size:1em;
-width: 8em;
+width: 4em;
 border: 2px solid red;
 border-radius: 4px;
 padding: 4px 4px;
@@ -25,7 +25,7 @@ padding: 4px 4px;
 
 input[type=number]{
 font-size:1em;
-width: 5em;
+width: 4em;
 border: 2px solid red;
 border-radius: 4px;
 padding: 4px 4px;
@@ -59,6 +59,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td>Precio</td>
 <td>M</td></td>
 <td>Cantidad</td>
+<td>Total ($)</td>
 <td>Total (Bs)</td>
 </tr>
 <tr>
@@ -67,6 +68,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(0);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -74,6 +76,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(1);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -81,6 +84,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(2);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -88,6 +92,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(3);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -95,6 +100,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(4);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -102,6 +108,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(5);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -109,6 +116,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(6);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -116,13 +124,15 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(7);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
 <td><input name="p" oninput="procesar();" type="number" value="0"></td>
 <td><button name="m" onclick="change(8);">Bs</button></td>
-<td><input name="c" oninput="procesar();" type="number" value="0">
-</td><td><span name="r"></span></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"</td>
+<td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -130,6 +140,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(9);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -137,6 +148,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(10);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""></td>
@@ -144,6 +156,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(11);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -151,6 +164,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(12);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -158,6 +172,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(13);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -165,6 +180,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(14);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -172,6 +188,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(15);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -179,6 +196,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(16);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -186,6 +204,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(17);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -193,6 +212,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(18);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -200,6 +220,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(19);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""> </td>
@@ -207,6 +228,7 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(20);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 <tr>
 <td> <input name="np" type="text" value=""></td>
@@ -214,6 +236,15 @@ Total(Bs): <span id="tot"></span> Total ($): <span id="tot2"></span>
 <td><button name="m" onclick="change(21);">Bs</button></td>
 <td><input name="c" oninput="procesar();" type="number" value="0"></td>
 <td><span name="r"></span></td>
+<td><span name="r2"></span></td>
+</tr>
+<tr>
+<td> <input name="np" type="text" value=""></td>
+<td><input name="p" oninput="procesar();" type="number" value="0"></td>
+<td><button name="m" onclick="change(22);">Bs</button></td>
+<td><input name="c" oninput="procesar();" type="number" value="0"></td>
+<td><span name="r"></span></td>
+<td><span name="r2"></span></td>
 </tr>
 </table>
 </div>
@@ -233,6 +264,8 @@ function change(p){
 var o=document.getElementsByName("m")[p];
 var pr=document.getElementsByName("p")[p];
 var st=document.getElementsByName("r")[p];
+var st2=document.getElementsByName("r2")[p];
+
 var t=document.getElementById("tas").value;
 if (o.innerText=='Bs') {o.innerText='$';
   pr.value=(parseFloat(pr.value)/parseFloat(t)).toFixed(2);
@@ -297,11 +330,13 @@ var precios=document.getElementsByName("p");
 var nombres=document.getElementsByName("np");
 var cantidad=document.getElementsByName("c");
 var subtotal=document.getElementsByName("r");
+var subtotal2=document.getElementsByName("r2");
 
 var n=precios.length;
 var moneda=document.getElementsByName("m");
 var tasa=parseFloat(document.getElementById("tas").value);
 var total=0;
+var total2=0;
 var buffer="";
 var buffer2="";
 var buffer3="";
@@ -315,16 +350,19 @@ buffer4+=cantidad[j].value;
 
 if (j!=(n-1)) {buffer+=","; buffer2+=","; buffer3+=",";buffer4+=","}
 var tp=(parseFloat(cantidad[j].value)*parseFloat(precios[j].value));
-if (moneda[j].innerText=='$') {tp*=tasa}
+if (moneda[j].innerText=='Bs') {tp/=tasa}
 subtotal[j].innerText=tp.toFixed(2);
 total+=tp;
+if (moneda[j].innerText=='$') {tp*=tasa}
+subtotal2[j].innerText=tp.toFixed(2);
+total2+=tp;
 }
 localStorage.setItem("DATOS",buffer);
 localStorage.setItem("MONEDAS",buffer2);
 localStorage.setItem("NOMBRES",buffer3);
 localStorage.setItem("CANTIDADES",buffer4);
-document.getElementById("tot").innerText=total.toFixed(2)+ ' Bs';
-document.getElementById("tot2").innerText=(total/tasa).toFixed(2)+ ' $';
+document.getElementById("tot").innerText=total2.toFixed(2)+ ' Bs';
+document.getElementById("tot2").innerText=(total).toFixed(2)+ ' $';
 
 }
 
