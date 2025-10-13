@@ -350,12 +350,20 @@ buffer4+=cantidad[j].value;
 
 if (j!=(n-1)) {buffer+=","; buffer2+=","; buffer3+=",";buffer4+=","}
 var tp=(parseFloat(cantidad[j].value)*parseFloat(precios[j].value));
-if (moneda[j].innerText=='Bs') {tp/=tasa}
-subtotal[j].innerText=tp.toFixed(2);
-total+=tp;
-if (moneda[j].innerText=='$') {tp*=tasa}
+//alert(tp);
+if (moneda[j].innerText=='Bs') {tp=tp;
+var tpd=tp/tasa;
+subtotal[j].innerText=tpd.toFixed(2);
 subtotal2[j].innerText=tp.toFixed(2);
+total+=tp;
+}
+if (moneda[j].innerText=='$') {
+var tpb;
+tpb=tp*tasa;
+subtotal[j].innerText=tp.toFixed(2);
+subtotal2[j].innerText=tpb.toFixed(2);
 total2+=tp;
+}
 }
 localStorage.setItem("DATOS",buffer);
 localStorage.setItem("MONEDAS",buffer2);
