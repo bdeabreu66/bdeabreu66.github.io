@@ -609,6 +609,8 @@ texto+='<tr style="height:30%;"><td><button class="btn2" onclick=importar()>Impo
 //texto+='<tr><td><button onclick=importar2()>Importar Facturas (FAC_)</button></td></tr>';
 texto+='<tr style="height:30%;"><td><button class="btn2" onclick=exportar()>Exportar Facturas</button></td></tr>';
 texto+='<tr style="height:30%;"><td><button class="btn2" onclick=generar_lista_facturas()>Generar Facturas</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=generar_lista_precios()>Generar Lista de Precios</button></td></tr>';
+
 //texto+='<tr><td><button onclick=elim_FAC()>Eliminar FACS</button></td></tr>';
 texto+='<tr style="height:30%;"><td><button class="btn2" onclick=quitar_div("lista");>Salir</button></td></tr>';
 texto+='</table></div>';
@@ -1456,6 +1458,7 @@ function salir(){
 guarda_pedido();
 t2=document.getElementById("t2").value;
 localStorage.setItem('p2',t2);
+localStorage.setItem('data',JSON.stringify(data));
 }
 
 var lcat=[];
@@ -2391,7 +2394,10 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
-Act_data();
+let resp= window.prompt("Desea Actualizar Precios?", "Si");
+if (resp=="Si") {Act_data();}
+ else 
+{ data=eval(localStorage.getItem('data'));}
 
 function Act_data(){
 var myHeaders = new Headers();
@@ -2399,7 +2405,7 @@ var myHeaders = new Headers();
 var myInit = { mode: 'cors' };
 
 //var nombrepag="https://monitordolarvenezuela.com/monitor-dolar-hoy";
-var nombrepag="https://bdeabreu66.github.io/factura/precios.txt";
+var nombrepag="https://bdeabreu66.github.io/factura/preciosVerduras.txt";
 
 
 fetch(nombrepag,myInit)
