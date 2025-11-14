@@ -2220,6 +2220,28 @@ if (data[num][4]=='') {data[num][4]=0}
 intro(num);
 salir();
 }
+function hab_cambio_dol(){
+var entrada=document.getElementById("entradaPU");
+if (entrada.disabled==true) {entrada.disabled=false} else {entrada.disabled=true}
+
+}
+function cambiaPU(num){
+data[num][6]="t2";
+data[num][2]=parseFloat(document.getElementById("entradaPU").value); 
+if (data[num][3]==1) {data[num][2]=parseFloat(parseFloat(data[num][2]/1.16).toFixed(2))}
+
+}
+function hab_cambio_bs(){
+var entrada=document.getElementById("entradaPUB");
+if (entrada.disabled==true) {entrada.disabled=false} else {entrada.disabled=true}
+
+}
+function cambiaPUB(num){
+data[num][6]="t1";
+data[num][2]=parseFloat(document.getElementById("entradaPUB").value);
+if (data[num][3]==1) {data[num][2]=parseFloat(parseFloat(data[num][2]/1.16).toFixed(2))}
+}
+
 function cambiaB(num){
 data[num][5]=document.getElementById("entradaB").value;
 if (data[num][5]=='') {data[num][5]=0}
@@ -2250,13 +2272,15 @@ if (data[i][5]==0) {var vcor1='red';} else {var vcor1='blue';}
 var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+data[i][0]+' '+BanderaIva+' '+'<span style="color:yellow;">'+dpc+ ' C '+dpu+' U'+'</span>'+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
 
 var pc=parseFloat(data[i][10]);
-
-var ga;
+var ga=0;
+/*var ga;
 if (data[i][6]=='t3')   {ga=(((pb-1.02*pc)/pb)*100).toFixed(2);}
 if (data[i][6]=='t2')   {ga=(((pu-1.02*pc)/pu)*100).toFixed(2);}
+*/
 var puiva=(pu*fm).toFixed(2)
 var pbiva=(pb*fm).toFixed(2)
 tex1='U '+puiva+' $';
+var pubs=parseFloat((puiva*factor).toFixed(2));
 tex2=(puiva*factor).toFixed(2)+ ' Bs';
 tex3='C '+pbiva +' $';
 tex4=(pbiva*factor).toFixed(2)+ ' Bs';
@@ -2264,7 +2288,11 @@ tex4=(pbiva*factor).toFixed(2)+ ' Bs';
 if (data[i][4]==0) {var valoru="";} else {var valoru=data[i][4];}
 if (data[i][5]==0) {var valorb="";} else {var valorb=data[i][5];}
 
-texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td><td>'+ga+ '</td></tr>';
+//texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td><td>'+ga+ '</td></tr>';
+texto+='<table><tr><td>'+'U'+'<input id="entradaPU" disabled type="number" class="btn2" style="color:'+vcor+';" value="'+puiva+'" onchange="cambiaPU('+i+');">'+'<button onclick="hab_cambio_dol();">$</button>'+'</td><td>';
+texto+='<input id="entradaPUB" disabled type="number" class="btn2" style="color:'+vcor+';" value="'+pubs+'" onchange="cambiaPUB('+i+');">'+'<button onclick="hab_cambio_bs();">Bs</button>';
+texto+='</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td><td>'+ga+ '</td></tr>';
+
 texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor1+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td><td></td></tr></table>';
 
 
