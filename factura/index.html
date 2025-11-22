@@ -305,6 +305,9 @@ Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
 <script type="text/javascript" src="selectFile.js"></script>
 <script type="text/javascript">
 let scannerRunning = false;
+function procesa_codigo(texto){
+alert(texto);
+}
 
 function startScanner() {
 Quagga.init({
@@ -331,7 +334,10 @@ scannerRunning = true;
 });
 
 Quagga.onDetected(result => {
-alert(`Barcode detected: ${result.codeResult.code}`);
+//alert(`Barcode detected: ${result.codeResult.code}`);
+procesa_codigo(result.codeResult.code);
+scannerRunning = false;
+Quagga.stop();
 });
 }
 document.getElementById("escanear").addEventListener("click", () => {
