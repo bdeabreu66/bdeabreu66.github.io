@@ -348,6 +348,8 @@ var videoE=cameraF.getElementsByTagName("video")[0];
 console.log(videoE);
 if (videoE) {
  videoE.pause();
+cameraF.style.visibility="hidden"
+ 
 }
 //Quagga.offProcessed();
 //Quagga.offDetected();
@@ -355,13 +357,16 @@ Quagga.stop();
 
 }
 function Escanear(){
+var cameraF=document.getElementById("scanner-container");
+
 if (scannerRunning) {
 //Quagga.stop();
 Stop_Scanner();
-alert("Paro");
+//alert("Paro");
 scannerRunning = false;
 } else {
 startScanner();
+cameraF.style.visibility="visible"
 }
 }
 /*
