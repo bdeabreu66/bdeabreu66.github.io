@@ -305,6 +305,7 @@ Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
 <script type="text/javascript" src="selectFile.js"></script>
 <script type="text/javascript">
 let scannerRunning = false;
+
 function procesa_codigo(texto){
 alert(texto);
 }
@@ -334,15 +335,28 @@ scannerRunning = true;
 });
 
 Quagga.onDetected(result => {
-alert(`Barcode detected: ${result.codeResult.code}`);
+//alert(`Barcode detected: ${result.codeResult.code}`);
 procesa_codigo(result.codeResult.code);
 scannerRunning = false;
-Quagga.stop();
+Stop_Scanner();
 });
+}
+function Stop_Scanner(){
+scannerRunning = false;
+var cameraF=document.getElementById("scanner-container");
+var videoE=cameraF.getElementsByTagName("video")[0];
+if (videoE) {
+ videoE.pause();
+}
+//Quagga.offProcessed();
+//Quagga.offDetected();
+Quagga.stop();
+
 }
 document.getElementById("escanear").addEventListener("click", () => {
 if (scannerRunning) {
-Quagga.stop();
+//Quagga.stop();
+Stop_Scanner();
 scannerRunning = false;
 } else {
 startScanner();
