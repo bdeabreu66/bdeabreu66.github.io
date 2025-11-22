@@ -337,6 +337,8 @@ Quagga.onDetected(result => {
 //alert(`Barcode detected: ${result.codeResult.code}`);
 procesa_codigo(result.codeResult.code);
 scannerRunning = false;
+Quagga.offProcessed();
+Quagga.offDetected();
 Quagga.stop();
 });
 }
