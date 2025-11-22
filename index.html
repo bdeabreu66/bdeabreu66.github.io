@@ -62,8 +62,8 @@ font-size:2em;
 position:fixed;
 top:0%;
 left:0%;
-height: 50%;
-width: 50%;
+height: 30%;
+width: 30%;
 }
 #divt {
 top:35%;
@@ -264,7 +264,7 @@ border-radius: 8px;
 <div id="factura" hidden="true"></div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
 <!-- <div id="voz"> <button class="micro" onclick="obtenerTexto();"></button> </div> -->
- <div id="voz"> <table width="50%"><tr><td width="20%" >Suma:</td><td width="20%" id="suma"></td><td width="5%" <button  class="bot4" id="escanear" >Escanear</button></td></tr></table> </div>
+ <div id="voz"> <table width="50%"><tr><td width="20%" >Suma:</td><td width="20%" id="suma"></td><td width="5%" <button  class="bot4" id="escanear" onclick="Escanear();" >Escanear</button></td></tr></table> </div>
 <div id="header">
 <table width="100%">
 <tr align="center">
@@ -317,8 +317,8 @@ name: "Live",
 type: "LiveStream",
 target: document.querySelector('#scanner-container'),
 constraints: {
-width: 640,
-height: 480,
+width: 340,
+height: 280,
 facingMode: "environment"
 }
 },
@@ -345,6 +345,7 @@ function Stop_Scanner(){
 scannerRunning = false;
 var cameraF=document.getElementById("scanner-container");
 var videoE=cameraF.getElementsByTagName("video")[0];
+console.log(videoE);
 if (videoE) {
  videoE.pause();
 }
@@ -353,15 +354,28 @@ if (videoE) {
 Quagga.stop();
 
 }
+function Escanear(){
+if (scannerRunning) {
+//Quagga.stop();
+Stop_Scanner();
+alert("Paro");
+scannerRunning = false;
+} else {
+startScanner();
+}
+}
+/*
 document.getElementById("escanear").addEventListener("click", () => {
 if (scannerRunning) {
 //Quagga.stop();
 Stop_Scanner();
+alert("Paro");
 scannerRunning = false;
 } else {
 startScanner();
 }
 });
+*/
 var Pedido_G=[];
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
