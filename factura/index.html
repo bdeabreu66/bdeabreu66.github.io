@@ -58,6 +58,13 @@ position:relative;
 font-size:2em;
 
 }
+#scanner-container {
+position:fixed;
+top:0%;
+left:0%;
+height: 50%;
+width: 50%;
+}
 #divt {
 top:35%;
 left:0%;
@@ -257,7 +264,7 @@ border-radius: 8px;
 <div id="factura" hidden="true"></div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
 <!-- <div id="voz"> <button class="micro" onclick="obtenerTexto();"></button> </div> -->
- <div id="voz"> <table width="50%"><tr><td width="20%" >Suma:</td><td width="20%" id="suma"></td><td width="5%" <button onclick="borra_suma();">B</button></td></tr></table> </div>
+ <div id="voz"> <table width="50%"><tr><td width="20%" >Suma:</td><td width="20%" id="suma"></td><td width="5%" <button  class="bot4" id="escanear" >Escanear</button></td></tr></table> </div>
 <div id="header">
 <table width="100%">
 <tr align="center">
@@ -267,6 +274,7 @@ border-radius: 8px;
 <td width="12%"><button class="btop" onclick="factura();">Fact</button></td> 
 <td width="12%"><button class="btop" onclick="total();">Ventas</button></td>
 <td width="12%"><button class="btop" onclick="desp_inventario();">Inv</button></td>
+<td width="12%"><button class="btop" onclick="sel_tienda();">Tienda</button></td>
 </tr></table>
 </div>
 
@@ -283,7 +291,7 @@ Vacios polar:<input style="width:55%;" type="text" id="vaccli" value="" ><br>
 Vacios 350 ml:<input style="width:55%;" type="text" id="vacclir1" value="" ><br>
 Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
 </div>
-
+<div id="scanner-container"></div>
 <div>
 <label hidden id=selected>Nothing selected</label><br>
 <input hidden type=file id="choose" accept="*.txt" >
@@ -291,11 +299,50 @@ Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
 <div id="lista" > </div>
 <!--   -->
 <div id="auxiliar" hidden="true"></div>
+<script src="barras.js"></script>
 <script src="arbol.js" type="text/javascript"></script>
 <script type="text/javascript" src="FileSaver.js"></script>
 <script type="text/javascript" src="selectFile.js"></script>
 <script type="text/javascript">
+let scannerRunning = false;
 
+function startScanner() {
+Quagga.init({
+inputStream: {
+name: "Live",
+type: "LiveStream",
+target: document.querySelector('#scanner-container'),
+constraints: {
+width: 640,
+height: 480,
+facingMode: "environment"
+}
+},
+decoder: {
+readers: ["code_128_reader", "ean_reader"]
+}
+}, function(err) {
+if (err) {
+console.error(err);
+return;
+}
+Quagga.start();
+scannerRunning = true;
+});
+
+Quagga.onDetected(result => {
+alert(`Barcode detected: ${result.codeResult.code}`);
+});
+}
+document.getElementById("escanear").addEventListener("click", () => {
+if (scannerRunning) {
+Quagga.stop();
+scannerRunning = false;
+} else {
+startScanner();
+}
+});
+var Pedido_G=[];
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
@@ -599,6 +646,18 @@ function fecha_estandar(f){
   var day=f.getDate();if (day<10) {day='0'+day}
 return day+'/'+mes+'/'+year;
 }
+function generar_lista_precios(){
+var sal='[';
+ for (var j=0;j<data.length;j++){
+  sal+='['+data[j].toString()+'],\n';
+}
+sal+=']';
+ let narch='precios2.txt'
+ var blob = new Blob([sal], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,narch);
+
+}
+
 
 function Mantenimiento(){
 var div3 = document.getElementById("lista");
@@ -612,6 +671,20 @@ texto+='<tr style="height:30%;"><td><button class="btn2" onclick=generar_lista_f
 texto+='<tr style="height:30%;"><td><button class="btn2" onclick=generar_lista_precios()>Generar Lista de Precios</button></td></tr>';
 
 //texto+='<tr><td><button onclick=elim_FAC()>Eliminar FACS</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=quitar_div("lista");>Salir</button></td></tr>';
+texto+='</table></div>';
+div3.innerHTML=texto;
+
+}
+
+function sel_tienda(){
+var div3 = document.getElementById("lista");
+div3.style="display:block ;position: fixed;top :30px; left: 0px; width: 100%;height:90%;background-color: blue;color:white; text-align: left; border: 3px solid #73AD21;";
+var texto='';
+texto+='<div> <table style="text-align:center;margin:auto;">';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=importar()>Verduras</button></td></tr>';
+//texto+='<tr><td><button onclick=importar2()>Chimenea</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=exportar()>El Chacal</button></td></tr>';
 texto+='<tr style="height:30%;"><td><button class="btn2" onclick=quitar_div("lista");>Salir</button></td></tr>';
 texto+='</table></div>';
 div3.innerHTML=texto;
@@ -1016,12 +1089,20 @@ var indcliente=AClientes.findIndex(x=>x.name===cliente);
 
 function guarda_pedido(){
 var texto='';
+for (var i=0;i<Pedido_G.length;i++) {
+if (Pedido_G[i][1]!=0 || Pedido_G[i][2]!=0) {
+texto+='&'+Pedido_G[i][0]+'#'+Pedido_G[i][1]+'#'+Pedido_G[i][2];
+}
+}
+if (texto.length>2) {localStorage.setItem('Pedido',texto.substr(1));} else {localStorage.setItem('Pedido','');}
+/*
 for (var i=0;i<data.length;i++) {
 if ((data[i][4]!=0) || (data[i][5]!=0)) { 
  texto+='&'+data[i][9]+'#'+data[i][4]+'#'+data[i][5];
 }
 if (texto.length>2) {localStorage.setItem('Pedido',texto.substr(1));} else {localStorage.setItem('Pedido','');}
 } 
+*/
 localStorage.setItem('Cliente',cliente);
 //guarda_clientes_IDB();
 }
@@ -1355,16 +1436,20 @@ data[i][5]=0;
 }
 
 texto=localStorage.getItem(archivo);
-
-
+//alert(texto);
+var items=[];
 if (texto!='' && texto!=null) {
 var ped=texto.split('&');
-console.log(ped);
+//alert('pedido '+ped+' '+ped.length);
 for (var i=0;i<ped.length;i++) {
-  var items=ped[i].split('#');
+  items=ped[i].split('#');
+//alert('items '+i+' '+items);
+  Pedido_G[i]=[items[0],parseFloat(items[1]),parseFloat(items[2])];
+
+// alert('P '+Pedido_G[i][0]);
   var ind=clave_ind.get(items[0]);
-  data[ind][4]=parseInt(items[1]);
-  data[ind][5]=parseInt(items[2]);
+  data[ind][4]+=parseFloat(items[1]);
+  data[ind][5]+=parseFloat(items[2]);
 }
 }
 
@@ -1619,17 +1704,17 @@ recupera_pedido("Pedido");
 }
 
 
-function actT(ind){
+function actT(ind,pos){
 var valor=prompt("Introduzca cantidad", "");
 if (valor!=null) {data[ind][5]=parseInt(valor);}
-intro(ind);
+intro(ind,pos);
 
 //console.log(ind);
 }
-function actU(ind){
+function actU(ind,pos){
 var valor=prompt("Introduzca cantidad", "");
 if (valor!=null) {data[ind][4]=parseInt(valor);}
-intro(ind);
+intro(ind,pos);
 
 //console.log(ind);
 }
@@ -1847,6 +1932,7 @@ texto+="<center>Factura</center>";
 texto+='<center><span id="contad" ></span></center>';
 var totald=0;
 var totalb=0;
+var ind;
 Ftexto='Fecha: '+fecha_actual()+'\n';
 Ftexto+=dist+'\n';
 Ftexto+='Cliente: '+cliente+'\n';
@@ -1856,84 +1942,97 @@ var contador=0;
 var colorb='black';
 Tdolar=0;
 Gdolar=0;
-for (var i=0;i<data.length;i++){
-  if (data[i][4]!=0 || data[i][5]!=0) {
-    contador++;
+//for (var i=0;i<data.length;i++){
+for (var i=0;i<Pedido_G.length;i++){
+  
+//  if (data[i][4]!=0 || data[i][5]!=0) {
+  if (Pedido_G[i][1]!=0 || Pedido_G[i][2]!=0) {
+    ind=clave_ind.get(Pedido_G[i][0]);
+console.log('ind '+ind+' '+Pedido_G[i][0]+' '+Pedido_G[i][1]);
+     contador++;
     factor=parseFloat(document.getElementById("t2").value);
-    if (data[i][3]==1) {fm=1.16;colorb='black'} else {fm=1;colorb='blue'}
-    [pu,pb]=precio(i);
-    [pcu,pcb]=precio_costo(i);
-    Tdolar=+((data[i][4]*pu + data[i][5]*pb));
-    Gdolar+=fm*((data[i][4]*(pu-ITF*pcu) + data[i][5]*(pb-ITF*pcb)));
-    if (data[i][6]=="t1") {
-     Tbs= data[i][4]*(data[i][2]) + data[i][5]*data[i][2]*data[i][1];
+    if (data[ind][3]==1) {fm=1.16;colorb='black'} else {fm=1;colorb='blue'}
+    [pu,pb]=precio(ind);
+console.log('pu '+pu+'pb '+pb);
+    [pcu,pcb]=precio_costo(ind);
+   // Tdolar=+((data[i][4]*pu + data[i][5]*pb));
+    Tdolar=+((Pedido_G[i][1]*pu + Pedido_G[i][2]*pb));
+ //   Gdolar+=fm*((data[i][4]*(pu-ITF*pcu) + data[i][5]*(pb-ITF*pcb)));
+   Gdolar+=fm*((Pedido_G[i][1]*(pu-ITF*pcu) + Pedido_G[i][2]*(pb-ITF*pcb)));
+ 
+    if (data[ind][6]=="t1") {
+     Tbs= Pedido_G[i][1]*(data[ind][2]) + Pedido_G[i][2]*data[ind][2]*data[ind][1];
     } else 
         {
     Tbs=parseFloat((Tdolar*factor).toFixed(2));
     }
+//alert(Tdolar);
   if (Tdolar==Tdolar) { 
      if (fm!=1) {BIMD+=Tdolar;}
      totald+=parseFloat((Tdolar*fm).toFixed(2));
      totaldsiva+=parseFloat((Tdolar).toFixed(2));
      Ftexto+='------------\n';
      texto+='<table width="100%">';
+//alert();
      if (tipo==0) {
-       if (data[i][4]!=0) { 
+//alert();
+       if (Pedido_G[i][1]!=0) { 
          v2=(pu).toFixed(2);
-         v3=(parseFloat(v2)*data[i][4]).toFixed(2);
+         v3=(parseFloat(v2)*Pedido_G[i][1]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
          v5=(parseFloat(v2)*fm).toFixed(2);
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
-         texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+ v4 +' $&nbsp'+'</tr>';
-         Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
+ 
+         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+ind+','+i+');">'+ Pedido_G[i][1] +' U '+ data[ind][0]+'</td></tr>';
+         texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+Pedido_G[i][1]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+ v4 +' $&nbsp'+'</tr>';
+         Ftexto+=Pedido_G[i][1] +' U '+ data[ind][0]+'\n';
  //        Ftexto+=data[i][4]+' U     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
-        Ftexto+=data[i][4]+' U     '+v5+' $'+"   C/IVA: "+v4 + ' $    \n'
+        Ftexto+=Pedido_G[i][1]+' U     '+v5+' $'+"   C/IVA: "+v4 + ' $    \n'
    
        }
-       if (data[i][5]!=0) {
+       if (Pedido_G[i][2]!=0) {
          v2=(pb).toFixed(2);
-         v3=(parseFloat(v2)*data[i][5]).toFixed(2);
+         v3=(parseFloat(v2)*Pedido_G[i][2]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
-         v5=(parseFloat(v2/data[i][1])*fm).toFixed(2);
-         texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
-         texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+v4 +' $&nbsp'+'</tr>';
-         Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
+         v5=(parseFloat(v2/data[ind][1])*fm).toFixed(2);
+         texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+ind+','+i+');">'+ Pedido_G[i][2] +' C  ' + data[ind][0]+' </td></tr>';
+         texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+Pedido_G[i][2]+'</td><td style="width:30%;">'+v2+'$'+'</td><td style="width:30%;">'+v3+' $'+'</td><td style="width:30%;">'+v4 +' $&nbsp'+'</tr>';
+         Ftexto+=Pedido_G[i][2] +' C '+ data[ind][0]+'\n';;
  //      Ftexto+=data[i][5]+' C     '+v2+' $'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' $    \n'
-         Ftexto+=data[i][5]+' C     '+v5+' $'+'   C/IVA: '+v4 + ' $    \n'
+         Ftexto+=Pedido_G[i][2]+' C     '+v5+' $'+'   C/IVA: '+v4 + ' $    \n'
 
        }
      }
      if (tipo==1) {
-       if (data[i][4]!=0) { 
+       if (Pedido_G[i][1]!=0) { 
          v2=(pu*factor).toFixed(2);
-         v3=(parseFloat(v2)*data[i][4]).toFixed(2);
+         v3=(parseFloat(v2)*Pedido_G[i][1]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
          v5=(parseFloat(v2)*fm).toFixed(2);
          //totalb+=parseFloat(v4);
          totalbsiva+=parseFloat(v3);
        
-         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][4] +' U '+ data[i][0]+'</td></tr>';
-         texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][4]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
-         Ftexto+=data[i][4] +' U '+ data[i][0]+'\n';
+         texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+ind+','+i+');">'+ Pedido_G[i][1] +' U '+ data[ind][0]+'</td></tr>';
+         texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+Pedido_G[i][1]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
+         Ftexto+=Pedido_G[i][1] +' U '+ data[ind][0]+'\n';
 //       Ftexto+=data[i][4]+' U     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
-         Ftexto+=data[i][4]+' U     '+v5+' Bs'+"   C/IVA: "+v4 + ' Bs    \n'
+         Ftexto+=Pedido_G[i][1]+' U     '+v5+' Bs'+"   C/IVA: "+v4 + ' Bs    \n'
 
 
        }
-       if (data[i][5]!=0) {
+       if (Pedido_G[i][2]!=0) {
          v2=(pb*factor).toFixed(2);
-         v3=(parseFloat(v2)*data[i][5]).toFixed(2);
+         v3=(parseFloat(v2)*Pedido_G[i][2]).toFixed(2);
          v4=(parseFloat(v3)*fm).toFixed(2);
-         v5=(parseFloat(v2/data[i][1])*fm).toFixed(2);
+         v5=(parseFloat(v2/data[ind][1])*fm).toFixed(2);
 
          totalb+=parseFloat(v4);
          totalbsiva+=parseFloat(v3);
 
-         texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+i+');">'+ data[i][5] +' C  ' + data[i][0]+' </td></tr>';
-         texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+data[i][5]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
-         Ftexto+=data[i][5] +' C '+ data[i][0]+'\n';;
+         texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" onclick="cintro('+ind+','+i+');">'+ Pedido_G[i][2] +' C  ' + data[ind][0]+' </td></tr>';
+         texto+='<tr style="text-align:right;font-size:0.3em;"><td style="width:10%;">'+Pedido_G[i][2]+'</td><td style="width:30%;">'+v2+'Bs'+'</td><td style="width:30%;">'+v3+' Bs'+'</td><td style="width:30%;">'+ v4 +' Bs&nbsp'+'</tr>';
+         Ftexto+=Pedido_G[i][2] +' C '+ data[ind][0]+'\n';;
  //        Ftexto+=data[i][5]+' C     '+v2+' Bs'+'S/IVA: '+v3+"   C/IVA: "+v4 + ' Bs    \n'
-        Ftexto+=data[i][5]+' C     '+v5+' Bs'+"   C/IVA: "+v4 + ' Bs    \n'
+        Ftexto+=Pedido_G[i][2]+' C     '+v5+' Bs'+"   C/IVA: "+v4 + ' Bs    \n'
    
        }
        if (fm!=1) {BIMB+=parseFloat(v3);}
@@ -2017,7 +2116,7 @@ document.getElementById("contad").innerText=contador+ " Productos";
 
 var tipo=0;
 var tipo2=0;
-
+var ind_pedido;
 function cambia_moneda(){
 tipo=1-tipo;
 factura2();
@@ -2151,19 +2250,19 @@ if (data[i][6]=="t3") {
 [pu,pb]=precio(i);
 if (data[i][6]=="t1") 
 {
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (fm*data[i][2]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]*data[i][1]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (fm*data[i][2]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+',-1);">'+data[i][4]+'</button></td></tr>';
+texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]*data[i][1]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+'-1);">'+data[i][5]+'</button></td></tr></table>';
 } 
 if (data[i][6]=="t2") 
 {
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+'-1);">'+data[i][4]+'</button></td></tr>';
+texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+'-1);">'+data[i][5]+'</button></td></tr></table>';
 }
   
 if (data[i][6]=="t3") 
 {
-texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+');">'+data[i][4]+'</button></td></tr>';
-texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+');">'+data[i][5]+'</button></td></tr></table>';
+texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+'-1);">'+data[i][4]+'</button></td></tr>';
+texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+'-1);">'+data[i][5]+'</button></td></tr></table>';
 }
 
 
@@ -2217,10 +2316,17 @@ function quitar_intro(){
 document.getElementById("introd").style.visibility="hidden";
 }
 
-function cambiaU(num){
+function cambiaU(num,pos){
 data[num][4]=document.getElementById("entradaU").value;
 if (data[num][4]=='') {data[num][4]=0}
-intro(num);
+if (data[num][4]!=0) {
+if (pos==-1 ) {Pedido_G.push([data[num][9],data[num][4],data[num][5]]);}
+ else 
+{Pedido_G[pos]=[data[num][9],data[num][4],data[num][5]];}
+}
+if (data[num][4]==0 && pos!=-1) {Pedido_G.splice(pos,1)}
+console.log(Pedido_G);
+intro(num,-1);
 salir();
 }
 function hab_cambio_dol(){
@@ -2245,19 +2351,19 @@ data[num][2]=parseFloat(document.getElementById("entradaPUB").value);
 if (data[num][3]==1) {data[num][2]=parseFloat(parseFloat(data[num][2]/1.16).toFixed(2))}
 }
 
-function cambiaB(num){
+function cambiaB(num,pos){
 data[num][5]=document.getElementById("entradaB").value;
 if (data[num][5]=='') {data[num][5]=0}
-intro(num);
+intro(num,pos);
 salir();
 }
-function cintro(num){
+function cintro(num,pos){
 document.getElementById("factura").hidden=true;
 factflag=true;
-intro(num);
+intro(num,pos);
 }
 
-function intro(i){
+function intro(i,pos){
 [dpc,dpu]=check_inv(data[i][9]);
 var totalsivabs;
 var totalsivad;
@@ -2287,14 +2393,14 @@ var pubs=parseFloat((puiva*factor).toFixed(2));
 tex2=(puiva*factor).toFixed(2)+ ' Bs';
 tex3='C '+pbiva +' $';
 tex4=(pbiva*factor).toFixed(2)+ ' Bs';
-
+if (pos!=-1) {data[i][4]=Pedido_G[pos][1];data[i][5]=Pedido_G[pos][2];}
 if (data[i][4]==0) {var valoru="";} else {var valoru=data[i][4];}
 if (data[i][5]==0) {var valorb="";} else {var valorb=data[i][5];}
 
-//texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td><td>'+ga+ '</td></tr>';
+//texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+','+pos+');"></td><td>'+ga+ '</td></tr>';
 texto+='<table><tr><td>'+'U'+'<input id="entradaPU" disabled type="number" class="btn2" style="color:'+vcor+';" value="'+puiva+'" onchange="cambiaPU('+i+');">'+'<button onclick="hab_cambio_dol();">$</button>'+'</td><td>';
 texto+='<input id="entradaPUB" disabled type="number" class="btn2" style="color:'+vcor+';" value="'+pubs+'" onchange="cambiaPUB('+i+');">'+'<button onclick="hab_cambio_bs();">Bs</button>';
-texto+='</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+');"></td><td>'+ga+ '</td></tr>';
+texto+='</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+','+pos+');"></td><td>'+ga+ '</td></tr>';
 
 texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor1+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td><td></td></tr></table>';
 
@@ -2307,7 +2413,7 @@ totalsivabs=totalsivad*factor;
  texto+='<tr><td>Diferencia IVA</td><td style="text-align:right;">'+(totalsivad*(fm-1)).toFixed(2)+'</td><td>$</td><td style="text-align:right;">'+(totalsivabs*(fm-1)).toFixed(2)+'</td><td>Bs</td></tr>';
  
 texto+='</table>';
-
+texto+='<button >Tot</button> <button onclick="cambiaU('+i+','+pos+');">Ok</button>';
 divintro.innerHTML=texto;
 divintro.style.visibility = "visible";
 //console.log('num '+i);
@@ -2338,7 +2444,7 @@ if ((data[i][7]==cat_comp) && (data[i][8]==1))
  if (data[i][6]=="t1") {factor=t2;}
  if (data[i][6]=="t2") {factor=t2;}
 //console.log(i+" "+data[i][0]);
-texto+='<button class="bot4" onclick="intro('+i+');">'+ data[i][0]+'</button><br>';
+texto+='<button class="bot4" onclick="intro('+i+',-1);">'+ data[i][0]+'</button><br>';
 //console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
 
 }
