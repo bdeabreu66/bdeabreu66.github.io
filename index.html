@@ -60,6 +60,7 @@ font-size:2em;
 }
 #scanner-container {
 position:fixed;
+display:none;
 top:0%;
 left:0%;
 height: 30%;
@@ -348,7 +349,7 @@ var videoE=cameraF.getElementsByTagName("video")[0];
 console.log(videoE);
 if (videoE) {
  videoE.pause();
-cameraF.style.visibility="hidden"
+cameraF.style.display="none"
  
 }
 //Quagga.offProcessed();
@@ -366,7 +367,7 @@ Stop_Scanner();
 scannerRunning = false;
 } else {
 startScanner();
-cameraF.style.visibility="visible"
+cameraF.style.display="block"
 }
 }
 /*
