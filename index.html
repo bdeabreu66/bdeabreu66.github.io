@@ -319,13 +319,13 @@ var j=0;
 var encont=false;
 var lgd=data.length;
 while (j<lgd && !encont ){
-if (data[j][12]==texto) {encont=true;} else {j++;}
+if (data[j][11]==texto) {encont=true;} else {j++;}
 }
 
 if (encont) {Pedido_G.push([data[j][9],1,0]);}
  else {alert("No existente")}
 
-alert("Codigo "+texto);
+
 }
 
 function startScanner() {
@@ -335,7 +335,7 @@ name: "Live",
 type: "LiveStream",
 target: document.querySelector('#scanner-container'),
 constraints: {
-width: 340,
+width: 440,
 height: 280,
 facingMode: "environment"
 }
