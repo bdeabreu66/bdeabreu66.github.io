@@ -319,11 +319,11 @@ var j=0;
 var encont=false;
 var lgd=data.length;
 while (j<lgd && !encont ){
-if (data[j][12]==texto) {encont=true;} else {j++;}
+if (data[j][11]==texto) {encont=true;} else {j++;}
 }
 
 if (encont) {Pedido_G.push([data[j][9],1,0]);}
- else {alert("No existente")}
+ else {alert("No existente "+ j+ " " + data[j][11])}
 
 
 }
