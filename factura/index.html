@@ -305,10 +305,27 @@ Vacios 1.25 L:<input style="width:55%;" type="text" id="vacclir2" value="" ><br>
 <script type="text/javascript" src="FileSaver.js"></script>
 <script type="text/javascript" src="selectFile.js"></script>
 <script type="text/javascript">
+var tiendas=[
+{Nomb:"La Chimenea",arch:"precios_chimenea_nag.txt"},
+{Nomb:"El Chacal",arch:"precios_chacal.txt"},
+{Nomb:"Verduleria",arch:"preciosVerduras.txt"},
+{Nomb:"La Granjita VRB",arch:"precios_granjita_vrb.txt"}
+]
+var tienda_sel=2;
 let scannerRunning = false;
 
 function procesa_codigo(texto){
-alert("Codigo "+texto);
+var j=0;
+var encont=false;
+var lgd=data.length;
+while (j<lgd && !encont ){
+if (data[j][12]==texto) {encont=true;} else {j++;}
+}
+
+if (encont) {Pedido_G.push([data[j][9],1,0]);}
+ else {alert("No existente")}
+
+
 }
 
 function startScanner() {
@@ -337,6 +354,8 @@ scannerRunning = true;
 
 Quagga.onDetected(result => {
 //alert(`Barcode detected: ${result.codeResult.code}`);
+Quagga.offProcessed();
+Quagga.offDetected();
 procesa_codigo(result.codeResult.code);
 scannerRunning = false;
 Stop_Scanner();
@@ -2541,17 +2560,18 @@ if ('serviceWorker' in navigator) {
   });
 }
 let resp= window.prompt("Desea Actualizar Precios?", "Si");
-if (resp=="Si") {Act_data();}
+if (resp=="Si") {Act_data(tienda_sel);}
  else 
 { data=eval(localStorage.getItem('data'));}
 
-function Act_data(){
+function Act_data(indsel){
 var myHeaders = new Headers();
 
 var myInit = { mode: 'cors' };
 
 //var nombrepag="https://monitordolarvenezuela.com/monitor-dolar-hoy";
-var nombrepag="https://bdeabreu66.github.io/factura/preciosVerduras.txt";
+alert(indsel+" "+tiendas[indsel].arch);
+var nombrepag="https://bdeabreu66.github.io/factura/"+tiendas[indsel].arch;
 
 
 fetch(nombrepag,myInit)
