@@ -2210,10 +2210,12 @@ function anula(){
 
 const resp = confirm("Esta seguro de borrar la factura ");
 if (resp) {
- for (var i=0;i<data.length;i++){
+Pedido_G=[];
+/* for (var i=0;i<data.length;i++){
   data[i][4]=0;
   data[i][5]=0;
  }
+*/
 }
 if (document.getElementById("factura").hidden==false) {factura2();}
 }
