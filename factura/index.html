@@ -203,6 +203,18 @@ display:grid;
 grid-template-columns: 20% 60% 20%;
 border-bottom:1px solid black;
 }
+.micro {
+   background-image:url(microphone.svg);
+   width:30px;
+	height:30px;
+	font-size:16px;
+	padding:0px 0px 0px 0px;
+	background-size:30px 30px;
+	background-position:-2px 0px;
+    fill: green;
+
+border-radius: 8px;
+}
 
 .conth1 {
 grid-columns: 1/2;
@@ -311,7 +323,7 @@ var tiendas=[
 {Nomb:"Verduleria",arch:"preciosVerduras.txt"},
 {Nomb:"La Granjita VRB",arch:"precios_granjita_vrb.txt"}
 ]
-var tienda_sel=0;
+var tienda_sel=2;
 let scannerRunning = false;
 
 function procesa_codigo(texto){
@@ -442,31 +454,51 @@ recognition.onresult = function(event) {
 }
 
 
-function obtenerTexto() {
-/*if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
+var textoreconocido;
+function obtenerTexto(indice) {
+if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
 // Obtenemos el objeto de reconocimento de texto de forma compatible a diferentes navegadores
 reconocimientoTexto = new ( window.SpeechRecognition || window.webkitSpeechRecognition ) ()
 reconocimientoTexto.lang='es-Ve'; 
 reconocimientoTexto.onerror = function(event) {
  alert("error "+event.error);
  textoreconocido="";
-//procesar2(indice);
+procesar2(indice);
 }
 reconocimientoTexto.onresult = function(event) {
 // Mostramos el texto obtenido
 textoreconocido=event.results[0][0].transcript;
-alert(textoreconocido);
-//procesar2(indice);
+console.log(textoreconocido);
+procesar2(indice);
 }
 // Empezamos a reconocer texto
 reconocimientoTexto.start();
 } else {
 alert ('El navegador no soporta reconocimiento de voz' );
 }
-*/
- recognition.start();
 }
 
+function procesar2(ind){
+var num=textoreconocido.split(" ");
+var lt=num.length;
+var cant='';
+for (var i=0;i<lt;i++) {
+ cant+=num[i];
+}
+console.log(cant);
+if (ind==1) {divs_datos.getElementsByTagName("input")[1].value=cant;return;}
+if (ind==2) {
+ divs_datos.getElementsByTagName("input")[2].value=cant.substring(0,2);
+ divs_datos.getElementsByTagName("input")[3].value=cant.substring(2);
+return;}
+ if (ind==3) {divs_datos.getElementsByTagName("input")[4].value=cant;return;}
+if (ind==4) {divs_datos.getElementsByTagName("input")[5].value=cant;return;}
+if (ind==5) {
+ document.getElementById("nret").value=cant;
+ set_n_ret();
+return;}
+
+}
 function leer_ventas_diarias(fecha){
 //=localStorage,getItem(fecha)
 
@@ -741,13 +773,23 @@ var div3 = document.getElementById("lista");
 div3.style="display:block ;position: fixed;top :30px; left: 0px; width: 100%;height:90%;background-color: blue;color:white; text-align: left; border: 3px solid #73AD21;";
 var texto='';
 texto+='<div> <table style="text-align:center;margin:auto;">';
-texto+='<tr style="height:30%;"><td><button class="btn2" onclick=importar()>Verduras</button></td></tr>';
-//texto+='<tr><td><button onclick=importar2()>Chimenea</button></td></tr>';
-texto+='<tr style="height:30%;"><td><button class="btn2" onclick=exportar()>El Chacal</button></td></tr>';
-texto+='<tr style="height:30%;"><td><button class="btn2" onclick=quitar_div("lista");>Salir</button></td></tr>';
+texto+='<tr ><td><button class="btn2" onclick="cambia_tienda(0);">'+tiendas[0].Nomb+'</button></td></tr>';
+texto+='<tr ><td><button class="btn2" onclick="cambia_tienda(1);">'+tiendas[1].Nomb+'</button></td></tr>';
+texto+='<tr ><td><button class="btn2" onclick="cambia_tienda(2);">'+tiendas[2].Nomb+'</button></td></tr>';
+texto+='<tr ><td><button class="btn2" onclick=quitar_div("lista");>Salir</button></td></tr>';
 texto+='</table></div>';
 div3.innerHTML=texto;
+}
+function cambia_tienda(num){
+tienda_sel=num;
+recarga_data();
+refrescar();
+}
 
+function recarga_data(){
+try {
+data=eval(localStorage.getItem('data'+tiendas[tienda_sel].Nomb));}
+catch{};
 }
 function elim_FAC(){
 for(var i=0;i<localStorage.length;i++){
@@ -898,8 +940,8 @@ for(var i=0;i<inventario.length;i++){
  //console.log('indice '+ind);
 // if (inventario[i]["UNID"]!=0 || inventario[i]["CAJAS"]!=0 ) {
  if (data[ind][8]!=0) {
-   var nuc=parseInt(data[ind][1]);
-  var tu=parseInt(inventario[i]["CAJAS"])*nuc+parseInt(inventario[i]["UNID"]);
+   var nuc=parseFloat(data[ind][1]);
+  var tu=parseFloat(inventario[i]["CAJAS"])*nuc+parseFloat(inventario[i]["UNID"]);
    var tc=Math.floor(tu/nuc);
   [pu,pb]=precio(ind);
   var ru=tu % nuc;
@@ -908,9 +950,10 @@ for(var i=0;i<inventario.length;i++){
   if (ru>0) {TOTAL_INVENTARIO+=parseFloat(tc*pb*fiva);}
 
   texto+='<tr><td style="width:70%;font-size:1em;">'+data[ind][0]+'</td>';
-  texto+='<td style="width:15%;font-size:1em;" class="pagocli" pos="0" onclick="permuta(this)">'+tc+' C</td>';
-  texto+='<td style="width:15%;font-size:1em;">'+ru+' U</td>';
-  } 
+  texto+='<td style="width:15%;font-size:1em;" class="pagocli" pos="0" onclick="permuta(this)">'+tc.toFixed(2)+' C</td>';
+  texto+='<td style="width:15%;font-size:1em;">'+ru.toFixed(2)+' U</td>';
+ //console.log(data[ind][0]+" "+nuc+" "+tu);
+ } 
  
 }
 texto+='</tr></table></div>';
@@ -944,16 +987,16 @@ if (resp) { resta_inventario();}
 
 function resta_inventario(){
 
-  for (var i=0;i<data.length;i++){
-   if (data[i][4]!=0 || data[i][5]!=0) {
-       ind=inventario.findIndex(element => element.CLAVE==data[i][9])
+  for (var i=0;i<Pedido_G.length;i++){
+   if (Pedido_G[i][1]!=0 || Pedido_G[i][2]!=0) {
+       ind=inventario.findIndex(element => element.CLAVE==Pedido_G[i][0])
        if (ind==-1) {ind=inventario.length;
-         inventario[ind]["CLAVE"]=data[i][9];
+         inventario[ind]["CLAVE"]=data[ind][9];
          inventario[ind]["UNID"]=0;
          inventario[ind]["CAJAS"]=0;
        }
- inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])-data[i][4]).toString();
- inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])-data[i][5]).toString();
+ inventario[ind]["UNID"]=(parseFloat(inventario[ind]["UNID"])-Pedido_G[i][1]).toString();
+ inventario[ind]["CAJAS"]=(parseFloat(inventario[ind]["CAJAS"])-Pedido_G[i][2]).toString();
      }
  }
 guarda_inventario();
@@ -996,14 +1039,15 @@ var suma=0;
 function suma_inventario2(){
   for (var i=0;i<datfac.length;i++){
       if (datfac[i].unidad!=0 || datfac[i].cajas!=0) {
-       ind=inventario.findIndex(element => element.CLAVE==data[i][9])
+ //      ind=inventario.findIndex(element => element.CLAVE==data[i][9])
+ind=inventario.findIndex(element => element.CLAVE==datfac[i].cod)
       if (ind==-1) {ind=inventario.length;
-        inventario[ind]["CLAVE"]=data[i][9];
+        inventario[ind]["CLAVE"]=data[ind][9];
         inventario[ind]["UNID"]=0;
         inventario[ind]["CAJAS"]=0;
  }
-       inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])+parseInt(datfac[i].unidad)).toString();
-       inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])+parseInt(datfac[i].cajas)).toString();
+       inventario[ind]["UNID"]=(parseFloat(inventario[ind]["UNID"])+parseFloat(datfac[i].unidad)).toString();
+       inventario[ind]["CAJAS"]=(parseFloat(inventario[ind]["CAJAS"])+parseFloat(datfac[i].cajas)).toString();
       }
  }
 //console.log(inventario);
@@ -1176,7 +1220,7 @@ for(var i=0;i<lf;i++){
   listasel.unshift(facturas[i].cliente+'_'+facturas[i].fecha+'_'+facturas[i].nro);
  } 
 listasel.sort();
-console.log(listasel);
+//console.log(listasel);
 }
 
 function lee_facturas(){
@@ -1283,6 +1327,7 @@ var findice=facturas.findIndex((e)=>e.cliente==partes[0] && e.fecha==partes[1] &
  }
 }
 cancelar();
+crea_lista_facturas()
 quitarlista();
 selectlista(0);
 }
@@ -1317,15 +1362,21 @@ div3.style="display:none;";
 
 function fact_base(num){
 var nomb=listasel[num];
-anula();
+//Pedido_G=[];
+anula2();
 recupera_factura(nomb);
+//alert("dl "+datfac.length);
+
 for (var i=0;i<datfac.length;i++) {
+
 if ((datfac[i].unidad!=0) || (datfac[i].cajas!=0)) {
- data[i][4]=datfac[i].unidad;
- data[i][5]=datfac[i].cajas;
-//console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
+//alert("dl0 "+datfac[i].cod);
+ Pedido_G[i]=[datfac[i].cod,datfac[i].unidad,datfac[i].cajas];
+//alert("cod "+Pedido_G[i][0]);
+// console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
 }
 } 
+
 factura2();
 cancelar();
 }
@@ -1388,6 +1439,7 @@ cancelar();
 Revierte_deuda();
 }
 var MONTOF='';
+
 function Actualiza_deuda(){
 Lclientes=localStorage.getItem('Clientes_Pita');
 if (Lclientes!=null) { AClientes=JSON.parse(Lclientes);} else {AClientes=[];}
@@ -1441,13 +1493,15 @@ quitarlista();
  
 function guarda_factura(){
 var indice=facturas.length;
+alert(indice);
 var pu,pb;
 var bcv=parseFloat(document.getElementById("t2").value);
 var texto=(bcv).toFixed(4);
-
+nro_factura=parseInt(document.getElementById("nfact").value);
 var nomb='FAC'+'_'+cliente_factura+'_'+fecha_factura+'_'+nro_factura;
+alert(nomb);
 nro_factura++;
-
+var ind;
 localStorage.setItem('FACT_NRO',(nro_factura).toString());
 facturas[indice]=new Object();
 facturas[indice].cliente=cliente_factura;
@@ -1460,20 +1514,22 @@ facturas[indice].total_ret=MONTOF;
 facturas[indice].deuda=DEU_ANT;
 facturas[indice].items=new Array;
 var nro_item=0;
-for (var i=0;i<data.length;i++) {
-if ((data[i][4]!=0) || (data[i][5]!=0)) { 
+//for (var i=0;i<data.length;i++) {
+for (var i=0;i<Pedido_G.length;i++) {
+//if ((data[i][4]!=0) || (data[i][5]!=0)) { 
 //console.log(data[i][4]+' '+data[i][5]);
- [pu,pb]=precio(i);
+ind=clave_ind.get(Pedido_G[i][0]);
+ [pu,pb]=precio(ind);
 //console.log('pu '+pu+'pb '+pb);
  facturas[indice].items[nro_item]=new Object;
- facturas[indice].items[nro_item].cod=data[i][9];
- facturas[indice].items[nro_item].cu=data[i][4];
+ facturas[indice].items[nro_item].cod=Pedido_G[i][0];
+ facturas[indice].items[nro_item].cu=Pedido_G[i][1];
  facturas[indice].items[nro_item].pu=(pu).toFixed(2);
- facturas[indice].items[nro_item].cb=data[i][5];
+ facturas[indice].items[nro_item].cb=Pedido_G[i][2];
  facturas[indice].items[nro_item].pb=(pb).toFixed(2);
  nro_item++;
- texto+='&'+data[i][9]+'#'+data[i][4]+'#'+(pu).toFixed(2)+'#'+data[i][5]+'#'+(pb).toFixed(2);
-}
+ texto+='&'+data[ind][9]+'#'+data[ind][4]+'#'+(pu).toFixed(2)+'#'+data[ind][5]+'#'+(pb).toFixed(2);
+//}
 }
 var tmp=JSON.stringify(facturas);
 localStorage.setItem("FACTURAS",tmp);
@@ -1534,14 +1590,8 @@ return (total_factura).toFixed(2);
 }
 function recupera_factura(id_factura){
 //alert(id_factura);
-for (var i=0;i<data.length;i++) {
-datfac[i]=new Object();
-datfac[i].unidad=0;
-datfac[i].pu=0;
-datfac[i].cajas=0;
-datfac[i].pb=0;
+datfac=[];
 
-}
 var partes=id_factura.split('_');
 fecha_factura=partes[1];
 cliente_factura=partes[0];
@@ -1553,14 +1603,18 @@ if (indf>=0) {
  //alert(indf);
  bcv_factura=facturas[indf].bcv;
 try {
-
+//alert("items "+facturas[indf].items.length);
  for (var i=0;i<facturas[indf].items.length;i++) {
    var ind=clave_ind.get(facturas[indf].items[i].cod);
+//alert("ind "+ind);
 if (ind!=undefined){
-   datfac[ind].unidad=parseInt(facturas[indf].items[i].cu);
-   datfac[ind].pu=parseFloat(facturas[indf].items[i].pu);
-   datfac[ind].cajas=parseInt(facturas[indf].items[i].cb);
-   datfac[ind].pb=parseFloat(facturas[indf].items[i].pb);
+//  alert("i " +i);
+datfac[i]=new Object();
+   datfac[i].cod=facturas[indf].items[i].cod;
+   datfac[i].unidad=parseFloat(facturas[indf].items[i].cu);
+   datfac[i].pu=parseFloat(facturas[indf].items[i].pu);
+   datfac[i].cajas=parseFloat(facturas[indf].items[i].cb);
+   datfac[i].pb=parseFloat(facturas[indf].items[i].pb);
 }
  }
 
@@ -1602,7 +1656,7 @@ function salir(){
 guarda_pedido();
 t2=document.getElementById("t2").value;
 localStorage.setItem('p2',t2);
-localStorage.setItem('data',JSON.stringify(data));
+localStorage.setItem('data'+tiendas[tienda_sel].Nomb,JSON.stringify(data));
 }
 
 var lcat=[];
@@ -1751,7 +1805,7 @@ data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,120,0,0,0,"t1","&Cerveceria&Vaci
 ];
 
 try {
-data=eval(localStorage.getItem('data'));
+data=eval(localStorage.getItem('data'+tiendas[tienda_sel].Nomb));
 } catch (error) {}
 set_cat();
 
@@ -1800,6 +1854,7 @@ var totalbsiva=0;
 var texto='Fecha: '+fecha_factura+'<br>';
 texto+=dist+'<br>';
 texto+='Cliente: '+cliente_factura+'<br>';
+//alert(bcv_factura);
 try{
 var bcv=parseFloat(bcv_factura);
 }catch{};
@@ -1807,30 +1862,33 @@ var BIMD=0;
 var BIMB=0;
 var factor=bcv;
 Gdolar=0;
-texto+='$ BCV: '+ (bcv).toFixed(4) +'<br>';
+try{texto+='$ BCV: '+ (bcv).toFixed(4) +'<br>';}catch{};
 texto+='<center>Factura '+numero_factura+'</center>';
 texto+='<center><span id="contad" ></span></center>';
 var totald=0;
 var totalb=0;
+var ind;
 var indc=AClientes.findIndex(x=>x.nombre==cliente_factura);
 if (indc>=0) {var cesp=AClientes[indc].esp} else {var cesp=false}
 Ftexto='Fecha: '+fecha_factura+'\n';
 Ftexto+=dist+'\n';
 Ftexto+='Cliente: '+cliente_factura+'\n';
-Ftexto+='$ BCV: '+  (bcv).toFixed(4) +'\n';
+try {Ftexto+='$ BCV: '+  (bcv).toFixed(4) +'\n';}catch{};
 Ftexto+="FACTURA "+numero_factura+"\n"
 var contador=0;
 var colorb='black';
 for (var i=0;i<datfac.length;i++){
  if (datfac[i].unidad!=0 || datfac[i].cajas!=0) {
+ ind=clave_ind.get(datfac[i].cod);
  contador++;
  //console.log(i+ " "+contador);
  factor=bcv;
- if (data[i][3]==1) {fm=1.16;colorb='black';} else {fm=1;colorb='blue';}
+
+ if (data[ind][3]==1) {fm=1.16;colorb='black';} else {fm=1;colorb='blue';}
 
  pu=datfac[i].pu;
  pb=datfac[i].pb;
-[pcu,pcb]=precio_costo(i);
+[pcu,pcb]=precio_costo(ind);
  var Tdolar=+((datfac[i].unidad*pu + datfac[i].cajas*pb));
  Gdolar+=fm*((datfac[i].unidad*(pu-(ITF*1.04+0.12)*pcu/fm) + datfac[i].cajas*(pb-(ITF*1.04+0.12)*pcb/fm)));
  Tbs=Tdolar*factor;
@@ -1850,9 +1908,9 @@ if (Tdolar==Tdolar) {
    } 
          else 
          {totald+=parseFloat(v4); totaldsiva+=parseFloat(v3);}
-      texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" >'+ datfac[i].unidad +' U '+ data[i][0]+'</td></tr>';
+      texto+='<tr><td colspan="4" style=" font-size:1.5em;background-color:'+colorb+';color:white;" >'+ datfac[i].unidad +' U '+ data[ind][0]+'</td></tr>';
          texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+datfac[i].unidad+'</td><td style="width:30%;">'+v2+mone+'</td><td style="width:30%;">'+v3+mone+'</td><td style="width:30%;">'+ v4 +mone+'&nbsp'+'</tr>';
-         Ftexto+=datfac[i].unidad +' U '+ data[i][0]+'\n';
+         Ftexto+=datfac[i].unidad +' U '+ data[ind][0]+'\n';
          Ftexto+=datfac[i].unidad+' U     '+v2+mone+' S/IVA: '+v3+mone+"   C/IVA: "+ v4 + mone +'    \n'
     }
    if (datfac[i].cajas!=0) {
@@ -1863,9 +1921,9 @@ if (Tdolar==Tdolar) {
           if (fm!=1) {BIMB+=parseFloat(v3);}}
    else 
          {totald+=parseFloat(v4); totaldsiva+=parseFloat(v3);}
-      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" >'+ datfac[i].cajas +' C  ' + data[i][0]+' </td></tr>';
+      texto+='<tr><td colspan="4" style="font-size:1.5em;background-color:'+colorb+';color:white;" >'+ datfac[i].cajas +' C  ' + data[ind][0]+' </td></tr>';
       texto+='<tr style="text-align:right;font-size:0.5em;"><td style="width:10%;">'+datfac[i].cajas+'</td><td style="width:30%;">'+v2+mone+'</td><td style="width:30%;">'+v3+mone+'</td><td style="width:30%;">'+ v4 +mone+'&nbsp'+'</tr>';
-      Ftexto+=datfac[i].cajas +' C '+ data[i][0]+'\n';;
+      Ftexto+=datfac[i].cajas +' C '+ data[ind][0]+'\n';;
       Ftexto+=datfac[i].cajas +' C     '+v2+mone+' S/IVA: '+v3+"   C/IVA: "+v4 + mone+'    \n'
     }
 }
@@ -2001,10 +2059,9 @@ var contador=0;
 var colorb='black';
 Tdolar=0;
 Gdolar=0;
-//for (var i=0;i<data.length;i++){
+//alert("LPG "+Pedido_G.length);
 for (var i=0;i<Pedido_G.length;i++){
   
-//  if (data[i][4]!=0 || data[i][5]!=0) {
   if (Pedido_G[i][1]!=0 || Pedido_G[i][2]!=0) {
     ind=clave_ind.get(Pedido_G[i][0]);
 console.log('ind '+ind+' '+Pedido_G[i][0]+' '+Pedido_G[i][1]);
@@ -2217,6 +2274,13 @@ Pedido_G=[];
  }
 */
 }
+if (document.getElementById("factura").hidden==false) {factura2();}
+}
+
+function anula2(){
+const resp = confirm("Esta seguro de establecer la factura ");
+if (resp) {Pedido_G=[];}
+
 if (document.getElementById("factura").hidden==false) {factura2();}
 }
 
@@ -2461,19 +2525,19 @@ if (data[i][5]==0) {var valorb="";} else {var valorb=data[i][5];}
 //texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+','+pos+');"></td><td>'+ga+ '</td></tr>';
 texto+='<table><tr><td>'+'U'+'<input id="entradaPU" disabled type="number" class="btn2" style="color:'+vcor+';" value="'+puiva+'" onchange="cambiaPU('+i+');">'+'<button onclick="hab_cambio_dol();">$</button>'+'</td><td>';
 texto+='<input id="entradaPUB" disabled type="number" class="btn2" style="color:'+vcor+';" value="'+pubs+'" onchange="cambiaPUB('+i+');">'+'<button onclick="hab_cambio_bs();">Bs</button>';
-texto+='</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+','+pos+');"></td><td>'+ga+ '</td></tr>';
-
+texto+='</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+','+pos+');"></td><td><button onclick="cambiaU('+i+','+pos+');">Ok</button></td></tr>';
+texto+='<button class="micro" onclick="obtenerTexto(2);">&nbsp;</button>';
 texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor1+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td><td></td></tr></table>';
 
 
 totalsivad=((pu)*data[i][4]+(pb)*data[i][5]);
 totalsivabs=totalsivad*factor;
 
- texto+='<table width="100%"><tr><td>Total S/IVA</td><td style="text-align:right;">'+(totalsivad).toFixed(2)+'</td><td style="color:blue:">$</td><td style="text-align:right;">'+(totalsivabs).toFixed(2)+'</td><td>Bs</td></tr>';
- texto+='<tr><td>Total C/IVA</td><td style="text-align:right;">'+(totalsivad*fm).toFixed(2)+'</td><td>$</td><td style="text-align:right;">'+(totalsivabs*fm).toFixed(2)+'</td><td>Bs</td></tr>';
- texto+='<tr><td>Diferencia IVA</td><td style="text-align:right;">'+(totalsivad*(fm-1)).toFixed(2)+'</td><td>$</td><td style="text-align:right;">'+(totalsivabs*(fm-1)).toFixed(2)+'</td><td>Bs</td></tr>';
+ //texto+='<table width="100%"><tr><td>Total S/IVA</td><td style="text-align:right;">'+(totalsivad).toFixed(2)+'</td><td style="color:blue:">$</td><td style="text-align:right;">'+(totalsivabs).toFixed(2)+'</td><td>Bs</td></tr>';
+// texto+='<tr><td>Total C/IVA</td><td style="text-align:right;">'+(totalsivad*fm).toFixed(2)+'</td><td>$</td><td style="text-align:right;">'+(totalsivabs*fm).toFixed(2)+'</td><td>Bs</td></tr>';
+ //texto+='<tr><td>Diferencia IVA</td><td style="text-align:right;">'+(totalsivad*(fm-1)).toFixed(2)+'</td><td>$</td><td style="text-align:right;">'+(totalsivabs*(fm-1)).toFixed(2)+'</td><td>Bs</td></tr>';
  
-texto+='</table>';
+//texto+='</table>';
 texto+='<button >Tot</button> <button onclick="cambiaU('+i+','+pos+');">Ok</button>';
 divintro.innerHTML=texto;
 divintro.style.visibility = "visible";
@@ -2564,7 +2628,7 @@ if ('serviceWorker' in navigator) {
 let resp= window.prompt("Desea Actualizar Precios?", "Si");
 if (resp=="Si") {Act_data(tienda_sel);}
  else 
-{ data=eval(localStorage.getItem('data'));}
+{ data=eval(localStorage.getItem('data'+tiendas[tienda_sel].Nomb));}
 
 function Act_data(indsel){
 var myHeaders = new Headers();
@@ -2590,7 +2654,7 @@ function ajaxPositive(response) {
     }
  function showResult(txt) {
         //console.log('muestro respuesta: ', txt);
-        localStorage.setItem('data',txt);
+        localStorage.setItem('data'+tiendas[tienda_sel].Nomb,txt);
         data=eval(txt);
         set_clave_indice();
         set_cat();
