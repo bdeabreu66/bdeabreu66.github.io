@@ -1,7 +1,7 @@
 {
-  "name": "Facturacion Polar",
+  "name": "Facturacion",
   "description": "Permite facturar",
-  "short_name": "Facturas Polar",
+  "short_name": "Facturas",
   "icons": [{
     "src": "icondef.png",
     "sizes": "256x256"
