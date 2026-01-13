@@ -2035,15 +2035,17 @@ var totaldsiva=0;
 var totalbsiva=0;
 var BIMD=0;
 var BIMB=0;
-alert("1");
+alert(" Paso numero 1");
+try {
 var bcv=parseFloat(document.getElementById("t2").value);
 var factor=parseFloat(bcv);
 var texto='<table width="100%" ><tr><td>Fecha: '+fecha_actual()+'</td><td>  $ BCV: '+ (bcv).toFixed(4) +'</td></tr></table>';
 texto+=dist+'<br>';
 texto+='Cliente: '+cliente+'<br>';
 texto+='Direcci&oacute;n: '+Ocliente.dir+'<br>';
-texto+='Rif: '+Ocliente.rif;
-alert("2");
+texto+='Rif: '+Ocliente.rif;} catch {alert("Error")}
+
+alert(" Paso numero 2");
 if (Ocliente.esp) {texto+=' AR';}
 texto+='<br>'
 //texto+='$ Paralelo: '+  impri(document.getElementById("t1").value) +'<br>';
