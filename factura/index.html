@@ -486,7 +486,8 @@ for (var i=0;i<lt;i++) {
  cant+=num[i];
 }
 console.log(cant);
-if (ind==1) {divs_datos.getElementsByTagName("input")[1].value=cant;return;}
+if (ind==1) {document.getElementsById("entradaU").value=cant;return;}
+/*
 if (ind==2) {
  divs_datos.getElementsByTagName("input")[2].value=cant.substring(0,2);
  divs_datos.getElementsByTagName("input")[3].value=cant.substring(2);
@@ -497,7 +498,7 @@ if (ind==5) {
  document.getElementById("nret").value=cant;
  set_n_ret();
 return;}
-
+*/
 }
 function leer_ventas_diarias(fecha){
 //=localStorage,getItem(fecha)
@@ -2525,8 +2526,8 @@ if (data[i][5]==0) {var valorb="";} else {var valorb=data[i][5];}
 //texto+='<table><tr><td>'+tex1+'</td><td>'+tex2+'</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+','+pos+');"></td><td>'+ga+ '</td></tr>';
 texto+='<table><tr><td>'+'U'+'<input id="entradaPU" disabled type="number" class="btn2" style="color:'+vcor+';" value="'+puiva+'" onchange="cambiaPU('+i+');">'+'<button onclick="hab_cambio_dol();">$</button>'+'</td><td>';
 texto+='<input id="entradaPUB" disabled type="number" class="btn2" style="color:'+vcor+';" value="'+pubs+'" onchange="cambiaPUB('+i+');">'+'<button onclick="hab_cambio_bs();">Bs</button>';
-texto+='</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+','+pos+');"></td><td><button onclick="cambiaU('+i+','+pos+');">Ok</button></td></tr>';
-texto+='<button class="micro" onclick="obtenerTexto(2);">&nbsp;</button>';
+texto+='</td><td><input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+valoru+'" onchange="cambiaU('+i+','+pos+');"></td><td><button onclick="cambiaU('+i+','+pos+');">Ok</button>';
+texto+='&nbsp;&nbsp;&nbsp;&nbsp;<button class="micro" onclick="obtenerTexto(0);">&nbsp;</button> </td></tr>';
 texto+='<tr><td>'+tex3+'</td><td>'+tex4+'</td><td><input id="entradaB" type="number" class="btn2" style="color:'+vcor1+';" value="'+valorb+'" onchange="cambiaB('+i+');"></td><td></td></tr></table>';
 
 
