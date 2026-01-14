@@ -4,6 +4,7 @@
       ["Apio",1,190,0,0,0,"t1","&Vegetales&Tuberculos&",1,'VT003',120,"",0],
       ["Ocumo",1,190,0,0,0,"t1","&Vegetales&Tuberculos&",1,'VT004',120,"",0],
       ["Name",1,190,0,0,0,"t1","&Vegetales&Tuberculos&",1,'VT005',120,"",0],
+      ["Nabo",1,190,0,0,0,"t1","&Vegetales&Tuberculos&",1,'VT006',120,"",0],
       ["Tomate",1,150,0,0,0,"t1","&Vegetales&Ensalada&",1,'VE001',120,"",0],
       ["Cebolla",1,380,0,0,0,"t1","&Vegetales&Ensalada&",1,'VE002',120,"",0],
       ["Pepino",1,200,0,0,0,"t1","&Vegetales&Ensalada&",1,'VE003',120,"",0],
