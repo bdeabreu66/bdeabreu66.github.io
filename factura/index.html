@@ -1759,7 +1759,7 @@ refresca();
 //console.log('paso');
 }
 
-function  set_clave_indice(){
+function set_clave_indice(){
 clave_ind=new Map();
 for (var i=0;i<data.length;i++) {
 //console.log(i);
@@ -2069,7 +2069,7 @@ for (var i=0;i<Pedido_G.length;i++){
   
   if (Pedido_G[i][1]!=0 || Pedido_G[i][2]!=0) {
     ind=clave_ind.get(Pedido_G[i][0]);
-alert('ind '+ind+' '+Pedido_G[i][0]+' '+Pedido_G[i][1]);
+//alert('ind '+ind+' '+Pedido_G[i][0]+' '+Pedido_G[i][1]);
      contador++;
     factor=parseFloat(document.getElementById("t2").value);
     if (data[ind][3]==1) {fm=1.16;colorb='black'} else {fm=1;colorb='blue'}
