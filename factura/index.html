@@ -2035,7 +2035,7 @@ var totaldsiva=0;
 var totalbsiva=0;
 var BIMD=0;
 var BIMB=0;
-alert(" Paso numero 1");
+//alert(" Paso numero 1");
 try {
 var bcv=parseFloat(document.getElementById("t2").value);
 var factor=parseFloat(bcv);
@@ -2045,7 +2045,7 @@ texto+='Cliente: '+cliente+'<br>';
 texto+='Direcci&oacute;n: '+Ocliente.dir+'<br>';
 texto+='Rif: '+Ocliente.rif;} catch {alert("Error")}
 
-alert(" Paso numero 2");
+//alert(" Paso numero 2");
 if (Ocliente.esp) {texto+=' AR';}
 try {
 texto+='<br>'
@@ -2063,8 +2063,8 @@ var contador=0;
 var colorb='black';
 Tdolar=0;
 Gdolar=0;} catch {alert("error")}
-//alert("LPG "+Pedido_G.length);
-alert(" Paso numero 3");
+alert("LPG "+Pedido_G.length);
+//alert(" Paso numero 3");
 for (var i=0;i<Pedido_G.length;i++){
   
   if (Pedido_G[i][1]!=0 || Pedido_G[i][2]!=0) {
