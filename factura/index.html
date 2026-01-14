@@ -1554,19 +1554,19 @@ data[i][5]=0;
 texto=localStorage.getItem(archivo);
 //alert(texto);
 var items=[];
+Pedido_G=[];
 if (texto!='' && texto!=null) {
-var ped=texto.split('&');
-//alert('pedido '+ped+' '+ped.length);
-for (var i=0;i<ped.length;i++) {
-  items=ped[i].split('#');
-//alert('items '+i+' '+items);
-  Pedido_G[i]=[items[0],parseFloat(items[1]),parseFloat(items[2])];
-
-// alert('P '+Pedido_G[i][0]);
-  var ind=clave_ind.get(items[0]);
-  data[ind][4]+=parseFloat(items[1]);
-  data[ind][5]+=parseFloat(items[2]);
-}
+  var ped=texto.split('&');
+   //alert('pedido '+ped+' '+ped.length);
+  for (var i=0;i<ped.length;i++) {
+    items=ped[i].split('#');
+    //alert('items '+i+' '+items);
+    Pedido_G[i]=[items[0],parseFloat(items[1]),parseFloat(items[2])];
+    // alert('P '+Pedido_G[i][0]);
+    var ind=clave_ind.get(items[0]);
+    data[ind][4]+=parseFloat(items[1]);
+    data[ind][5]+=parseFloat(items[2]);
+   }
 }
 
 }
@@ -2063,7 +2063,7 @@ var contador=0;
 var colorb='black';
 Tdolar=0;
 Gdolar=0;} catch {alert("error")}
-alert("LPG "+Pedido_G.length);
+alert("       LPG "+Pedido_G.length);
 //alert(" Paso numero 3");
 for (var i=0;i<Pedido_G.length;i++){
   
