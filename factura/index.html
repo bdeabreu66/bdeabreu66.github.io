@@ -1821,7 +1821,7 @@ recupera_pedido("Pedido");
 function actT(ind,pos){
 var valor=prompt("Introduzca cantidad", "");
 if (valor!=null) {data[ind][5]=parseInt(valor);}
-intro(ind,pos);
+cintro(ind,pos);
 
 //console.log(ind);
 }
@@ -2456,7 +2456,7 @@ if (pos==-1 ) {Pedido_G.push([data[num][9],data[num][4],data[num][5]]);}
 }
 if (data[num][4]==0 && pos!=-1) {Pedido_G.splice(pos,1)}
 console.log(Pedido_G);
-intro(num,-1);
+if (pos==-1 ) {intro(num,-1);} else {factura2()}
 salir();
 }
 function hab_cambio_dol(){
