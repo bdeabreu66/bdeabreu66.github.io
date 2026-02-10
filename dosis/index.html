@@ -5,7 +5,7 @@
 <link rel="manifest" href="manifest.json">
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0,  user-scalable=no" />
 <meta name="mobile-web-app-capable" content="yes">
-<META http-equiv="Content-Type" content="text/html;" charset=utf-8"/>
+<META http-equiv="Content-Type" content="text/html;" charset="UTF-8"/>
 </HEAD>
 <STYLE>
 body {text-align: center;
@@ -28,6 +28,9 @@ text-align: left;
 font-size: 1rem; 
 }
 
+.test_recipe{
+font-size: 1rem;
+}
 .historiaitem {
     color: green;  
     background-color: blue;
@@ -1485,11 +1488,11 @@ function muestrarecipes(){
 muestraactivo="1";
 presentadiv4(0);
 var divrecipe = document.getElementById("recipes");
-divrecipe.style="position: fixed;top :100px; overflow-y: scroll; height: 70%;left: 10px; width:80% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;";
+divrecipe.style="position: fixed;top :0px; overflow-y: scroll; height: 70%;left: 0px; width:99% ;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;resize:vertical;";
 
 var textoT,texto;
 textoT="";
-textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
+textoT+='<div style="position: fixed;background-color: gray;width:99%;">';
 //textoT+=' <button title="Agrega recipe" id="carga_recipe" onclick="carga_archivo();">'+iconoplus +' </button>';
 textoT+=' <button title="Agrega recipe" id="carga_recipe" onclick="Activalector_recipes();">'+iconoplus +' </button>';
 textoT+=' <button title="Guarda recipe" onclick="guarda_archivo();">'+ iconosave+' </button> ';
@@ -1503,14 +1506,14 @@ textoT+=' <br> <br><center><span id="titrec"> RECIPES </span></center><br>';
 for(var i=0;i<recipes.length;i++){
          var textaux = recipes[i];
              texto=textaux.replace(/\r?\n/g,'<br />');
-         textoT+='<p style="font-size: 0.2em;">';
+         textoT+='<p>';
    if (i!=(recipes.length-1))  {textoT+= '<button title="Bajar" onclick="bajaritem('+i+')"    >'+iconodown+'</button>';}
    if (i!=0) {textoT+= '<button title="Subir" onclick="subiritem('+i+')" >'+iconoup+'</button>';}
 
          textoT+= '<button title="Eliminar" onclick="clickp5('+i+')" >'+iconoborrador+'</button>&nbsp';
          textoT+= '<button title="Editar" onclick="editarecipe('+i+')" >'+iconoeditor+'</button>';
-         textoT+= '<button title="Rehacer" onclick="quitarrecipe();rehacerrecipe('+i+')" >'+iconoredo+'</button><br>';
-         textoT+= '<TT >'+texto+' </TT></p>';
+         textoT+= '<button title="Rehacer" onclick="quitarrecipe();rehacerrecipe('+i+')" >'+iconoredo+'</button></p>';
+         textoT+= ' <p class="test_recipe">'+'<TT >'+texto+' </TT></p>';
 }
 //alert(textoT);
 
@@ -3677,10 +3680,12 @@ divselect.style="position: fixed;top :300px; overflow-y: scroll; height: 40%;lef
 
 
 function valerta(texto){
-var textoT;
+var textoT="";
 var div5 = document.getElementById("pag5");
-div5.style="position: fixed;top :100px; left: 10px; overflow-y: auto; width: 90% ; height: 50%; background-color: gray;color:white; border: 3px solid #73AD21;";
-textoT='<p style="text-indent: 10px; text-align: justify; border: none;">'+texto+'</p><br> <INPUT TYPE="button" value="OK" onclick="return quitar();" style="font-size:100%">';
+div5.style="position: fixed;top :0px; left: 10px; overflow-y: auto; width: 90% ; height: 50%; background-color: gray;color:white; border: 3px solid #73AD21;";
+textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:90%;">';
+textoT+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
+textoT+='<p style="text-indent: 10px; text-align: justify; border: none;">'+texto+'</p><br> ';
 div5.innerHTML=textoT;
 }
 
@@ -4753,7 +4758,7 @@ if ('serviceWorker' in navigator) {
 <div id="pag2" style="display:none;overflow-y: scroll;"> </div>
 <div id="pag3" style="display:none; "> </div>
 <div id="pag4" style="display:none;"> </div>
-<div id="pag5" style="display:none;"onmouseleave="quitar();"></div>
+<div id="pag5" style="display:none;"></div>
 <div id="recipes" style="display:none; " > </div>
 <div id="divedit" style="display:none;" class="divinput"> </div>
 <div id="plantilla" style="display:none;" class="divinput" > </div>
