@@ -32,22 +32,22 @@ font-size: 1rem;
 font-size: 1rem;
 }
 .historiaitem {
-    color: green;  
-    background-color: blue;
+Â Â Â  color: green;  
+Â Â Â  background-color: blue;
 }
 .historiaitemp {
     border: 1px solid #999999;
-    color: green;  
-    background-color: blue;
+Â Â Â  color: green;  
+Â Â Â  background-color: blue;
 }
 
 
 .inputtext {
-    background-color: yellow;
-    color: blue;  
+Â Â Â  background-color: yellow;
+Â Â Â  color: blue;  
    border-bottom: 2px solid black;
 /*    border: 6px solid red;  */
-    border-radius: 16px;
+Â    border-radius: 16px;
 
 }
 
@@ -772,7 +772,7 @@ return peso;
 function refrescadatospac(){
 var inddatos=document.getElementById('datosg');
 var textoT='';
-textoT+='Nombre: '.fontcolor("blue")+ nombpac+' Edad: '.fontcolor("blue")+edadglobal+' años ';
+textoT+='Nombre: '.fontcolor("blue")+ nombpac+' Edad: '.fontcolor("blue")+edadglobal+' aÃ±os ';
 textoT+='Peso: '.fontcolor("blue")+pesoglobal+' '+unidemasa+' ';
 textoT+='Altura: '.fontcolor("blue")+alturaglobal+' '+unidelong+' ';
 textoT+='IMC: '.fontcolor("blue")+IMC(pesoglobal,alturaglobal)+' '+unideimc;
@@ -837,7 +837,7 @@ var divdatos = document.getElementById("datos");
 divdatos.style="position: fixed;top :100px; left: 10px; width:98% ; text-align: left;";
 textoT+='<center> Datos del paciente </center>';
 textoT+='<br> Nombre: <INPUT id="nombreu" style="background-color: lightgray;color: black;" class="inputtext" TYPE="text" value="'+ nombpac+ '" >';
-textoT+='<br> Edad: <INPUT id="edad2" min="0" max="120"TYPE="number" onkeypress="return event.charCode !=45" value="'+ edadglobal.toString() +'" > años'
+textoT+='<br> Edad: <INPUT id="edad2" min="0" max="120"TYPE="number" onkeypress="return event.charCode !=45" value="'+ edadglobal.toString() +'" > aÃ±os'
 textoT+='<br> Peso: <INPUT id="peso2" min="3" max="300" TYPE="number" onkeypress="return event.charCode !=45" value="'+ pesoglobal.toString()+'" oninput="actimcp();">'+ unidemasa;
 textoT+='<br> Altura: <INPUT id="altura2" min="50" max="250" TYPE="number"  onkeypress="return event.charCode !=45" value="'+ alturaglobal.toString()+'" oninput="actimc();">'+unidelong;
 textoT+='<br>';
@@ -1039,7 +1039,7 @@ textoT+='Imagen central:<br><canvas id="imgcentro" onclick=" numerodeimagen=2 ;A
 textoT+='Pie:<br><canvas id="imgpie" onclick=" numerodeimagen=1 ;Activalector_imagenes();" style="width: 50%; position: relative; top: 0px; left: 0px; border:0 px SOLID #000000;  WIDTH: 80%; HEIGHT: 100px ; background-color: white;" ></canvas>';
 textoT+='</div>';
 textoT+='<br>Encabezado y pie solo en primera pagina <input type="checkbox" id="ppag" onchange="asignappag();"><br>';
-textoT+='<table border="4" style=" color: white;width=100%;"><tr><td> Fuente </td> <td> Tamaño </td><td> Tipo </td></tr><tr><td>';
+textoT+='<table border="4" style=" color: white;width=100%;"><tr><td> Fuente </td> <td> TamaÃ±o </td><td> Tipo </td></tr><tr><td>';
 textoT+='<select id="fuente" onchange="asignafuente();muestraejemplo();">';
 textoT+='<option selected > Times</i> </option><option> Helvetica </option><option> Courier </option></select>';
 textoT+='</td>  <td> ';
@@ -1198,13 +1198,13 @@ Signos[0].prop=new Array();
 Signos[0].prop[0]=new properties("Temperatura","R2.1-35-41","",37,"prop0");// NR : Numero real
 Signos[0].prop[1]=new properties("Predominio","E",["Matutino","Vespertino","Nocturno"],2,"prop1");
 Signos[0].prop[2]=new properties("Comienzo","E",["Brusco","Insidioso"],1,"prop2");
-Signos[0].prop[3]=new properties("Patrón","E",["No medido","irregular","Continua","Remitente","Intermitente","Séptica","Recurrente"],3,"prop3");
+Signos[0].prop[3]=new properties("PatrÃ³n","E",["No medido","irregular","Continua","Remitente","Intermitente","SÃ©ptica","Recurrente"],3,"prop3");
 
 Signos[1]=new signosintoma("Diarrea","General")
 Signos[1].prop=new Array();
 Signos[1].prop[0]=new properties("Comienzo","E",["Brusco","Insidioso"],0,"prop0");
-Signos[1].prop[1]=new properties("Tiempo de evolución","E",["Aguda","Crónica"],0,"prop1");
-Signos[1].prop[2]=new properties("Consistencia","E",["Blanda","Pastosa","Líquida"],0,"prop2");
+Signos[1].prop[1]=new properties("Tiempo de evoluciÃ³n","E",["Aguda","CrÃ³nica"],0,"prop1");
+Signos[1].prop[2]=new properties("Consistencia","E",["Blanda","Pastosa","LÃ­quida"],0,"prop2");
 Signos[1].prop[3]=new properties("Sanguinolentas","E",["No","Si"],0,"prop3");
 Signos[1].prop[4]=new properties("Presencia de Moco","E",["No","Si"],0,"prop4");
 Signos[1].prop[5]=new properties("Presencia de Pus","E",["No","Si"],0,"prop5");
@@ -1212,7 +1212,7 @@ Signos[1].prop[5]=new properties("Presencia de Pus","E",["No","Si"],0,"prop5");
 Signos[2]=new signosintoma("Tos","Cardio-respiratorio")
 Signos[2].prop=new Array();
 Signos[2].prop[0]=new properties("Comienzo","E",["Brusco","Insidioso"],0,"prop0");
-Signos[2].prop[1]=new properties("Tiempo de evolución","E",["Aguda","Crónica"],0,"prop1");
+Signos[2].prop[1]=new properties("Tiempo de evoluciÃ³n","E",["Aguda","CrÃ³nica"],0,"prop1");
 Signos[2].prop[2]=new properties("Tipo","E",["Quintosa","Coqueluchoide","Ronca","Emetizante","Bitonal"],0,"prop2");
 Signos[2].prop[3]=new properties("Sequedad","E",["Seca","Humeda no productiva","Humeda productiva"],0,"prop3");
 
@@ -1220,7 +1220,7 @@ Signos[2].prop[3]=new properties("Sequedad","E",["Seca","Humeda no productiva","
 Signos[3]=new signosintoma("Expectoracion","Cardio-respiratorio")
 Signos[3].prop=new Array();
 Signos[3].prop[0]=new properties("Comienzo","E",["Brusco","Insidioso"],0,"prop0");
-Signos[3].prop[1]=new properties("Tiempo de evolución","E",["Aguda","Crónica"],0,"prop1");
+Signos[3].prop[1]=new properties("Tiempo de evoluciÃ³n","E",["Aguda","CrÃ³nica"],0,"prop1");
 Signos[3].prop[2]=new properties("Cantidad","E",["Abundante","Media","Escasa"],0,"prop2");
 Signos[3].prop[3]=new properties("Color","E",["Blanquecino","Verdoso","Rojizo"],0,"prop3");
 Signos[3].prop[4]=new properties("Consistencia","E",["Blanquecino","Verdoso","Rojizo"],0,"prop3");
@@ -1293,7 +1293,7 @@ function iniciaHistoriaPlantilla(){
  historia.antec.medicos=new Object();
  historia.antec.medicos.alergia="";
  historia.antec.medicos.enfermedades=new Array();
- historia.antec.medicos.enfermedades[0]=new Antecedente("Hipertensión arterial","07/2000","Sin Tratamiento");
+ historia.antec.medicos.enfermedades[0]=new Antecedente("HipertensiÃ³n arterial","07/2000","Sin Tratamiento");
  historia.exfis=new Object();
  historia.exfis.cabeza=new Object();
  historia.exfis.cabeza.tamcab=1;
@@ -1339,10 +1339,10 @@ labs.lip.tipo[4]=new Exam("Trigliceridos",false);
 labs.ren=new Object();
 labs.ren.name="Perfil Renal";
 labs.ren.tipo=new Array();
-labs.ren.tipo[0]=new Exam("Creatinina sérica",false);
+labs.ren.tipo[0]=new Exam("Creatinina sÃ©rica",false);
 labs.ren.tipo[1]=new Exam("Urea",false);
 labs.ren.tipo[2]=new Exam("BUN",false);
-labs.ren.tipo[3]=new Exam("Acido úrico",false);
+labs.ren.tipo[3]=new Exam("Acido Ãºrico",false);
 labs.ren.tipo[4]=new Exam("Cistatina",false);
 labs.orina=new Object();
 labs.orina.name="Orina";
@@ -1563,7 +1563,7 @@ textoT+=' <br> <br><center><span id="titrechistoria"> Antecedentes </span></cent
 posantec=["Hipertension Arterial","Diabetes Mellitus"];
 textoT+=makeRadioInput("pantec",posantec);
 textoT+='<br>';
-textoT+= '  Fecha de Diagnóstico <input id="fechaantec" type="date">';
+textoT+= '  Fecha de DiagnÃ³stico <input id="fechaantec" type="date">';
 textoT+='<br>';
 textoT+='Tratamiento: <input type="text" id="tratantec" value="Sin tratamiento">';
 textoT+='</div>';
@@ -1615,14 +1615,14 @@ textoT+=' <button title="Salir" onclick="quitarhistoria()" >'+ iconocerrar+'</bu
 textoT+=' <br> <br><center><span id="titrechistoria"> HISTORIA MEDICA </span></center><br>';
 
 var id1="fp";var id2="idfp";
-textoT+=' <span class="historiaitemp" >Ficha patronímica <button id="idfp" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button></span><br>';
+textoT+=' <span class="historiaitemp" >Ficha patronÃ­mica <button id="idfp" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button></span><br>';
 textoT+='<div class="divh" style="display:none;" id="fp">';
 //textoT+= '<label for id="nbpac"> Nombres y apellidos </label>';
 textoT+= 'Nombres y apellidos ';
 textoT+=makeKeyInput("nbpac","","T15","");
 // <input id="nbpac" type="text" >';
-//textoT+= '<label for id="cipac"> Cédula </label>';
-textoT+= ' Cédula <input id="cipac" type="number" style=" width: 6em;"><br>';
+//textoT+= '<label for id="cipac"> CÃ©dula </label>';
+textoT+= ' CÃ©dula <input id="cipac" type="number" style=" width: 6em;"><br>';
 //textoT+= '<label for id="fnpac"> Fecha de nacimiento </label>';
 textoT+= '  Fecha de nacimiento <input id="fnpac" type="date">&nbsp;';
 tsexos=[iconomujer,iconohombre];
@@ -1633,17 +1633,17 @@ textoT+=makeRadioInput("SEXOH",tsexos,historia.ficha.sexo);
 
 textoT+= '<br>'+  'Estado civil: '+' <select id="eciv"><option> Soltero</option> <option> Casado</option>';
 textoT+=  '<option> Concubino</option><option> Divorciado</option><option> Viudo</option></select>';
-//textoT+= '<br><label for id="dirpac"> Dirección </label>';
-textoT+= '<br> Dirección <input id="dirpac" type="text">';
-//textoT+= '<br><label for id="telpac"> Teléfono </label>';
-textoT+= '<br> Teléfono<input id="telpac" type="tel">';
-//textoT+= '<br><label for id="mailpac"> Correo electrónico </label>';
-textoT+= '<br> Correo electrónico <input id="mailpac" type="email">';
+//textoT+= '<br><label for id="dirpac"> DirecciÃ³n </label>';
+textoT+= '<br> DirecciÃ³n <input id="dirpac" type="text">';
+//textoT+= '<br><label for id="telpac"> TelÃ©fono </label>';
+textoT+= '<br> TelÃ©fono<input id="telpac" type="tel">';
+//textoT+= '<br><label for id="mailpac"> Correo electrÃ³nico </label>';
+textoT+= '<br> Correo electrÃ³nico <input id="mailpac" type="email">';
 
 textoT+='</div>';
 
 var id1="mc";var id2="idmc";
-textoT+=' <span class="historiaitem" >Mótivo de consulta </span> <button id="idmc" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+=' <span class="historiaitem" >MÃ³tivo de consulta </span> <button id="idmc" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
 textoT+='<div style="display:none;" id="mc">';
 textoT+= '<textarea ID="tea" rows="4" cols="30" style="background-color: lightgray;color: black;"></textarea><br>';
 textoT+='</div>';
@@ -1661,26 +1661,26 @@ textoT+=' <span class="historiaitemp" >Antecedentes </span> <button id="idantec"
 textoT+='<div id="antec" style="display:none;">';
 
 var id1="antmed";var id2="idantmed";
-textoT+=' <span class="historiaitem" >&nbsp;Médicos </span> <button id="idantmed" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+=' <span class="historiaitem" >&nbsp;MÃ©dicos </span> <button id="idantmed" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
 textoT+='<div id="antmed" style="display:none;">';
    textoT+= 'Alergias: <input type="text" id="alergia">';
    textoT+='<span id="listaantec"></span>';
    textoT+='<button onclick="addAntec();">Agregar</button>'; 
 // textoT+= ' No <button name="talergia" onclick="changeStateButton(this);activaalergia(0);">'+iconoselecton+' </button>';
-//   textoT+= ' Sí <button name="talergia" onclick="changeStateButton(this);activaalergia(1)">'+iconoselectoff+ '</button>';
+//   textoT+= ' SÃ­ <button name="talergia" onclick="changeStateButton(this);activaalergia(1)">'+iconoselectoff+ '</button>';
 //   textoT+='&nbsp;<span id="valerg"> A: <input type="text" id="alergia"></span>';
 textoT+='</div>';
 
 var id1="antquir";var id2="idantquir";
-textoT+=' <span class="historiaitem" >&nbsp;Quirúrgicos </span> <button id="idantquir" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+=' <span class="historiaitem" >&nbsp;QuirÃºrgicos </span> <button id="idantquir" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
 textoT+='<div id="antquir" style="display:none;">';
 
 textoT+='</div>';
 
 var id1="anthab";var id2="idanthab";
-textoT+=' <span class="historiaitem" >&nbsp;Hábitos psicobiológicos </span> <button id="idanthab" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+=' <span class="historiaitem" >&nbsp;HÃ¡bitos psicobiolÃ³gicos </span> <button id="idanthab" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
 textoT+='<div id="anthab" style="display:none;">';
-textoT+= 'Duración del sueño: ';
+textoT+= 'DuraciÃ³n del sueÃ±o: ';
 textoT+= makeKeyInput("dursue","","I2-0-24","8");
 textoT+=' horas<br>';
 textoT+= 'Tabaquismo: ';
@@ -1716,7 +1716,7 @@ textoT+='<div id="antfam" style="display:none;">';
 textoT+='</div>';
 
 var id1="antepi";var id2="idantepi";
-textoT+=' <span class="historiaitem" >&nbsp;Epidemiológicos </span> <button id="idantepi" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+=' <span class="historiaitem" >&nbsp;EpidemiolÃ³gicos </span> <button id="idantepi" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
 textoT+='<div id="antepi" style="display:none;">';
 
 textoT+='</div>';
@@ -1729,11 +1729,11 @@ textoT+='<div id="int" style="display:none;">';
 var id1="apsist1";var id2="idapsist1";
    textoT+=' <span class="historiaitem" > &nbsp;General</span> <button id="idapsist1" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist1" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1741,11 +1741,11 @@ var id1="apsist1";var id2="idapsist1";
 var id1="apsist2";var id2="idapsist2";
    textoT+=' <span class="historiaitem" > &nbsp;Cabeza</span> <button id="idapsist2" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist2" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1753,11 +1753,11 @@ var id1="apsist2";var id2="idapsist2";
 var id1="apsist3";var id2="idapsist3";
    textoT+=' <span class="historiaitem" > &nbsp;Ojos</span> <button id="idapsist3" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist3" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1765,11 +1765,11 @@ var id1="apsist3";var id2="idapsist3";
 var id1="apsist4";var id2="idapsist4";
    textoT+=' <span class="historiaitem" > &nbsp;Oidos</span> <button id="idapsist4" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist4" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1778,11 +1778,11 @@ var id1="apsist4";var id2="idapsist4";
 var id1="apsist5";var id2="idapsist5";
    textoT+=' <span class="historiaitem" > &nbsp;Nariz</span> <button id="idapsist5" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist5" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1792,11 +1792,11 @@ var id1="apsist5";var id2="idapsist5";
 var id1="apsist6";var id2="idapsist6";
    textoT+=' <span class="historiaitem" > &nbsp;Boca</span> <button id="idapsist6" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist6" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1804,11 +1804,11 @@ var id1="apsist6";var id2="idapsist6";
 var id1="apsist7";var id2="idapsist7";
    textoT+=' <span class="historiaitem" > &nbsp;ORL</span> <button id="idapsist7" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist7" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1816,11 +1816,11 @@ var id1="apsist7";var id2="idapsist7";
 var id1="apsist8";var id2="idapsist8";
    textoT+=' <span class="historiaitem" > &nbsp;Respiratorio</span> <button id="idapsist8" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist8" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1828,11 +1828,11 @@ var id1="apsist8";var id2="idapsist8";
 var id1="apsist9";var id2="idapsist9";
    textoT+=' <span class="historiaitem" > &nbsp;Osteomuscular</span> <button id="idapsist9" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist9" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1840,11 +1840,11 @@ var id1="apsist9";var id2="idapsist9";
 var id1="apsist10";var id2="idapsist10";
    textoT+=' <span class="historiaitem" > &nbsp;Cardiovascular</span> <button id="idapsist10" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist10" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1852,11 +1852,11 @@ var id1="apsist10";var id2="idapsist10";
 var id1="apsist11";var id2="idapsist11";
    textoT+=' <span class="historiaitem" > &nbsp;Gastrointestinal</span> <button id="idapsist11" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist11" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1864,11 +1864,11 @@ var id1="apsist11";var id2="idapsist11";
 var id1="apsist12";var id2="idapsist12";
    textoT+=' <span class="historiaitem" > &nbsp;Genitourinario</span> <button id="idapsist12" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist12" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos)
    textoT+='</div>';
@@ -1876,11 +1876,11 @@ var id1="apsist12";var id2="idapsist12";
 var id1="apsist13";var id2="idapsist13";
    textoT+=' <span class="historiaitem" > &nbsp;Nervioso y mental</span> <button id="idapsist13" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="apsist13" style="display:none;">';
-   textoT+= ' Pérdida de peso:';
+   textoT+= ' PÃ©rdida de peso:';
    textoT+= '<input id="ppeso" type="number" >';
 //   tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
 //   textoT+=makeSelectSimple2("tipoabd",tipoAbdomen,0)
-//   textoT+= '<br> Ruidos Hidroaéreos:';
+//   textoT+= '<br> Ruidos HidroaÃ©reos:';
 //   ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
 //   textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos,0)
    textoT+='</div>';
@@ -1891,22 +1891,22 @@ textoT+='</div>';
 
 
 var id1="exf";var id2="idexf";
-textoT+=' <span class="historiaitem" >Examen físico </span> <button id="idexf" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+textoT+=' <span class="historiaitem" >Examen fÃ­sico </span> <button id="idexf" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
 textoT+='<div id="exf" style="display:none;">';
 
    var id1="exf1";var id2="idexf1";
    textoT+=' <span class="historiaitem" > &nbsp;Cabeza</span> <button id="idexf1" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="exf1" style="display:none;">';
-   tamcabeza=["Normocefálico","Macrocefálico","Microcefálico"];
-   textoT+=' Tamaño: ';
+   tamcabeza=["NormocefÃ¡lico","MacrocefÃ¡lico","MicrocefÃ¡lico"];
+   textoT+=' TamaÃ±o: ';
    textoT+=makeRadioInput("tamcab",tamcabeza,historia.exfis.cabeza.tamcab);
    textoT+='<br>'
-   indcefal=["Normocefálico","Dolicocefálico","Braquicefálico"];
-   textoT+=' Indice cefálico: ';
+   indcefal=["NormocefÃ¡lico","DolicocefÃ¡lico","BraquicefÃ¡lico"];
+   textoT+=' Indice cefÃ¡lico: ';
    textoT+=makeSelectSimple("indcab",indcefal,0);
    textoT+='<br>'
-   altcefal=["Normocefálico","Turricefálico","Platicefálico"];
-   textoT+=' Altura cefálica: ';
+   altcefal=["NormocefÃ¡lico","TurricefÃ¡lico","PlaticefÃ¡lico"];
+   textoT+=' Altura cefÃ¡lica: ';
    textoT+=makeSelectSimple("altcab",altcefal,0);
    textoT+='<br>'
 
@@ -1922,14 +1922,14 @@ textoT+='<div id="exf" style="display:none;">';
   
    textoT+= ' Si <button name="protcab" onclick="changeStateButton(this);muestrasvg(vsgobject,500,500);">'+iconoselectoff+ '</button>';
    textoT+='Color de cabello: ';
-   colorcabello=["Negro","Castaño","Blanco"];
+   colorcabello=["Negro","CastaÃ±o","Blanco"];
    textoT+=makeSelectSimple("colcab",colorcabello,0)
    textoT+='<br>Ojos: ';
-   Ojos=["Pupilas isocóricas","Reactivas a la luz"] 
+   Ojos=["Pupilas isocÃ³ricas","Reactivas a la luz"] 
    textoT+=makeCheckInput("ojoscar",Ojos);
    textoT+= '<br>';
    textoT+='Fosas nasales:';
-   fosasNasales=["Permeables","Simétricas","Presencia de vibrisas"];
+   fosasNasales=["Permeables","SimÃ©tricas","Presencia de vibrisas"];
    textoT+=makeSelectMultiple2("fosasnas",fosasNasales,[]);
 
    textoT+='</div>';
@@ -1946,12 +1946,12 @@ textoT+='<div id="exf" style="display:none;">';
    var id1="exf3";var id2="idexf3";
    textoT+=' <span class="historiaitem" > &nbsp;Pulmonar</span> <button id="idexf3" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="exf3" style="display:none;">';
-   textoT+= 'Torax estático:';
-   toraxEstat=["Enfisematoso","Cifoescoliótico","Pectus excavatum","Pectus carinatum"];
+   textoT+= 'Torax estÃ¡tico:';
+   toraxEstat=["Enfisematoso","CifoescoliÃ³tico","Pectus excavatum","Pectus carinatum"];
    textoT+=makeSelectMultiple2("toraxsim",toraxEstat,[]);
 //   textoT+= ' Normal <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselecton+' </button>';
 //   textoT+= ' Enfisematoso <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
-//   textoT+= ' Cifoescoliótico <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
+//   textoT+= ' CifoescoliÃ³tico <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
 //   textoT+= ' Pectus excavatum <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
 //   textoT+= ' Pectus carinatum <button name="toraxsim" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
    textoT+= '<br>';
@@ -1965,13 +1965,13 @@ textoT+='<div id="exf" style="display:none;">';
 
   // <input id="respormin" type="number">'
    textoT+= '<br>';
-   textoT+= ' Patrón respiratorio: ';
+   textoT+= ' PatrÃ³n respiratorio: ';
    patronesresp=["Normal","Cheyne Stokes","Kussmaul","Biot"];
    textoT+=makeRadioInput("patronresp",patronesresp,historia.exfis.pulmonar.patron)
    textoT+= '<br>';
    textoT+= ' Dificultad respiratoria: Ausente <button name="difresp" onclick="changeStateButton(this);activadifresp(0);">'+iconoselectoff+ '</button>';
    textoT+= ' Presente <button name="difresp" onclick="changeStateButton(this);activadifresp(1);">'+iconoselectoff+ '</button>';
-   difResp=["Aleteo nasal","Tiraje intercostal","Musculatura accesoria","Depresión abdominal"];
+   difResp=["Aleteo nasal","Tiraje intercostal","Musculatura accesoria","DepresiÃ³n abdominal"];
    textoT+=makeSelectMultiple2("tipodifresp",difResp,[]);
    textoT+= '<br>';
    image='"img/abdomen.png"';
@@ -1982,14 +1982,14 @@ textoT+='<div id="exf" style="display:none;">';
    var id1="exf4";var id2="idexf4";
    textoT+=' <span class="historiaitem" > &nbsp;Cardiaco</span> <button id="idexf4" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="exf4" style="display:none;">';
-   textoT+= ' Frecuencia cardíaca: ';
+   textoT+= ' Frecuencia cardÃ­aca: ';
    textoT+= makeKeyInput("freccard","Latidos por minuto","I3-0-400","70");
 //<input id="freccard" type="number" style="width: 2.5em" min="0" onkeypress="return validInput(this,event,3,0)"> l.p.m.'
    textoT+= '<br>';
    textoT+= ' Presion arterial: ';
-   textoT+= makeKeyInput("partsist","Sistólica","I3-0-400","120");
+   textoT+= makeKeyInput("partsist","SistÃ³lica","I3-0-400","120");
 //  <input id="partsist" type="number" style="width: 2.5em" min="0" onkeypress="return validInput(this,event,3,0)">/';
-   textoT+= makeKeyInput("partdiast","Diastólica","I3-0-250","80");
+   textoT+= makeKeyInput("partdiast","DiastÃ³lica","I3-0-250","80");
  textoT+=' mmHg'
 //   textoT+= '<input id="partdiast" type="number" style="width: 2em" min="0" onkeypress="return validInput(this,event,3,0)"> mmHg'
 
@@ -2004,7 +2004,7 @@ textoT+='<div id="exf" style="display:none;">';
 //   textoT+= ' Palpable <button name="apex" status="0" onclick="setStateButton(this)">'+iconoselectoff+'</button>';
 
    textoT+= '<br>';
-   soplos=["Ausente","Sistólico","Diastólico","Continuo"];
+   soplos=["Ausente","SistÃ³lico","DiastÃ³lico","Continuo"];
    textoT+= ' Soplos: ';
    textoT+=makeRadioInput("soplo",soplos,historia.exfis.cardio.soplo);
    textoT+= '<br>';
@@ -2016,10 +2016,10 @@ var id1="exf5";var id2="idexf5";
    textoT+= ' Tipo:';
    tipoAbdomen=["Plano","Excavado","Redondeado","Distendido"];
    textoT+=makeSelectSimple2("tipoabd",tipoAbdomen,0)
-   textoT+= '<br> Ruidos Hidroaéreos:';
+   textoT+= '<br> Ruidos HidroaÃ©reos:';
    ruidosHidroAereos=["Presentes","Aumentados","Disminuidos","Ausentes"];
    textoT+=makeSelectSimple2("ruihidro",ruidosHidroAereos,0)
-   textoT+= '<br>Circulación colateral: ';
+   textoT+= '<br>CirculaciÃ³n colateral: ';
    Circulcol=["Ausente","Presente"];
    textoT+=makeRadioInput("circulcol",Circulcol);
 
@@ -2027,7 +2027,7 @@ var id1="exf5";var id2="idexf5";
    textoT+='</div>';
 
    var id1="exf6";var id2="idexf6";
-   textoT+=' <span class="historiaitem" >&nbsp;Neurológico</span> <button id="idexf6" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
+   textoT+=' <span class="historiaitem" >&nbsp;NeurolÃ³gico</span> <button id="idexf6" onclick="changedisplay('+id1+','+id2+');">'+iconoplus+'</button><br>';
    textoT+='<div id="exf6" style="display:none;">';
  
    textoT+= 'Pares craneales:<br>';
@@ -2053,39 +2053,39 @@ var id1="exf5";var id2="idexf5";
 
    textoT+= '<tr><td> \III Oculo Motor</td>';
    textoT+= '<td>';
-   parcraneal3=["Normal","Paresia","Parálisis"]
+   parcraneal3=["Normal","Paresia","ParÃ¡lisis"]
    textoT+= makeSelectSimple("par3d",parcraneal3,0);
    textoT+= '</td><td>'
    textoT+= makeSelectSimple("par3i",parcraneal3,0);
    textoT+= '</td></tr>';
 
-   textoT+= '<tr><td> \IV Oblícuo</td>';
+   textoT+= '<tr><td> \IV OblÃ­cuo</td>';
    textoT+= '<td>';
-   parcraneal4=["Normal","Paresia","Parálisis"]
+   parcraneal4=["Normal","Paresia","ParÃ¡lisis"]
    textoT+= makeSelectSimple("par4d",parcraneal4,0);
    textoT+= '</td><td>'
    textoT+= makeSelectSimple("par4i",parcraneal4,0);
    textoT+= '</td></tr>';
    
-   textoT+= '<tr><td>V Trigémino</td>';
+   textoT+= '<tr><td>V TrigÃ©mino</td>';
    textoT+= '<td><select>';
    textoT+= '<option selected> Normal</option>';
-   textoT+= '<option>  Parálisis V<sub>1</sub></option>';
-   textoT+= '<option>  Parálisis V<sub>2</sub></option>';
-   textoT+= '<option>  Parálisis V<sub>3</sub></option>';
+   textoT+= '<option>  ParÃ¡lisis V<sub>1</sub></option>';
+   textoT+= '<option>  ParÃ¡lisis V<sub>2</sub></option>';
+   textoT+= '<option>  ParÃ¡lisis V<sub>3</sub></option>';
    textoT+= '<option>  Hiposmia </option>';
    textoT+= '</select></td>'
    textoT+= '<td><select>';
    textoT+= '<option selected> Normal</option>';
-   textoT+= '<option>  Parálisis V<sub>1</sub></option>';
-   textoT+= '<option>  Parálisis V<sub>2</sub></option>';
-   textoT+= '<option>  Parálisis V<sub>3</sub></option>';
+   textoT+= '<option>  ParÃ¡lisis V<sub>1</sub></option>';
+   textoT+= '<option>  ParÃ¡lisis V<sub>2</sub></option>';
+   textoT+= '<option>  ParÃ¡lisis V<sub>3</sub></option>';
    textoT+= '<option>  Hiposmia </option>';
    textoT+= '</select></td></tr>';
 
    textoT+= '<tr><td> VI Lateral</td>';
    textoT+= '<td>';
-   parcraneal6=["Normal","Paresia","Parálisis"]
+   parcraneal6=["Normal","Paresia","ParÃ¡lisis"]
    textoT+= makeSelectSimple("par6d",parcraneal6,0);
    textoT+= '</td><td>'
    textoT+= makeSelectSimple("par6i",parcraneal6,0);
@@ -2093,7 +2093,7 @@ var id1="exf5";var id2="idexf5";
 
    textoT+= '<tr><td> VII Facial</td>';
    textoT+= '<td>';
-   parcraneal7=["Normal","Paresia","Parálisis"]
+   parcraneal7=["Normal","Paresia","ParÃ¡lisis"]
    textoT+= makeSelectSimple("par7d",parcraneal7,0);
    textoT+= '</td><td>'
    textoT+= makeSelectSimple("par7i",parcraneal7,0);
@@ -2102,16 +2102,16 @@ var id1="exf5";var id2="idexf5";
    textoT+= '<tr><td> VIII Auditivo-Vestibular</td>';
    textoT+= '<td><select>';
    textoT+= '<option selected> Normal</option>';
-   textoT+= '<option>  Parálisis </option>';
+   textoT+= '<option>  ParÃ¡lisis </option>';
    textoT+= '</select></td>'
    textoT+= '<td><select>';
    textoT+= '<option selected> Normal</option>';
-   textoT+= '<option>  Parálisis </option>';
+   textoT+= '<option>  ParÃ¡lisis </option>';
    textoT+= '</select></td></tr>';
 
-   textoT+= '<tr><td> IX Glosofaríngeo</td>';
+   textoT+= '<tr><td> IX GlosofarÃ­ngeo</td>';
    textoT+= '<td>';
-   parcraneal9=["Normal","Paresia","Parálisis"]
+   parcraneal9=["Normal","Paresia","ParÃ¡lisis"]
    textoT+= makeSelectSimple("par9d",parcraneal9,0);
    textoT+= '</td><td>'
    textoT+= makeSelectSimple("par9i",parcraneal9,0);
@@ -2120,16 +2120,16 @@ var id1="exf5";var id2="idexf5";
    textoT+= '<tr><td> X Vago</td>';
    textoT+= '<td><select>';
    textoT+= '<option selected> Normal</option>';
-   textoT+= '<option>  Parálisis </option>';
+   textoT+= '<option>  ParÃ¡lisis </option>';
    textoT+= '</select></td>'
    textoT+= '<td><select>';
    textoT+= '<option selected> Normal</option>';
-   textoT+= '<option>  Parálisis </option>';
+   textoT+= '<option>  ParÃ¡lisis </option>';
    textoT+= '</select></td></tr>';
 
    textoT+= '<tr><td> XI Espinal</td>';
    textoT+= '<td>';
-   parcraneal11=["Normal","Paresia","Parálisis"]
+   parcraneal11=["Normal","Paresia","ParÃ¡lisis"]
    textoT+= makeSelectSimple("par11d",parcraneal11,0);
    textoT+= '</td><td>'
    textoT+= makeSelectSimple("par11i",parcraneal11,0);
@@ -2138,22 +2138,22 @@ var id1="exf5";var id2="idexf5";
    textoT+= '<tr><td> XII Hipogloso</td>';
    textoT+= '<td><select>';
    textoT+= '<option selected> Normal</option>';
-   textoT+= '<option>  Parálisis </option>';
+   textoT+= '<option>  ParÃ¡lisis </option>';
    textoT+= '</select></td>'
    textoT+= '<td><select>';
    textoT+= '<option selected> Normal</option>';
-   textoT+= '<option>  Parálisis </option>';
+   textoT+= '<option>  ParÃ¡lisis </option>';
    textoT+= '</select></td></tr>';
 
   textoT+= '</table>';
 
-   textoT+= '<br>Conciencia: Persona Sí <button name="cenp" onclick="changeStateButton(this)">'+iconoselecton+ '</button>';
+   textoT+= '<br>Conciencia: Persona SÃ­ <button name="cenp" onclick="changeStateButton(this)">'+iconoselecton+ '</button>';
    textoT+= ' No <button name="cenp" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
    textoT+= ' No evaluado <button name="cenp" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
     
-   textoT+= 'Tiempo Sí <button name="cent" onclick="changeStateButton(this)">'+iconoselecton+ '</button>';
+   textoT+= 'Tiempo SÃ­ <button name="cent" onclick="changeStateButton(this)">'+iconoselecton+ '</button>';
    textoT+= ' No <button name="cent" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
-   textoT+= ' Espacio: Sí <button name="cene" onclick="changeStateButton(this)">' +iconoselecton+'</button>';
+   textoT+= ' Espacio: SÃ­ <button name="cene" onclick="changeStateButton(this)">' +iconoselecton+'</button>';
    textoT+= ' No <button name="cene" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';
    textoT+= '<br>Reflejos:';    
    textoT+= '<br>Osteotendinosos:';    
@@ -2490,9 +2490,9 @@ vsgobject.data[2]=new circulo("Hipocondrio izquierdo",190,130,10);
 vsgobject.data[3]=new circulo("Flanco derecho",115,180,10);
 vsgobject.data[4]=new circulo("Mesogastrio",153,180,10);
 vsgobject.data[5]=new circulo("Flanco izquierdo",190,180,10);
-vsgobject.data[6]=new circulo("Fosa ilíaca derecha",115,230,10);
+vsgobject.data[6]=new circulo("Fosa ilÃ­aca derecha",115,230,10);
 vsgobject.data[7]=new circulo("Hipogastrio",153,230,10);
-vsgobject.data[8]=new circulo("Fosa ilíaca izquierda",190,230,10);
+vsgobject.data[8]=new circulo("Fosa ilÃ­aca izquierda",190,230,10);
 vsgobject.anchor=300;
 vsgobject.altor=300;
 activo=[];
@@ -2646,10 +2646,10 @@ tex1=recipesA[num];
 //tex2=tex2.trim();
 tex2=recipesB[num];
 
-//textoT+='<p> Presentación:</p>';
+//textoT+='<p> PresentaciÃ³n:</p>';
 
 //textoT+=' <INPUT id="t1" class="inputtext" TYPE="textarea" style="background-color: lightgray;color: black;width: 90%;" //value="'+ tex1 +'" ><br>';
-textoT+='<br><br><label for="t1">Presentación</label><br>'
+textoT+='<br><br><label for="t1">PresentaciÃ³n</label><br>'
 textoT+= '<textarea ID="t1" rows="4" cols="30" style="background-color: lightgray;color: black;"></textarea><br>';
 //textoT+='<p> Dosis:</p>';
 textoT+='<label for="t2">Dosis</label><br>'
@@ -2887,17 +2887,17 @@ if (parseFloat(mladd)>0) {
    if ((ppres.tipo == "TAB")  && (cantidad==0.5)) {cantidad="Media"; unidades=" tableta "}
    if ((ppres.tipo == "GRAG") && (cantidad!=1)){unidades=" grageas "}
    if ((ppres.tipo == "GRAG") && (cantidad==1)){unidades=" gragea "}
-   if ((ppres.tipo == "CAP")  && (cantidad!=1)){unidades=" cápsulas "}
-   if ((ppres.tipo == "CAP")  && (cantidad==1)){unidades=" cápsula "}
+   if ((ppres.tipo == "CAP")  && (cantidad!=1)){unidades=" cÃ¡psulas "}
+   if ((ppres.tipo == "CAP")  && (cantidad==1)){unidades=" cÃ¡psula "}
    if ((ppres.tipo == "COMP") && (cantidad!=1)){unidades=" comprimidos "} 
    if ((ppres.tipo == "COMP") && (cantidad==1)){unidades=" comprimido "} 
    if ((ppres.tipo == "COMP")  && (cantidad==0.5)) {cantidad="Medio"; unidades=" comprimido "}
    if ((ppres.tipo == "AERO") && (cantidad!=1)){unidades=" inhalaciones "}
-   if ((ppres.tipo == "AERO") && (cantidad==1)){unidades=" inhalación "}
+   if ((ppres.tipo == "AERO") && (cantidad==1)){unidades=" inhalaciÃ³n "}
    if ((ppres.tipo =="GOTAS") && (cantidad!=1)){unidades=" gotas "}
    if ((ppres.tipo =="GOTAS") && (cantidad==1)){unidades=" gota "}
-   if ((ppres.tipo == "OVU")  && (cantidad!=1)){unidades=" óvulos "}
-   if ((ppres.tipo == "OVU")  && (cantidad==1)){unidades=" óvulo "}
+   if ((ppres.tipo == "OVU")  && (cantidad!=1)){unidades=" Ã³vulos "}
+   if ((ppres.tipo == "OVU")  && (cantidad==1)){unidades=" Ã³vulo "}
    if ((ppres.tipo == "AMP")  && (cantidad!=1)){unidades=" ampollas "}
    if ((ppres.tipo == "AMP")  && (cantidad==1)){unidades=" ampolla "}
    if (ppres.unidad2!="") {unidades=" "+ppres.unidad2+" "} 
@@ -2954,8 +2954,8 @@ if ( (typeof(elementot)!="undefined") && (elementot!=null) ){
 if ((tiempo!=0) && !(isNaN(tiempo))) {
 // alert("t "+tiempo) ;
 var portiempo;
- var unidades2=["días","semanas","meses","años"];
- var unidades1=["día","semana","mes","año"];
+ var unidades2=["dÃ­as","semanas","meses","aÃ±os"];
+ var unidades1=["dÃ­a","semana","mes","aÃ±o"];
  var indi=document.getElementById("udurac").selectedIndex; 
  portiempo=" por "+ tiempo +" ";
  if (tiempo==1){portiempo+=unidades1[indi]} else {portiempo+=unidades2[indi]} 
@@ -3477,7 +3477,7 @@ if (i>=0){
 
 }
 
-i=presentm.indexOf(" CÁPSULA");
+i=presentm.indexOf(" CÃPSULA");
 if (i>=0){
      presentr.tipo="CAP"; 
      presentr.via[0]="VO";
@@ -3706,7 +3706,7 @@ if (sexoglobal!="M") {var factor=0.85} else  {var factor=1;}
 tfg=xround((140-edadglobal)*pesoglobal*factor/(72*creatininacorr),1);
 var campotfg=document.getElementById("btfg");
 //campotfg.innerHTML=": "+tfg+" ml/min "+modelotfg;
-campotfg.title="Tasa de filtración glomerular: "+tfg+" ml/min "+modelotfg;
+campotfg.title="Tasa de filtraciÃ³n glomerular: "+tfg+" ml/min "+modelotfg;
 
 }
 
@@ -3721,7 +3721,7 @@ tfg=175*fsexo*fraza*Math.pow(creatininacorr,-1.154)*Math.pow(edadglobal,-0.203);
 tfg=xround(tfg,1);
 var campotfg=document.getElementById("btfg");
 //campotfg.innerHTML=": "+tfg+" ml/min " +modelotfg;
-campotfg.title="Tasa de filtración glomerular: "+tfg+" ml/min " +modelotfg;
+campotfg.title="Tasa de filtraciÃ³n glomerular: "+tfg+" ml/min " +modelotfg;
 
 }
 
@@ -3739,7 +3739,7 @@ tfg=141*fsexo*fraza*Math.pow(fmin,alfa)*Math.pow(fmax,-1.209)*Math.pow(0.993,eda
 tfg=xround(tfg,1);
 var campotfg=document.getElementById("btfg");
 //campotfg.innerHTML=": "+tfg+" ml/min " +modelotfg;
-campotfg.title="Tasa de filtración glomerular: "+tfg+" ml/min " +modelotfg;
+campotfg.title="Tasa de filtraciÃ³n glomerular: "+tfg+" ml/min " +modelotfg;
 
 }
 
@@ -3861,7 +3861,7 @@ textoT+='<select id="creatuni" onchange="cambiaunidcreat();calctfg();">';
 if (unidcreatglobal=="0") {textoT+='<option selected> mg/dL </option>  <option>&#181;mol/L </option> </select>';} else
        {textoT+='<option> mg/dL </option>  <option selected>&#181;mol/L </option> </select>';}
 
-textoT+='<br> Edad: <INPUT id="edad"  pattern=”[0-9]{3}" min="0" max="120" TYPE="number" value="'+edadglobal.toString()+'" onkeypress="return validInputI(this,event,3,0,150)" onchange="cambiaedad();calctfg();" style="font-size:100%"> años'
+textoT+='<br> Edad: <INPUT id="edad"  pattern=â€[0-9]{3}" min="0" max="120" TYPE="number" value="'+edadglobal.toString()+'" onkeypress="return validInputI(this,event,3,0,150)" onchange="cambiaedad();calctfg();" style="font-size:100%"> aÃ±os'
 textoT+='<br> Peso: ';
 textoT+='<INPUT id="tfgpeso" min="3" max="400" TYPE="text" onkeypress="return validInputR(this,event,6,3,400)" value="'+pesoglobal.toString()+'" onchange="cambiapeso();cambiasup();calctfg();" style="width: 80px;"> kg'
 textoT+='<br> Altura: <INPUT id="altura3" min="50" max="250" TYPE="number" onkeypress="return event.charCode !=45" value="'+ alturaglobal.toString()+'" oninput="cambiaaltura();calctfg();cambiasup();">'+unidelong;
@@ -4020,7 +4020,7 @@ var indiceactivo;
 function dextra(num){
 var textoT,texto;
 textoT="";
-var encabezado=["Descripci&oacute;n:","Indicaciones:","Contraindicaciones:","Interacciones:","Reacciones adversas:","Farmacocinetica:","Farmacodinámica:"];
+var encabezado=["Descripci&oacute;n:","Indicaciones:","Contraindicaciones:","Interacciones:","Reacciones adversas:","Farmacocinetica:","FarmacodinÃ¡mica:"];
 var color="blue"
 textoT=encabezado[num].fontcolor(color) + '<br><br>';
 //var indice=listafarmaco[indicefarmaco];
@@ -4235,32 +4235,32 @@ textoT+='</SELECT>  ';
 }
 //textoT+='</td>'
 //textoT+='<td>'
-textoT+='<button id="agregar" TYPE="button" title="Agregar récipe" onclick="return procesar();" style="font-size:100%">'+iconoplus+'</button><br>';
+textoT+='<button id="agregar" TYPE="button" title="Agregar rÃ©cipe" onclick="return procesar();" style="font-size:100%">'+iconoplus+'</button><br>';
 //textoT+='</td>'
 //textoT+='</tr>'
 //textoT+='<tr><td colspan="2">'
 if (pdosis.tiempo!="") {
  textoT+='<label for="durac" >Por </label>'
- textoT+=makeKeyInput("durac","Tiempo de infusión","I3-1-999","1");
-// textoT+='<input id="durac" onkeypress="return event.charCode !=45" min="1" type="number" style="background-color: lightgray;color: black;" title="Tiempo de infusión">';
+ textoT+=makeKeyInput("durac","Tiempo de infusiÃ³n","I3-1-999","1");
+// textoT+='<input id="durac" onkeypress="return event.charCode !=45" min="1" type="number" style="background-color: lightgray;color: black;" title="Tiempo de infusiÃ³n">';
  textoT+=' <SELECT ID="udurac" >';
- textoT+=' <option selected>'+'día(s)'+'</option>';
+ textoT+=' <option selected>'+'dÃ­a(s)'+'</option>';
  textoT+=' <option >'+'semana(s)'+'</option>';
  textoT+=' <option >'+'mes(es)'+'</option>';
- textoT+=' <option >'+'año(s)'+'</option>';
+ textoT+=' <option >'+'aÃ±o(s)'+'</option>';
 textoT+='</SELECT>  ';
 } 
 //textoT+='</td>';
 //textoT+='<td style="text-align:left;" colspan="2">';
-textoT+='<input id="textadic"  class="inputtext" type="text" style="background-color: lightgray;color: black;" title="Agregar indicación" >&nbsp';
+textoT+='<input id="textadic"  class="inputtext" type="text" style="background-color: lightgray;color: black;" title="Agregar indicaciÃ³n" >&nbsp';
 //textoT+='</td></tr>';
 //textoT+='<tr>';
 //textoT+='<td colspan="4">';
 if (ppres.tipo=="INF") {
- textoT+='<label for="tinfu" >Tiempo de infusión</label>'
+ textoT+='<label for="tinfu" >Tiempo de infusiÃ³n</label>'
  var ttinfu=remedio[indice].tinf.split(" ")[0].toString();
- textoT+=makeKeyInput("tinfu","Tiempo de infusión","I3-0-999",ttinfu);
-// textoT+='<input id="tinfu"  type="number" onkeypress="return event.charCode !=45" min="0" style="background-color: lightgray;color: black;" title="Tiempo de infusión">';
+ textoT+=makeKeyInput("tinfu","Tiempo de infusiÃ³n","I3-0-999",ttinfu);
+// textoT+='<input id="tinfu"  type="number" onkeypress="return event.charCode !=45" min="0" style="background-color: lightgray;color: black;" title="Tiempo de infusiÃ³n">';
  textoT+=' <SELECT ID="uinfu" >';
  textoT+=' <option selected>'+'Horas'+'</option>';
  textoT+=' <option >'+'Minutos'+'</option>';
@@ -4712,28 +4712,28 @@ if ('serviceWorker' in navigator) {
 
 <div id="encabezado"  style=" position: fixed; top:0; left:0; text-align: left; border: 0px solid #999999;   background-color: gray; width:100%" > 
 <div>
-<button title="Configuración" onclick="openNav();"> &#9776; </button>
+<button title="ConfiguraciÃ³n" onclick="openNav();"> &#9776; </button>
 <button onclick="togglerecipe();" title="Recipe"> <i class="fas fa-prescription"></i> </button>
 <button onclick="toggledatos();" title="Datos del paciente" ><i class="fas fa-user"></i> </button>
 <button onclick="laboratorio();" title="Laboratorios" ><i class="fas fa-flask"></i> </button>
-<button onclick="historiamedica();" title="Historia médica" ><i class="fas fa-file-medical"></i> </button>
-<button onclick="informemedico();" title="Informe médico" ><i class="fas fa-notes-medical"></i> </button>
+<button onclick="historiamedica();" title="Historia mÃ©dica" ><i class="fas fa-file-medical"></i> </button>
+<button onclick="informemedico();" title="Informe mÃ©dico" ><i class="fas fa-notes-medical"></i> </button>
 <!-- <button onclick="hacerpdf();"  title="Genera pdf"><i class="fas fa-file-pdf"></i> </button>-->
 <span onclick="refrescadatospac();return false" id="datosg"> </span>
-<button id="btfg" onclick="corr_renal();" title="Tasa de filtración glomerular">TFG</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<button id="btfg" onclick="corr_renal();" title="Tasa de filtraciÃ³n glomerular">TFG</button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 </div>
 <div>
 <button  style="display:none;"id="brereturn" onclick="regresar(1);" title="Regresar a Grupos"><i class="fa fa-angle-double-left"></i></button>
 <button  style="display:none;"id="breturn" onclick="regresar(2);" title="Regresar"><i class="fa fa-angle-left"></i></button>
 <span id="farmaco" style="color:blue;"> </span>
 <div>
-<button  style="display:none;"id="bdesc" onclick="dextra(0);" title="Descripción"><i class="fa_char_D"></i></button>
+<button  style="display:none;"id="bdesc" onclick="dextra(0);" title="DescripciÃ³n"><i class="fa_char_D"></i></button>
 <button  style="display:none;"id="bindic" onclick="dextra(1);" title="Indicaciones"><i class="fa_char_I"></i></button>
 <button  style="display:none;"id="bcindic" onclick="dextra(2);" title="Contraindicaciones"><i class="fa_char_C"></i></button>
-<button  style="display:none;"id="binterac" onclick="dextra(3);" title="Interacciones Farmacológicas"><i class="fa_char_IF"></i></button>
+<button  style="display:none;"id="binterac" onclick="dextra(3);" title="Interacciones FarmacolÃ³gicas"><i class="fa_char_IF"></i></button>
 <button  style="display:none;"id="bram" onclick="dextra(4);" title="Efectos adversos"><i class="fa_char_E"></i></button>
-<button  style="display:none;"id="bfarcin" onclick="dextra(5);" title="Farmacocinética"><i class="fa_char_FC"></i></button>
-<button  style="display:none;"id="bfardin" onclick="dextra(6);" title="Farmacodinámica"><i class="fa_char_FD"></i></button>
+<button  style="display:none;"id="bfarcin" onclick="dextra(5);" title="FarmacocinÃ©tica"><i class="fa_char_FC"></i></button>
+<button  style="display:none;"id="bfardin" onclick="dextra(6);" title="FarmacodinÃ¡mica"><i class="fa_char_FD"></i></button>
 </div>
 </div>
 </div>
@@ -4747,7 +4747,7 @@ if ('serviceWorker' in navigator) {
 <div>
 <select id="tipobusqueda" >
 <option > Grupo </option>
-<option selected> Presentación </option>
+<option selected> PresentaciÃ³n </option>
 <option> Otras </option>
 </select>
 </div>
