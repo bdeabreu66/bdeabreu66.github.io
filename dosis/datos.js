@@ -21,9 +21,9 @@ remedio[5]=new farmaco("AMLODIPINA","ANTIHIPERTENSIVOS","CACIO ANTAGONISTA","DA:
 remedio[6]=new farmaco("PROPANOLOL","ANTIHIPERTENSIVOS@ANTIARRITMICOS@ANTIMIGRAÑA","BETABLOQUEADOR","D.A 40-600 mg/dia c/12h VO","30 mg/Kg","Propanolol tabletas 40 mg","","","","","");
 remedio[7]=new farmaco("ANFOTERICINA B","ANTIMICOTICOS@ANTIBIOTICOS","","D.A 0.1-1 mg/Kg/dia c/24h EV","","Anfotericina B, Fungisone ampollas 50 mg","","","","","");
 remedio[8]=new farmaco("LORATADINA","ANTIALERGICOS","ANTAGONISTA H1","D.P. 0.2 mg/kg/dia c/24h VO@D.A. 10 mg/dia c/12h o c/24h VO","","Loratadina, Clarityne, Loraval suspension 5mg/5cc@Loratadina, Biorolat, Loriden, Roletra en tabletas 10 mg","","","","","");
-       remedio[8].indic="Tratamiento b&aacute;sico de la rinitis al&eacute;rgica estacional, rinitis al&eacute;rgicas perennes, conjuntivitis al&eacute;rgica, prurito y urticaria de origen al&eacute;rgico, dermatosis al&eacute;rgicas, picaduras de insectos.";
-       remedio[8].desc="Antial&eacute;rgico y antihistam&iacute;nico.";
-       remedio[8].cindic="Insuficiencia renal, ni&ntilde;os menores de 6 a&ntilde;os, embarazo y lactancia.";
+       remedio[8].indic="Tratamiento básico de la rinitis alérgica estacional, rinitis alérgicas perennes, conjuntivitis alérgica, prurito y urticaria de origen alérgico, dermatosis alérgicas, picaduras de insectos.";
+       remedio[8].desc="Antialérgico y antihistamínico.";
+       remedio[8].cindic="Insuficiencia renal, niños menores de 6 años, embarazo y lactancia.";
        remedio[8].farcin="t1/2: 4 h no se.";
 remedio[9]=new farmaco("LORAZEPAM","ANTICONVULSIONANTES/ ANTIEPILEPTICOS","GABAERGICO","D.A.: 0.5-3 mg/dia c/12h VO","10 mg/Kg","Lorazepam tabletas 0.5 mg","","","","","");
 remedio[10]=new farmaco("LEVOFLOXACINA","ANTIBIOTICOS","QUILONONA","D.P (5-12 ) 10 mg/kg/dosis c/24h VO EV@D.A. 250-500 mg c/24h o C/24 VO EV","500 mg/24h","Levofloxacina, Levaquin, Ifos tabletas 500 mg","","","","","");
@@ -40,18 +40,18 @@ remedio[14]=new farmaco("MEROPENEM","ANTIBIOTICOS","CARBAPENEMICO","D.P. < 12 a�
 
 remedio[15]=new farmaco("IBUPROFENO","ANTIINFLAMATORIOS (AINES)","INHIBIDOR COX","D.P >6 meses: 5-10 mg/kg/dosis c/6h VO@ Artritis juvenil: 30-50 mg/kg/dia c/6h VO@DA: 400 mg c/4h VO","","Ibuprofeno tabletas 600 mg@Brugesic suspension 100mg/5cc@Brugesic Forte suspension 200mg/5cc","","","","","");
 remedio[16]=new farmaco("TIOCOLCHICOSIDO","RELAJANTES MUSCULARES","INHIBIDOR GABA","D.A.: 4-8 mg c/12h IM VO EV","","Tiocolchicocido,Biocolchid, Coltrax, Colval, Eusilen, Tiochax, Tractil tabletas 4 mg@Tiocolchicosido, Coltrax, Colval, Eusilen, Lampral ampollas 4 mg","","","","","");
-   remedio[16].cindic="Par&aacute;lisis flaccida, hipoton&iacute;a muscular";
-   remedio[16].indic="Relajante de la musculatura estriada. En todo tipo de contractura muscular: lumbago, ci&aacute;tica, calambres, tort&iacute;colis, manipulaciones y tracciones vertebrales, reducci&oacute;n de fracturas, dismenorrea esencial, hiperton^iacute;a uterina en la parturienta, paraplej&iacute;as espasm&oacute;dicas.";
+   remedio[16].cindic="Parálisis flaccida, hipotonía muscular";
+   remedio[16].indic="Relajante de la musculatura estriada. En todo tipo de contractura muscular: lumbago, ciática, calambres, tortícolis, manipulaciones y tracciones vertebrales, reducción de fracturas, dismenorrea esencial, hiperton^iacute;a uterina en la parturienta, paraplejías espasmódicas.";
   
 remedio[17]=new farmaco("ALBENDAZOL","ANTIPARASITARIOS","INHIBIDOR MICROTUBULOS","DA: 400 mg STAT VO@DA:Strongiloidiasis, himenolepiasis y teniasis 400 mg/dia c/24h por 3 dias VO","","Albendazol, Albendazole, Albicar, Bevindazol,Sostril tabletas 200 mg@Albendazol tabletas 400 mg@Albendazol, Albendazole,Albezol, Albicar, Bevindazol suspension 400mg/10ml@Albendazol suspension 400mg/20ml@Sostril suspension 200mg/5ml","","","","","");
-   remedio[17].indic=" Parasitosis, Ascarosis, Tricurosis, Enterobiosis, Uncinariosis, Hidatidosis qu&iacute;stica, Estrongiloidosis, Neurocisticercosis por Taenia Solium.";
-   remedio[17].desc=" Antiparasitato: Antihelm&iacute;ntico derivado del Benzimidazol Vida media: 4 a 15 horas.";
-   remedio[17].cindic="No administrar durante el embarazo ni la lactancia y en ni&ntilde;os menores de 2 a&ntilde;os";
+   remedio[17].indic=" Parasitosis, Ascarosis, Tricurosis, Enterobiosis, Uncinariosis, Hidatidosis quística, Estrongiloidosis, Neurocisticercosis por Taenia Solium.";
+   remedio[17].desc=" Antiparasitato: Antihelmíntico derivado del Benzimidazol Vida media: 4 a 15 horas.";
+   remedio[17].cindic="No administrar durante el embarazo ni la lactancia y en niños menores de 2 años";
 
 remedio[18]=new farmaco("MEBENDAZOL","ANTIPARASITARIOS","INHIBIDOR MICROTUBULOS","DA: Ouxiurasis 100 mg STAT VO Repetir a los 15 dias@DA:Ascaris tricocefalo, necator, ancylostoma e infestaciones mixtas 100 mg c/12h VO por 3 dias@DA: Strongiloidiasis, himenolepiasis y teniasis 200 mg c/12h VO por 3 dias","","Mebendazol, Bendamen, Eprofil, Vermalon tabletas 100 mg@Mebendazol, Bendamen, Eprofil, Vermalon suspension 100mg/5ml","","","","","");
-   remedio[18].indic=" Parasitosis, Ascarosis, Tricurosis, Enterobiosis, Uncinariosis, Hidatidosis qu&iacute;stica, Estrongiloidosis, Neurocisticercosis por Taenia Solium.";
-   remedio[18].desc=" Antiparasitario: Antihelm&iacute;ntico derivado del Benzimidazol Vida media: 4 a 15 horas.";
-   remedio[18].cindic="No administrar durante el embarazo ni la lactancia y en ni&ntilde;os menores de 2 a&ntilde;os";
+   remedio[18].indic=" Parasitosis, Ascarosis, Tricurosis, Enterobiosis, Uncinariosis, Hidatidosis quística, Estrongiloidosis, Neurocisticercosis por Taenia Solium.";
+   remedio[18].desc=" Antiparasitario: Antihelmíntico derivado del Benzimidazol Vida media: 4 a 15 horas.";
+   remedio[18].cindic="No administrar durante el embarazo ni la lactancia y en niños menores de 2 años";
 
 
 
@@ -63,24 +63,24 @@ remedio[22]=new farmaco("CIPROFLOXACINA","ANTIBIOTICOS","FLUOROQUILONONA","D.P. 
 remedio[23]=new farmaco("METFORMINA","ANTIDIABETICOS","MEJORA RESISTENCIA A LA INSULINA","DA: 500-3000 mg/dia C/8h VO@DP: 500-2000 mg/dia C/12h VO","10 mg/Kg","Amarilys tabletas 500 mg@Amarilys tabletas 1000 mg","","","","","");
 remedio[24]=new farmaco("CEFALEXINA","ANTIBIOTICOS","CEFALOSPORINA DE 1RA GENERACION","D.P.: 25-50 mg/Kg/dia C/6h VO@D.A.: 200 mg C/12h VO","8 mg/Kg","Cefalexina, Keforal, Bidocef, Stricef suspension 250mg/5cc","","","","","");
 remedio[25]=new farmaco("CEFTIBUTEN","ANTIBIOTICOS","CEFALOSPORINA DE 3RA GENERACION","D.A.: 200 mg C/12h VO@D.A.: 400 mg C/24h VO@D.P.: 9-10 mg/Kg/dia C/24h VO","8 mg/Kg","Ceftibuten, Cedax suspension 180mg/5cc@Ceftibuten, Cedax capsulas 400 mg","","","","","");
-    remedio[25].indic="Infecciones cl&iacute;nicas por los siguientes organismos Gram negativos: Haemophilus influenzae, Haemophilus parainfluenzae, Moraxella catarralis, Escherichia coli, Especies de Klebsiela."; 
-    remedio[25].desc="Cefalosporina de 3era generaci&oacute;n";
+    remedio[25].indic="Infecciones clínicas por los siguientes organismos Gram negativos: Haemophilus influenzae, Haemophilus parainfluenzae, Moraxella catarralis, Escherichia coli, Especies de Klebsiela."; 
+    remedio[25].desc="Cefalosporina de 3era generación";
 remedio[26]=new farmaco("CETIRIZINA","ANTIALERGICOS","ANTAGONISTA H1","D.P.(2 a 6 años) 0.3 mg/kg/dia c/24h VO@D.P. 1 gotas/kg/dia c/24h VO@ D.P: 2 a 6 años 5 mg/dia c/24h VO@D.A: 5-10 mg/dia c/12h o c/24h VO","10 mg/Kg","Cetirizina, Cetral suspension 1mg/cc@Celay, Cetirivax suspension 10mg/1cc@Cetirizina gotas 10mg/1cc@Cetirizina, Celay, Cetirex, Cetrine tabletas 10 mg","","","","","");
-       remedio[26].indic="Tratamiento b&aacute;sico de la rinitis al&eacute;rgica estacional, rinitis al&eacute;rgicas perennes, conjuntivitis al&eacute;rgica, prurito y urticaria de origen al&eacute;rgico, dermatosis al&eacute;rgicas, picaduras de insectos.";
-       remedio[26].desc="Antial&eacute;rgico y antihistam&iacute;nico.";
-       remedio[26].cindic="Insuficiencia renal, ni&ntilde;os menores de 2 a&ntilde;os, embarazo y lactancia.";
+       remedio[26].indic="Tratamiento básico de la rinitis alérgica estacional, rinitis alérgicas perennes, conjuntivitis alérgica, prurito y urticaria de origen alérgico, dermatosis alérgicas, picaduras de insectos.";
+       remedio[26].desc="Antialérgico y antihistamínico.";
+       remedio[26].cindic="Insuficiencia renal, niños menores de 2 años, embarazo y lactancia.";
 
 remedio[27]=new farmaco("CLORANFENICOL","ANTIBIOTICOS","","D.P.: 50-100 mg/kg/dia c/6h VO EV @ 10 gotas/dia c/12h VOF","8 mg/Kg","Cloranfericol suspension 150mg/5cc@Cloranfenicol ampollas 1 g@ Cloranfenicol tabletas 250 mg@Cloranfenicol gotas oftalmicas","","","","","");
-       remedio[27].indic="Infecciones causadas por Salmonella tiphi. Infecciones men&iacute;ngeas. Ricketsia, tifus, paratifus A y B, brucelosis, enteritis por coli";
-       remedio[27].indic+=" y por enterococos, neumon&iacute;a bacteriana y at&iacute;pica";
-       remedio[27].desc="Antibi&oacute;tico bacteriost&aacute;tico";
+       remedio[27].indic="Infecciones causadas por Salmonella tiphi. Infecciones meníngeas. Ricketsia, tifus, paratifus A y B, brucelosis, enteritis por coli";
+       remedio[27].indic+=" y por enterococos, neumonía bacteriana y atípica";
+       remedio[27].desc="Antibiótico bacteriostático";
        remedio[27].cindic="No consumir junto al kaolin";
 
 
 remedio[28]=new farmaco("AZITROMICINA","ANTIBIOTICOS","MACROLIDO","D.P.: 10 mg/kg/dia c/24h VO EV por 3 dias@ >45Kg: 500 mg/dia c/24h VO EV por 3 dias@ C. trachomatis o N. gonorrhoeae: 1 g/dosis STAT VO","8 mg/Kg","Azitromicina, Amizin,amovin, arzomidol, Azitromin, Azigram, Azitrom, Binozyt, Saver, Zitromax, Zival suspension 200mg/5cc@Azitromicina, Amizin, amovin, Arzomidol, atromizin, azibax, Azigram, Azitrodex, Azitrom, Saver, Zitromax G, Zival tabletas 500 mg@Zitromax polvo liofilizado/ infusión EV 500mg/2ml a diluir @Azimakrol comprimido 1 g", "","","","","");
-       remedio[28].indic="Infecciones causadas por g&eacute;rmenes susceptibles: Vias respiratorias altas: faringitis, amigdalitis causada por estreptococos, otitis,otiitis media en ninos, sinusitis";
-       remedio[28].desc="Antibi&oacute;tico macrolido";
-       remedio[28].cindic="Insuficiencia hep&aacute;tica. No administrar con antiacidos ni alimentos";
+       remedio[28].indic="Infecciones causadas por gérmenes susceptibles: Vias respiratorias altas: faringitis, amigdalitis causada por estreptococos, otitis,otiitis media en ninos, sinusitis";
+       remedio[28].desc="Antibiótico macrolido";
+       remedio[28].cindic="Insuficiencia hepática. No administrar con antiacidos ni alimentos";
        remedio[28].diluible="Solución 0.9%@Solución Dextroxa 5%";
        remedio[28].tinf="1 hora";
        remedio[28].vinf="1 mg/kg/min";
@@ -104,14 +104,14 @@ remedio[38]=new farmaco("VANCOMICINA","ANTIBIOTICOS","GLUCOPEPTIDO","D.P.: 40 mg
 remedio[39]=new farmaco("OXACILINA","ANTIBIOTICOS","BETALACTAMICO","D.P.: 100-150 mg/kg/dia C/6h  VO EV@D.P.(infeccion grave): 200 mg/kg/dia C/6h VO EV","8 mg/Kg","Oxacilina ampollas 1 g@Oxacilina capsulas 500 mg","","","","","");
 remedio[40]=new farmaco("DICLOXACILINA","ANTIBIOTICOS","BETALACTAMICO","D.P.: 25-50 mg/kg/dia C/6h o c/8h VO","8 mg/Kg","Dicloxacilina, Diclocid suspension 250mg/5cc","","","","","");
 //remedio[41]=new farmaco("ERITROMICINA","ANTIBIOTICOS","MACROLIDO","D.P.: 30-50 mg/kg/dia C/6h VO EV@DA:250-1000 mg c/6h VO","8 mg/Kg","Eritromicina, Ilosone suspension 125mg/5cc@Eritromicina, Ilosone, suspension 250mg/5cc@Eritromicina, Ilosone tabletas 500 mg","","","","","");
-//       remedio[41].indic="Infecciones causadas por g&eacute;rmenes susceptibles: Vias respiratorias altas: faringitis, amigdalitis causada por estreptococos, otitis,otiitis media en ninos, sinusitis";
-//       remedio[41].desc="Antibi&oacute;tico macrolido";
-//       remedio[41].cindic="Insuficiencia hep&aacute;tica. No administrar con antiacidos ni alimentos";
+//       remedio[41].indic="Infecciones causadas por gérmenes susceptibles: Vias respiratorias altas: faringitis, amigdalitis causada por estreptococos, otitis,otiitis media en ninos, sinusitis";
+//       remedio[41].desc="Antibiótico macrolido";
+//       remedio[41].cindic="Insuficiencia hepática. No administrar con antiacidos ni alimentos";
 
 
 remedio[41]=new farmaco("ERITROMICINA","ANTIBIOTICOS","MACROLIDO","D.P.: 30-50 mg/kg/dia c/6h VO  x 7 dias@DA: 250-500 mg/dia c/6h VO  x 7 dias","","Eritromicina, Ilosone suspension 250mg/5cc@Eritromicina, Ilosone suspension 125mg/5cc@Eritromicina, Ilosone tabletas 500 mg", "","","","","");
        remedio[41].indic="Infecciones causadas por germenes sensibles: Gram positivos: Staphylococcus aureus, Streptococcus del grupo A, Enterococcus, Pneumonococcus, Gram-negativos: Neissseria, Haemophylus influenzae, Brucella, Rickettsia, Treponema, Mycoplasma pneumoniae, Chlamidia tracomatis, Legionella pneumopila Infecciones del tracto respiratorio superior: faringitis,amigdalitis, sinusitis, faringoamigdalitis. Tracto respiratorio inferior: Nuemonia, traqueitis, alveolitis, enfermedad del legionario. Infecciones de partes blandas: por gérmenes gram-positivos sensibles, acné vulgaris, tratamiento alterno de la sífilis primaria y tardia en alérgicos a la penicilina, eritrasma, inflamación pélvica por gram positivos, enfermedad genitourinaria por Chlamydi tracomatis, tratamiento coadyuvante en amebiasis intestinal y Helicobacter pylori";
-       remedio[41].desc="Antibi&oacute;tico macrolido";
+       remedio[41].desc="Antibiótico macrolido";
        remedio[41].advers="gastrointestinal: epigastralgia moderada a intensa, cardiovascular: prolonga el segmento QT con arrtimias ventriculares, hepático: hepatitis colestásica por tratameinto a largo plazo, efectos tóxicos e irritantes: fiebre, eosinofilia y erupciones en piel, tinnitus y lateraciones auditivas";
        remedio[41].cindic="Disfunción hepática ó historia previa, valorar el riesgo/beneficio en pacientes con pérdida de la audición ó afecciones hepáticas";
        remedio[41].interac="aumenta la concentración sérica de la Carbamazepina y los efectos de la digoxina, esteroides,alcaloides ergóticos, triazolam, ciclosporina, valproato,teofilina y warfarina, no ingerir con las comidas a xcepción del estolato";
@@ -124,45 +124,45 @@ remedio[44]=new farmaco("PENICILINA G SODICA","ANTIBIOTICOS","BETALACTAMICO","DA
 remedio[45]=new farmaco("DICLOFENACO","ANTIINFLAMATORIOS (AINES)","INHIBIDOR COX","DA: 100-200 mg/dia c/12h VO@DP: 0.5-2 mg/kg/dosis c/8h VO@ DP: 1 gotas/kg/dosis c/8h VO","","Diclofenac, Cataflam tabletas 75 mg@Diclofenac, Cataflam tabletas 100 mg@Diclofenac, Cataflam tabletas 125 mg@Diclofenac, Cataflam suspension 1.8mg/1cc@Diclofenac, Cataflam gotas","","","","","");
 remedio[46]=new farmaco("MELOXICAM","ANTIINFLAMATORIOS (AINES)","INHIBIDOR COX","DA: 7.5-15 mg c/24h VO EV","","Meloxicam tabletas 7.5 mg@Meloxicam tabletas 15 mg@Meloxicam suspension 7.5mg/5ml","","","","","");
 remedio[47]=new farmaco("OMEPRAZOL","ANTIACIDOS GASTRICOS","INHIBIDOR BOMBA DE PROTONES","DA (ERGE) Inicio: 20-40 mg c/24h VO@DA (ERGE) Mantenimiento: 20 mg c/12h VO@DP (5-10 Kg) 5 mg c/24h VO@DP (10-20 Kg) 10 mg c/24h VO@DP (>20 Kg) 20 mg c/24h VO","","Omevax tabletas 10 mg@Omeprazol, Omevaxl, Omez, Omezul tabletas 20 mg@Omevax tabletas 40 mg@Omeprazol, Omebloc Ampollas 40 mg","","","","","");
-       remedio[47].indic="Tratamiento de &uacute;lceras duodenales y g&aacute;stricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patolog&iacute;as dependientes de hipersecreci&oacute;n g&aacute;strica.";
-       remedio[47].desc="Antial&eacute;cido inhibidor de la bomba de protones de las c&eacute;lulas parietales del estomago";
+       remedio[47].indic="Tratamiento de úlceras duodenales y gástricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patologías dependientes de hipersecreción gástrica.";
+       remedio[47].desc="Antialécido inhibidor de la bomba de protones de las células parietales del estomago";
        remedio[47].cindic="Embarazo y lactancia";
 
 remedio[48]=new farmaco("CANDESARTAN","ANTIHIPERTENSIVOS","ARA II","DA: 8-16 mg c/24h VO","30 mg/Kg","Candesartan, Blopress comprimidos 8 mg@Candesartan, Blopress comprimidos 16 mg","","","","","");
 remedio[49]=new farmaco("CAPECITABINA","CITOSTATICOS","","DA: 2500 MG/M2 C/12h VO","30 mg/Kg","Capecitabina  tabletas 500 mg","","","","","");
 remedio[50]=new farmaco("CLORFERINAMINA","ANTIALERGICOS","ANTAGONISTA H1","DP: 0.25-0.5 mg/kg/dia C/6h o C/8h VO@DA: 4 mg C/6h o C/8h VO","30 mg/Kg","Clorferinamina, Clorotrimetron  tabletas 4 mg@Clorferinamina, Clorotrimetron  tabletas 8 mg@Clorferinamina, Clorotrimetron  suspension 2.5mg/1cc@Clorferinamina, Clorotrimetron  ampolla 10 mg","","","","","");
-       remedio[50].indic="Tratamiento b&aacute;sico de la rinitis al&eacute;rgica estacional, rinitis al&eacute;rgicas perennes, conjuntivitis al&eacute;rgica, prurito y urticaria de origen al&eacute;rgico, dermatosis al&eacute;rgicas, picaduras de insectos.";
-       remedio[50].desc="Antial&eacute;rgico y antihistam&iacute;nico.";
-       remedio[50].cindic="Insuficiencia renal, ni&ntilde;os menores de 6 a&ntilde;os, embarazo y lactancia.";
+       remedio[50].indic="Tratamiento básico de la rinitis alérgica estacional, rinitis alérgicas perennes, conjuntivitis alérgica, prurito y urticaria de origen alérgico, dermatosis alérgicas, picaduras de insectos.";
+       remedio[50].desc="Antialérgico y antihistamínico.";
+       remedio[50].cindic="Insuficiencia renal, niños menores de 6 años, embarazo y lactancia.";
 
 remedio[51]=new farmaco("METILPREDNISOLONA","AGENTES ESTEROIDEOS","","DP: 0.5-1.7 mg/kg/dia C/6h o C/8h o C/12h VO EV IM","30 mg/Kg","Metilprednisolona, Solumedrol tabletas 40 mg","","","","","");
 remedio[52]=new farmaco("BICALUTAMIDA","HORMONALES","","DA: 50 mg/dia c/24h VO","30 mg/Kg","Bicalutamida tabletas 50 mg","","","","","");
 remedio[53]=new farmaco("CLARITROMICINA","ANTIBIOTICOS","MACROLIDO","DA: 250-500 mg c/12h VO EV@DP: 7.5 mg/Kg c/12h VO EV","15 mg/kg c/12h VO EV","Claritromicina, BinoclaR,klabax, tabletas 250 mg@Claritromicina, Binoclar, Claranta, Claritic, Claritron, Clarivax, Klabax, Klaricid tabletas 500 mg@Claritromicina, Klaricid suspension 125mg/5ml @Clarittromicina, Claritic, Clarivax, Klaricid suspension 250mg/5cc@Claritron, Klaricid vial iny de 500 mg@Klaricid U.D tabletas liberación modificada 500 mg","","","","","");
-       remedio[53].indic="Infecciones causadas por g&eacute;rmenes susceptibles: Neomonia por micoplasma pneumoniae, faringitis bacteriana por staphylococcus epidermidis, N gonorrohoeae, infecciones de piel y tejidos blandos. Endocarditis bacteriana. Helicobacter pylori";
-       remedio[53].desc="Antibi&oacute;tico macrolido";
-       remedio[53].cindic="Insuficiencia renal y-o hep&aacute;tica. Se recomienda no administrar durante el embarazo ni durante la lactancia.";
+       remedio[53].indic="Infecciones causadas por gérmenes susceptibles: Neomonia por micoplasma pneumoniae, faringitis bacteriana por staphylococcus epidermidis, N gonorrohoeae, infecciones de piel y tejidos blandos. Endocarditis bacteriana. Helicobacter pylori";
+       remedio[53].desc="Antibiótico macrolido";
+       remedio[53].cindic="Insuficiencia renal y-o hepática. Se recomienda no administrar durante el embarazo ni durante la lactancia.";
 remedio[54]=new farmaco("LANSOPRAZOL","ANTIACIDOS GASTRICOS","INHIBIDOR BOMBA DE PROTONES","DA (ERGE) Inicio: 20-40 mg c/24h VO@DA (ERGE) Mantenimiento: 20 mg c/12h VO@DP (5-10 Kg) 5 mg c/24h VO@DP (10-20 Kg) 10 mg c/24h VO@DP (>20 Kg) 20 mg c/24h VO","","Lansoprazol tabletas 20 mg","","","","","");
-       remedio[54].indic="Tratamiento de &uacute;lceras duodenales y g&aacute;stricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patolog&iacute;as dependientes de hipersecreci&oacute;n g&aacute;strica.";
-       remedio[54].desc="Antial&eacute;cido inhibidor de la bomba de protones de las c&eacute;lulas parietales del estomago";
+       remedio[54].indic="Tratamiento de úlceras duodenales y gástricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patologías dependientes de hipersecreción gástrica.";
+       remedio[54].desc="Antialécido inhibidor de la bomba de protones de las células parietales del estomago";
        remedio[54].cindic="Embarazo y lactancia";
 remedio[55]=new farmaco("RANITINIDA","ANTIACIDOS GASTRICOS","ANTIHISTAMINICOS","DA:  150-300 mg c/12h VO","","Ranitidina, Gastac, Enteral, Vizerul tabletas 150 mg@Ranitidina, Gastac, Enteral, Vizerul tabletas 300 mg","","","","","");
-       remedio[55].indic="Tratamiento de &uacute;lceras duodenales y g&aacute;stricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patolog&iacute;as dependientes de hipersecreci&oacute;n g&aacute;strica.";
-       remedio[55].desc="Anti&aacute;cido inhibidor de receptores histam&iacutenicos H<sub>2<sub>.";
+       remedio[55].indic="Tratamiento de úlceras duodenales y gástricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patologías dependientes de hipersecreción gástrica.";
+       remedio[55].desc="Antiácido inhibidor de receptores histamínicos H<sub>2<sub>.";
        remedio[55].cindic="Embarazo y lactancia";
 remedio[56]=new farmaco("CIMETIDINA","ANTIACIDOS GASTRICOS","ANTIHISTAMINICOS","DA:  200 mg/dosis c/6h VO@DA:  200 mg/dosis c/4h o c/6h IM EV","","Cimeditina, Cimetix, tabletas 200 mg@Cimetidina solucion inyectable 200mg/2ml","","","","","");
-       remedio[56].indic="Tratamiento de &uacute;lceras duodenales y g&aacute;stricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patolog&iacute;as dependientes de hipersecreci&oacute;n g&aacute;strica.";
-       remedio[56].desc="Anti&aacute;cido inhibidor de receptores histam&iacutenicos H<sub>2<sub>.";
+       remedio[56].indic="Tratamiento de úlceras duodenales y gástricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patologías dependientes de hipersecreción gástrica.";
+       remedio[56].desc="Antiácido inhibidor de receptores histamínicos H<sub>2<sub>.";
        remedio[56].cindic="Embarazo y lactancia";
 remedio[57]=new farmaco("FAMOTINIDA","ANTIACIDOS GASTRICOS","ANTIHISTAMINICOS","DA:  20 mg/dosis c/12h VO","A","famotinida, Famogel tabletas 20 mg@Famotinida, Famogel tabletas 40 mg","","","","","");
-       remedio[57].indic="Tratamiento de &uacute;lceras duodenales y g&aacute;stricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patolog&iacute;as dependientes de hipersecreci&oacute;n g&aacute;strica.";
-       remedio[57].desc="Anti&aacute;cido inhibidor de receptores histam&iacutenicos H<sub>2<sub>.";
+       remedio[57].indic="Tratamiento de úlceras duodenales y gástricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patologías dependientes de hipersecreción gástrica.";
+       remedio[57].desc="Antiácido inhibidor de receptores histamínicos H<sub>2<sub>.";
        remedio[57].cindic="Embarazo y lactancia";
 remedio[58]=new farmaco("AMOXICILINA","ANTIBIOTICOS","BETALACTAMICOS","DP:  50 mg/kg/dia c/12h VO","","Amoxicilina, Amoxal suspension 250mg/5ml@Amoxicilina, Amoxiduo suspension 750mg/5ml","","","","","");
        remedio[58].indic="";
        remedio[58].desc="Aminopenicilina";
        remedio[58].cindic="Embarazo y lactancia";
 remedio[59]=new farmaco("AMOXICILINA + CLAVULANICO","ANTIBIOTICOS","BETALACTAMICOS","DP:  50 mg/kg/dia c/12h VO","","Amoxicilina, Fulgram, Augmentin suspension 250mg/5ml@Amoxicilina, Amoxiduo suspension 750mg/5ml","","","","","");
-       remedio[59].indic="Tratamiento de &uacute;lceras duodenales y g&aacute;stricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patolog&iacute;as dependientes de hipersecreci&oacute;n g&aacute;strica.";
+       remedio[59].indic="Tratamiento de úlceras duodenales y gástricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patologías dependientes de hipersecreción gástrica.";
        remedio[59].desc="";
        remedio[59].cindic="Embarazo y lactancia";
 remedio[60]=new farmaco("LEVOTIROXINA","TIROIDEOS","","DA:  50-100 mcg/dia c/24h VO","","Levotiroxina, Euthirox tabletas 50 mcg@Levotiroxina, Euthirox tabletas 100 mcg@Levotiroxina, Euthirox tabletas 125 mcg@Levotiroxina, Euthirox tabletas 150 mcg@Levotiroxina, Euthirox tabletas 175 mcg@Levotiroxina, Euthirox tabletas 200 mcg","","","","","");
@@ -304,8 +304,8 @@ remedio[112]=new farmaco("ONDANSETRON","ANTIEMETICOS","","D.A. 8-32 mg/dia c/24h
        remedio[112].cindic="";
        remedio[112].interac=""; 
 remedio[113]=new farmaco("PANTOPRAZOL","ANTIACIDOS GASTRICOS","INHIBIDOR BOMBA DE PROTONES","DA: 20-40 mg/dia c/24h VO EV","","Pantoprazol, Pantop 20, Zovanta en tabletas de 20 mg@Pantoprazol,Pantop 40, Zovanta en tabletas de 40 mg@Pantop 40 en polvo liofilizado inyectable de 40 mg","","","","","");
-       remedio[113].indic="Tratamiento de &uacute;lceras duodenales y g&aacute;stricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patolog&iacute;as dependientes de hipersecreci&oacute;n g&aacute;strica.";
-       remedio[113].desc="Antial&eacute;cido inhibidor de la bomba de protones de las c&eacute;lulas parietales del estomago";
+       remedio[113].indic="Tratamiento de úlceras duodenales y gástricas, esofagitis por reflujo, sindrome de Zollinger=Ellison y todas las patologías dependientes de hipersecreción gástrica.";
+       remedio[113].desc="Antiácido inhibidor de la bomba de protones de las células parietales del estomago";
        remedio[113].cindic="Embarazo y lactancia";
 remedio[114]=new farmaco("PRAVASTATINA","METABOLISMO LIPIDICO","","D.A. 10-20 mg/dia c/24h VO@ Dosis max 40 mg/dia c/24h VO","","Pravastatina en comprimidos de 10 mg@Pravastatina en comprimidos de 20 mg@Pravastatina sodica, Pravacol en tabletas de 10 mg@Pravacol en tabletas de 20 mg@Pravacol en tabletas de 40 mg","","","","","");
 remedio[115]=new farmaco("SIBUTRAMINA","ENFERMEDADES NUTRICIONALES","","D.A. 10 mg/dia c/24h VO@D.A. 15 mg/dia c/24h","","Sibutramina, Milical, Repentil, Siluval en capsulas de 10 mg@Sibutramina, Repentil, Siluval en capsulas de 15 mg","","","","","");
