@@ -4104,10 +4104,12 @@ generapagina3(ind);
 }
 function Agrega_farmacod(){
 var l=remedio.length;
-var descr=document.getElementById("nfarmaco").value;
-alert(descr);
+var descr=document.getElementById("nfarmaco").value.toUpperCase();
+var grupo=document.getElementById("ngrupo").value.toUpperCase();
+adicionar(grupo);
+//alert(descr);
 quitardivedit();
-remedio[l]=new farmaco(descr,tipoactivo,"","","","","","","","");
+remedio[l]=new farmaco(descr,grupo,"","","","","","","","");
     
 generapagina2();
 }
@@ -4151,6 +4153,7 @@ textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
 textoT+=' <button title="Cancelar" onclick="quitardivedit()" style="font-size:100%">'+ iconocerrar+'</button></div>';
 textoT+='<div>';
 textoT+='<br><br>Descripcion: '+makeKeyInput("nfarmaco","Agrega farmaco","T30","");
+textoT+='<br><br>Grupo: '+makeKeyInput("ngrupo","Agrega grupo","T30",tipoactivo);
 textoT+=' <br><button title="Agregar" onclick="Agrega_farmacod()" style="font-size:100%">'+ iconoplus+'</button></div>';
 
 textoT+='</div>';
