@@ -6,8 +6,21 @@ const files =
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
     'img/icon.png',
     'datos.js',
-    'crearpdf.js'
- 
+    'crearpdf.js',
+    'js/jspdfv153.js',
+    'js/Filesaver.js',
+    'js/addimagev153.js',
+    'js/split_text_to_sizev153.js',
+    'js/standard_fonts_metricsv153.js',
+    'js/cell153.js',
+    'js/png.js',
+    'js/png_support.js',
+    'js/zlib.js',
+    'js/selectFile.js',
+    'manifest.json',
+    'bdatos.txt',
+    'webfonts/fa-solid-900.woff2',
+    'css/all.css'
 ];
 
 self.addEventListener('install', event => {
