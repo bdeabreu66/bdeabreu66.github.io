@@ -1408,9 +1408,10 @@ getFile.simulate();
 }
 function iniciar(){
 Act_data();
-iniciar2();
+//iniciar2();
 }
 function iniciar2(){
+
 //graficarpH();
 define_signos();
 hoy=new Date();
@@ -1442,13 +1443,13 @@ inicialabplantilla();
 iniciaHistoriaPlantilla();
 //    var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
 //    saveAs(blob, "hello world.txt");
-//inicia_bd();
+inicia_bd();
 }
 var db;
 function Actualiza_farmaco(ind){
 const transaction=db.transaction(["REMEDIOS"],'readwrite');
 const store=transaction.objectStore("REMEDIOS");
-const updateRequest=store.put(remedio[ind],ind+1);
+const updateRequest=store.put(remedio[ind],ind);
 updateRequest.onsuccess=()=>{ console.log("Actualizado")};
 updateRequest.onerror=()=>{ console.log("Error actualizando")};
 }
@@ -1477,9 +1478,10 @@ const request=indexedDB.open(DB_NAME,DB_VERSION);
 request.onupgradeneeded= function(e){
  db=e.target.result;
  if (!db.objectStoreNames.contains('REMEDIOS')) {
-  const objectStore=db.createObjectStore('REMEDIOS',{autoIncrement: true});
-  for (var i=1;i<remedio.length; i++) {
-    objectStore.add(remedio[i-1]);
+  const objectStore=db.createObjectStore('REMEDIOS');
+  
+  for (var i=0;i<remedio.length; i++) {
+    objectStore.put(remedio[i],i);
    }
  }
 }
@@ -4178,7 +4180,7 @@ document.getElementById("dosis2").value=document.getElementById("dosis").value;
 }
 function Agrega_presd(ind){
 var descr=document.getElementById("npres").value;
-alert(descr);
+//alert(descr);
 quitardivedit();
 if (remedio[ind].presentacion!="") {remedio[ind].presentacion+='@'+descr;} else {remedio[ind].presentacion=descr;}
 Actualiza_farmaco(ind)
@@ -4186,9 +4188,10 @@ generapagina3(ind);
 }
 function Agrega_dosisd(ind){
 var descr=document.getElementById("ndosis").value;
-alert(descr);
+//alert(descr);
 quitardivedit();
 if (remedio[ind].dosisa!="") {remedio[ind].dosisa+='@'+descr;} else {remedio[ind].dosisa=descr;}
+Actualiza_farmaco(ind)
 generapagina3(ind);
 }
 function Agrega_farmacod(){
@@ -4199,7 +4202,7 @@ adicionar(grupo);
 //alert(descr);
 quitardivedit();
 remedio[l]=new farmaco(descr,grupo,"","","","","","","","");
-    
+Actualiza_farmaco(l)   
 generapagina2();
 }
 function Agrega_pres(ind){
