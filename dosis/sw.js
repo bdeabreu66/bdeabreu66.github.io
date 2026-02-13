@@ -7,7 +7,7 @@ const files =
     'datos.js',
     'crearpdf.js',
     'js/jspdfv153.js',
-    'js/Filesaver.js',
+    'js/FileSaver.js',
     'js/addimagev153.js',
     'js/split_text_to_sizev153.js',
     'js/standard_fonts_metricsv153.js',
