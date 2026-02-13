@@ -478,6 +478,35 @@ agregadosis(items[i]);
 }
 }
 
+function Act_data(){
+var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+var nombrepag="https://bdeabreu66.github.io/dosis/"+"bdatos.txt";
+fetch(nombrepag,myInit)
+        .then(ajaxPositive)
+        .catch(showError);
+function ajaxPositive(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.text().then(showResult);
+      } else {
+        showError('status code: ' + response.status);
+      }
+    }
+ function showResult(txt) {
+        console.log('muestro respuesta: ', txt);
+        remedio=JSON.parse(txt);
+        iniciar2();
+  }
+
+function showError(err) { 
+      console.log('muestor error', err);
+      remedio=null;
+       iniciar2();
+    }
+}
+
+
 function agregadosis(texto){
 var j=texto.indexOf(':');
 var gener=texto.substring(0,j);
@@ -949,6 +978,7 @@ case 16: document.getElementById("tamano").selectedIndex=3;break;
 function guardar(){
 closeNav();
 guardar_default();
+generar_bd_txt();
 }
 
 
@@ -1376,14 +1406,16 @@ archivos1.addEventListener('change', function(e){procesarimagen(e,numimagen)}, f
 getFile.simulate();
 
 }
-
 function iniciar(){
-
+Act_data();
+iniciar2();
+}
+function iniciar2(){
 //graficarpH();
 define_signos();
 hoy=new Date();
 leer_default();
-leerdatos();
+//leerdatos();
 remedio.sort(comparar);
 for(var i=0;i<remedio.length;i++){
 adicionar(remedio[i].tipo); 
@@ -1398,6 +1430,7 @@ function comparar(a,b){
    }
 }
 indicetipo=0;
+
 generapagina1();
 getFile = new selectFile;
 getFile.targets('choose1','selected');
@@ -1409,9 +1442,63 @@ inicialabplantilla();
 iniciaHistoriaPlantilla();
 //    var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
 //    saveAs(blob, "hello world.txt");
+//inicia_bd();
+}
+var db;
+function Actualiza_farmaco(ind){
+const transaction=db.transaction(["REMEDIOS"],'readwrite');
+const store=transaction.objectStore("REMEDIOS");
+const updateRequest=store.put(remedio[ind],ind+1);
+updateRequest.onsuccess=()=>{ console.log("Actualizado")};
+updateRequest.onerror=()=>{ console.log("Error actualizando")};
+}
+function generar_bd_txt(){
+/*var sal='[';
+ for (var j=0;j<remedio.length;j++){
+ sal+='{'
+ for (const [clave ,valor] of Object.entries(remedio[j])) {
+sal+=clave+':"'+valor+'",\n';
+  } 
+  sal+='},'+'\n';
+}
+sal+=']';
+*/
+var sal=JSON.stringify(remedio,null,2);
+ let narch='bdatos.txt'
+ var blob = new Blob([sal], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,narch);
 
 }
 
+function inicia_bd(){
+const DB_NAME="FARMACOS";
+const DB_VERSION=1;
+const request=indexedDB.open(DB_NAME,DB_VERSION);
+request.onupgradeneeded= function(e){
+ db=e.target.result;
+ if (!db.objectStoreNames.contains('REMEDIOS')) {
+  const objectStore=db.createObjectStore('REMEDIOS',{autoIncrement: true});
+  for (var i=1;i<remedio.length; i++) {
+    objectStore.add(remedio[i-1]);
+   }
+ }
+}
+request.onsuccess= function(e){
+db=e.target.result;
+let transaction=db.transaction(["REMEDIOS"],"readonly");
+let objectStore= transaction.objectStore("REMEDIOS");
+let getAllRequest=objectStore.getAll();
+getAllRequest.onsuccess=function(){
+ remedio=getAllRequest.result;
+ }
+getAllRequest.onerror=function(){
+ alert("Error leyendo base de datos");
+ }
+
+}
+
+
+}
 
 var iconoregresar='<i class="fa fa-redo"></i>';
 var iconogrupos='<i class="fa fa-redo"></i>';
@@ -3606,6 +3693,7 @@ var textoT="";
 document.getElementById("farmaco").innerHTML="GRUPOS FARMACOLOGICOS";
 var texto;
 //alert(indicetipo);
+listatipo.sort();
 for (var i=0;i<listatipo.length;i++){
    texto=listatipo[i];
    if (i==indicetipo){
@@ -4093,6 +4181,7 @@ var descr=document.getElementById("npres").value;
 alert(descr);
 quitardivedit();
 if (remedio[ind].presentacion!="") {remedio[ind].presentacion+='@'+descr;} else {remedio[ind].presentacion=descr;}
+Actualiza_farmaco(ind)
 generapagina3(ind);
 }
 function Agrega_dosisd(ind){
