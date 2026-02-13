@@ -2298,5 +2298,21 @@
     "farcin": "",
     "fardin": "",
     "interac": ""
+  },
+  {
+    "ng": "RIVEROXABAN",
+    "tipo": "ANTICOAGULANTES",
+    "subtipo": "",
+    "dosisa": "DA: 15 mg/dia c/24h VO",
+    "ren": "",
+    "presentacion": "Arudil tabletas 15 mg",
+    "indadic": "",
+    "desc": "",
+    "indic": "",
+    "cindic": "",
+    "ram": "",
+    "farcin": "",
+    "fardin": "",
+    "interac": ""
   }
 ]
