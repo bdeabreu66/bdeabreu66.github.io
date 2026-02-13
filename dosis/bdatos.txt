@@ -1393,7 +1393,7 @@
     "subtipo": "BETABLOQUEADOR",
     "dosisa": "D.A 40-600 mg/dia c/12h VO",
     "ren": "30 mg/Kg",
-    "presentacion": "Propanolol tabletas 40 mg",
+    "presentacion": "Propanolol tabletas 40 mg@Propanolol  tabletas 60 mg",
     "indadic": "",
     "desc": "",
     "indic": "",
