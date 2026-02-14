@@ -763,13 +763,15 @@ alert(contenido);
 function openNav() {
 var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
   texto+='<a href="javascript:void(0)" onclick="Infogeneral();">Informaci&oacute;n general</a>';
-  texto+='<a href="javascript:void(0)" onclick="Configurarplantilla();">'+"Configurar plantilla"+'</a>';
+  texto+='<a href="javascript:void(0)" onclick="5plantilla();">'+"Configurar plantilla"+'</a>';
   texto+='<a href="javascript:void(0)" onclick="Equilibrioacidobase();">'+"Equilibrio Acido-base"+'</a>';
   texto+='<a href="javascript:void(0)" onclick="pregunta_signo(Signos[1]);">'+"Signos"+'</a>';
 
   //texto+='<a  href="javascript:void(0)"onclick="mdatospaciente();">'+"Datos del paciente"+'</a>';
   texto+='<a  href="javascript:void(0)"onclick="guardar();">'+"Guardar"+'</a>';
   texto+='<a  href="javascript:void(0)"onclick="cargar();">'+"Cargar"+'</a>';
+  texto+='<a  href="javascript:void(0)"onclick="cerrar();">'+"Cerrar"+'</a>';
+
  // texto+='<a  href="javascript:void(0)"onclick="Editarrecipe();">'+"Editar recipe"+'</a>' 
   //texto+='<a  href="javascript:void(0)"onclick="makepdf();">'+"Generar recipe"+'</a>' 
   document.getElementById("mySidenav").innerHTML=texto;
@@ -938,6 +940,9 @@ function asignafecha(){
 fechaderecipe= new Date(document.getElementById("fecharecipe").value); 
 }
 
+function cerrar(){
+window.close();
+}
 function cerrarConfigPlantilla(){
 var plantilla = document.getElementById("plantilla");
 plantilla.style="display: none;";
@@ -3319,7 +3324,9 @@ else {
    prosunidad(" MUI/DIA ");
    prosunidad(" APLICACION ");
    prosunidad(" APLICACION/DIA ");
+// Unidad_dosis=["MG","MG/DIA","G/DOSIS","MG/DOSIS","MCG/DOSIS","G","G/DIA","MCG","MCG/DIA","MCG/MIN","GOTAS","GOTAS/DIA","GOTAS/MIN","MUI","MUI/DIA","APLICACION","APLICACION/DIA" ];
 var i3=dosism.indexOf("/M2");
+
    if (i3>=0){
    var dosisu=dosism.substring(i3);
    var i2=dosisu.indexOf(" ");
@@ -3783,6 +3790,55 @@ textoT+='<p style="text-indent: 10px; text-align: justify; border: none;">'+text
 div5.innerHTML=textoT;
 }
 
+function valerta2(num,ind){
+let color="blue";
+var textoT=encabezado[num].fontcolor(color) + '<br><br>';;
+var div5 = document.getElementById("pag5");
+div5.style="position: fixed;top :0px; left: 10px; overflow-y: auto; width: 90% ; height: 50%; background-color: gray;color:white; border: 3px solid #73AD21;";
+textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:90%;">';
+textoT+=' <button  title="Salir" onclick="editar_texto('+num+','+ind+');" > E </button>';
+textoT+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
+textoT+='<p style="text-indent: 10px; text-align: justify; border: none;">'+texto_prop(num,ind)+'</p><br> ';
+div5.innerHTML=textoT;
+}
+
+function texto_prop(num,ind){
+let textoT='';
+if (num==0) {textoT=remedio[ind].desc;}
+if (num==1) {textoT=remedio[ind].indic;}
+if (num==2) {textoT=remedio[ind].cindic;}
+if (num==3) {textoT+=remedio[ind].interac;}
+if (num==4) {textoT=remedio[ind].ram;}
+if (num==5) {textoT=remedio[ind].farcin;}
+if (num==6) {textoT=remedio[ind].fardin;}
+return textoT;
+}
+
+function editar_texto(num,ind){
+let color="blue";
+var textoT=encabezado[num].fontcolor(color) + '<br><br>';;
+var div5 = document.getElementById("pag5");
+div5.style="position: fixed;top :0px; left: 10px; overflow-y: auto; width: 90% ; height: 50%; background-color: gray;color:white; border: 3px solid #73AD21;";
+textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:90%;">';
+textoT+=' <button  title="Salir" onclick="guardar_texto('+num+','+ind+');" > G </button>';
+textoT+=' <button  title="Salir" onclick="quitar();" > x </button></div> <br> <br>';
+textoT+='<textarea id="tedit" width="95%" height="60%">'+texto_prop(num,ind)+'</textarea>';
+//textoT+='<p style="text-indent: 10px; text-align: justify; border: none;">'+texto_prop(num,ind)+'</p><br> ';
+div5.innerHTML=textoT;
+}
+function guardar_texto(num,ind){
+texto=document.getElementById("tedit").value;
+
+if (num==0) {remedio[ind].desc=texto;}
+if (num==1) {remedio[ind].indic=texto;}
+if (num==2) {remedio[ind].cindic=texto;}
+if (num==3) {remedio[ind].interac=texto;}
+if (num==4) {remedio[ind].ram=texto;}
+if (num==5) {remedio[ind].farcin=texto;}
+if (num==6) {remedio[ind].fardin=texto;}
+Actualiza_farmaco(ind);
+valerta2(num,ind)
+}
 var tfg=0;
 var tfga=0;
 var unidcreatglobal=0;
@@ -4109,17 +4165,17 @@ graficarpH(phglobal,bicarbglobal);
 function cambiasup(){document.getElementById("supcorporal").innerHTML='Sup. corporal: '+supcorp2(pesoglobal,alturaglobal)+' m<sup>2</sup>'}
 
 
+var encabezado=["Descripci&oacute;n:","Indicaciones:","Contraindicaciones:","Interacciones:","Reacciones adversas:","Farmacocinetica:","Farmacodinámica:"];
 
 var indiceactivo;
 function dextra(num){
 var textoT,texto;
 textoT="";
-var encabezado=["Descripci&oacute;n:","Indicaciones:","Contraindicaciones:","Interacciones:","Reacciones adversas:","Farmacocinetica:","Farmacodinámica:"];
 var color="blue"
 textoT=encabezado[num].fontcolor(color) + '<br><br>';
 //var indice=listafarmaco[indicefarmaco];
 var indice=indiceactivo;
-
+/*
 if (num==0) {textoT+=remedio[indice].desc;}
 if (num==1) {textoT+=remedio[indice].indic;}
 if (num==2) {textoT+=remedio[indice].cindic;}
@@ -4127,8 +4183,8 @@ if (num==3) {textoT+=remedio[indice].interac;}
 if (num==4) {textoT+=remedio[indice].ram;}
 if (num==5) {textoT+=remedio[indice].farcin;}
 if (num==6) {textoT+=remedio[indice].fardin;}
-
-valerta(textoT);
+*/
+valerta2(num,indice);
 
 }
 function ajuste(){
@@ -4183,7 +4239,7 @@ var descr=document.getElementById("npres").value;
 //alert(descr);
 quitardivedit();
 if (remedio[ind].presentacion!="") {remedio[ind].presentacion+='@'+descr;} else {remedio[ind].presentacion=descr;}
-Actualiza_farmaco(ind)
+Actualiza_farmaco(ind);
 generapagina3(ind);
 }
 function Agrega_dosisd(ind){
@@ -4275,34 +4331,35 @@ document.getElementById("farmaco").innerHTML=remedio[indice].ng;
 
 document.getElementById("breturn").style.display='initial';
 document.getElementById("brereturn").style.display='initial';
-if (remedio[indice].desc!="") {
+
+//if (remedio[indice].desc!="") {
     document.getElementById("bdesc").style.display='initial';
     //textoT+='<INPUT TYPE="button" value="Descripcion" onclick="dextra(0);"> &nbsp';
-}
-if (remedio[indice].indic!="") {
+//}
+//if (remedio[indice].indic!="") {
     document.getElementById("bindic").style.display='initial';
     //textoT+='<INPUT TYPE="button" value="Indicaciones" onclick="dextra(1);"> &nbsp';
-}
-if (remedio[indice].cindic!="") {
+//}
+//if (remedio[indice].cindic!="") {
     document.getElementById("bcindic").style.display='initial';
     //textoT+='<INPUT TYPE="button" value="Contraindicaciones" onclick="dextra(2);"> &nbsp';
-}
-if (remedio[indice].interac!="") {
+//}
+//if (remedio[indice].interac!="") {
     document.getElementById("binterac").style.display='initial';
     //textoT+='<INPUT TYPE="button" value="Contraindicaciones" onclick="dextra(2);"> &nbsp';
-}
-if (remedio[indice].ram!="") {
+//}
+//if (remedio[indice].ram!="") {
     document.getElementById("bram").style.display='initial';
     //textoT+='<INPUT TYPE="button" value="Efectos adversos" onclick="dextra(3);"> &nbsp';
-}
-if (remedio[indice].farcin!="") {
+//}
+//if (remedio[indice].farcin!="") {
     document.getElementById("bfarcin").style.display='initial';
     //textoT+='<INPUT TYPE="button" value="Farmacocinetica" onclick="dextra(4);"> &nbsp';
-}
-if (remedio[indice].fardin!="") {
+//}
+//if (remedio[indice].fardin!="") {
     document.getElementById("bfardin").style.display='initial';
     //textoT+='<INPUT TYPE="button" value="Farmacocinetica" onclick="dextra(4);"> &nbsp';
-}
+//}
 
 
 //if (remedio[indice].ren!="") {textoT+='<INPUT id="btfg" TYPE="button" value="TFG: '+ tfg.toString() +' " onclick="corr_renal();"> &nbsp';}
