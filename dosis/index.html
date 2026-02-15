@@ -195,7 +195,7 @@ transform: scale(1.9);
 <script type="text/javascript" src="crearpdf.js"></script>
 
 <SCRIPT LANGUAGE="JavaScript">
-var mod_edt=false;
+var mod_edt=true;
 function graficapercentil(c,vpercentil,xr,yr){
 var DATA=vpercentil.datos;
 var nx=vpercentil.descrx+" ("+vpercentil.unidx+")";
@@ -4276,6 +4276,8 @@ remedio[l]=new farmaco(descr,grupo,"","","","","","","","");
 Actualiza_farmaco(l)   
 generapagina2();
 }
+var Lista_unid_pres=["mg","g","mcg","ml","cc","mg/ml","g/ml","UI","MUI"];
+var Lista_tipo_pres=["tabletas","comprimidos","grageas","cápsulas","suspensión","solución","solución inyectable","ampollas","jarabe","gotas oftálmicas","aerosol","crema","pomada","gel","óvulo","supositorio"];
 function Agrega_pres(ind,pos){
 var textoT='';
 var div6 = document.getElementById("divedit");
@@ -4283,7 +4285,12 @@ divedit.style="position: fixed;top :150px; left: 80px; width:80% ; height: 70%; 
 textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
 textoT+=' <button title="Cancelar" onclick="quitardivedit()" style="font-size:100%">'+ iconocerrar+'</button></div>';
 textoT+='<div>';
-textoT+='<br><br>Descripcion: '+makeKeyInput("npres","Agrega presentacion","T30","");
+textoT+='<br>Descripcion: '+makeKeyInput("npres","Agrega presentacion","T30","");
+textoT+='<br>Presentacion: '+makeSelectSimple("tipop",Lista_tipo_pres,0)+'<br>';
+textoT+='<br>Valor: '+makeKeyInput("npres1","valor","I4","")+'&nbsp';
+textoT+=makeSelectSimple("unidf1",Lista_unid_pres,0)+'&nbsp/&nbsp';
+textoT+=''+makeKeyInput("npres2","valor","I4","")+'&nbsp';
+textoT+=makeSelectSimple("unidf2",Lista_unid_pres,0)+'<br>';
 textoT+=' <br><button title="Agregar" onclick="Agrega_presd('+ind+','+pos+')" style="font-size:100%">'+ iconoplus+'</button></div>';
 
 textoT+='</div>';

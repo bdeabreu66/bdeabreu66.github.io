@@ -1,4 +1,4 @@
-const currentCache = 'cache-v2.2';
+const currentCache = 'cache-v2.3';
 const files =
 [
     'index.html',
