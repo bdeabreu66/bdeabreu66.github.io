@@ -497,6 +497,7 @@ function ajaxPositive(response) {
         console.log('muestro respuesta: ', txt);
         remedio=JSON.parse(txt);
         iniciar2();
+        
   }
 
 function showError(err) { 
@@ -766,6 +767,7 @@ var texto='<a class="closebtn" onclick="closeNav()">&times;</a>';
   texto+='<a href="javascript:void(0)" onclick="5plantilla();">'+"Configurar plantilla"+'</a>';
   texto+='<a href="javascript:void(0)" onclick="Equilibrioacidobase();">'+"Equilibrio Acido-base"+'</a>';
   texto+='<a href="javascript:void(0)" onclick="pregunta_signo(Signos[1]);">'+"Signos"+'</a>';
+  texto+='<a href="javascript:void(0)" onclick="Restaura_bd()">'+"Restaurar BD"+'</a>';
 
   //texto+='<a  href="javascript:void(0)"onclick="mdatospaciente();">'+"Datos del paciente"+'</a>';
   texto+='<a  href="javascript:void(0)"onclick="toggle_edt();">'+"Modo edicion"+ (mod_edt ?" +":" -")+'</a>';
@@ -937,11 +939,15 @@ switch (tam) {
 }
 }
 var fechaderecipe=new Date();
-
+var rest_bd=false;
 function asignafecha(){
 fechaderecipe= new Date(document.getElementById("fecharecipe").value); 
 }
-
+function Restaura_bd(){
+closeNav();
+rest_bd=true;
+Act_data();
+}
 function cerrar(){
 closeNav();
 window.close();
@@ -1456,7 +1462,7 @@ inicialabplantilla();
 iniciaHistoriaPlantilla();
 //    var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
 //    saveAs(blob, "hello world.txt");
-inicia_bd();
+if (!rest_bd) {inicia_bd();} else {inicia_bd2();}
 }
 var db;
 function Actualiza_farmaco(ind){
@@ -1466,6 +1472,7 @@ const updateRequest=store.put(remedio[ind],ind);
 updateRequest.onsuccess=()=>{ console.log("Actualizado")};
 updateRequest.onerror=()=>{ console.log("Error actualizando")};
 }
+
 function generar_bd_txt(){
 /*var sal='[';
  for (var j=0;j<remedio.length;j++){
@@ -1511,9 +1518,14 @@ getAllRequest.onerror=function(){
  }
 
 }
-
-
 }
+
+function inicia_bd2(){
+ for (var i=0;i<remedio.length; i++) {
+    Actualiza_farmaco(i);
+   }
+}
+
 
 var iconoregresar='<i class="fa fa-redo"></i>';
 var iconogrupos='<i class="fa fa-redo"></i>';
@@ -2884,12 +2896,14 @@ return y;
 function procesar(){
 function nombrevia(nomb){
 switch (nomb){
-case "VO":return "via oral";
-case "EV":return "via endovenosa";
-case "VN":return "via nasal";
-case "VV":return "via vaginal";
-case "IM":return "via intramuscular";
-case "VR":return "via rectal";
+case "VO":return "vía oral";
+case "EV":return "vía endovenosa";
+case "VN":return "vía nasal";
+case "VV":return "vía vaginal";
+case "IM":return "vía intramuscular";
+case "VR":return "vía rectal";
+case "VD":return "vía tópica";
+case "SC":return "vía subcutánea";
 default: return nomb;
 }
 }
@@ -3463,13 +3477,16 @@ presentr.valor1=0;
 presentr.valor2=0;
 presentr.unidad="";
 presentr.unidad2="";
-
+presentr.descr="";
+var separa=present.split('^');
+if (separa.length==1) {presentr.descr=present;present2=present} else {presentr.descr=separa[0];present2=separa[1];}
 presentr.tipo="";
-var presentm=present.toUpperCase()+" ";
+
+var presentm=present2.toUpperCase()+" ";
 
 var i=presentm.indexOf("%");
 if (i>0){
-     presentr.unidad="G";
+     presentr.unidad="g";
      presentr.unidadmasa="G";
  var present2=presentm.substring(0,i);
      present2=present2.trim();
@@ -3477,46 +3494,49 @@ if (i>0){
      present2=present2.substring(li);
      presentr.valor=(parseFloat(present2)/100).toString(); 
      //alert(presentr.valor);
-     presentr.unidad2="ML";
+     presentr.unidad2="ml";
 
 }
 
-
 var i=presentm.indexOf(" MG ");
 if (i>0){
-     presentr.unidad="MG";
-     presentr.unidadmasa="MG";
+     presentr.unidad="mg";
+     presentr.unidadmasa="mg";
  var present2=presentm.substring(0,i);
      present2=present2.trim();
  var li=present2.lastIndexOf(" ");
      present2=present2.substring(li);
      presentr.valor=present2;
+     presentr.valor1=parseFloat(present2);
 }
 
 i=presentm.indexOf(" G ");
 if (i>0){
-     presentr.unidad="G";
-     presentr.unidadmasa="G";
+     presentr.unidad="g";
+     presentr.unidadmasa="g";
  var present2=presentm.substring(0,i);
      present2=present2.trim();
  var li=present2.lastIndexOf(" ");
      present2=present2.substring(li);
      presentr.valor=present2;
+     presentr.valor1=parseFloat(present2);
 }
 
 i=presentm.indexOf(" MCG ");
 if (i>0){
-     presentr.unidad="MCG";
-     presentr.unidadmasa="MCG";
+     presentr.unidad="mcg";
+     presentr.unidadmasa="mcg";
  var present2=presentm.substring(0,i);
      present2=present2.trim();
  var li=present2.lastIndexOf(" ");
      present2=present2.substring(li);
      presentr.valor=present2;
+     presentr.valor1=parseFloat(present2);
 }
 
 i=presentm.indexOf(" MUI ");
-if (i>0){
+
+if (i>-1){
      presentr.unidad="MUI";
      presentr.unidadmasa="MUI";
  var present2=presentm.substring(0,i);
@@ -3524,6 +3544,7 @@ if (i>0){
  var li=present2.lastIndexOf(" ");
      present2=present2.substring(li);
      presentr.valor=present2;
+     presentr.valor1=parseFloat(present2);
 }
 
 //     presentr.tipo="SUSP"; 
@@ -3537,8 +3558,8 @@ if (i>0){
         presentr.valor2=parseFloat(aux[2]);
         presentr.valor=parseFloat(aux[0])/parseFloat(aux[2]);
         //alert(presentr.valor);
-        presentr.unidad=aux[1];
-        presentr.unidad2=aux[3];
+        presentr.unidad=aux[1].toLowerCase();
+        presentr.unidad2=aux[3].toLowerCase();
        presentr.via[0]="VO";
      }
     else {
@@ -3551,40 +3572,47 @@ if (i>0){
            presentr.valor1=parseFloat(aux[0]);
            presentr.valor2=parseFloat(aux[2]);
            presentr.valor=parseFloat(aux[0])/parseFloat(aux[2]);
-           presentr.unidad=aux[1];
-           presentr.unidad2=aux[3];
+           presentr.unidad=aux[1].toLowerCase();
+           presentr.unidad2=aux[3].toLowerCase();
            presentr.via[0]="VO";
         }
        } 
 
 i=presentm.indexOf(" CREMA ");
-if (i>=0){
+if (i>-1){
      presentr.tipo="CREMA"; 
      presentr.via[0]="VD";
      presentr.via[1]="VV";
 
 }
+i=presentm.indexOf(" POMADA ");
+if (i>-1){
+     presentr.tipo="POMADA"; 
+     presentr.via[0]="VD";
+//     presentr.via[1]="VV";
+
+}
 i=presentm.indexOf(" TABLET");
-if (i>=0){
+if (i>-1){
      presentr.tipo="TAB"; 
      presentr.via[0]="VO";
 }
 
 i=presentm.indexOf(" GRAGEAS");
-if (i>=0){
+if (i>-1){
      presentr.tipo="GRAG"; 
      presentr.via[0]="VO";
 }
 
 i=presentm.indexOf(" CAPSULA");
-if (i>=0){
+if (i>-1){
      presentr.tipo="CAP"; 
      presentr.via[0]="VO";
 
 }
 
 i=presentm.indexOf(" CÁPSULA");
-if (i>=0){
+if (i>-1){
      presentr.tipo="CAP"; 
      presentr.via[0]="VO";
 
@@ -3596,87 +3624,93 @@ if (i>=0){
 
 
 i=presentm.indexOf(" COMPRIMIDO");
-if (i>=0){
+if (i>-1){
      presentr.tipo="COMP"; 
      presentr.via[0]="VO";
 }
 
 i=presentm.indexOf(" AEROSOL");
-if (i>=0){
+if (i>-1){
      presentr.tipo="AERO"; 
      presentr.via[0]="VN";
      
 }
 
 i=presentm.indexOf(" AMPOLL");
-if (i>=0){
+if (i>-1){
      presentr.tipo="AMP"; 
      presentr.via[0]="EV";
      presentr.via[1]="IM";
 
 }
 i=presentm.indexOf(" GOTAS");
-if (i>0){
+if (i>-1){
      presentr.tipo="GOTAS"; 
      presentr.via[0]="VO";
 
 }
 i=presentm.indexOf(" SUPOSITORIO");
-if (i>0){
+if (i>-1){
      presentr.tipo="SUP"; 
      presentr.via[0]="VR";
 }
 
 i=presentm.indexOf(" SOLUCION");
-if (i>0){
+if (i>-1){
      presentr.tipo="SOL"; 
      presentr.via[0]="VO";
 }
 
+i=presentm.indexOf(" SOLUCIÓN");
+if (i>-1){
+     presentr.tipo="SOL"; 
+     presentr.via[0]="VO";
+}
+
+i=presentm.indexOf(" SOLUC");
+
+if (i>-1){
+     presentr.tipo="SOL"; 
+     presentr.via[0]="VO";
+}
 i=presentm.indexOf(" INFUSI");
-if (i>0){
+if (i>-1){
      presentr.tipo="INF"; 
      presentr.via[0]="EV";
 }
 
 i=presentm.indexOf(" OVULO");
-if (i>0){
+if (i>-1){
       presentr.tipo="OVU"; 
      presentr.via[0]="VV";
 }
-
 i=presentm.indexOf(" SUSPEN");
-if (i>0){
+if (i>-1){
      presentr.tipo="SUSP"; 
      presentr.via[0]="VO";
 }
 
-
-
-
-
-
 i=presentm.indexOf(" JARABE");
-if (i>0){
+if (i>-1){
      presentr.tipo="JAR"; 
      presentr.via[0]="VO";
 }
-
 i=presentm.indexOf(" INYECTABLE");
-if (i>=0){
-    presentr.tipo="AMP"; 
+if (i>-1){
+    presentr.tipo="SINY"; 
      presentr.via[0]="EV";
      presentr.via[1]="IM";
   
 }
 
 i=presentm.indexOf(" OFTALM");
-if (i>0){
+if (i>-1){
+     presentr.tipo="OFT"
      presentr.via[0]="VOF";
 }
 
 i=presentm.indexOf(" INHALAR");
-if (i>=0){
+if (i>-1){
 //     presentr.tipo="INH"; 
      presentr.via[0]="VN";
 }
@@ -4250,10 +4284,20 @@ function actinv(){
 document.getElementById("dosis2").value=document.getElementById("dosis").value;
 }
 function Agrega_presd(ind,pos){
+
 var descr=document.getElementById("npres").value;
-//alert(descr);
+var indp=document.getElementById("tipop").value;
+var indu1=document.getElementById("unidf1").value;
+var indu2=document.getElementById("unidf2").value;
+var v1=document.getElementById("npres1").value;
+var v2=document.getElementById("npres2").value;
+var todo=descr+ ' ' + '^'+' '+indp+' ';
+if (parseInt(v2)==0 || v2=="" ) {todo+=v1+' '+indu1} else {todo+=v1+indu1+'/'+v2+indu2}
+//alert(todo);
 quitardivedit();
-if (remedio[ind].presentacion!="") {remedio[ind].presentacion+='@'+descr;} else {remedio[ind].presentacion=descr;}
+present[pos]=todo;
+remedio[ind].presentacion=present.join('@');
+//if (remedio[ind].presentacion!="") {remedio[ind].presentacion+='@'+descr;} else {remedio[ind].presentacion=descr;}
 Actualiza_farmaco(ind);
 generapagina3(ind);
 }
@@ -4276,26 +4320,91 @@ remedio[l]=new farmaco(descr,grupo,"","","","","","","","");
 Actualiza_farmaco(l)   
 generapagina2();
 }
-var Lista_unid_pres=["mg","g","mcg","ml","cc","mg/ml","g/ml","UI","MUI"];
-var Lista_tipo_pres=["tabletas","comprimidos","grageas","cápsulas","suspensión","solución","solución inyectable","ampollas","jarabe","gotas oftálmicas","aerosol","crema","pomada","gel","óvulo","supositorio"];
-function Agrega_pres(ind,pos){
+var Lista_unid_pres=["mg","g","mcg","UI","MUI","cc","ml","%"," "];
+var Lista_tipo_pres=["tabletas","comprimidos","grageas","cápsulas","suspensión","solución","solución inyectable","ampollas","jarabe","gotas oftálmicas","aerosol","crema","pomada","gel","óvulos","supositorios","gotas","infusión"," "];
+
+function extrae_descripcion(texto){
+return texto;
+}
+function extrae_indice(tipo){
+if (tipo=="TAB") return 0;
+if (tipo=="COMP") return 1;
+if (tipo=="GRAG") return 2;
+if (tipo=="CAP") return 3;
+if (tipo=="SUSP") return 4;
+if (tipo=="SOL") return 5;
+if (tipo=="SINY") return 6;
+if (tipo=="AMP") return 7;
+if (tipo=="JAR") return 8;
+if (tipo=="OFT") return 9;
+if (tipo=="AERO") return 10;
+if (tipo=="CREMA") return 11;
+if (tipo=="POMADA") return 12;
+if (tipo=="GEL") return 13;
+if (tipo=="OVU") return 14;
+if (tipo=="SUP") return 15;
+if (tipo=="GOTAS") return 16;
+if (tipo=="INF") return 17;
+return 18;
+}
+
+function extrae_unidad(texto){
+if (texto=="mg" || texto=="MG" ) return 0;
+if (texto=="g" || texto=="G") return 1;
+if (texto=="mcg") return 2;
+if (texto=="UI") return 3
+if (texto=="MUI") return 4;
+if (texto=="cc") return 5;
+if (texto=="ml") return 6;
+if (texto=="%") return 7;
+return 8;
+}
+
+function Modif_pres(ind,pos){
+var probj=parsepresentacion(present[pos]);
+var descr=probj.descr;
+var indtipo=extrae_indice(probj.tipo);
+//alert('unidad: '+ probj.unidad);
+var indu1=extrae_unidad(probj.unidad);
+var indu2=extrae_unidad(probj.unidad2);
 var textoT='';
 var div6 = document.getElementById("divedit");
 divedit.style="position: fixed;top :150px; left: 80px; width:80% ; height: 70%; text-align: left; ";
 textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
 textoT+=' <button title="Cancelar" onclick="quitardivedit()" style="font-size:100%">'+ iconocerrar+'</button></div>';
 textoT+='<div>';
-textoT+='<br>Descripcion: '+makeKeyInput("npres","Agrega presentacion","T30","");
-textoT+='<br>Presentacion: '+makeSelectSimple("tipop",Lista_tipo_pres,0)+'<br>';
-textoT+='<br>Valor: '+makeKeyInput("npres1","valor","I4","")+'&nbsp';
-textoT+=makeSelectSimple("unidf1",Lista_unid_pres,0)+'&nbsp/&nbsp';
+textoT+='<br>Descripcion: '+makeKeyInput("npres","Agrega presentacion","T30",descr);
+textoT+='<br>Presentacion: '+makeSelectSimple("tipop",Lista_tipo_pres,indtipo)+'<br>';
+textoT+='<br>Valor: '+makeKeyInput("npres1","valor","R4.2",probj.valor1)+'&nbsp';
+textoT+=makeSelectSimple("unidf1",Lista_unid_pres,indu1)+'&nbsp/&nbsp';
+textoT+=''+makeKeyInput("npres2","valor","I4",probj.valor2)+'&nbsp';
+textoT+=makeSelectSimple("unidf2",Lista_unid_pres,indu2)+'<br>';
+textoT+=' <br><button title="Agregar" onclick="Agrega_presd('+ind+','+pos+')" style="font-size:100%">'+ iconoplus+'</button></div>';
+textoT+='</div>';
+divedit.innerHTML=textoT;
+//alert(textoT);
+}
+function Agrega_pres(ind){
+pos=present.length;
+var descr='';
+var indtipo=Lista_tipo_pres.length-1;
+var indu1=Lista_unid_pres.length-1;
+var indu2=indu1;
+var textoT='';
+var div6 = document.getElementById("divedit");
+divedit.style="position: fixed;top :150px; left: 80px; width:80% ; height: 70%; text-align: left; ";
+textoT+='<div style="position: fixed;background-color: gray;width:80%;">';
+textoT+=' <button title="Cancelar" onclick="quitardivedit()" style="font-size:100%">'+ iconocerrar+'</button></div>';
+textoT+='<div>';
+textoT+='<br>Descripcion: '+makeKeyInput("npres","Agrega presentacion","T30",descr);
+textoT+='<br>Presentacion: '+makeSelectSimple("tipop",Lista_tipo_pres,indtipo)+'<br>';
+textoT+='<br>Valor: '+makeKeyInput("npres1","valor","I4","0")+'&nbsp';
+textoT+=makeSelectSimple("unidf1",Lista_unid_pres,indu1)+'&nbsp/&nbsp';
 textoT+=''+makeKeyInput("npres2","valor","I4","")+'&nbsp';
-textoT+=makeSelectSimple("unidf2",Lista_unid_pres,0)+'<br>';
+textoT+=makeSelectSimple("unidf2",Lista_unid_pres,indu2)+'<br>';
 textoT+=' <br><button title="Agregar" onclick="Agrega_presd('+ind+','+pos+')" style="font-size:100%">'+ iconoplus+'</button></div>';
 
 textoT+='</div>';
-
-
 divedit.innerHTML=textoT;
 //alert(textoT);
 }
@@ -4401,14 +4510,14 @@ for(var i=0;i<present.length;i++){
 //     alert(tadicpres[i]);    
     if (i==indicepresent){
            textoT+='<p style="color:black;background:lightblue" onclick="clickp4('+i+')"> '+texto;
-           if (mod_edt) {textoT+='<button onclick="Agrega_pres('+indice+','+i+');">'+iconoeditor+'</button> ';} else {textoT+='</p>'}
+           if (mod_edt) {textoT+='<button onclick="Modif_pres('+indice+','+i+');">'+iconoeditor+'</button> ';} else {textoT+='</p>'}
   
          inddiluir=present[i].indexOf(" a diluir");
            indliquido=present[i].indexOf(" diluido ");
          }
         else {
             textoT+="<p onclick='clickp4("+i+" )'> "+texto;
-            if (mod_edt) {textoT+='<button onclick="Agrega_pres('+indice+','+i+');">'+iconoeditor+'</button> ';} else {textoT+='</p>'}
+            if (mod_edt) {textoT+='<button onclick="Modif_pres('+indice+','+i+');">'+iconoeditor+'</button> ';} else {textoT+='</p>'}
          }
 //       div3.innerHTML=textoT;
 }
