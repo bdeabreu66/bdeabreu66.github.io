@@ -838,11 +838,7 @@ edadglobal=parseFloat(document.getElementById("edad2").value);
 alturaglobal=parseFloat(document.getElementById("altura2").value);
 idglobal=document.getElementById("idpac").value;
 tlfglobal=document.getElementById("tlfpac").value;
-alert('tlf '+tlfglobal);
 emailglobal=document.getElementById("emailpac").value;
-
-
-
 calctfg();
 var ind_pac=pacientes.findIndex(e=>e.nombre==nombpac);
 //alert(pacientes[0].nombre+' '+pacientes.length);
@@ -856,14 +852,24 @@ pacientes[ind_pac].sexo=sexoglobal;
 pacientes[ind_pac].tlf=tlfglobal;
 pacientes[ind_pac].id=idglobal;
 pacientes[ind_pac].email=emailglobal;
-//alert(pacientes[ind_pac].nombre);
-//alert(ind_pac);
-Actualiza_bd_pac(ind_pac);
+
+if (pacientes[ind_pac].nombre!="") {pacientes[ind_pac].borrado=false;Actualiza_bd_pac(ind_pac);}
 var elementopeso=document.getElementById("peso");
 if ( (typeof(elementopeso)!="undefined") && (elementopeso!=null) ){
   document.getElementById("peso").value=pesoglobal;
 }
 
+//refrescadatospac();
+}
+function eliminapaciente(){
+var divdatos = document.getElementById("datos");
+divdatos.style="display: none;";
+nombpac=document.getElementById("nombreu").value;
+if (nombpac!="") {
+  Elimina_bd_pac(nombpac);
+  var ind_pac=pacientes.findIndex(e=>e.nombre==nombpac);
+  if (ind_pac!=-1) {pacientes[ind_pac].borrado=true;}
+}
 //refrescadatospac();
 }
 var unidelong="cm";
@@ -897,7 +903,7 @@ muestradatosactivo="1";
 var divdatos = document.getElementById("datos");
 divdatos.style="position: fixed;top :100px; left: 10px; width:98% ; text-align: left;";
 textoT+='<center> Datos del paciente </center>';
-textoT+='<br> Nombre: <INPUT id="nombreu" style="background-color: lightgray;color: black;" class="inputtext" TYPE="text" value="'+ nombpac+ '" >';
+textoT+='<br> Nombre: <INPUT id="nombreu" style="background-color: lightgray;color: black;" class="inputtext" TYPE="text" value="'+ nombpac+ '" oninput="busqueda_pac()" >';
 textoT+='<br> Edad: <INPUT id="edad2" min="0" max="120"TYPE="number" onkeypress="return event.charCode !=45" value="'+ edadglobal.toString() +'" > años'
 //textoT+='<br> Peso: <INPUT id="peso2" min="3" max="300" TYPE="number" onkeypress="return event.charCode !=45" value="'+ pesoglobal.toString()+'" oninput="actimcp();">'+ unidemasa;
 textoT+='<br> Peso: '+makeKeyInput("peso2","Peso","I3-2-700",pesoglobal.toString());
@@ -911,13 +917,15 @@ textoT+=' '+iconohombre+' '+'<button ID="ISEXM" TYPE="button" class="buttonopt" 
 
 //if (sexoglobal=="F") {var textf='checked="checked"';var textm='';} else {var textf='';var textm='checked="checked"';}
 //textoT+=  ' <br> Sexo: F <INPUT NAME="NSEX" ID="ISEXF" TYPE="radio" value="F" '+textf+' onchange="cambiasexo();"> M <INPUT NAME="NSEX" ID="ISEXM" TYPE="radio" value="M" '+textm+'onchange="cambiasexo();"> '
-textoT+='<br> Identificacion: '+makeKeyInput("idpac","Telefono","T12",tlfglobal.toString());
+textoT+='<br> Identificacion: '+makeKeyInput("idpac","Identificacion","T12",tlfglobal.toString());
 
 textoT+='<br> Teléfono: '+makeKeyInput("tlfpac","Telefono","T12",tlfglobal.toString());
-textoT+='<br> e-mail: '+makeKeyInput("emailpac","email","T12",emailglobal.toString());
+textoT+='<br> e-mail: '+makeKeyInput("emailpac","email","T30",emailglobal.toString());
 
 
 textoT+=texto+'<br> <INPUT TYPE="button" value="Ok" onclick="muestradatosactivo='+"0"+';asignardatospaciente();" style="font-size:100%">';
+textoT+=texto+'&nbsp <button onclick="muestradatosactivo='+"0"+';eliminapaciente();" style="font-size:100%">E</button>';
+
 divdatos.innerHTML=textoT;
 divdatos.focus();
 
@@ -1514,12 +1522,19 @@ updateRequest.onerror=()=>{ console.log("Error actualizando")};
 function Actualiza_bd_pac(ind){
 const transaction=dbpac.transaction(["Pacientes"],'readwrite');
 const store=transaction.objectStore("Pacientes");
-alert(Object.entries(pacientes[ind]))
+//alert(Object.entries(pacientes[ind]))
 const updateRequest=store.put(pacientes[ind]);
 updateRequest.onsuccess=()=>{ console.log("Actualizado")};
 updateRequest.onerror=()=>{ console.log("Error actualizando")};
 }
-
+function Elimina_bd_pac(nombre){
+const transaction=dbpac.transaction(["Pacientes"],'readwrite');
+const store=transaction.objectStore("Pacientes");
+alert(`nombre: ${nombre}`)
+const deleteRequest=store.delete(nombre);
+deleteRequest.onsuccess=()=>{ console.log("Paciente borrado")};
+deleteRequest.onerror=()=>{ console.log("Error Borrando paciente")};
+}
 
 function generar_bd_txt(){
 /*var sal='[';
@@ -2862,13 +2877,14 @@ document.getElementById("t2").value=tex2;
 }
 
 function ajustarunidad(pdosis,ppres,valor){
+//alert(`${pdosis.unidadmasa}${ppres.unidad}`)
 var aux=valor;
-if (pdosis.unidadmasa=="G" && ppres.unidad=="MG") {aux*=1000;}
-if (pdosis.unidadmasa=="MG" && ppres.unidad=="G") {aux/=1000;}
-if (pdosis.unidadmasa=="MG" && ppres.unidad=="MCG") {aux*=1000;}
-if (pdosis.unidadmasa=="MCG" && ppres.unidad=="MG") {aux/=1000;}
-if (pdosis.unidadmasa=="UI" && ppres.unidad=="MUI") {aux/=1000000;}
-if (pdosis.unidadmasa=="MUI" && ppres.unidad=="UI") {aux*=1000000;}
+if (pdosis.unidadmasa.toUpperCase()=="G" && ppres.unidad.toUpperCase()=="MG") {aux*=1000;}
+if (pdosis.unidadmasa.toUpperCase()=="MG" && ppres.unidad.toUpperCase()=="G") {aux/=1000;}
+if (pdosis.unidadmasa.toUpperCase()=="MG" && ppres.unidad.toUpperCase()=="MCG") {aux*=1000;}
+if (pdosis.unidadmasa.toUpperCase()=="MCG" && ppres.unidad.toUpperCase()=="MG") {aux/=1000;}
+if (pdosis.unidadmasa.toUpperCase()=="UI" && ppres.unidad.toUpperCase()=="MUI") {aux/=1000000;}
+if (pdosis.unidadmasa.toUpperCase()=="MUI" && ppres.unidad.toUpperCase()=="UI") {aux*=1000000;}
 return aux;
 }
 var inddiluir;
@@ -3925,7 +3941,22 @@ divselect.innerHTML=textoT;
 divselect.style="position: fixed;top :300px; overflow-y: scroll; height: 40%;left: 10px;width:50%;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;";
 }
 
+function selecciona_pac(){
 
+var divselect = document.getElementById("selfar");
+var textoT="";
+textoT+='<div style="position: fixed;background-color: gray;width:50%;">';
+textoT+=' <button title="Cancelar" onclick="quitardivselec();" >'+ iconocerrar+'</button></div><br>';
+var texto;
+var indf=0;
+for(var i=0;i<listapacientes.length;i++){
+      texto=pacientes[listapacientes[i]].nombre;
+      textoT+="<p onclick='clickpac("+listapacientes[i]+" )'> "+texto+"</p>"; 
+      indf++;
+}
+divselect.innerHTML=textoT;
+divselect.style="position: fixed;top :300px; overflow-y: scroll; height: 40%;left: 10px;width:50%;background-color: white;color:green; text-align: left; border: 3px solid #73AD21;";
+}
 
 
 
@@ -4141,7 +4172,7 @@ else {razaglobal="O";razan.innerHTML=iconoselectoff; razao.innerHTML=iconoselect
 
 function calctfg(){
 var sp=supcorp2(pesoglobal,alturaglobal);
-if (modelotfg=="CG") {CG();tfga=tfg; tfg=xround(tfg*1.73/sp,2)} 
+if (modelotfg=="CG") {CG();tfga=xround(tfg*1.73/sp,2)} 
 if (modelotfg=="CKDEPI") {CKDEPI();tfga=xround(tfg*sp/1.73,2) }
 if (modelotfg=="MDRD-IDMS") {MDRDIDMS();tfga=xround(tfg*sp/1.73,2)}
 var elem=document.getElementById("muestrafTFG");
@@ -4431,9 +4462,9 @@ quitardivedit();
 
 dosisdelfarmaco[pos]=todo;
 remedio[ind].dosisa=dosisdelfarmaco.join('@');
-//Actualiza_farmaco(ind);
+Actualiza_farmaco(ind);
 //alert(dosisdelfarmaco[pos]);
-alert(todo);
+//alert(todo);
 generapagina3(ind);
 }
 function Agrega_farmacod(){
@@ -5032,6 +5063,20 @@ indantdosis=-1;
 generapagina3(listafarmacosel[num]);
 }
 
+function clickpac(num){
+document.getElementById("selfar").style.display="none";
+document.getElementById("nombreu").value=pacientes[num].nombre;
+document.getElementById("edad2").value=pacientes[num].edad;
+document.getElementById("peso2").value=pacientes[num].peso;
+document.getElementById("altura2").value=pacientes[num].altura;
+document.getElementById("idpac").value=pacientes[num].id;
+document.getElementById("tlfpac").value=pacientes[num].tlf;
+document.getElementById("emailpac").value=pacientes[num].email;
+if (pacientes[num].borrado==true) 
+  {document.getElementById("nombreu").style.color='blue';}
+else 
+ {document.getElementById("nombreu").style.color='black';}
+}
 
 function subiritem(num){
 var temp; 
@@ -5091,15 +5136,12 @@ if (ind>=0) {return true}
 var ind=remedio[num].dosisa.toUpperCase().indexOf(texto); 
 if (ind>=0) {return true} 
 }
-//this.dosisa=dosisa;
-//this.dosisp=dosisp;
-//this.presentacion=presentacion;
-//this.desc=descr;
-//this.indic=indica;
-//this.cindic=cindica;
-//this.ram=efadv;
-//this.aux=aux;
+}
 
+function verificatexto_pac(texto,num){
+texto=texto.toUpperCase();
+var ind=pacientes[num].nombre.toUpperCase().indexOf(texto); 
+if (ind>=0) {return true} else {return false}
 }
 
 function busqueda(){
@@ -5135,6 +5177,22 @@ selecciona();
 
 }
 
+function busqueda_pac(){
+var textoT,texto;
+listapacientes=new Array;
+var indf=0;
+var texto1=document.getElementById("nombreu").value;
+if (texto1!='') {
+for(var i=0;i<pacientes.length;i++){
+    var esta=verificatexto_pac(texto1,i); 
+      if (esta) {
+         listapacientes[indf]=i;       
+         indf++;    
+     }
+ }
+if (indf>0) {selecciona_pac();} else {quitardivselec()}
+} else {quitardivselec()}
+}
 
 function togglerecipe() {
 if (muestraactivo=="0") {muestrarecipes();} else {quitarrecipe(); muestraactivo="0"}
