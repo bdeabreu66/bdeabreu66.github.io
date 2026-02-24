@@ -3,8 +3,8 @@
     "ng": "METILPREDNISOLONA",
     "tipo": "AGENTES ESTEROIDEOS",
     "subtipo": "",
-    "dosisa": "DP: 0.5-1.7 mg/kg/dia C/6h o C/8h o C/12h VO EV IM",
-    "ren": "30 mg/Kg",
+    "dosisa": "DP:  ^ 0.5-1.7 MG/KG/DIA VO EV IM C/12H o C/8H o C/6H",
+    "ren": 1,
     "presentacion": "Metilprednisolona, Solumedrol ^ tabletas 40 mg",
     "indadic": "",
     "desc": "",
@@ -13,13 +13,14 @@
     "ram": "",
     "farcin": "",
     "fardin": "",
-    "interac": ""
+    "interac": "",
+    "hep": 0
   },
   {
     "ng": "DIPIRONA",
     "tipo": "ANALGESICOS",
     "subtipo": "",
-    "dosisa": "D.A. 0.5-1 g/dosis c/24h VO EV",
+    "dosisa": "D.A.: ^ 0.5-1 G/DOSIS VO EV C/24H",
     "ren": "",
     "presentacion": "Dipirona ^ comprimidos 500 mg@Dipirona ^ solución inyectable 500mg/1ml@Dipirona ^ comprimidos 800 mg",
     "indadic": "",
@@ -308,7 +309,7 @@
     "tipo": "ANTIBIOTICOS",
     "subtipo": "AMINOGLUCOSIDO",
     "dosisa": "Menores de 2 años (inicial): 10 mg/Kg/dia c/8h o c/12h EV IM@Menores de 2 años (mantenimiento): 7.5 mg/Kg/dia c/8h o c/12h EV IM@>2 años : 15 mg/Kg/dia c/8h o c/12h EV IM",
-    "ren": "15 mg/Kg/dia",
+    "ren": 1,
     "presentacion": "Amikacina  ^ ampollas 40 mg@Amikacina, Amicip, Behkacin a diluir ^ ampollas 100mg/2cc@Amikacina, Amicip, Behkacin diluido  ^ ampollas 500mg/2cc",
     "indadic": "",
     "desc": "",
@@ -320,14 +321,15 @@
     "interac": "",
     "advers": "Neurológicos: neuritis periférica, hipoacusia, acusia, laberintitis, tinnitus; Renal: nefrotoxicidad",
     "diluible": "Solución 0.9%@Solución Dextroxa 5%",
-    "tinf": "1 hora"
+    "tinf": "1 hora",
+    "hep": 0
   },
   {
     "ng": "AMOXICILINA",
     "tipo": "ANTIBIOTICOS",
     "subtipo": "BETALACTAMICOS",
     "dosisa": "DP:  50 mg/kg/dia c/12h VO",
-    "ren": "",
+    "ren": 0,
     "presentacion": "Amoxicilina, Amoxal   ^ solución 250mg/5ml@Amoxicilina, Amoxiduo ^ suspensión 750mg/5ml",
     "indadic": "",
     "desc": "Aminopenicilina",
@@ -336,7 +338,8 @@
     "ram": "",
     "farcin": "",
     "fardin": "",
-    "interac": ""
+    "interac": "",
+    "hep": 0
   },
   {
     "ng": "AMOXICILINA + CLAVULANICO",
@@ -375,7 +378,7 @@
     "tipo": "ANTIBIOTICOS",
     "subtipo": "MACROLIDO",
     "dosisa": "D.P.: 10 mg/kg/dia c/24h VO EV por 3 dias@ >45Kg: 500 mg/dia c/24h VO EV por 3 dias@ C. trachomatis o N. gonorrhoeae: 1 g/dosis STAT VO",
-    "ren": "8 mg/Kg",
+    "ren": 0,
     "presentacion": "Azitromicina, Amizin,amovin, arzomidol, Azitromin, Azigram, Azitrom, Binozyt, Saver, Zitromax, Zival ^ suspensión 200mg/5cc@Azitromicina, Amizin, amovin, Arzomidol, atromizin, azibax, Azigram, Azitrodex, Azitrom, Saver, Zitromax G, Zival ^ tabletas 500 mg@Zitromax polvo liofilizado a diluir  (EV) ^ infusión 500mg/2ml@Azimakrol ^ comprimidos 1 g",
     "indadic": "",
     "desc": "Antibiótico macrolido",
@@ -387,7 +390,8 @@
     "interac": "",
     "diluible": "Solución 0.9%@Solución Dextroxa 5%",
     "tinf": "1 hora",
-    "vinf": "1 mg/kg/min"
+    "vinf": "1 mg/kg/min",
+    "hep": 0
   },
   {
     "ng": "AZTREONAM",
@@ -1012,9 +1016,9 @@
     "presentacion": "Carmabazepina ^ comprimidos 200 mg",
     "indadic": "",
     "desc": "",
-    "indic": "Tratamiento unico o asociado de las convulsiones tonico clonicas generalizadas primarias y de las convulsiones parciales simples o complejas con o sin generalizacion secundaria. Tratamiento de la neuralgia del trigemino y de la neuralgia del glosofaringeo. Tratamiento de la mania aguda resitente al tratamientocon litio como monoterapia o terapia adyuvante",
+    "indic": "Tratamiento de crisis epilépticas parciales con sintomatología compleja y simple; en crisis epilépticas primarias y secundarias generalizadas; en forma epiléptica mixta. Coadyuvante con medicamentos destinados al mantenimiento del pequeño mal. Neuralgia en la esclerosis multiple: del trigémino y neuralgia del glosofaríngeo.\n\n",
     "cindic": "",
-    "ram": "",
+    "ram": "Los más frecuentes: diplopía, visión borrosa, somnolencia, mareos, náuseas, vómitos y ataxia, efectos cardiovasculares, leucopenia, púrpura, ictericia hepatocelular, reacción alérgica, síndrome de Steven-Johnson, dermatitis exfoliativa, fotosensibilización, alteración de la pigmentación cutánea y lupus eritematoso sistémico.",
     "farcin": "",
     "fardin": "",
     "interac": ""
@@ -1729,7 +1733,7 @@
     "subtipo": "",
     "dosisa": "30-40 MG/KG STAT VO",
     "ren": "",
-    "presentacion": "Secnidazol ^ suspensión 250mg/5cc",
+    "presentacion": "Secnidazol ^ suspensión 250mg/5cc@Secnidazol (recubiertas) ^ tabletas 500 mg",
     "indadic": "",
     "desc": "",
     "indic": "",
@@ -1903,9 +1907,9 @@
     "ng": "ACICLOVIR",
     "tipo": "ANTIVIRALES",
     "subtipo": "",
-    "dosisa": "D.P.: 30 mg/kg/dia C/8h VO@D.P.: 1500 mg/m2/dosis C/24h EV",
+    "dosisa": "D.P.: 30 mg/kg/dia C/8h VO@D.P.: 1500 mg/m2/dosis C/24h EV@DA: ^ 1 APLIC/DOSIS VD C/6H",
     "ren": "8 mg/Kg",
-    "presentacion": "Aciclovir,  Aciclor ^ suspensión 200mg/5cc@Aciclovir, Aciclor ampollas 1 g",
+    "presentacion": "Aciclovir,  Aciclor ^ suspensión 200mg/5cc@Aciclovir, Aciclor ampollas 1 g@Aciclovir ^ crema 5 %@Aciclovir ^ tabletas 200 mg",
     "indadic": "",
     "desc": "",
     "indic": "",
@@ -2271,7 +2275,7 @@
     "ng": "ACIDO ALENDRONICO",
     "tipo": "METABOLISMO OSEO Y CALCIO",
     "subtipo": "",
-    "dosisa": "D.A. 70 mg/dosis c/semana VO",
+    "dosisa": "D.A.  ^ 70 MG/DOSIS VO C/1S",
     "ren": "",
     "presentacion": "Acido alendrónico ^ tabletas 35 mg@Acido alendrónico ^ tabletas 70 mg",
     "indadic": "",
@@ -2330,5 +2334,22 @@
     "farcin": "",
     "fardin": "",
     "interac": ""
+  },
+  {
+    "ng": "ALENDRONATO SODICO",
+    "tipo": "METABOLISMO OSEO Y CALCIO",
+    "subtipo": "",
+    "dosisa": "DA:  ^ 70 MG VO C/1S",
+    "ren": 0,
+    "presentacion": " ^  0 @ALENDRONATO ^ tabletas 70 ",
+    "indadic": "",
+    "desc": "",
+    "indic": "",
+    "cindic": "",
+    "ram": "",
+    "farcin": "",
+    "fardin": "",
+    "interac": "",
+    "hep": 0
   }
-]
+ ]
