@@ -664,7 +664,7 @@ function writeFile(filepath,contenido){
 </SCRIPT>
 
 <SCRIPT LANGUAGE="JavaScript">
-
+var sep2="^";
 function cargarecipe(){
 var content=contenido.substring(0,clavevalida.length);
 if (content==clavevalida) {
@@ -1538,6 +1538,14 @@ deleteRequest.onsuccess=()=>{ console.log("Paciente borrado")};
 deleteRequest.onerror=()=>{ console.log("Error Borrando paciente")};
 }
 
+function Elimina_bd_farmaco(nombre){
+const transaction=db.transaction(["REMEDIOS"],'readwrite');
+const store=transaction.objectStore("REMEDIOS");
+alert(`nombre: ${nombre}`)
+const deleteRequest=store.delete(nombre);
+deleteRequest.onsuccess=()=>{ console.log("Farmaco borrado")};
+deleteRequest.onerror=()=>{ console.log("Error Borrando Farmaco")};
+}
 function generar_bd_txt(){
 /*var sal='[';
  for (var j=0;j<remedio.length;j++){
@@ -1626,14 +1634,14 @@ if (indic==-1) {
    val_nuevo=remedactual[i].presentacion.split('@');
 //console.log(indic+" "+remedio[indic].ng+" "+val_nuevo);
    for (var j=0;j<val_nuevo.length; j++){
-       if (val_nuevo[j].split("^").length==3) {val_exis.push(val_nuevo[j])}
+       if (val_nuevo[j].split(sep2).length==3) {console.log(val_nuevo[j]);val_exis.push(val_nuevo[j])}
    }
   remedio[indic].presentacion=val_exis.join('@');
 // Agrega dosis propias
    val_exis=remedio[indic].dosisa.split('@');
    val_nuevo=remedactual[i].dosisa.split('@');
    for (var j=0;j<val_nuevo.length; j++){
-       if (val_nuevo[j].split("^").length==3) {val_exis.push(val_nuevo[j])}
+       if (val_nuevo[j].split(sep2).length==3) {console.log(val_nuevo[j]);val_exis.push(val_nuevo[j])}
    }
 
 remedio[indic].dosisa=val_exis.join('@');
@@ -3362,8 +3370,11 @@ dosisr.unidad="";
 dosis.nvd=0;
 dosis.rango=false;
 dosisr.sc=false;
-var separa=dosis.split('^');
-if (separa.length==1) {dosisr.descr=dosis;dosis2=dosis} else {dosisr.descr=separa[0];dosis2=separa[1];}
+var separa=dosis.split(sep2);
+if (separa.length==1) {dosisr.descr=dosis;dosis2=dosis} 
+if (separa.length==2) {dosisr.descr=separa[0];dosis2=separa[1];}
+if (separa.length==3) {dosisr.descr=separa[0];dosis2=separa[1];dosisr.propio=true}
+
 var dosism=dosis2.toUpperCase()+" ";
 function prosunidad(texto){
    var i3=dosism.indexOf(texto);
@@ -3619,7 +3630,7 @@ presentr.valor2=0;
 presentr.unidad="";
 presentr.unidad2="";
 presentr.descr="";
-var separa=present.split('^');
+var separa=present.split(sep2);
 if (separa.length==1) {presentr.descr=present;present2=present} 
 if (separa.length==2) {presentr.descr=separa[0];present2=separa[1];}
 if (separa.length==3) {presentr.descr=separa[0];present2=separa[1];presentr.propio=true}
@@ -4461,13 +4472,32 @@ var indu1=document.getElementById("unidf1").value;
 var indu2=document.getElementById("unidf2").value;
 var v1=document.getElementById("npres1").value;
 var v2=document.getElementById("npres2").value;
-var todo=descr+ ' ' + '^'+' '+indp+' ';
+var todo=descr+ ' ' + sep2+' '+indp+' ';
 if (parseInt(v2)==0 || v2=="" ) {todo+=v1+' '+indu1} else {todo+=v1+indu1+'/'+v2+indu2}
 //alert(todo);
 quitardivedit();
-present[pos]=todo+"^A";//Presentacion agregada por usuario
+present[pos]=todo+sep2+"A";//Presentacion agregada por usuario
 remedio[ind].presentacion=present.join('@');
 //if (remedio[ind].presentacion!="") {remedio[ind].presentacion+='@'+descr;} else {remedio[ind].presentacion=descr;}
+Actualiza_farmaco(ind);
+generapagina3(ind);
+}
+
+
+function elimina_pres(ind,pos){
+quitardivedit();
+present.splice(pos,1);
+remedio[ind].presentacion=present.join('@');
+alert(present.length);
+Actualiza_farmaco(ind);
+generapagina3(ind);
+}
+
+function elimina_dosis(ind,pos){
+quitardivedit();
+dosisdelfarmaco[pos]=todo;
+remedio[ind].dosisa=dosisdelfarmaco.join('@');
+alert(dosisdelfarmaco.length);
 Actualiza_farmaco(ind);
 generapagina3(ind);
 }
@@ -4485,7 +4515,7 @@ var efrec=document.getElementById("frecd1");
 var indfrec=Array.from(efrec.selectedOptions).map(option=>option.text);
 //alert(indvia.join(' ')+' '+indfrec.join(' o '));
 var v1=document.getElementById("ndosis1").value;
-var todo=descr+ ' ' + '^'+' '+v1+' '+Lista_unid_dosis[indu1]+' '+indvia.join(' ')+' '+indfrec.join(' o ');
+var todo=descr+ ' ' + sep2+' '+v1+' '+Lista_unid_dosis[indu1]+' '+indvia.join(' ')+' '+indfrec.join(' o ');
 if (!(valdur==0 || Number.isNaN(valdur) )) {
  todo+=' por '+valdur+' ';
  if (valdur==1) {todo+=Lista_tiempo_sing[inddur]} else {todo+=Lista_tiempo[inddur]}
@@ -4495,6 +4525,7 @@ quitardivedit();
 
 
 dosisdelfarmaco[pos]=todo;
+dosisdelfarmaco[pos]=todo+sep2+"A";//Dosis agregada por usuario
 remedio[ind].dosisa=dosisdelfarmaco.join('@');
 Actualiza_farmaco(ind);
 //alert(dosisdelfarmaco[pos]);
@@ -4540,6 +4571,13 @@ quitardivedit();
 remedio[ind].ng=descr;
 remedio[ind].tipo=grupo;
 Actualiza_farmaco(ind)   
+generapagina2();
+}
+
+function elimina_farmaco(ind){
+quitardivedit();
+Elimina_bd_farmaco(remedio[ind].ng) ;
+remedio.splice(ind,1);  
 generapagina2();
 }
 var Lista_vias=["VO","EV","IM","VR","VN","VOF","VOT","VD"]
@@ -4626,7 +4664,9 @@ textoT+='<br>Valor: '+makeKeyInput("npres1","valor","R4.2",probj.valor1)+'&nbsp'
 textoT+=makeSelectSimple("unidf1",Lista_unid_pres,indu1)+'&nbsp/&nbsp';
 textoT+=''+makeKeyInput("npres2","valor","I4",probj.valor2)+'&nbsp';
 textoT+=makeSelectSimple("unidf2",Lista_unid_pres,indu2)+'<br>';
-textoT+=' <br><button title="Agregar" onclick="Agrega_presd('+ind+','+pos+')" style="font-size:100%">'+ iconoplus+'</button></div>';
+textoT+=' <br><button title="Agregar" onclick="Agrega_presd('+ind+','+pos+')" style="font-size:100%">'+ iconoplus+'</button>';
+textoT+='&nbsp <button onclick="elimina_pres('+ind+','+pos+')" style="font-size:100%">E</button></div>';
+
 textoT+='</div>';
 divedit.innerHTML=textoT;
 //alert(textoT);
@@ -4679,6 +4719,8 @@ else
 {indunidtiempo=0}
 textoT+=makeSelectSimple("nunidt",Lista_tiempo,indunidtiempo)+'&nbsp';
 textoT+=' <br><button title="Agregar" onclick="Agrega_dosisd('+ind+','+pos+')" style="font-size:100%">'+ iconoplus+'</button></div>';
+textoT+='&nbsp <button onclick="elimina_dosis('+ind+','+pos+')" style="font-size:100%">E</button>';
+
 textoT+='</div>';
 divedit.innerHTML=textoT;
 
@@ -4741,7 +4783,8 @@ if (remedio[ind].hep) {ahep=1;} else {ahep=0;}
 textoT+='<br><br>Ajuste renal: '+makeRadioInput("arenal",["No","Si"],arenal);
 textoT+='<br><br>Ajuste hepático: '+makeRadioInput("ahep",["No","Si"],ahep);
 textoT+='<br><br>Grupo: '+makeKeyInput("ngrupo","Agrega grupo","T30",grupo);
-textoT+=' <br><button title="Agregar" onclick="Modif_farmacod('+ind+')" style="font-size:100%">'+ iconoplus+'</button></div>';
+textoT+=' <br><button title="Agregar" onclick="Modif_farmacod('+ind+')" style="font-size:100%">'+ iconoplus+'</button>';
+textoT+='&nbsp <button onclick="elimina_farmaco('+ind+')" style="font-size:100%">E</button>';
 textoT+='</div>';
 divedit.innerHTML=textoT;
 //alert(textoT);
@@ -4835,12 +4878,12 @@ for(var i=0;i<dosisdelfarmaco.length;i++){
         texto = dosisdelfarmaco[i];
         if (i==indicedosis){
            textoT+='<p style="color:black;background:lightblue" onclick="clickp3('+i+')"> '+texto;
-           if (mod_edt) {textoT+='<button onclick="Modif_dosis('+indice+','+i+');">'+iconoeditor+'</button></p> ';} else {textoT+='</p>'}
+           if (mod_edt && parsedosis(dosisdelfarmaco[i]).propio)  {textoT+='<button onclick="Modif_dosis('+indice+','+i+');">'+iconoeditor+'</button></p> ';} else {textoT+='</p>'}
 
          }
         else {
             textoT+="<p onclick='clickp3("+i+" )'> "+texto; 
-           if (mod_edt) {textoT+='<button onclick="Modif_dosis('+indice+','+i+');">'+iconoeditor+'</button></p> ';} else {textoT+='</p>'}
+           if (mod_edt && parsedosis(dosisdelfarmaco[i]).propio) {textoT+='<button onclick="Modif_dosis('+indice+','+i+');">'+iconoeditor+'</button></p> ';} else {textoT+='</p>'}
 
 
          }
