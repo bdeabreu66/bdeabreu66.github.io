@@ -981,7 +981,9 @@ var rest_bd=false;
 function asignafecha(){
 fechaderecipe= new Date(document.getElementById("fecharecipe").value); 
 }
+var remedactual=[];
 function Restaura_bd(){
+remedactual=Array.from(remedio);
 closeNav();
 rest_bd=true;
 Act_data();
@@ -1514,7 +1516,7 @@ var dbpac;
 function Actualiza_farmaco(ind){
 const transaction=db.transaction(["REMEDIOS"],'readwrite');
 const store=transaction.objectStore("REMEDIOS");
-const updateRequest=store.put(remedio[ind],ind);
+const updateRequest=store.put(remedio[ind]);
 updateRequest.onsuccess=()=>{ console.log("Actualizado")};
 updateRequest.onerror=()=>{ console.log("Error actualizando")};
 }
@@ -1561,10 +1563,10 @@ const request=indexedDB.open(DB_NAME,DB_VERSION);
 request.onupgradeneeded= function(e){
  db=e.target.result;
  if (!db.objectStoreNames.contains('REMEDIOS')) {
-  const objectStore=db.createObjectStore('REMEDIOS');
+  const objectStore=db.createObjectStore('REMEDIOS',{ keyPath:"ng"});
   
   for (var i=0;i<remedio.length; i++) {
-    objectStore.put(remedio[i],i);
+    objectStore.put(remedio[i]);
    }
  }
 }
@@ -1610,9 +1612,39 @@ getAllRequest.onerror=function(){
 
 
 function inicia_bd2(){
+var val_exis;
+var val_nuevo;
+var indic;
+ for (var i=0;i<remedactual.length; i++) {
+   indic=remedio.findIndex(e=>e.ng==remedactual[i].ng);
+if (indic==-1) {
+   alert(remedactual[i].ng);
+   remedio.push(remedactual[i])
+ } else {
+// Agrega presentaciones propias
+   val_exis=remedio[indic].presentacion.split('@');
+   val_nuevo=remedactual[i].presentacion.split('@');
+//console.log(indic+" "+remedio[indic].ng+" "+val_nuevo);
+   for (var j=0;j<val_nuevo.length; j++){
+       if (val_nuevo[j].split("^").length==3) {val_exis.push(val_nuevo[j])}
+   }
+  remedio[indic].presentacion=val_exis.join('@');
+// Agrega dosis propias
+   val_exis=remedio[indic].dosisa.split('@');
+   val_nuevo=remedactual[i].dosisa.split('@');
+   for (var j=0;j<val_nuevo.length; j++){
+       if (val_nuevo[j].split("^").length==3) {val_exis.push(val_nuevo[j])}
+   }
+
+remedio[indic].dosisa=val_exis.join('@');
+}
+ 
+}
  for (var i=0;i<remedio.length; i++) {
+    //console.log(remedio[i]);
     Actualiza_farmaco(i);
    }
+
 }
 
 
@@ -3353,7 +3385,7 @@ function prosunidad(texto){
 
 
 // veces por dia
-//var i3=dosism.indexOf(" VECES/DIA ");
+//var i3=dosism.indexOf(" V/DIA ");
 //   if (i3>=0){
 //     var dosis2=dosism.substring(0,i3);
 //     dosis2=dosis2.trim();
@@ -3393,24 +3425,24 @@ if (i4>0) {dosisr.frec.unshift("C/1H");dosisr.indfrec.unshift(7);}
 var i4=dosism.indexOf("STAT");
 if (i4>0) {dosisr.frec.unshift("STAT");dosisr.indfrec.unshift(8);}
 var i4=dosism.indexOf("C/S");
-if (i4>0) { dosisr.frec.unshift("C/1S");}
+if (i4>0) { dosisr.frec.unshift("C/1S");dosisr.indfrec.unshift(9);}
 var i4=dosism.indexOf("C/2S");
-if (i4>0) { dosisr.frec.unshift("C/2S");}
+if (i4>0) { dosisr.frec.unshift("C/2S");dosisr.indfrec.unshift(10);}
 var i4=dosism.indexOf("C/3S");
-if (i4>0) { dosisr.frec.unshift("C/3S");}
+if (i4>0) { dosisr.frec.unshift("C/3S");dosisr.indfrec.unshift(11);}
 var i4=dosism.indexOf("C/4S");
-if (i4>0) { dosisr.frec.unshift("C/4S");}
+if (i4>0) { dosisr.frec.unshift("C/4S");dosisr.indfrec.unshift(12);}
 
 var i4=dosism.indexOf("C/M");
-if (i4>0) { dosisr.frec.unshift("C/1M");}
+if (i4>0) { dosisr.frec.unshift("C/1M");dosisr.indfrec.unshift(13);}
 var i4=dosism.indexOf("C/2M");
-if (i4>0) { dosisr.frec.unshift("C/2M");}
+if (i4>0) { dosisr.frec.unshift("C/2M");dosisr.indfrec.unshift(14);}
 var i4=dosism.indexOf("C/2M");
-if (i4>0) { dosisr.frec.unshift("C/3M");}
+if (i4>0) { dosisr.frec.unshift("C/3M");dosisr.indfrec.unshift(15);}
 var i4=dosism.indexOf("C/3M");
-if (i4>0) { dosisr.frec.unshift("C/4M");}
+if (i4>0) { dosisr.frec.unshift("C/4M");dosisr.indfrec.unshift(16);}
 var i4=dosism.indexOf("C/4M");
-if (i4>0) { dosisr.frec.unshift("C/5M");}
+if (i4>0) { dosisr.frec.unshift("C/5M");dosisr.indfrec.unshift(17);}
 var i4=dosism.indexOf("C/5M");
 
 var i=dosism.indexOf("/KG");
@@ -3588,7 +3620,9 @@ presentr.unidad="";
 presentr.unidad2="";
 presentr.descr="";
 var separa=present.split('^');
-if (separa.length==1) {presentr.descr=present;present2=present} else {presentr.descr=separa[0];present2=separa[1];}
+if (separa.length==1) {presentr.descr=present;present2=present} 
+if (separa.length==2) {presentr.descr=separa[0];present2=separa[1];}
+if (separa.length==3) {presentr.descr=separa[0];present2=separa[1];presentr.propio=true}
 presentr.tipo="";
 
 var presentm=present2.toUpperCase()+" ";
@@ -3912,7 +3946,7 @@ for(var j=0;j<remedio.length;j++){
         else {
             textoT+="<p onclick='clickp2("+indf+" )'> "+texto; 
          }
- 	if (mod_edt) {textoT+='<button onclick="Modif_farmaco('+i+');">'+iconoeditor+'</button> </p>';} else {textoT+='</p>';}
+ 	if (mod_edt && remedio[i].propio) {textoT+='<button onclick="Modif_farmaco('+i+');">'+iconoeditor+'</button> </p>';} else {textoT+='</p>';}
 
        indf++;    
     }
@@ -4431,7 +4465,7 @@ var todo=descr+ ' ' + '^'+' '+indp+' ';
 if (parseInt(v2)==0 || v2=="" ) {todo+=v1+' '+indu1} else {todo+=v1+indu1+'/'+v2+indu2}
 //alert(todo);
 quitardivedit();
-present[pos]=todo;
+present[pos]=todo+"^A";//Presentacion agregada por usuario
 remedio[ind].presentacion=present.join('@');
 //if (remedio[ind].presentacion!="") {remedio[ind].presentacion+='@'+descr;} else {remedio[ind].presentacion=descr;}
 Actualiza_farmaco(ind);
@@ -4473,6 +4507,8 @@ var descr=document.getElementById("nfarmaco").value.toUpperCase();
 var grupo=document.getElementById("ngrupo").value.toUpperCase();
 var arenal=getIndexRadioInput("arenal");
 var ahep=getIndexRadioInput("ahep");
+var repet=remedio.findIndex(e=>e.ng==descr);
+if (repet==-1) {
 adicionar(grupo);
 //alert(descr);
 quitardivedit();
@@ -4481,8 +4517,13 @@ remedio[l]=new farmaco(descr,grupo,"","","","","","","","");
 //alert(arenal+' '+ahep);
 remedio[l].ren=arenal;
 remedio[l].hep=ahep;
+remedio[l].propio=true;
 Actualiza_farmaco(l)   
 generapagina2();
+} else {
+alert(`Farmaco ${descr} ya existe`);
+quitardivedit();
+}
 }
 function Modif_farmacod(ind){
 var descr=document.getElementById("nfarmaco").value.toUpperCase();
@@ -4512,7 +4553,7 @@ var Lista_unid_dosis=["G","G/DOSIS","G/DIA","G/KG","G/KG/DOSIS","G/KG/DIA","G/M2
    "UI","UI/DOSIS","UI/DIA","UI/KG","UI/KG/DOSIS","UI/KG/DIA","UI/M2","UI/M2/DOSIS","UI/M2/DIA",
    "MUI","MUI/DOSIS","MUI/DIA","MUI/KG","MUI/KG/DOSIS","MUI/KG/DIA","MUI/M2","MUI/M2/DOSIS","MUI/M2/DIA",
    "APLIC","APLIC/DOSIS","APLIC/DIA","APLIC/KG","APLIC/KG/DOSIS","APLIC/KG/DIA","APLIC/M2","APLIC/M2/DOSIS","APLIC/M2/DIA"];
-var Lista_frecuencias=["C/24H","C/12H","C/8H","C/6H","C/4H","C/3H","C/2H","C/1H","STAT"];
+var Lista_frecuencias=["C/24H","C/12H","C/8H","C/6H","C/4H","C/3H","C/2H","C/1H","STAT","C/1S","C/2S","C/3S","C/4S","C/1M","C/2M","C/3M","C/4M","C/5M"];
 var Lista_tiempo=["dias","semanas","meses","años"];
 var Lista_tiempo_sing=["dia","semana","mes","año"];
 function extrae_descripcion(texto){
@@ -4773,14 +4814,14 @@ for(var i=0;i<present.length;i++){
 //     alert(tadicpres[i]);    
     if (i==indicepresent){
            textoT+='<p style="color:black;background:lightblue" onclick="clickp4('+i+')"> '+texto;
-           if (mod_edt) {textoT+='<button onclick="Modif_pres('+indice+','+i+');">'+iconoeditor+'</button> ';} else {textoT+='</p>'}
+           if (mod_edt && parsepresentacion(present[i]).propio) {textoT+='<button onclick="Modif_pres('+indice+','+i+');">'+iconoeditor+'</button> ';} else {textoT+='</p>'}
   
          inddiluir=present[i].indexOf(" a diluir");
            indliquido=present[i].indexOf(" diluido ");
          }
         else {
             textoT+="<p onclick='clickp4("+i+" )'> "+texto;
-            if (mod_edt) {textoT+='<button onclick="Modif_pres('+indice+','+i+');">'+iconoeditor+'</button> ';} else {textoT+='</p>'}
+            if (mod_edt && parsepresentacion(present[i]).propio) {textoT+='<button onclick="Modif_pres('+indice+','+i+');">'+iconoeditor+'</button> ';} else {textoT+='</p>'}
          }
 //       div3.innerHTML=textoT;
 }
