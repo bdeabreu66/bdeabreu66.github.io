@@ -1541,9 +1541,9 @@ deleteRequest.onerror=()=>{ console.log("Error Borrando paciente")};
 function Elimina_bd_farmaco(nombre){
 const transaction=db.transaction(["REMEDIOS"],'readwrite');
 const store=transaction.objectStore("REMEDIOS");
-alert(`nombre: ${nombre}`)
+
 const deleteRequest=store.delete(nombre);
-deleteRequest.onsuccess=()=>{ console.log("Farmaco borrado")};
+deleteRequest.onsuccess=()=>{ console.log("Farmaco borrado");alert(`${nombre} eliminado`)};
 deleteRequest.onerror=()=>{ console.log("Error Borrando Farmaco")};
 }
 function generar_bd_txt(){
@@ -1625,7 +1625,7 @@ var val_nuevo;
 var indic;
  for (var i=0;i<remedactual.length; i++) {
    indic=remedio.findIndex(e=>e.ng==remedactual[i].ng);
-if (indic==-1) {
+if (indic==-1 && remedactual[i].propio) {
    alert(remedactual[i].ng);
    remedio.push(remedactual[i])
  } else {
@@ -4575,10 +4575,13 @@ generapagina2();
 }
 
 function elimina_farmaco(ind){
+let resp=prompt(`Desea eliminar el farmaco ${remedio[ind].ng} ?`, "Si");
+if (resp!==null && resp!=='') {
 quitardivedit();
 Elimina_bd_farmaco(remedio[ind].ng) ;
 remedio.splice(ind,1);  
 generapagina2();
+}
 }
 var Lista_vias=["VO","EV","IM","VR","VN","VOF","VOT","VD"]
 var Lista_cod_unid_pres=["TAB","COMP","GRAG","CAP","SUSP","SOL","SINY","AMP","JAR","OFT","AERO","CREMA","POMADA","GEL","OVU","SUP","GOTAS","INF"," "];
