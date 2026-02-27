@@ -1,7 +1,6 @@
 const currentCache = 'FACPOLAR_cache_v5.5';
 const files =
 [
-    'historico.txt',
     'fecha.txt',
     'manifest.json',
     'barras.js',
