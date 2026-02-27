@@ -5,8 +5,8 @@ const files =
     'index.html',
     'icondef.png',
     'arbol.js',
-    'filesaver.js',
-    'selectfile.js'
+    'Filesaver.js',
+    'selectFile.js'
  ];
 
 self.addEventListener('install', event => {
