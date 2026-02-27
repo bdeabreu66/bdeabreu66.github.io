@@ -4,7 +4,7 @@ const files =
     'index.html',
     'icondef.png',
     'arbol.js',
-    'Filesaver.js',
+    'FileSaver.js',
     'selectFile.js'
  ];
 
