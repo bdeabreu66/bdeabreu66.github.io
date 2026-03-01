@@ -1,8 +1,9 @@
-const currentCache = 'cache-v1.2';
+const currentCache = 'cache-carne-v1.2';
 const files =
 [
     'index.html',
-    'icondef.png'
+    'icondef.png',
+    'manifest.json'
  ];
 
 self.addEventListener('install', event => {
@@ -14,17 +15,7 @@ self.addEventListener('install', event => {
 });
 
 // Borra las cache anteriores
-/*
-self.addEventListener('activate', event => {
-  event.waitUntil(
-       caches.keys().then(cacheNames => Promise.all(
-       cacheNames.filter(cacheName => {
-           return cacheName !== currentCache
-         }).map(cacheName => caches.delete(cacheName))
-        ))
-  );
-});
-*/
+
 self.addEventListener('activate', function(event) {
     event.waitUntil(caches.keys().then(function(names) {
         return Promise.all(
