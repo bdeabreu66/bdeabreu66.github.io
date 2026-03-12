@@ -1,7 +1,6 @@
-const currentCache = 'FACPOLAR_cache_v5.5';
+const currentCache = 'Nutricion_cache_v1.0';
 const files =
 [
-    'fecha.txt',
     'manifest.json',
     'barras.js',
     'index.html',

@@ -1,7 +1,7 @@
 {
-  "name": "Facturacion",
-  "description": "Permite facturar",
-  "short_name": "Facturas",
+  "name": "Calculo nutricional",
+  "description": "Calcula nutrientes",
+  "short_name": "Nutricion",
   "icons": [{
     "src": "icondef.png",
     "sizes": "256x256"
