@@ -1,1 +1,2646 @@
+<HTML>
+<HEAD>
+<TITLE>  Calculadora Nutricional</TITLE>
+<!-- <link rel="stylesheet" href="styles.css" > -->
+<link rel="manifest" href="manifest.json"> 
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<style>
+
+body{
+font-size:30px;
+}
+input[type=number]{
+width: 3em;
+}
+
+
+.btop{
+font-size:0.6em;
+}
+
+.bot3:hover {
+  background-color: SteelBlue; /* Green */
+  color: blue;
+}
+.bot3{
+transition-duration: 0.4s;
+background-color: SkyBlue; /* Green */
+padding:15px;
+font-size:1.5em;
+width:70%;
+}
+
+.bot4:hover {
+  background-color: SteelBlue; /* Green */
+  color: white;
+}
+.bot4{
+background-color: PowderBlue; /* Green */
+transition-duration: 0.4s;
+padding:15px;
+font-size:1.0em;
+width:70%;
+}
+.btn2{
+font-size:1em;
+}
+
+
+#dsearch {
+position:relative;
+}
+
+#enc {
+position:relative;
+}
+.nav {
+font-size:2em;
+
+}
+#scanner-container {
+position:fixed;
+display:none;
+top:0%;
+left:0%;
+height: 30%;
+width: 30%;
+}
+#divt {
+top:35%;
+left:0%;
+height: 60%;
+text-align:center;
+width:95%;
+overflow-y:auto;
+}
+
+#auxiliar {
+position:fixed;
+background-color:green;
+top:30%;
+left:0%;
+height: 40%;
+width:98%;
+overflow-y:scroll;
+}
+
+input[type=text]{
+font-size:0.8em;
+width: 4em;
+border: 2px solid red;
+border-radius: 4px;
+padding: 4px 4px;
+  margin: 4px 0;
+  box-sizing: border-box;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+p{
+font-size:1.5rem;
+background-color:black;
+color:white;
+padding:0px;
+margin:0px;
+
+}
+td{
+font-size:1.5rem;
+padding:1px;
+}
+table{
+margin:0px;
+padding:0px;
+
+}
+
+#cat {
+position:fixed;
+top:35%;
+left:0px;
+height: 60%;
+font-size:1.5rem;
+text-align:center;
+width:95%;
+overflow-y:scroll;
+}
+
+#introd {
+position:fixed;
+background-color:Aqua;
+border-radius: 5% 5%;
+top:30%;
+left:0%;
+height: 40%;
+width:98%;
+overflow-y:scroll;
+}
+
+
+#footer {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+#voz {
+  display: block;
+  position: fixed; 
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+  
+}
+
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height=5%;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  text-align: center;
+  font-size:0.5em;
+}
+
+#cliente {
+  position: fixed;
+  left: 0;
+  top: 5%;
+  height:50%;
+   width: 100%;
+  background-color: Turquoise;
+  color: red;
+  text-align: left;
+  font-size:0.8em;
+overflow-y:auto;
+}
+
+.dolar {
+ // position: fixed;
+ // left: 0;
+ // top: 50px;
+  width: 100%;
+  }
+.cont0{
+}
+.cont1 {
+display:grid;
+grid-template-columns: 20% 60% 20%;
+border-bottom:1px solid black;
+}
+.micro {
+   background-image:url(microphone.svg);
+   width:30px;
+	height:30px;
+	font-size:16px;
+	padding:0px 0px 0px 0px;
+	background-size:30px 30px;
+	background-position:-2px 0px;
+    fill: green;
+
+border-radius: 8px;
+}
+
+.conth1 {
+grid-columns: 1/2;
+}
+.conth2 {
+grid-columns: 2/3;
+}
+.conth3 {
+grid-columns: 3/4;
+}
+
+.micro {
+   background-image:url(microphone.svg);
+   width:30px;
+	height:30px;
+	font-size:16px;
+	padding:0px 0px 0px 0px;
+	background-size:30px 30px;
+	background-position:-2px 0px;
+    fill: green;
+
+border-radius: 8px;
+}
+</style>
+
+</HEAD>
+
+
+<BODY onload="carga();" onunload="salir();">
+
+<br>
+
+<div class="dolar">
+<!-- <table width="100%"> -->
+<!-- <tr><td> </td><td></td> -->
+<!-- <tr><td></td><td></td></tr> -->
+<!-- <div id="menu"></div> -->
+<!-- <tr><td></td></tr> -->
+<!-- </table> -->
+</div>
+<div class="cont0">
+<div class="cont1">
+<div class="con1h1">
+
+</div>
+<div class="con1h2">
+<center>Cálculo Nutricional<br><span id="fecha_p" style="font-size:0.8em;"></span></center>
+</div>
+<div class="con1h3">
+<button class="nav" onclick="sube_cat()";>&#8630;</button>
+</div>
+</div>
+</div>
+<div id="arbol" style="font-size:0.4em;"></div>
+<div id="cat" ></div>
+<!-- <div id="dsearch"> <input id="search" type="text" placeholder="Buscar" oninput="refresca();"></div>-->
+<div id="divt" ></div>
+<div id="introd" ></div>
+<div id="content" hidden="false"></div>
+<div id="factura" hidden="true"></div>
+ <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
+<!-- <div id="voz"> <button class="micro" onclick="obtenerTexto();"></button> </div> -->
+ <div id="voz"> <table width="50%"><tr><td width="20%" >Suma:</td><td width="20%" id="suma"></td><td width="5%" <button  class="bot4" id="escanear" onclick="Escanear();" >Escanear</button></td></tr></table> </div>
+<div id="header">
+<table width="100%">
+<tr align="center">
+<td width="12%"> <button class="btop" onclick="Mantenimiento();">Mant</button></td>
+<td width="12%"> <button class="btop" onclick="Actualiza_Nutriente();">Alimento</button></td>
+<td width="12%"><button class="btop" onclick="factura();">Calorias</button></td> 
+</tr></table>
+</div>
+
+<div id="cliente" hidden="true" >
+<span onclick="limpiaCliente();">Alimento:</span> <input style="width:45%;" type="text" id="cli" value="" list="listaclientes" oninput="datos_cliente();">&nbsp&nbsp<button onclick="setcliente();">OK</button>&nbsp&nbsp<button onclick="elimina_cliente();">E</button>&nbsp&nbsp<button onclick="salir_cliente();">X</button>'
+<datalist id="listaclientes"></datalist><br>
+Energia (Kcal/100g):<input style="width:15%;" type="text" id="energia" value="" > <br>
+Proteinas:<input style="width:15%;" type="text"  id="protein" value="" > gr<br>
+Carbohidratos:<input style="width:15%;" type="text" id="carboh" value="" > gr<br>
+Agua:<input style="width:15%;" type="text" id="AGUA" value="" > gr<br>
+Lipidos:<br><br>
+AGS:<input style="width:15%;" type="text" id="LAGS" value="" > gr<br>
+AGP:<input style="width:15%;" type="text" id="LAGP" value="" > gr<br>
+AGM:<input style="width:15%;" type="text" id="LAGM" value="" > gr<br>
+Minerales:<br><br>
+Potasio:<input style="width:15%;" type="text" id="potasio" value="" > mg<br>
+Sodio:<input style="width:15%;" type="text" id="sodio" value="" > mg<br>
+Fosforo:<input style="width:15%;" type="text" id="fosforo" value="" > mg<br>
+Categoria:<input style="width:55%;" type="text" id="categoria" value="" > <br>
+
+</div>
+<div id="scanner-container"></div>
+<div>
+<label hidden id=selected>Nothing selected</label><br>
+<input hidden type=file id="choose" accept="*.txt" >
+</div>
+<div id="lista" > </div>
+<!--   -->
+<div id="auxiliar" hidden="true"></div>
+<script src="barras.js"></script>
+<script src="arbol.js" type="text/javascript"></script>
+<script type="text/javascript" src="FileSaver.js"></script>
+<script type="text/javascript" src="selectFile.js"></script>
+<script type="text/javascript">
+var tiendas=[
+{Nomb:"La Chimenea",arch:"precios_chimenea_nag.txt"},
+{Nomb:"El Chacal",arch:"precios_chacal.txt"},
+{Nomb:"Verduleria",arch:"preciosVerduras.txt"},
+{Nomb:"La Granjita VRB",arch:"precios_granjita_vrb.txt"}
+]
+var tienda_sel=2;
+let scannerRunning = false;
+
+function procesa_codigo(texto){
+var j=0;
+var encont=false;
+var lgd=data.length;
+while (j<lgd && !encont ){
+if (data[j][11]==texto) {encont=true;} else {j++;}
+}
+
+if (encont) {Pedido_G.push([data[j][9],1,0]);}
+ else {alert("No existente "+ j+ " " + data[j][11])}
+
+
+}
+
+function startScanner() {
+Quagga.init({
+inputStream: {
+name: "Live",
+type: "LiveStream",
+target: document.querySelector('#scanner-container'),
+constraints: {
+width: 540,
+height: 280,
+facingMode: "environment"
+}
+},
+decoder: {
+readers: ["code_128_reader", "ean_reader"]
+}
+}, function(err) {
+if (err) {
+console.error(err);
+return;
+}
+Quagga.start();
+scannerRunning = true;
+});
+
+Quagga.onDetected(result => {
+//alert(`Barcode detected: ${result.codeResult.code}`);
+Quagga.offProcessed();
+Quagga.offDetected();
+procesa_codigo(result.codeResult.code);
+scannerRunning = false;
+Stop_Scanner();
+});
+}
+function Stop_Scanner(){
+scannerRunning = false;
+var cameraF=document.getElementById("scanner-container");
+var videoE=cameraF.getElementsByTagName("video")[0];
+console.log(videoE);
+if (videoE) {
+ videoE.pause();
+cameraF.style.display="none"
+ 
+}
+//Quagga.offProcessed();
+//Quagga.offDetected();
+Quagga.stop();
+
+}
+function Escanear(){
+var cameraF=document.getElementById("scanner-container");
+
+if (scannerRunning) {
+//Quagga.stop();
+Stop_Scanner();
+//alert("Paro");
+scannerRunning = false;
+} else {
+startScanner();
+cameraF.style.display="block"
+}
+}
+/*
+document.getElementById("escanear").addEventListener("click", () => {
+if (scannerRunning) {
+//Quagga.stop();
+Stop_Scanner();
+//alert("Paro");
+scannerRunning = false;
+} else {
+startScanner();
+}
+});
+*/
+var Pedido_G=[];
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
+var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+var recognition;
+function set_var_voz(){
+var producto='';
+m=0;
+for(var i=0;i<data.length;i++){
+ if (data[i][11]!='' &&  data[i][8]!=0) 
+  { if (m==0) {producto+=data[i][11];m=1} else {producto+='|'+data[i][11]} }
+ }
+
+var selector='unidades|cajas|bultos|unidad|caja|bulto';
+var cantidad='un|una';
+for(var i=1;i<301;i++){
+ cantidad+='|'+i;
+}
+console.log(cantidad);
+//var grammar = '#JSGF V1.0; grammar statement; <statement>=<cantidad> <selector> de <producto>;public <producto> = ' + producto + ' ;'+'public <selector> = ' + selector + ' ;'+'public <cantidad> = ' + cantidad + ' ;'
+var grammar = '#JSGF V1.0; grammar producto; public <producto> = ' + producto + ';';
+recognition = new SpeechRecognition();
+var speechRecognitionList = new SpeechGrammarList();
+console.log(grammar);
+
+speechRecognitionList.addFromString(grammar, 1);
+recognition.grammars = speechRecognitionList;
+recognition.continuous = false;
+recognition.lang = 'es-US';
+recognition.interimResults = false;
+recognition.maxAlternatives = 1;
+recognition.onresult = function(event) {
+  var resultado = event.results[0][0].transcript;
+ // diagnostic.textContent = 'Result received: ' + color + '.';
+ // bg.style.backgroundColor = color;
+ console.log('Confidence: ' + event.results[0][0].confidence);
+ //alert(resultado);//console.log(resultado);
+}
+}
+
+
+var textoreconocido;
+function obtenerTexto(indice) {
+if ( window.SpeechRecognition || window.webkitSpeechRecognition ) {
+// Obtenemos el objeto de reconocimento de texto de forma compatible a diferentes navegadores
+reconocimientoTexto = new ( window.SpeechRecognition || window.webkitSpeechRecognition ) ()
+reconocimientoTexto.lang='es-Ve'; 
+reconocimientoTexto.onerror = function(event) {
+ alert("error "+event.error);
+ textoreconocido="";
+procesar2(indice);
+}
+reconocimientoTexto.onresult = function(event) {
+// Mostramos el texto obtenido
+textoreconocido=event.results[0][0].transcript;
+console.log(textoreconocido);
+procesar2(indice);
+}
+// Empezamos a reconocer texto
+reconocimientoTexto.start();
+} else {
+alert ('El navegador no soporta reconocimiento de voz' );
+}
+}
+
+function procesar2(ind){
+var num=textoreconocido.split(" ");
+var lt=num.length;
+var cant='';
+for (var i=0;i<lt;i++) {
+ cant+=num[i];
+}
+console.log(cant);
+if (ind==0) {document.getElementById("entradaU").value=cant;return;}
+/*
+if (ind==2) {
+ divs_datos.getElementsByTagName("input")[2].value=cant.substring(0,2);
+ divs_datos.getElementsByTagName("input")[3].value=cant.substring(2);
+return;}
+ if (ind==3) {divs_datos.getElementsByTagName("input")[4].value=cant;return;}
+if (ind==4) {divs_datos.getElementsByTagName("input")[5].value=cant;return;}
+if (ind==5) {
+ document.getElementById("nret").value=cant;
+ set_n_ret();
+return;}
+*/
+}
+function leer_ventas_diarias(fecha){
+//=localStorage,getItem(fecha)
+
+}
+
+function guarda_facturas_IDB(){
+let openReq = indexedDB.open('DIST_PITA',1);
+openRequest.onupgradeneeded = function () {
+  // triggers if the client does not have a database
+  // initialization
+};
+openRequest.onerror = function () {
+  console.error("Error", openRequest.error);
+};
+openRequest.onsuccess = function () {
+  let db = openRequest.result;
+  db.createObjectStore("FACTURAS");
+
+  // continue working with the database using the db object
+};
+}
+
+
+
+
+function guarda_clientes_IDB(){
+
+}
+function lee_facturas_IDB(){
+
+}
+function lee_clientes_IDB(){
+
+}
+var dbnut;
+var nutrientes=[];
+function inicia_bd_Nut(){
+const DB_NAME="NUTRIENTES";
+const DB_VERSION=1;
+const request=indexedDB.open(DB_NAME,DB_VERSION);
+request.onupgradeneeded= function(e){
+ dbnut=e.target.result;
+ if (!dbnut.objectStoreNames.contains('Nutrientes')) {
+  const objectStore=dbnut.createObjectStore("Nutrientes",{ keyPath:"nombre"});
+  }
+}
+request.onsuccess= function(e){
+dbnut=e.target.result;
+let transaction=dbnut.transaction(["Nutrientes"],"readonly");
+let objectStore= transaction.objectStore("Nutrientes");
+let getAllRequest=objectStore.getAll();
+getAllRequest.onsuccess=function(){
+ nutrientes=getAllRequest.result;
+//alert('L'+nutrientes.length);
+set_cat();
+muestra_cat();
+refresca();
+Lee_clientes();
+ }
+getAllRequest.onerror=function(){
+ alert("Error leyendo base de datos pacientes");
+ }
+
+}
+}
+function Actualiza_bd_nut(ind){
+const transaction=dbnut.transaction(["Nutrientes"],'readwrite');
+const store=transaction.objectStore("Nutrientes");
+//alert(Object.entries(pacientes[ind]))
+const updateRequest=store.put(nutrientes[ind]);
+updateRequest.onsuccess=()=>{ console.log("Actualizado")};
+updateRequest.onerror=()=>{ console.log("Error actualizando")};
+}
+
+function Elimina_bd_nut(nombre){
+const transaction=dbnut.transaction(["Nutrientes"],'readwrite');
+const store=transaction.objectStore("Nutrientes");
+//alert(`nombre: ${nombre}`)
+const deleteRequest=store.delete(nombre);
+deleteRequest.onsuccess=()=>{ console.log("Nutriente borrado")};
+deleteRequest.onerror=()=>{ console.log("Error Borrando Nutriente")};
+}
+
+function importar(){
+getFile = new selectFile;
+getFile.targets('choose','selected');
+archivos=document.getElementById('choose');
+archivos.value=null;
+archivos.addEventListener('change', Leer_Archivo, false);
+getFile.simulate();
+}
+
+function importar2(){
+getFile = new selectFile;
+getFile.targets('choose','selected');
+archivos=document.getElementById('choose');
+archivos.value=null;
+archivos.addEventListener('change', Leer_Archivo2, false);
+getFile.simulate();
+}
+
+function Leer_Archivo(e){
+ var archivos=e.currentTarget.files;
+
+  var lector=new FileReader();
+  lector.addEventListener("load",(e) => {
+    datos_imp = e.target.result;
+    var data_sep=datos_imp.split('*#*');
+
+if (data_sep[2]=='Clientes_Pita') {
+if (data_sep[3]!=null) {
+localStorage.setItem('Clientes_Pita',data_sep[3]);
+}
+//guarda_clientes_IDB()
+}
+
+if (data_sep[4]=='Inventario_PO') {
+localStorage.setItem(data_sep[4],data_sep[5]);
+}
+
+if (data_sep[0]=='FACTURAS') {
+localStorage.setItem(data_sep[0],data_sep[1]);
+facturas=JSON.parse(data_sep[1]);
+//guarda_facturas_IDB()
+}
+
+//    alert(datos_imp.length);
+  });
+  lector.readAsText(archivos[0]);
+}
+
+function Leer_Archivo2(e){
+ var archivos=e.currentTarget.files;
+ //alert(archivos);
+  var lector=new FileReader();
+  lector.addEventListener("load",(e) => {
+    datos_imp = e.target.result;
+    var data_sep=datos_imp.split('*#*');
+    var n=Math.trunc(data_sep.length/2);
+    for (var i=0;i<n;i++) {
+ // if (localStorage.getItem(data_sep[2*i])===null) {
+    localStorage.setItem(data_sep[2*i],data_sep[2*i+1]);
+//  }
+  }
+  });
+  lector.readAsText(archivos[0]);
+}
+
+function permuta(o){
+var propi=o.getAttribute('pos')
+if (propi=="0") {o.setAttribute("pos", "1");o.style.color='white';suma+=parseFloat(o.innerText)} 
+ else 
+{o.setAttribute("pos", "0");o.style.color='black';suma-=parseFloat(o.innerText)}
+
+document.getElementById('suma').innerText=suma.toFixed(2);
+}
+
+function Respalda_inventario(){
+var info='';
+for (var i=0;i<inventario.length;i++){
+var ind=clave_ind.get(inventario[i]["CLAVE"]);
+info+=inventario[i].CLAVE+ ' '+ data[ind][0]+' '+inventario[i].CAJAS+' Cajas'+ inventario[i].UNID+' Unid'+'\r\n';
+}
+let hoy=new Date();
+
+narch="Inventario_ "+hoy.toLocaleString()+'.txt';
+ var blob = new Blob([info], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,narch);
+}
+function exportar(){
+ var data='';
+ var sep='*#*';
+
+data="FACTURAS"+sep+JSON.stringify(facturas);
+
+data+=sep+'Clientes_Pita'+sep+localStorage.getItem('Clientes_Pita');
+//data+=sep+'Clientes_Pita'+sep+JSON.stringify(Lclientes);
+data+=sep+'Inventario_PO'+sep+localStorage.getItem('Inventario_PO');
+
+let hoy=new Date();
+let narch='facturas '+hoy.toLocaleString()+'.txt'
+ var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,narch);
+}
+function generar_lista_facturas(){
+ var data='';
+ var sep='*#*';
+
+//data="FACTURAS"+sep+JSON.stringify(facturas);
+
+var nf=facturas.length;
+//alert(nf);
+alert (facturas[0].cliente);
+for (j=0;j<nf;j++){
+if (facturas[j].cliente.indexOf('Obsequio')==-1 && facturas[j].cliente.indexOf('Pedido')==-1) {
+     data+=facturas[j].cliente+';'+facturas[j].fecha+';'+facturas[j].total.replace(".", ",")+'\r';
+}
+}
+
+
+let hoy=new Date();
+let narch='lista facturas '+hoy.toLocaleString()+'.csv'
+ var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,narch);
+
+}
+
+
+function fecha_mayor_igual(f1,f2){
+var a2=f2.split('/');
+var a1=f1.split('/');
+ if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>a1[0]) {return false; } else {return true;}
+}
+var totalunid=[];
+var totalcajas=[];
+var modo_inv=false;
+
+function borra_suma(){
+suma=0;
+ document.getElementById('suma').innerText=suma.toFixed(2);
+document.getElementById("suma").innerText="0";
+var tds=document.getElementsByClassName("pagocli");
+for (var i=0;i<tds.length;i++){
+tds[i].setAttribute("pos", "0");
+tds[i].style.color='black';
+}
+
+}
+function muestra_total_ventas(){
+var nd=data.length;
+var texto='';
+var div3 = document.getElementById("lista");
+div3.style="position: fixed;top :7%; left: 0px; width: 100%;height:80%;background-color:lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
+texto+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+texto+='<table width="100%"><tr><td style="width:55%;text-align:center;color:blue;" >Productos vendidos</td><td width="5%"><button  title="Salir" onclick="quitarlista();" > x </button></td></tr></table></div><br>';
+texto+='<div style="overflow:auto;height:90%;">';
+texto+='<table style="width:100%;">';
+//texto+='<br>';
+var totvol=0;
+for(var i=0;i<nd;i++){
+ if (totalcajas[i]!=0 ||totalunid[i]!=0 ) {
+//console.log(data[i][0]+" "+totalcajas[i]+ " cajas");
+var tot=totalcajas[i]*data[i][1]+totalunid[i];
+if (data[i][6]=="t3") 
+   {totvol+=parseFloat(((totalcajas[i]+totalunid[i]/data[i][1])*data[i][12]).toFixed(2));}
+if (data[i][6]=="t2") 
+   {totvol+=parseFloat(((totalcajas[i]*data[i][1]+totalunid[i])*data[i][12]).toFixed(2));}
+
+var ncaj=Math.floor(tot/data[i][1]);
+var nunid=tot % data[i][1];
+texto+='<tr><td style="width:80%;font-size:1em;"  >'+data[i][0]+'</td><td style="width:10%;font-size:1em;" class="pagocli" pos="0" onclick="permuta(this)">'+ncaj+' C</td><td style="width:10%;font-size:1em;">'+nunid+' U</td>'+'</tr>';
+}
+
+}
+texto+='</table></div>';
+texto+='<p>Monto: '+Monto.toFixed(2)+ ' $ Ganancia:'+(Ganancia).toFixed(2)+'</p>';
+texto+='<p>Volumen: '+totvol.toFixed(2)+'</p>';
+div3.innerHTML=texto;
+}
+
+function fecha_mayor_igual(f1,f2){
+var a2=f2.split('/');
+var a1=f1.split('/');
+ if (a2[2]>a1[2] || (a2[2]==a1[2] && a2[1]>a1[1]) || (a2[2]==a1[2] && a2[1]==a1[1]) && a2[0]>a1[0]) {return false; } else {return true;}
+}
+
+function inv_fecha_date(f){
+var comp=f.split('-');
+var sal=comp[2]+'/'+comp[1]+'/'+comp[0];
+//console.log('sal2 '+sal);
+return sal;
+}
+
+function fecha_date(f){
+var comp=f.split('/');
+var sal=comp[2]+'-'+comp[1]+'-'+comp[0];
+//console.log('sal '+sal)
+return sal;
+}
+
+function fecha_estandar(f){
+  var year=f.getFullYear();
+  var mes=f.getMonth();mes++;if (mes<10) {mes='0'+mes}
+  var day=f.getDate();if (day<10) {day='0'+day}
+return day+'/'+mes+'/'+year;
+}
+function generar_lista_precios(){
+var sal='[';
+ for (var j=0;j<data.length;j++){
+  sal+='['+data[j].toString()+'],\n';
+}
+sal+=']';
+ let narch='precios2.txt'
+ var blob = new Blob([sal], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,narch);
+
+}
+
+
+function Mantenimiento(){
+var div3 = document.getElementById("lista");
+div3.style="display:block ;position: fixed;top :30px; left: 0px; width: 100%;height:90%;background-color: blue;color:white; text-align: left; border: 3px solid #73AD21;";
+var texto='';
+texto+='<div> <table style="text-align:center;margin:auto;">';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=importar()>Importar Facturas</button></td></tr>';
+//texto+='<tr><td><button onclick=importar2()>Importar Facturas (FAC_)</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=exportar()>Exportar Facturas</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=generar_lista_facturas()>Generar Facturas</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=generar_lista_precios()>Generar Lista de Precios</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=generar_bd_txt()>Generar base de datos Nutrientes</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=Restaura_bd()>Restaura bd nutrientes</button></td></tr>';
+
+
+//texto+='<tr><td><button onclick=elim_FAC()>Eliminar FACS</button></td></tr>';
+texto+='<tr style="height:30%;"><td><button class="btn2" onclick=quitar_div("lista");>Salir</button></td></tr>';
+texto+='</table></div>';
+div3.innerHTML=texto;
+
+}
+
+function sel_tienda(){
+var div3 = document.getElementById("lista");
+div3.style="display:block ;position: fixed;top :30px; left: 0px; width: 100%;height:90%;background-color: blue;color:white; text-align: left; border: 3px solid #73AD21;";
+var texto='';
+texto+='<div> <table style="text-align:center;margin:auto;">';
+texto+='<tr ><td><button class="btn2" onclick="cambia_tienda(0);">'+tiendas[0].Nomb+'</button></td></tr>';
+texto+='<tr ><td><button class="btn2" onclick="cambia_tienda(1);">'+tiendas[1].Nomb+'</button></td></tr>';
+texto+='<tr ><td><button class="btn2" onclick="cambia_tienda(2);">'+tiendas[2].Nomb+'</button></td></tr>';
+texto+='<tr ><td><button class="btn2" onclick=quitar_div("lista");>Salir</button></td></tr>';
+texto+='</table></div>';
+div3.innerHTML=texto;
+}
+function cambia_tienda(num){
+tienda_sel=num;
+recarga_data();
+refrescar();
+}
+
+function recarga_data(){
+try {
+data=eval(localStorage.getItem('data'+tiendas[tienda_sel].Nomb));}
+catch{};
+}
+function elim_FAC(){
+for(var i=0;i<localStorage.length;i++){
+    var nomb=localStorage.key(i); 
+    var parte=nomb.split("_");
+    if (nomb.indexOf("FAC_")==0) {
+     localStorage.removeItem(nomb);
+ }
+}
+}
+
+function convertir(){
+facturas=[];
+var nf=0;
+var indice=0;
+for(var i=0;i<localStorage.length;i++){
+    var nomb=localStorage.key(i); 
+    var parte=nomb.split("_");
+    if (nomb.indexOf("FAC_")==0) {
+      var nombf=parte[1]+"_"+parte[2]+"_"+parte[3];
+       var info=localStorage.getItem(nomb);
+       facturas[indice]=new Object();
+       facturas[indice].cliente=parte[1];
+       facturas[indice].fecha=parte[2];
+       facturas[indice].nro=parte[3];
+       info_s=info.split("&")
+       facturas[indice].bcv=info_s[0];
+       monto_factura2(nombf);
+       facturas[indice].total=total_factura.toFixed(2);
+       facturas[indice].ganancia=Gdolar.toFixed(2);
+       facturas[indice].total_ret=MONTOF.toFixed(2);
+       facturas[indice].items=[];
+       var total_f=0;
+       
+       for (var j=1;j<info_s.length;j++) {
+         var prod=info_s[j].split('#');
+         var ind=clave_ind.get(prod[0]);
+         facturas[indice].items[j-1]=new Object();
+         facturas[indice].items[j-1].cod=prod[0];
+         facturas[indice].items[j-1].cu=prod[1];
+         facturas[indice].items[j-1].pu=prod[2];
+         facturas[indice].items[j-1].cb=prod[3];
+         facturas[indice].items[j-1].pb=prod[4]; 
+         //total_f+=parseInt(prod[1])*prod[2];
+       }
+   
+    console.log('factura '+indice);
+    console.log(facturas[indice]);
+   indice++;
+   } 
+} 
+
+localStorage.setItem("FACTURAS",JSON.stringify(facturas));
+//guarda_facturas_IDB();
+}
+
+function quitar_div(div_b){
+document.getElementById(div_b).style.visibility='hidden';
+}
+var facturas=[];
+
+function total(){
+var textoT="";
+var div3 = document.getElementById("lista");
+div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
+
+textoT+='Desde: <input id="f1" type="date" value="'+fecha_date(fecha_actual())+'"><br>';
+textoT+='Hasta: <input id="f2" type="date" value="'+fecha_date(fecha_actual())+'"><br><br>';
+textoT+='<span onclick="limpiaCliente2();">Cliente:</span>';
+textoT+='<input style="width:30%;" type="text" id="cli2" value="" list="listaclientes">';
+textoT+='<datalist id="listaclientes"></datalist>';
+textoT+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="total_unidades_vendidas();" >Ok </button>';
+div3.innerHTML=textoT;
+}
+var Monto=0;
+var Ganancia=0;
+var ITF=1.00;
+function total_unidades_vendidas(){
+Monto=0;
+Costo=0;
+var f1=document.getElementById("f1").value;
+var f2=document.getElementById("f2").value;
+var clib=document.getElementById("cli2").value;
+f1=inv_fecha_date(f1);
+f2=inv_fecha_date(f2);
+quitarlista();
+//console.log('rango de fechas'+f1+' '+f2);
+Ganancia=0;
+var nd=data.length;
+//console.log(nd);
+for(var i=0;i<nd;i++){
+ totalunid[i]=0;
+ totalcajas[i]=0;
+}
+var fecha=fecha_actual();
+//console.log(fecha);
+for(var i=0;i<facturas.length;i++){
+  var fech=facturas[i].fecha;
+  var nombcli=facturas[i].cliente;
+  if ( (fecha_mayor_igual(fech,f1)) && (fecha_mayor_igual(f2,fech)) && ( ((nombcli.indexOf(clib)==0) && clib!='' ) || (clib=='' && nombcli.indexOf('Pedido')!=0 ) ) ) {
+    for (var j=0;j<facturas[i].items.length;j++) {
+      var ind=clave_ind.get(facturas[i].items[j].cod);
+      totalunid[ind]+=parseInt(facturas[i].items[j].cu);
+      totalcajas[ind]+=parseInt(facturas[i].items[j].cb);
+    }//for j
+      if (facturas[i].cliente.indexOf('Pita')==-1 && facturas[i].cliente.indexOf('Obsequio')==-1 ) {Ganancia+=parseFloat(facturas[i].ganancia);}
+      if (facturas[i].cliente.indexOf('Obsequio')==-1 ) 
+         {Monto+=parseFloat(facturas[i].total);}
+  } //if
+} // for
+ muestra_total_ventas();
+} // fun
+
+inventario=[];
+
+function carga_inventario(){
+var invent=localStorage.getItem('Inventario_PO');
+if (invent!=null) {
+ var items=invent.split('&');
+  for (var i=0;i<items.length;i++){
+   //console.log(items[i]);
+   var partes=items[i].split('#');
+    ind=inventario.findIndex(element => element.CLAVE==partes[0])
+   inventario[ind]={"CLAVE":partes[0],"UNID":partes[1],"CAJAS":partes[2]};
+  }
+}
+//console.log(inventario);
+}
+function desp_inventario(){
+let pu=0;
+let pb=0;
+let fiva=1;
+texto='';
+TOTAL_INVENTARIO=0;
+carga_inventario();
+var div3 = document.getElementById("lista");
+div3.style="position: fixed;top :7%; left: 0%; width: 100%;height:80%;background-color:lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
+texto+='<div style="position: fixed;top :7%; text-align:right;background-color: gray;width:100%;">';
+texto+='<table width="100%"><tr><td style="width:70%;text-align:center;color:blue;" >Inventario</td>';
+texto+='<td width="10%"><button  title="Respalda" onclick="Respalda_inventario();" > R </button></td>';
+//texto+='<td width="10%"><button  title="Borra" onclick="anula_inventario();" > B </button></td>';
+texto+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td></tr></table></div><br>';
+texto+='<div style="overflow:auto;height:90%;">';
+texto+='<table style="width:100%;">';
+for(var i=0;i<inventario.length;i++){
+//console.log('clave '+inventario[i]["CLAVE"]);
+ var ind=clave_ind.get(inventario[i]["CLAVE"]);
+ //console.log('indice '+ind);
+// if (inventario[i]["UNID"]!=0 || inventario[i]["CAJAS"]!=0 ) {
+ if (data[ind][8]!=0) {
+   var nuc=parseFloat(data[ind][1]);
+  var tu=parseFloat(inventario[i]["CAJAS"])*nuc+parseFloat(inventario[i]["UNID"]);
+   var tc=Math.floor(tu/nuc);
+  [pu,pb]=precio(ind);
+  var ru=tu % nuc;
+  if (data[ind][3]==0) {fiva=1} else {fiva=1.16}
+  if (tc>0) {TOTAL_INVENTARIO+=parseFloat(tc*pb*fiva);}
+  if (ru>0) {TOTAL_INVENTARIO+=parseFloat(tc*pb*fiva);}
+
+  texto+='<tr><td style="width:70%;font-size:1em;">'+data[ind][0]+'</td>';
+  texto+='<td style="width:15%;font-size:1em;" class="pagocli" pos="0" onclick="permuta(this)">'+tc.toFixed(2)+' C</td>';
+  texto+='<td style="width:15%;font-size:1em;">'+ru.toFixed(2)+' U</td>';
+ //console.log(data[ind][0]+" "+nuc+" "+tu);
+ } 
+ 
+}
+texto+='</tr></table></div>';
+texto+='<p> TOTAL: '+ TOTAL_INVENTARIO.toFixed(2) + '</p>';
+div3.innerHTML=texto;
+}
+
+
+function guarda_inventario(){
+var texto="";
+  for (var i=0;i<inventario.length;i++){
+      texto+='&'+inventario[i]["CLAVE"]+'#'+inventario[i]["UNID"]+'#'+inventario[i]["CAJAS"];
+  }
+if (texto.length>0) {localStorage.setItem('Inventario_PO',texto.substr(1));} else {localStorage.setItem('Inventario_PO','');}
+}
+
+function anula_inventario(){
+const resp = confirm("Esta seguro de eliminar el inventario");
+
+if (resp) {
+  inventario=[]; 
+  guarda_inventario();
+  desp_inventario();
+}
+}
+function restar_inventario(){
+ resp=confirm('Desea quitar del inventario');
+if (resp) { resta_inventario();}
+}
+
+
+function resta_inventario(){
+
+  for (var i=0;i<Pedido_G.length;i++){
+   if (Pedido_G[i][1]!=0 ) {
+       ind=inventario.findIndex(element => element.CLAVE==Pedido_G[i][1])
+       if (ind==-1) {ind=inventario.length;
+         inventario[ind]["CLAVE"]=data[ind][9];
+         inventario[ind]["UNID"]=0;
+         inventario[ind]["CAJAS"]=0;
+       }
+ inventario[ind]["UNID"]=(parseFloat(inventario[ind]["UNID"])-Pedido_G[i][1]).toString();
+     }
+ }
+guarda_inventario();
+
+}
+
+function inicio_inventario(){
+ for (var i=0;i<data.length;i++){
+    inventario[i]={"CLAVE":data[i][9],"UNID":"0","CAJAS":"0"}
+}
+//console.log(inventario);
+carga_inventario();
+
+//console.log(inventario);
+}
+
+function suma_inventario(){
+const resp = confirm("Esta seguro de agregar al Inventario");
+if (resp) {
+  for (var i=0;i<data.length;i++){
+      if (data[i][4]!=0 || data[i][5]!=0) {
+       ind=inventario.findIndex(element => element.CLAVE==data[i][9])
+  if (ind==-1) {ind=inventario.length;
+    //alert(ind);
+    //alert(data[i][9]);
+//alert(inventario[0]);
+    inventario[ind]["CLAVE"]=data[i][9];
+    inventario[ind]["UNID"]=0;
+    inventario[ind]["CAJAS"]=0;
+ }
+       inventario[ind]["UNID"]=(parseInt(inventario[ind]["UNID"])+parseInt(data[i][4])).toString();
+       inventario[ind]["CAJAS"]=(parseInt(inventario[ind]["CAJAS"])+parseInt(data[i][5])).toString();
+      }
+ }
+//console.log(inventario);
+guarda_inventario();
+}
+}
+var suma=0;
+function suma_inventario2(){
+  for (var i=0;i<datfac.length;i++){
+      if (datfac[i].unidad!=0 || datfac[i].cajas!=0) {
+ //      ind=inventario.findIndex(element => element.CLAVE==data[i][9])
+ind=inventario.findIndex(element => element.CLAVE==datfac[i].cod)
+      if (ind==-1) {ind=inventario.length;
+        inventario[ind]["CLAVE"]=data[ind][9];
+        inventario[ind]["UNID"]=0;
+        inventario[ind]["CAJAS"]=0;
+ }
+       inventario[ind]["UNID"]=(parseFloat(inventario[ind]["UNID"])+parseFloat(datfac[i].unidad)).toString();
+       inventario[ind]["CAJAS"]=(parseFloat(inventario[ind]["CAJAS"])+parseFloat(datfac[i].cajas)).toString();
+      }
+ }
+//console.log(inventario);
+guarda_inventario();
+}
+function ventas_periodo(fecha1,fecha2){
+}
+
+var cliente='';
+var AClientes=[];
+
+function limpiaCliente2(){
+document.getElementById("cli2").value='';
+}
+
+function limpiaCliente(){
+document.getElementById("cli").value='';
+datos_cliente();
+}
+
+function elimina_cliente(){
+var ecliente;
+document.getElementById("cliente").hidden=true;
+ecliente=document.getElementById("cli").value;
+var pos=AClientes.findIndex(x=>x.nombre===ecliente);
+//console.log(pos);
+const resp = confirm("Esta seguro de eliminar el cliente");
+if (pos>=0 && resp) {AClientes.splice(pos,1);guarda_clientes();
+   limpiaCliente();
+ }
+//console.log('LC: '+Lclientes);
+}
+function salir_cliente(){
+document.getElementById("cliente").hidden=true;
+
+}
+
+function setcliente(){
+var indic;
+cliente=document.getElementById("cli").value;
+if (cliente!='') {
+  energia=document.getElementById("energia").value;
+  carboh=document.getElementById("carboh").value;
+  protein=document.getElementById("protein").value;
+  agua=document.getElementById("AGUA").value;
+  lags=document.getElementById("LAGS").value;
+  lagp=document.getElementById("LAGP").value;
+  lagm=document.getElementById("LAGM").value;
+  potasio=document.getElementById("potasio").value;
+  sodio=document.getElementById("sodio").value;
+  fosforo=document.getElementById("fosforo").value;
+  categoria=document.getElementById("categoria").value;
+ 
+  indic=-1;
+  if (nutrientes.length>0) {indic=nutrientes.findIndex(x => x.nombre == cliente);} 
+ // if (indic==-1) {indic=nutrientes.length}
+  Ocliente=new Object();
+  Ocliente.nombre=cliente;
+  Ocliente.kcal=energia;
+  Ocliente.carbo=carboh;
+  Ocliente.prot=protein;
+  Ocliente.agua=agua;
+  Ocliente.ags=lags;
+  Ocliente.agp=lagp;
+  Ocliente.agm=lagm;
+  Ocliente.k=potasio;
+  Ocliente.na=sodio;
+  Ocliente.p=fosforo;
+  Ocliente.cat=categoria;
+  if (indic==-1) {indic=nutrientes.length;nutrientes.push(Ocliente); } else {Object.assign(nutrientes[indic],Ocliente)}
+  guarda_clientes();
+ }
+  document.getElementById("cliente").hidden=true;
+Actualiza_bd_nut(indic);
+}
+
+//var Ocliente=new Object();
+
+function Actualiza_Nutriente(){
+//Lee_clientes();
+divcliente=document.getElementById("cliente");
+//divcliente.innerHTML=texto;
+divcliente.hidden=false;
+datos_cliente();
+}
+
+function datos_cliente(){
+cliente=document.getElementById("cli").value;
+//alert(cliente);
+var ind=nutrientes.findIndex(x=>x.nombre==cliente);
+//alert(ind);
+if (ind>=0) {
+ document.getElementById("protein").value=nutrientes[ind].prot;
+ document.getElementById("carboh").value=nutrientes[ind].carbo;
+ document.getElementById("LAGS").value=nutrientes[ind].ags;
+ document.getElementById("energia").value=nutrientes[ind].kcal;
+ document.getElementById("LAGP").value=nutrientes[ind].agp;
+ document.getElementById("LAGM").value=nutrientes[ind].agm;
+ document.getElementById("AGUA").value=nutrientes[ind].agua;
+ document.getElementById("potasio").value=nutrientes[ind].k;
+ document.getElementById("sodio").value=nutrientes[ind].na;
+ document.getElementById("fosforo").value=nutrientes[ind].p;
+ document.getElementById("categoria").value=nutrientes[ind].cat;
+} else {
+
+ document.getElementById("protein").value='';
+ document.getElementById("LAGS").checked=false;
+ document.getElementById("energia").value='';
+ document.getElementById("LAGP").value=0;
+ document.getElementById("carboh").value='';
+}
+}
+function guarda_clientes(){
+var Lclientes='';
+
+if (AClientes.length>0) {
+ localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
+// guarda_clientes_IDB();
+}
+   else 
+{
+localStorage.setItem('Clientes_Pita','');
+// guarda_clientes_IDB();
+}
+
+}
+
+function Lee_clientes(){
+//Lclientes=localStorage.getItem('Clientes_Pita');
+//lee_clientes_IDB();
+//if (Lclientes!=null) { AClientes=JSON.parse(Lclientes);} else {AClientes=[];}
+
+//console.log(AClientes);
+if (nutrientes.length>0) {
+ var options='';
+ for (var i = 0; i < nutrientes.length; i++) {
+   options += '<option value="' + nutrientes[i].nombre + '" />';
+ }
+//console.log('op'+options)
+
+document.getElementById('listaclientes').innerHTML = options;
+}
+}
+
+function guarda_pedido(){
+var texto='';
+//alert("LPG: "+Pedido_G.length);
+for (var i=0;i<Pedido_G.length;i++) {
+if (Pedido_G[i][1]!=0 ) {
+texto+='&'+Pedido_G[i][0]+'#'+Pedido_G[i][1]+'#'+Pedido_G[i][2];
+}
+}
+if (texto.length>2) {localStorage.setItem('Pedido',texto.substr(1));} else {localStorage.setItem('Pedido','');}
+
+//localStorage.setItem('Cliente',cliente);
+//guarda_clientes_IDB();
+}
+
+function crea_lista_facturas(){
+listasel=[];
+
+
+var lf=facturas.length;
+
+for(var i=0;i<lf;i++){
+  listasel.unshift(facturas[i].nombre+'_'+facturas[i].fecha);
+ } 
+listasel.sort();
+//console.log(listasel);
+}
+
+function lee_facturas(){
+crea_lista_facturas();
+//selectlista(0);
+}
+
+function ord_nomb(a,b){
+var ela=a.split('_');
+var elb=b.split('_');
+ if (ela[0]<elb[0]) return -1;
+  if (ela[0]>elb[0]) return 1;
+  if (!fecha_mayor_igual(ela[1],elb[1])) return -1;
+  if (!fecha_mayor_igual(elb[1],ela[1])) return 1;
+
+ return 0;
+}
+function ord_fecha(a,b){
+var ela=a.split('_');
+var elb=b.split('_');
+  if (!fecha_mayor_igual(ela[1],elb[1])) return 1;
+  if (!fecha_mayor_igual(elb[1],ela[1])) return -1;
+  if (ela[0]<elb[0]) return -1;
+  if (ela[0]>elb[0]) return 1;
+  return 0;
+}
+
+function ordena_nombre(){
+crea_lista_facturas();
+listasel=listasel.sort(ord_nomb);
+selectlista(0);
+}
+
+function ordena_fecha(){
+crea_lista_facturas();
+listasel=listasel.sort(ord_fecha);
+selectlista(0);
+}
+function ordena_cliente(){
+crea_lista_facturas();
+listasel=listasel.filter(x=>x.split('_')[0]==cliente);
+listasel=listasel.sort(ord_fecha);
+selectlista(1);
+}
+var total_factura=0;
+
+function selectlista(t){
+var textoT="";
+var div3 = document.getElementById("lista");
+div3.style="position: fixed;top :0px; left: 0px; width: 100%;height:80%;background-color: lightgray;color:white; text-align: left; border: 3px solid #73AD21;";
+textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+textoT+='<table width="100%"><tr>';
+textoT+='<td style="width:60%;text-align:center;color:blue;" >Menues disponibles</td>';
+textoT+='<td width="10%"><button  title="Nombre" onclick="ordena_nombre();" > N </button></td>';
+textoT+='<td width="10%"><button  title="Salir" onclick="quitarlista();" > x </button></td>';
+textoT+='</tr></table></div><br>';
+textoT+='<div style="overflow:auto;height:90%;font-size:0.6rem;">';
+textoT+='<table style="width:"100%;font-size:0.2rem;">';
+console.log(textoT);
+for (var i=0;i<listasel.length;i++) {
+partes=listasel[i].split('_');
+
+if (t=="0") {
+textoT+='<tr style="cursor:pointer;" onclick="clickp('+i+')";>';
+textoT+='<td style="width:40%;color:white;background:DodgerBlue;" >'+partes[0]+'</td>';
+textoT+='</tr>';
+
+console.log('<tr style="cursor:pointer;" onclick="clickp('+i+')";><td style="width:80%;color:white;background:DodgerBlue;" >'+partes[0]+'</td>+ '+partes[1]+'</td><td style="width:20%;"></td></tr>');
+} else {
+ textoT+='<tr style="cursor:pointer;" onclick="clickp('+i+')";>';
+ textoT+='<td style="width:35%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+partes[0]+'</td>';
+ textoT+='<td style="width:35%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+partes[1]+'</td>';
+ textoT+='<td style="width:30%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+monto_factura(listasel[i])+'</td>';
+ textoT+='</tr>'; 
+}
+}
+textoT+='</table></div>';
+div3.innerHTML=textoT;
+}
+
+function quitarlista(){
+var div3 = document.getElementById("lista");
+div3.style="display: none;";
+}
+
+function elim_factura(ind){
+   facturas.splice(ind,1);
+   localStorage.setItem("FACTURAS",JSON.stringify(facturas));
+// guarda_facturas_IDB();
+//  console.log('indice '+ind);
+}
+
+function borra(num){
+var partes=listasel[num].split("_");
+const resp = confirm("Esta seguro de eliminar la factura");
+//var resp=prompt(,'S/N'); 
+if (resp) {
+var findice=facturas.findIndex((e)=>e.cliente==partes[0] && e.fecha==partes[1] && e.nro==partes[2]);
+ if (findice>=0) {  
+  elim_factura(findice)
+ }
+}
+cancelar();
+crea_lista_facturas()
+quitarlista();
+selectlista(0);
+}
+
+
+function borra2(num){
+var partes=listasel[num].split("_");
+var findice=facturas.findIndex((e)=>e.cliente==partes[0] && e.fecha==partes[1] && e.nro==partes[2]);
+ if (findice>=0) {  
+  elim_factura(findice)
+ }
+cancelar();
+}
+
+
+function clickp(num){
+//alert(num);
+var nomb=listasel[num];
+
+recupera_factura(nomb);
+factura();
+factura3(num);
+document.getElementById("lista").style.visibility = "hidden";
+//quitarlista();
+
+}
+
+function cancelar(){
+var div3 = document.getElementById("auxiliar");
+div3.style="display:none;";
+}
+
+
+function fact_base(num){
+var nomb=listasel[num];
+Pedido_G=[];
+quitarlista();
+recupera_factura(nomb);
+//alert("dl "+datfac.length);
+
+for (var i=0;i<datfac.length;i++) {
+
+if ((datfac[i].cantidad!=0) ) {
+//alert("dl0 "+datfac[i].cod);
+ Pedido_G[i]=[datfac[i].nombre,datfac[i].cantidad,datfac[i].tipo];
+//alert("cod "+Pedido_G[i][1]);
+// console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
+}
+} 
+
+factura2();
+cancelar();
+}
+function modifica_factura2(indf){
+//fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
+cliente_factura=document.getElementById('cli2').value;
+//alert("indf "+indf);
+facturas[indf].nombre=cliente_factura;
+localStorage.setItem("MENUS",JSON.stringify(facturas))
+// guarda_facturas_IDB();
+quitarlista();
+lee_facturas();
+selectlista(0);
+}
+ 
+
+function fact_modif(num){
+//bcv_factura=ped[0];
+var nomb=listasel[num];
+//alert("nomb "+nomb);
+partes=nomb.split("_");
+var indf=facturas.findIndex((e)=>e.nombre==partes[0])
+var div3 = document.getElementById("lista");
+div3.style="display:block; position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
+//nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
+texto='';
+texto+='<span onclick="limpiaCliente2();">Nombre:</span>';
+texto+='<input style="width:30%;" type="text" id="cli2" value="'+partes[0]+'" list="listaclientes">';
+texto+='<datalist id="listaclientes"></datalist>';
+
+texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="modifica_factura2('+indf+');" >Ok </button>';
+div3.innerHTML=texto;
+//anula();
+
+
+//factura2();
+//cancelar();
+}
+function revertir_factura(num){
+var nomb=listasel[num];
+recupera_factura(nomb);
+//alert(cliente_factura.indexOf('Pedido'));
+ if (cliente_factura.indexOf('Pedido')==-1) {suma_inventario2();}
+cliente=cliente_factura;
+var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
+//console.log(indcliente);
+if (indcliente>=0) {Ocliente=AClientes[indcliente];} else {Ocliente=AClientes[0];}
+fact_base(num);
+borra2(num);
+cancelar();
+Revierte_deuda();
+}
+var MONTOF='';
+
+function Actualiza_deuda(){
+Lclientes=localStorage.getItem('Clientes_Pita');
+if (Lclientes!=null) { AClientes=JSON.parse(Lclientes);} else {AClientes=[];}
+
+var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
+//alert(indcliente);
+if (indcliente>=0) {
+DEU_ANT=AClientes[indcliente].deuda;
+AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)+parseFloat(MONTOF)).toFixed(2);
+AClientes[indcliente].ultfac=parseFloat(MONTOF).toFixed(2);
+localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
+// guarda_clientes_IDB();
+}
+}
+function Revierte_deuda(){
+var indcliente=AClientes.findIndex(x=>x.nombre==cliente);
+//alert(indcliente);
+if (indcliente>=0) {
+AClientes[indcliente].deuda=(parseFloat(AClientes[indcliente].deuda)-parseFloat(MONTOF)).toFixed(2);
+localStorage.setItem('Clientes_Pita',JSON.stringify(AClientes));
+// guarda_clientes_IDB();
+//alert(AClientes[indcliente].deuda);
+}
+
+}
+
+function guardar_factura(){
+var div3 = document.getElementById("lista");
+div3.style="display:block; position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
+//nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
+texto='';
+texto+='Fecha: <input id="ffac" type="date" value="'+fecha_date(fecha_actual())+'"><br>';
+texto+='<span onclick="limpiaCliente2();">Menu:</span>';
+texto+='<input style="width:30%;" type="text" id="cli2" value="" >';
+//texto+='<datalist id="listaclientes"></datalist>';
+//texto+='<input style="width:30%;" type="text" id="nfact" value="'+nro_factura+'" list="listaclientes">';
+texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="guarda_factura2();" >Ok </button>';
+div3.innerHTML=texto;
+
+}
+function get_total(A,ind){
+var total=new Object();
+total.kcal=0;
+total.gr=0;
+total.k=0;
+total.p=0;
+total.na=0;
+total.agm=0;
+total.ags=0;
+total.agp=0;
+total.agua=0;
+total.carbo=0;
+total.prot=0;
+var lA=A.length;
+for (var i=0;i<lA;i++) {
+if ((ind==-1) || (ind==A[i][2])) {
+  indf=nutrientes.findIndex(e=>e.nombre==A[i][0]);
+  if (indf>=0) {
+   total.gr+=parseFloat(A[i][1]);
+   total.kcal+=parseFloat(nutrientes[indf].kcal*A[i][1]/100);
+   total.agm+=parseFloat(nutrientes[indf].agm*A[i][1]/100);
+   total.agp+=parseFloat(nutrientes[indf].agp*A[i][1]/100);
+   total.ags+=parseFloat(nutrientes[indf].ags*A[i][1]/100);
+   total.carbo+=parseFloat(nutrientes[indf].carbo*A[i][1]/100);
+   total.k+=parseFloat(nutrientes[indf].k*A[i][1]/100);
+   total.na+=parseFloat(nutrientes[indf].na*A[i][1]/100);
+   total.p+=parseFloat(nutrientes[indf].p*A[i][1]/100);
+   total.prot+=parseFloat(nutrientes[indf].prot*A[i][1]/100);
+   total.agua+=parseFloat(nutrientes[indf].agua*A[i][1]/100);
+
+  }
+}
+}
+console.log("total: "+total.gr);
+return total;
+}
+
+function suma_alimento(){
+var div3 = document.getElementById("lista");
+div3.style="display:block; position: fixed;top :0px; left: 0px; width: 100%;height:40%;background-color: black;color:white; text-align: left; border: 3px solid #73AD21;";
+//nro_factura=parseInt(localStorage.getItem('FACT_NRO'));
+texto='';
+//texto+='Fecha: <input id="ffac" type="date" value="'+fecha_date(fecha_actual())+'"><br>';
+//texto+='<span onclick="limpiaCliente2();">Alimento:</span>';
+texto+='<input style="width:30%;" type="text" id="cli2" value="" list="listaclientes">';
+texto+='<datalist id="listaclientes"></datalist>';
+//texto+='<input style="width:30%;" type="text" id="nfact" value="'+nro_factura+'" list="listaclientes">';
+texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="suma_alimento2();" >Ok </button>';
+div3.innerHTML=texto;
+
+}
+
+function guarda_factura2(){
+fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
+//alert(fecha_factura);
+cliente_factura=document.getElementById('cli2').value;
+//Actualiza_deuda();
+guarda_factura(); 
+//localStorage.setItem('FACT_NRO',(nro_factura+1).toString());
+quitarlista();
+}
+ function suma_alimento2(){
+//fecha_factura=inv_fecha_date(document.getElementById('ffac').value.toLocaleString('es-US',{}));
+//alert(fecha_factura);
+cliente_factura=document.getElementById('cli2').value;
+//alert(cliente_factura);
+//Actualiza_deuda();
+//guarda_factura();
+
+var indf=nutrientes.findIndex(e=>e.nombre==cliente_factura);
+if (indf>=0) {
+   total=get_total(Pedido_G,-1); 
+   nutrientes[indf].kcal=parseFloat(total.kcal*100/total.gr).toFixed(2);
+   nutrientes[indf].agm=parseFloat(total.agm*100/total.gr).toFixed(2);
+   nutrientes[indf].agp=parseFloat(total.agp*100/total.gr).toFixed(2);
+   nutrientes[indf].ags=parseFloat(total.ags*100/total.gr).toFixed(2);
+   nutrientes[indf].carbo=parseFloat(total.carbo*100/total.gr).toFixed(2);
+   nutrientes[indf].k=parseFloat(total.k*100/total.gr).toFixed(2);
+   nutrientes[indf].na=parseFloat(total.na*100/total.gr).toFixed(2);
+   nutrientes[indf].p=parseFloat(total.p*100/total.gr).toFixed(2);
+   nutrientes[indf].prot=parseFloat(total.prot*100/total.gr).toFixed(2);
+   nutrientes[indf].agua=parseFloat(total.agua*100/total.gr).toFixed(2);
+   Actualiza_bd_nut(indf); 
+   }
+
+
+
+//localStorage.setItem('FACT_NRO',(nro_factura+1).toString());
+quitarlista();
+}
+
+function guarda_factura(){
+var indice=facturas.length;
+var indc=facturas.findIndex(e=>e.nombre==cliente_factura);
+//alert(indice+" "+indc);
+
+//var nomb='FAC'+'_'+cliente_factura+'_'+fecha_factura+'_'+nro_factura;
+//alert(nomb);
+//nro_factura++;
+var ind;
+//localStorage.setItem('FACT_NRO',(nro_factura).toString());
+if (indc>=0) {indice=indc}
+facturas[indice]=new Object();
+facturas[indice].nombre=cliente_factura;
+//facturas[indice].fecha=fecha_factura;
+facturas[indice].items=new Array;
+var nro_item=0;
+//alert("LP "+Pedido_G.length);
+for (var i=0;i<Pedido_G.length;i++) {
+//ind=nutrientes.findIndex(e=>e.nombre==Pedido_G[i][0]);
+ facturas[indice].items[nro_item]=new Object;
+ facturas[indice].items[nro_item].cod=Pedido_G[i][0];
+ facturas[indice].items[nro_item].cu=Pedido_G[i][1];
+ facturas[indice].items[nro_item].tipo=Pedido_G[i][2];
+ nro_item++;
+ texto+='&'+Pedido_G[i][0]+'#'+Pedido_G[i][1];
+//}
+}
+var tmp=JSON.stringify(facturas);
+localStorage.setItem("MENUS",tmp);
+}
+
+
+function recupera_pedido(archivo){
+var texto='';
+
+texto=localStorage.getItem(archivo);
+//alert(texto);
+var items=[];
+Pedido_G=[];
+if (texto!='' && texto!=null) {
+  var ped=texto.split('&');
+  for (var i=0;i<ped.length;i++) {
+    items=ped[i].split('#');
+    Pedido_G[i]=[items[0],parseFloat(items[1]),parseInt(items[2])];
+    }
+}
+
+}
+
+var datfac=[];
+
+function monto_factura(nomb){
+//alert(nomb);
+var partes=nomb.split("_");
+findice=facturas.findIndex((e)=>e.cliente==partes[0] && e.fecha==partes[1] );
+if (findice>=0) {return facturas[findice].total} else {return 0}
+}
+function Restaura_bd(){
+//nutrientesctual=Array.from(nutrientes);
+rest_bd=true;
+Act_data();
+}
+
+function Re_actualiza_bd(){
+let l=nutrientes.length;
+for (var i=0;i<l;i++) {
+ Actualiza_bd_nut(i)
+}
+}
+
+function monto_factura2(nomb){
+//alert(nomb);
+recupera_factura2(nomb);
+//alert(nomb);
+factura3(0);
+document.getElementById("factura").hidden=true;
+return (total_factura).toFixed(2);
+
+}
+function recupera_factura(id_factura){
+//alert(id_factura);
+datfac=[];
+
+var partes=id_factura.split('_');
+//fecha_factura=partes[1];
+cliente_factura=partes[0];
+//numero_factura=partes[2];
+//console.log("f "+facturas[2].nombre+" "+facturas[2].fecha);
+var indf=facturas.findIndex((e)=> e.nombre==cliente_factura );
+//alert("indf "+indf);
+if (indf>=0) {
+ try {
+ for (var i=0;i<facturas[indf].items.length;i++) {
+   datfac[i]=new Object();
+   datfac[i].nombre=facturas[indf].items[i].cod;
+   datfac[i].cantidad=parseFloat(facturas[indf].items[i].cu);
+   datfac[i].tipo=parseInt(facturas[indf].items[i].tipo);
+
+  }
+ }
+ catch(error) {console.log(error)};
+}
+}
+
+function recupera_factura2(nomb){
+
+for (var i=0;i<data.length;i++) {
+datfac[i]=new Object();
+datfac[i].unidad=0;
+datfac[i].pu=0;
+datfac[i].cajas=0;
+datfac[i].pb=0;
+
+}
+var partes=nomb.split('_');
+fecha_factura=partes[1];
+cliente_factura=partes[0];
+numero_factura=partes[2];
+//alert(nomb);
+var texto=localStorage.getItem('FAC_'+nomb);
+//alert(texto);
+var items=texto.split('&');
+ bcv_factura=items[0];
+ for (var i=1;i<items.length;i++) {
+  var det=items[i].split('#');
+   var ind=clave_ind.get(det[0]);;
+   datfac[ind].unidad=parseInt(det[1]);
+   datfac[ind].pu=parseFloat(det[2]);
+   datfac[ind].cajas=parseInt(det[3]);
+   datfac[ind].pb=parseFloat(det[4]);
+ }
+
+}
+
+function salir(){
+guarda_pedido();
+//t2=document.getElementById("t2").value;
+//localStorage.setItem('p2',t2);
+//localStorage.setItem('data'+tiendas[tienda_sel].Nomb,JSON.stringify(data));
+}
+
+var lcat=[];
+var Stack_cat=['Nutrientes'];
+var Cats;
+var cat_actual='Nutrientes';
+var cat_ant='';
+
+function set_cat(){
+Cats = new Tree();
+Cats.add('Nutrientes','');
+var categorias=[];
+var ldatos=nutrientes.length;
+//alert(ldatos);
+for (i=0;i<ldatos;i++){
+//console.log(data[i][8]);
+  if  (!categorias.includes(nutrientes[i].cat)) {
+     categorias.push(nutrientes[i].cat);   
+  } 
+ }
+
+var categ;
+var nrocateg;
+var ldatos2=categorias.length;
+//console.log(ldatos2);
+for (i=0;i<ldatos2;i++){
+  categ=categorias[i].split('&');
+  nrocateg=categ.length-2;
+  //console.log(i + ' '+categ[1]+ ' '+ nrocateg);
+  Cats.add(categ[1],'Nutrientes');
+  for (var j=2;j<=nrocateg;j++) {
+     //console.log('subc '+ j+ ' '+categ[j]);
+     Cats.add(categ[j],categ[j-1]);
+   }
+}
+
+//console.log(Cats);
+}
+
+function check_inv(cod){
+
+let cajas=0;
+let unid=0;
+let ind=inventario.findIndex(e=>e.CLAVE==cod);
+if (ind!=-1) 
+{
+let i=clave_ind.get(inventario[ind]["CLAVE"]);
+let total=parseInt(inventario[ind].CAJAS)*parseInt(data[i][1])+parseInt(inventario[ind].UNID);
+cajas=Math.trunc(total/data[i][1]);unid=total % data[i][1];
+
+}
+return [cajas,unid];
+}
+
+function muestra_cat(){
+var divcat=document.getElementById("cat");
+var divarbol=document.getElementById("arbol");
+cat_actual=Stack_cat[Stack_cat.length-1];
+var text_cat='';
+for (i=0;i<Stack_cat.length;i++)
+    text_cat+=Stack_cat[i]+'/';
+var nodo=Cats.findBFS(cat_actual) ;
+var texto='';
+texto+='<center>'+text_cat+'</center>';
+if (Stack_cat.length>1) {
+//texto+='  '+'<button class="nav" onclick="sube_cat()";>'+'&#9650'+'</button>'
+}
+//texto+='<br>';
+divarbol.innerHTML=texto;
+//cat_ant=cat_actual;
+texto='';
+for (i=0;i<nodo.children.length;i++){
+  var aux=nodo.children[i].value;
+  texto+='  '+'<button class="bot3" onclick="cambia_cat(\''+aux+'\')";>'+aux+'</button>';
+
+}
+divcat.innerHTML=texto;
+divcat.style.visibility="visible";
+
+//divcat.hidden=false;
+
+}
+function sube_cat(){
+if (Stack_cat.length>1) { 
+ Stack_cat.pop();
+ muestra_cat();
+refresca();
+//console.log('paso sube');
+}
+}
+
+function cambia_cat(valor){
+Stack_cat.push(valor)
+cat_ant=cat_actual;
+//console.log('cat anterior  '+cat_ant);
+cat_actual=valor.toString();
+muestra_cat();
+refresca();
+//console.log('paso');
+}
+
+function set_clave_indice(){
+clave_ind=new Map();
+for (var i=0;i<data.length;i++) {
+//console.log(i);
+//console.log(data[i][9]);
+
+clave_ind.set(data[i][9],i.toString());
+}
+}
+
+function ordena(){
+data.sort(function(a, b){
+  if (a.cat<b.cat) {return -1} else {return 0;}
+   });
+}
+
+var dist="Mercado"
+var hoy=new Date();
+function camb(){
+var va=document.getElementById("t3").checked; 
+//console.log('va '+va);
+localStorage.setItem('p3',va);
+}
+function carga(){
+
+var ftemp=localStorage.getItem("MENUS")
+//alert(ftemp.length);
+if (ftemp===null) {facturas=[];} else {facturas=JSON.parse(ftemp);}
+//console.log(facturas);
+//lee_facturas_IDB();
+/*try {
+
+document.getElementById("t2").value = localStorage.getItem('p2');
+document.getElementById("fecha_p").innerText = localStorage.getItem('FECHA_P');
+} catch (error) {  console.error(error); }
+*/
+divt=document.getElementById("divt");
+fiva=7.25;
+
+var j=0;
+
+inicia_bd_Nut();
+
+data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,120,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV001',120]
+];
+
+//try {
+//data=eval(localStorage.getItem('data'+tiendas[tienda_sel].Nomb));
+//} catch (error) {}
+//alert(nutrientes.length);
+//set_cat();
+//muestra_cat();
+//set_clave_indice();
+//inicio_inventario();
+//refresca();
+recupera_pedido("Pedido");
+}
+
+
+function actT(ind,pos){
+var valor=prompt("Introduzca cantidad", "");
+if (valor!=null) {data[ind][5]=parseInt(valor);}
+cintro(ind,pos);
+
+//console.log(ind);
+}
+function actU(ind,pos){
+var valor=prompt("Introduzca cantidad", "");
+if (valor!=null) {data[ind][4]=parseInt(valor);}
+intro(ind,pos);
+
+//console.log(ind);
+}
+var factflag=true;
+function factura(){
+if (factflag) {factflag=false; factura2(); } else { factflag=true; quitar()};
+
+}
+var Ftexto;
+
+function fecha_actual(){
+var dia=(hoy.getDate()).toString() ;
+if (dia.length==1) {dia='0'+dia}
+var mes=(hoy.getMonth()+1).toString();
+if (mes.length==1) {mes='0'+mes}
+return dia + '/' +mes + '/' +hoy.getFullYear().toString()
+
+}
+
+function factura3(numf){
+
+var texto='';
+//texto+='Fecha: '+fecha_factura+'<br>';
+texto+=dist+'<br>';
+texto+='Menu: '+cliente_factura+'<br>';
+console.log("datfac "+datfac);
+texto+='<center>Informacion nutricional '+'</center>';
+texto+='<center><span id="contad" ></span></center>';
+//Ftexto='Fecha: '+fecha_factura+'\n';;
+Ftexto+='Menu: '+cliente_factura+'\n';
+Ftexto+="Informacion nutricional "+"\n"
+var contador=0;
+var colorb='black';
+for (var i=0;i<datfac.length;i++){
+ if (datfac[i].unidad!=0 ) {
+  contador++;
+ texto+=datfac[i].nombre+' '+datfac[i].cantidad+Comidas[datfac[i].tipo]+'<br>';
+}
+}
+texto+='</table>';
+
+
+texto+='<HR>';
+Ftexto+='============================================\n';
+//texto+='<span style="color:yellow; font-size:1em;">Total</span><br>';
+
+
+
+texto+='<table width="60%">';
+texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total S/IVA </td><td style="width:50%;">'+'</td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+' </td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+' </td></tr>';
+texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+' </td></tr>';
+texto+='</table>';
+//total_factura=totald;
+
+
+//Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+mone+' C/IVA: '+(totalb).toFixed(2)+' '+mone+' \n'
+//Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+mone+ ' \n';
+
+var textoT='<div style="position: fixed; text-align:right;background-color: lightgreen;width:100%;">';
+textoT+='<table width="100%"';
+textoT+='<tr>';
+textoT+='<td width="15%"><button class="btop" onclick="borra('+numf+');">Borrar</button></td>';
+//textoT+='<td width="15%"><button class="btop" onclick="revertir_factura('+numf+');">Revertir</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="fact_base('+numf+');">Estab</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="fact_modif('+numf+');">Modif</button></td>';
+textoT+='<td width="10%"></td>';
+textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
+textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
+textoT+='</tr></table></div><br>';
+divfactura=document.getElementById("factura")
+divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 100% ; height: 80%; background-color: lightgray;color:white; border: 3px solid #73AD21;";
+textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
+divfactura.innerHTML=textoT;
+divfactura.hidden=false;
+//console.log("contador: "+contador);
+document.getElementById("contad").innerText=contador+ " Productos";
+}
+
+var Ptexto;
+
+function pedido(){
+const resp = confirm("Esta seguro de hacer el pedido ");
+if (resp) {
+Ptexto='Pedido de alimentos de Distribuidora Pita Orozco\n';
+Ptexto+='Codigo: 224000666\n'
+Ptexto+='-----------\n';
+for (var i=0;i<data.length;i++){
+if (data[i][4]!=0 ) {Ptexto+= data[i][4]+' U '+data[i][0]+'\n';}
+  if (data[i][5]!=0) {Ptexto+= data[i][5]+' '+data[i][0]+'\n';}
+
+}
+//console.log(Ptexto);
+
+const shareData = {
+  title: 'Pedido',
+  text: Ptexto
+}
+comparte(shareData);
+}
+}
+
+function factura2(){
+var totalt;
+var texto='<table width="100%" ><tr><td>Fecha: '+fecha_actual()+'</td><td> '+ '</td></tr></table>';
+
+texto+='<br>'
+textoT='';
+texto+="<center>Informacion nutricional</center>";
+texto+='<center><span id="contad" ></span></center>';
+var ind;
+Ftexto='Fecha: '+fecha_actual()+'\n';
+
+Ftexto+="Informacion nutricional\n"
+var contador=0;
+var kcal=0;
+var carboh=0;
+var kcalt=0;
+var colorb='black';
+var comdant=-1;
+//alert(" Paso numero 3");
+texto+='<table>';
+for (var i=0;i<Pedido_G.length;i++){
+  ind=nutrientes.findIndex(e=>e.nombre==Pedido_G[i][0]);
+if (Pedido_G[i][2]!=comdant) {
+  if (i!=0) {texto+='<tr><td span="2"></td></tr>';texto+='<tr><td span="2"></td></tr>';}
+  texto+='<tr><td span="2" style="color:red;">'+Comidas[Pedido_G[i][2]]+'</td></tr>';
+  comdant=Pedido_G[i][2];
+ } 
+
+ if (Pedido_G[i][1]!=0 && ind>=0) {
+    kcal=parseFloat(nutrientes[ind].kcal*Pedido_G[i][1]/100);
+   carboh=parseFloat(nutrientes[ind].carbo*Pedido_G[i][1]/100);
+   texto+='<tr onclick="cintro('+ind+','+i+');" style="color:blue;"><td span="2">'+Pedido_G[i][0]+' '+Pedido_G[i][1]+' gr </td></tr>'; 
+   texto+='<tr><td>'+kcal.toFixed(2)+' Kcal'+'</td>';
+  texto+='<td>'+carboh.toFixed(2)+' gr'+'</td>'+'</tr>';
+   kcalt+=kcal; 
+ contador++;
+    
+  } // if
+ }// for
+texto+='</table>';
+texto+='<HR>';
+Ftexto+='============================================\n';
+totalt=get_total(Pedido_G,-1);
+
+  texto+='<table width="60%">';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total Kcal </td><td style="width:50%;">'+(totalt.kcal).toFixed(2)+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;">Potasio </td><td style="width:50%;">'+(totalt.k).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Fosforo </td><td style="width:50%;">'+(totalt.p).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Sodio </td><td style="width:50%;">'+(totalt.na).toFixed(2)+ '</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Agua </td><td style="width:50%;">'+(totalt.agua).toFixed(2)+ '</td></tr>';
+
+  texto+='</table>';
+ texto+='</table>';
+textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
+textoT+='<table width="100%"';
+textoT+='<tr>';
+textoT+='<td width="15%"><button class="btop" onclick="anula();">Borrar</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="guardar_factura();">Guardar</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="lee_facturas();ordena_fecha();selectlista(0);">Ver</button></td>';
+textoT+='<td width="5%"></td>';
+textoT+='<td width="10%"></td>';
+textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
+textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Modificar Alimento" id="btnc" onclick="suma_alimento();"> +I </button></td>';
+
+//textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="suma_inventario();"> +I </button></td>';
+//textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="restar_inventario();"> -I </button></td>';
+//textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Pedido" id="btnc" onclick="pedido();"> P </button></td>';
+textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
+textoT+='</tr></table></div><br>';
+
+divfactura=document.getElementById("factura")
+divfactura.style="position: fixed;top :35px; left: 2px; overflow-y: auto; width: 100% ; height: 80%; background-color: lightgray;color:white; border: 3px solid #73AD21;";
+textoT+='<div style="color:black; font-size:0.8em;">'+texto+'</div>';
+divfactura.innerHTML=textoT;
+divfactura.hidden=false;
+document.getElementById("contad").innerText=contador+ " Alimentos";
+}
+
+var tipo=0;
+var tipo2=0;
+var ind_pedido;
+function cambia_moneda(){
+tipo=1-tipo;
+factura2();
+}
+
+function cambia_moneda2(num){
+tipo2=1-tipo2;
+//alert();
+factura3(num);
+}
+
+function compartir(){
+const shareData = {
+  title: 'Factura',
+  text: Ftexto
+}
+//console.log(shareData);
+comparte(shareData);
+}
+
+async function comparte(shareData){
+  try {
+    await navigator.share(shareData)
+    console.log('MDN shared successfully');
+  } catch(err) {
+    console.log( 'Error: ' + err);
+  }
+}
+
+
+function anula(){
+
+const resp = confirm("Esta seguro de borrar la factura ");
+if (resp) {
+Pedido_G=[];
+/* for (var i=0;i<data.length;i++){
+  data[i][4]=0;
+  data[i][5]=0;
+ }
+*/
+}
+if (document.getElementById("factura").hidden==false) {factura2();}
+}
+
+function anula2(){
+const resp = confirm("Esta seguro de establecer la factura ");
+if (resp) {Pedido_G=[];}
+
+if (document.getElementById("factura").hidden==false) {factura2();}
+}
+
+function quitar(){
+var div5 = document.getElementById("factura");
+div5.hidden=true;
+factflag=true;
+document.getElementById("lista").style.visibility = "visible";
+
+}
+function precio_costo(ind){
+//var factor=parseFloat(document.getElementById("t2").value);
+factor=1;
+if (data[ind][6]=="t1") {
+ var pcu=+(data[ind][10]*(1/factor)).toFixed(2);
+ var pcb=+(pcu*data[ind][1]);
+} 
+if (data[ind][6]=="t2") {
+   var pcu=+(data[ind][10]).toFixed(2);
+   var pcb=+(pcu*data[ind][1]);
+    } 
+if (data[ind][6]=="t3") {
+   var pcb=+(data[ind][10].toFixed(2));
+   var pcu=+((pcb/data[ind][1]).toFixed(2));
+    }
+
+pcu=parseFloat(pcu.toFixed(2));
+pcb=parseFloat(pcb.toFixed(2));
+//alert('pu'+pu+' pb '+pb);
+return [pcu,pcb];
+}
+
+function precio(ind){
+//var factor=parseFloat(document.getElementById("t2").value);
+var factor=1;
+if (data[ind][6]=="t1") {
+ var pu=+(data[ind][2]*(1/factor)).toFixed(8);
+ var pb=+(pu*data[ind][1]);
+} 
+if (data[ind][6]=="t2") {
+   var pu=+(data[ind][2]).toFixed(2);
+   var pb=+(pu*data[ind][1]);
+    } 
+if (data[ind][6]=="t3") {
+   var pb=+(data[ind][2].toFixed(2));
+   var pu=+((pb/data[ind][1]).toFixed(2));
+    }
+
+pu=parseFloat(pu.toFixed(8));
+pb=parseFloat(pb.toFixed(8));
+//alert('pu'+pu+' pb '+pb);
+return [pu,pb];
+}
+
+
+function refresca2(){
+var patron=document.getElementById("search").value.toUpperCase();
+var pb;
+var pu;
+//t1=document.getElementById("t1").value;
+t2=document.getElementById("t2").value;
+//localStorage.setItem('p1',t1);
+localStorage.setItem('p2',t2);
+texto="";
+var factor;
+var fm;
+var pu,pb;
+for (var i=0;i<data.length;i++){
+if (data[i][0].toUpperCase().indexOf(patron) !=-1)   {
+if (data[i][6]=="t1") {factor=t2;}
+if (data[i][6]=="t2") {factor=t2;}
+//console.log(i+" "+data[i][0]);
+texto+='<p  >'+ data[i][0]+'</p>';
+//console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
+if (data[i][4]==0) {var vcor='black';} else {var vcor='blue';}
+if (data[i][5]==0) {var vcor1='black';} else {var vcor1='blue';}
+if (data[i][3]==1) {fm=1.16} else {fm=1}
+//var pu=+(fm*data[i][2]/data[i][1]).toFixed(2);
+//var pb=+(fm*data[i][2]).toFixed(2);
+/*if (data[i][6]=="t1") {
+  var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
+  var pb=+(pu*data[i][1]).toFixed(2);
+} 
+if (data[i][6]=="t2") {
+  var pu=+(fm*data[i][2]).toFixed(2);
+  var pb=+(pu*data[i][1]).toFixed(2);
+}
+
+if (data[i][6]=="t3") {
+  var pb=+(fm*data[i][2]).toFixed(2);
+  var pu=+(pb/data[i][1]).toFixed(2);
+}
+*/
+[pu,pb]=precio(i);
+if (data[i][6]=="t1") 
+{
+texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (fm*data[i][2]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+',-1);">'+data[i][4]+'</button></td></tr>';
+texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (fm*data[i][2]*data[i][1]).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+'-1);">'+data[i][5]+'</button></td></tr></table>';
+} 
+if (data[i][6]=="t2") 
+{
+texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+'-1);">'+data[i][4]+'</button></td></tr>';
+texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+'-1);">'+data[i][5]+'</button></td></tr></table>';
+}
+  
+if (data[i][6]=="t3") 
+{
+texto+='<table><tr><td> U '+(pu).toFixed(2)+' $' +'</td><td>'+ (pu*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor+';"'+'onclick="actU('+i+'-1);">'+data[i][4]+'</button></td></tr>';
+texto+='<tr><td> B '+(pb).toFixed(2)+' $'+'</td><td>'+ (pb*factor).toFixed(2)+ ' Bs <button class="btn2" style="color:'+vcor1+';"'+'onclick="actT('+i+'-1);">'+data[i][5]+'</button></td></tr></table>';
+}
+
+
+ if (data[i][3]==1) {
+    texto+="<span style='font-size:0.6em;'>Retenci&oacute;n T: "+(fm*data[i][2]/fiva).toFixed(2)+ " $ "+(fm*data[i][2]*factor/fiva).toFixed(2)+" Bs          </span>";
+   }
+}
+}
+texto+='<br><br>'
+divt.innerHTML=texto;
+}
+function preciou(i){
+var fm
+if (data[i][3]==1) {fm=1.16} else {fm=1}
+if (data[i][6]=="t1") {
+  var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
+  var pb=+(pu*data[i][1]).toFixed(2);
+} 
+if (data[i][6]=="t2") {
+  var pu=+(fm*data[i][2]).toFixed(2);
+  var pb=+(pu*data[i][1]).toFixed(2);
+}
+
+if (data[i][6]=="t3") {
+  var pb=+(fm*data[i][2]).toFixed(2);
+  var pu=+(pb/data[i][1]).toFixed(2);
+}
+return pu;
+}
+
+function preciob(i){
+var fm
+if (data[i][3]==1) {fm=1.16} else {fm=1}
+
+if (data[i][6]=="t1") {
+  var pu=+(fm*data[i][2]*(1/t2)).toFixed(2);
+  var pb=+(pu*data[i][1]).toFixed(2);
+} 
+if (data[i][6]=="t2") {
+  var pu=+(fm*data[i][2]).toFixed(2);
+  var pb=+(pu*data[i][1]).toFixed(2);
+}
+
+if (data[i][6]=="t3") {
+  var pb=+(fm*data[i][2]).toFixed(2);
+  var pu=+(pb/data[i][1]).toFixed(2);
+}
+return pb;
+}
+function quitar_intro(){
+document.getElementById("introd").style.visibility="hidden";
+}
+
+function cambiaU(num,pos){
+var cantidad=document.getElementById("entradaU").value;
+var tipocom=document.getElementById("Comida").selectedIndex;
+
+if (cantidad=='') {cantidad=0}
+if (cantidad!=0) {
+if (pos==-1 ) {Pedido_G.push([nutrientes[num].nombre,cantidad,tipocom]);}
+ else 
+{Pedido_G[pos]=[nutrientes[num].nombre,cantidad,tipocom];}
+}
+if (cantidad==0 && pos!=-1) {Pedido_G.splice(pos,1)}
+console.log(Pedido_G);
+Pedido_G.sort((a,b)=>a[2]-b[2]);
+if (pos==-1 ) {intro(num,-1);} else {factura2()}
+
+salir();
+}
+function hab_cambio_dol(){
+var entrada=document.getElementById("entradaPU");
+if (entrada.disabled==true) {entrada.disabled=false} else {entrada.disabled=true}
+
+}
+function cambiaPU(num){
+data[num][6]="t2";
+data[num][2]=parseFloat(document.getElementById("entradaPU").value); 
+if (data[num][3]==1) {data[num][2]=parseFloat(parseFloat(data[num][2]/1.16).toFixed(2))}
+
+}
+function hab_cambio_bs(){
+var entrada=document.getElementById("entradaPUB");
+if (entrada.disabled==true) {entrada.disabled=false} else {entrada.disabled=true}
+
+}
+function cambiaPUB(num){
+data[num][6]="t1";
+data[num][2]=parseFloat(document.getElementById("entradaPUB").value);
+if (data[num][3]==1) {data[num][2]=parseFloat(parseFloat(data[num][2]/1.16).toFixed(2))}
+}
+
+function cambiaB(num,pos){
+data[num][5]=document.getElementById("entradaB").value;
+if (data[num][5]=='') {data[num][5]=0}
+intro(num,pos);
+salir();
+}
+function cintro(num,pos){
+document.getElementById("factura").hidden=true;
+factflag=true;
+intro(num,pos);
+}
+function makeSelectSimple(id,D,indice){
+var texto='<select '+'id="'+id+'"'+'> ';
+//alert(texto);
+for (var i=0;i<D.length;i++){
+if (i==indice) {texto+='<option selected> '+D[i]+' </option>';} else {texto+='<option> '+D[i]+' </option>';}
+}
+texto+='</select>';
+return texto;
+}
+
+function getIndexInputSimple(name){
+var sel=document.getElementsByTagName(name).indexSelected;
+
+
+return sel;
+}
+var Comidas=["Desayuno","Media mañana","Almuerzo","Merienda","Cena"]
+function intro(i,pos){
+
+var colb="black";
+//if (data[i][3]==1) {fm=1.16;BanderaIva="C/IVA";colb="black";} else {fm=1;BanderaIva="S/IVA";colb="blue";}
+var divintro=document.getElementById("introd");
+var vcor='red';
+var vcor1='red';
+var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+nutrientes[i].nombre+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
+
+texto+='<table><tr><td>'+'</td><td>';
+texto+='</td><td>';
+if (pos>-1) 
+{texto+='<input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+Pedido_G[pos][1]+'" >';}
+else
+{texto+='<input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="0" >';}
+texto+='</td><td><button onclick="cambiaU('+i+','+pos+');">Ok</button>';
+texto+='&nbsp;&nbsp;&nbsp;&nbsp;<button class="micro" onclick="obtenerTexto(0);">&nbsp;</button> </td>';
+if (pos>-1) 
+{texto+='<td>'+makeSelectSimple("Comida",Comidas,Pedido_G[pos][2])+'</td></tr>';}
+ else
+{texto+='<td>'+makeSelectSimple("Comida",Comidas,0)+'</td></tr>';}
+
+texto+='</tr></table>';
+
+
+
+texto+='<button >Tot</button> <button onclick="cambiaU('+i+','+pos+');">Ok</button>';
+divintro.innerHTML=texto;
+divintro.style.visibility = "visible";
+
+}
+
+function refresca(){
+//var patron=document.getElementById("search").value.toUpperCase();
+var pb;
+var pu;
+//t1=document.getElementById("t1").value;
+//t2=document.getElementById("t2").value;
+//localStorage.setItem('p1',t1);
+//localStorage.setItem('p2',t2);
+texto="";
+var factor;
+var fm;
+var cat_comp='&';
+for (var i=1;i<Stack_cat.length;i++) {
+ cat_comp+=Stack_cat[i]+'&';
+}
+var hay=false;
+for (var i=0;i<nutrientes.length;i++){
+if ((nutrientes[i].cat==cat_comp) )  
+{
+ //console.log(data[i][8]);
+ hay=true;
+ //if (data[i][6]=="t1") {factor=t2;}
+ //if (data[i][6]=="t2") {factor=t2;}
+//console.log(i+" "+data[i][0]);
+texto+='<button class="bot4" onclick="intro('+i+',-1);">'+ nutrientes[i].nombre+'</button><br>';
+//console.log(data[i][0]+' ' +(data[i][2]).toFixed(2));
+
+}
+
+}
+texto+='<br><br>'
+divt.innerHTML=texto;
+if (!hay) {
+   document.getElementById("introd").style.visibility = "hidden";}
+   else {
+   document.getElementById("cat").style.visibility = "hidden";
+}
+}
+
+function impri(A){
+var At=A.toString();
+var p=At.indexOf('.');
+var num=At.substring(0,p);
+var dec=At.substring(p+1,At.length);
+//console.log(p+" "+num+" "+dec);
+var B="";
+var j=0;
+var indfin=num.length
+var porc=[];
+while (indfin>0) {
+porc[j]=num.substring(indfin-3,indfin);
+indfin=indfin-3;
+j=j+1;
+}
+
+for(var j=porc.length-1;j>0;j--)
+{
+B=B+porc[j]+".";
+}
+B=B+porc[0]+","+dec
+//console.log(B);
+return B;
+}
+impri(12356.3478);
+
+</script>
+<script>
+
+// Registra el service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
+      // Si es exitoso
+      console.log('SW registrado correctamente');
+    }, function(err) {
+      // Si falla
+      console.log('SW fallo', err);
+    });
+  });
+}
+/*let resp= window.prompt("Desea Actualizar Precios?", "Si");
+if (resp=="Si") {Act_data(tienda_sel);}
+ else 
+{ data=eval(localStorage.getItem('data'+tiendas[tienda_sel].Nomb));}
+*/
+function Act_data(){
+var myHeaders = new Headers();
+
+var myInit = { mode: 'cors' };
+
+var nombrepag="https://bdeabreu66.github.io/nutrientes/"+bd_nut.txt;
+
+
+fetch(nombrepag,myInit)
+        .then(ajaxPositive)
+        .catch(showError);
+
+function ajaxPositive(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.text().then(showResult);
+      } else {
+        showError('status code: ' + response.status);
+      }
+    }
+ function showResult(txt) {
+        //console.log('muestro respuesta: ', txt);
+        nutrientes=JSON.parse(txt);
+        if (rest_bd) {Re_actualiza_bd(); rest_bd=false;}
+        set_cat();
+        muestra_cat();
+        inicio_inventario();
+        refresca();
+        recupera_pedido("Pedido");
+        set_var_voz();
+  }
+
+function showError(err) { 
+      console.log('muestor error', err);
+    }
+}
+function generar_bd_txt(){
+
+var sal=JSON.stringify(nutrientes,null,2);
+ let narch='bdatos_nut.txt'
+ var blob = new Blob([sal], {type: "text/plain;charset=utf-8"});
+ saveAs(blob,narch);
+
+}
+function Actualiza_dolar(){
+var nomb="https://s3.amazonaws.com/dolartoday/data.json"
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+ function showResultD(txt) {
+       console.log('muestro respuesta: ', txt.USD.sicad2);
+       //document.getElementById("t1").value = txt.USD.promedio;
+       document.getElementById("t2").value = txt.USD.sicad2;
+       refresca();
+  }
+
+function showErrorD(err) { 
+      console.log('muestor error', err);
+    }
+}
+
+Fecha_precios();
+
+descarga_historico();
+function descarga_historico(){
+var nomb="https://bdeabreu66.github.io/historico/historico.txt";
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+ function showResultD(txt) {
+       console.log('muestro respuesta: ', txt);
+        Historico=txt;
+ //console.log(fecha_actual());
+        var ind=Historico.findIndex(elemento => elemento.fecha==fecha_actual());
+ //       if (ind>=0) { document.getElementById("t2").value =Historico[ind].bcv; localStorage.setItem('p2',Historico[ind].bcv);}
+ //         else {alert('Dolar no actualizado')}
+ }
+function showErrorD(err) {
+ console.log('muestor error', err); 
+  }
+ 
+  
+
+}
+
+function Fecha_precios(){
+var nomb="https://bdeabreu66.github.io/factura/fecha.txt";
+
+
+//var myHeaders = new Headers();
+var myInit = { mode: 'cors' };
+
+fetch(nomb,myInit)
+        .then(ajaxPositiveD)
+        .catch(showErrorD);
+
+function ajaxPositiveD(response) {
+      console.log('response.ok: ', response.ok);
+      if(response.ok) {
+        response.json().then(showResultD);
+      } else {
+        showErrorD('status code: ' + response.status);
+      }
+    }
+ function showResultD(txt) {
+       //console.log('fecha: '+ txt.dia+txt.mes+txt.ano);
+      // document.getElementById("t1").value = txt.USD.promedio;
+     //    document.getElementById("t2").value = txt.USD.sicad2;
+      var fecha='('+txt.dia+'/'+txt.mes+'/'+txt.ano+')';
+      document.getElementById("fecha_p").innerText=fecha;
+      localStorage.setItem('FECHA_P',fecha);
+  //  refresca();
+  }
+
+function showErrorD(err) { 
+      console.log('muestor error', err);
+    }
+
+}
+
+
+</script>
+</BODY>
+</html>
