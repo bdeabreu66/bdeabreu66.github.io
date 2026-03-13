@@ -658,7 +658,7 @@ if (propi=="0") {o.setAttribute("pos", "1");o.style.color='white';suma+=parseFlo
 
 document.getElementById('suma').innerText=suma.toFixed(2);
 }
-
+var rest_bd=false;
 function Respalda_inventario(){
 var info='';
 for (var i=0;i<inventario.length;i++){
@@ -730,6 +730,15 @@ tds[i].style.color='black';
 }
 
 }
+
+function Elimina_bd_nut(nombre){
+const transaction=dbnut.transaction(["Nutrientes"],'readwrite');
+const store=transaction.objectStore("Nutrientes");
+const deleteRequest=store.delete(nombre);
+deleteRequest.onsuccess=()=>{ console.log("Nutriente borrado")};
+deleteRequest.onerror=()=>{ console.log("Error Borrando Nutriente")};
+}
+
 function muestra_total_ventas(){
 var nd=data.length;
 var texto='';
@@ -1125,14 +1134,18 @@ function elimina_cliente(){
 var ecliente;
 document.getElementById("cliente").hidden=true;
 ecliente=document.getElementById("cli").value;
-var pos=AClientes.findIndex(x=>x.nombre===ecliente);
+var pos=nutrientes.findIndex(x=>x.nombre===ecliente);
 //console.log(pos);
-const resp = confirm("Esta seguro de eliminar el cliente");
-if (pos>=0 && resp) {AClientes.splice(pos,1);guarda_clientes();
+const resp = confirm("Esta seguro de eliminar el alimento");
+if (pos>=0 && resp) {
+   nutrientes.splice(pos,1);
+   Elimina_bd_nut(ecliente);
    limpiaCliente();
+   Lee_clientes()
  }
 //console.log('LC: '+Lclientes);
 }
+
 function salir_cliente(){
 document.getElementById("cliente").hidden=true;
 
@@ -1171,7 +1184,7 @@ if (cliente!='') {
   Ocliente.p=fosforo;
   Ocliente.cat=categoria;
   if (indic==-1) {indic=nutrientes.length;nutrientes.push(Ocliente); } else {Object.assign(nutrientes[indic],Ocliente)}
-  guarda_clientes();
+  Lee_clientes();
  }
   document.getElementById("cliente").hidden=true;
 Actualiza_bd_nut(indic);
@@ -2502,7 +2515,7 @@ var myHeaders = new Headers();
 
 var myInit = { mode: 'cors' };
 
-var nombrepag="https://bdeabreu66.github.io/nutrientes/"+bd_nut.txt;
+var nombrepag="https://bdeabreu66.github.io/nutrientes/"+"bd_nut.txt";
 
 
 fetch(nombrepag,myInit)
@@ -2518,7 +2531,7 @@ function ajaxPositive(response) {
       }
     }
  function showResult(txt) {
-        //console.log('muestro respuesta: ', txt);
+        console.log('muestro respuesta: ', txt);
         nutrientes=JSON.parse(txt);
         if (rest_bd) {Re_actualiza_bd(); rest_bd=false;}
         set_cat();
