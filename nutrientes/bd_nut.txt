@@ -28,6 +28,20 @@
     "agua": "40"
   },
   {
+    "nombre": "ARROZ BLANCO",
+    "kcal": "130",
+    "carbo": "28",
+    "prot": "2.5",
+    "agua": "90",
+    "ags": "0.2",
+    "agp": "0",
+    "agm": "0",
+    "k": "55",
+    "na": "2",
+    "p": "35",
+    "cat": "&Cereales&Arroz&"
+  },
+  {
     "nombre": "CARNE MOLIDA",
     "kcal": "250",
     "carbo": "0",
@@ -139,5 +153,19 @@
     "p": "220",
     "cat": "&Carnes&Pollo&",
     "agua": "20"
+  },
+  {
+    "nombre": "PIÑA",
+    "kcal": "55",
+    "carbo": "13",
+    "prot": "0.5",
+    "agua": "86",
+    "ags": "0.1",
+    "agp": "0",
+    "agm": "0",
+    "k": "110",
+    "na": "1.5",
+    "p": "9",
+    "cat": "&Frutas&"
   }
 ]

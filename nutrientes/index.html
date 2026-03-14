@@ -2171,7 +2171,7 @@ function quitar(){
 var div5 = document.getElementById("factura");
 div5.hidden=true;
 factflag=true;
-document.getElementById("lista").style.visibility = "visible";
+//document.getElementById("lista").style.visibility = "visible";
 
 }
 function precio_costo(ind){
@@ -2549,7 +2549,7 @@ function showError(err) {
 function generar_bd_txt(){
 
 var sal=JSON.stringify(nutrientes,null,2);
- let narch='bdatos_nut.txt'
+ let narch='bd_nut.txt'
  var blob = new Blob([sal], {type: "text/plain;charset=utf-8"});
  saveAs(blob,narch);
 
