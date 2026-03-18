@@ -828,6 +828,15 @@ muestradatosactivo="0";
 
 }
 
+function Lee_pacientes(){
+if (pacientes.length>0) {
+ var options='';
+ for (var i = 0; i < pacientes.length; i++) {
+   options += '<option value="' + pacientes[i].nombre + '" />';
+ }
+document.getElementById('listapacientes').innerHTML = options;
+} 
+}
 
 function asignardatospaciente(){
 var divdatos = document.getElementById("datos");
@@ -897,13 +906,16 @@ document.getElementById("peso2").value=pesoIMC(parseFloat(document.getElementByI
 }
 
 function datospaciente(){
+
 var textoT="";
 var texto="";
 muestradatosactivo="1";
 var divdatos = document.getElementById("datos");
 divdatos.style="position: fixed;top :100px; left: 10px; width:98% ; text-align: left;";
 textoT+='<center> Datos del paciente </center>';
-textoT+='<br> Nombre: <INPUT id="nombreu" style="background-color: lightgray;color: black;" class="inputtext" TYPE="text" value="'+ nombpac+ '" oninput="busqueda_pac()" >';
+//textoT+='<br> Nombre: <INPUT id="nombreu" style="background-color: lightgray;color: black;" class="inputtext" TYPE="text" value="'+ nombpac+ '" oninput="busqueda_pac()" >';
+textoT+='<br> Nombre: <INPUT id="nombreu" style="background-color: lightgray;color: black;" class="inputtext" TYPE="text" value="'+ nombpac+ '" list="listapacientes" oninput="coloca_datos_pac()">';
+textoT+='<datalist id="listapacientes"></datalist>';
 textoT+='<br> Edad: <INPUT id="edad2" min="0" max="120"TYPE="number" onkeypress="return event.charCode !=45" value="'+ edadglobal.toString() +'" > años'
 //textoT+='<br> Peso: <INPUT id="peso2" min="3" max="300" TYPE="number" onkeypress="return event.charCode !=45" value="'+ pesoglobal.toString()+'" oninput="actimcp();">'+ unidemasa;
 textoT+='<br> Peso: '+makeKeyInput("peso2","Peso","I3-2-700",pesoglobal.toString());
@@ -930,6 +942,7 @@ divdatos.innerHTML=textoT;
 divdatos.focus();
 
 actimc();
+Lee_pacientes();
 }
 
 var muestraactivo="0";
@@ -1229,6 +1242,7 @@ var recipesA=new Array();
 var recipesB=new Array();
 
 var creatglobal=1;
+var cistcglobal=1;
 var creatunidad=1;
 
 function supcorp(P){
@@ -1529,6 +1543,7 @@ const updateRequest=store.put(pacientes[ind]);
 updateRequest.onsuccess=()=>{ console.log("Actualizado")};
 updateRequest.onerror=()=>{ console.log("Error actualizando")};
 }
+
 function Elimina_bd_pac(nombre){
 const transaction=dbpac.transaction(["Pacientes"],'readwrite');
 const store=transaction.objectStore("Pacientes");
@@ -1547,16 +1562,7 @@ deleteRequest.onsuccess=()=>{ console.log("Farmaco borrado");alert(`${nombre} el
 deleteRequest.onerror=()=>{ console.log("Error Borrando Farmaco")};
 }
 function generar_bd_txt(){
-/*var sal='[';
- for (var j=0;j<remedio.length;j++){
- sal+='{'
- for (const [clave ,valor] of Object.entries(remedio[j])) {
-sal+=clave+':"'+valor+'",\n';
-  } 
-  sal+='},'+'\n';
-}
-sal+=']';
-*/
+
 var sal=JSON.stringify(remedio,null,2);
  let narch='bdatos.txt'
  var blob = new Blob([sal], {type: "text/plain;charset=utf-8"});
@@ -4067,6 +4073,8 @@ Actualiza_farmaco(ind);
 valerta2(num,ind)
 }
 var tfg=0;
+var tfgc=0;
+var tfgcc=0;
 var tfga=0;
 var unidcreatglobal=0;
 var creatunid="mg/dl";
@@ -4108,11 +4116,24 @@ function CKDEPI(){
 
 if (unidcreatglobal==0) {var factor2=1; creatunid="mg/dL"} else {var factor2=1/88.4;creatunid="mcmol/L"}
 var creatininacorr=creatglobal*factor2;
-if (sexoglobal=="F") {var kappa=0.7; var alfa=-0.329; var fsexo=1.018} else {var kappa=0.9; var alfa=-0.411; var fsexo=1;}
+var cistatinaC=cistcglobal;
+var fscc;
+var fscc2;
+var alfa;
+var alfa2;
+if (sexoglobal=="F") {var kappa=0.7; alfa=-0.329; alfa2=-0.248;var fsexo=1.018; fscc=0.932;fscc2=0.969;} else {var kappa=0.9; alfa=-0.411; alfa2=-0.207;var fsexo=1;fscc=1;fscc2=2;}
 if (razaglobal=="N") {var fraza=1.159;} else {var fraza=1;}
 var fmin=Math.min(creatininacorr/kappa ,1 );
+var fminc=Math.min(cistcglobal/0.8 ,1 );
 var fmax=Math.max(creatininacorr/kappa ,1 );
+var fmaxc=Math.max(cistcglobal/0.8 ,1 );
+//alert(fmin+" "+fmax+" "+fminc+" "+fmaxc+" "+alfa2+" "+edadglobal);
 tfg=141*fsexo*fraza*Math.pow(fmin,alfa)*Math.pow(fmax,-1.209)*Math.pow(0.993,edadglobal);
+tfgc=133*Math.pow(fminc,-0.499)*Math.pow(fmaxc,-1.328)*Math.pow(0.996,edadglobal)*fscc;
+tfgc=xround(tfgc,1);
+tfgcc=135*Math.pow(fmin,alfa2)*Math.pow(fmax,-0.601)*Math.pow(fmaxc,-0.711)*Math.pow(0.995,edadglobal)*fscc2;
+tfgcc=xround(tfgcc,1);
+//alert(tfgcc);
 tfg=xround(tfg,1);
 var campotfg=document.getElementById("btfg");
 //campotfg.innerHTML=": "+tfg+" ml/min " +modelotfg;
@@ -4175,6 +4196,8 @@ function cambiaedad(){edadglobal=document.getElementById("edad").value;
 //refrescadatospac();
 }
 function cambiacreat(){creatglobal=parseFloat(document.getElementById("creat").value);}
+function cambiacistc(){cistcglobal=parseFloat(document.getElementById("cistC").value);}
+
 function cambiaunidcreat(){
 var factor;
 unidcreatglobal=document.getElementById("creatuni").selectedIndex;
@@ -4224,6 +4247,12 @@ var elem=document.getElementById("muestrafTFG");
 if ( (typeof(elem)!="undefined") && (elem!=null) ){
 document.getElementById("muestrafTFG").innerHTML= "TFG: "+tfg.toString()+" ml/min/1.73 m<sup>2</sup> " +modelotfg;
 document.getElementById("muestrafTFGA").innerHTML= "TFGA: "+tfga+" ml/min " +modelotfg;
+if (modelotfg=="CKDEPI") 
+{document.getElementById("muestrafTFGAC").innerHTML= "TFGe: "+tfgc+" ml/min " +modelotfg+ " por Cist C";
+document.getElementById("muestrafTFGACC").innerHTML= "TFGe: "+tfgcc+" ml/min " +modelotfg+ " por Cist C/Creatinina";
+
+}
+
 }
 }
 
@@ -4235,8 +4264,10 @@ divrenal.style="position: fixed;top :100px; left: 10px; width:98% ; text-align: 
 textoT+='<center> Calculadora de tasa de filtraci&oacute;n glomerular</center>';
 textoT+='<br> Creatinina: <INPUT min="0.1" id="creat" TYPE="number" step="0.1" value="'+creatglobal.toString()+'" onchange="cambiacreat();calctfg();"style="font-size:100%">';
 textoT+='<select id="creatuni" onchange="cambiaunidcreat();calctfg();">'; 
+
 if (unidcreatglobal=="0") {textoT+='<option selected> mg/dL </option>  <option>&#181;mol/L </option> </select>';} else
        {textoT+='<option> mg/dL </option>  <option selected>&#181;mol/L </option> </select>';}
+textoT+='<br> Cistatina C: <INPUT min="0.1" id="cistC" TYPE="number" step="0.1" value="'+cistcglobal.toString()+'" onchange="cambiacistc();calctfg();"style="font-size:100%"> mg/L';
 
 textoT+='<br> Edad: <INPUT id="edad"  pattern=”[0-9]{3}" min="0" max="120" TYPE="number" value="'+edadglobal.toString()+'" onkeypress="return validInputI(this,event,3,0,150)" onchange="cambiaedad();calctfg();" style="font-size:100%"> años'
 textoT+='<br> Peso: ';
@@ -4256,6 +4287,8 @@ textoT+=texto+'<br> <span id="supcorporal"></span>';
 textoT+=texto+'<br> <span id="muestrafTFG"></span>';
 
 textoT+=texto+'<br> <span id="muestrafTFGA"></span>';
+textoT+=texto+'<br> <span id="muestrafTFGAC"></span>';
+textoT+=texto+'<br> <span id="muestrafTFGACC"></span>';
 
 textoT+=texto+'<br> <INPUT TYPE="button" value="Ok" onclick="return ajuste();" style="font-size:100%">';
 
@@ -5281,6 +5314,11 @@ if (indf>0) {selecciona_pac();} else {quitardivselec()}
 } else {quitardivselec()}
 }
 
+function coloca_datos_pac(){
+var texto1=document.getElementById("nombreu").value;
+var indf=pacientes.findIndex(e=>e.nombre==texto1);
+if (indf>-1) {clickpac(indf)};
+}
 function togglerecipe() {
 if (muestraactivo=="0") {muestrarecipes();} else {quitarrecipe(); muestraactivo="0"}
 }
