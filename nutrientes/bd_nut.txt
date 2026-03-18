@@ -1,12 +1,12 @@
 [
   {
     "nombre": "ACEITE DE OLIVA",
-    "kcal": "0",
+    "kcal": "850",
     "carbo": "0",
     "prot": "0",
-    "ags": "0",
-    "agp": "0",
-    "agm": "0",
+    "ags": "14",
+    "agp": "11",
+    "agm": "73",
     "k": "0",
     "na": "0",
     "p": "0",
@@ -15,7 +15,14 @@
     "fibra": "0",
     "ca": "0",
     "fe": "0",
-    "zn": "0"
+    "zn": "0",
+    "mg": "0",
+    "mn": "0",
+    "vitC": "0",
+    "vitK": "0",
+    "vitD": "0",
+    "vitE": "0",
+    "vitB1": "0"
   },
   {
     "nombre": "ACEITE DE SOYA",
@@ -33,7 +40,14 @@
     "ca": "0",
     "fe": "0",
     "zn": "0",
-    "cat": "&Aceites Vegetales&"
+    "cat": "&Aceites Vegetales&",
+    "mg": "0",
+    "mn": "0",
+    "vitC": "0",
+    "vitK": "0",
+    "vitD": "0",
+    "vitE": "0",
+    "vitB1": "0"
   },
   {
     "nombre": "AREPA",
