@@ -1242,7 +1242,7 @@ var recipesA=new Array();
 var recipesB=new Array();
 
 var creatglobal=1;
-var cistcglobal=1;
+var cistcglobal=1.0;
 var creatunidad=1;
 
 function supcorp(P){
@@ -4121,19 +4121,22 @@ var fscc;
 var fscc2;
 var alfa;
 var alfa2;
-if (sexoglobal=="F") {var kappa=0.7; alfa=-0.329; alfa2=-0.248;var fsexo=1.018; fscc=0.932;fscc2=0.969;} else {var kappa=0.9; alfa=-0.411; alfa2=-0.207;var fsexo=1;fscc=1;fscc2=2;}
+if (sexoglobal=="F") {var kappa=0.7; alfa=-0.241; alfa2=-0.248;var fsexo=1.012; fscc=0.932;fscc2=0.969;} else {var kappa=0.9; alfa=-0.302; alfa2=-0.207;var fsexo=1;fscc=1;fscc2=1;}
 if (razaglobal=="N") {var fraza=1.159;} else {var fraza=1;}
 var fmin=Math.min(creatininacorr/kappa ,1 );
 var fminc=Math.min(cistcglobal/0.8 ,1 );
 var fmax=Math.max(creatininacorr/kappa ,1 );
 var fmaxc=Math.max(cistcglobal/0.8 ,1 );
-//alert(fmin+" "+fmax+" "+fminc+" "+fmaxc+" "+alfa2+" "+edadglobal);
-tfg=141*fsexo*fraza*Math.pow(fmin,alfa)*Math.pow(fmax,-1.209)*Math.pow(0.993,edadglobal);
-tfgc=133*Math.pow(fminc,-0.499)*Math.pow(fmaxc,-1.328)*Math.pow(0.996,edadglobal)*fscc;
+//alert("fmincr:"+fmin+" "+"fmaxcr:"+fmax+" "+"fminCys:"+fminc+" "+"fmaxCys:"+fmaxc+" "+alfa2+" "+edadglobal);
+// formula creatinina 
+tfg=142*fsexo*fraza*Math.pow(fmin,alfa)*Math.pow(fmax,-1.200)*Math.pow(0.9938,edadglobal);
+// formula Cistatina
+tfgc=133*(Math.pow(fminc,-0.499))*(Math.pow(fmaxc,-1.328))*(Math.pow(0.996,edadglobal))*fscc;
 tfgc=xround(tfgc,1);
-tfgcc=135*Math.pow(fmin,alfa2)*Math.pow(fmax,-0.601)*Math.pow(fmaxc,-0.711)*Math.pow(0.995,edadglobal)*fscc2;
+// formula creatinina + Cistatina
+tfgcc=135*(Math.pow(fmin,alfa2))*(Math.pow(fmax,-0.601))*(Math.pow(fminc,-0.375))*(Math.pow(fmaxc,-0.711))*(Math.pow(0.995,edadglobal))*fscc2;
 tfgcc=xround(tfgcc,1);
-//alert(tfgcc);
+//alert(Math.pow(fmin,alfa2)+" "+Math.pow(fmax,-0.601)+" "+Math.pow(fminc,-0.375)+" "+Math.pow(fmaxc,-0.711)+" "+Math.pow(0.995,edadglobal)+" "+fscc2);
 tfg=xround(tfg,1);
 var campotfg=document.getElementById("btfg");
 //campotfg.innerHTML=": "+tfg+" ml/min " +modelotfg;
@@ -4245,11 +4248,11 @@ if (modelotfg=="CKDEPI") {CKDEPI();tfga=xround(tfg*sp/1.73,2) }
 if (modelotfg=="MDRD-IDMS") {MDRDIDMS();tfga=xround(tfg*sp/1.73,2)}
 var elem=document.getElementById("muestrafTFG");
 if ( (typeof(elem)!="undefined") && (elem!=null) ){
-document.getElementById("muestrafTFG").innerHTML= "TFG: "+tfg.toString()+" ml/min/1.73 m<sup>2</sup> " +modelotfg;
-document.getElementById("muestrafTFGA").innerHTML= "TFGA: "+tfga+" ml/min " +modelotfg;
+document.getElementById("muestrafTFG").innerHTML= "TFGecr: "+tfg.toString()+" ml/min/1.73 m<sup>2</sup> " +modelotfg;
+//document.getElementById("muestrafTFGA").innerHTML= "TFGA: "+tfga+" ml/min " +modelotfg;
 if (modelotfg=="CKDEPI") 
-{document.getElementById("muestrafTFGAC").innerHTML= "TFGe: "+tfgc+" ml/min " +modelotfg+ " por Cist C";
-document.getElementById("muestrafTFGACC").innerHTML= "TFGe: "+tfgcc+" ml/min " +modelotfg+ " por Cist C/Creatinina";
+{document.getElementById("muestrafTFGAC").innerHTML= "TFGecys: "+tfgc+" ml/min " +modelotfg;
+document.getElementById("muestrafTFGACC").innerHTML= "TFGecr+cys: "+tfgcc+" ml/min " +modelotfg;
 
 }
 
@@ -4260,7 +4263,7 @@ function corr_renal(){
 var textoT="";
 var texto="";
 var divrenal = document.getElementById("renal");
-divrenal.style="position: fixed;top :100px; left: 10px; width:98% ; text-align: left;";
+divrenal.style="position: fixed;top :100px; left: 10px; width:98% ; text-align: left; overflow-y: auto; ";
 textoT+='<center> Calculadora de tasa de filtraci&oacute;n glomerular</center>';
 textoT+='<br> Creatinina: <INPUT min="0.1" id="creat" TYPE="number" step="0.1" value="'+creatglobal.toString()+'" onchange="cambiacreat();calctfg();"style="font-size:100%">';
 textoT+='<select id="creatuni" onchange="cambiaunidcreat();calctfg();">'; 
@@ -4278,15 +4281,14 @@ textoT+=  ' <br> Sexo: '+iconomujer+' <button ID="ISEXFCR" TYPE="button" class="
 textoT+=' '+iconohombre+' <button ID="ISEXMCR" TYPE="button" class="buttonopt" onclick="cambiasexocr(this.id);calctfg();">'+textm+'</button> '
 if (razaglobal=="N") {var textn='checked="checked"';var textO='';} else {var textn='';var textO='checked="checked"';}
 if (razaglobal=="N") {var textn=iconoselecton;var textO=iconoselectoff;} else {var textn=iconoselectoff;var textO=iconoselecton;}
-textoT+=  ' <br> Raza: Negra <button ID="IRAZN" TYPE="button" class="buttonopt" onclick="cambiaraza(this.id);calctfg();">'+textn+'</button>';
-textoT+=' Otra <button ID="IRAZO" TYPE="button" class="buttonopt" onclick="cambiaraza(this.id);calctfg();">'+textO+'</button> '
+//textoT+=  ' <br> Raza: Negra <button ID="IRAZN" TYPE="button" class="buttonopt" onclick="cambiaraza(this.id);calctfg();">'+textn+'</button>';
+//textoT+=' Otra <button ID="IRAZO" TYPE="button" class="buttonopt" onclick="cambiaraza(this.id);calctfg();">'+textO+'</button> '
 textoT+=' <br> Modelo:<select id="model" onchange="establecemetodo2();calctfg();">'; 
 textoT+='<option selected> Cockcroft-Gault </option> <option> CKD-EPI </option> <option> MDRD-IDMS </option></select>';
 textoT+=texto+'<br> <span id="supcorporal"></span>';
 
 textoT+=texto+'<br> <span id="muestrafTFG"></span>';
-
-textoT+=texto+'<br> <span id="muestrafTFGA"></span>';
+//textoT+=texto+'<br> <span id="muestrafTFGA"></span>';
 textoT+=texto+'<br> <span id="muestrafTFGAC"></span>';
 textoT+=texto+'<br> <span id="muestrafTFGACC"></span>';
 
@@ -4409,9 +4411,7 @@ textoT+='<INPUT id="valph" min="6" max="8" step="0.01" TYPE="number" onkeypress=
 textoT+='<INPUT  id="phcheck" TYPE="checkbox" onchange="cambiacheck(this);"';
 
 textoT+=texto+'<br> <span id="muestrafTFG"></span>';
-
 textoT+=texto+'<br> <span id="muestrafTFGA"></span>';
-
 textoT+=texto+'<br> <INPUT TYPE="button" value="Ok" onclick="ajusteph();" style="font-size:100%">';
 textoT+='<canvas id="canvaspH" style="BORDER:1PX SOLID #000000;background-color: white" width="500px" height="300px"></canvas>';  
 
