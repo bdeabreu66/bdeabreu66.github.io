@@ -1,4 +1,4 @@
-const currentCache = 'FACPOLAR_cache_v5.5';
+const currentCache = 'FACTURAS_cache_v1.1';
 const files =
 [
     'fecha.txt',

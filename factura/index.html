@@ -2065,6 +2065,7 @@ Tdolar=0;
 Gdolar=0;} catch {alert("error")}
 
 //alert(" Paso numero 3");
+try {
 for (var i=0;i<Pedido_G.length;i++){
   
   if (Pedido_G[i][1]!=0 || Pedido_G[i][2]!=0) {
@@ -2162,7 +2163,7 @@ console.log('pu '+pu+'pb '+pb);
   texto+='</table>';
   } // if
  }// for
-
+} catch {console.log("Error factura")};
 texto+='<HR>';
 Ftexto+='============================================\n';
 var TM="";
