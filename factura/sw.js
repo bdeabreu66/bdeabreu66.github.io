@@ -1,4 +1,4 @@
-const currentCache = 'FACTURAS_cache_v1.1';
+const currentCache = 'FACTURAS_cache_v1.2';
 const files =
 [
     'fecha.txt',
