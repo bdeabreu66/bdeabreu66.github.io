@@ -4248,11 +4248,11 @@ if (modelotfg=="CKDEPI") {CKDEPI();tfga=xround(tfg*sp/1.73,2) }
 if (modelotfg=="MDRD-IDMS") {MDRDIDMS();tfga=xround(tfg*sp/1.73,2)}
 var elem=document.getElementById("muestrafTFG");
 if ( (typeof(elem)!="undefined") && (elem!=null) ){
-document.getElementById("muestrafTFG").innerHTML= "TFGecr: "+tfg.toString()+" ml/min/1.73 m<sup>2</sup> " +modelotfg;
-//document.getElementById("muestrafTFGA").innerHTML= "TFGA: "+tfga+" ml/min " +modelotfg;
+document.getElementById("muestrafTFG").innerHTML= "TFGecr: "+tfg.toString();//+" ml/min/1.73 m<sup>2</sup> " +modelotfg;
+//document.getElementById("muestrafTFGA").innerHTML= "TFGA: "+tfga;//+" ml/min " +modelotfg;
 if (modelotfg=="CKDEPI") 
-{document.getElementById("muestrafTFGAC").innerHTML= "TFGecys: "+tfgc+" ml/min " +modelotfg;
-document.getElementById("muestrafTFGACC").innerHTML= "TFGecr+cys: "+tfgcc+" ml/min " +modelotfg;
+{document.getElementById("muestrafTFGAC").innerHTML= "TFGecys: "+tfgc;//+" ml/min " +modelotfg;
+document.getElementById("muestrafTFGACC").innerHTML= "TFGecr+cys: "+tfgcc;//+" ml/min " +modelotfg;
 
 }
 
@@ -4296,7 +4296,7 @@ textoT+=texto+'<br> <INPUT TYPE="button" value="Ok" onclick="return ajuste();" s
 
 divrenal.innerHTML=textoT;
 iniciamodelo();
-cambiasup();
+//cambiasup();
 calctfg();
 }
 
