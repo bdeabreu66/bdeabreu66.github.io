@@ -295,6 +295,8 @@ Energia (Kcal/100g):<input style="width:15%;" type="text" id="energia" value="" 
 Proteinas:<input style="width:15%;" type="text"  id="protein" value="" > gr<br>
 Carbohidratos:<input style="width:15%;" type="text" id="carboh" value="" > gr<br>
 Agua:<input style="width:15%;" type="text" id="AGUA" value="" > gr<br>
+Fibra:<input style="width:15%;" type="text" id="fibra" value="" > gr<br>
+
 Lipidos:<br><br>
 AGS:<input style="width:15%;" type="text" id="LAGS" value="" > gr<br>
 AGP:<input style="width:15%;" type="text" id="LAGP" value="" > gr<br>
@@ -303,6 +305,32 @@ Minerales:<br><br>
 Potasio:<input style="width:15%;" type="text" id="potasio" value="" > mg<br>
 Sodio:<input style="width:15%;" type="text" id="sodio" value="" > mg<br>
 Fosforo:<input style="width:15%;" type="text" id="fosforo" value="" > mg<br>
+Calcio:<input style="width:15%;" type="text" id="calcio" value="" > mg<br>
+Hierro:<input style="width:15%;" type="text" id="hierro" value="" > mg<br>
+Zinc:<input style="width:15%;" type="text" id="zinc" value="" > mg<br>
+Magnesio:<input style="width:15%;" type="text" id="magnesio" value="" > mg<br>
+Manganeso:<input style="width:15%;" type="text" id="manganeso" value="" > mg<br>
+Selenio:<input style="width:15%;" type="text" id="selenio" value="" > mg<br>
+Cobre:<input style="width:15%;" type="text" id="cobre" value="" > mg<br>
+Iodo:<input style="width:15%;" type="text" id="iodo" value="" > mg<br>
+
+
+Vitaminas:<br><br>
+Vit A:<input style="width:15%;" type="text" id="vitA" value="" > mg<br>
+Vit C:<input style="width:15%;" type="text" id="vitC" value="" > mg<br>
+Vit K:<input style="width:15%;" type="text" id="vitK" value="" > mg<br>
+Vit D:<input style="width:15%;" type="text" id="vitD" value="" > mg<br>
+Vit E:<input style="width:15%;" type="text" id="vitE" value="" > mg<br>
+Vit B1 (Tiamina):<input style="width:15%;" type="text" id="vitB1" value="" > mg<br>
+Vit B2 (Riboflavina):<input style="width:15%;" type="text" id="vitB2" value="" > mg<br>
+Vit B3 (Niacina):<input style="width:15%;" type="text" id="vitB3" value="" > mg<br>
+Vit B5 (A. Pantotenico):<input style="width:15%;" type="text" id="vitB5" value="" > mg<br>
+Vit B6 (Piridoxina):<input style="width:15%;" type="text" id="vitB6" value="" > mg<br>
+Vit B7 (Biotina):<input style="width:15%;" type="text" id="vitB7" value="" > mg<br>
+Vit B9 (A Folico):<input style="width:15%;" type="text" id="vitB9" value="" > mg<br>
+Vit B12 (Cobalamina):<input style="width:15%;" type="text" id="vitB12" value="" > mg<br>
+
+
 Categoria:<input style="width:55%;" type="text" id="categoria" value="" > <br>
 
 </div>
@@ -570,7 +598,7 @@ getAllRequest.onerror=function(){
 function Actualiza_bd_nut(ind){
 const transaction=dbnut.transaction(["Nutrientes"],'readwrite');
 const store=transaction.objectStore("Nutrientes");
-//alert(Object.entries(pacientes[ind]))
+//alert(Object.entries(nutrientes[ind]))
 const updateRequest=store.put(nutrientes[ind]);
 updateRequest.onsuccess=()=>{ console.log("Actualizado")};
 updateRequest.onerror=()=>{ console.log("Error actualizando")};
@@ -1100,16 +1128,16 @@ guarda_inventario();
 var suma=0;
 function suma_inventario2(){
   for (var i=0;i<datfac.length;i++){
-      if (datfac[i].unidad!=0 || datfac[i].cajas!=0) {
+      if (datfac[i][1]!=0 ) {
  //      ind=inventario.findIndex(element => element.CLAVE==data[i][9])
-ind=inventario.findIndex(element => element.CLAVE==datfac[i].cod)
+ind=inventario.findIndex(element => element.CLAVE==datfac[i][0])
       if (ind==-1) {ind=inventario.length;
         inventario[ind]["CLAVE"]=data[ind][9];
         inventario[ind]["UNID"]=0;
         inventario[ind]["CAJAS"]=0;
  }
-       inventario[ind]["UNID"]=(parseFloat(inventario[ind]["UNID"])+parseFloat(datfac[i].unidad)).toString();
-       inventario[ind]["CAJAS"]=(parseFloat(inventario[ind]["CAJAS"])+parseFloat(datfac[i].cajas)).toString();
+ //      inventario[ind]["UNID"]=(parseFloat(inventario[ind]["UNID"])+parseFloat(datfac[i].unidad)).toString();
+ //      inventario[ind]["CAJAS"]=(parseFloat(inventario[ind]["CAJAS"])+parseFloat(datfac[i].cajas)).toString();
       }
  }
 //console.log(inventario);
@@ -1151,21 +1179,53 @@ document.getElementById("cliente").hidden=true;
 
 }
 
+function filtra_und(x) {
+//alert("x "+x+" "+typeof(x))
+if (x === 'undefined') {return "0"} else {return x};
+
+}
 function setcliente(){
 var indic;
 cliente=document.getElementById("cli").value;
 if (cliente!='') {
-  energia=document.getElementById("energia").value;
-  carboh=document.getElementById("carboh").value;
-  protein=document.getElementById("protein").value;
-  agua=document.getElementById("AGUA").value;
-  lags=document.getElementById("LAGS").value;
-  lagp=document.getElementById("LAGP").value;
-  lagm=document.getElementById("LAGM").value;
-  potasio=document.getElementById("potasio").value;
-  sodio=document.getElementById("sodio").value;
-  fosforo=document.getElementById("fosforo").value;
-  categoria=document.getElementById("categoria").value;
+  energia=filtra_und(document.getElementById("energia").value);
+  carboh=filtra_und(document.getElementById("carboh").value);
+  protein=filtra_und(document.getElementById("protein").value);
+  agua=filtra_und(document.getElementById("AGUA").value);
+  lags=filtra_und(document.getElementById("LAGS").value);
+  lagp=filtra_und(document.getElementById("LAGP").value);
+  lagm=filtra_und(document.getElementById("LAGM").value);
+  fibra=filtra_und(document.getElementById("fibra").value);
+  potasio=filtra_und(document.getElementById("potasio").value);
+  sodio=filtra_und(document.getElementById("sodio").value);
+  fosforo=filtra_und(document.getElementById("fosforo").value);
+  calcio=filtra_und(document.getElementById("calcio").value);
+  hierro=filtra_und(document.getElementById("hierro").value);
+  zinc=filtra_und(document.getElementById("zinc").value);
+  magnesio=filtra_und(document.getElementById("magnesio").value);
+  manganeso=filtra_und(document.getElementById("manganeso").value);
+  selenio=filtra_und(document.getElementById("selenio").value);
+  cobre=filtra_und(document.getElementById("cobre").value);
+  iodo=filtra_und(document.getElementById("iodo").value);
+
+
+  vita=filtra_und(document.getElementById("vitA").value);
+  vitc=filtra_und(document.getElementById("vitC").value);
+  vitk=filtra_und(document.getElementById("vitK").value);
+  vitd=filtra_und(document.getElementById("vitD").value);
+  vite=filtra_und(document.getElementById("vitE").value);
+  vitb1=filtra_und(document.getElementById("vitB1").value);
+  vitb2=filtra_und(document.getElementById("vitB2").value);
+  vitb3=filtra_und(document.getElementById("vitB3").value);
+  vitb5=filtra_und(document.getElementById("vitB5").value);
+  vitb6=filtra_und(document.getElementById("vitB6").value);
+  vitb7=filtra_und(document.getElementById("vitB7").value);
+  vitb9=filtra_und(document.getElementById("vitB9").value);
+  vitb12=filtra_und(document.getElementById("vitB12").value);
+
+//alert(document.getElementById("calcio").value);
+ // alert("calcio "+calcio);
+ categoria=document.getElementById("categoria").value;
  
   indic=-1;
   if (nutrientes.length>0) {indic=nutrientes.findIndex(x => x.nombre == cliente);} 
@@ -1179,9 +1239,32 @@ if (cliente!='') {
   Ocliente.ags=lags;
   Ocliente.agp=lagp;
   Ocliente.agm=lagm;
+  Ocliente.fibra=fibra;
   Ocliente.k=potasio;
   Ocliente.na=sodio;
   Ocliente.p=fosforo;
+  Ocliente.ca=calcio;
+  Ocliente.fe=hierro;
+  Ocliente.zn=zinc;
+  Ocliente.mg=magnesio;
+  Ocliente.mn=manganeso;
+  Ocliente.se=selenio;
+  Ocliente.cu=cobre;
+  Ocliente.i=iodo;
+  Ocliente.vitA=vita;
+  Ocliente.vitC=vitc;
+  Ocliente.vitK=vitk;
+  Ocliente.vitD=vitd;
+  Ocliente.vitE=vite;
+  Ocliente.vitB1=vitb1;
+  Ocliente.vitB2=vitb2;
+  Ocliente.vitB3=vitb3;
+  Ocliente.vitB5=vitb5;
+  Ocliente.vitB6=vitb6;
+  Ocliente.vitB7=vitb7;
+  Ocliente.vitB9=vitb9;
+  Ocliente.vitB12=vitb12;
+
   Ocliente.cat=categoria;
   if (indic==-1) {indic=nutrientes.length;nutrientes.push(Ocliente); } else {Object.assign(nutrientes[indic],Ocliente)}
   Lee_clientes();
@@ -1213,14 +1296,37 @@ if (ind>=0) {
  document.getElementById("LAGP").value=nutrientes[ind].agp;
  document.getElementById("LAGM").value=nutrientes[ind].agm;
  document.getElementById("AGUA").value=nutrientes[ind].agua;
+ document.getElementById("fibra").value=nutrientes[ind].fibra;
  document.getElementById("potasio").value=nutrientes[ind].k;
  document.getElementById("sodio").value=nutrientes[ind].na;
  document.getElementById("fosforo").value=nutrientes[ind].p;
+ document.getElementById("calcio").value=nutrientes[ind].ca;
+document.getElementById("hierro").value=nutrientes[ind].fe;
+document.getElementById("zinc").value=nutrientes[ind].zn;
+document.getElementById("magnesio").value=nutrientes[ind].mg;
+document.getElementById("manganeso").value=nutrientes[ind].mn;
+document.getElementById("selenio").value=nutrientes[ind].se;
+document.getElementById("cobre").value=nutrientes[ind].cu;
+document.getElementById("iodo").value=nutrientes[ind].i;
+document.getElementById("vitA").value=nutrientes[ind].vitA;
+document.getElementById("vitC").value=nutrientes[ind].vitC;
+document.getElementById("vitK").value=nutrientes[ind].vitK;
+document.getElementById("vitD").value=nutrientes[ind].vitD;
+document.getElementById("vitE").value=nutrientes[ind].vitE;
+document.getElementById("vitB1").value=nutrientes[ind].vitB1;
+document.getElementById("vitB2").value=nutrientes[ind].vitB2;
+document.getElementById("vitB3").value=nutrientes[ind].vitB3;
+document.getElementById("vitB5").value=nutrientes[ind].vitB5;
+document.getElementById("vitB6").value=nutrientes[ind].vitB6;
+document.getElementById("vitB7").value=nutrientes[ind].vitB7;
+document.getElementById("vitB9").value=nutrientes[ind].vitB9;
+document.getElementById("vitB12").value=nutrientes[ind].vitB12;
+
  document.getElementById("categoria").value=nutrientes[ind].cat;
 } else {
 
  document.getElementById("protein").value='';
- document.getElementById("LAGS").checked=false;
+ document.getElementById("LAGS").value='';
  document.getElementById("energia").value='';
  document.getElementById("LAGP").value=0;
  document.getElementById("carboh").value='';
@@ -1258,7 +1364,7 @@ document.getElementById('listaclientes').innerHTML = options;
 }
 }
 
-function guarda_pedido(){
+function guarda_pedido(archivo){
 var texto='';
 //alert("LPG: "+Pedido_G.length);
 for (var i=0;i<Pedido_G.length;i++) {
@@ -1266,7 +1372,7 @@ if (Pedido_G[i][1]!=0 ) {
 texto+='&'+Pedido_G[i][0]+'#'+Pedido_G[i][1]+'#'+Pedido_G[i][2];
 }
 }
-if (texto.length>2) {localStorage.setItem('Pedido',texto.substr(1));} else {localStorage.setItem('Pedido','');}
+if (texto.length>2) {localStorage.setItem(archivo,texto.substr(1));} else {localStorage.setItem(archivo,'');}
 
 //localStorage.setItem('Cliente',cliente);
 //guarda_clientes_IDB();
@@ -1429,9 +1535,9 @@ recupera_factura(nomb);
 
 for (var i=0;i<datfac.length;i++) {
 
-if ((datfac[i].cantidad!=0) ) {
+if ((datfac[i][1]!=0) ) {
 //alert("dl0 "+datfac[i].cod);
- Pedido_G[i]=[datfac[i].nombre,datfac[i].cantidad,datfac[i].tipo];
+ Pedido_G[i]=[datfac[i][0],datfac[i][1],datfac[i][2]];
 //alert("cod "+Pedido_G[i][1]);
 // console.log(datfac[i].unidad+" "+datfac[i].pu+" "+datfac[i].cajas+" "+datfac[i].pb);
 }
@@ -1531,19 +1637,52 @@ texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<
 div3.innerHTML=texto;
 
 }
+
+var req_diario={kcal:"2400",agm:"30",ags:"30",agp:"30",
+ agua:"2500",carbo:"300",prot:"80",k:"3000",
+ fibra:"30",p:"1200",ca:"300",fe:"100",zn:"20",
+ mg:"20",mn:"20",se:"15",cu:"15",i:"0.170",na:"1300",
+ vitA:"10",vitC:"200",vitD:"40",vitE:"20",
+ vitK:"10",vitB1:"15",vitB2:"15",vitB3:"15",
+ vitB5:"15",vitB6:"15",vitB7:"15",vitB9:"15",
+ vitB12:"15"
+}
 function get_total(A,ind){
 var total=new Object();
 total.kcal=0;
 total.gr=0;
-total.k=0;
-total.p=0;
-total.na=0;
 total.agm=0;
 total.ags=0;
 total.agp=0;
 total.agua=0;
 total.carbo=0;
 total.prot=0;
+total.k=0;
+total.fibra=0;
+total.p=0;
+total.ca=0;
+total.fe=0;
+total.zn=0;
+total.mg=0;
+total.mn=0;
+total.se=0;
+total.cu=0;
+total.i=0;
+total.vitA=0;
+total.vitC=0;
+total.vitD=0;
+total.vitE=0;
+total.vitK=0;
+total.vitB1=0;
+total.vitB2=0;
+total.vitB3=0;
+total.vitB5=0;
+total.vitB6=0;
+total.vitB7=0;
+total.vitB9=0;
+total.vitB12=0;
+total.na=0;
+
 var lA=A.length;
 for (var i=0;i<lA;i++) {
 if ((ind==-1) || (ind==A[i][2])) {
@@ -1555,11 +1694,36 @@ if ((ind==-1) || (ind==A[i][2])) {
    total.agp+=parseFloat(nutrientes[indf].agp*A[i][1]/100);
    total.ags+=parseFloat(nutrientes[indf].ags*A[i][1]/100);
    total.carbo+=parseFloat(nutrientes[indf].carbo*A[i][1]/100);
+   total.fibra+=parseFloat(nutrientes[indf].fibra*A[i][1]/100);
    total.k+=parseFloat(nutrientes[indf].k*A[i][1]/100);
    total.na+=parseFloat(nutrientes[indf].na*A[i][1]/100);
    total.p+=parseFloat(nutrientes[indf].p*A[i][1]/100);
+   total.ca+=parseFloat(nutrientes[indf].ca*A[i][1]/100);
+   total.fe+=parseFloat(nutrientes[indf].fe*A[i][1]/100);
+   total.zn+=parseFloat(nutrientes[indf].zn*A[i][1]/100);
    total.prot+=parseFloat(nutrientes[indf].prot*A[i][1]/100);
    total.agua+=parseFloat(nutrientes[indf].agua*A[i][1]/100);
+   total.mg+=parseFloat(nutrientes[indf].mg*A[i][1]/100);
+   total.mn+=parseFloat(nutrientes[indf].mn*A[i][1]/100);
+   total.se+=parseFloat(nutrientes[indf].se*A[i][1]/100);
+   total.cu+=parseFloat(nutrientes[indf].cu*A[i][1]/100);
+   total.i+=parseFloat(nutrientes[indf].i*A[i][1]/100);
+
+
+
+   total.vitA+=parseFloat(nutrientes[indf].vitA*A[i][1]/100);
+   total.vitC+=parseFloat(nutrientes[indf].vitC*A[i][1]/100);
+   total.vitD+=parseFloat(nutrientes[indf].vitD*A[i][1]/100);
+   total.vitE+=parseFloat(nutrientes[indf].vitE*A[i][1]/100);
+   total.vitK+=parseFloat(nutrientes[indf].vitK*A[i][1]/100);
+   total.vitB1+=parseFloat(nutrientes[indf].vitB1*A[i][1]/100);
+   total.vitB2+=parseFloat(nutrientes[indf].vitB2*A[i][1]/100);
+   total.vitB3+=parseFloat(nutrientes[indf].vitB3*A[i][1]/100);
+   total.vitB5+=parseFloat(nutrientes[indf].vitB5*A[i][1]/100);
+   total.vitB6+=parseFloat(nutrientes[indf].vitB6*A[i][1]/100);
+   total.vitB7+=parseFloat(nutrientes[indf].vitB7*A[i][1]/100);
+   total.vitB9+=parseFloat(nutrientes[indf].vitB9*A[i][1]/100);
+   total.vitB12+=parseFloat(nutrientes[indf].vitB12*A[i][1]/100);
 
   }
 }
@@ -1608,6 +1772,7 @@ if (indf>=0) {
    nutrientes[indf].agp=parseFloat(total.agp*100/total.gr).toFixed(2);
    nutrientes[indf].ags=parseFloat(total.ags*100/total.gr).toFixed(2);
    nutrientes[indf].carbo=parseFloat(total.carbo*100/total.gr).toFixed(2);
+   nutrientes[indf].fibra=parseFloat(total.fibra*100/total.gr).toFixed(2);
    nutrientes[indf].k=parseFloat(total.k*100/total.gr).toFixed(2);
    nutrientes[indf].na=parseFloat(total.na*100/total.gr).toFixed(2);
    nutrientes[indf].p=parseFloat(total.p*100/total.gr).toFixed(2);
@@ -1715,12 +1880,12 @@ var indf=facturas.findIndex((e)=> e.nombre==cliente_factura );
 if (indf>=0) {
  try {
  for (var i=0;i<facturas[indf].items.length;i++) {
-   datfac[i]=new Object();
-   datfac[i].nombre=facturas[indf].items[i].cod;
-   datfac[i].cantidad=parseFloat(facturas[indf].items[i].cu);
-   datfac[i].tipo=parseInt(facturas[indf].items[i].tipo);
+   datfac[i]=[];
+   datfac[i][0]=facturas[indf].items[i].cod;
+   datfac[i][1]=parseFloat(facturas[indf].items[i].cu);
+   datfac[i][2]=parseInt(facturas[indf].items[i].tipo);
 
-  }
+ }
  }
  catch(error) {console.log(error)};
 }
@@ -1729,13 +1894,11 @@ if (indf>=0) {
 function recupera_factura2(nomb){
 
 for (var i=0;i<data.length;i++) {
-datfac[i]=new Object();
-datfac[i].unidad=0;
-datfac[i].pu=0;
-datfac[i].cajas=0;
-datfac[i].pb=0;
-
+datfac[i][1]=0;
+datfac[i][2]=0;
+datfac[i][0]="";
 }
+
 var partes=nomb.split('_');
 fecha_factura=partes[1];
 cliente_factura=partes[0];
@@ -1748,16 +1911,13 @@ var items=texto.split('&');
  for (var i=1;i<items.length;i++) {
   var det=items[i].split('#');
    var ind=clave_ind.get(det[0]);;
-   datfac[ind].unidad=parseInt(det[1]);
-   datfac[ind].pu=parseFloat(det[2]);
-   datfac[ind].cajas=parseInt(det[3]);
-   datfac[ind].pb=parseFloat(det[4]);
+   datfac[ind][1]=parseInt(det[1]);
  }
 
 }
 
 function salir(){
-guarda_pedido();
+guarda_pedido("menuact");
 //t2=document.getElementById("t2").value;
 //localStorage.setItem('p2',t2);
 //localStorage.setItem('data'+tiendas[tienda_sel].Nomb,JSON.stringify(data));
@@ -1917,7 +2077,7 @@ data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,120,0,0,0,"t1","&Cerveceria&Vaci
 //set_clave_indice();
 //inicio_inventario();
 //refresca();
-recupera_pedido("Pedido");
+recupera_pedido("menuact");
 }
 
 
@@ -1965,11 +2125,35 @@ Ftexto+='Menu: '+cliente_factura+'\n';
 Ftexto+="Informacion nutricional "+"\n"
 var contador=0;
 var colorb='black';
+var comdant=-1;
+texto+='<table>';
 for (var i=0;i<datfac.length;i++){
- if (datfac[i].unidad!=0 ) {
-  contador++;
- texto+=datfac[i].nombre+' '+datfac[i].cantidad+Comidas[datfac[i].tipo]+'<br>';
+  ind=nutrientes.findIndex(e=>e.nombre==datfac[i][0]);
+if (datfac[i][2]!=comdant) {
+  if (i!=0) {
+ texto+='<tr><td span="2" style="color:red;">'+(totalp.kcal).toFixed(2)+'</td></tr>';
+ texto+='<tr><td span="2"></td></tr>';texto+='<tr><td span="2"></td></tr>';
 }
+ texto+='<tr><td span="2" style="color:red;">'+Comidas[datfac[i][2]]+'</td></tr>';
+ comdant=datfac[i][2];
+ totalp=get_total(datfac,comdant);
+ 
+ } 
+
+ if (datfac[i][1]!=0 && ind>=0) {
+    kcal=parseFloat(nutrientes[ind].kcal*datfac[i][1]/100);
+   carboh=parseFloat(nutrientes[ind].carbo*datfac[i][1]/100);
+   texto+='<tr onclick="cintro('+ind+','+i+');" style="color:blue;"><td span="2">'+datfac[i][0]+' '+datfac[i][1]+' gr </td></tr>'; 
+   texto+='<tr><td>'+kcal.toFixed(2)+' Kcal'+'</td>';
+  texto+='<td>'+carboh.toFixed(2)+' gr'+'</td>'+'</tr>';
+ //  kcalt+=kcal; 
+ contador++;
+    
+  } // if
+if (i==datfac.length-1) {
+  texto+='<tr><td span="2" style="color:red;">'+(totalp.kcal).toFixed(2)+'</td></tr>';
+}
+
 }
 texto+='</table>';
 
@@ -1980,14 +2164,35 @@ Ftexto+='============================================\n';
 
 
 
-texto+='<table width="60%">';
-texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total S/IVA </td><td style="width:50%;">'+'</td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> B. Imp. </td><td style="width:50%;">'+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> IVA </td><td style="width:50%;">'+' </td></tr>';
-texto+='<tr align="right"><td style="color:#000066; width:50%;"> Total </td><td style="width:50%;">'+' </td></tr>';
-texto+='</table>';
-//total_factura=totald;
+totalt=get_total(datfac,-1);
 
+  texto+='<table width="60%">';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total Kcal </td><td style="width:50%;">'+(totalt.kcal).toFixed(2)+'</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Carbohidratos </td><td style="width:50%;">'+(totalt.carbo).toFixed(2)+'</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Proteinas </td><td style="width:50%;">'+(totalt.prot).toFixed(2)+'</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Acidos grasos </td><td style="width:50%;">'+(totalt.ags+totalt.agp+totalt.agm).toFixed(2)+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;">Fibra </td><td style="width:50%;">'+(totalt.fibra).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;">Potasio </td><td style="width:50%;">'+(totalt.k).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Fosforo </td><td style="width:50%;">'+(totalt.p).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Calcio </td><td style="width:50%;">'+(totalt.ca).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Hierro </td><td style="width:50%;">'+(totalt.fe).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Zinc </td><td style="width:50%;">'+(totalt.zn).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Magnesio </td><td style="width:50%;">'+(totalt.mg).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Manganeso </td><td style="width:50%;">'+(totalt.mn).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Selenio </td><td style="width:50%;">'+(totalt.se).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Cobre </td><td style="width:50%;">'+(totalt.cu).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Iodo </td><td style="width:50%;">'+(totalt.i).toFixed(2)+' </td></tr>';
+
+
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit C </td><td style="width:50%;">'+(totalt.vitC).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit D </td><td style="width:50%;">'+(totalt.vitD).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit E </td><td style="width:50%;">'+(totalt.vitE).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit K </td><td style="width:50%;">'+(totalt.vitK).toFixed(2)+' </td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B1 </td><td style="width:50%;">'+(totalt.vitB1).toFixed(2)+' </td></tr>';
+
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Sodio </td><td style="width:50%;">'+(totalt.na).toFixed(2)+ '</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Agua </td><td style="width:50%;">'+(totalt.agua).toFixed(2)+ '</td></tr>';
+  texto+='</table>';
 
 //Ftexto+='S/IVA: '+(totalbsiva).toFixed(2)+' '+mone+' C/IVA: '+(totalb).toFixed(2)+' '+mone+' \n'
 //Ftexto+='IVA: '+(totalb-totalbsiva).toFixed(2)+' '+mone+ ' \n';
@@ -2048,9 +2253,6 @@ Ftexto='Fecha: '+fecha_actual()+'\n';
 
 Ftexto+="Informacion nutricional\n"
 var contador=0;
-var kcal=0;
-var carboh=0;
-var kcalt=0;
 var colorb='black';
 var comdant=-1;
 //alert(" Paso numero 3");
@@ -2058,9 +2260,14 @@ texto+='<table>';
 for (var i=0;i<Pedido_G.length;i++){
   ind=nutrientes.findIndex(e=>e.nombre==Pedido_G[i][0]);
 if (Pedido_G[i][2]!=comdant) {
-  if (i!=0) {texto+='<tr><td span="2"></td></tr>';texto+='<tr><td span="2"></td></tr>';}
-  texto+='<tr><td span="2" style="color:red;">'+Comidas[Pedido_G[i][2]]+'</td></tr>';
-  comdant=Pedido_G[i][2];
+  if (i!=0) {
+ texto+='<tr><td style="color:yellow;">'+(totalp.kcal).toFixed(2)+'</td><td style="color:red;">'+(totalp.prot).toFixed(2)+'</td></tr>';
+ texto+='<tr><td span="2"></td></tr>';texto+='<tr><td span="2"></td></tr>';
+}
+ texto+='<tr><td span="2" style="color:red;">'+Comidas[Pedido_G[i][2]]+'</td></tr>';
+ comdant=Pedido_G[i][2];
+ totalp=get_total(Pedido_G,comdant);
+ 
  } 
 
  if (Pedido_G[i][1]!=0 && ind>=0) {
@@ -2069,10 +2276,13 @@ if (Pedido_G[i][2]!=comdant) {
    texto+='<tr onclick="cintro('+ind+','+i+');" style="color:blue;"><td span="2">'+Pedido_G[i][0]+' '+Pedido_G[i][1]+' gr </td></tr>'; 
    texto+='<tr><td>'+kcal.toFixed(2)+' Kcal'+'</td>';
   texto+='<td>'+carboh.toFixed(2)+' gr'+'</td>'+'</tr>';
-   kcalt+=kcal; 
+ //  kcalt+=kcal; 
  contador++;
     
   } // if
+if (i==Pedido_G.length-1) {
+  texto+='<tr><td style="color:red;">'+(totalp.kcal).toFixed(2)+'</td><td style="color:red;">'+(totalp.prot).toFixed(2)+'</td></tr>';
+}
  }// for
 texto+='</table>';
 texto+='<HR>';
@@ -2080,14 +2290,31 @@ Ftexto+='============================================\n';
 totalt=get_total(Pedido_G,-1);
 
   texto+='<table width="60%">';
-  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total Kcal </td><td style="width:50%;">'+(totalt.kcal).toFixed(2)+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;">Potasio </td><td style="width:50%;">'+(totalt.k).toFixed(2)+' </td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Fosforo </td><td style="width:50%;">'+(totalt.p).toFixed(2)+' </td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Sodio </td><td style="width:50%;">'+(totalt.na).toFixed(2)+ '</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Agua </td><td style="width:50%;">'+(totalt.agua).toFixed(2)+ '</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total Kcal </td><td style="width:30%;">'+(totalt.kcal).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.kcal/req_diario.kcal).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Carbohidratos </td><td style="width:30%;">'+(totalt.carbo).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.carbo/req_diario.carbo).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Proteinas </td><td style="width:30%;">'+(totalt.prot).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.prot/req_diario.prot).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Acidos grasos </td><td style="width:30%;">'+(totalt.ags+totalt.agp+totalt.agm).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.ags/req_diario.ags).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;">Fibra </td><td style="width:30%;">'+(totalt.fibra).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.fibra/req_diario.fibra).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;">Potasio </td><td style="width:30%;">'+(totalt.k).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.k/req_diario.k).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Fosforo </td><td style="width:30%;">'+(totalt.p).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.p/req_diario.p).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Calcio </td><td style="width:30%;">'+(totalt.ca).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.ca/req_diario.ca).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Hierro </td><td style="width:30%;">'+(totalt.fe).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.fe/req_diario.fe).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Zinc </td><td style="width:30%;">'+(totalt.zn).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.zn/req_diario.zn).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Sodio </td><td style="width:30%;">'+(totalt.na).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.na/req_diario.na).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Magnesio </td><td style="width:30%;">'+(totalt.mg).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.mg/req_diario.mg).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Manganeso </td><td style="width:30%;">'+(totalt.mn).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.mn/req_diario.mn).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Selenio </td><td style="width:30%;">'+(totalt.se).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.se/req_diario.se).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Cobre </td><td style="width:30%;">'+(totalt.cu).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.cu/req_diario.cu).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Iodo </td><td style="width:30%;">'+(totalt.i).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.i/req_diario.i).toFixed(2)+'%'+'</td></tr>';
 
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit C </td><td style="width:30%;">'+(totalt.vitC).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitC/req_diario.vitC).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit D </td><td style="width:30%;">'+(totalt.vitD).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitD/req_diario.vitD).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit E </td><td style="width:30%;">'+(totalt.vitE).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitE/req_diario.vitE).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit K </td><td style="width:30%;">'+(totalt.vitK).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitK/req_diario.vitK).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B1 </td><td style="width:30%;">'+(totalt.vitB1).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'</td></tr>';
+
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Agua </td><td style="width:30%;">'+(totalt.agua).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.agua/req_diario.agua).toFixed(2)+'%'+'</td></tr>';
   texto+='</table>';
- texto+='</table>';
 textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
 textoT+='<table width="100%"';
 textoT+='<tr>';
@@ -2538,7 +2765,7 @@ function ajaxPositive(response) {
         muestra_cat();
         inicio_inventario();
         refresca();
-        recupera_pedido("Pedido");
+        recupera_pedido("menuact");
         set_var_voz();
   }
 
