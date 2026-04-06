@@ -141,6 +141,17 @@ width:98%;
 overflow-y:scroll;
 }
 
+#requer {
+visibility: hidden;
+position:fixed;
+background-color:Aqua;
+border-radius: 5% 5%;
+top:30%;
+left:0%;
+height: 40%;
+width:98%;
+overflow-y:scroll;
+}
 
 #footer {
   display: none;
@@ -274,6 +285,7 @@ border-radius: 8px;
 <!-- <div id="dsearch"> <input id="search" type="text" placeholder="Buscar" oninput="refresca();"></div>-->
 <div id="divt" ></div>
 <div id="introd" ></div>
+<div id="requer" ></div>
 <div id="content" hidden="false"></div>
 <div id="factura" hidden="true"></div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
@@ -283,6 +295,7 @@ border-radius: 8px;
 <table width="100%">
 <tr align="center">
 <td width="12%"> <button class="btop" onclick="Mantenimiento();">Mant</button></td>
+<td width="12%"> <button class="btop" onclick="Requerimientos();">Requerimientos</button></td>
 <td width="12%"> <button class="btop" onclick="Actualiza_Nutriente();">Alimento</button></td>
 <td width="12%"><button class="btop" onclick="factura();">Calorias</button></td> 
 </tr></table>
@@ -1638,14 +1651,24 @@ div3.innerHTML=texto;
 
 }
 
-var req_diario={kcal:"2400",agm:"30",ags:"30",agp:"30",
- agua:"2500",carbo:"300",prot:"80",k:"3000",
- fibra:"30",p:"1200",ca:"300",fe:"100",zn:"20",
- mg:"20",mn:"20",se:"15",cu:"15",i:"0.170",na:"1300",
- vitA:"10",vitC:"200",vitD:"40",vitE:"20",
- vitK:"10",vitB1:"15",vitB2:"15",vitB3:"15",
- vitB5:"15",vitB6:"15",vitB7:"15",vitB9:"15",
- vitB12:"15"
+var req_diario={kcal:"2400",agm:"30",ags:"20",agp:"20",
+ agua:"2500",carbo:"330",prot:"80",k:"3000",
+ fibra:"30",p:"700",ca:"900",fe:"10",zn:"13",
+ mg:"350",mn:"2.3",se:"0.055",cu:"0.9",i:"0.15",na:"2000",
+ vitA:"0.8",vitC:"90",vitD:"0.005",vitE:"10",
+ vitK:"0.08",vitB1:"1.2",vitB2:"1.3",vitB3:"16",
+ vitB5:"5",vitB6:"1.3",vitB7:"0.03",vitB9:"0.4",
+ vitB12:"0.0024"
+}
+
+function Requerimientos(){
+
+var colb="black";
+var divrequer=document.getElementById("requer");
+var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+'Requerimientos'+'</td><td style="text-align:left;"><button onclick=quitar_div('+'"requer"'+');>x</button></td></tr></table>';
+//alert(texto);
+divrequer.innerHTML=texto;
+divrequer.style.visibility = "visible";
 }
 function get_total(A,ind){
 var total=new Object();
@@ -2295,6 +2318,8 @@ totalt=get_total(Pedido_G,-1);
   texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Proteinas </td><td style="width:30%;">'+(totalt.prot).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.prot/req_diario.prot).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Acidos grasos </td><td style="width:30%;">'+(totalt.ags+totalt.agp+totalt.agm).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.ags/req_diario.ags).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;">Fibra </td><td style="width:30%;">'+(totalt.fibra).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.fibra/req_diario.fibra).toFixed(2)+'%'+'</td></tr>';
+   texto+='<tr align="right"><td span="3" style="color:#000066; width:100%;"> Minerales </td></tr>';
+
   texto+='<tr align="right"><td style="color:#000066; width:50%;">Potasio </td><td style="width:30%;">'+(totalt.k).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.k/req_diario.k).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Fosforo </td><td style="width:30%;">'+(totalt.p).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.p/req_diario.p).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Calcio </td><td style="width:30%;">'+(totalt.ca).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.ca/req_diario.ca).toFixed(2)+'%'+'</td></tr>';
@@ -2306,12 +2331,21 @@ totalt=get_total(Pedido_G,-1);
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Selenio </td><td style="width:30%;">'+(totalt.se).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.se/req_diario.se).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Cobre </td><td style="width:30%;">'+(totalt.cu).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.cu/req_diario.cu).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Iodo </td><td style="width:30%;">'+(totalt.i).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.i/req_diario.i).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td span="3" style="color:#000066; width:100%;"> Vitaminas </td></tr>';
 
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit A </td><td style="width:30%;">'+(totalt.vitA).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitA/req_diario.vitA).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit C </td><td style="width:30%;">'+(totalt.vitC).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitC/req_diario.vitC).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit D </td><td style="width:30%;">'+(totalt.vitD).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitD/req_diario.vitD).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit E </td><td style="width:30%;">'+(totalt.vitE).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitE/req_diario.vitE).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit K </td><td style="width:30%;">'+(totalt.vitK).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitK/req_diario.vitK).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B1 </td><td style="width:30%;">'+(totalt.vitB1).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B2 </td><td style="width:30%;">'+(totalt.vitB2).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB2/req_diario.vitB2).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B3 </td><td style="width:30%;">'+(totalt.vitB3).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB3/req_diario.vitB3).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B5 </td><td style="width:30%;">'+(totalt.vitB5).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB5/req_diario.vitB5).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B6 </td><td style="width:30%;">'+(totalt.vitB6).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB6/req_diario.vitB6).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B7 </td><td style="width:30%;">'+(totalt.vitB7).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB7/req_diario.vitB7).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B9 </td><td style="width:30%;">'+(totalt.vitB9).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB9/req_diario.vitB9).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B12 </td><td style="width:30%;">'+(totalt.vitB12).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB12/req_diario.vitB12).toFixed(2)+'%'+'</td></tr>';
 
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Agua </td><td style="width:30%;">'+(totalt.agua).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.agua/req_diario.agua).toFixed(2)+'%'+'</td></tr>';
   texto+='</table>';
