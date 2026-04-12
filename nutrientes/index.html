@@ -3,6 +3,7 @@
 <TITLE>  Calculadora Nutricional</TITLE>
 <!-- <link rel="stylesheet" href="styles.css" > -->
 <link rel="manifest" href="manifest.json"> 
+<link rel="stylesheet" type="text/css" href="css/all.css">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 <style>
@@ -152,7 +153,17 @@ height: 40%;
 width:98%;
 overflow-y:scroll;
 }
-
+#requerE {
+visibility: hidden;
+position:fixed;
+background-color:Aqua;
+border-radius: 5% 5%;
+top:30%;
+left:0%;
+height: 40%;
+width:98%;
+overflow-y:scroll;
+}
 #footer {
   display: none;
   position: fixed;
@@ -286,6 +297,7 @@ border-radius: 8px;
 <div id="divt" ></div>
 <div id="introd" ></div>
 <div id="requer" ></div>
+<div id="requerE" ></div>
 <div id="content" hidden="false"></div>
 <div id="factura" hidden="true"></div>
  <div id="footer"> Dr. Braulio De Abreu. email: brauliodeabreu@gmail.com <br> Tlfs: +58414 4728631 +58412 8552592</div>
@@ -295,7 +307,8 @@ border-radius: 8px;
 <table width="100%">
 <tr align="center">
 <td width="12%"> <button class="btop" onclick="Mantenimiento();">Mant</button></td>
-<td width="12%"> <button class="btop" onclick="Requerimientos();">Requerimientos</button></td>
+<td width="12%"> <button class="btop" onclick="Requerimientos();">Req Gen</button></td>
+<td width="12%"> <button class="btop" onclick="Requerimientos_E();">Req Esp</button></td>
 <td width="12%"> <button class="btop" onclick="Actualiza_Nutriente();">Alimento</button></td>
 <td width="12%"><button class="btop" onclick="factura();">Calorias</button></td> 
 </tr></table>
@@ -337,6 +350,7 @@ Vit E:<input style="width:15%;" type="text" id="vitE" value="" > mg<br>
 Vit B1 (Tiamina):<input style="width:15%;" type="text" id="vitB1" value="" > mg<br>
 Vit B2 (Riboflavina):<input style="width:15%;" type="text" id="vitB2" value="" > mg<br>
 Vit B3 (Niacina):<input style="width:15%;" type="text" id="vitB3" value="" > mg<br>
+Vit B4 (Colina):<input style="width:15%;" type="text" id="vitB4" value="" > mg<br>
 Vit B5 (A. Pantotenico):<input style="width:15%;" type="text" id="vitB5" value="" > mg<br>
 Vit B6 (Piridoxina):<input style="width:15%;" type="text" id="vitB6" value="" > mg<br>
 Vit B7 (Biotina):<input style="width:15%;" type="text" id="vitB7" value="" > mg<br>
@@ -1230,6 +1244,7 @@ if (cliente!='') {
   vitb1=filtra_und(document.getElementById("vitB1").value);
   vitb2=filtra_und(document.getElementById("vitB2").value);
   vitb3=filtra_und(document.getElementById("vitB3").value);
+  vitb4=filtra_und(document.getElementById("vitB4").value);
   vitb5=filtra_und(document.getElementById("vitB5").value);
   vitb6=filtra_und(document.getElementById("vitB6").value);
   vitb7=filtra_und(document.getElementById("vitB7").value);
@@ -1272,6 +1287,7 @@ if (cliente!='') {
   Ocliente.vitB1=vitb1;
   Ocliente.vitB2=vitb2;
   Ocliente.vitB3=vitb3;
+  Ocliente.vitB4=vitb4;
   Ocliente.vitB5=vitb5;
   Ocliente.vitB6=vitb6;
   Ocliente.vitB7=vitb7;
@@ -1329,6 +1345,7 @@ document.getElementById("vitE").value=nutrientes[ind].vitE;
 document.getElementById("vitB1").value=nutrientes[ind].vitB1;
 document.getElementById("vitB2").value=nutrientes[ind].vitB2;
 document.getElementById("vitB3").value=nutrientes[ind].vitB3;
+document.getElementById("vitB4").value=nutrientes[ind].vitB4;
 document.getElementById("vitB5").value=nutrientes[ind].vitB5;
 document.getElementById("vitB6").value=nutrientes[ind].vitB6;
 document.getElementById("vitB7").value=nutrientes[ind].vitB7;
@@ -1398,10 +1415,12 @@ listasel=[];
 var lf=facturas.length;
 
 for(var i=0;i<lf;i++){
-  listasel.unshift(facturas[i].nombre+'_'+facturas[i].fecha);
+//  listasel.unshift(facturas[i].nombre+'_'+facturas[i].fecha);
+listasel.unshift(facturas[i].nombre);
+
  } 
 listasel.sort();
-//console.log(listasel);
+console.log(listasel);
 }
 
 function lee_facturas(){
@@ -1651,24 +1670,170 @@ div3.innerHTML=texto;
 
 }
 
-var req_diario={kcal:"2400",agm:"30",ags:"20",agp:"20",
+const req_diarioM={kcal:"2000",agm:"30",ags:"20",agp:"20",
  agua:"2500",carbo:"330",prot:"80",k:"3000",
  fibra:"30",p:"700",ca:"900",fe:"10",zn:"13",
  mg:"350",mn:"2.3",se:"0.055",cu:"0.9",i:"0.15",na:"2000",
  vitA:"0.8",vitC:"90",vitD:"0.005",vitE:"10",
- vitK:"0.08",vitB1:"1.2",vitB2:"1.3",vitB3:"16",
+ vitK:"0.08",vitB1:"1.2",vitB2:"1.3",vitB3:"16",vitB4:"550",
  vitB5:"5",vitB6:"1.3",vitB7:"0.03",vitB9:"0.4",
  vitB12:"0.0024"
 }
+
+const req_diarioF31_50={kcal:"1600",agm:"30",ags:"20",agp:"20",
+ agua:"2500",carbo:"330",prot:"80",k:"4700",
+ fibra:"30",p:"700",ca:"1000",fe:"18",zn:"8",
+ mg:"320",mn:"1.8",se:"0.055",cu:"0.9",i:"0.159",na:"1500",
+ vitA:"0.7",vitC:"55",vitD:"0.005",vitE:"15",
+ vitK:"0.090",vitB1:"1.1",vitB2:"1.1",vitB3:"14",vitB4:"425",
+ vitB5:"5",vitB6:"0.4",vitB7:"0.03",vitB9:"0.4",
+ vitB12:"0.0024"
+}
+var req_diario=structuredClone(req_diarioM);
 
 function Requerimientos(){
 
 var colb="black";
 var divrequer=document.getElementById("requer");
-var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+'Requerimientos'+'</td><td style="text-align:left;"><button onclick=quitar_div('+'"requer"'+');>x</button></td></tr></table>';
+var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+'Requerimientos Generales'+'</td><td style="text-align:left;"><button onclick=quitar_div('+'"requer"'+');>x</button></td></tr></table>';
+texto+='Nombre: '+makeKeyInput("nombren","Nombre","T",param.nombre)+'<br>';
+var sexo=["M","F"];
+texto+='Edad: '+makeKeyInput("edadn","Edad","I2-10-90",param.edad)+'<br>';
+texto+='Peso: '+makeKeyInput("peson","Peso","I3-20-250",param.peso)+'<br>';
+texto+='Altura '+makeKeyInput("alturan","Altura","I3-100-230",param.altura)+'<br>';
+var Actividad=["Sedentario","Moderado","Intenso","Muy intenso"];
+texto+='Actividad '+makeRadioInput("actn",Actividad,param.activ)+'<br>';
+texto+='Sexo: '+makeRadioInput("sexon",sexo,param.sexo)+'<br>';
+texto+='Porc Carbo '+makeKeyInput("porccn","Carbohidratos","I2-10-70","50")+'<br>';
+texto+='Porc Proteinas '+makeKeyInput("porcpn","Proteinas","I2-10-70","20")+'<br>';
+texto+='Porc Grasas '+makeKeyInput("porcgn","Grasas","I2-10-70","30")+'<br>';
+
+texto+='<button onclick="set_Pacn();">Ok</button>';
+
 //alert(texto);
+
 divrequer.innerHTML=texto;
 divrequer.style.visibility = "visible";
+}
+function Requerimientos_E(){
+var colb="black";
+var divrequerE=document.getElementById("requerE");
+var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+'Requerimientos Especiales'+'</td><td style="text-align:left;"><button onclick=quitar_div('+'"requerE"'+');>x</button></td></tr></table>';
+texto+='Kcal: '+makeKeyInput("kcaln","Kilocalorias","I4-1000-3000",req_diario.kcal)+'<br>';
+var sexo=["M","F"];
+texto+='Proteinas: '+makeKeyInput("protn","Proteinas","I3-10-300",req_diario.prot)+'<br>';
+texto+='Carbohidratos: '+makeKeyInput("carbon","Carbohidratos","I3-20-250",req_diario.carbo)+'<br>';
+texto+='AG Saturados '+makeKeyInput("agsn","AG Sat","I3-10-230",req_diario.ags)+'<br>';
+texto+='AG Poli-insaturados '+makeKeyInput("agpn","AG Poli-inSat","I3-10-230",req_diario.agp)+'<br>';
+texto+='AG Mono-insaturados '+makeKeyInput("agmn","AG Mono-inSat","I3-10-230",req_diario.agm)+'<br>';
+texto+='Fibra '+makeKeyInput("fibran","Fibra","I2-0-99",req_diario.fibra)+'<br>';
+texto+='Minerales:<br>';
+texto+='Potasio '+makeKeyInput("potasion","Potasio","I4-0-9999",req_diario.k)+'<br>';
+texto+='Fosforo '+makeKeyInput("fosforon","Fosforo","I4-0-9999",req_diario.p)+'<br>';
+texto+='Calcio '+makeKeyInput("calcion","Calcio","I4-0-9999",req_diario.ca)+'<br>';
+texto+='Hierro '+makeKeyInput("hierron","Hierro","I4-0-9999",req_diario.fe)+'<br>';
+texto+='Zinc '+makeKeyInput("zincn","Zinc","I4-0-9999",req_diario.zn)+'<br>';
+texto+='Sodio '+makeKeyInput("sodion","Sodio","I4-0-9999",req_diario.na)+'<br>';
+texto+='Magnesio '+makeKeyInput("magnesion","Magmesio","I4-0-9999",req_diario.mg)+'<br>';
+texto+='Manganeso '+makeKeyInput("manganeson","Manganeso","I4-0-9999",req_diario.mn)+'<br>';
+texto+='Selenio '+makeKeyInput("selenion","Selenio","I4-0-9999",req_diario.se)+'<br>';
+texto+='Cobre '+makeKeyInput("cobren","Cobre","I4-0-9999",req_diario.cu)+'<br>';
+texto+='Iodo '+makeKeyInput("iodon","Iodo","I4-0-9999",req_diario.i)+'<br>';
+texto+='Vitaminas:<br>';
+texto+='Vit A '+makeKeyInput("vitAn","Vit A","I4-0-9999",req_diario.vitA)+'<br>';
+texto+='Vit C '+makeKeyInput("vitCn","Vit C","I4-0-9999",req_diario.vitC)+'<br>';
+texto+='Vit D '+makeKeyInput("vitDn","Vit D","I4-0-9999",req_diario.vitD)+'<br>';
+texto+='Vit E '+makeKeyInput("vitEn","Vit E","I4-0-9999",req_diario.vitE)+'<br>';
+texto+='Vit K '+makeKeyInput("vitKn","Vit K","I4-0-9999",req_diario.vitK)+'<br>';
+texto+='Vit B1 '+makeKeyInput("vitB1n","Vit B1","I4-0-9999",req_diario.vitB1)+'<br>';
+texto+='Vit B2 '+makeKeyInput("vitB2n","Vit B2","I4-0-9999",req_diario.vitB2)+'<br>';
+texto+='Vit B3 '+makeKeyInput("vitB3n","Vit B3","I4-0-9999",req_diario.vitB3)+'<br>';
+texto+='Vit B4 '+makeKeyInput("vitB4n","Vit B4","I4-0-9999",req_diario.vitB4)+'<br>';
+texto+='Vit B5 '+makeKeyInput("vitB5n","Vit B5","I4-0-9999",req_diario.vitB5)+'<br>';
+texto+='Vit B6 '+makeKeyInput("vitB6n","Vit B6","I4-0-9999",req_diario.vitB6)+'<br>';
+texto+='Vit B7 '+makeKeyInput("vitB7n","Vit B7","I4-0-9999",req_diario.vitB7)+'<br>';
+texto+='Vit B9 '+makeKeyInput("vitB9n","Vit B9","I4-0-9999",req_diario.vitB9)+'<br>';
+texto+='Vit B12 '+makeKeyInput("vitB12n","Vit B12","I4-0-9999",req_diario.vitB12)+'<br>';
+texto+='<button onclick="set_Pacn_E();">Ok</button>';
+
+//alert(texto);
+
+divrequerE.innerHTML=texto;
+divrequerE.style.visibility = "visible";
+}
+var param={nombre:"",edad:"30",peso:"120",altura:"165",activ:"1",
+ sexo:"1"
+}
+function set_Pacn(){
+var pa=[1.2,1.55,1.725,1.9];
+var nombre=document.getElementById("nombren").value;
+var edad=document.getElementById("edadn").value;
+var peso=document.getElementById("peson").value;
+var altura=document.getElementById("alturan").value;
+var activ=getIndexRadioInput("actn");
+var sexo=getIndexRadioInput("sexon");
+var cald;
+//alert(edad+" "+sexo+" "+activ);
+param.nombre=nombre;
+param.edad=edad;
+param.peso=peso;
+param.altura=altura;
+param.sexo=sexo;
+param.activ=activ;
+if (sexo==0) { 
+cald=10*peso+6.25*altura-5*edad+5;
+req_diario=structuredClone(req_diarioM);
+} else
+{ 
+cald=10*peso+6.25*altura-5*edad-161;
+req_diario=structuredClone(req_diarioF31_50);
+} 
+cald*=pa[activ];
+req_diario.kcal=cald;
+req_diario.carbo=0.55*cald/4.0;
+req_diario.prot=0.20*cald/4.0;
+req_diario.ags=0.10*cald/9.0;
+req_diario.agp=0.10*cald/9.0;
+req_diario.agm=0.10*cald/9.0;
+
+quitar_div("requer");
+}
+
+function set_Pacn_E(){
+req_diario.kcal=document.getElementById("kcaln").value
+req_diario.prot=document.getElementById("protn").value
+req_diario.carbo=document.getElementById("carbon").value
+req_diario.ags=document.getElementById("agsn").value
+req_diario.agp=document.getElementById("agpn").value
+req_diario.agm=document.getElementById("agmn").value
+req_diario.fibra=document.getElementById("fibran").value
+req_diario.k=document.getElementById("potasion").value
+req_diario.p=document.getElementById("fosforon").value
+req_diario.ca=document.getElementById("calcion").value
+req_diario.fe=document.getElementById("hierron").value
+req_diario.zn=document.getElementById("zincn").value
+req_diario.na=document.getElementById("sodion").value
+req_diario.mg=document.getElementById("magnesion").value
+req_diario.mn=document.getElementById("manganeson").value
+req_diario.se=document.getElementById("selenion").value
+req_diario.cu=document.getElementById("cobren").value
+req_diario.i=document.getElementById("iodon").value
+req_diario.vitA=document.getElementById("vitAn").value
+req_diario.vitC=document.getElementById("vitCn").value
+req_diario.vitD=document.getElementById("vitDn").value
+req_diario.vitE=document.getElementById("vitEn").value
+req_diario.vitK=document.getElementById("vitKn").value
+req_diario.vitB1=document.getElementById("vitB1n").value
+req_diario.vitB2=document.getElementById("vitB2n").value
+req_diario.vitB3=document.getElementById("vitB3n").value
+req_diario.vitB4=document.getElementById("vitB4n").value
+req_diario.vitB5=document.getElementById("vitB5n").value
+req_diario.vitB6=document.getElementById("vitB6n").value
+req_diario.vitB7=document.getElementById("vitB7n").value
+req_diario.vitB9=document.getElementById("vitB9n").value
+req_diario.vitB12=document.getElementById("vitB12n").value
+
+quitar_div("requerE");
 }
 function get_total(A,ind){
 var total=new Object();
@@ -1699,6 +1864,7 @@ total.vitK=0;
 total.vitB1=0;
 total.vitB2=0;
 total.vitB3=0;
+total.vitB4=0;
 total.vitB5=0;
 total.vitB6=0;
 total.vitB7=0;
@@ -1742,6 +1908,7 @@ if ((ind==-1) || (ind==A[i][2])) {
    total.vitB1+=parseFloat(nutrientes[indf].vitB1*A[i][1]/100);
    total.vitB2+=parseFloat(nutrientes[indf].vitB2*A[i][1]/100);
    total.vitB3+=parseFloat(nutrientes[indf].vitB3*A[i][1]/100);
+   total.vitB4+=parseFloat(nutrientes[indf].vitB4*A[i][1]/100);
    total.vitB5+=parseFloat(nutrientes[indf].vitB5*A[i][1]/100);
    total.vitB6+=parseFloat(nutrientes[indf].vitB6*A[i][1]/100);
    total.vitB7+=parseFloat(nutrientes[indf].vitB7*A[i][1]/100);
@@ -2321,7 +2488,10 @@ totalt=get_total(Pedido_G,-1);
   texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total Kcal </td><td style="width:30%;">'+(totalt.kcal).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.kcal/req_diario.kcal).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Carbohidratos </td><td style="width:30%;">'+(totalt.carbo).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.carbo/req_diario.carbo).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Proteinas </td><td style="width:30%;">'+(totalt.prot).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.prot/req_diario.prot).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Acidos grasos </td><td style="width:30%;">'+(totalt.ags+totalt.agp+totalt.agm).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.ags/req_diario.ags).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> AG S</td><td style="width:30%;">'+(totalt.ags).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.ags/req_diario.ags).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> AG PIS</td><td style="width:30%;">'+(totalt.agp).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.agp/req_diario.agp).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> AG MIS</td><td style="width:30%;">'+(totalt.agm).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.agm/req_diario.agm).toFixed(2)+'%'+'</td></tr>';
+
   texto+='<tr align="right"><td style="color:#000066; width:50%;">Fibra </td><td style="width:30%;">'+(totalt.fibra).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.fibra/req_diario.fibra).toFixed(2)+'%'+'</td></tr>';
    texto+='<tr align="right"><td span="3" style="color:#000066; width:100%;"> Minerales </td></tr>';
 
@@ -2346,6 +2516,7 @@ totalt=get_total(Pedido_G,-1);
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B1 </td><td style="width:30%;">'+(totalt.vitB1).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B2 </td><td style="width:30%;">'+(totalt.vitB2).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB2/req_diario.vitB2).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B3 </td><td style="width:30%;">'+(totalt.vitB3).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB3/req_diario.vitB3).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B4 </td><td style="width:30%;">'+(totalt.vitB4).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB4/req_diario.vitB4).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B5 </td><td style="width:30%;">'+(totalt.vitB5).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB5/req_diario.vitB5).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B6 </td><td style="width:30%;">'+(totalt.vitB6).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB6/req_diario.vitB6).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B7 </td><td style="width:30%;">'+(totalt.vitB7).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB7/req_diario.vitB7).toFixed(2)+'%'+'</td></tr>';
@@ -2382,6 +2553,7 @@ totalt=get_total(Pedido_G,-1);
   Ftexto+='Vit B1 '+(totalt.vitB1).toFixed(2)+' '+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'\n';
   Ftexto+='Vit B2 '+(totalt.vitB2).toFixed(2)+' '+(100*totalt.vitB2/req_diario.vitB2).toFixed(2)+'%'+'\n';
   Ftexto+='Vit B3 '+(totalt.vitB3).toFixed(2)+' '+(100*totalt.vitB3/req_diario.vitB3).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B4 '+(totalt.vitB4).toFixed(2)+' '+(100*totalt.vitB4/req_diario.vitB4).toFixed(2)+'%'+'\n';
   Ftexto+='Vit B5 '+(totalt.vitB5).toFixed(2)+' '+(100*totalt.vitB5/req_diario.vitB5).toFixed(2)+'%'+'\n';
   Ftexto+='Vit B6 '+(totalt.vitB6).toFixed(2)+' '+(100*totalt.vitB6/req_diario.vitB6).toFixed(2)+'%'+'\n';
   Ftexto+='Vit B7 '+(totalt.vitB7).toFixed(2)+' '+(100*totalt.vitB7/req_diario.vitB7).toFixed(2)+'%'+'\n';
@@ -2397,7 +2569,7 @@ textoT+='<table width="100%"';
 textoT+='<tr>';
 textoT+='<td width="15%"><button class="btop" onclick="anula();">Borrar</button></td>';
 textoT+='<td width="15%"><button class="btop" onclick="guardar_factura();">Guardar</button></td>';
-textoT+='<td width="15%"><button class="btop" onclick="lee_facturas();ordena_fecha();selectlista(0);">Ver</button></td>';
+textoT+='<td width="15%"><button class="btop" onclick="lee_facturas();selectlista(0);">Ver</button></td>';
 textoT+='<td width="5%"></td>';
 textoT+='<td width="10%"></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
@@ -2690,6 +2862,96 @@ texto+='</select>';
 return texto;
 }
 
+function makeKeyInput(name,titulo,tipo,valori){
+if (tipo[0]=='T') {
+   var tipod="text";
+   tam=parseInt(tipo.substring(1));
+   tamp=tam*20;
+   var texto='<input id="'+name+'" type="'+tipod+'" title="'+ titulo;
+   texto+='" style=" width: '+tamp+'px;" value="'+valori+'">';
+}
+
+if (tipo[0]=='I') {
+   var tipod="number";
+   var resto=tipo.substring(1);
+   var campos=resto.split("-"); 
+   tamp=campos[0]*15+20;
+   vmin=campos[1];
+   vmax=campos[2];
+   var texto='<input id="'+name+'" type="'+tipod+'" title="'+ titulo;
+   texto+='" style=" width: '+tamp+'px;" min="'+vmin+'" max="'+vmax+'" value="'+valori+'"';
+   //texto+=' onkeypress="return ((event.charCode !=46)&&(event.charCode !=45))">';
+   texto+=' onkeypress=" return validInputI(this,event,'+campos[0]+','+vmin+','+vmax+')">';
+}
+if (tipo[0]=='R') {
+   var tipod="text";
+   var resto=tipo.substring(1);
+   var campos=resto.split("-"); 
+   var partes=campos[0].split(".");
+   var pr=parseInt(partes[0]);
+   if (partes.length>1) {var dc=parseInt(partes[1])} else {var dc=0}
+   tamp=(pr+dc+1)*15;
+   vmin=campos[1];
+   vmax=campos[2];
+   var texto='<input id="'+name+'" type="'+tipod+'" title="'+ titulo;
+   texto+='" style=" width: '+tamp+'px;" min="'+vmin+'" max="'+vmax+'" value="'+valori+'"';
+   texto+=' onkeypress=" return validInputR(this,event,'+campos[0]+','+vmin+','+vmax+')">';
+}
+//alert("texto: "+texto);
+
+return texto;
+
+}
+var colcheck="blue";
+var colradio="lightblue";
+
+var iconocheck='<i class="fa fa-check-square"></i>';
+var icononocheck='<i class="fa fa-square"></i>';
+var iconoselecton='<i class="fa fa-circle-check"></i>';
+var iconoselectoff='<i class="fa fa-circle"></i>';
+
+function changeStateCheckButton(e){
+     if (e.innerHTML==icononocheck) {e.innerHTML=iconocheck;} else  {e.innerHTML=icononocheck;}
+}
+
+function makeCheckInput(name,D,indice){
+var texto='';
+texto+='<span style="color: '+colcheck+';">';
+for (var i=0;i<D.length;i++){
+if (i==indice) {texto+=' '+D[i]+' <button name="'+name+'" onclick="changeStateCheckButton(this)">'+iconocheck+ '</button>';}
+   else {texto+=' '+D[i]+' <button name="'+name+'" onclick="changeStateCheckButton(this)">'+icononocheck+ '</button>';}
+ 
+}
+//alert(texto);
+texto+='</span>';
+
+return texto;
+}
+function makeRadioInput(name,D,indice){
+var texto='';
+texto+='<span style="color: '+colradio+';">';
+for (var i=0;i<D.length;i++){
+if (i==indice) { texto+=' '+D[i]+' <button name="'+name+'" onclick="changeStateButton(this)">'+iconoselecton+ '</button>';}
+   else { texto+=' '+D[i]+' <button name="'+name+'" onclick="changeStateButton(this)">'+iconoselectoff+ '</button>';}
+}
+//alert(texto);
+texto+='</span>';
+return texto;
+}
+function changeStateButton(e){
+var b=document.getElementsByName(e.name);
+for (var i=0;i<b.length;i++){
+   if (b[i]===e) {b[i].innerHTML=iconoselecton;} else  {b[i].innerHTML=iconoselectoff;}
+}
+
+}
+function getIndexRadioInput(name){
+var sel=document.getElementsByName(name);
+for (var i=0;i<sel.length;i++){
+    if (sel[i].innerHTML==iconoselecton) return i
+}
+return 0;
+}
 function getIndexInputSimple(name){
 var sel=document.getElementsByTagName(name).indexSelected;
 
@@ -2767,7 +3029,19 @@ if (!hay) {
    document.getElementById("cat").style.visibility = "hidden";
 }
 }
+function validInputI(o,e,l,vmin,vmax){
+//alert(e.charCode);
+var x=o.value+String.fromCharCode(e.charCode);
+//alert(x);
+if (x.length>l) {return false} // longitud
+if ((x<vmin) || (x>vmax)) {return false}
+if ((e.charCode==45) || (e.charCode==46)) {return false}
 
+//if ((x.indexOf(".")>0) && (t==1) && (e.charCode==46)) { alert("F");return false}
+//if (((t==0) || (t==1)) && (e.charCode==45)) { return false}
+//if ((t==0) && (e.charCode==46)) { return false}
+return true;
+}
 function impri(A){
 var At=A.toString();
 var p=At.indexOf('.');
