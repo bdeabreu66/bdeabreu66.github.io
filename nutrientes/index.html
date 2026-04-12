@@ -1790,12 +1790,12 @@ cald=10*peso+6.25*altura-5*edad-161;
 req_diario=structuredClone(req_diarioF31_50);
 } 
 cald*=pa[activ];
-req_diario.kcal=cald;
-req_diario.carbo=0.55*cald/4.0;
-req_diario.prot=0.20*cald/4.0;
-req_diario.ags=0.10*cald/9.0;
-req_diario.agp=0.10*cald/9.0;
-req_diario.agm=0.10*cald/9.0;
+req_diario.kcal=cald.toFixed(0);
+req_diario.carbo=(0.55*cald/4.0).toFixed(0);
+req_diario.prot=(0.20*cald/4.0).toFixed(0);
+req_diario.ags=(0.10*cald/9.0).toFixed(0);
+req_diario.agp=(0.10*cald/9.0).toFixed(0);
+req_diario.agm=(0.10*cald/9.0).toFixed(0);
 
 quitar_div("requer");
 }
