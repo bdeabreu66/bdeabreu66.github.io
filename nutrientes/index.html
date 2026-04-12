@@ -1780,6 +1780,7 @@ param.peso=peso;
 param.altura=altura;
 param.sexo=sexo;
 param.activ=activ;
+localStorage.setItem('PARAMG',JSON.stringify(param));
 if (sexo==0) { 
 cald=10*peso+6.25*altura-5*edad+5;
 req_diario=structuredClone(req_diarioM);
@@ -2254,6 +2255,8 @@ fiva=7.25;
 var j=0;
 
 inicia_bd_Nut();
+ param_aux = localStorage.getItem('PARAMG');
+if (!(param_aux==null)) param=JSON.parse(param_aux);
 
 data= [["Vacio de cerveza Ret 222 ml x 36 UN",1,120,0,0,0,"t1","&Cerveceria&Vacios&",1,'CV001',120]
 ];
