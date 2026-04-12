@@ -1,4 +1,4 @@
-const currentCache = 'Nutricion_cache_v1.5';
+const currentCache = 'Nutricion_cache_v1.6';
 const files =
 [
     'manifest.json',
