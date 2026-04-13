@@ -218,7 +218,8 @@
     "vitB12": "0",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "ARROZ BLANCO",
@@ -547,6 +548,43 @@
     "i": "0"
   },
   {
+    "nombre": "CEREAL CHOCO/AVENA",
+    "kcal": "434",
+    "carbo": "64",
+    "prot": "7.6",
+    "agua": "20",
+    "ags": "2.6",
+    "agp": "6",
+    "agm": "6.4",
+    "fibra": "6.2",
+    "k": "0",
+    "na": "240",
+    "p": "0",
+    "ca": "0",
+    "fe": "0",
+    "zn": "0",
+    "mg": "0",
+    "mn": "0",
+    "se": "0",
+    "cu": "0",
+    "i": "0",
+    "vitA": "0",
+    "vitC": "0",
+    "vitK": "0",
+    "vitD": "0",
+    "vitE": "0",
+    "vitB1": "0",
+    "vitB2": "0",
+    "vitB3": "0",
+    "vitB4": "0",
+    "vitB5": "0",
+    "vitB6": "0",
+    "vitB7": "0",
+    "vitB9": "0",
+    "vitB12": "0",
+    "cat": "&Cereales&Varios&"
+  },
+  {
     "nombre": "COTTAGE",
     "kcal": "75",
     "carbo": "3.1",
@@ -618,7 +656,8 @@
     "vitB12": "0.009",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "FILET MIGNON",
@@ -764,7 +803,8 @@
     "vitB12": "0.00097",
     "se": "0.0331",
     "cu": "0.08",
-    "i": "0"
+    "i": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "KIWI",
@@ -839,6 +879,43 @@
     "cu": "0.072",
     "i": "0",
     "vitB4": "0"
+  },
+  {
+    "nombre": "LECHE PASTAGEM",
+    "kcal": "46",
+    "carbo": "4.9",
+    "prot": "3.1",
+    "agua": "90",
+    "ags": "1",
+    "agp": "0.5",
+    "agm": "0",
+    "fibra": "0",
+    "k": "0",
+    "na": "40",
+    "p": "87",
+    "ca": "120",
+    "fe": "0",
+    "zn": "0",
+    "mg": "0",
+    "mn": "0",
+    "se": "0",
+    "cu": "0",
+    "i": "0.027",
+    "vitA": "0",
+    "vitC": "0",
+    "vitK": "0",
+    "vitD": "0",
+    "vitE": "0",
+    "vitB1": "0",
+    "vitB2": "0.13",
+    "vitB3": "0",
+    "vitB4": "0",
+    "vitB5": "0",
+    "vitB6": "0",
+    "vitB7": "0",
+    "vitB9": "0",
+    "vitB12": "0",
+    "cat": "&Lacteos y derivados&Leche&"
   },
   {
     "nombre": "LECHE SEMI-DESCREMADA",
@@ -1057,7 +1134,8 @@
     "vitB12": "0",
     "se": "0.0093",
     "cu": "0.43",
-    "i": "0"
+    "i": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "MANZANA",
@@ -1094,6 +1172,43 @@
     "se": "0",
     "cu": "0",
     "i": "0"
+  },
+  {
+    "nombre": "MAYONESA",
+    "kcal": "699",
+    "carbo": "2.7",
+    "prot": "1",
+    "agua": "20",
+    "ags": "5.8",
+    "agp": "35",
+    "agm": "35",
+    "fibra": "0",
+    "k": "0",
+    "na": "240",
+    "p": "0",
+    "ca": "0",
+    "fe": "0",
+    "zn": "0",
+    "mg": "0",
+    "mn": "0",
+    "se": "0",
+    "cu": "0",
+    "i": "0",
+    "vitA": "0",
+    "vitC": "0",
+    "vitK": "0",
+    "vitD": "0",
+    "vitE": "12",
+    "vitB1": "0",
+    "vitB2": "0",
+    "vitB3": "0",
+    "vitB4": "0",
+    "vitB5": "0",
+    "vitB6": "0",
+    "vitB7": "0",
+    "vitB9": "0",
+    "vitB12": "0",
+    "cat": "&Aceites / Grasas / Azucar&"
   },
   {
     "nombre": "MILHO FRITO",
@@ -1420,7 +1535,8 @@
     "vitB12": "0.00018",
     "se": "0.030",
     "cu": "0.05",
-    "i": "0"
+    "i": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "PEPINO",
@@ -1675,7 +1791,8 @@
     "cat": "&Vegetales&Verduras&",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "REQUESON",
@@ -1857,7 +1974,7 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Cereales&Arroz&"
+    "cat": "&Cereales&Varios&"
   },
   {
     "nombre": "VINAGRE BLANCO",
@@ -1929,7 +2046,8 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Lacteos y derivados&Yogur&"
+    "cat": "&Lacteos y derivados&Yogur&",
+    "vitB4": "0"
   },
   {
     "nombre": "YOGUR GRIEGO",
@@ -2003,5 +2121,42 @@
     "vitB9": "0.006",
     "vitB12": "0.0002",
     "cat": "&Lacteos y derivados&Yogur&"
+  },
+  {
+    "nombre": "YUCA",
+    "kcal": "150",
+    "carbo": "30",
+    "prot": "4",
+    "agua": "65",
+    "ags": "0",
+    "agp": "0",
+    "agm": "0",
+    "fibra": "1.2",
+    "k": "0",
+    "na": "0",
+    "p": "0",
+    "ca": "0",
+    "fe": "0",
+    "zn": "0",
+    "mg": "0",
+    "mn": "0",
+    "se": "0",
+    "cu": "0",
+    "i": "0",
+    "vitA": "0",
+    "vitC": "0",
+    "vitK": "0",
+    "vitD": "0",
+    "vitE": "0",
+    "vitB1": "0",
+    "vitB2": "0",
+    "vitB3": "0",
+    "vitB4": "0",
+    "vitB5": "0",
+    "vitB6": "0",
+    "vitB7": "0",
+    "vitB9": "0",
+    "vitB12": "0",
+    "cat": "&Vegetales&Verduras&"
   }
 ]
