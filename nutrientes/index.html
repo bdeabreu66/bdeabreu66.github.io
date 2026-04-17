@@ -2469,9 +2469,13 @@ for (var i=0;i<Pedido_G.length;i++){
   ind=nutrientes.findIndex(e=>e.nombre==Pedido_G[i][0]);
 if (Pedido_G[i][2]!=comdant) {
   if (i!=0) {
- texto+='<tr><td style="color:yellow;">E:'+(totalp.kcal).toFixed(2)+'</td><td style="color:red;">P:'+(totalp.prot).toFixed(2)+'</td></tr>';
+ texto+='<tr><td style="color:yellow;">E:'+(totalp.kcal).toFixed(2)+'</td><td style="color:red;">P:'+(totalp.prot).toFixed(2)+'</td>';
+ texto+='<td style="color:red;">C:'+(totalp.carbo).toFixed(2)+'</td>';
+ texto+='<td style="color:red;">AZ:'+(totalp.azucar).toFixed(2)+'</td>';
+ texto+='<td style="color:red;">AGS:'+(totalp.ags).toFixed(2)+'</td>';
+  texto+='</tr>';
  texto+='<tr><td span="5"></td></tr>';texto+='<tr><td span="2"></td></tr>';
-Ftexto+='Calorias: '+(totalp.kcal).toFixed(2)+' '+' Proteinas: '+(totalp.prot).toFixed(2)+'\n';
+ Ftexto+='Calorias: '+(totalp.kcal).toFixed(2)+' '+' Proteinas: '+(totalp.prot).toFixed(2)+'\n';
 }
  texto+='<tr><td span="5" style="color:red;">'+Comidas[Pedido_G[i][2]]+'</td></tr>';
  comdant=Pedido_G[i][2];
@@ -2495,11 +2499,16 @@ Ftexto+='\n'+Comidas[Pedido_G[i][2]]+'\n';
   //  kcalt+=kcal; 
  contador++;
   Ftexto+= Pedido_G[i][0]+' '+Pedido_G[i][1]+' gr \n';
-  Ftexto+='E:'+kcal.toFixed(2)+' Kcal'+' P:'+proth.toFixed(2)+' gr';
+  Ftexto+='E:'+kcal.toFixed(2)+' Kcal'+' P:'+proth.toFixed(2)+' gr'+'\n';
   } // if
 if (i==Pedido_G.length-1) {
-  texto+='<tr><td style="color:red;">E:'+(totalp.kcal).toFixed(2)+'</td><td style="color:red;">P:'+(totalp.prot).toFixed(2)+'</td></tr>';
-  Ftexto+='Calorias: '+(totalp.kcal).toFixed(2)+' '+'Proteinas: '+(totalp.prot).toFixed(2)+'\n';
+  texto+='<tr><td style="color:yellow;">E:'+(totalp.kcal).toFixed(2)+'</td><td style="color:red;">P:'+(totalp.prot).toFixed(2)+'</td>';
+  texto+='<td style="color:red;">C:'+(totalp.carbo).toFixed(2)+'</td>';
+  texto+='<td style="color:red;">AZ:'+(totalp.azucar).toFixed(2)+'</td>';
+  texto+='<td style="color:red;">AGS:'+(totalp.ags).toFixed(2)+'</td>';
+
+  texto+='</tr>';
+ Ftexto+='Calorias: '+(totalp.kcal).toFixed(2)+' '+'Proteinas: '+(totalp.prot).toFixed(2)+'\n';
 
 }
  }// for
@@ -2508,55 +2517,63 @@ texto+='<HR>';
 Ftexto+='============================================\n';
 totalt=get_total(Pedido_G,-1);
 
-  texto+='<table width="60%">';
-  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Total Kcal </td><td style="width:30%;">'+(totalt.kcal).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.kcal/req_diario.kcal).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Carbohidratos </td><td style="width:30%;">'+(totalt.carbo).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.carbo/req_diario.carbo).toFixed(2)+'%'+'</td><td style="width:20%;">'+(400*totalt.carbo/req_diario.kcal).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Azucar </td><td style="width:30%;">'+(totalt.azucar).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.azucar/req_diario.azucar).toFixed(2)+'%'+'</td><td style="width:20%;">'+(400*totalt.azucar/req_diario.kcal).toFixed(2)+'%'+'</td></tr>';
- 
- texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> Proteinas </td><td style="width:30%;">'+(totalt.prot).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.prot/req_diario.prot).toFixed(2)+'%'+'</td><td style="width:20%;">'+(400*totalt.prot/req_diario.kcal).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> AG S</td><td style="width:30%;">'+(totalt.ags).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.ags/req_diario.ags).toFixed(2)+'%'+'</td><td style="width:20%;">'+(900*totalt.ags/req_diario.kcal).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> AG PIS</td><td style="width:30%;">'+(totalt.agp).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.agp/req_diario.agp).toFixed(2)+'%'+'</td><td style="width:20%;">'+(900*totalt.agp/req_diario.kcal).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="width:50%;color:#000066;width:50%;"> AG MIS</td><td style="width:30%;">'+(totalt.agm).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.agm/req_diario.agm).toFixed(2)+'%'+'</td><td style="width:20%;">'+(900*totalt.agm/req_diario.kcal).toFixed(2)+'%'+'</td></tr>';
+  texto+='<table style="align:left;width:100%:>';
+  texto+='<colgroup>';
+  texto+='<col style="color:#000066;width:40%;" >';
+  texto+='<col style="color:#000066;width:20%;" >';
+  texto+='<col style="color:#000066;width:20%;" >';
+  texto+='<col style="color:#000066;width:20%;" >';
+  texto+='</colgroup>'
+  texto+='<tr><td> Total Kcal </td><td>'+(totalt.kcal).toFixed(2)+'</td><td>'+(100*totalt.kcal/req_diario.kcal).toFixed(2)+'%'+'</td><td></td></tr>';
+  texto+='<tr><td> Carbohidratos </td><td>'+(totalt.carbo).toFixed(2)+'</td><td>'+(100*totalt.carbo/req_diario.carbo).toFixed(2)+'%'+'</td><td>'+'('+(400*totalt.carbo/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
+  texto+='<tr><td> Azucar </td><td>'+(totalt.azucar).toFixed(2)+'</td><td>'+(100*totalt.azucar/req_diario.azucar).toFixed(2)+'%'+'</td><td>'+'('+(400*totalt.azucar/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
+  texto+='<tr><td> Proteinas </td><td>'+(totalt.prot).toFixed(2)+'</td><td>'+(100*totalt.prot/req_diario.prot).toFixed(2)+'%'+'</td><td>'+'('+(400*totalt.prot/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
+  texto+='<tr><td> AG S</td><td>'+(totalt.ags).toFixed(2)+'</td><td>'+(100*totalt.ags/req_diario.ags).toFixed(2)+'%'+'</td><td>'+'('+(900*totalt.ags/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
+  texto+='<tr><td> AG PIS</td><td>'+(totalt.agp).toFixed(2)+'</td><td>'+(100*totalt.agp/req_diario.agp).toFixed(2)+'%'+'</td><td>'+'('+(900*totalt.agp/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
+  texto+='<tr><td> AG MIS</td><td>'+(totalt.agm).toFixed(2)+'</td><td>'+(100*totalt.agm/req_diario.agm).toFixed(2)+'%'+'</td><td>'+'('+(900*totalt.agm/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
+  texto+='<tr><td>Fibra </td><td>'+(totalt.fibra).toFixed(2)+'</td><td>'+(100*totalt.fibra/req_diario.fibra).toFixed(2)+'%'+'</td></tr>';
 
-  texto+='<tr align="right"><td style="color:#000066; width:50%;">Fibra </td><td style="width:30%;">'+(totalt.fibra).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.fibra/req_diario.fibra).toFixed(2)+'%'+'</td></tr>';
-   texto+='<tr align="right"><td span="3" style="color:#000066; width:100%;"> Minerales </td></tr>';
+  texto+='<tr><td span="4"> Minerales </td></tr>';
 
-  texto+='<tr align="right"><td style="color:#000066; width:50%;">Potasio </td><td style="width:30%;">'+(totalt.k).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.k/req_diario.k).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Fosforo </td><td style="width:30%;">'+(totalt.p).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.p/req_diario.p).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Calcio </td><td style="width:30%;">'+(totalt.ca).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.ca/req_diario.ca).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Hierro </td><td style="width:30%;">'+(totalt.fe).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.fe/req_diario.fe).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Zinc </td><td style="width:30%;">'+(totalt.zn).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.zn/req_diario.zn).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Sodio </td><td style="width:30%;">'+(totalt.na).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.na/req_diario.na).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Magnesio </td><td style="width:30%;">'+(totalt.mg).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.mg/req_diario.mg).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Manganeso </td><td style="width:30%;">'+(totalt.mn).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.mn/req_diario.mn).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Selenio </td><td style="width:30%;">'+(totalt.se).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.se/req_diario.se).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Cobre </td><td style="width:30%;">'+(totalt.cu).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.cu/req_diario.cu).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Iodo </td><td style="width:30%;">'+(totalt.i).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.i/req_diario.i).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td span="3" style="color:#000066; width:100%;"> Vitaminas </td></tr>';
+  texto+='<tr><td>Potasio </td><td>'+(totalt.k).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.k/req_diario.k).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Fosforo </td><td>'+(totalt.p).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.p/req_diario.p).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Calcio </td><td>'+(totalt.ca).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.ca/req_diario.ca).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Hierro </td><td>'+(totalt.fe).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.fe/req_diario.fe).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Zinc </td><td>'+(totalt.zn).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.zn/req_diario.zn).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Sodio </td><td>'+(totalt.na).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.na/req_diario.na).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Magnesio </td><td>'+(totalt.mg).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.mg/req_diario.mg).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Manganeso </td><td>'+(totalt.mn).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.mn/req_diario.mn).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Selenio </td><td>'+(totalt.se).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.se/req_diario.se).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Cobre </td><td>'+(totalt.cu).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.cu/req_diario.cu).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Iodo </td><td>'+(totalt.i).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.i/req_diario.i).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td span="4"> Vitaminas </td></tr>';
 
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit A </td><td style="width:30%;">'+(totalt.vitA).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitA/req_diario.vitA).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit C </td><td style="width:30%;">'+(totalt.vitC).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitC/req_diario.vitC).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit D </td><td style="width:30%;">'+(totalt.vitD).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitD/req_diario.vitD).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit E </td><td style="width:30%;">'+(totalt.vitE).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitE/req_diario.vitE).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit K </td><td style="width:30%;">'+(totalt.vitK).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitK/req_diario.vitK).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B1 </td><td style="width:30%;">'+(totalt.vitB1).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B2 </td><td style="width:30%;">'+(totalt.vitB2).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB2/req_diario.vitB2).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B3 </td><td style="width:30%;">'+(totalt.vitB3).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB3/req_diario.vitB3).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B4 </td><td style="width:30%;">'+(totalt.vitB4).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB4/req_diario.vitB4).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B5 </td><td style="width:30%;">'+(totalt.vitB5).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB5/req_diario.vitB5).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B6 </td><td style="width:30%;">'+(totalt.vitB6).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB6/req_diario.vitB6).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B7 </td><td style="width:30%;">'+(totalt.vitB7).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB7/req_diario.vitB7).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B9 </td><td style="width:30%;">'+(totalt.vitB9).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB9/req_diario.vitB9).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Vit B12 </td><td style="width:30%;">'+(totalt.vitB12).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB12/req_diario.vitB12).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit A </td><td>'+(totalt.vitA).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitA/req_diario.vitA).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit C </td><td>'+(totalt.vitC).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitC/req_diario.vitC).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit D </td><td>'+(totalt.vitD).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitD/req_diario.vitD).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit E </td><td>'+(totalt.vitE).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitE/req_diario.vitE).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit K </td><td>'+(totalt.vitK).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitK/req_diario.vitK).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B1 </td><td>'+(totalt.vitB1).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B2 </td><td>'+(totalt.vitB2).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB2/req_diario.vitB2).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B3 </td><td>'+(totalt.vitB3).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB3/req_diario.vitB3).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B4 </td><td>'+(totalt.vitB4).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB4/req_diario.vitB4).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B5 </td><td>'+(totalt.vitB5).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB5/req_diario.vitB5).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B6 </td><td>'+(totalt.vitB6).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB6/req_diario.vitB6).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B7 </td><td>'+(totalt.vitB7).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB7/req_diario.vitB7).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B9 </td><td>'+(totalt.vitB9).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB9/req_diario.vitB9).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B12 </td><td>'+(totalt.vitB12).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB12/req_diario.vitB12).toFixed(2)+'%'+'</td></tr>';
 
-  texto+='<tr align="right"><td style="color:#000066; width:50%;"> Agua </td><td style="width:30%;">'+(totalt.agua).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.agua/req_diario.agua).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Agua </td><td>'+(totalt.agua).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.agua/req_diario.agua).toFixed(2)+'%'+'</td></tr>';
   
   Ftexto+='Total Kcal '+(totalt.kcal).toFixed(2)+' '+(100*totalt.kcal/req_diario.kcal).toFixed(2)+' % '+'\n';
-  Ftexto+='Carbohidratos '+(totalt.carbo).toFixed(2)+' '+(100*totalt.carbo/req_diario.carbo).toFixed(2)+' %   '+(400*totalt.carbo/req_diario.kcal).toFixed(2)+' % TE'+'\n';
-  Ftexto+='Azucar '+(totalt.azucar).toFixed(2)+' '+(100*totalt.azucar/req_diario.azucar).toFixed(2)+' %   '+'**'+(400*totalt.azucar/req_diario.kcal).toFixed(2)+' %'+'**'+'\n';
+  Ftexto+='Carbohidratos '+(totalt.carbo).toFixed(2)+' '+(100*totalt.carbo/req_diario.carbo).toFixed(2)+' %   '+'('+(400*totalt.carbo/req_diario.kcal).toFixed(2)+' %'+')'+'\n';
+  Ftexto+='Azucar '+(totalt.azucar).toFixed(2)+' '+(100*totalt.azucar/req_diario.azucar).toFixed(2)+' %   '+'('+(400*totalt.azucar/req_diario.kcal).toFixed(2)+' %'+')'+'\n';
 
-  Ftexto+='Proteinas '+(totalt.prot).toFixed(2)+' '+(100*totalt.prot/req_diario.prot).toFixed(2)+' %   '+(400*totalt.prot/req_diario.kcal).toFixed(2)+'% TE'+'\n';
-  Ftexto+='Acidos grasos Saturados'+(totalt.ags).toFixed(2)+' '+(100*totalt.ags/req_diario.ags).toFixed(2)+'%   '+(900*totalt.ags/req_diario.kcal).toFixed(2)+' % TE' +'\n';
+  Ftexto+='Proteinas '+(totalt.prot).toFixed(2)+' '+(100*totalt.prot/req_diario.prot).toFixed(2)+' %   '+'('+(400*totalt.prot/req_diario.kcal).toFixed(2)+'%'+')'+'\n';
+  Ftexto+='Acidos grasos Saturados: '+(totalt.ags).toFixed(2)+' '+(100*totalt.ags/req_diario.ags).toFixed(2)+'%   '+'('+(900*totalt.ags/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
+  Ftexto+='Acidos grasos Poli: '+(totalt.agp).toFixed(2)+' '+(100*totalt.agp/req_diario.ags).toFixed(2)+'%   '+'('+(900*totalt.agp/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
+  Ftexto+='Acidos grasos Mono: '+(totalt.agm).toFixed(2)+' '+(100*totalt.agm/req_diario.ags).toFixed(2)+'%   '+'('+(900*totalt.agm/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
+
   Ftexto+='Fibra '+(totalt.fibra).toFixed(2)+' '+(100*totalt.fibra/req_diario.fibra).toFixed(2)+' % '+'\n';
  
   Ftexto+=' Minerales \n';
