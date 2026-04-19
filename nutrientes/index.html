@@ -2570,9 +2570,12 @@ totalt=get_total(Pedido_G,-1);
   Ftexto+='Azucar '+(totalt.azucar).toFixed(2)+' '+(100*totalt.azucar/req_diario.azucar).toFixed(2)+' %   '+'('+(400*totalt.azucar/req_diario.kcal).toFixed(2)+' %'+')'+'\n';
 
   Ftexto+='Proteinas '+(totalt.prot).toFixed(2)+' '+(100*totalt.prot/req_diario.prot).toFixed(2)+' %   '+'('+(400*totalt.prot/req_diario.kcal).toFixed(2)+'%'+')'+'\n';
-  Ftexto+='Acidos grasos Saturados: '+(totalt.ags).toFixed(2)+' '+(100*totalt.ags/req_diario.ags).toFixed(2)+'%   '+'('+(900*totalt.ags/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
-  Ftexto+='Acidos grasos Poli: '+(totalt.agp).toFixed(2)+' '+(100*totalt.agp/req_diario.ags).toFixed(2)+'%   '+'('+(900*totalt.agp/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
-  Ftexto+='Acidos grasos Mono: '+(totalt.agm).toFixed(2)+' '+(100*totalt.agm/req_diario.ags).toFixed(2)+'%   '+'('+(900*totalt.agm/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
+  Ftexto+='A grasos. Saturados: '+(totalt.ags).toFixed(2)+' '+(100*totalt.ags/req_diario.ags).toFixed(2)+'%   '+'('+(900*totalt.ags/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
+  Ftexto+='A grasos Poli: '+(totalt.agp).toFixed(2)+' '+(100*totalt.agp/req_diario.agp).toFixed(2)+'%   '+'('+(900*totalt.agp/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
+  Ftexto+='A grasos Mono: '+(totalt.agm).toFixed(2)+' '+(100*totalt.agm/req_diario.agm).toFixed(2)+'%   '+'('+(900*totalt.agm/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
+var totalag=totalt.agm+totalt.agp+totalt.ags;
+var totalreqag=1.0*req_diario.ags+1.0*req_diario.agp+1.0*req_diario.agm;
+  Ftexto+='A grasos (Total): '+(totalag).toFixed(2)+' '+(100*(totalag)/totalreqag).toFixed(2)+'%   '+'('+(900*totalag/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
 
   Ftexto+='Fibra '+(totalt.fibra).toFixed(2)+' '+(100*totalt.fibra/req_diario.fibra).toFixed(2)+' % '+'\n';
  
@@ -2606,7 +2609,7 @@ totalt=get_total(Pedido_G,-1);
   Ftexto+='Vit B12 '+(totalt.vitB12).toFixed(2)+' '+(100*totalt.vitB12/req_diario.vitB12).toFixed(2)+'%'+'\n';
 
   Ftexto+='Agua '+(totalt.agua).toFixed(2)+' '+(100*totalt.agua/req_diario.agua).toFixed(2)+'%'+'\n';
- alert(Ftexto);
+ //alert(Ftexto);
 
 texto+='</table>';
 textoT+='<div style="position: fixed; text-align:right;background-color: gray;width:100%;">';
