@@ -1970,18 +1970,40 @@ var indf=nutrientes.findIndex(e=>e.nombre==cliente_factura);
 if (indf>=0) {
    total=get_total(Pedido_G,-1); 
    nutrientes[indf].kcal=parseFloat(total.kcal*100/total.gr).toFixed(2);
-   nutrientes[indf].agm=parseFloat(total.agm*100/total.gr).toFixed(2);
-   nutrientes[indf].agp=parseFloat(total.agp*100/total.gr).toFixed(2);
-   nutrientes[indf].ags=parseFloat(total.ags*100/total.gr).toFixed(2);
-   nutrientes[indf].colest=parseFloat(total.colest*100/total.gr).toFixed(2);
-   nutrientes[indf].carbo=parseFloat(total.carbo*100/total.gr).toFixed(2);
-   nutrientes[indf].azucar=parseFloat(total.azucar*100/total.gr).toFixed(2);
-   nutrientes[indf].fibra=parseFloat(total.fibra*100/total.gr).toFixed(2);
-   nutrientes[indf].k=parseFloat(total.k*100/total.gr).toFixed(2);
-   nutrientes[indf].na=parseFloat(total.na*100/total.gr).toFixed(2);
-   nutrientes[indf].p=parseFloat(total.p*100/total.gr).toFixed(2);
    nutrientes[indf].prot=parseFloat(total.prot*100/total.gr).toFixed(2);
-   nutrientes[indf].agua=parseFloat(total.agua*100/total.gr).toFixed(2);
+   nutrientes[indf].agm=parseFloat(total.agm*100/total.gr).toPrecision(3);
+   nutrientes[indf].agp=parseFloat(total.agp*100/total.gr).toPrecision(3);
+   nutrientes[indf].ags=parseFloat(total.ags*100/total.gr).toPrecision(3);
+   nutrientes[indf].colest=parseFloat(total.colest*100/total.gr).toPrecision(2);
+   nutrientes[indf].carbo=parseFloat(total.carbo*100/total.gr).toPrecision(3);
+   nutrientes[indf].azucar=parseFloat(total.azucar*100/total.gr).toPrecision(3);
+   nutrientes[indf].fibra=parseFloat(total.fibra*100/total.gr).toPrecision(3);
+   nutrientes[indf].k=parseFloat(total.k*100/total.gr).toPrecision(4);
+   nutrientes[indf].na=parseFloat(total.na*100/total.gr).toPrecision(4);
+   nutrientes[indf].p=parseFloat(total.p*100/total.gr).toPrecision(4);
+   nutrientes[indf].ca=parseFloat(total.ca*100/total.gr).toPrecision(4);
+   nutrientes[indf].fe=parseFloat(total.fe*100/total.gr).toPrecision(4);
+   nutrientes[indf].zn=parseFloat(total.zn*100/total.gr).toPrecision(4);
+   nutrientes[indf].mg=parseFloat(total.mg*100/total.gr).toPrecision(4);
+   nutrientes[indf].mn=parseFloat(total.mn*100/total.gr).toPrecision(4);
+   nutrientes[indf].se=parseFloat(total.se*100/total.gr).toPrecision(4);
+   nutrientes[indf].cu=parseFloat(total.cu*100/total.gr).toPrecision(4);
+   nutrientes[indf].i=parseFloat(total.i*100/total.gr).toPrecision(4);
+   nutrientes[indf].agua=parseFloat(total.agua*100/total.gr).toPrecision(4);
+   nutrientes[indf].vitA=parseFloat(total.vitA*100/total.gr).toFixed(5);
+   nutrientes[indf].vitC=parseFloat(total.vitC*100/total.gr).toFixed(4);
+   nutrientes[indf].vitD=parseFloat(total.vitD*100/total.gr).toFixed(4);
+   nutrientes[indf].vitE=parseFloat(total.vitE*100/total.gr).toFixed(4);
+   nutrientes[indf].vitK=parseFloat(total.vitK*100/total.gr).toFixed(4);
+   nutrientes[indf].vitB1=parseFloat(total.vitB1*100/total.gr).toFixed(4);
+   nutrientes[indf].vitB2=parseFloat(total.vitB2*100/total.gr).toFixed(4);
+   nutrientes[indf].vitB3=parseFloat(total.vitB3*100/total.gr).toFixed(4);
+   nutrientes[indf].vitB4=parseFloat(total.vitB4*100/total.gr).toFixed(4);
+   nutrientes[indf].vitB5=parseFloat(total.vitB5*100/total.gr).toFixed(4);
+   nutrientes[indf].vitB6=parseFloat(total.vitB6*100/total.gr).toFixed(4);
+   nutrientes[indf].vitB7=parseFloat(total.vitB7*100/total.gr).toFixed(4);
+   nutrientes[indf].vitB9=parseFloat(total.vitB9*100/total.gr).toFixed(4);
+   nutrientes[indf].vitB12=parseFloat(total.vitB12*100/total.gr).toFixed(4);
    Actualiza_bd_nut(indf); 
    }
 
@@ -2524,6 +2546,9 @@ totalt=get_total(Pedido_G,-1);
   texto+='<col style="color:#000066;width:20%;" >';
   texto+='<col style="color:#000066;width:20%;" >';
   texto+='</colgroup>'
+var totalag=totalt.agm+totalt.agp+totalt.ags;
+var totalreqag=1.0*req_diario.ags+1.0*req_diario.agp+1.0*req_diario.agm;
+
   texto+='<tr><td> Total Kcal </td><td>'+(totalt.kcal).toFixed(2)+'</td><td>'+(100*totalt.kcal/req_diario.kcal).toFixed(2)+'%'+'</td><td></td></tr>';
   texto+='<tr><td> Carbohidratos </td><td>'+(totalt.carbo).toFixed(2)+'</td><td>'+(100*totalt.carbo/req_diario.carbo).toFixed(2)+'%'+'</td><td>'+'('+(400*totalt.carbo/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
   texto+='<tr><td> Azucar </td><td>'+(totalt.azucar).toFixed(2)+'</td><td>'+(100*totalt.azucar/req_diario.azucar).toFixed(2)+'%'+'</td><td>'+'('+(400*totalt.azucar/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
@@ -2531,7 +2556,11 @@ totalt=get_total(Pedido_G,-1);
   texto+='<tr><td> AG S</td><td>'+(totalt.ags).toFixed(2)+'</td><td>'+(100*totalt.ags/req_diario.ags).toFixed(2)+'%'+'</td><td>'+'('+(900*totalt.ags/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
   texto+='<tr><td> AG PIS</td><td>'+(totalt.agp).toFixed(2)+'</td><td>'+(100*totalt.agp/req_diario.agp).toFixed(2)+'%'+'</td><td>'+'('+(900*totalt.agp/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
   texto+='<tr><td> AG MIS</td><td>'+(totalt.agm).toFixed(2)+'</td><td>'+(100*totalt.agm/req_diario.agm).toFixed(2)+'%'+'</td><td>'+'('+(900*totalt.agm/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
-  texto+='<tr><td>Fibra </td><td>'+(totalt.fibra).toFixed(2)+'</td><td>'+(100*totalt.fibra/req_diario.fibra).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> A grasos (Total): </td><td>'+(totalag).toFixed(2)+'</td><td>'+(100*(totalag)/totalreqag).toFixed(2)+'%'+'</td><td>'+'('+(900*totalag/req_diario.kcal).toFixed(2)+'% )'+'</td></tr>';
+ 
+  Ftexto+=''+(totalag).toFixed(2)+' '+(100*(totalag)/totalreqag).toFixed(2)+'%   '+'('+(900*totalag/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
+
+ texto+='<tr><td>Fibra </td><td>'+(totalt.fibra).toFixed(2)+'</td><td>'+(100*totalt.fibra/req_diario.fibra).toFixed(2)+'%'+'</td></tr>';
 
   texto+='<tr><td span="4"> Minerales </td></tr>';
 
@@ -2548,20 +2577,20 @@ totalt=get_total(Pedido_G,-1);
   texto+='<tr><td> Iodo </td><td>'+(totalt.i).toFixed(2)+'</td><td style="width:25%;">'+(100*totalt.i/req_diario.i).toFixed(2)+'%'+'</td></tr>';
   texto+='<tr><td span="4"> Vitaminas </td></tr>';
 
-  texto+='<tr><td> Vit A </td><td>'+(totalt.vitA).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitA/req_diario.vitA).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit C </td><td>'+(totalt.vitC).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitC/req_diario.vitC).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit D </td><td>'+(totalt.vitD).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitD/req_diario.vitD).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit E </td><td>'+(totalt.vitE).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitE/req_diario.vitE).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit K </td><td>'+(totalt.vitK).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitK/req_diario.vitK).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit B1 </td><td>'+(totalt.vitB1).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit B2 </td><td>'+(totalt.vitB2).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB2/req_diario.vitB2).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit B3 </td><td>'+(totalt.vitB3).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB3/req_diario.vitB3).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit B4 </td><td>'+(totalt.vitB4).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB4/req_diario.vitB4).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit B5 </td><td>'+(totalt.vitB5).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB5/req_diario.vitB5).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit B6 </td><td>'+(totalt.vitB6).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB6/req_diario.vitB6).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit B7 </td><td>'+(totalt.vitB7).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB7/req_diario.vitB7).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit B9 </td><td>'+(totalt.vitB9).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB9/req_diario.vitB9).toFixed(2)+'%'+'</td></tr>';
-  texto+='<tr><td> Vit B12 </td><td>'+(totalt.vitB12).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.vitB12/req_diario.vitB12).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit A </td><td>'+(totalt.vitA).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitA/req_diario.vitA).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit C </td><td>'+(totalt.vitC).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitC/req_diario.vitC).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit D </td><td>'+(totalt.vitD).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitD/req_diario.vitD).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit E </td><td>'+(totalt.vitE).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitE/req_diario.vitE).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit K </td><td>'+(totalt.vitK).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitK/req_diario.vitK).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B1 </td><td>'+(totalt.vitB1).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B2 </td><td>'+(totalt.vitB2).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitB2/req_diario.vitB2).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B3 </td><td>'+(totalt.vitB3).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitB3/req_diario.vitB3).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B4 </td><td>'+(totalt.vitB4).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitB4/req_diario.vitB4).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B5 </td><td>'+(totalt.vitB5).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitB5/req_diario.vitB5).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B6 </td><td>'+(totalt.vitB6).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitB6/req_diario.vitB6).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B7 </td><td>'+(totalt.vitB7).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitB7/req_diario.vitB7).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B9 </td><td>'+(totalt.vitB9).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitB9/req_diario.vitB9).toFixed(2)+'%'+'</td></tr>';
+  texto+='<tr><td> Vit B12 </td><td>'+(totalt.vitB12).toPrecision(2)+'</td><td style="width:20%;">'+(100*totalt.vitB12/req_diario.vitB12).toFixed(2)+'%'+'</td></tr>';
 
   texto+='<tr><td> Agua </td><td>'+(totalt.agua).toFixed(2)+'</td><td style="width:20%;">'+(100*totalt.agua/req_diario.agua).toFixed(2)+'%'+'</td></tr>';
   
@@ -2573,8 +2602,6 @@ totalt=get_total(Pedido_G,-1);
   Ftexto+='A grasos. Saturados: '+(totalt.ags).toFixed(2)+' '+(100*totalt.ags/req_diario.ags).toFixed(2)+'%   '+'('+(900*totalt.ags/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
   Ftexto+='A grasos Poli: '+(totalt.agp).toFixed(2)+' '+(100*totalt.agp/req_diario.agp).toFixed(2)+'%   '+'('+(900*totalt.agp/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
   Ftexto+='A grasos Mono: '+(totalt.agm).toFixed(2)+' '+(100*totalt.agm/req_diario.agm).toFixed(2)+'%   '+'('+(900*totalt.agm/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
-var totalag=totalt.agm+totalt.agp+totalt.ags;
-var totalreqag=1.0*req_diario.ags+1.0*req_diario.agp+1.0*req_diario.agm;
   Ftexto+='A grasos (Total): '+(totalag).toFixed(2)+' '+(100*(totalag)/totalreqag).toFixed(2)+'%   '+'('+(900*totalag/req_diario.kcal).toFixed(2)+' %'+')' +'\n';
 
   Ftexto+='Fibra '+(totalt.fibra).toFixed(2)+' '+(100*totalt.fibra/req_diario.fibra).toFixed(2)+' % '+'\n';
@@ -2593,20 +2620,20 @@ var totalreqag=1.0*req_diario.ags+1.0*req_diario.agp+1.0*req_diario.agm;
   Ftexto+='Iodo '+(totalt.i).toFixed(2)+' '+(100*totalt.i/req_diario.i).toFixed(2)+'%'+'\n';
  
   Ftexto+='Vitaminas \n';
-  Ftexto+='Vit A '+(totalt.vitA).toFixed(2)+' '+(100*totalt.vitA/req_diario.vitA).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit C '+(totalt.vitC).toFixed(2)+' '+(100*totalt.vitC/req_diario.vitC).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit D '+(totalt.vitD).toFixed(2)+' '+(100*totalt.vitD/req_diario.vitD).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit E '+(totalt.vitE).toFixed(2)+' '+(100*totalt.vitE/req_diario.vitE).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit K '+(totalt.vitK).toFixed(2)+' '+(100*totalt.vitK/req_diario.vitK).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit B1 '+(totalt.vitB1).toFixed(2)+' '+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit B2 '+(totalt.vitB2).toFixed(2)+' '+(100*totalt.vitB2/req_diario.vitB2).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit B3 '+(totalt.vitB3).toFixed(2)+' '+(100*totalt.vitB3/req_diario.vitB3).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit B4 '+(totalt.vitB4).toFixed(2)+' '+(100*totalt.vitB4/req_diario.vitB4).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit B5 '+(totalt.vitB5).toFixed(2)+' '+(100*totalt.vitB5/req_diario.vitB5).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit B6 '+(totalt.vitB6).toFixed(2)+' '+(100*totalt.vitB6/req_diario.vitB6).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit B7 '+(totalt.vitB7).toFixed(2)+' '+(100*totalt.vitB7/req_diario.vitB7).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit B9 '+(totalt.vitB9).toFixed(2)+' '+(100*totalt.vitB9/req_diario.vitB9).toFixed(2)+'%'+'\n';
-  Ftexto+='Vit B12 '+(totalt.vitB12).toFixed(2)+' '+(100*totalt.vitB12/req_diario.vitB12).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit A '+(totalt.vitA).toPrecision(2)+' '+(100*totalt.vitA/req_diario.vitA).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit C '+(totalt.vitC).toPrecision(2)+' '+(100*totalt.vitC/req_diario.vitC).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit D '+(totalt.vitD).toPrecision(2)+' '+(100*totalt.vitD/req_diario.vitD).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit E '+(totalt.vitE).toPrecision(2)+' '+(100*totalt.vitE/req_diario.vitE).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit K '+(totalt.vitK).toPrecision(2)+' '+(100*totalt.vitK/req_diario.vitK).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B1 '+(totalt.vitB1).toPrecision(2)+' '+(100*totalt.vitB1/req_diario.vitB1).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B2 '+(totalt.vitB2).toPrecision(2)+' '+(100*totalt.vitB2/req_diario.vitB2).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B3 '+(totalt.vitB3).toPrecision(2)+' '+(100*totalt.vitB3/req_diario.vitB3).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B4 '+(totalt.vitB4).toPrecision(2)+' '+(100*totalt.vitB4/req_diario.vitB4).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B5 '+(totalt.vitB5).toPrecision(2)+' '+(100*totalt.vitB5/req_diario.vitB5).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B6 '+(totalt.vitB6).toPrecision(2)+' '+(100*totalt.vitB6/req_diario.vitB6).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B7 '+(totalt.vitB7).toPrecision(2)+' '+(100*totalt.vitB7/req_diario.vitB7).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B9 '+(totalt.vitB9).toPrecision(2)+' '+(100*totalt.vitB9/req_diario.vitB9).toFixed(2)+'%'+'\n';
+  Ftexto+='Vit B12 '+(totalt.vitB12).toPrecision(2)+' '+(100*totalt.vitB12/req_diario.vitB12).toFixed(2)+'%'+'\n';
 
   Ftexto+='Agua '+(totalt.agua).toFixed(2)+' '+(100*totalt.agua/req_diario.agua).toFixed(2)+'%'+'\n';
  //alert(Ftexto);
