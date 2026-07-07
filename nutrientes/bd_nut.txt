@@ -185,7 +185,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "AJO",
@@ -222,7 +223,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "AJONJOLI",
@@ -373,7 +375,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "ATUN EN LATA CONTINENTE",
@@ -447,7 +450,9 @@
     "cat": "&Cereales&Avena&",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "CACHETES DE CERDO",
@@ -483,13 +488,15 @@
     "vitB7": "0",
     "vitB9": "0.001",
     "vitB12": "0",
-    "cat": "&Carnes / Pescados / Huevos&Carnes&Cerdo&"
+    "cat": "&Carnes / Pescados / Huevos&Carnes&Cerdo&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "CAFE CON LECHE",
     "kcal": "40",
     "carbo": "5.6",
-    "azucar": "",
+    "azucar": "0",
     "prot": "1.7",
     "agua": "91.1",
     "ags": "0.65",
@@ -631,7 +638,9 @@
     "vitB12": "0",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "CARNE DE BORREGO",
@@ -667,7 +676,9 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Carnes / Pescados / Huevos&Carnes&Res&"
+    "cat": "&Carnes / Pescados / Huevos&Carnes&Res&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "CARNE DE HAMBURGUESA",
@@ -742,7 +753,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "CEBOLLA",
@@ -773,14 +785,14 @@
     "vitB3": "0.12",
     "vitB5": "0.12",
     "vitB6": "0.12",
-    "vitB7": "0",
+    "vitB7": "0.0006",
     "vitB9": "0.019",
     "vitB12": "0",
     "se": "0.0005",
     "cu": "0.04",
     "i": "0",
     "azucar": "424",
-    "vitB4": "0"
+    "vitB4": "8.8"
   },
   {
     "nombre": "CEREAL CHOCO/AVENA",
@@ -817,7 +829,8 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Cereales&Varios&"
+    "cat": "&Cereales&Varios&",
+    "azucar": "0"
   },
   {
     "nombre": "CERVEZA SUPER BOCK",
@@ -968,7 +981,8 @@
     "vitB9": "0.012",
     "vitB12": "0.0004",
     "cat": "&Lacteos y derivados&Queso&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "CROISSANT FOLHADO",
@@ -1121,7 +1135,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "ENTREMEADAS DE CERDO",
@@ -1196,7 +1211,8 @@
     "vitB9": "0",
     "vitB12": "0",
     "cat": "&Carnes / Pescados / Huevos&Carnes&Res&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "FLIP FLOPS PINGO DOCE",
@@ -1309,7 +1325,8 @@
     "vitB9": "0",
     "vitB12": "0",
     "cat": "&Cereales&Trigo&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "GALLETAS OREO",
@@ -1726,7 +1743,8 @@
     "vitB9": "0.002",
     "vitB12": "0.00055",
     "cat": "&Lacteos y derivados&Leche&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "LECHOZA",
@@ -1838,7 +1856,9 @@
     "vitB12": "0",
     "se": "0",
     "cu": "0.25",
-    "i": "0"
+    "i": "0",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "MANDARINA",
@@ -1913,7 +1933,8 @@
     "se": "0.0093",
     "cu": "0.43",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "MANTEQUILLA",
@@ -2063,7 +2084,8 @@
     "vitB9": "0",
     "vitB12": "0",
     "cat": "&Cereales&Maiz&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "MOLHO PARA HAMBURGUESA",
@@ -2253,7 +2275,7 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Carnes / Pescados / Huevos&Carnes&Cerdo&"
+    "cat": "&Cereales&Trigo&"
   },
   {
     "nombre": "PANQUECA",
@@ -2289,7 +2311,9 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Cereales&Avena&"
+    "cat": "&Cereales&Avena&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "PAPAS FRITAS BOLSA",
@@ -2363,7 +2387,9 @@
     "vitB7": "0",
     "vitB9": "0.015",
     "vitB12": "0",
-    "cat": "&Leguminosas / Frutos secos / Papas&Papas&"
+    "cat": "&Leguminosas / Frutos secos / Papas&Papas&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "PAPAS SALTEADAS",
@@ -2400,7 +2426,8 @@
     "vitB9": "0.015",
     "vitB12": "0",
     "cat": "&Leguminosas / Frutos secos / Papas&Papas&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "PASTA",
@@ -2436,7 +2463,9 @@
     "vitB12": "0",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "PECHUGA",
@@ -2890,7 +2919,9 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0.0017",
-    "cat": "&Lacteos y derivados&Queso&"
+    "cat": "&Lacteos y derivados&Queso&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "QUESO FLAMENGO",
@@ -3084,40 +3115,41 @@
   },
   {
     "nombre": "REPOLLO",
-    "kcal": "50",
-    "carbo": "2",
-    "prot": "1",
-    "agua": "90",
-    "ags": "0",
-    "agp": "0",
-    "agm": "0",
-    "fibra": "1.7",
-    "k": "150",
-    "na": "0",
-    "p": "40",
-    "ca": "23",
-    "fe": "0",
-    "zn": "0",
-    "mg": "0",
-    "mn": "0",
-    "vitA": "0",
-    "vitC": "0",
-    "vitK": "0",
+    "kcal": "25",
+    "carbo": "5.8",
+    "prot": "1.28",
+    "agua": "92.18",
+    "ags": "0.03",
+    "agp": "0.04",
+    "agm": "0.01",
+    "fibra": "2.5",
+    "k": "170",
+    "na": "18",
+    "p": "26",
+    "ca": "40",
+    "fe": "0.47",
+    "zn": "0.18",
+    "mg": "12",
+    "mn": "0.16",
+    "vitA": "0.005",
+    "vitC": "36.6",
+    "vitK": "0.076",
     "vitD": "0",
-    "vitE": "0",
-    "vitB1": "0",
-    "vitB2": "0",
-    "vitB3": "0",
-    "vitB5": "0",
-    "vitB6": "0",
-    "vitB7": "0",
-    "vitB9": "0",
+    "vitE": "0.15",
+    "vitB1": "0.06",
+    "vitB2": "0.04",
+    "vitB3": "0.23",
+    "vitB5": "0.21",
+    "vitB6": "0.12",
+    "vitB7": "0.0004",
+    "vitB9": "0.043",
     "vitB12": "0",
     "cat": "&Vegetales&Verduras&",
-    "se": "0",
-    "cu": "0",
+    "se": "0.0003",
+    "cu": "0.02",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "10.7",
+    "azucar": "3.2"
   },
   {
     "nombre": "REQUESON",
@@ -3189,7 +3221,9 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Especies&"
+    "cat": "&Especies&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "SALMON A LA PLANCHA",
@@ -3305,40 +3339,41 @@
   },
   {
     "nombre": "TOMATE",
-    "kcal": "19",
-    "carbo": "3.84",
-    "prot": "0.7",
-    "agua": "94.7",
-    "ags": "0.425",
-    "agp": "0",
-    "agm": "0",
-    "fibra": "0.97",
-    "k": "193",
-    "na": "0",
-    "p": "19.1",
-    "ca": "9.96",
-    "fe": "0.103",
-    "zn": "0.0824",
+    "kcal": "18",
+    "carbo": "3.89",
+    "prot": "0.88",
+    "agua": "94.52",
+    "ags": "0.03",
+    "agp": "0.08",
+    "agm": "0.03",
+    "fibra": "1.2",
+    "k": "237",
+    "na": "5",
+    "p": "24",
+    "ca": "10",
+    "fe": "0.27",
+    "zn": "0.17",
     "cat": "&Vegetales&Verduras&",
-    "mg": "8.09",
-    "mn": "0",
-    "vitA": "0.0239",
-    "vitC": "17.8",
-    "vitK": "0",
+    "mg": "11",
+    "mn": "0.11",
+    "vitA": "0.042",
+    "vitC": "13.7",
+    "vitK": "0.0079",
     "vitD": "0",
-    "vitE": "0",
-    "vitB1": "0.0558",
-    "vitB2": "0",
-    "vitB3": "0.533",
-    "vitB5": "0",
-    "vitB6": " 0.0789",
-    "vitB7": "0",
-    "vitB9": "0.0099",
+    "vitE": "0.54",
+    "vitB1": "0.04",
+    "vitB2": "0.02",
+    "vitB3": "0.59",
+    "vitB5": "0.09",
+    "vitB6": " 0.08",
+    "vitB7": "0.0014",
+    "vitB9": "0.0015",
     "vitB12": "0",
-    "se": "0",
-    "cu": "0",
+    "se": "0.0004",
+    "cu": "0.06",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "6.7",
+    "azucar": "2.63"
   },
   {
     "nombre": "TORTILLAS DE ARROZ",
@@ -3375,7 +3410,8 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Cereales&Varios&"
+    "cat": "&Cereales&Varios&",
+    "azucar": "0"
   },
   {
     "nombre": "TOSTA DE CHOCOLATE",
@@ -3563,7 +3599,8 @@
     "vitB9": "0",
     "vitB12": "0",
     "cat": "&Lacteos y derivados&Yogur&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "YOGUR GRIEGO",
@@ -3600,7 +3637,8 @@
     "vitB9": "0.006",
     "vitB12": "0.0002",
     "cat": "&Lacteos y derivados&Yogur&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "YOGUR GRIEGO DESNATADO",
@@ -3636,7 +3674,9 @@
     "vitB7": "0",
     "vitB9": "0.006",
     "vitB12": "0.0002",
-    "cat": "&Lacteos y derivados&Yogur&"
+    "cat": "&Lacteos y derivados&Yogur&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "YOGUR KEFIR",
@@ -3754,40 +3794,41 @@
   },
   {
     "nombre": "YUCA",
-    "kcal": "150",
-    "carbo": "30",
-    "prot": "4",
-    "agua": "65",
-    "ags": "0",
-    "agp": "0",
-    "agm": "0",
-    "fibra": "1.2",
-    "k": "0",
-    "na": "0",
-    "p": "0",
-    "ca": "0",
-    "fe": "0",
-    "zn": "0",
-    "mg": "0",
-    "mn": "0",
-    "se": "0",
-    "cu": "0",
+    "kcal": "120",
+    "carbo": "27",
+    "prot": "1.4",
+    "agua": "65.2",
+    "ags": "0.07",
+    "agp": "0.08",
+    "agm": "0.06",
+    "fibra": "1.8",
+    "k": "271",
+    "na": "14",
+    "p": "27",
+    "ca": "16",
+    "fe": "0.27",
+    "zn": "0.34",
+    "mg": "21",
+    "mn": "0.38",
+    "se": "0.0007",
+    "cu": "0.10",
     "i": "0",
-    "vitA": "0",
-    "vitC": "0",
-    "vitK": "0",
+    "vitA": "0.001",
+    "vitC": "19",
+    "vitK": "0.0019",
     "vitD": "0",
-    "vitE": "0",
-    "vitB1": "0",
-    "vitB2": "0",
-    "vitB3": "0",
-    "vitB4": "0",
-    "vitB5": "0",
-    "vitB6": "0",
-    "vitB7": "0",
-    "vitB9": "0",
+    "vitE": "0.001",
+    "vitB1": "0.07",
+    "vitB2": "0.04",
+    "vitB3": "0.6",
+    "vitB4": "9.2",
+    "vitB5": "0.11",
+    "vitB6": "0.09",
+    "vitB7": "0.00015",
+    "vitB9": "0.023",
     "vitB12": "0",
-    "cat": "&Vegetales&Verduras&"
+    "cat": "&Vegetales&Verduras&",
+    "azucar": "1.7"
   },
   {
     "nombre": "ZANAHORIA",
@@ -3824,6 +3865,44 @@
     "vitB6": "0",
     "vitB7": "0",
     "vitB9": "0",
+    "vitB12": "0",
+    "cat": "&Vegetales&Verduras&"
+  },
+  {
+    "nombre": "ZANAHORIA S/PIEL",
+    "kcal": "41",
+    "carbo": "9.58",
+    "azucar": "4.74",
+    "prot": "0.93",
+    "agua": "88.29",
+    "ags": "0.03",
+    "agp": "0.1",
+    "agm": "0.01",
+    "fibra": "2.8",
+    "k": "320",
+    "na": "69",
+    "p": "35",
+    "ca": "33",
+    "fe": "0.3",
+    "zn": "0.24",
+    "mg": "12",
+    "mn": "0.14",
+    "se": "0.0001",
+    "cu": "0.04",
+    "i": "0",
+    "vitA": "0.835",
+    "vitC": "5.9",
+    "vitK": "0.0132",
+    "vitD": "0",
+    "vitE": "0.66",
+    "vitB1": "0.06",
+    "vitB2": "0.05",
+    "vitB3": "0.98",
+    "vitB4": "8.8",
+    "vitB5": "0.27",
+    "vitB6": "0.14",
+    "vitB7": "0.0006",
+    "vitB9": "0.019",
     "vitB12": "0",
     "cat": "&Vegetales&Verduras&"
   }
