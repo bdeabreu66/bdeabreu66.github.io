@@ -1432,6 +1432,7 @@ console.log(listasel);
 
 function lee_facturas(){
 crea_lista_facturas();
+
 //selectlista(0);
 }
 
@@ -1488,18 +1489,18 @@ textoT+='<div style="overflow:auto;height:90%;font-size:0.6rem;">';
 textoT+='<table style="width:"100%;font-size:0.2rem;">';
 console.log(textoT);
 for (var i=0;i<listasel.length;i++) {
-partes=listasel[i].split('_');
+partes=listasel[i];
 
 if (t=="0") {
 textoT+='<tr style="cursor:pointer;" onclick="clickp('+i+')";>';
-textoT+='<td style="width:40%;color:white;background:DodgerBlue;" >'+partes[0]+'</td>';
+textoT+='<td style="width:40%;color:white;background:DodgerBlue;" >'+partes+'</td>';
 textoT+='</tr>';
 
 console.log('<tr style="cursor:pointer;" onclick="clickp('+i+')";><td style="width:80%;color:white;background:DodgerBlue;" >'+partes[0]+'</td>+ '+partes[1]+'</td><td style="width:20%;"></td></tr>');
 } else {
  textoT+='<tr style="cursor:pointer;" onclick="clickp('+i+')";>';
- textoT+='<td style="width:35%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+partes[0]+'</td>';
- textoT+='<td style="width:35%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+partes[1]+'</td>';
+ textoT+='<td style="width:35%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+partes+'</td>';
+ textoT+='<td style="width:35%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+partes+'</td>';
  textoT+='<td style="width:30%;color:white;background:DodgerBlue;" onclick="clickp('+i+')";>'+monto_factura(listasel[i])+'</td>';
  textoT+='</tr>'; 
 }
@@ -1515,18 +1516,19 @@ div3.style="display: none;";
 
 function elim_factura(ind){
    facturas.splice(ind,1);
-   localStorage.setItem("FACTURAS",JSON.stringify(facturas));
+   localStorage.setItem("MENUS",JSON.stringify(facturas));
 // guarda_facturas_IDB();
 //  console.log('indice '+ind);
 }
 
 function borra(num){
-var partes=listasel[num].split("_");
-const resp = confirm("Esta seguro de eliminar la factura");
+var partes=listasel[num];
+const resp = confirm("Esta seguro de eliminar el menu (S/N)");
 //var resp=prompt(,'S/N'); 
 if (resp) {
-var findice=facturas.findIndex((e)=>e.cliente==partes[0] && e.fecha==partes[1] && e.nro==partes[2]);
- if (findice>=0) {  
+
+var findice=facturas.findIndex((e)=>e.nombre==partes);
+ if (findice>=0) { 
   elim_factura(findice)
  }
 }
@@ -2015,9 +2017,10 @@ quitarlista();
 
 function guarda_factura(){
 var indice=facturas.length;
-var indc=facturas.findIndex(e=>e.nombre==cliente_factura);
-//alert(indice+" "+indc);
 
+var indc=facturas.findIndex(e=>e.nombre==cliente_factura);
+//alert(cliente_factura);
+//alert(indice+" "+indc);
 //var nomb='FAC'+'_'+cliente_factura+'_'+fecha_factura+'_'+nro_factura;
 //alert(nomb);
 //nro_factura++;
@@ -2274,9 +2277,11 @@ localStorage.setItem('p3',va);
 function carga(){
 
 var ftemp=localStorage.getItem("MENUS")
-//alert(ftemp.length);
+
 if (ftemp===null) {facturas=[];} else {facturas=JSON.parse(ftemp);}
-//console.log(facturas);
+//alert(facturas.length);
+//for (var i=0;i<facturas.length;i++)
+//alert(facturas[i].nombre);
 //lee_facturas_IDB();
 /*try {
 
@@ -2650,9 +2655,6 @@ textoT+='<td width="10%"></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Compartir" id="btnc" onclick="compartir();"> C </button></td>';
 textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Modificar Alimento" id="btnc" onclick="suma_alimento();"> +I </button></td>';
 
-//textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="suma_inventario();"> +I </button></td>';
-//textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Inventario" id="btnc" onclick="restar_inventario();"> -I </button></td>';
-//textoT+='<td width="10%"><button style="font-size: 0.9em;" title="Pedido" id="btnc" onclick="pedido();"> P </button></td>';
 textoT+='<td width="10%"><button  style="font-size: 0.9em;" title="Salir" onclick="quitar();" > x </button></td>';
 textoT+='</tr></table></div><br>';
 
