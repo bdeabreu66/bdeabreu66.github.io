@@ -140,7 +140,7 @@ background-color:Aqua;
 border-radius: 5% 5%;
 top:30%;
 left:0%;
-height: 40%;
+height: 60%;
 width:98%;
 overflow-y:scroll;
 }
@@ -2474,7 +2474,10 @@ const shareData = {
 comparte(shareData);
 }
 }
-
+function elimina(ind,pos){
+Pedido_G.splice(pos,1);
+factura2();
+}
 function factura2(){
 var totalt;
 var texto='<table width="100%" ><tr><td>Fecha: '+fecha_actual()+'</td><td> '+ '</td></tr></table>';
@@ -2517,7 +2520,8 @@ Ftexto+='\n'+Comidas[Pedido_G[i][2]]+'\n';
    proth=parseFloat(nutrientes[ind].prot*Pedido_G[i][1]/100);
    azucarh=parseFloat(nutrientes[ind].azucar*Pedido_G[i][1]/100);
    agsh=parseFloat(nutrientes[ind].ags*Pedido_G[i][1]/100);
-   texto+='<tr onclick="cintro('+ind+','+i+');" style="color:blue;"><td span="5">'+Pedido_G[i][0]+' '+Pedido_G[i][1]+' gr </td></tr>'; 
+   texto+='<tr ><td span="4" onclick="cintro('+ind+','+i+');" style="color:blue;">'+Pedido_G[i][0]+' '+Pedido_G[i][1]+' gr </td>';
+   texto+='<td ><button onclick="elimina('+ind+','+i+');">X</button></td></tr>'; 
    texto+='<tr><td>E:'+kcal.toFixed(2)+' Kcal'+'</td>';
    texto+='<td>P:'+proth.toFixed(2)+' gr'+'</td>';
    texto+='<td>C:'+carboh.toFixed(2)+' gr'+'</td>';
@@ -3035,38 +3039,109 @@ var sel=document.getElementsByTagName(name).indexSelected;
 
 return sel;
 }
-var Comidas=["Desayuno","Media mañana","Almuerzo","Merienda","Cena"]
+var Comidas=["Desayuno","Media mañana","Almuerzo","Merienda","Cena"];
+
 function intro(i,pos){
 
 var colb="black";
-//if (data[i][3]==1) {fm=1.16;BanderaIva="C/IVA";colb="black";} else {fm=1;BanderaIva="S/IVA";colb="blue";}
 var divintro=document.getElementById("introd");
 var vcor='red';
 var vcor1='red';
-var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr ><td >'+nutrientes[i].nombre+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>';
+var texto='<table width="100%" style="background-color:'+colb+';color:white;"><tr >\n<td >'+nutrientes[i].nombre+'</td><td style="text-align:left;"><button onclick="quitar_intro();">x</button></td></tr></table>\n';
 
-texto+='<table><tr><td>'+'</td><td>';
-texto+='</td><td>';
+texto+='<table>\n<tr><td>';
 if (pos>-1) 
-{texto+='<input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+Pedido_G[pos][1]+'" >';}
+{texto+='<input oninput="calcula_cantid('+i+');" id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="'+Pedido_G[pos][1]+'" >';}
 else
-{texto+='<input id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="0" >';}
-texto+='</td><td><button onclick="cambiaU('+i+','+pos+');">Ok</button>';
+{texto+='<input oninput="calcula_cantid('+i+');" id="entradaU" type="number" class="btn2" style="color:'+vcor+';" value="0" >';}
+texto+='</td>\n<td><button onclick="cambiaU('+i+','+pos+');">Ok</button>';
 texto+='&nbsp;&nbsp;&nbsp;&nbsp;<button class="micro" onclick="obtenerTexto(0);">&nbsp;</button> </td>';
 if (pos>-1) 
-{texto+='<td>'+makeSelectSimple("Comida",Comidas,Pedido_G[pos][2])+'</td></tr>';}
+{texto+='\n<td>'+makeSelectSimple("Comida",Comidas,Pedido_G[pos][2])+'</td>';}
  else
-{texto+='<td>'+makeSelectSimple("Comida",Comidas,0)+'</td></tr>';}
+{texto+='\n<td>'+makeSelectSimple("Comida",Comidas,0)+'</td>';}
 
-texto+='</tr></table>';
+texto+='\n</tr>\n</table>';
 
+texto+='\n<br><table style="text-align: center; width:100%;border:3px solid green;border-spacing:0;">';
+texto+='\n<tr style="color: blue;">\n<td>Kcal</td> <td>Carbo</td> <td>Azucar</td> <td>Fibra</td> <td>Prot</td> <td>AGS</td> <td>AGP</td> <td>AGM</td></tr>';
+texto+='\n<tr><td><span id="kcalSpan"></span></td>';
+texto+='\n<td><span id="carboSpan"></span></td>';
+texto+='\n<td><span id="azucarSpan"></span></td>';
+texto+='\n<td><span id="fibraSpan"></span></td>';
+texto+='\n<td><span id="protSpan"></span></td>';
+texto+='\n<td><span id="agsSpan"></span></td>';
+texto+='\n<td><span id="agpSpan"></span></td>';
+texto+='\n<td><span id="agmSpan"></span></td>';
+texto+='\n</tr>\n</table>';
 
+texto+='\n<br><table style="text-align: center; width:100%;border:3px solid green;border-spacing:0;">';
+texto+='\n<tr style="color: blue;">\n<td>K</td> <td>Na</td> <td>P</td> <td>Mg</td> <td>Ca</td> <td>Fe</td> <td>Zn</td> <td>Se</td> <td>Cu</td> <td>Mn</td> <td>I</td></tr>';
+texto+='\n<tr><td><span id="kSpan"></span></td>';
+texto+='\n<td><span id="naSpan"></span></td>';
+texto+='\n<td><span id="pSpan"></span></td>';
+texto+='\n<td><span id="mgSpan"></span></td>';
+texto+='\n<td><span id="caSpan"></span></td>';
+texto+='\n<td><span id="feSpan"></span></td>';
+texto+='\n<td><span id="znSpan"></span></td>';
+texto+='\n<td><span id="seSpan"></span></td>';
+texto+='\n<td><span id="cuSpan"></span></td>';
+texto+='\n<td><span id="mnSpan"></span></td>';
+texto+='\n<td><span id="iSpan"></span></td>';
 
-texto+='<button >Tot</button> <button onclick="cambiaU('+i+','+pos+');">Ok</button>';
+texto+='\n</tr>\n</table>';
+
+//texto+='<button >Tot</button> <button onclick="cambiaU('+i+','+pos+');">Ok</button>';
 divintro.innerHTML=texto;
+console.log(texto);
 divintro.style.visibility = "visible";
-
+calcula_cantid(i)
 }
+function calcula_cantid(ind){
+var cant=document.getElementById("entradaU").value;
+var vkcal=parseFloat(nutrientes[ind].kcal*cant/100).toFixed(2);
+var vcarb=parseFloat(nutrientes[ind].carbo*cant/100).toFixed(2);
+var vazucar=parseFloat(nutrientes[ind].azucar*cant/100).toFixed(2);
+var vfibra=parseFloat(nutrientes[ind].fibra*cant/100).toFixed(2);
+var vprot=parseFloat(nutrientes[ind].prot*cant/100).toFixed(2);
+var vags=parseFloat(nutrientes[ind].ags*cant/100).toFixed(2);
+var vagp=parseFloat(nutrientes[ind].agp*cant/100).toFixed(2);
+var vagm=parseFloat(nutrientes[ind].agm*cant/100).toFixed(2);
+
+var vk=parseFloat(nutrientes[ind].k*cant/100).toFixed(1);
+var vna=parseFloat(nutrientes[ind].na*cant/100).toFixed(1);
+var vp=parseFloat(nutrientes[ind].p*cant/100).toFixed(1);
+var vmg=parseFloat(nutrientes[ind].mg*cant/100).toFixed(1);
+var vca=parseFloat(nutrientes[ind].ca*cant/100).toFixed(1);
+var vfe=parseFloat(nutrientes[ind].fe*cant/100).toFixed(1);
+var vzn=parseFloat(nutrientes[ind].zn*cant/100).toFixed(1);
+var vse=parseFloat(nutrientes[ind].se*cant/100).toFixed(1);
+var vcu=parseFloat(nutrientes[ind].cu*cant/100).toFixed(1);
+var vmn=parseFloat(nutrientes[ind].mn*cant/100).toFixed(1);
+var vi=parseFloat(nutrientes[ind].i*cant/100).toFixed(1);
+
+document.getElementById("kcalSpan").textContent=vkcal;
+document.getElementById("carboSpan").textContent=vcarb;
+document.getElementById("azucarSpan").textContent=vazucar;
+document.getElementById("fibraSpan").textContent=vfibra;
+document.getElementById("protSpan").textContent=vprot;
+document.getElementById("agsSpan").textContent=vags;
+document.getElementById("agpSpan").textContent=vagp;
+document.getElementById("agmSpan").textContent=vagm;
+
+document.getElementById("kSpan").textContent=vk;
+document.getElementById("naSpan").textContent=vna;
+document.getElementById("pSpan").textContent=vp;
+document.getElementById("caSpan").textContent=vca;
+document.getElementById("mgSpan").textContent=vmg;
+document.getElementById("feSpan").textContent=vfe;
+document.getElementById("znSpan").textContent=vzn;
+document.getElementById("seSpan").textContent=vse;
+document.getElementById("cuSpan").textContent=vcu;
+document.getElementById("mnSpan").textContent=vmn;
+document.getElementById("iSpan").textContent=vi;
+
+};
 
 function refresca(){
 //var patron=document.getElementById("search").value.toUpperCase();
