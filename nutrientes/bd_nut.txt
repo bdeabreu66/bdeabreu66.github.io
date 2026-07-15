@@ -72,7 +72,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "AGUA",
@@ -185,7 +186,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "AJO",
@@ -222,7 +224,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "AJONJOLI",
@@ -449,7 +452,9 @@
     "cat": "&Cereales&Avena&",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "CACHETES DE CERDO",
@@ -485,7 +490,9 @@
     "vitB7": "0",
     "vitB9": "0.001",
     "vitB12": "0",
-    "cat": "&Carnes / Pescados / Huevos&Carnes&Cerdo&"
+    "cat": "&Carnes / Pescados / Huevos&Carnes&Cerdo&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "CAFE CON LECHE",
@@ -709,7 +716,9 @@
     "vitB12": "0",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "CARNE DE BORREGO",
@@ -745,7 +754,9 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Carnes / Pescados / Huevos&Carnes&Res&"
+    "cat": "&Carnes / Pescados / Huevos&Carnes&Res&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "CARNE DE HAMBURGUESA",
@@ -820,7 +831,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "CEBOLLA",
@@ -895,7 +907,8 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Cereales&Varios&"
+    "cat": "&Cereales&Varios&",
+    "azucar": "0"
   },
   {
     "nombre": "CERVEZA SUPER BOCK",
@@ -1199,7 +1212,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "ENTREMEADAS DE CERDO",
@@ -1274,7 +1288,8 @@
     "vitB9": "0",
     "vitB12": "0",
     "cat": "&Carnes / Pescados / Huevos&Carnes&Res&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "FLIP FLOPS PINGO DOCE",
@@ -1387,7 +1402,8 @@
     "vitB9": "0",
     "vitB12": "0",
     "cat": "&Cereales&Trigo&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "GALLETAS OREO",
@@ -1880,7 +1896,8 @@
     "vitB9": "0.002",
     "vitB12": "0.00055",
     "cat": "&Lacteos y derivados&Leche&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "LECHOZA",
@@ -1992,7 +2009,9 @@
     "vitB12": "0",
     "se": "0",
     "cu": "0.25",
-    "i": "0"
+    "i": "0",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "MANDARINA",
@@ -2067,7 +2086,8 @@
     "se": "0.0093",
     "cu": "0.43",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "MANTEQUILLA",
@@ -2180,7 +2200,8 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Aceites / Grasas / Azucar&"
+    "cat": "&Aceites / Grasas / Azucar&",
+    "azucar": "0"
   },
   {
     "nombre": "MILHO FRITO",
@@ -2217,7 +2238,8 @@
     "vitB9": "0",
     "vitB12": "0",
     "cat": "&Cereales&Maiz&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "MOLHO PARA HAMBURGUESA",
@@ -2407,7 +2429,7 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Carnes / Pescados / Huevos&Carnes&Cerdo&"
+    "cat": "&Cereales&Trigo&"
   },
   {
     "nombre": "PANQUECA",
@@ -2443,7 +2465,9 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Cereales&Avena&"
+    "cat": "&Cereales&Avena&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "PAPAS COCIDAS",
@@ -3125,7 +3149,9 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0.0017",
-    "cat": "&Lacteos y derivados&Queso&"
+    "cat": "&Lacteos y derivados&Queso&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "QUESO BLANCO SEMIDURO",
@@ -3390,7 +3416,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "REQUESON",
@@ -3426,7 +3453,9 @@
     "cat": "&Lacteos y derivados&Queso&",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "SAL",
@@ -3543,6 +3572,44 @@
     "cat": "&Aceites / Grasas / Azucar&"
   },
   {
+    "nombre": "SARDINA EN LATA",
+    "kcal": "100",
+    "carbo": "0",
+    "azucar": "0",
+    "prot": "20",
+    "agua": "70",
+    "ags": "",
+    "agp": "0",
+    "agm": "0.7",
+    "fibra": "0",
+    "k": "0",
+    "na": "200",
+    "p": "0",
+    "ca": "0",
+    "fe": "0",
+    "zn": "0",
+    "mg": "0",
+    "mn": "0",
+    "se": "0",
+    "cu": "0",
+    "i": "0",
+    "vitA": "0",
+    "vitC": "0",
+    "vitK": "0",
+    "vitD": "0",
+    "vitE": "0",
+    "vitB1": "0",
+    "vitB2": "0",
+    "vitB3": "0",
+    "vitB4": "0",
+    "vitB5": "0",
+    "vitB6": "0",
+    "vitB7": "0",
+    "vitB9": "0",
+    "vitB12": "0",
+    "cat": "&Carnes / Pescados / Huevos&Pescado&"
+  },
+  {
     "nombre": "SIROPE DE MAPLE",
     "kcal": "260",
     "carbo": "65",
@@ -3576,7 +3643,9 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Aceites / Grasas / Azucar&"
+    "cat": "&Aceites / Grasas / Azucar&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "TOMATE",
@@ -3613,7 +3682,8 @@
     "se": "0",
     "cu": "0",
     "i": "0",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "TORTILLAS DE ARROZ",
@@ -3650,7 +3720,8 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Cereales&Varios&"
+    "cat": "&Cereales&Varios&",
+    "azucar": "0"
   },
   {
     "nombre": "TOSTA DE CHOCOLATE",
@@ -3724,7 +3795,9 @@
     "vitB12": "0",
     "se": "0",
     "cu": "0",
-    "i": "0"
+    "i": "0",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "YOGUR CASERO",
@@ -3838,7 +3911,8 @@
     "vitB9": "0",
     "vitB12": "0",
     "cat": "&Lacteos y derivados&Yogur&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "YOGUR GRIEGO",
@@ -3875,7 +3949,8 @@
     "vitB9": "0.006",
     "vitB12": "0.0002",
     "cat": "&Lacteos y derivados&Yogur&",
-    "vitB4": "0"
+    "vitB4": "0",
+    "azucar": "0"
   },
   {
     "nombre": "YOGUR GRIEGO DESNATADO",
@@ -3911,7 +3986,9 @@
     "vitB7": "0",
     "vitB9": "0.006",
     "vitB12": "0.0002",
-    "cat": "&Lacteos y derivados&Yogur&"
+    "cat": "&Lacteos y derivados&Yogur&",
+    "azucar": "0",
+    "vitB4": "0"
   },
   {
     "nombre": "YOGUR KEFIR",
@@ -4062,7 +4139,8 @@
     "vitB7": "0",
     "vitB9": "0",
     "vitB12": "0",
-    "cat": "&Vegetales&Verduras&"
+    "cat": "&Vegetales&Verduras&",
+    "azucar": "0"
   },
   {
     "nombre": "ZANAHORIA",
