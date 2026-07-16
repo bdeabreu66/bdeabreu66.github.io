@@ -137,7 +137,6 @@ overflow-y:scroll;
 #introd {
 position:fixed;
 background-color:Aqua;
-border-radius: 5% 5%;
 top:30%;
 left:0%;
 height: 60%;
@@ -1671,9 +1670,8 @@ div3.style="display:block; position: fixed;top :0px; left: 0px; width: 100%;heig
 texto='';
 texto+='Fecha: <input id="ffac" type="date" value="'+fecha_date(fecha_actual())+'"><br>';
 texto+='<span onclick="limpiaCliente2();">Menu:</span>';
-texto+='<input style="width:30%;" type="text" id="cli2" value="" >';
-//texto+='<datalist id="listaclientes"></datalist>';
-//texto+='<input style="width:30%;" type="text" id="nfact" value="'+nro_factura+'" list="listaclientes">';
+var valor=param.nombre+' '+fecha_actual2();
+texto+='<input style="width:30%;" type="text" id="cli2" value="'+valor+'" >';
 texto+='<br><button onclick="quitarlista();" >Cancelar </button>&nbsp&nbsp&nbsp<button onclick="guarda_factura2();" >Ok </button>';
 div3.innerHTML=texto;
 
@@ -2341,7 +2339,13 @@ if (dia.length==1) {dia='0'+dia}
 var mes=(hoy.getMonth()+1).toString();
 if (mes.length==1) {mes='0'+mes}
 return dia + '/' +mes + '/' +hoy.getFullYear().toString()
-
+}
+function fecha_actual2(){
+var dia=(hoy.getDate()).toString() ;
+if (dia.length==1) {dia='0'+dia}
+var mes=(hoy.getMonth()+1).toString();
+if (mes.length==1) {mes='0'+mes}
+return dia + '-' +mes + '-' +hoy.getFullYear().toString()
 }
 
 function factura3(numf){
@@ -3064,7 +3068,7 @@ if (pos>-1)
 texto+='\n</tr>\n</table>';
 
 texto+='\n<br><table style="text-align: center; width:100%;border:3px solid green;border-spacing:0;">';
-texto+='\n<tr style="color: blue;">\n<td>Kcal</td> <td>Carbo</td> <td>Azucar</td> <td>Fibra</td> <td>Prot</td> <td>AGS</td> <td>AGP</td> <td>AGM</td></tr>';
+texto+='\n<tr style="color: blue;">\n<td>Kcal</td> <td>Carb</td> <td>Azuc</td> <td>Fibra</td> <td>Prot</td> <td>AGS</td> <td>AGP</td> <td>AGM</td></tr>';
 texto+='\n<tr><td><span id="kcalSpan"></span></td>';
 texto+='\n<td><span id="carboSpan"></span></td>';
 texto+='\n<td><span id="azucarSpan"></span></td>';
@@ -3075,19 +3079,46 @@ texto+='\n<td><span id="agpSpan"></span></td>';
 texto+='\n<td><span id="agmSpan"></span></td>';
 texto+='\n</tr>\n</table>';
 
-texto+='\n<br><table style="text-align: center; width:100%;border:3px solid green;border-spacing:0;">';
-texto+='\n<tr style="color: blue;">\n<td>K</td> <td>Na</td> <td>P</td> <td>Mg</td> <td>Ca</td> <td>Fe</td> <td>Zn</td> <td>Se</td> <td>Cu</td> <td>Mn</td> <td>I</td></tr>';
+texto+='\n<table style="text-align: center; width:100%;border:3px solid green;border-spacing:0;">';
+texto+='\n<tr style="color: blue;">\n<td>K</td> <td>Na</td> <td>P</td> <td>Mg</td> <td>Ca</td> </tr>';
 texto+='\n<tr><td><span id="kSpan"></span></td>';
 texto+='\n<td><span id="naSpan"></span></td>';
 texto+='\n<td><span id="pSpan"></span></td>';
 texto+='\n<td><span id="mgSpan"></span></td>';
 texto+='\n<td><span id="caSpan"></span></td>';
+
+texto+='\n</tr>\n</table>';
+texto+='\n<table style="text-align: center; width:100%;border:3px solid green;border-spacing:0;">';
+texto+='\n<tr style="color: blue;">\n<td>Fe</td> <td>Zn</td> <td>Se</td> <td>Cu</td> <td>Mn</td> <td>I</td></tr>';
+
 texto+='\n<td><span id="feSpan"></span></td>';
 texto+='\n<td><span id="znSpan"></span></td>';
 texto+='\n<td><span id="seSpan"></span></td>';
 texto+='\n<td><span id="cuSpan"></span></td>';
 texto+='\n<td><span id="mnSpan"></span></td>';
 texto+='\n<td><span id="iSpan"></span></td>';
+texto+='\n</tr>\n</table>';
+
+texto+='\n<table style="text-align: center; width:100%;border:3px solid green;border-spacing:0;">';
+texto+='\n<tr style="color: blue;">\n<td>A</td> <td>C</td> <td>D</td> <td>E</td> <td>K</td> <td>B1</td> <td>B2</td>  </tr>';
+texto+='\n<td><span id="vitASpan"></span></td>';
+texto+='\n<td><span id="vitCSpan"></span></td>';
+texto+='\n<td><span id="vitDSpan"></span></td>';
+texto+='\n<td><span id="vitESpan"></span></td>';
+texto+='\n<td><span id="vitKSpan"></span></td>';
+texto+='\n<td><span id="vitB1Span"></span></td>';
+texto+='\n<td><span id="vitB2Span"></span></td>';
+texto+='\n</tr>\n</table>';
+
+texto+='\n<table style="text-align: center; width:100%;border:3px solid green;border-spacing:0;">';
+texto+='\n<tr style="color: blue;">\n<td>B3</td> <td>B4</td> <td>B5</td> <td>B6</td> <td>B7</td> <td>B9</td> <td>B12</td></tr>';
+texto+='\n<td><span id="vitB3Span"></span></td>';
+texto+='\n<td><span id="vitB4Span"></span></td>';
+texto+='\n<td><span id="vitB5Span"></span></td>';
+texto+='\n<td><span id="vitB6Span"></span></td>';
+texto+='\n<td><span id="vitB7Span"></span></td>';
+texto+='\n<td><span id="vitB9Span"></span></td>';
+texto+='\n<td><span id="vitB12Span"></span></td>';
 
 texto+='\n</tr>\n</table>';
 
@@ -3099,14 +3130,14 @@ calcula_cantid(i)
 }
 function calcula_cantid(ind){
 var cant=document.getElementById("entradaU").value;
-var vkcal=parseFloat(nutrientes[ind].kcal*cant/100).toFixed(2);
-var vcarb=parseFloat(nutrientes[ind].carbo*cant/100).toFixed(2);
-var vazucar=parseFloat(nutrientes[ind].azucar*cant/100).toFixed(2);
-var vfibra=parseFloat(nutrientes[ind].fibra*cant/100).toFixed(2);
-var vprot=parseFloat(nutrientes[ind].prot*cant/100).toFixed(2);
-var vags=parseFloat(nutrientes[ind].ags*cant/100).toFixed(2);
-var vagp=parseFloat(nutrientes[ind].agp*cant/100).toFixed(2);
-var vagm=parseFloat(nutrientes[ind].agm*cant/100).toFixed(2);
+var vkcal=parseFloat(nutrientes[ind].kcal*cant/100).toFixed(1);
+var vcarb=parseFloat(nutrientes[ind].carbo*cant/100).toFixed(1);
+var vazucar=parseFloat(nutrientes[ind].azucar*cant/100).toFixed(1);
+var vfibra=parseFloat(nutrientes[ind].fibra*cant/100).toFixed(1);
+var vprot=parseFloat(nutrientes[ind].prot*cant/100).toFixed(1);
+var vags=parseFloat(nutrientes[ind].ags*cant/100).toFixed(1);
+var vagp=parseFloat(nutrientes[ind].agp*cant/100).toFixed(1);
+var vagm=parseFloat(nutrientes[ind].agm*cant/100).toFixed(1);
 
 var vk=parseFloat(nutrientes[ind].k*cant/100).toFixed(1);
 var vna=parseFloat(nutrientes[ind].na*cant/100).toFixed(1);
@@ -3119,6 +3150,21 @@ var vse=parseFloat(nutrientes[ind].se*cant/100).toFixed(1);
 var vcu=parseFloat(nutrientes[ind].cu*cant/100).toFixed(1);
 var vmn=parseFloat(nutrientes[ind].mn*cant/100).toFixed(1);
 var vi=parseFloat(nutrientes[ind].i*cant/100).toFixed(1);
+
+var vvitA=parseFloat(nutrientes[ind].vitA*cant/100).toFixed(1);
+var vvitC=parseFloat(nutrientes[ind].vitC*cant/100).toFixed(1);
+var vvitD=parseFloat(nutrientes[ind].vitD*cant/100).toFixed(1);
+var vvitE=parseFloat(nutrientes[ind].vitE*cant/100).toFixed(1);
+var vvitK=parseFloat(nutrientes[ind].vitK*cant/100).toFixed(1);
+var vvitB1=parseFloat(nutrientes[ind].vitB1*cant/100).toFixed(1);
+var vvitB2=parseFloat(nutrientes[ind].vitB2*cant/100).toFixed(1);
+var vvitB3=parseFloat(nutrientes[ind].vitB3*cant/100).toFixed(1);
+var vvitB4=parseFloat(nutrientes[ind].vitB4*cant/100).toFixed(1);
+var vvitB5=parseFloat(nutrientes[ind].vitB5*cant/100).toFixed(1);
+var vvitB6=parseFloat(nutrientes[ind].vitB6*cant/100).toFixed(1);
+var vvitB7=parseFloat(nutrientes[ind].vitB7*cant/100).toFixed(1);
+var vvitB9=parseFloat(nutrientes[ind].vitB9*cant/100).toFixed(1);
+var vvitB12=parseFloat(nutrientes[ind].vitB12*cant/100).toFixed(1);
 
 document.getElementById("kcalSpan").textContent=vkcal;
 document.getElementById("carboSpan").textContent=vcarb;
@@ -3140,6 +3186,22 @@ document.getElementById("seSpan").textContent=vse;
 document.getElementById("cuSpan").textContent=vcu;
 document.getElementById("mnSpan").textContent=vmn;
 document.getElementById("iSpan").textContent=vi;
+
+
+document.getElementById("vitASpan").textContent=vvitA;
+document.getElementById("vitCSpan").textContent=vvitC;
+document.getElementById("vitDSpan").textContent=vvitD;
+document.getElementById("vitESpan").textContent=vvitE;
+document.getElementById("vitKSpan").textContent=vvitK;
+document.getElementById("vitB1Span").textContent=vvitB1;
+document.getElementById("vitB2Span").textContent=vvitB2;
+document.getElementById("vitB3Span").textContent=vvitB3;
+document.getElementById("vitB4Span").textContent=vvitB4;
+document.getElementById("vitB5Span").textContent=vvitB5;
+document.getElementById("vitB6Span").textContent=vvitB6;
+document.getElementById("vitB7Span").textContent=vvitB7;
+document.getElementById("vitB9Span").textContent=vvitB9;
+document.getElementById("vitB12Span").textContent=vvitB12;
 
 };
 
